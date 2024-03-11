@@ -1,0 +1,159 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: "Hanken Grotesk", sans-serif!important;
+}
+.container_mod {
+    width: 85%;
+    margin: 0 auto;
+}
+.bg-test {
+    background-color: #f3f9f5;
+}
+.bg-card {
+    background-color: #fafaf5;
+}
+
+a:link {
+    text-decoration: none;
+}
+@media (100px < width < 1200px) {
+    .container_mod {
+        width: 95%;
+        margin: 0 auto;
+    }
+}
+.navegacion {
+    box-shadow: 0px 2px 5px 0px rgba(207,207,207,1);
+}
+
+.navs_childs { 
+    display: none;
+    top: 70px;
+}
+.navs_childs.active {
+    display: block;
+}
+
+.sz {
+    font-size: 14px!important;
+}
+
+.fieldset_bg {
+    background-color: #96bd96;
+}
+
+.title::after {
+    content: '';
+    display: block;
+    width: 10%;
+    margin: 10px auto 0 auto;
+    border-bottom: 3px solid rgb(213, 230, 213);
+}
+
+.tabs_ensayo {
+    background-color: #c5e2c5;
+    color: #585858;
+}
+
+/* Estilos tabla para las solicitudes */
+
+.table_solicitud {
+    font-size: 14px;
+}
+
+.table_solicitud thead {
+    border-bottom: 1.5px solid lightgray;
+}
+.table_solicitud th {
+    padding: 10px;
+    /* font-size: 14px; */
+}
+/* .table_solicitud th {
+    border-right: 1.5px solid lightgray;
+}
+
+.table_solicitud th:last-child {
+    border-right: 0;
+} */
+.table_solicitud tbody tr {
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+}
+.table_solicitud tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+.table_solicitud td {
+    padding: 15px;
+}
+
+.table_btn {
+    padding: 3px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: 500;
+    width: 100%;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+}
+
+/* Botón de confrimado */
+.table_btn_success {
+    background-color: rgb(189, 223, 189);
+    color: rgb(80, 138, 80);
+    max-width: 50%;
+}
+.table_btn_success .point_success {
+    background-color: rgb(80, 138, 80);
+}
+
+/* Botón de pendiente */
+.table_btn_pendiente {
+    background-color: rgb(232, 232, 232);
+    max-width: 55%;
+    color: rgb(123, 123, 123);
+}
+.table_btn_pendiente .point_pendiente {
+    background-color: rgb(123, 123, 123);
+}
+
+/* Botón de confrimado */
+.table_btn_delete {
+    background-color: rgb(191, 93, 93);
+    color: white;
+    max-width: 50%;
+}
+
+@media (100px < width < 1200px) {
+    .table_btn_success {
+        max-width: 100%;
+    }
+    .table_btn_pendiente {
+        max-width: 100%;
+    }
+    .table_btn_delete {
+        max-width: 100%;
+    }
+}
+
+/* Solicitud Vista */
+.nav_tab_mod {
+    background-color: transparent!important;
+    color: #6765a5!important;
+    font-weight: 500;
+}
+.nav_tab_mod.active {
+    /* background-color: transparent!important; */
+    border: none!important;
+    border-bottom: 2px solid #6765a5!important;
+}
+
+
+/* .table_btn_delete .point_delete {
+    background-color: rgb(80, 138, 80);
+} */
