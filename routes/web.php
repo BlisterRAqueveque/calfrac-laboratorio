@@ -38,16 +38,18 @@ Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 # Ensayo
 Route::get('/ensayo/create', [EnsayoController::class, 'create'])->name('ensayo.create');
 Route::get('/ensayos', [EnsayoController::class, 'index'])->name('ensayos');
+Route::post('/ensayo/create', [EnsayoController::class, 'store'])->name('ensayo.store');
 
 # Solicitudes
 Route::get('/solicitud', [SolicitudController::class, 'create'])->name('solicitud.create.show');
 Route::post('/solicitud', [SolicitudController::class, 'store_fractura'])->name('solicitud.fractura');
-// Route::post('/solicitud', [SolicitudController::class, 'store_lechada'])->name('solicitud.lechada');
-Route::post('/solicitud/lodo', [SolicitudController::class, 'store_lodo'])->name('solicitud.lodo');
 Route::post('/solicitud/edicion', [SolicitudController::class, 'update'])->name('solicitud.update');
+Route::post('/solicitud/aprobada', [SolicitudController::class, 'store_aprobar'])->name('solicitud.aprobar');
+Route::get('/solicitud/fractura/{solicitud_id}', [SolicitudController::class, 'show_fractura'])->name('solicitud.fractura.show');
 
 Route::get('/solicitudes', [SolicitudController::class, 'index'])->name('solicitudes');
-Route::get('/solicitud/fractura/{solicitud_id}', [SolicitudController::class, 'show_fractura'])->name('solicitud.fractura.show');
+
+// Route::post('/solicitud/lodo', [SolicitudController::class, 'store_lodo'])->name('solicitud.lodo');
 
 # Comentarios
 // Route::post('/comentario/{user_id}', [ComentarioController::class, 'store'])->name('comentario.store');

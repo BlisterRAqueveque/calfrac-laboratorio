@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Aditivo;
 use App\Models\AgenteSosten;
 use App\Models\AnalisisMicrobial;
 use App\Models\Cliente;
@@ -13,6 +14,7 @@ use App\Models\SolicitudFractura;
 use App\Models\User;
 use App\Models\Yacimiento;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class SolicitudController extends Controller
 {
@@ -42,25 +44,25 @@ class SolicitudController extends Controller
     public function store_fractura(Request $request) {
 
         # Validamos los datos del encabezado general
-        // $this->validate($request, [
-        //     'proyecto_number' => 'required',
-        //     'servicio_number' => 'required',
-        //     'cliente' => 'required',
-        //     'locacion' => 'required',
-        //     'programa' => 'required',
-        //     'fecha_solicitud' => 'required',
-        //     'empresa' => 'required',
-        //     'fecha_tratamiento' => 'required',
-        //     'pozo' => 'required',
-        //     'rep_compania' => 'required',
-        //     'fecha_reporte' => 'required',
-        //     'rep_venta' => 'required',
-        //     'fecha_resultados' => 'required',
-        //     'equipo' => 'required',
-        //     'servicio' => 'required',
-        //     'reporte_lab_tall' => 'required',
-        //     'reporte_lab_lead' => 'required',
-        // ]);
+        $this->validate($request, [
+            'proyecto_number' => 'required',
+            'servicio_number' => 'required',
+            'cliente' => 'required',
+            'locacion' => 'required',
+            'programa' => 'required',
+            'fecha_solicitud' => 'required',
+            'empresa' => 'required',
+            'fecha_tratamiento' => 'required',
+            'pozo' => 'required',
+            'rep_compania' => 'required',
+            'fecha_reporte' => 'required',
+            'rep_venta' => 'required',
+            'fecha_resultados' => 'required',
+            'equipo' => 'required',
+            'servicio' => 'required',
+            'reporte_lab_tall' => 'required',
+            'reporte_lab_lead' => 'required',
+        ]);
 
         # Crea la Información General
         $solicitud = Solicitud::create([
@@ -97,6 +99,7 @@ class SolicitudController extends Controller
             'proveedor' => $request->proveedor,
             'producto' => $request->producto,
             'concentracion' => $request->concentracion,
+            'aditivo_extra' => $request->aditivo_extra,
             'sistema_fluido_id' => $request->sistema_fluido,
             'analisis_microbial_id' => $request->analisis_microbial,
             'agente_sosten_id' => $request->agente_sosten,
@@ -118,6 +121,23 @@ class SolicitudController extends Controller
         // En Proceso
     }
 
+    /**
+     * Cuando se aprueba una solicitud, se almacena el usuario quién aprobó, 
+     * cambia de estado y también se almacena la fecha
+     */
+    public function store_aprobar(Request $request) {
+        $solicitud = Solicitud::find($request->solicitud_id);
+        $solicitud->estado_solicitud_id = 2;
+        $solicitud->aprobada = 1;
+        $solicitud->fecha_aprobada = date('Y-m-d H:i:s');
+        $solicitud->usuario_aprobo = auth()->user()->id;
+        $solicitud->save();
+        return back();
+    }
+
+    /**
+     * Edita la solicitud de fractura, la misma se crea un comentario/fundamento al respecto de por qué se está editando
+     */
     public function update(Request $request) {
         # Validamos los datos del encabezado general
         $this->validate($request, [
@@ -161,7 +181,7 @@ class SolicitudController extends Controller
         $solicitud->reporte_lab_tall = $request->reporte_lab_tall;
         $solicitud->reporte_lab_lead = $request->reporte_lab_lead;
         $solicitud->save();
-        // $solicitud->updated_at = date('Y-m-d H:i:s');
+        $solicitud->updated_at = date('Y-m-d H:i:s');
 
         # Editando los datos de la solicitud de fractura
         $solicitud_fractura = SolicitudFractura::where('solicitud_id', $solicitud->id)->first();
@@ -221,6 +241,7 @@ class SolicitudController extends Controller
             'analisis_microbial' => AnalisisMicrobial::all(),
             'agente_sosten' => AgenteSosten::all(),
             'otros_analisis' => OtrosAnalisis::all(),
+            'aditivos' => Aditivo::all(),
             'users' => User::all(),
             // 'solicitud_fractura' => SolicitudFractura::where('solicitud_id', $solicitud_id)->get()
         ];

@@ -18,20 +18,26 @@
                 </div>
                 <div class="flex flex-col">
                     <div class="flex flex-col md:flex-row md:gap-4">
-                        <span class="text-xl flex items-center gap-3 font-bold text-gray-700">Solicitud de Fractura -
+                        <span class="text-md xl:text-xl flex items-center gap-3 font-bold text-gray-700">Solicitud de
+                            Fractura -
                             #{{ $solicitud->id }}
                             @php
                                 switch ($solicitud->estado->id) {
                                     case '1':
+                                        $estado = $solicitud->estado->nombre;
+                                        $clase = 'bg-cyan-600';
+                                        break;
+                                        case '2':
+                                        $clase = 'bg-green-500';
                                         $estado = $solicitud->estado->nombre;
                                         break;
                                 }
                             @endphp
                         </span>
                         <small
-                            class="bg-cyan-600 text-white text-sm px-2 rounded-md p-0 m-0 md:flex md:items-center">{{ $estado }}</small>
+                            class="{{$clase}} text-white text-xs px-2 rounded-md p-0 m-0 md:flex md:items-center tracking-wide">{{ $estado }}</small>
                     </div>
-                    <div class="flex flex-col md:flex-row text-sm md:items-center gap-3 md:gap-10">
+                    <div class="flex flex-col mt-2 md:flex-row text-xs md:text-sm md:items-center gap-3 md:gap-10">
                         <article class="flex items-center gap-1">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-4 h-4">
@@ -61,7 +67,7 @@
                         </article>
                     </div>
 
-                    <div class="flex mt-2 text-sm items-center gap-10">
+                    <div class="flex mt-2 text-xs md:text-sm items-center gap-10">
                         <article class="flex items-center gap-1">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-4 h-4">
@@ -69,17 +75,19 @@
                                     d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
                             </svg>
 
-                            Última edición: <b>Aún no hubo edición</b>
+                            Última edición: <b>{{ $solicitud->updated_at->format('d') }} de
+                                {{ $solicitud->updated_at->format('M') }}, {{ $solicitud->updated_at->format('Y') }}</b>
                         </article>
                     </div>
 
-                    <div class="flex mt-2 text-sm items-center gap-10">
+                    <div class="flex mt-2 text-xs md:text-sm items-center gap-10">
                         <article class="flex items-center gap-1">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-4 h-4">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                             </svg>
-                            Solicitud Aprobada: <b class="text-gray-700">En espera</b>
+                            Solicitud Aprobada: <b class="text-gray-700"> @if(!$solicitud->aprobada) En espera @else {{ $solicitud->fecha_aprobada->format('d') }} de
+                                {{ $solicitud->fecha_aprobada->format('M') }}, {{ $solicitud->fecha_aprobada->format('Y') }} @endif </b>
                         </article>
                     </div>
                 </div>
@@ -95,44 +103,57 @@
                         data-bs-toggle="tab" data-bs-target="#tab1-content" role="tab" aria-controls="tab1-content"
                         aria-selected="true">Información de la Solicitud</a>
                 </li>
-                <li class="nav-item w-full text-center md:w-auto" role="presentation">
-                    <a class="nav-link nav_tab_mod" id="nav-tab2" data-bs-toggle="tab" href="#tab2-content"
-                        data-bs-target="#tab2-content" role="tab" aria-controls="tab2-content"
-                        aria-selected="false">Ensayos</a>
-                </li>
+                @if ($solicitud->aprobada == 1)
+                    <li class="nav-item w-full text-center md:w-auto" role="presentation">
+                        <a class="nav-link nav_tab_mod" id="nav-tab2" data-bs-toggle="tab" href="#tab2-content"
+                            data-bs-target="#tab2-content" role="tab" aria-controls="tab2-content"
+                            aria-selected="false">Ensayos</a>
+                    </li>
+                @else
+                    <div class="flex items-center">
+                        <li data-tooltip-target="tooltip-default"
+                            class="nav-item w-full text-center md:w-auto cursor-not-allowed"
+                            tooltip="Debe aprobar la solicitud para asignar un ensayo" role="presentation">
+                            <a class="nav-link nav_tab_mod" aria-selected="false">Ensayos </a>
+                        </li>
+                        <small class="text-gray-700">(Debe aprobar la solicitud para asignar un ensayo)</small>
+                    </div>
+                @endif
             </ul>
 
         </section>
 
     </section>
     <div class="tab-content" id="nav-tabs-content">
-        <div class="container_mod bg-white p-3 mt-4 shadow-sm tab-pane fade show active" id="tab1-content" role="tabpanel"
-            aria-labelledby="nav-tab1">
+        <div class="container_mod bg-white p-3 mt-4 shadow-sm tab-pane fade show active" id="tab1-content"
+            role="tabpanel" aria-labelledby="nav-tab1">
 
             <div class="flex items-center justify-between">
                 <div class="flex w-full items-center justify-between flex-col md:flex-row">
                     <p class="m-0 font-bold text-lg tracking-wide">Información General</p>
-                    <div class="flex gap-3">
-                        <button
-                            class="bg-cyan-600 text-white font-bold tracking-wide px-3 py-1 rounded-sm flex gap-2 hover:bg-cyan-700 transition-all duration-200"
-                            id="btnHabilitarEdicion">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                            </svg>
-                            Habilitar Edición
-                        </button>
-                        <button
-                            class="bg-red-400 text-white font-bold tracking-wide px-3 py-1 rounded-sm flex gap-2 hover:bg-red-500 transition-all duration-200 hidden"
-                            id="btnDeshabilitarEdicion">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                            </svg>
-                            Deshabilitar Edición
-                        </button>
-                    </div>
+                    @if (!$solicitud->aprobada)
+                        <div class="flex gap-3">
+                            <button
+                                class="bg-cyan-600 text-white font-bold tracking-wide px-3 py-1 rounded-sm flex gap-2 hover:bg-cyan-700 transition-all duration-200"
+                                id="btnHabilitarEdicion">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                </svg>
+                                Habilitar Edición
+                            </button>
+                            <button
+                                class="bg-red-400 text-white font-bold tracking-wide px-3 py-1 rounded-sm flex gap-2 hover:bg-red-500 transition-all duration-200 hidden"
+                                id="btnDeshabilitarEdicion">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                                </svg>
+                                Deshabilitar Edición
+                            </button>
+                        </div>
+                    @endif
                 </div>
             </div>
 
@@ -158,7 +179,7 @@
                             Revisión de Solicitud de Servicio</label>
                         <input type="number" placeholder="Ingrese el número" class="form-control sz p-2"
                             name="servicio_number" id="servicio_number" min="0"
-                            value="{{ $solicitud->servicio_number }}">
+                            value="{{ $solicitud->servicio_number }}" readonly>
                         @error('servicio_number')
                             <small class="text-sm text-red-600">El Nº de Revisión es requerido</small>
                         @enderror
@@ -589,7 +610,8 @@
                                     <option value="{{ $e->id }}" selected>{{ $e->nombre }} {{ $e->apellido }}
                                     </option>
                                 @else
-                                    <option value="{{ $e->id }}">{{ $e->nombre }} {{ $e->apellido }}</option>
+                                    <option value="{{ $e->id }}">{{ $e->nombre }} {{ $e->apellido }}
+                                    </option>
                                 @endif
                             @endforeach
                         </select>
@@ -612,106 +634,129 @@
                 </div>
             </form>
 
-                @if ($solicitud->fundamento->count() > 0)
-                    <p class="m-0 mt-3 font-bold text-lg tracking-wide">Sector de Comentarios</p>
+            @if ($solicitud->fundamento->count() > 0)
+                <p class="m-0 mt-3 font-bold text-lg tracking-wide">Sector de Comentarios</p>
 
-                    <div class="row w-1/2 mt-1">
-                            @foreach ($solicitud->fundamento as $c)
-                                <article class="flex gap-3 mt-3">
-                                    <div class="flex justify-center items-center w-12 h-12 mx-auto">
-                                        <img src="{{ asset('uploads/perfiles') . '/' . $c->user_fundamento->img }}"
-                                            class="rounded-full object-cover w-12 h-12" alt="">
-                                    </div>
-                                    <div class="text-sm flex-1">
-                                        <p class="m-0 font-bold">{{ $c->user_fundamento->nombre }}
-                                            {{ $c->user_fundamento->apellido }} <small
-                                                class="text-gray-400"> Realizó una edición el día {{ $c->created_at->format('d') }}
-                                                {{ $c->created_at->format('M') }}
-                                                {{ $c->created_at->format('Y') }} -
-                                                {{ $c->created_at->format('H:i') }}</small></p>
-                                        <p class="mb-0">
-                                            {{ $c->fundamento }}
-                                        </p>
+                <div class="row md:w-1/2 mt-1">
+                    @foreach ($solicitud->fundamento as $c)
+                        <article class="flex gap-3 mt-3">
+                            <div class="flex justify-center items-center w-12 h-12 mx-auto">
+                                <img src="{{ asset('uploads/perfiles') . '/' . $c->user_fundamento->img }}"
+                                    class="rounded-full object-cover w-12 h-12" alt="">
+                            </div>
+                            <div class="text-sm flex-1">
 
-                                        <div class="containerRta">
-                                            @if ($c->respuesta)
-                                                <article class="flex gap-3 mt-4">
-                                                    <div class="flex justify-center items-center w-12 h-12">
-                                                        <img src="{{ asset('uploads/perfiles') . '/' . $c->user_rta->img }}"
-                                                            class="rounded-full object-cover w-12 h-12">
-                                                    </div>
-                                                    <div class="text-sm">
-                                                        <p class="m-0 font-bold">{{ $c->user_rta->nombre }}
-                                                            {{ $c->user_rta->apellido }} <small
-                                                                class="text-gray-400">{{ $c->updated_at->format('d') }}
-                                                                {{ $c->updated_at->format('M') }}
-                                                                {{ $c->updated_at->format('Y') }} -
-                                                                {{ $c->updated_at->format('H:i') }}</small></p>
-                                                        <p class="mb-0">
-                                                            {{ $c->respuesta }}
-                                                        </p>
-                                                    </div>
-                                                </article>
-                                            @else
-                                                <div
-                                                    class="bg-gray-200 inline-block px-2 rounded-md mt-3 cursor-pointer hover:bg-gray-300 transition-all duration-300">
-                                                    <button class="flex gap-2 items-center rtaComment">
+                                <p class="m-0 flex flex-col md:flex-row md:gap-2 font-bold">
+                                    {{ $c->user_fundamento->nombre }}
+                                    {{ $c->user_fundamento->apellido }} <small class="text-gray-400"> Realizó una edición
+                                        el día {{ $c->created_at->format('d') }}
+                                        {{ $c->created_at->format('M') }}
+                                        {{ $c->created_at->format('Y') }} -
+                                        {{ $c->created_at->format('H:i') }}</small></p>
+                                <p class="mb-0">
+                                    {{ $c->fundamento }}
+                                </p>
+
+                                <div class="containerRta">
+                                    @if ($c->respuesta)
+                                        <article class="flex gap-3 mt-4">
+                                            <div class="flex justify-center items-center w-12 h-12">
+                                                <img src="{{ asset('uploads/perfiles') . '/' . $c->user_rta->img }}"
+                                                    class="rounded-full object-cover w-12 h-12">
+                                            </div>
+                                            <div class="text-sm flex flex-col">
+                                                <p class="m-0 font-bold">{{ $c->user_rta->nombre }}
+                                                    {{ $c->user_rta->apellido }} <small
+                                                        class="text-gray-400">{{ $c->updated_at->format('d') }}
+                                                        {{ $c->updated_at->format('M') }}
+                                                        {{ $c->updated_at->format('Y') }} -
+                                                        {{ $c->updated_at->format('H:i') }}</small></p>
+                                                <p class="mb-0">
+                                                    {{ $c->respuesta }}
+                                                </p>
+                                            </div>
+                                        </article>
+                                    @else
+                                        @if (auth()->user()->id != $c->user_fundamento->id)
+                                            <div
+                                                class="bg-gray-200 inline-block px-2 rounded-md mt-3 cursor-pointer hover:bg-gray-300 transition-all duration-300">
+                                                <button class="flex gap-2 items-center rtaComment">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                        class="w-4 h-4">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
+                                                    </svg>
+                                                    Responder
+                                                </button>
+                                            </div>
+                                            <form action="{{ route('fundamento.rta', auth()->user()->id) }}"
+                                                method="POST" class="mt-3 formRta_0 hidden">
+                                                @csrf
+                                                <input type="hidden" name="fundamento_id" value="{{ $c->id }}">
+                                                <textarea name="respuesta" id="respuesta" cols="30" rows="3" class="form-control sz p-2"
+                                                    placeholder="Ingrese una respuesta" required></textarea>
+                                                <div class="flex gap-3 justify-end mt-2">
+                                                    <button
+                                                        class="text-sm rounded flex items-center gap-1 px-2 py-1 hover:bg-orange-200 text-orange-400 transition-all duration-300"
+                                                        onclick="removeRta(this)">
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                                             class="w-4 h-4">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
-                                                                d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
+                                                                d="M6 18 18 6M6 6l12 12" />
                                                         </svg>
-                                                        Responder
-                                                    </button>
+                                                        Cancelar</button>
+                                                    <input type="submit"
+                                                        class="bg-green-700 bg-opacity-60 text-white font-bold px-2 py-1 rounded-sm hover:shadow-lg transition-all duration-75"
+                                                        value="Responder">
                                                 </div>
-                                                <form action="{{ route('fundamento.rta', auth()->user()->id) }}" method="POST" class="mt-3 formRta_0 hidden">
-                                                    @csrf
-                                                    <input type="hidden" name="comentario_id" value="{{ $c->id }}">
-                                                    <textarea name="respuesta" id="respuesta" cols="30" rows="3" class="form-control sz p-2"
-                                                        placeholder="Ingrese una respuesta" required></textarea>
-                                                    <div class="flex gap-3 justify-end mt-2">
-                                                        <button
-                                                            class="text-sm rounded flex items-center gap-1 px-2 py-1 hover:bg-orange-200 text-orange-400 transition-all duration-300"
-                                                            onclick="removeRta(this)">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                                stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                                    d="M6 18 18 6M6 6l12 12" />
-                                                            </svg>
-                                                            Cancelar</button>
-                                                        <input type="submit"
-                                                            class="bg-green-700 bg-opacity-60 text-white font-bold px-2 py-1 rounded-sm hover:shadow-lg transition-all duration-75"
-                                                            value="Responder">
-                                                    </div>
-                                                </form>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </article>
-                            @endforeach
-                    </div>
-                @endif
-
-               
+                                            </form>
+                                        @endif
+                                    @endif
+                                </div>
+                            </div>
+                        </article>
+                    @endforeach
+                </div>
+            @endif
 
             <hr>
             <!-- Aprobar la solicitud -->
-            {{-- <div class="row mt-3">
-                <div class="flex items-center gap-2">
-                    <input type="submit" value="Aprobar Solicitud"
-                        class="bg-emerald-400 text-white font-bold tracking-wide px-3 py-1 rounded-sm flex gap-2 hover:bg-emerald-500 transition-all duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed">
-                    <p class="mb-0 flex items-center gap-2 text-gray-600 text-sm">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
-                            stroke="currentColor" class="w-5 h-5">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
-                        </svg>
-                        Al aprobar la solicitud, da por confirmado que la misma se encuentra en condiciones de asignarle un
-                        ensayo
-                    </p>
+            @if ($solicitud->aprobada)
+                <div
+                    class="mt-3 flex items-center justify-center flex-col md:flex-row gap-3 text-center bg-green-200 border-1 p-1 rounded-sm w-full md:w-1/2 mx-auto border-green-500 text-green-800">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6 ">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                    <span>Solicitud aprobada por {{ $solicitud->user_aprobo->nombre }} {{ $solicitud->user_aprobo->apellido }} el día {{ $solicitud->fecha_aprobada->format('d') }} de
+                        {{ $solicitud->fecha_aprobada->format('M') }}, {{ $solicitud->fecha_aprobada->format('Y') }}</span>
                 </div>
-            </div> --}}
+            @else
+                <div class="row mt-3">
+                    <div class="flex flex-col items-center gap-2">
+                        <form action="{{ route('solicitud.aprobar') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="solicitud_id" value="{{ $solicitud->id }}">
+                            <input type="submit" value="Aprobar Solicitud"
+                                class="bg-emerald-400 text-white font-bold tracking-wide px-3 py-1 rounded-sm flex gap-2 hover:bg-emerald-500 transition-all duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed">
+                        </form>
+                        <p class="mb-0 flex flex-col text-center md:flex-row items-center gap-2 text-gray-600 text-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.8" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+                            </svg>
+                            Al aprobar la solicitud, da por confirmado que la misma se encuentra en condiciones de asignarle
+                            un
+                            ensayo. (La misma ya no se podrá editar)
+                        </p>
+                    </div>
+                </div>
+            @endif
+
         </div>
         <br>
 

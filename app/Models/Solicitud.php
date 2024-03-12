@@ -33,7 +33,14 @@ class Solicitud extends Model
         'reporte_lab_lead',
         'solicitud',
         'estado_solicitud_id',
+        'aprobada',
+        'fecha_aprobada',
+        'usuario_aprobo',
         'user_id',
+    ];
+
+    protected $casts = [
+        'fecha_aprobada' => 'datetime',
     ];
 
     public function user()
@@ -41,11 +48,15 @@ class Solicitud extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function user_aprobo()
+    {
+        return $this->belongsTo(User::class, 'usuario_aprobo');
+    }
+
     public function estado()
     {
         return $this->belongsTo(Estado_Solicitud::class, 'estado_solicitud_id');
     }
-
 
     public function fundamento() {
         return $this->hasMany(Edicion_Solicitud::class);

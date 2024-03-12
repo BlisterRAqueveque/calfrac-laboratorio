@@ -21,9 +21,11 @@
 {{-- <body class="bg-gradient-to-br from-green-50 to-gray-100"> --}}
 <style>
     .contenido-con-margen {
-        margin-top: 250px; /* Ajusta este valor según el tamaño de tu barra de navegación */
+        margin-top: 250px;
+        /* Ajusta este valor según el tamaño de tu barra de navegación */
     }
 </style>
+
 <body class="bg-test">
     <!-- Barra de Navegación -->
     <nav class="bg-white navegacion fixed top-0 w-full" style="z-index: 1;">
@@ -69,7 +71,7 @@
                 <li class="relative p-2 flex gap-3 cursor-pointer rounded-md" id="miPerfilNav">
                     <div class="flex justify-center items-center w-10 h-10 mx-auto">
                         <img src="{{ asset('uploads/perfiles') . '/' . auth()->user()->img }}"
-                            class="rounded-full object-cover w-10 h-10"  alt="">
+                            class="rounded-full object-cover w-10 h-10" alt="">
                     </div>
                     <div class="flex flex-col">
                         <span class="text-sm font-semibold tracking-wide">{{ auth()->user()->nombre }}
@@ -77,9 +79,10 @@
                         <small class="text-sm text-gray-400">{{ auth()->user()->grupo->nombre }}</small>
                     </div>
 
-                    <div class="absolute z-50 text-sm mt-1 rounded bg-white shadow-md w-56 hidden" id="miPerfilConfig" style="box-shadow: 0px 0px 2px 0px rgba(171,171,171,1); top: 55px; left: 0; right: 0;">
+                    <div class="absolute z-50 text-sm mt-1 rounded bg-white shadow-md w-56 hidden" id="miPerfilConfig"
+                        style="box-shadow: 0px 0px 2px 0px rgba(171,171,171,1); top: 55px; left: 0; right: 0;">
                         <ul class="ps-0 p-2 pe-0">
-                            <small class="font-semibold text-gray-700 ps-3">Bienvenido
+                            <small class="font-semibold text-sm text-gray-700 ps-3">Bienvenido
                                 {{ auth()->user()->nombre }}</small>
                             <li class="ps-3 mt-2 hover:bg-gray-100 py-2">
                                 <a href=""
@@ -115,7 +118,7 @@
         <hr class="my-0">
 
         <div class="container_mod">
-            <ul class="flex p-0 m-0 gap-4">
+            <ul class="flex text-xs xl:text-sm p-0 m-0 gap-4">
                 <li class="py-2">
                     <a href="{{ route('dashboard') }}"
                         class="flex items-center gap-2 text-gray-500 hover:text-green-900">
@@ -232,7 +235,7 @@
                     <div class="absolute text-sm z-50 mt-1 rounded bg-white shadow-md w-48 hidden nav_list_3"
                         style="box-shadow: 0px 0px 2px 0px rgba(171,171,171,1);">
                         <ul class="ps-0 p-2">
-                            
+
                             <li class="ps-3 py-2 cursor-pointer">
                                 <a href="{{ route('aditivos') }}"
                                     class="text-gray-600 hover:text-green-900 flex items-center justify-between">Aditivos</a>
@@ -260,7 +263,13 @@
 
         </div>
     </nav>
-
+    <script src="{{ asset('js/redom.min.js') }}"></script>
+    <script>
+        const {
+            el,
+            mount
+        } = redom;
+    </script>
     <div style="margin-top: 113px;">
         @yield('contenido')
     </div>
@@ -288,7 +297,7 @@
 <script>
     const miPerfilNav = document.getElementById('miPerfilNav');
     const miPerfilConfig = document.getElementById('miPerfilConfig');
-    
+
     miPerfilNav.addEventListener('click', e => {
         event.preventDefault();
         miPerfilConfig.classList.toggle('hidden');
