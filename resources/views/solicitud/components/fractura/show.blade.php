@@ -27,7 +27,7 @@
                                         $estado = $solicitud->estado->nombre;
                                         $clase = 'bg-cyan-600';
                                         break;
-                                        case '2':
+                                    case '2':
                                         $clase = 'bg-green-500';
                                         $estado = $solicitud->estado->nombre;
                                         break;
@@ -35,7 +35,7 @@
                             @endphp
                         </span>
                         <small
-                            class="{{$clase}} text-white text-xs px-2 rounded-md p-0 m-0 md:flex md:items-center tracking-wide">{{ $estado }}</small>
+                            class="{{ $clase }} text-white text-xs px-2 rounded-md p-0 m-0 md:flex md:items-center tracking-wide">{{ $estado }}</small>
                     </div>
                     <div class="flex flex-col mt-2 md:flex-row text-xs md:text-sm md:items-center gap-3 md:gap-10">
                         <article class="flex items-center gap-1">
@@ -86,8 +86,15 @@
                                 stroke="currentColor" class="w-4 h-4">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                             </svg>
-                            Solicitud Aprobada: <b class="text-gray-700"> @if(!$solicitud->aprobada) En espera @else {{ $solicitud->fecha_aprobada->format('d') }} de
-                                {{ $solicitud->fecha_aprobada->format('M') }}, {{ $solicitud->fecha_aprobada->format('Y') }} @endif </b>
+                            Solicitud Aprobada: <b class="text-gray-700">
+                                @if (!$solicitud->aprobada)
+                                    En espera
+                                @else
+                                    {{ $solicitud->fecha_aprobada->format('d') }} de
+                                    {{ $solicitud->fecha_aprobada->format('M') }},
+                                    {{ $solicitud->fecha_aprobada->format('Y') }}
+                                @endif
+                            </b>
                         </article>
                     </div>
                 </div>
@@ -99,13 +106,13 @@
             <ul role="tablist" aria-owns="nav-tab1 nav-tab2 nav-tab3 nav-tab4" class="nav nav-tabs"
                 id="nav-tab-with-nested-tabs" style="z-index: 999">
                 <li class="nav-item w-full text-center md:w-auto" role="presentation">
-                    <a class="nav-link nav_tab_mod active" aria-current="page" id="nav-tab1" href="#tab1-content"
+                    <a class="nav-link nav_tab_mod" aria-current="page" id="nav-tab1" href="#tab1-content"
                         data-bs-toggle="tab" data-bs-target="#tab1-content" role="tab" aria-controls="tab1-content"
                         aria-selected="true">Información de la Solicitud</a>
                 </li>
                 @if ($solicitud->aprobada == 1)
                     <li class="nav-item w-full text-center md:w-auto" role="presentation">
-                        <a class="nav-link nav_tab_mod" id="nav-tab2" data-bs-toggle="tab" href="#tab2-content"
+                        <a class="nav-link nav_tab_mod active" id="nav-tab2" data-bs-toggle="tab" href="#tab2-content"
                             data-bs-target="#tab2-content" role="tab" aria-controls="tab2-content"
                             aria-selected="false">Ensayos</a>
                     </li>
@@ -125,8 +132,8 @@
 
     </section>
     <div class="tab-content" id="nav-tabs-content">
-        <div class="container_mod bg-white p-3 mt-4 shadow-sm tab-pane fade show active" id="tab1-content"
-            role="tabpanel" aria-labelledby="nav-tab1">
+        <div class="container_mod bg-white p-3 mt-4 shadow-sm tab-pane fade" id="tab1-content" role="tabpanel"
+            aria-labelledby="nav-tab1">
 
             <div class="flex items-center justify-between">
                 <div class="flex w-full items-center justify-between flex-col md:flex-row">
@@ -607,7 +614,8 @@
                             <option value="">-- Seleccione --</option>
                             @foreach ($users as $e)
                                 @if ($e->id == $solicitud_fractura[0]->firma_reconocimiento_id)
-                                    <option value="{{ $e->id }}" selected>{{ $e->nombre }} {{ $e->apellido }}
+                                    <option value="{{ $e->id }}" selected>{{ $e->nombre }}
+                                        {{ $e->apellido }}
                                     </option>
                                 @else
                                     <option value="{{ $e->id }}">{{ $e->nombre }} {{ $e->apellido }}
@@ -731,8 +739,10 @@
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                     </svg>
-                    <span>Solicitud aprobada por {{ $solicitud->user_aprobo->nombre }} {{ $solicitud->user_aprobo->apellido }} el día {{ $solicitud->fecha_aprobada->format('d') }} de
-                        {{ $solicitud->fecha_aprobada->format('M') }}, {{ $solicitud->fecha_aprobada->format('Y') }}</span>
+                    <span>Solicitud aprobada por {{ $solicitud->user_aprobo->nombre }}
+                        {{ $solicitud->user_aprobo->apellido }} el día {{ $solicitud->fecha_aprobada->format('d') }} de
+                        {{ $solicitud->fecha_aprobada->format('M') }},
+                        {{ $solicitud->fecha_aprobada->format('Y') }}</span>
                 </div>
             @else
                 <div class="row mt-3">
@@ -760,7 +770,11 @@
         </div>
         <br>
 
-        @include('ensayo.create')
+        @if ($ensayos->count() > 0)
+            @include('ensayo.show')
+        @else
+            @include('ensayo.create')
+        @endif
 
         <script src="{{ asset('js/Solicitud/comment.js') }}"></script>
         <script src="{{ asset('js/Solicitud/edition.js') }}"></script>

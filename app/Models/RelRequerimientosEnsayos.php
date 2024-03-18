@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class RelRequerimientosEnsayos extends Model
 {
     use HasFactory;
+    protected $table = 'rel_requerimientos_ensayo';
 
     protected $fillable = [
         'ensayo_id',

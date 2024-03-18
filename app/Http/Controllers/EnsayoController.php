@@ -65,15 +65,13 @@ class EnsayoController extends Controller
         }
         
         # Asignar los requerimientos
-        // if ($request->aditivos) {
-        //     foreach ($request->aditivos as $aditivo) {
-        //         $this->_createRelRequerimiento($aditivo, $ensayo->id);
-        //     }
-        // }
+        if ($request->requerimientos) {
+            foreach ($request->requerimientos as $requerimiento) {
+                $this->_createRelRequerimiento($requerimiento, $ensayo->id);
+            }
+        }
 
         return back();
-
-
     }
 
     protected function _createRelAditivo($aditivo, $ensayo_id) {
@@ -90,60 +88,62 @@ class EnsayoController extends Controller
 
     protected function _createRelRequerimiento($requerimiento, $ensayo_id) {
         RelRequerimientosEnsayos::create([
+            'ensayo_id' => $ensayo_id,
             'test_id' => $requerimiento['test'],
             'temperatura' => $requerimiento['temperatura'],
             'condicion_id' => $requerimiento['condicion'],
-            'planilla' => $requerimiento['planilla'],
-            'consistometro' => $requerimiento['consistometro'],
-            'tiempo_acondicionamiento' => $requerimiento['tiempo_acondicionamiento'],
-            'gradiente' => $requerimiento['gradiente'],
-            'temperatura_bombeabilidad' => $requerimiento['temperatura_bombeabilidad'],
-            'presion' => $requerimiento['presion'],
-            '40_bc' => $requerimiento['40_bc'],
-            '70_bc' => $requerimiento['70_bc'],
-            '100_bc' => $requerimiento['100_bc'],
-            'uca_numero' => $requerimiento['uca_numero'],
-            'uca_temperatura' => $requerimiento['uca_temperatura'],
-            'uca_50_psi' => $requerimiento['uca_50_psi'],
-            'uca_500_psi' => $requerimiento['uca_500_psi'],
-            'uca_1000_psi' => $requerimiento['uca_1000_psi'],
-            'uca_12_hr' => $requerimiento['uca_12_hr'],
-            'uca_24_hr' => $requerimiento['uca_24_hr'],
-            'uca_impedancia_acustica' => $requerimiento['uca_impedancia_acustica'],
-            'uca_sgc_cero' => $requerimiento['uca_sgc_cero'],
-            'uca_sgc_max' => $requerimiento['uca_sgc_max'],
-            'uca_tiempo' => $requerimiento['uca_tiempo'],
-            'radiologia_temp_amb_rpm' => $requerimiento['radiologia_temp_amb_rpm'],
-            'radiologia_temp_amb_300' => $requerimiento['radiologia_temp_amb_300'],
-            'radiologia_temp_amb_200' => $requerimiento['radiologia_temp_amb_200'],
-            'radiologia_temp_amb_100' => $requerimiento['radiologia_temp_amb_100'],
-            'radiologia_temp_amb_60' => $requerimiento['radiologia_temp_amb_60'],
-            'radiologia_temp_amb_30' => $requerimiento['radiologia_temp_amb_30'],
-            'radiologia_temp_amb_6' => $requerimiento['radiologia_temp_amb_6'],
-            'radiologia_temp_amb_3' => $requerimiento['radiologia_temp_amb_3'],
-            'radiologia_temp_ens_rpm' => $requerimiento['radiologia_temp_ens_rpm'],
-            'radiologia_temp_ens_300' => $requerimiento['radiologia_temp_ens_300'],
-            'radiologia_temp_ens_200' => $requerimiento['radiologia_temp_ens_200'],
-            'radiologia_temp_ens_100' => $requerimiento['radiologia_temp_ens_100'],
-            'radiologia_temp_ens_60' => $requerimiento['radiologia_temp_ens_60'],
-            'radiologia_temp_ens_30' => $requerimiento['radiologia_temp_ens_30'],
-            'radiologia_temp_ens_6' => $requerimiento['radiologia_temp_ens_6'],
-            'radiologia_temp_ens_3' => $requerimiento['radiologia_temp_ens_3'],
-            'radiologia_temp_amb' => $requerimiento['radiologia_temp_amb'],
-            'radiologia_temp_ens' => $requerimiento['radiologia_temp_ens'],
-            'radiologia_temp_amb_cedencia' => $requerimiento['radiologia_temp_amb_cedencia'],
-            'radiologia_temp_ens_cedencia' => $requerimiento['radiologia_temp_ens_cedencia'],
-            'radiologia_temp_amb_gel_10_seg' => $requerimiento['radiologia_temp_amb_gel_10_seg'],
-            'radiologia_temp_ens_gel_10_seg' => $requerimiento['radiologia_temp_ens_gel_10_seg'],
-            'radiologia_temp_amb_gel_10_min' => $requerimiento['radiologia_temp_amb_gel_10_min'],
-            'radiologia_temp_ens_gel_10_min' => $requerimiento['radiologia_temp_ens_gel_10_min'],
-            'perdida_filtrado_temp' => $requerimiento['perdida_filtrado_temp'],
-            'perdida_fluido_acumulado' => $requerimiento['perdida_fluido_acumulado'],
-            'perdida_filtrado_api' => $requerimiento['perdida_filtrado_api'],
-            'perdida_agua_libre' => $requerimiento['perdida_agua_libre'],
-            'perdida_volumen' => $requerimiento['perdida_volumen'],
-            'perdida_api_agua_libre' => $requerimiento['perdida_api_agua_libre'],
-            'mezclabilidad' => $requerimiento['mezclabilidad'],
+            'planilla' => $requerimiento['resultados']['planilla'],
+            'consistometro' => $requerimiento['resultados']['consistometro'],
+            'tiempo_acondicionamiento' => $requerimiento['resultados']['tiempo_acondicionamiento'],
+            'gradiente' => $requerimiento['resultados']['gradiente'],
+            'temperatura_bombeabilidad' => $requerimiento['resultados']['temperatura_bombeabilidad'],
+            'presion' => $requerimiento['resultados']['presion'],
+            '40_bc' => $requerimiento['resultados']['40_bc'],
+            '70_bc' => $requerimiento['resultados']['70_bc'],
+            '100_bc' => $requerimiento['resultados']['100_bc'],
+            'uca_numero' => $requerimiento['resultados']['uca_numero'],
+            'uca_temperatura' => $requerimiento['resultados']['uca_temperatura'],
+            'uca_50_psi' => $requerimiento['resultados']['uca_50_psi'],
+            'uca_500_psi' => $requerimiento['resultados']['uca_500_psi'],
+            'uca_1000_psi' => $requerimiento['resultados']['uca_1000_psi'],
+            'uca_12_hr' => $requerimiento['resultados']['uca_12_hr'],
+            'uca_24_hr' => $requerimiento['resultados']['uca_24_hr'],
+            'uca_impedancia_acustica' => $requerimiento['resultados']['uca_impedancia_acustica'],
+            'uca_sgc_cero' => $requerimiento['resultados']['uca_sgc_cero'],
+            'uca_sgc_max' => $requerimiento['resultados']['uca_sgc_max'],
+            'uca_tiempo' => $requerimiento['resultados']['uca_tiempo'],
+            'radiologia_temp_amb_rpm' => $requerimiento['resultados']['radiologia_temp_amb_rpm'],
+            'radiologia_temp_amb_300' => $requerimiento['resultados']['radiologia_temp_amb_300'],
+            'radiologia_temp_amb_200' => $requerimiento['resultados']['radiologia_temp_amb_200'],
+            'radiologia_temp_amb_100' => $requerimiento['resultados']['radiologia_temp_amb_100'],
+            'radiologia_temp_amb_60' => $requerimiento['resultados']['radiologia_temp_amb_60'],
+            'radiologia_temp_amb_30' => $requerimiento['resultados']['radiologia_temp_amb_30'],
+            'radiologia_temp_amb_6' => $requerimiento['resultados']['radiologia_temp_amb_6'],
+            'radiologia_temp_amb_3' => $requerimiento['resultados']['radiologia_temp_amb_3'],
+            'radiologia_temp_ens_rpm' => $requerimiento['resultados']['radiologia_temp_ens_rpm'],
+            'radiologia_temp_ens_300' => $requerimiento['resultados']['radiologia_temp_ens_300'],
+            'radiologia_temp_ens_200' => $requerimiento['resultados']['radiologia_temp_ens_200'],
+            'radiologia_temp_ens_100' => $requerimiento['resultados']['radiologia_temp_ens_100'],
+            'radiologia_temp_ens_60' => $requerimiento['resultados']['radiologia_temp_ens_60'],
+            'radiologia_temp_ens_30' => $requerimiento['resultados']['radiologia_temp_ens_30'],
+            'radiologia_temp_ens_6' => $requerimiento['resultados']['radiologia_temp_ens_6'],
+            'radiologia_temp_ens_3' => $requerimiento['resultados']['radiologia_temp_ens_3'],
+            'radiologia_temp_amb' => $requerimiento['resultados']['radiologia_temp_amb'],
+            'radiologia_temp_ens' => $requerimiento['resultados']['radiologia_temp_ens'],
+            'radiologia_temp_amb_cedencia' => $requerimiento['resultados']['radiologia_temp_amb_cedencia'],
+            'radiologia_temp_ens_cedencia' => $requerimiento['resultados']['radiologia_temp_ens_cedencia'],
+            'radiologia_temp_amb_gel_10_seg' => $requerimiento['resultados']['radiologia_temp_amb_gel_10_seg'],
+            'radiologia_temp_ens_gel_10_seg' => $requerimiento['resultados']['radiologia_temp_ens_gel_10_seg'],
+            'radiologia_temp_amb_gel_10_min' => $requerimiento['resultados']['radiologia_temp_amb_gel_10_min'],
+            'radiologia_temp_ens_gel_10_min' => $requerimiento['resultados']['radiologia_temp_ens_gel_10_min'],
+            'perdida_filtrado_temp' => $requerimiento['resultados']['perdida_filtrado_temp'],
+            'perdida_fluido_acumulado' => $requerimiento['resultados']['perdida_fluido_acumulado'],
+            'perdida_filtrado_api' => $requerimiento['resultados']['perdida_filtrado_api'],
+            'perdida_agua_libre' => $requerimiento['resultados']['perdida_agua_libre'],
+            'perdida_volumen' => $requerimiento['resultados']['perdida_volumen'],
+            'perdida_api_agua_libre' => $requerimiento['resultados']['perdida_api_agua_libre'],
+            'mezclabilidad' => $requerimiento['resultados']['mezclabilidad'],
+            'user_id' => auth()->user()->id, 
         ]);
     }
 }

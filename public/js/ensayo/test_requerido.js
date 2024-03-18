@@ -79,7 +79,7 @@ btnAddTest.addEventListener('click', e => {
                                 Nº</label>
                             <input type="number"
                                 class="form-control sz text-center placeholder:text-gray-300 placeholder:font-light"
-                                placeholder="Nº" requerimientos[${aux}][resultados][consistometro] min="0">
+                                placeholder="Nº" name="requerimientos[${aux}][resultados][consistometro]" min="0">
                         </div>
 
                         <div class="col-xs-12 col-md-3 my-2">
@@ -104,7 +104,7 @@ btnAddTest.addEventListener('click', e => {
                                 <small>(ºC)</small></label>
                             <input type="number"
                                 class="form-control sz text-center placeholder:text-gray-300 placeholder:font-light"
-                                placeholder="ºC" min="0" requerimientos[${aux}][resultados][temperatura_bombeabilidad]>
+                                placeholder="ºC" min="0" name="requerimientos[${aux}][resultados][temperatura_bombeabilidad]">
                         </div>
 
                         <div class="col-xs-12 col-md-2 my-2">
@@ -112,7 +112,7 @@ btnAddTest.addEventListener('click', e => {
                                 <small>(psi)</small></label>
                             <input type="number"
                                 class="form-control sz text-center placeholder:text-gray-300 placeholder:font-light"
-                                placeholder="Nº" min="0" requerimientos[${aux}][resultados][presion]>
+                                placeholder="Nº" min="0" name="requerimientos[${aux}][resultados][presion]">
                         </div>
 
                         <div class="col-xs-12 col-md-2 my-2">
@@ -120,7 +120,7 @@ btnAddTest.addEventListener('click', e => {
                                 <small>(hh:mm)</small></label>
                             <input type="text"
                                 class="form-control sz text-center placeholder:text-gray-300 placeholder:font-light"
-                                placeholder="hh:mm" requerimientos[${aux}][resultados][40_bc]>
+                                placeholder="hh:mm" name="requerimientos[${aux}][resultados][40_bc]">
                         </div>
 
                         <div class="col-xs-12 col-md-2 my-2">
@@ -128,7 +128,7 @@ btnAddTest.addEventListener('click', e => {
                                 <small>(hh:mm)</small></label>
                             <input type="text"
                                 class="form-control sz text-center placeholder:text-gray-300 placeholder:font-light"
-                                placeholder="hh:mm" requerimientos[${aux}][resultados][70_bc]>
+                                placeholder="hh:mm" name="requerimientos[${aux}][resultados][70_bc]">
                         </div>
 
                         <div class="col-xs-12 col-md-2 my-2">
@@ -136,7 +136,7 @@ btnAddTest.addEventListener('click', e => {
                                 <small>(hh:mm)</small></label>
                             <input type="text"
                                 class="form-control sz text-center placeholder:text-gray-300 placeholder:font-light"
-                                placeholder="hh:mm" requerimientos[${aux}][resultados][100_bc]>
+                                placeholder="hh:mm" name="requerimientos[${aux}][resultados][100_bc]">
                         </div>
                     </div>
 

@@ -7,6 +7,7 @@ use App\Models\AgenteSosten;
 use App\Models\AnalisisMicrobial;
 use App\Models\Cliente;
 use App\Models\Edicion_Solicitud;
+use App\Models\Ensayo;
 use App\Models\OtrosAnalisis;
 use App\Models\SistemasFluidos;
 use App\Models\Solicitud;
@@ -243,7 +244,7 @@ class SolicitudController extends Controller
             'otros_analisis' => OtrosAnalisis::all(),
             'aditivos' => Aditivo::all(),
             'users' => User::all(),
-            // 'solicitud_fractura' => SolicitudFractura::where('solicitud_id', $solicitud_id)->get()
+            'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
         return view('solicitud.components.fractura.show', $data);
     }

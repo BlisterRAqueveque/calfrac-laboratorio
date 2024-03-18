@@ -43,4 +43,8 @@ class Ensayo extends Model
     public function aditivos() {
         return $this->hasMany(RelAditivosEnsayos::class);
     }
+
+    public function requerimientos() {
+        return $this->hasMany(RelRequerimientosEnsayos::class);
+    }
 }

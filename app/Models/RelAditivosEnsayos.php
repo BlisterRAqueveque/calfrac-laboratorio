@@ -20,7 +20,7 @@ class RelAditivosEnsayos extends Model
     ];
 
     public function aditivo() {
-        return $this->hasMany(Aditivo::class);
+        return $this->belongsTo(Aditivo::class);
     }
 
     public function ensayo() {

@@ -61,4 +61,5 @@ class Solicitud extends Model
     public function fundamento() {
         return $this->hasMany(Edicion_Solicitud::class);
     }
+
 }
