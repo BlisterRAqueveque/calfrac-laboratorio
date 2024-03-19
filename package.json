@@ -1,5 +1,6 @@
 {
     "private": true,
+    "type": "module",
     "scripts": {
         "dev": "vite",
         "build": "vite build"
@@ -15,6 +16,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "echarts": "^5.5.0"
+        "echarts": "^5.5.0",
+        "sweetalert2": "^11.10.6"
     }
 }

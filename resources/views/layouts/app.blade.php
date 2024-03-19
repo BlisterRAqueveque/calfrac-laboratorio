@@ -15,7 +15,7 @@
         rel="stylesheet">
     @vite('resources/css/app.css')
     @vite('resources/css/bootstrap.min.css')
-
+    <script src="{{ asset('css/sweetalert2.css') }}"></script>
 </head>
 
 {{-- <body class="bg-gradient-to-br from-green-50 to-gray-100"> --}}
@@ -264,6 +264,7 @@
         </div>
     </nav>
     <script src="{{ asset('js/redom.min.js') }}"></script>
+    <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
     <script>
         const {
             el,
@@ -273,11 +274,13 @@
     <div style="margin-top: 113px;">
         @yield('contenido')
     </div>
+    @yield('scripts')
 </body>
 
 </html>
 @vite('resources/js/bootstrap.bundle.min.js')
 
+<script src="{{ asset('js/alerts.js') }}"></script>
 <script>
     const navHeader = document.querySelectorAll('.nav_list');
 

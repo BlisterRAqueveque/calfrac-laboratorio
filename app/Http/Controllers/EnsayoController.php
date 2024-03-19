@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Ensayo;
 use App\Models\RelAditivosEnsayos;
 use App\Models\RelRequerimientosEnsayos;
+use App\Models\Solicitud;
 use Illuminate\Http\Request;
 
 class EnsayoController extends Controller
@@ -24,7 +25,7 @@ class EnsayoController extends Controller
 
     public function store(Request $request) {
         # Validaciones (Consultar que se valida)
-
+        
         # Crear el Ensayo
         $ensayo = Ensayo::create([
             'uso' => $request->uso, 
@@ -71,7 +72,13 @@ class EnsayoController extends Controller
             }
         }
 
-        return back();
+        return $ensayo->id;
+    }
+
+    public function assigned(Request $request) {
+        $solicitud = Solicitud::find($request->solicitud_id);
+        $solicitud->ensayo_asignado = $request->ensayo_id;
+        $solicitud->fundamento_asignacion = $request->fundamento_asignacion;
     }
 
     protected function _createRelAditivo($aditivo, $ensayo_id) {

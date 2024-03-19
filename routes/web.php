@@ -39,6 +39,7 @@ Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 Route::get('/ensayo/create', [EnsayoController::class, 'create'])->name('ensayo.create');
 Route::get('/ensayos', [EnsayoController::class, 'index'])->name('ensayos');
 Route::post('/ensayo/create', [EnsayoController::class, 'store'])->name('ensayo.store');
+Route::post('/ensayo/assigned', [EnsayoController::class, 'assigned'])->name('ensayo.assigned');
 
 # Solicitudes
 Route::get('/solicitud', [SolicitudController::class, 'create'])->name('solicitud.create.show');

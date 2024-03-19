@@ -4,6 +4,7 @@ const contenedor_tests_requeridos = document.getElementById('contenedor_tests_re
 let aux = 1;
 btnAddTest.addEventListener('click', e => {
     e.preventDefault();
+
     let html = `
     <div class="mb-3 px-3">
 

@@ -106,13 +106,13 @@
             <ul role="tablist" aria-owns="nav-tab1 nav-tab2 nav-tab3 nav-tab4" class="nav nav-tabs"
                 id="nav-tab-with-nested-tabs" style="z-index: 999">
                 <li class="nav-item w-full text-center md:w-auto" role="presentation">
-                    <a class="nav-link nav_tab_mod" aria-current="page" id="nav-tab1" href="#tab1-content"
+                    <a class="nav-link nav_tab_mod active" aria-current="page" id="nav-tab1" href="#tab1-content"
                         data-bs-toggle="tab" data-bs-target="#tab1-content" role="tab" aria-controls="tab1-content"
                         aria-selected="true">Información de la Solicitud</a>
                 </li>
                 @if ($solicitud->aprobada == 1)
                     <li class="nav-item w-full text-center md:w-auto" role="presentation">
-                        <a class="nav-link nav_tab_mod active" id="nav-tab2" data-bs-toggle="tab" href="#tab2-content"
+                        <a class="nav-link nav_tab_mod" id="nav-tab2" data-bs-toggle="tab" href="#tab2-content"
                             data-bs-target="#tab2-content" role="tab" aria-controls="tab2-content"
                             aria-selected="false">Ensayos</a>
                     </li>
@@ -132,8 +132,8 @@
 
     </section>
     <div class="tab-content" id="nav-tabs-content">
-        <div class="container_mod bg-white p-3 mt-4 shadow-sm tab-pane fade" id="tab1-content" role="tabpanel"
-            aria-labelledby="nav-tab1">
+        <div class="container_mod bg-white p-3 mt-4 shadow-sm tab-pane fade show active" id="tab1-content"
+            role="tabpanel" aria-labelledby="nav-tab1">
 
             <div class="flex items-center justify-between">
                 <div class="flex w-full items-center justify-between flex-col md:flex-row">
@@ -164,7 +164,8 @@
                 </div>
             </div>
 
-            <form action="{{ route('solicitud.update') }}" method="POST">
+            <form id="form_edicion">
+                {{-- <form action="{{ route('solicitud.update') }}" method="POST"> --}}
                 @csrf
                 <input type="hidden" value="{{ $solicitud->id }}" name="solicitud_id">
                 <div class="row mt-3"> <!-- Información General -->
@@ -698,8 +699,9 @@
                                                     Responder
                                                 </button>
                                             </div>
-                                            <form action="{{ route('fundamento.rta', auth()->user()->id) }}"
-                                                method="POST" class="mt-3 formRta_0 hidden">
+                                            <form id="form_fundamento" class="mt-3 formRta_0 hidden">
+                                                {{-- <form action="{{ route('fundamento.rta', auth()->user()->id) }}"
+                                                    method="POST" class="mt-3 formRta_0 hidden"> --}}
                                                 @csrf
                                                 <input type="hidden" name="fundamento_id" value="{{ $c->id }}">
                                                 <textarea name="respuesta" id="respuesta" cols="30" rows="3" class="form-control sz p-2"
@@ -715,7 +717,7 @@
                                                                 d="M6 18 18 6M6 6l12 12" />
                                                         </svg>
                                                         Cancelar</button>
-                                                    <input type="submit"
+                                                    <input type="button" id="submitRtaFundamento"
                                                         class="bg-green-700 bg-opacity-60 text-white font-bold px-2 py-1 rounded-sm hover:shadow-lg transition-all duration-75"
                                                         value="Responder">
                                                 </div>
@@ -747,10 +749,10 @@
             @else
                 <div class="row mt-3">
                     <div class="flex flex-col items-center gap-2">
-                        <form action="{{ route('solicitud.aprobar') }}" method="POST">
+                        <form id="form_aprobar_solicitud">
                             @csrf
                             <input type="hidden" name="solicitud_id" value="{{ $solicitud->id }}">
-                            <input type="submit" value="Aprobar Solicitud"
+                            <input type="button" id="btnAprobarSolicitud" value="Aprobar Solicitud"
                                 class="bg-emerald-400 text-white font-bold tracking-wide px-3 py-1 rounded-sm flex gap-2 hover:bg-emerald-500 transition-all duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed">
                         </form>
                         <p class="mb-0 flex flex-col text-center md:flex-row items-center gap-2 text-gray-600 text-sm">
@@ -768,14 +770,74 @@
             @endif
 
         </div>
-        <br>
 
         @if ($ensayos->count() > 0)
             @include('ensayo.show')
         @else
             @include('ensayo.create')
         @endif
+        <br>
 
         <script src="{{ asset('js/Solicitud/comment.js') }}"></script>
         <script src="{{ asset('js/Solicitud/edition.js') }}"></script>
+
+        <!-- Función para aprobar la solicitud -->
+        <script>
+            const btnAprobarSolicitud = document.getElementById('btnAprobarSolicitud');
+            if (btnAprobarSolicitud) {
+                btnAprobarSolicitud.addEventListener('click', e => {
+                    e.preventDefault();
+    
+                    let form = new FormData(document.getElementById('form_aprobar_solicitud'))
+                    confirmAlert('¿Está seguro de aprobar la solicitud?',
+                        'Una vez aprobado, la misma no se podrá editar más', 1, 'Aprobar Solicitud').then((
+                    confirmed) => {
+                        if (confirmed) {
+                            fetch("{{ route('solicitud.aprobar') }}", {
+                                    method: 'POST',
+                                    body: form
+                                }).then((response) => response.json())
+                                .then((data) => {
+                                    if (data) {
+                                        successAlert('¡Solicitud Aprobada!', 'La solicitud fue aprobada correctamente').then((confirmed) => {
+                                            window.location.reload();
+                                        })
+                                    }
+                                })
+                        }
+                    })
+    
+                })
+            }
+        </script>
+
+        <!-- Función para agregar una edición -->
+        <script>
+            const submitFundamentoEdicion = document.getElementById('submitFundamentoEdicion');
+
+            submitFundamentoEdicion.addEventListener('click', e => {
+                e.preventDefault();
+
+                let form = new FormData(document.getElementById('form_edicion'))
+                confirmAlert('¿Está seguro de realizar la edición?',
+                    'Una vez que se realice la edición se generará un comentario', 1, 'Editar Solicitud').then((confirmed) => {
+
+                    if (confirmed) {
+                        fetch("{{ route('solicitud.update') }}", {
+                                method: 'POST',
+                                body: form
+                            }).then((response) => response.json())
+                            .then((data) => {
+                                console.log(data);
+                                if (data) {
+                                    successAlert('¡Edición Exitosa!', 'La edición se realizó correctamente').then((confirmed) => {
+                                        window.location.reload();
+                                    })
+                                }
+                            })
+                    }
+                })
+
+            })
+        </script>
     @endsection

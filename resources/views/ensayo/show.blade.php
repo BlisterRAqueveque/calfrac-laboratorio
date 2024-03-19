@@ -1,7 +1,6 @@
-<div class="container_mod bg-white p-3 mt-4 shadow-sm tab-pane fade show active" id="tab2-content" role="tabpanel"
+<div class="container_mod bg-white p-3 mt-4 shadow-sm tab-pane fade" id="tab2-content" role="tabpanel"
     aria-labelledby="nav-tab2">
     <p class="m-0 mt-1 font-bold text-lg tracking-wide">Formulario para crear un Ensayo</p>
-
 
     <!-- Si ya tiene Ensayos asignados, entonces acá se van a ir iterando -->
     <ul role="tablist" class="nav mt-4 nav-tabs p-1 border-1  rounded-full gap-1" id="nav-tab-with-nested-tabs">
@@ -17,9 +16,10 @@
                     $clase = '';
                 }
             @endphp
-            <li class="nav-item w-full md:w-auto py-1 px-4 rounded-full nav_tab_intentos {{ $clase }}" role="presentation">
-                <a class="text-gray-500" aria-current="page" href="#tab-intento_{{ $e->id }}"
-                    data-bs-toggle="tab" data-bs-target="#tab-intento_{{ $e->id }}" role="tab"
+            <li class="nav-item w-full md:w-auto py-1" role="presentation">
+                <a class="text-gray-500 py-1 px-4 rounded-full nav_tab_intentos {{ $clase }}" aria-current="page"
+                    href="#tab-intento_{{ $e->id }}" data-bs-toggle="tab"
+                    data-bs-target="#tab-intento_{{ $e->id }}" role="tab"
                     aria-controls="tab-intento_{{ $e->id }}" aria-selected="true">
                     Intento Nº{{ $i }}
                 </a>
@@ -29,17 +29,15 @@
             @endphp
         @endforeach
 
-        <li class="nav-item w-full md:w-auto py-1 px-4 rounded-full" role="presentation">
-            <a class="text-gray-500" aria-current="page" id="nav-nuevo_ensayo" href="#tab-nuevo_ensayo"
-                data-bs-toggle="tab" data-bs-target="#tab-nuevo_ensayo" role="tab" aria-controls="tab-nuevo_ensayo"
-                aria-selected="true">
-                <div class="flex items-center gap-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-4 h-4">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                    </svg>
-                    Nuevo Ensayo
-                </div>
+        <li class="nav-item w-full md:w-auto" role="presentation">
+            <a class="text-gray-500 py-1 px-4 rounded-full nav_tab_intentos flex items-center" aria-current="page"
+                id="nav-nuevo_ensayo" href="#tab-nuevo_ensayo" data-bs-toggle="tab" data-bs-target="#tab-nuevo_ensayo"
+                role="tab" aria-controls="tab-nuevo_ensayo" aria-selected="true">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-4 h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                </svg>
+                Nuevo Ensayo
             </a>
         </li>
 
@@ -91,6 +89,19 @@
                             data-bs-target="#tab-requerimientos_ensayo_{{ $e->id }}" role="tab"
                             aria-controls="tab-requerimientos_ensayo_{{ $e->id }}" aria-selected="false">
                             Requerimientos del Ensayo
+                        </a>
+                    </li>
+                    <li class="nav-item w-full md:w-auto" role="presentation">
+                        <a class="nav-link nav_tab_mod d-flex items-center justify-center gap-2" id="nav-tab2"
+                            data-bs-toggle="tab" href="#tab-ensayo_asignado_{{ $e->id }}"
+                            data-bs-target="#tab-ensayo_asignado_{{ $e->id }}" role="tab"
+                            aria-selected="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.7" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
+                            </svg>
+                            Asignar Ensayo
                         </a>
                     </li>
                 </ul>
@@ -368,7 +379,7 @@
                         @if ($e->aditivos->count() > 0)
                             <span class="ms-1 mb-0 font-light tracking-wide">Datos Esenciales</span>
                             <hr class="ms-1 mt-1">
-                            <div class="mb-3 px-3" id="contenedor_aditivos">
+                            <div class="mb-3 px-3">
                                 @foreach ($e->aditivos as $aditivo)
                                     <div class="row rounded-md p-3 bg-gray-50 border border-gray-100 mb-3">
                                         <article class="col-xs-12 col-md-1 my-2"><label
@@ -411,11 +422,10 @@
                                 @endforeach
                             </div>
                         @else
-                            <div id="contenedor_aditivos" class="text-center">
+                            <div class="text-center">
                                 No se han agregado aditivos
                             </div>
                         @endif
-
 
                     </div> <!-- Aditivos -->
 
@@ -425,7 +435,7 @@
                         @if ($e->requerimientos->count() > 0)
                             <span class="ms-1 mb-0 font-light tracking-wide">Tests Requeridos</span>
                             <hr class="ms-1 mt-1">
-                            <div id="contenedor_tests_requeridos">
+                            <div>
                                 @foreach ($e->requerimientos as $req)
                                     <div class="mb-3 px-3">
 
@@ -1026,11 +1036,25 @@
                                 @endforeach
                             </div>
                         @else
-                            <div id="contenedor_tests_requeridos" class="text-center">
+                            <div class="text-center">
                                 No se han agregado tests
                             </div>
                         @endif
 
+                    </div>
+
+                    <div class="mt-4 tab-pane fade" id="tab-ensayo_asignado_{{ $e->id }}">
+                        <form
+                            class="flex flex-col justify-center items-center form_asignar_ensayo_{{ $e->id }}">
+                            @csrf
+                            <input type="hidden" name="ensayo_id" value="{{ $e->id }}">
+                            <input type="hidden" name="solicitud_id" value="{{ $e->solicitud_id }}">
+                            <span class="text-md">Al asignar este ensayo para la solicitud queda concluida la misma
+                                para realizar nuevos cambios</span>
+                            <button data-id-ensayo="{{ $e->id }}"
+                                class="text-sm mt-2 bg-green-700 bg-opacity-60 text-white tracking-widest p-2 rounded-sm hover:shadow-lg transition-all duration-75 font-bold btnAsignarSolicitud">Asignar
+                                Ensayo</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -1040,19 +1064,93 @@
         @endforeach
         <div class="mt-4 tab-pane fade" id="tab-nuevo_ensayo" role="tabpanel"
             aria-labelledby="nav-tab_carga_informacion"> <!-- Carga de Información -->
-            Nuevo ensayo
+            @include('ensayo.components.create.form')
         </div>
     </div> <!-- Carga de Información -->
 
 </div>
 
+<!-- Agrega aditivos -->
+<script>
+    let aditivos = {!! json_encode($aditivos) !!}
+</script>
+<script src="{{ asset('js/ensayo/add_aditivo.js') }}"></script>
+<script src="{{ asset('js/ensayo/test_requerido.js') }}"></script>
+
+<!-- Script que quita y agrega clases de la navegación de intentos -->
 <script>
     const nav_tab_intentos = document.querySelectorAll('.nav_tab_intentos');
 
     for (let i = 0; i < nav_tab_intentos.length; i++) {
         nav_tab_intentos[i].addEventListener('click', e => {
             event.preventDefault();
-            alert('Click');
-        })        
+            if (!nav_tab_intentos[i].classList.contains('border-1')) {
+                for (let j = 0; j < nav_tab_intentos.length; j++) {
+                    nav_tab_intentos[j].classList.remove('border-1', 'shadow-sm');
+                }
+                nav_tab_intentos[i].classList.add('border-1', 'shadow-sm');
+            }
+        })
+    }
+</script>
+
+<!-- Crea el submit del ensayo -->
+<script>
+    const submitEnsayo = document.getElementById('submitEnsayo');
+
+    submitEnsayo.addEventListener('click', e => {
+        e.preventDefault();
+        let form = new FormData(document.getElementById('form_ensayo'));
+
+        confirmAlert().then((confirmed) => {
+            if (confirmed) {
+                fetch("{{ route('ensayo.store') }}", {
+                        method: 'POST',
+                        body: form
+                    }).then((response) => response.json())
+                    .then((data) => {
+                        if (data) {
+                            successAlert('¡Ensayo Creado!', 'El ensayo se creó correctamente').then(
+                                (confirmed) => {
+                                    window.location.reload();
+                                })
+                        }
+                    })
+            }
+        })
+    })
+</script>
+
+<!-- Crea el submit de asignación de Ensayo -->
+<script>
+    const btnAsignarSolicitud = document.querySelectorAll('.btnAsignarSolicitud');
+
+    for (let i = 0; i < btnAsignarSolicitud.length; i++) {
+        btnAsignarSolicitud[i].addEventListener('click', e => {
+            e.preventDefault();
+
+            let ensayo_id = btnAsignarSolicitud[i].getAttribute('data-id-ensayo');
+            let form = new FormData(document.querySelector(`.form_asignar_ensayo_${ensayo_id}`));
+
+            confirmAlert('¿Desea asignar este ensayo para la solicitud?',
+                'Una vez asignado el ensayo no podrán haber más cambios', 1, 'Aceptar').then((
+            confirmed) => {
+                if (confirmed) {
+                    fetch("{{ route('ensayo.assigned') }}", {
+                            method: 'POST',
+                            body: form
+                        }).then((response) => response.json())
+                        .then((data) => {
+                            console.log(data);
+                            if (data) {
+                                successAlert('¡Ensayo Creado!', 'El ensayo se creó correctamente')
+                                    .then((confirmed) => {
+                                        window.location.reload();
+                                    })
+                            }
+                        })
+                }
+            })
+        })
     }
 </script>

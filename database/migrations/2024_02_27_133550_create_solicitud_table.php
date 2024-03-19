@@ -38,9 +38,16 @@ return new class extends Migration
             $table->string('reporte_lab_lead')->nullable();
             $table->integer('solicitud')->nullable();
             $table->foreignId('estado_solicitud_id')->references('id')->on('estados_solicitudes');
+            $table->tinyInteger('aprobada')->nullable()->default(0);
+            $table->dateTime('fecha_aprobada')->nullable();
+            $table->unsignedBigInteger('usuario_aprobo')->nullable();
+            $table->foreign('usuario_aprobo')->references('id')->on('users');
+            $table->unsignedBigInteger('ensayo_asignado_id')->nullable();
+            $table->foreign('ensayo_asignado_id')->references('id')->on('ensayos');
+            $table->text('fundamento_asignacion')->nullable();
+            $table->dateTime('fecha_asignacion')->nullable();
             $table->tinyInteger('activo')->default(1)->comment('1: Activo - 0: Inactivo (Visualizacion en el sistema)');
             $table->foreignId('user_id')->constrained()->onDelete('restrict');
-            
             $table->timestamps();
         });
     }

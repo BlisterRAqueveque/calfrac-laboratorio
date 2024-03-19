@@ -157,3 +157,157 @@ a:link {
 /* .table_btn_delete .point_delete {
     background-color: rgb(80, 138, 80);
 } */
+
+/* SWEETALERT */
+.swal2-container .btn-primary {
+    background-color: #405189;
+    border: 1px solid #405189;
+    font-size: 13px;
+    padding: 8px 30px;
+}
+
+.swal2-container .btn-primary:hover {
+    background-color: #364574;
+    border: 1px solid #364574;
+}
+
+.swal2-container .btn-danger {
+    background-color: #f06548;
+    border: 1px solid #f06548;
+    font-size: 13px;
+    padding: 8px 30px;
+}
+.swal2-container .btn-danger:hover {
+    background-color: #cc563d;
+    border: 1px solid #cc563d;
+}
+
+.swal2-container .swal2-title {
+    padding: 24px 24px 0;
+    font-size: 20px;
+    font-weight: 500
+}
+
+.swal2-container .swal2-title {
+    padding: 24px 24px 0;
+    font-size: 20px;
+    font-weight: 500
+}
+
+.swal2-popup {
+    padding-bottom: 24px;
+    border-radius: 10px;
+    background-color: hwb(0 100% 0%);
+    color: #ced4da
+}
+
+.swal2-popup .swal2-title {
+    color: #495057
+}
+
+.swal2-popup .swal2-html-container {
+    color: #495057
+}
+
+.swal2-footer {
+    border-top: 1px solid var(--vz-border-color);
+    color: #ced4da
+}
+
+.swal2-html-container {
+    font-size: 16px
+}
+
+.swal2-icon.swal2-question {
+    border-color: #0ac7fb;
+    color: #0ac7fb
+}
+
+.swal2-icon.swal2-success .swal2-success-line {
+    background-color: #63958e
+}
+
+.swal2-icon.swal2-success .swal2-success-ring {
+    border-color: #3b978b4d!important;
+}
+
+.swal2-icon.swal2-warning {
+    border-color: #ffc84b;
+    color: #ffc84b
+}
+
+.swal2-styled:focus {
+    -webkit-box-shadow: none;
+    box-shadow: none
+}
+
+.swal2-loader {
+    border-color: #0ab39c transparent #0ab39c transparent
+}
+
+.swal2-timer-progress-bar {
+    background-color: rgba(103,177,115.4)
+}
+
+.swal2-progress-steps .swal2-progress-step {
+    background: #0ab39c
+}
+
+.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step {
+    background: #0ab39c
+}
+
+.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step,.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step-line {
+    background: rgba(var(--vz-primary-rgb),.3)
+}
+
+.swal2-progress-steps .swal2-progress-step-line {
+    background: #0ab39c
+}
+
+.swal2-actions.swal2-loading .swal2-styled.swal2-confirm {
+    border-left-color: #0ab39c!important;
+    border-right-color: #0ab39c!important
+}
+
+.swal2-file,.swal2-input,.swal2-textarea {
+    border: 1px solid #ced4da
+}
+
+.swal2-file:focus,.swal2-input:focus,.swal2-textarea:focus {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-color: #2a3559
+}
+
+.swal2-input {
+    height: auto;
+    display: block;
+    padding: .5rem .9rem;
+    font-size: 0.8125rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #ced4da;
+    background-color: transparent;
+    background-clip: padding-box;
+    border: 1px solid #ced4da
+}
+
+.swal2-close {
+    /* font-family: var(--vz-font-sans-serif);
+    font-weight: var(--vz-font-weight-light); */
+    font-size: 28px
+}
+
+.swal2-close:focus {
+    -webkit-box-shadow: none;
+    box-shadow: none
+}
+
+.swal2-close:hover {
+    color: #ced4da;
+}
+
+.swal2-validation-message {
+    background-color: transparent
+}

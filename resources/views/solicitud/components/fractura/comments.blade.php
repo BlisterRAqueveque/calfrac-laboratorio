@@ -12,7 +12,8 @@
             @enderror
         </div>
         <div class="flex justify-end mt-2">
-            <input type="submit"
+            <input type="button"
+                id="submitFundamentoEdicion"
                 class="text-sm w-full md:w-auto bg-green-700 bg-opacity-60 text-white p-2 rounded-sm hover:shadow-lg transition-all duration-75 font-bold"
                 value="Editar Solicitud">
         </div>

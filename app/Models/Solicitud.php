@@ -36,11 +36,16 @@ class Solicitud extends Model
         'aprobada',
         'fecha_aprobada',
         'usuario_aprobo',
+        'ensayo_asignado_id',
+        'fundamento_asignacion',
+        'fecha_asignacion',
+        'activo',
         'user_id',
     ];
 
     protected $casts = [
         'fecha_aprobada' => 'datetime',
+        'fecha_asignacion' => 'datetime',
     ];
 
     public function user()

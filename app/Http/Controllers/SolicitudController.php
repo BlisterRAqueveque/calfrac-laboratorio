@@ -133,7 +133,8 @@ class SolicitudController extends Controller
         $solicitud->fecha_aprobada = date('Y-m-d H:i:s');
         $solicitud->usuario_aprobo = auth()->user()->id;
         $solicitud->save();
-        return back();
+
+        return $solicitud->id;
     }
 
     /**
@@ -210,7 +211,7 @@ class SolicitudController extends Controller
         $solicitud_fractura->fecha_firma_reconocimiento = $request->fecha_firma_reconocimiento;
         $solicitud_fractura->fecha_firma_reconocimiento = $request->fecha_firma_reconocimiento;
         $solicitud_fractura->save();
-        // $solicitud_fractura->updated_at = date('Y-m-d H:i:s');
+        
         # La fundamentación del por qué se editó la solicitud
         Edicion_Solicitud::create([
             'fundamento' => $request->fundamento_edicion,
@@ -218,7 +219,7 @@ class SolicitudController extends Controller
             'solicitud_id' => $solicitud->id
         ]);
 
-        // return back();
+        return $solicitud->id;
     }
 
     public function store_lechada(Request $request) {}
@@ -228,13 +229,12 @@ class SolicitudController extends Controller
     }
     public function index() {
         $data = [
-            'solicitudes' => Solicitud::all(),
+            'solicitudes' => Solicitud::orderBy('id', 'desc')->get(),
         ];
         return view('solicitud.index', $data);
     }
 
     public function show_fractura($solicitud_id) {
-
         $data = [
             'solicitud' => Solicitud::find($solicitud_id),
             'solicitud_fractura' => SolicitudFractura::where('solicitud_id', $solicitud_id)->get(),
