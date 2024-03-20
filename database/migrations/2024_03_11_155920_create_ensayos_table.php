@@ -45,6 +45,10 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('restrict')->comment('Usuario carga');
             $table->timestamps();
         });
+
+        Schema::table('solicitud', function (Blueprint $table) {
+            $table->foreign('ensayo_asignado_id')->references('id')->on('ensayos');
+        });
     }
 
     /**

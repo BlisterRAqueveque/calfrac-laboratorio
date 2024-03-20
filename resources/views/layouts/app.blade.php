@@ -96,10 +96,11 @@
                                 </a>
                             </li>
 
-                            <li class="ps-3 hover:bg-gray-100 py-2">
-                                <form action="{{ route('logout') }}" method="POST">
+                            <li class="ps-3 hover:bg-gray-100 py-2 z-50">
+                                <form action="{{ route('logout.store') }}" method="POST">
                                     @csrf
-                                    <button class="text-gray-600 hover:text-green-900 text-sm flex items-center gap-1">
+                                    <button type="submit"
+                                        class="text-gray-600 hover:text-green-900 text-sm flex items-center gap-1">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -271,7 +272,18 @@
             mount
         } = redom;
     </script>
-    <div style="margin-top: 113px;">
+    <style>
+        .top_cs {
+            margin-top: 107px
+        }
+
+        @media (100px < width < 1200px) {
+            .top_cs {
+                margin-top: 113px
+            }
+        }
+    </style>
+    <div class="top_cs">
         @yield('contenido')
     </div>
     @yield('scripts')
@@ -302,7 +314,6 @@
     const miPerfilConfig = document.getElementById('miPerfilConfig');
 
     miPerfilNav.addEventListener('click', e => {
-        event.preventDefault();
-        miPerfilConfig.classList.toggle('hidden');
+        miPerfilConfig.classList.remove('hidden');
     })
 </script>

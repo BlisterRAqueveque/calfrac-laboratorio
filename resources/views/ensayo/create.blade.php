@@ -12,28 +12,3 @@
 </script>
 <script src="{{ asset('js/ensayo/add_aditivo.js') }}"></script>
 <script src="{{ asset('js/ensayo/test_requerido.js') }}"></script>
-
-<script>
-    const submitEnsayo = document.getElementById('submitEnsayo');
-
-    submitEnsayo.addEventListener('click', e => {
-        e.preventDefault();
-        let form = new FormData(document.getElementById('form_ensayo'));
-
-        confirmAlert().then((confirmed) => {
-            if (confirmed) {
-                fetch("{{ route('ensayo.store') }}", {
-                    method: 'POST',
-                    body: form
-                }).then((response) => response.json())
-                .then((data) => {
-                    if (data) {
-                        successAlert().then((confirmed) => {
-                            window.location.reload();
-                        })
-                    }
-                })
-            }
-        })
-    })
-</script>

@@ -52,8 +52,7 @@
     </li>
 </ul>
 
-{{-- <form action="{{ route('ensayo.store') }}" method="POST"> --}}
-    <form id="form_ensayo" method="POST">
+<form action="{{ route('ensayo.store') }}" method="POST"> 
     @csrf
     <div class="tab-content" id="nav-tabs-content">
         <input type="hidden" value="{{ $solicitud->id }}" name="solicitud_id">
@@ -116,7 +115,8 @@
                 <div class="col-xs-12 col-md-3 my-2">
                     <label for="fecha_solicitado" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha
                         Solicitado</label>
-                    <input type="date" class="form-control sz p-2" name="fecha_solicitado" id="fecha_solicitado" max="@php echo date('Y-m-d') @endphp">
+                    <input type="date" class="form-control sz p-2" name="fecha_solicitado" id="fecha_solicitado"
+                        max="@php echo date('Y-m-d') @endphp">
                 </div>
 
                 <div class="col-xs-12 col-md-3 my-2">
@@ -321,10 +321,37 @@
             <div class="flex flex-col text-center justify-center w-1/4 mx-auto">
                 <span class="text-sm mb-2">Una vez completado todos los campos del ensayo, dar por finalizado el
                     mismo.</span>
-                <input type="button"
+                <button data-bs-toggle="modal" data-bs-target="#modalSubmitEnsayo"
                     class="text-sm bg-green-700 bg-opacity-60 text-white p-2 rounded-sm hover:shadow-lg transition-all duration-75 font-bold"
-                    id="submitEnsayo"
-                    value="Crear Ensayo">
+                    onclick="event.preventDefault()">
+                    Crear Ensayo
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="modalSubmitEnsayo" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header py-2 px-3">
+                    Confirmación de carga de ensayo
+                </div>
+                <div class="modal-body text-center">
+                    <p class="font-semibold tracking-wide mb-2">¿Confirma crear el ensayo?</p>
+                </div>
+                <div class="modal-footer p-2">
+                    <button
+                        class=" rounded flex items-center gap-1 p-2 hover:bg-orange-200 text-orange-400 transition-all duration-300 text-sm"
+                        data-bs-dismiss="modal" onclick="event.preventDefault()">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                        </svg>
+                        Cancelar</button>
+                    <button type="submit"
+                        class="w-full md:w-auto bg-green-700 bg-opacity-60 text-white p-2 rounded-sm hover:shadow-lg transition-all duration-75 font-bold text-sm">Confirmar</button>
+                </div>
             </div>
         </div>
     </div>

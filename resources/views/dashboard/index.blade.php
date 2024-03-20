@@ -5,7 +5,7 @@
 @endsection
 
 @section('contenido')
-    <section class="container_mod  mt-3">
+    <section class="container_mod pt-4">
         <h6 class="font-bold uppercase">¡Buenas Noches Mirko!</h6>
 
         <div class="flex gap-3">

@@ -17,6 +17,7 @@ class SolicitudFractura extends Model
         'tipo_temp_bhst',
         'temp_ensayo',
         'tipo_temp_ensayo',
+        'aditivo_extra',
         'proveedor',
         'producto',
         'concentracion',

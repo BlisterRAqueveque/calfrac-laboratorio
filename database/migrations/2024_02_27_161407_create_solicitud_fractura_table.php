@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('tipo_temp_bhst')->nullable();
             $table->integer('temp_ensayo')->nullable();
             $table->integer('tipo_temp_ensayo')->nullable();
+            $table->tinyInteger('aditivo_extra')->nullable()->default(0);
             $table->string('proveedor')->nullable();
             $table->string('producto')->nullable();
             $table->string('concentracion')->nullable();

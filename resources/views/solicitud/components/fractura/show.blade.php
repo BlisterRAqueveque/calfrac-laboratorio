@@ -5,9 +5,33 @@
 @endsection
 
 @section('contenido')
+
+    <!-- TODO | Pasar estos estilos a otro lado -->
+    <style>
+        .estado_pendiente {
+            background: rgb(118, 158, 201);
+            letter-spacing: .5px;
+        }
+
+        .estado_finalizada {
+            background: rgb(170, 214, 170);
+            letter-spacing: .5px;
+        }
+
+        .section_solicitud {
+            margin-top: 0px
+        }
+
+        @media (100px < width < 1200px) {
+            .section_solicitud {
+                margin-top: 15px
+            }
+        }
+    </style>
+
     <section class="p-2 pb-0 mb-0 relative shadow-sm"
         style="background-color: #fdf4e5; width: 90%; margin: 0 auto; margin-top: 1px;">
-        <section class="p-2 mx-auto pb-0" style="width: 97%;">
+        <section class="p-2 mx-auto pb-0 section_solicitud" style="width: 97%;">
             <div class="flex gap-3">
                 <div class="flex justify-center items-center w-16 h-16 rounded-full bg-gray-200">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -25,17 +49,37 @@
                                 switch ($solicitud->estado->id) {
                                     case '1':
                                         $estado = $solicitud->estado->nombre;
-                                        $clase = 'bg-cyan-600';
+                                        $clase = 'estado_pendiente';
                                         break;
                                     case '2':
                                         $clase = 'bg-green-500';
+                                        $estado = $solicitud->estado->nombre;
+                                        break;
+                                    case '3':
+                                        $clase = 'estado_finalizada';
                                         $estado = $solicitud->estado->nombre;
                                         break;
                                 }
                             @endphp
                         </span>
                         <small
-                            class="{{ $clase }} text-white text-xs px-2 rounded-md p-0 m-0 md:flex md:items-center tracking-wide">{{ $estado }}</small>
+                            class="{{ $clase }} text-white text-xs px-2 rounded-md p-1 m-0 text-center justify-center flex md:items-center tracking-wide gap-1">
+                            @if ($solicitud->estado->id == 3)
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                    stroke="currentColor" class="w-4 h-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
+                                </svg>
+                            @endif
+                            @if ($solicitud->estado->id == 1)
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                    stroke="currentColor" class="w-4 h-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                </svg>
+                            @endif
+                            {{ $estado }}
+                        </small>
                     </div>
                     <div class="flex flex-col mt-2 md:flex-row text-xs md:text-sm md:items-center gap-3 md:gap-10">
                         <article class="flex items-center gap-1">
@@ -80,7 +124,8 @@
                         </article>
                     </div>
 
-                    <div class="flex mt-2 text-xs md:text-sm items-center gap-10">
+                    <div class="flex flex-col md:flex-row mt-2 text-xs md:text-sm md:items-center gap-2 md:gap-10">
+
                         <article class="flex items-center gap-1">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-4 h-4">
@@ -96,6 +141,16 @@
                                 @endif
                             </b>
                         </article>
+
+                        @if ($solicitud->ensayo_asignado_id)
+                            <article class="flex items-center gap-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                                </svg>
+                                Ensayo Asignado: <b class="text-gray-700"> #{{ $solicitud->ensayo_asignado_id }}</b>
+                            </article>
+                        @endif
                     </div>
                 </div>
 
@@ -117,7 +172,7 @@
                             aria-selected="false">Ensayos</a>
                     </li>
                 @else
-                    <div class="flex items-center">
+                    <div class="flex flex-col md:flex-row text-center items-center">
                         <li data-tooltip-target="tooltip-default"
                             class="nav-item w-full text-center md:w-auto cursor-not-allowed"
                             tooltip="Debe aprobar la solicitud para asignar un ensayo" role="presentation">
@@ -131,9 +186,17 @@
         </section>
 
     </section>
+
     <div class="tab-content" id="nav-tabs-content">
         <div class="container_mod bg-white p-3 mt-4 shadow-sm tab-pane fade show active" id="tab1-content"
             role="tabpanel" aria-labelledby="nav-tab1">
+
+            @if (session('success'))
+                <div
+                    class="mt-3 bg-green-500 opacity-50 text-white p-2 text-center uppercase border-1 border-green-500 rounded-md font-semibold tracking-wide mb-3">
+                    {{ session('success') }}
+                </div>
+            @endif
 
             <div class="flex items-center justify-between">
                 <div class="flex w-full items-center justify-between flex-col md:flex-row">
@@ -164,8 +227,7 @@
                 </div>
             </div>
 
-            <form id="form_edicion">
-                {{-- <form action="{{ route('solicitud.update') }}" method="POST"> --}}
+            <form action="{{ route('solicitud.update') }}" method="POST">
                 @csrf
                 <input type="hidden" value="{{ $solicitud->id }}" name="solicitud_id">
                 <div class="row mt-3"> <!-- Información General -->
@@ -787,11 +849,11 @@
             if (btnAprobarSolicitud) {
                 btnAprobarSolicitud.addEventListener('click', e => {
                     e.preventDefault();
-    
+
                     let form = new FormData(document.getElementById('form_aprobar_solicitud'))
                     confirmAlert('¿Está seguro de aprobar la solicitud?',
                         'Una vez aprobado, la misma no se podrá editar más', 1, 'Aprobar Solicitud').then((
-                    confirmed) => {
+                        confirmed) => {
                         if (confirmed) {
                             fetch("{{ route('solicitud.aprobar') }}", {
                                     method: 'POST',
@@ -799,45 +861,49 @@
                                 }).then((response) => response.json())
                                 .then((data) => {
                                     if (data) {
-                                        successAlert('¡Solicitud Aprobada!', 'La solicitud fue aprobada correctamente').then((confirmed) => {
+                                        successAlert('¡Solicitud Aprobada!',
+                                            'La solicitud fue aprobada correctamente').then((
+                                            confirmed) => {
                                             window.location.reload();
                                         })
                                     }
                                 })
                         }
                     })
-    
+
                 })
             }
         </script>
 
         <!-- Función para agregar una edición -->
         <script>
-            const submitFundamentoEdicion = document.getElementById('submitFundamentoEdicion');
+            // const submitFundamentoEdicion = document.getElementById('submitFundamentoEdicion');
 
-            submitFundamentoEdicion.addEventListener('click', e => {
-                e.preventDefault();
+            // submitFundamentoEdicion.addEventListener('click', e => {
+            //     e.preventDefault();
 
-                let form = new FormData(document.getElementById('form_edicion'))
-                confirmAlert('¿Está seguro de realizar la edición?',
-                    'Una vez que se realice la edición se generará un comentario', 1, 'Editar Solicitud').then((confirmed) => {
+            //     let form = new FormData(document.getElementById('form_edicion'))
+            //     confirmAlert('¿Está seguro de realizar la edición?',
+            //         'Una vez que se realice la edición se generará un comentario', 1, 'Editar Solicitud').then((
+            //         confirmed) => {
 
-                    if (confirmed) {
-                        fetch("{{ route('solicitud.update') }}", {
-                                method: 'POST',
-                                body: form
-                            }).then((response) => response.json())
-                            .then((data) => {
-                                console.log(data);
-                                if (data) {
-                                    successAlert('¡Edición Exitosa!', 'La edición se realizó correctamente').then((confirmed) => {
-                                        window.location.reload();
-                                    })
-                                }
-                            })
-                    }
-                })
+            //         if (confirmed) {
+            //             fetch("{{ route('solicitud.update') }}", {
+            //                     method: 'POST',
+            //                     body: form
+            //                 }).then((response) => response.json())
+            //                 .then((data) => {
+            //                     console.log(data);
+            //                     if (data) {
+            //                         successAlert('¡Edición Exitosa!', 'La edición se realizó correctamente')
+            //                             .then((confirmed) => {
+            //                                 window.location.reload();
+            //                             })
+            //                     }
+            //                 })
+            //         }
+            //     })
 
-            })
+            // })
         </script>
     @endsection

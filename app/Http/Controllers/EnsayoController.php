@@ -72,13 +72,21 @@ class EnsayoController extends Controller
             }
         }
 
-        return $ensayo->id;
+        if ($ensayo->id)
+            return back()->with('success', 'El ensayo se ha creado y asignado correctamente');
     }
 
     public function assigned(Request $request) {
         $solicitud = Solicitud::find($request->solicitud_id);
-        $solicitud->ensayo_asignado = $request->ensayo_id;
+        $solicitud->ensayo_asignado_id = $request->ensayo_id;
         $solicitud->fundamento_asignacion = $request->fundamento_asignacion;
+        $solicitud->estado_solicitud_id = 3;
+        $solicitud->fecha_asignacion = date('Y-m-d H:i:s');
+
+        $solicitud->save();
+        
+        if ($solicitud->id)
+            return back()->with('success', 'El ensayo se ha asignado a la solicitud Nº ' . $solicitud->id . ' correctamente');
     }
 
     protected function _createRelAditivo($aditivo, $ensayo_id) {

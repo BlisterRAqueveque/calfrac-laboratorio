@@ -44,6 +44,7 @@ class Solicitud extends Model
     ];
 
     protected $casts = [
+        'fecha_solicitud' => 'date',
         'fecha_aprobada' => 'datetime',
         'fecha_asignacion' => 'datetime',
     ];

@@ -33,7 +33,7 @@ Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 # Login
 Route::get('login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'store']);
-Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
+Route::post('/logout', [LogoutController::class, 'store'])->name('logout.store');
 
 # Ensayo
 Route::get('/ensayo/create', [EnsayoController::class, 'create'])->name('ensayo.create');

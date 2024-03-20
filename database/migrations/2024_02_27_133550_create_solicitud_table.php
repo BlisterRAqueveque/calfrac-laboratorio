@@ -43,7 +43,6 @@ return new class extends Migration
             $table->unsignedBigInteger('usuario_aprobo')->nullable();
             $table->foreign('usuario_aprobo')->references('id')->on('users');
             $table->unsignedBigInteger('ensayo_asignado_id')->nullable();
-            $table->foreign('ensayo_asignado_id')->references('id')->on('ensayos');
             $table->text('fundamento_asignacion')->nullable();
             $table->dateTime('fecha_asignacion')->nullable();
             $table->tinyInteger('activo')->default(1)->comment('1: Activo - 0: Inactivo (Visualizacion en el sistema)');

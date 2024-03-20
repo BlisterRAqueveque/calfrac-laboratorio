@@ -23,7 +23,7 @@ class SolicitudController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function create()
     {
         $data = [
@@ -42,7 +42,8 @@ class SolicitudController extends Controller
      * Crea una nueva Solicitud de Fractura
      * Primero crea el encabezado general, que es la "Solicitud" y luego crea la "Solicitud de Fractura"
      */
-    public function store_fractura(Request $request) {
+    public function store_fractura(Request $request)
+    {
 
         # Validamos los datos del encabezado general
         $this->validate($request, [
@@ -64,14 +65,13 @@ class SolicitudController extends Controller
             'reporte_lab_tall' => 'required',
             'reporte_lab_lead' => 'required',
         ]);
-
         # Crea la Información General
         $solicitud = Solicitud::create([
             'tipo' => 1,
             'proyecto_number' => $request->proyecto_number,
             'servicio_number' => $request->servicio_number,
             'cliente' => $request->cliente,
-            'locacion' => $request->locacion,                  
+            'locacion' => $request->locacion,
             'programa' => $request->programa,
             'fecha_solicitud' => $request->fecha_solicitud,
             'empresa' => $request->empresa,
@@ -97,10 +97,10 @@ class SolicitudController extends Controller
             'tipo_temp_bhst' => $request->tipo_temp_bhst,
             'temp_ensayo' => $request->temp_ensayo,
             'tipo_temp_ensayo' => $request->tipo_temp_ensayo,
+            'aditivo_extra' => $request->aditivo_extra,
             'proveedor' => $request->proveedor,
             'producto' => $request->producto,
             'concentracion' => $request->concentracion,
-            'aditivo_extra' => $request->aditivo_extra,
             'sistema_fluido_id' => $request->sistema_fluido,
             'analisis_microbial_id' => $request->analisis_microbial,
             'agente_sosten_id' => $request->agente_sosten,
@@ -118,6 +118,9 @@ class SolicitudController extends Controller
             'usuario_carga' => auth()->user()->id
         ]);
 
+        if ($solicitud->id)
+            return redirect()->route('solicitudes')->with('success', 'La Solicitud de Fractura Nº' . $solicitud->id . ' se ha creado correctamente.');
+
         # Envío de Emails
         // En Proceso
     }
@@ -126,7 +129,8 @@ class SolicitudController extends Controller
      * Cuando se aprueba una solicitud, se almacena el usuario quién aprobó, 
      * cambia de estado y también se almacena la fecha
      */
-    public function store_aprobar(Request $request) {
+    public function store_aprobar(Request $request)
+    {
         $solicitud = Solicitud::find($request->solicitud_id);
         $solicitud->estado_solicitud_id = 2;
         $solicitud->aprobada = 1;
@@ -140,7 +144,8 @@ class SolicitudController extends Controller
     /**
      * Edita la solicitud de fractura, la misma se crea un comentario/fundamento al respecto de por qué se está editando
      */
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
         # Validamos los datos del encabezado general
         $this->validate($request, [
             'proyecto_number' => 'required',
@@ -211,7 +216,7 @@ class SolicitudController extends Controller
         $solicitud_fractura->fecha_firma_reconocimiento = $request->fecha_firma_reconocimiento;
         $solicitud_fractura->fecha_firma_reconocimiento = $request->fecha_firma_reconocimiento;
         $solicitud_fractura->save();
-        
+
         # La fundamentación del por qué se editó la solicitud
         Edicion_Solicitud::create([
             'fundamento' => $request->fundamento_edicion,
@@ -219,22 +224,27 @@ class SolicitudController extends Controller
             'solicitud_id' => $solicitud->id
         ]);
 
-        return $solicitud->id;
+        if ($solicitud->id)
+            return back()->with('success', 'La solicitud se ha editado correctamente');
     }
 
-    public function store_lechada(Request $request) {}
-
-    public function store_lodo(Request $request) {
-        
+    public function store_lechada(Request $request)
+    {
     }
-    public function index() {
+
+    public function store_lodo(Request $request)
+    {
+    }
+    public function index()
+    {
         $data = [
             'solicitudes' => Solicitud::orderBy('id', 'desc')->get(),
         ];
         return view('solicitud.index', $data);
     }
 
-    public function show_fractura($solicitud_id) {
+    public function show_fractura($solicitud_id)
+    {
         $data = [
             'solicitud' => Solicitud::find($solicitud_id),
             'solicitud_fractura' => SolicitudFractura::where('solicitud_id', $solicitud_id)->get(),

@@ -3,7 +3,8 @@
     <p class="m-0 mt-1 font-bold text-lg tracking-wide">Formulario para crear un Ensayo</p>
 
     <!-- Si ya tiene Ensayos asignados, entonces acá se van a ir iterando -->
-    <ul role="tablist" class="nav mt-4 nav-tabs p-1 border-1  rounded-full gap-1" id="nav-tab-with-nested-tabs">
+    <ul role="tablist" class="nav mt-4 nav-tabs p-1 border-1 items-center rounded-3xl md:rounded-full gap-1"
+        id="nav-tab-with-nested-tabs">
         @php
             $i = 1;
         @endphp
@@ -16,30 +17,49 @@
                     $clase = '';
                 }
             @endphp
-            <li class="nav-item w-full md:w-auto py-1" role="presentation">
-                <a class="text-gray-500 py-1 px-4 rounded-full nav_tab_intentos {{ $clase }}" aria-current="page"
-                    href="#tab-intento_{{ $e->id }}" data-bs-toggle="tab"
-                    data-bs-target="#tab-intento_{{ $e->id }}" role="tab"
-                    aria-controls="tab-intento_{{ $e->id }}" aria-selected="true">
-                    Intento Nº{{ $i }}
-                </a>
-            </li>
+            @if ($solicitud->ensayo_asignado_id == $e->id)
+                <li class="nav-item w-full md:w-auto py-1" role="presentation">
+                    <a class="flex text-center justify-center items-center gap-2 text-green-700 py-1 px-4 rounded-full nav_tab_intentos hover:text-green-700"
+                        aria-current="page" href="#tab-intento_{{ $e->id }}" data-bs-toggle="tab"
+                        data-bs-target="#tab-intento_{{ $e->id }}" role="tab"
+                        aria-controls="tab-intento_{{ $e->id }}" aria-selected="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-4 h-4">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
+                        </svg>
+                        Intento Nº{{ $i }}
+                    </a>
+                </li>
+            @else
+                <li class="nav-item w-full md:w-auto py-1" role="presentation">
+                    <a class="flex text-center justify-center text-gray-500 py-1 px-4 rounded-full nav_tab_intentos hover:text-gray-600 {{ $clase }}"
+                        aria-current="page" href="#tab-intento_{{ $e->id }}" data-bs-toggle="tab"
+                        data-bs-target="#tab-intento_{{ $e->id }}" role="tab"
+                        aria-controls="tab-intento_{{ $e->id }}" aria-selected="true">
+                        Intento Nº{{ $i }}
+                    </a>
+                </li>
+            @endif
             @php
                 $i++;
             @endphp
         @endforeach
 
-        <li class="nav-item w-full md:w-auto" role="presentation">
-            <a class="text-gray-500 py-1 px-4 rounded-full nav_tab_intentos flex items-center" aria-current="page"
-                id="nav-nuevo_ensayo" href="#tab-nuevo_ensayo" data-bs-toggle="tab" data-bs-target="#tab-nuevo_ensayo"
-                role="tab" aria-controls="tab-nuevo_ensayo" aria-selected="true">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="w-4 h-4">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                </svg>
-                Nuevo Ensayo
-            </a>
-        </li>
+        @if ($solicitud->estado_solicitud_id < 3)
+            <li class="nav-item w-full md:w-auto" role="presentation">
+                <a class="text-gray-500 py-1 px-4 rounded-full nav_tab_intentos hover:text-gray-600 flex items-center"
+                    aria-current="page" id="nav-nuevo_ensayo" href="#tab-nuevo_ensayo" data-bs-toggle="tab"
+                    data-bs-target="#tab-nuevo_ensayo" role="tab" aria-controls="tab-nuevo_ensayo"
+                    aria-selected="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-4 h-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
+                    Nuevo Ensayo
+                </a>
+            </li>
+        @endif
 
     </ul>
 
@@ -91,6 +111,7 @@
                             Requerimientos del Ensayo
                         </a>
                     </li>
+                    @if ($solicitud->estado_solicitud_id < 3)
                     <li class="nav-item w-full md:w-auto" role="presentation">
                         <a class="nav-link nav_tab_mod d-flex items-center justify-center gap-2" id="nav-tab2"
                             data-bs-toggle="tab" href="#tab-ensayo_asignado_{{ $e->id }}"
@@ -104,6 +125,7 @@
                             Asignar Ensayo
                         </a>
                     </li>
+                    @endif
                 </ul>
 
                 <div class="tab-content" id="nav-tabs-content">
@@ -1044,16 +1066,63 @@
                     </div>
 
                     <div class="mt-4 tab-pane fade" id="tab-ensayo_asignado_{{ $e->id }}">
-                        <form
+                        <form action="{{ route('ensayo.assigned') }}" method="POST"
                             class="flex flex-col justify-center items-center form_asignar_ensayo_{{ $e->id }}">
                             @csrf
+                            <div class="row">
+
+                            </div>
                             <input type="hidden" name="ensayo_id" value="{{ $e->id }}">
                             <input type="hidden" name="solicitud_id" value="{{ $e->solicitud_id }}">
+
+                            <div class="col-xs-12 col-md-6 mb-2">
+                                <label
+                                    class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fundamento</label>
+                                <textarea name="fundamento_asignacion" rows="3" class="form-control sz p-2"
+                                    placeholder="Ingrese un breve fundamento - Max 250 caracteres (Opcional)" maxlength="250"></textarea>
+                            </div>
+
                             <span class="text-md">Al asignar este ensayo para la solicitud queda concluida la misma
                                 para realizar nuevos cambios</span>
-                            <button data-id-ensayo="{{ $e->id }}"
+                            <button data-id-ensayo="{{ $e->id }}" onclick="event.preventDefault()"
+                                data-bs-toggle="modal" data-bs-target="#modalAsignacionEnsayo_{{ $e->id }}"
                                 class="text-sm mt-2 bg-green-700 bg-opacity-60 text-white tracking-widest p-2 rounded-sm hover:shadow-lg transition-all duration-75 font-bold btnAsignarSolicitud">Asignar
                                 Ensayo</button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="modalAsignacionEnsayo_{{ $e->id }}" tabindex="-1"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header py-2 px-3">
+                                            Confirmación de Asignación de Ensayo
+                                        </div>
+                                        <div class="modal-body text-center">
+                                            <p class="font-semibold tracking-wide mb-2">¿Confirma asignar el ensayo
+                                                seleccionado?
+                                            </p>
+                                            <p class="mb-0 text-sm">Luego de la asignación del ensayo, la solicitud se
+                                                considera completada para su evaluación y calificación.</p>
+
+
+                                        </div>
+                                        <div class="modal-footer p-2">
+                                            <button
+                                                class=" rounded flex items-center gap-1 p-2 hover:bg-orange-200 text-orange-400 transition-all duration-300 text-sm"
+                                                data-bs-dismiss="modal" onclick="event.preventDefault()">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                    class="w-4 h-4">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M6 18 18 6M6 6l12 12" />
+                                                </svg>
+                                                Cancelar</button>
+                                            <button type="submit"
+                                                class="w-full md:w-auto bg-green-700 bg-opacity-60 text-white p-2 rounded-sm hover:shadow-lg transition-all duration-75 font-bold text-sm">Confirmar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -1119,38 +1188,4 @@
             }
         })
     })
-</script>
-
-<!-- Crea el submit de asignación de Ensayo -->
-<script>
-    const btnAsignarSolicitud = document.querySelectorAll('.btnAsignarSolicitud');
-
-    for (let i = 0; i < btnAsignarSolicitud.length; i++) {
-        btnAsignarSolicitud[i].addEventListener('click', e => {
-            e.preventDefault();
-
-            let ensayo_id = btnAsignarSolicitud[i].getAttribute('data-id-ensayo');
-            let form = new FormData(document.querySelector(`.form_asignar_ensayo_${ensayo_id}`));
-
-            confirmAlert('¿Desea asignar este ensayo para la solicitud?',
-                'Una vez asignado el ensayo no podrán haber más cambios', 1, 'Aceptar').then((
-            confirmed) => {
-                if (confirmed) {
-                    fetch("{{ route('ensayo.assigned') }}", {
-                            method: 'POST',
-                            body: form
-                        }).then((response) => response.json())
-                        .then((data) => {
-                            console.log(data);
-                            if (data) {
-                                successAlert('¡Ensayo Creado!', 'El ensayo se creó correctamente')
-                                    .then((confirmed) => {
-                                        window.location.reload();
-                                    })
-                            }
-                        })
-                }
-            })
-        })
-    }
 </script>
