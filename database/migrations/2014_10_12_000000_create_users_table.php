@@ -24,6 +24,7 @@ return new class extends Migration
             $table->foreignId('grupo_id')->constrained()->onDelete('restrict');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->tinyInteger('is_admin')->default(0);
             $table->rememberToken();
             $table->timestamps();
             $table->foreignId('usuario_carga_id')->references('id')->on('users');

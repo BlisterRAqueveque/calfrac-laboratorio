@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Str;
 use App\Models\Grupo;
+use App\Models\Permisos;
+use App\Models\RelPermisosUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -15,11 +17,12 @@ class UserController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function index()
     {
         $data = [
-            'usuarios' => User::all(),
+            'usuarios' => User::paginate(8),
+            'permisos' => Permisos::all(),
             'grupos' => Grupo::all()
         ];
         return view('user.index', $data);
@@ -40,7 +43,7 @@ class UserController extends Controller
         ]);
         if ($request->imagen_perfil) {
             $imagen = $request->file('imagen_perfil');
-            
+
             // Generar un ID único
             $nombreImagen = Str::uuid() . "." . $imagen->extension();
 
@@ -57,7 +60,11 @@ class UserController extends Controller
             $imagenServidor->save($imagenPath);
         }
 
-        User::create([
+        $is_admin = 0;
+        if ($request->grupo == 1)
+            $is_admin = 1;
+
+        $user = User::create([
             'nombre' => $request->name,
             'apellido' => $request->apellido,
             'username' => $request->username,
@@ -65,13 +72,28 @@ class UserController extends Controller
             'telefono' => $request->telefono && null,
             'img' => isset($nombreImagen) ? $nombreImagen : '',
             'grupo_id' => $request->grupo,
+            'is_admin' => $is_admin,
             'password' => Hash::make($request->password),
             'usuario_carga_id' => auth()->user()->id,
         ]);
+
+        if ($request->user_permissions_new) {
+            $permisos_id = join(",", $request->user_permissions_new);
+            $permisos_separados = explode(',', $permisos_id);
+            foreach ($permisos_separados as $p) {
+                $permiso = Permisos::find($p);
+                RelPermisosUser::create([
+                    'user_id' => $user->id,
+                    'permiso_id' => $p,
+                    'permiso' => $permiso->permiso
+                ]);
+            }
+        }
         return back();
     }
 
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
 
         $this->validate($request, [
             'edit_apellido' => 'required',
@@ -83,7 +105,7 @@ class UserController extends Controller
 
         if ($request->edit_imagen_perfil) {
             $imagen = $request->file('edit_imagen_perfil');
-            
+
             // Generar un ID único
             $nombreImagen = Str::uuid() . "." . $imagen->extension();
 
@@ -102,6 +124,10 @@ class UserController extends Controller
             // Eliminar imagen anterior (Si es que existe)
         }
 
+        $is_admin = 0;
+        if ($request->edit_grupo == 1)
+            $is_admin = 1;
+
         # Guardar cambios
         $user =  User::find($request->user_id);
         $user->apellido = $request->edit_apellido;
@@ -112,9 +138,9 @@ class UserController extends Controller
         $user->img = isset($nombreImagen) ? $nombreImagen : $user->img;
         $user->password = $request->edit_password ? Hash::make($request->edit_password) : $user->password;
         $user->grupo_id = $request->edit_grupo;
+        $user->is_admin = $is_admin;
         $user->save();
 
         return back();
-
     }
 }

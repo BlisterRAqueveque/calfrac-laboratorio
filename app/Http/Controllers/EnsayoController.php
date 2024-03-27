@@ -20,7 +20,10 @@ class EnsayoController extends Controller
     }
 
     public function index() {
-        return view('ensayo.index');
+        $data = [
+            'ensayos' => Ensayo::all()
+        ];
+        return view('ensayo.index', $data);
     }
 
     public function store(Request $request) {

@@ -1,50 +1,50 @@
 <ul role="tablist" aria-owns="nav-tab1 nav-tab2 nav-tab3 nav-tab4" class="nav mt-4 nav-tabs" id="nav-tab-with-nested-tabs"
     style="z-index: 999">
-    <li class="nav-item w-full md:w-auto" role="presentation">
+    <li class="nav-item w-full md:w-auto text-xs md:text-sm" role="presentation">
         <a class="nav-link nav_tab_mod d-flex items-center gap-2 justify-center active" aria-current="page" id="nav-tab1"
             href="#tab-carga_informacion" data-bs-toggle="tab" data-bs-target="#tab-carga_informacion" role="tab"
             aria-controls="tab-carga_informacion" aria-selected="true">
-            <div class="w-6 h-6 bg-gray-300 rounded-full flex justify-center text-white">
+            <div class="w-4 h-4 xl:w-6 xl:h-6 bg-gray-300 rounded-full flex justify-center text-white">
                 1
             </div>
             Carga de Información
         </a>
     </li>
-    <li class="nav-item w-full md:w-auto" role="presentation">
+    <li class="nav-item w-full md:w-auto text-xs xl:text-sm" role="presentation">
         <a class="nav-link nav_tab_mod d-flex items-center justify-center gap-2" id="nav-tab2" data-bs-toggle="tab"
             href="#tab-condiciones_test" data-bs-target="#tab-condiciones_test" role="tab"
             aria-controls="tab-condiciones_test" aria-selected="false">
-            <div class="w-6 h-6 bg-gray-300 rounded-full flex justify-center text-white">
+            <div class="w-4 h-4 xl:w-6 xl:h-6 bg-gray-300 rounded-full flex justify-center text-white">
                 2
             </div>
             Condiciones del Test
         </a>
     </li>
-    <li class="nav-item w-full md:w-auto" role="presentation">
+    <li class="nav-item w-full md:w-auto text-xs xl:text-sm" role="presentation">
         <a class="nav-link nav_tab_mod d-flex items-center justify-center gap-2" id="nav-tab2" data-bs-toggle="tab"
             href="#tab-aditivos" data-bs-target="#tab-aditivos" role="tab" aria-controls="tab-aditivos"
             aria-selected="false">
-            <div class="w-6 h-6 bg-gray-300 rounded-full flex justify-center text-white">
+            <div class="w-4 h-4 xl:w-6 xl:h-6 bg-gray-300 rounded-full flex justify-center text-white">
                 3
             </div>
             Aditivos
         </a>
     </li>
-    <li class="nav-item w-full md:w-auto" role="presentation">
+    <li class="nav-item w-full md:w-auto text-xs xl:text-sm" role="presentation">
         <a class="nav-link nav_tab_mod d-flex items-center justify-center gap-2" id="nav-tab2" data-bs-toggle="tab"
             href="#tab-requerimientos_ensayo" data-bs-target="#tab-requerimientos_ensayo" role="tab"
             aria-controls="tab-requerimientos_ensayo" aria-selected="false">
-            <div class="w-6 h-6 bg-gray-300 rounded-full flex justify-center text-white">
+            <div class="w-4 h-4 xl:w-6 xl:h-6 bg-gray-300 rounded-full flex justify-center text-white">
                 4
             </div>
             Requerimientos del Ensayo
         </a>
     </li>
-    <li class="nav-item w-full md:w-auto" role="presentation">
+    <li class="nav-item w-full md:w-auto text-xs xl:text-sm" role="presentation">
         <a class="nav-link nav_tab_mod d-flex items-center justify-center gap-2" id="nav-tab2" data-bs-toggle="tab"
             href="#tab-cierre" data-bs-target="#tab-cierre" role="tab" aria-controls="tab-cierre"
             aria-selected="false">
-            <div class="w-6 h-6 bg-gray-300 rounded-full flex justify-center text-white">
+            <div class="w-4 h-4 xl:w-6 xl:h-6 bg-gray-300 rounded-full flex justify-center text-white">
                 5
             </div>
             Cierre de Ensayo
@@ -60,7 +60,7 @@
             aria-labelledby="nav-tab_carga_informacion"> <!-- Carga de Información -->
             <div class="row mt-3">
                 <div class="col-xs-12 col-md-3 my-2">
-                    <label for="uso" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">¿Cuál
+                    <label for="uso" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">¿Cuál
                         será el uso?</label>
                     <select name="uso" id="uso" class="form-select sz p-2">
                         <option value="">-- Seleccione --</option>
@@ -70,7 +70,7 @@
                 </div>
 
                 <div class="col-xs-12 col-md-3 my-2">
-                    <label for="cliente" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Cliente</label>
+                    <label for="cliente" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Cliente</label>
                     <select name="cliente" id="cliente" class="form-select sz p-2">
                         <option value="">-- Seleccione --</option>
                         <option value="1">Cliente 1</option>
@@ -79,7 +79,7 @@
                 </div>
 
                 <div class="col-xs-12 col-md-3 my-2">
-                    <label for="estado" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Estado</label>
+                    <label for="estado" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Estado</label>
                     <select name="estado" id="estado" class="form-select sz p-2">
                         <option value="">-- Seleccione --</option>
                         <option value="1">Estado 1</option>
@@ -88,14 +88,14 @@
                 </div>
 
                 <div class="col-xs-12 col-md-3 my-2">
-                    <label for="numero_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Nº de
+                    <label for="numero_lodo" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Nº de
                         Lodo</label>
                     <input type="number" class="form-control sz p-2" name="numero_lodo" id="numero_lodo"
                         placeholder="Ingrese el Nº de lodo">
                 </div>
 
                 <div class="col-xs-12 col-md-3 my-2">
-                    <label for="tipo_trabajo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo
+                    <label for="tipo_trabajo" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo
                         de
                         Trabajo</label>
                     <select name="tipo_trabajo" id="tipo_trabajo" class="form-select sz p-2">
@@ -106,14 +106,14 @@
                 </div>
 
                 <div class="col-xs-12 col-md-3 my-2">
-                    <label for="nombre_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre
+                    <label for="nombre_lodo" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre
                         del Lodo</label>
                     <input type="text" class="form-control sz p-2" name="nombre_lodo" id="nombre_lodo"
                         placeholder="Ingrese el Nº de lodo">
                 </div>
 
                 <div class="col-xs-12 col-md-3 my-2">
-                    <label for="fecha_solicitado" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha
+                    <label for="fecha_solicitado" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha
                         Solicitado</label>
                     <input type="date" class="form-control sz p-2" name="fecha_solicitado" id="fecha_solicitado"
                         max="@php echo date('Y-m-d') @endphp">
@@ -121,7 +121,7 @@
 
                 <div class="col-xs-12 col-md-3 my-2">
                     <label for="requerido_por"
-                        class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Requerido
+                        class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Requerido
                         por</label>
                     <input type="text" class="form-control sz p-2" name="requerido_por" id="requerido_por"
                         placeholder="Requerido por..">
@@ -129,7 +129,7 @@
 
                 <div class="col-xs-12 col-md-3 my-2">
                     <label for="tipo_requerimiento"
-                        class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de
+                        class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de
                         Requerimiento</label>
                     <select name="tipo_requerimiento" id="tipo_requerimiento" class="form-select sz p-2">
                         <option value="">-- Seleccione --</option>
@@ -140,7 +140,7 @@
 
                 <div class="col-xs-12 col-md-3 my-2">
                     <label for="laboratorio"
-                        class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Laboratorio</label>
+                        class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Laboratorio</label>
                     <select name="laboratorio" id="laboratorio" class="form-select sz p-2">
                         <option value="">-- Seleccione --</option>
                         <option value="1">Laboratorio 1</option>
@@ -149,7 +149,7 @@
                 </div>
 
                 <div class="col-xs-12 col-md-3 my-2">
-                    <label for="well_name" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Well
+                    <label for="well_name" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Well
                         Name</label>
                     <input type="text" class="form-control sz p-2" name="well_name" id="well_name"
                         placeholder="Well Name">
@@ -157,7 +157,7 @@
 
                 <div class="col-xs-12 col-md-3 my-2">
                     <label for="ingeniero"
-                        class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Ingeniero</label>
+                        class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Ingeniero</label>
                     <input type="text" class="form-control sz p-2" name="ingeniero" id="ingeniero"
                         placeholder="Ingeniero">
                 </div>
@@ -167,113 +167,122 @@
 
         <div class="mt-4 tab-pane fade" id="tab-condiciones_test" role="tabpanel"
             aria-labelledby="nav-tab_condiciones_test"> <!-- Condiciones del Test -->
-            <div class="row mt-3">
-                <span class="ms-1 mb-0 font-light tracking-wide">Datos del Pozo</span>
-                <hr class="mt-1 w-96">
 
-                <div class="col-xs-12 col-md-2 my-2">
-                    <label for="open_hole" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Open
+            <span class="ms-1 mb-0 font-light tracking-wide">Datos del Pozo</span>
+            <hr class="mt-1 w-auto">
+
+            <div class="grid gap-2 grid-cols-1 md:grid-cols-5 mt-3">
+
+                <div class="col-span-1 my-2">
+                    <label for="open_hole" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Open
                         Hole</label>
                     <input type="text" class="form-control sz p-2" name="open_hole" id="open_hole"
                         placeholder="Open Hole">
                 </div>
 
-                <div class="col-xs-12 col-md-2 my-2">
-                    <label for="densidad_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Densidad
+                <div class="col-span-1 my-2">
+                    <label for="densidad_lodo" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Densidad
                         del Lodo <small>(lbm/gal)</small></label>
                     <input type="number" class="form-control sz p-2" name="densidad_lodo" id="densidad_lodo"
                         placeholder="Ingrese la densidad del lodo">
                 </div>
-                <div class="col-xs-12 col-md-2 my-2">
-                    <label for="md" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">MD
+
+                <div class="col-span-1 my-2">
+                    <label for="md" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">MD
                         <small>(ft)</small></label>
                     <input type="number" class="form-control sz p-2" name="md" id="md"
                         placeholder="MD">
                 </div>
-                <div class="col-xs-12 col-md-2 my-2">
-                    <label for="tvd" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">TVD
+
+                <div class="col-span-1 my-2">
+                    <label for="tvd" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">TVD
                         <small>(ft)</small></label>
                     <input type="number" class="form-control sz p-2" name="tvd" id="tvd"
                         placeholder="TVD">
                 </div>
-                <div class="col-xs-12 col-md-2 my-2">
+
+                <div class="col-span-1 my-2">
                     <label for="proveedor_lodo"
-                        class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Proveedor
+                        class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Proveedor
                         del Lodo</label>
                     <select name="proveedor_lodo" id="proveedor_lodo" class="form-select sz p-2">
                         <option value="">-- Seleccione --</option>
                     </select>
                 </div>
+
             </div>
 
-            <div class="row mt-3">
-                <span class="ms-1 mb-0 font-light tracking-wide">Datos de la Temperatura</span>
-                <hr class="mt-1 w-96">
-                <div class="col-xs-12 col-md-2 my-2">
-                    <label for="bhse" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">BHSE
+            <span class="ms-1 mb-0 font-light tracking-wide">Datos de la Temperatura</span>
+            <hr class="mt-1 w-auto">
+
+            <div class="grid gap-2 grid-cols-1 md:grid-cols-3 mt-3">
+
+                <div class="col-span-1 my-2">
+                    <label for="bhse" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">BHSE
                         <small>(degf)</small></label>
                     <input type="number" class="form-control sz p-2" name="bhse" id="bhse"
                         placeholder="BHSE">
                 </div>
 
-                <div class="col-xs-12 col-md-2 my-2">
-                    <label for="bhct" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">BHCT
+                <div class="col-span-1 my-2">
+                    <label for="bhct" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">BHCT
                         <small>(degf)</small></label>
                     <input type="number" class="form-control sz p-2" name="bhct" id="bhct"
                         placeholder="BHCT">
                 </div>
 
-                <div class="col-xs-12 col-md-2 my-2">
-                    <label for="grado_temperatura" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Grad
+                <div class="col-span-1 my-2">
+                    <label for="grado_temperatura" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Grad
                         Tº</label>
                     <input type="number" class="form-control sz p-2" name="grado_temperatura"
                         id="grado_temperatura" placeholder="Grad">
                 </div>
             </div>
+            
+            <span class="ms-1 mb-0 font-light tracking-wide">Datos Complementarios</span>
+            <hr class="mt-1 w-auto">
 
-            <div class="row mt-3">
-                <span class="ms-1 mb-0 font-light tracking-wide">Datos Complementarios</span>
-                <hr class="mt-1 w-96">
-                <div class="col-xs-12 col-md-2 my-2">
+            <div class="grid gap-2 grid-cols-1 md:grid-cols-5 mt-3">
+                <div class="col-span-1 my-2">
                     <label for="volumen"
-                        class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Volumen</label>
+                        class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Volumen</label>
                     <input type="number" class="form-control sz p-2" name="volumen" id="volumen"
                         placeholder="Volumen">
                 </div>
 
-                <div class="col-xs-12 col-md-2 my-2">
+                <div class="col-span-1 my-2">
                     <label for="caudal"
-                        class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Caudal</label>
+                        class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Caudal</label>
                     <input type="number" class="form-control sz p-2" name="caudal" id="caudal"
                         placeholder="Caudal">
                 </div>
 
-                <div class="col-xs-12 col-md-2 my-2">
-                    <label for="tope_lechada" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tope
+                <div class="col-span-1 my-2">
+                    <label for="tope_lechada" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Tope
                         de
                         Lechada</label>
                     <input type="number" class="form-control sz p-2" name="tope_lechada" id="tope_lechada"
                         placeholder="Tope de Lechada">
                 </div>
 
-                <div class="col-xs-12 col-md-2 my-2">
-                    <label for="base_lechada" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Base
+                <div class="col-span-1 my-2">
+                    <label for="base_lechada" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Base
                         de
                         Lechada</label>
                     <input type="number" class="form-control sz p-2" name="base_lechada" id="base_lechada"
                         placeholder="Base de Lechada">
                 </div>
 
-                <div class="col-xs-12 col-md-2 my-2">
+                <div class="col-span-1 my-2">
                     <label for="densidad_lechada"
-                        class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Densidad
+                        class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Densidad
                         de Lechada</label>
                     <input type="number" class="form-control sz p-2" name="densidad_lechada" id="densidad_lechada"
                         placeholder="Densidad de Lechada">
                 </div>
 
-                <div class="col-12 my-2">
-                    <label for="comentario" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Comentarios
+                <div class="col-span-5 my-2">
+                    <label for="comentario" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Comentarios
                         /
                         Observaciones</label>
                     <textarea name="comentario" id="comentario" cols="30" rows="4" class="form-control sz p-2"

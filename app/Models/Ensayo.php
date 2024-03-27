@@ -40,6 +40,11 @@ class Ensayo extends Model
         'user_id',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function aditivos() {
         return $this->hasMany(RelAditivosEnsayos::class);
     }

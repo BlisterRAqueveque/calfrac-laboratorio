@@ -69,24 +69,32 @@
                 </li>
 
                 <li class="relative p-2 flex gap-3 cursor-pointer rounded-md" id="miPerfilNav">
-                    <div class="flex justify-center items-center w-10 h-10 mx-auto">
-                        <img src="{{ asset('uploads/perfiles') . '/' . auth()->user()->img }}"
-                            class="rounded-full object-cover w-10 h-10" alt="">
-                    </div>
+
+                    @if (auth()->user()->img)
+                        <div class="flex justify-center items-center w-10 h-10 mx-auto">
+                            <img src="{{ asset('uploads/perfiles') . '/' . auth()->user()->img }}"
+                                class="rounded-full object-cover w-10 h-10" alt="">
+                        </div>
+                    @else
+                        <div class="flex justify-center items-center w-12 h-12 mx-auto">
+                            <img src="{{ asset('img/img_default.jpg') }}"
+                                class="rounded-full object-cover w-12 h-12" alt="">
+                        </div>
+                    @endif
                     <div class="flex flex-col">
-                        <span class="text-sm font-semibold tracking-wide">{{ auth()->user()->nombre }}
+                        <span class="text-xs xl:text-sm font-semibold tracking-wide">{{ auth()->user()->nombre }}
                             {{ auth()->user()->apellido }}</span>
-                        <small class="text-sm text-gray-400">{{ auth()->user()->grupo->nombre }}</small>
+                        <small class="text-xs xl:text-sm text-gray-400">{{ auth()->user()->grupo->nombre }}</small>
                     </div>
 
-                    <div class="absolute z-50 text-sm mt-1 rounded bg-white shadow-md w-56 hidden" id="miPerfilConfig"
+                    <div class="absolute z-50 text-xs xl:text-sm mt-1 rounded bg-white shadow-md w-56 hidden"
+                        id="miPerfilConfig"
                         style="box-shadow: 0px 0px 2px 0px rgba(171,171,171,1); top: 55px; left: 0; right: 0;">
                         <ul class="ps-0 p-2 pe-0">
-                            <small class="font-semibold text-sm text-gray-700 ps-3">Bienvenido
+                            <small class="font-semibold text-gray-700 ps-3">Bienvenido
                                 {{ auth()->user()->nombre }}</small>
                             <li class="ps-3 mt-2 hover:bg-gray-100 py-2">
-                                <a href=""
-                                    class="text-gray-600 hover:text-green-900 text-sm flex items-center gap-1">
+                                <a href="" class="text-gray-600 hover:text-green-900 flex items-center gap-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -100,7 +108,7 @@
                                 <form action="{{ route('logout.store') }}" method="POST">
                                     @csrf
                                     <button type="submit"
-                                        class="text-gray-600 hover:text-green-900 text-sm flex items-center gap-1">
+                                        class="text-gray-600 hover:text-green-900 text-xs xl:text-sm flex items-center gap-1">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -136,71 +144,82 @@
                     </a>
                 </li>
 
-                <li class="relative py-2 nav_list">
+                @can('view', App\Models\Ensayo::class)
+                    <li class="relative py-2 nav_list">
 
-                    <a href="" class="flex items-center gap-2 text-gray-600 hover:text-green-900">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0 1 12 15a9.065 9.065 0 0 0-6.23-.693L5 14.5m14.8.8 1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0 1 12 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
-                        </svg>
-                        Ensayo
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                        </svg>
-                    </a>
+                        <a href="#/" class="flex items-center gap-2 text-gray-600 hover:text-green-900">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0 1 12 15a9.065 9.065 0 0 0-6.23-.693L5 14.5m14.8.8 1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0 1 12 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
+                            </svg>
+                            Ensayo
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </a>
 
-                    <div class="absolute z-50 text-sm mt-1 rounded bg-white shadow-md w-48 hidden nav_list_0"
-                        style="box-shadow: 0px 0px 2px 0px rgba(171,171,171,1);">
-                        <ul class="ps-0 p-2">
-                            <li class="ps-3 ">
-                                <a href=""
-                                    class="text-gray-600 hover:text-green-900 flex items-center justify-between">Histórico
+                        <div class="absolute z-50 text-xs xl:text-sm mt-1 rounded bg-white shadow-md w-48 hidden nav_list_0"
+                            style="box-shadow: 0px 0px 2px 0px rgba(171,171,171,1);">
+                            <ul class="ps-0 p-2">
+                                <li class="ps-3 ">
+                                    <a href="{{ route('ensayos') }}"
+                                        class="text-gray-600 hover:text-green-900 flex items-center justify-between">Histórico
 
-                                    {{-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        {{-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="2" stroke="currentColor" class="w-3 h-3">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                                     </svg> --}}
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                @endcan
+
+                @canany(['view', 'create'], App\Models\Solicitud::class)
+                    <li class="relative py-2 nav_list">
+                        <a href="#/" class="flex items-center gap-2 text-gray-500 hover:text-green-900">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z" />
+                            </svg>
+                            Solicitudes
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </a>
+
+                        <div class="absolute text-xs xl:text-sm z-50 mt-1 rounded bg-white shadow-md w-48 hidden nav_list_1"
+                            style="box-shadow: 0px 0px 2px 0px rgba(171,171,171,1);">
+                            <ul class="ps-0 p-2">
+
+                                @can('create', App\Models\Solicitud::class)
+                                    <li class="ps-3 py-2">
+                                        <a href="{{ route('solicitud.create.show') }}"
+                                            class="text-gray-600 hover:text-green-900 flex items-center justify-between">Crear
+                                            solicitud</a>
+                                    </li>
+                                @endcan
+
+                                @can('view', App\Models\Solicitud::class)
+                                    <li class="ps-3 py-2">
+                                        <a href="{{ route('solicitudes') }}"
+                                            class="text-gray-600 hover:text-green-900 flex items-center justify-between">Histórico</a>
+                                    </li>
+                                @endcan
+
+                            </ul>
+                        </div>
+                    </li>
+                @endcanany
 
                 <li class="relative py-2 nav_list">
-                    <a href="" class="flex items-center gap-2 text-gray-500 hover:text-green-900">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z" />
-                        </svg>
-                        Solicitudes
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                        </svg>
-                    </a>
-
-                    <div class="absolute text-sm z-50 mt-1 rounded bg-white shadow-md w-48 hidden nav_list_1"
-                        style="box-shadow: 0px 0px 2px 0px rgba(171,171,171,1);">
-                        <ul class="ps-0 p-2">
-                            <li class="ps-3 py-2">
-                                <a href="{{ route('solicitud.create.show') }}"
-                                    class="text-gray-600 hover:text-green-900 flex items-center justify-between">Crear
-                                    solicitud</a>
-                            </li>
-                            <li class="ps-3 py-2">
-                                <a href="{{ route('solicitudes') }}"
-                                    class="text-gray-600 hover:text-green-900 flex items-center justify-between">Histórico</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="relative py-2 nav_list">
-                    <a href="" class="flex items-center gap-2 text-gray-500 hover:text-green-900">
+                    <a href="#/" class="flex items-center gap-2 text-gray-500 hover:text-green-900">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                             stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -213,12 +232,12 @@
                         </svg>
                     </a>
 
-                    <div class="absolute text-sm z-50 mt-1 rounded bg-white shadow-md w-48 hidden nav_list_2"
+                    <div class="absolute text-xs xl:text-sm z-50 mt-1 rounded bg-white shadow-md w-48 hidden nav_list_2"
                         style="box-shadow: 0px 0px 2px 0px rgba(171,171,171,1);"></div>
                 </li>
 
                 <li class="relative py-2 nav_list">
-                    <a href="" class="flex items-center gap-2 text-gray-500 hover:text-green-900">
+                    <a href="#/" class="flex items-center gap-2 text-gray-500 hover:text-green-900">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                             stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -233,7 +252,7 @@
                         </svg>
                     </a>
 
-                    <div class="absolute text-sm z-50 mt-1 rounded bg-white shadow-md w-48 hidden nav_list_3"
+                    <div class="absolute text-xs xl:text-sm z-50 mt-1 rounded bg-white shadow-md w-48 hidden nav_list_3"
                         style="box-shadow: 0px 0px 2px 0px rgba(171,171,171,1);">
                         <ul class="ps-0 p-2">
 
@@ -249,13 +268,19 @@
                                 <a href="{{ route('solicitudes') }}"
                                     class="text-gray-600 hover:text-green-900 flex items-center justify-between">Movimientos</a>
                             </li>
-                            <li class="ps-3 py-2 cursor-pointer">
-                                <a href="{{ route('usuarios') }}"
-                                    class="text-gray-600 hover:text-green-900 flex items-center justify-between">Usuarios</a>
-                            </li>
+                            @can('view', App\Models\User::class)
+                                <li class="ps-3 py-2 cursor-pointer">
+                                    <a href="{{ route('usuarios') }}"
+                                        class="text-gray-600 hover:text-green-900 flex items-center justify-between">Usuarios</a>
+                                </li>
+                            @endcan
                             <li class="ps-3 py-2 cursor-pointer">
                                 <a href="{{ route('yacimientos') }}"
                                     class="text-gray-600 hover:text-green-900 flex items-center justify-between">Yacimientos</a>
+                            </li>
+                            <li class="ps-3 py-2 cursor-pointer">
+                                <a href="{{ route('permisos') }}"
+                                    class="text-gray-600 hover:text-green-900 flex items-center justify-between">Permisos</a>
                             </li>
                         </ul>
                     </div>
@@ -298,12 +323,14 @@
 
     for (let i = 0; i < navHeader.length; i++) {
         navHeader[i].addEventListener('mouseenter', e => {
-            let navChild = document.querySelector(`.nav_list_${i}`);
+            // console.log(navHeader[i].getElementsByTagName('div')[0]);
+            let navChild = navHeader[i].getElementsByTagName('div')[0];
             navChild.classList.remove('hidden');
         })
 
         navHeader[i].addEventListener('mouseleave', e => {
-            let navChild = document.querySelector(`.nav_list_${i}`);
+            let navChild = navHeader[i].getElementsByTagName('div')[0];
+            // let navChild = document.querySelector(`.nav_list_${i}`);
             navChild.classList.add('hidden');
         });
     }

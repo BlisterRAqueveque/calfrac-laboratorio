@@ -13,6 +13,11 @@
             letter-spacing: .5px;
         }
 
+        .estado_aprobada {
+            background: rgb(170, 214, 209);
+            letter-spacing: .5px;
+        }
+
         .estado_finalizada {
             background: rgb(170, 214, 170);
             letter-spacing: .5px;
@@ -52,7 +57,7 @@
                                         $clase = 'estado_pendiente';
                                         break;
                                     case '2':
-                                        $clase = 'bg-green-500';
+                                        $clase = 'estado_aprobada';
                                         $estado = $solicitud->estado->nombre;
                                         break;
                                     case '3':
@@ -158,7 +163,7 @@
 
             <br>
 
-            <ul role="tablist" aria-owns="nav-tab1 nav-tab2 nav-tab3 nav-tab4" class="nav nav-tabs"
+            <ul role="tablist" aria-owns="nav-tab1 nav-tab2 nav-tab3 nav-tab4" class="nav nav-tabs text-sm md:text-md"
                 id="nav-tab-with-nested-tabs" style="z-index: 999">
                 <li class="nav-item w-full text-center md:w-auto" role="presentation">
                     <a class="nav-link nav_tab_mod active" aria-current="page" id="nav-tab1" href="#tab1-content"
@@ -232,7 +237,7 @@
                 <input type="hidden" value="{{ $solicitud->id }}" name="solicitud_id">
                 <div class="row mt-3"> <!-- Información General -->
                     <div class="col-xs-12 col-md-6 my-2">
-                        <label for="proyecto_number" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Solo
+                        <label for="proyecto_number" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Solo
                             uso
                             de
                             Laboratorio - Nº de Proyecto</label>
@@ -245,7 +250,7 @@
                     </div>
 
                     <div class="col-xs-12 col-md-6 my-2">
-                        <label for="servicio_number" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Nº
+                        <label for="servicio_number" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Nº
                             Revisión de Solicitud de Servicio</label>
                         <input type="number" placeholder="Ingrese el número" class="form-control sz p-2"
                             name="servicio_number" id="servicio_number" min="0"
@@ -257,156 +262,156 @@
 
                     <div class="col-xs-12 col-md-3 my-2">
                         <label for="cliente"
-                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Cliente</label>
+                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Cliente</label>
                         <input type="text" placeholder="Ingrese el cliente" class="form-control sz p-2"
                             name="cliente" id="cliente" value="{{ $solicitud->cliente }}" readonly>
                         @error('cliente')
-                            <small class="text-sm text-red-600">{{ $message }}</small>
+                            <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
                         @enderror
                     </div>
 
                     <div class="col-xs-12 col-md-2 my-2">
-                        <label for="locacion" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Yacimiento /
+                        <label for="locacion" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Yacimiento /
                             Locación</label>
                         <input type="text" placeholder="Ingrese el yacimiento / locación" class="form-control sz p-2"
                             name="locacion" id="locacion" value="{{ $solicitud->locacion }}" readonly>
                         @error('locacion')
-                            <small class="text-sm text-red-600">{{ $message }}</small>
+                            <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
                         @enderror
                     </div>
 
                     <div class="col-xs-12 col-md-2 my-2">
                         <label for="programa"
-                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Programa</label>
+                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Programa</label>
                         <input type="text" placeholder="Ingrese el programa" class="form-control sz p-2"
                             name="programa" id="programa" value="{{ $solicitud->programa }}" readonly>
                         @error('programa')
-                            <small class="text-sm text-red-600">{{ $message }}</small>
+                            <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
                         @enderror
                     </div>
 
                     <div class="col-xs-12 col-md-2 my-2">
-                        <label for="fecha_solicitud" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha
+                        <label for="fecha_solicitud" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha
                             de
                             Solicitud</label>
                         <input type="date" class="form-control sz p-2" name="fecha_solicitud" id="fecha_solicitud"
-                            value="{{ $solicitud->fecha_solicitud }}" readonly>
+                            value="{{ $solicitud->fecha_solicitud->format('Y-m-d') }}" readonly>
                         @error('fecha_solicitud')
-                            <small class="text-sm text-red-600">{{ $message }}</small>
+                            <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
                         @enderror
                     </div>
 
                     <div class="col-xs-12 col-md-3 my-2">
-                        <label for="empresa" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Compañía /
+                        <label for="empresa" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Compañía /
                             Empresa</label>
                         <input type="text" placeholder="Ingrese la empresa" class="form-control sz p-2"
                             name="empresa" id="empresa" value="{{ $solicitud->empresa }}" readonly>
                         @error('empresa')
-                            <small class="text-sm text-red-600">{{ $message }}</small>
+                            <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
                         @enderror
                     </div>
 
                     <div class="col-xs-12 col-md-2 my-2">
                         <label for="fecha_tratamiento"
-                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha
+                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha
                             del
                             Tratamiento</label>
                         <input type="date" class="form-control sz p-2" name="fecha_tratamiento"
                             id="fecha_tratamiento" value="{{ $solicitud->fecha_tratamiento }}" readonly>
                         @error('fecha_tratamiento')
-                            <small class="text-sm text-red-600">{{ $message }}</small>
+                            <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
                         @enderror
                     </div>
 
                     <div class="col-xs-12 col-md-2 my-2">
-                        <label for="pozo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Pozo</label>
+                        <label for="pozo" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Pozo</label>
                         <input type="text" class="form-control sz p-2" name="pozo" id="pozo"
                             placeholder="Ingrese el Pozo" value="{{ $solicitud->pozo }}" readonly>
                         @error('pozo')
-                            <small class="text-sm text-red-600">{{ $message }}</small>
+                            <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
                         @enderror
                     </div>
 
                     <div class="col-xs-12 col-md-3 my-2">
-                        <label for="rep_compania" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Rep
+                        <label for="rep_compania" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Rep
                             Compañía</label>
                         <input type="text" class="form-control sz p-2" name="rep_compania" id="rep_compania"
                             placeholder="Rep Compañía" value="{{ $solicitud->rep_compania }}" readonly>
                         @error('rep_compania')
-                            <small class="text-sm text-red-600">{{ $message }}</small>
+                            <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
                         @enderror
                     </div>
 
                     <div class="col-xs-12 col-md-2 my-2">
-                        <label for="fecha_reporte" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha
+                        <label for="fecha_reporte" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha
                             del
                             Reporte</label>
                         <input type="date" class="form-control sz p-2" name="fecha_reporte" id="fecha_reporte"
                             value="{{ $solicitud->fecha_reporte }}" readonly>
                         @error('fecha_reporte')
-                            <small class="text-sm text-red-600">{{ $message }}</small>
+                            <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
                         @enderror
                     </div>
 
                     <div class="col-xs-12 col-md-3 my-2">
-                        <label for="rep_venta" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Rep
+                        <label for="rep_venta" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Rep
                             Ventas</label>
                         <input type="text" class="form-control sz p-2" name="rep_venta" id="rep_venta"
                             placeholder="Rep Ventas" value="{{ $solicitud->rep_venta }}" readonly>
                         @error('rep_venta')
-                            <small class="text-sm text-red-600">{{ $message }}</small>
+                            <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
                         @enderror
                     </div>
 
                     <div class="col-xs-12 col-md-2 my-2">
-                        <label for="fecha_resultados" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha
+                        <label for="fecha_resultados" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha
                             Resultados</label>
                         <input type="date" class="form-control sz p-2" name="fecha_resultados" id="fecha_resultados"
                             value="{{ $solicitud->fecha_resultados }}" readonly>
                         @error('fecha_resultados')
-                            <small class="text-sm text-red-600">{{ $message }}</small>
+                            <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
                         @enderror
                     </div>
 
                     <div class="col-xs-12 col-md-3 my-2">
                         <label for="equipo"
-                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Equipo</label>
+                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Equipo</label>
                         <input type="text" class="form-control sz p-2" name="equipo" id="equipo"
                             placeholder="Ingrese el equipo" value="{{ $solicitud->equipo }}" readonly>
                         @error('equipo')
-                            <small class="text-sm text-red-600">{{ $message }}</small>
+                            <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
                         @enderror
                     </div>
 
                     <div class="col-xs-12 col-md-3 my-2">
                         <label for="servicio"
-                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Servicio</label>
+                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Servicio</label>
                         <input type="text" class="form-control sz p-2" name="servicio" id="servicio"
                             placeholder="Ingrese el servicio" value="{{ $solicitud->servicio }}" readonly>
                         @error('servicio')
-                            <small class="text-sm text-red-600">{{ $message }}</small>
+                            <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
                         @enderror
                     </div>
 
                     <div class="col-xs-12 col-md-2 my-2">
                         <label for="reporte_lab_tall"
-                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Reporte
+                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Reporte
                             Laboratorio Tall</label>
                         <input type="text" class="form-control sz p-2" name="reporte_lab_tall" id="reporte_lab_tall"
                             placeholder="Ingrese el reporte" value="{{ $solicitud->reporte_lab_tall }}" readonly>
                         @error('reporte_lab_tall')
-                            <small class="text-sm text-red-600">{{ $message }}</small>
+                            <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
                         @enderror
                     </div>
 
                     <div class="col-xs-12 col-md-2 my-2">
                         <label for="reporte_lab_lead"
-                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Reporte
+                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Reporte
                             Laboratorio Lead</label>
                         <input type="text" class="form-control sz p-2" name="reporte_lab_lead" id="reporte_lab_lead"
                             placeholder="Ingrese el reporte" value="{{ $solicitud->reporte_lab_lead }}" readonly>
                         @error('reporte_lab_lead')
-                            <small class="text-sm text-red-600">{{ $message }}</small>
+                            <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
                         @enderror
                     </div>
                 </div>
@@ -414,7 +419,7 @@
                 <p class="m-0 mt-3 font-bold text-lg tracking-wide">Informacion del Pozo y Ensayos</p>
                 <div class="row mt-3">
                     <div class="col-xs-12 col-md-3 my-2">
-                        <label for="fluido" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fluido del
+                        <label for="fluido" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Fluido del
                             Reservorio</label>
                         <input type="text" placeholder="Ingrese el fluido" class="form-control sz p-2" name="fluido"
                             id="fluido" value="{{ $solicitud_fractura[0]->fluido ?? 'No Aplica' }}" readonly>
@@ -422,7 +427,7 @@
 
                     <div class="col-xs-12 col-md-3 my-2">
                         <label for="formacion"
-                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Formación</label>
+                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Formación</label>
                         <input type="text" placeholder="Ingrese la formación" class="form-control sz p-2"
                             name="formacion" id="formacion"
                             value="{{ $solicitud_fractura[0]->formacion ?? 'No Aplica' }}" readonly>
@@ -431,13 +436,13 @@
                         <div class="row">
                             <div class="col-xs-12 col-md-6">
                                 <label for="bhst"
-                                    class="text-sm text-gray-700 font-semibold tracking-wide mb-2">BHST</label>
+                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">BHST</label>
                                 <input type="number" placeholder="Cº / Fº" class="form-control sz p-2" name="bhst"
                                     id="bhst" value="{{ $solicitud_fractura[0]->bhst ?? 'No Aplica' }}" readonly>
                             </div>
                             <div class="col-xs-12 col-md-6">
                                 <label for="tipo_temp_bhst"
-                                    class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo</label>
+                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo</label>
                                 <select name="tipo_temp_bhst" id="tipo_temp_bhst" class="form-select sz p-2" disabled>
                                     <option value="">-- Tipo --</option>
                                     <option value="1"
@@ -452,7 +457,7 @@
                         <div class="row">
                             <div class="col-xs-12 col-md-6">
                                 <label for="temp_ensayo"
-                                    class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Temp.
+                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Temp.
                                     Ensayo</label>
                                 <input type="number" placeholder="Cº / Fº" class="form-control sz p-2"
                                     name="temp_ensayo" id="temp_ensayo"
@@ -460,7 +465,7 @@
                             </div>
                             <div class="col-xs-12 col-md-6">
                                 <label for="tipo_temp_ensayo"
-                                    class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo</label>
+                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo</label>
                                 <select name="tipo_temp_ensayo" id="tipo_temp_ensayo" class="form-select sz p-2"
                                     disabled>
                                     <option value="">-- Tipo --</option>
@@ -473,7 +478,7 @@
                         </div>
                     </div>
                     <div class="col-12 my-2 text-center">
-                        <span class="w-full items-center m-0 text-sm">¿Hay algún aditivo que no sea de Calfrac para ser
+                        <span class="w-full items-center m-0 text-xs xl:text-sm">¿Hay algún aditivo que no sea de Calfrac para ser
                             usado
                             en
                             este proyecto?</span>
@@ -485,14 +490,14 @@
                     </div>
 
                     <div class="col-xs-12 col-md-4 my-2">
-                        <label for="proveedor" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre del
+                        <label for="proveedor" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre del
                             Proveedor</label>
                         <input type="text" placeholder="Ingrese el proveedor" class="form-control sz p-2"
                             name="proveedor" id="proveedor"
                             value="{{ $solicitud_fractura[0]->proveedor ?? 'No Aplica' }}" readonly>
                     </div>
                     <div class="col-xs-12 col-md-4 my-2">
-                        <label for="producto" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre del
+                        <label for="producto" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre del
                             Producto</label>
                         <input type="text" placeholder="Ingrese el producto" class="form-control sz p-2"
                             name="producto" id="producto" value="{{ $solicitud_fractura[0]->producto ?? 'No Aplica' }}"
@@ -500,7 +505,7 @@
                     </div>
                     <div class="col-xs-12 col-md-4 my-2">
                         <label for="concentracion"
-                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Concentración
+                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Concentración
                             a Ensayar</label>
                         <input type="text" placeholder="Ingrese la concentración" class="form-control sz p-2"
                             name="concentracion" id="concentracion"
@@ -513,7 +518,7 @@
                 <div class="row mt-3"> <!-- Análisis Requerido -->
                     <div class="col-xs-12 col-md-3 my-2">
                         <label for="sistema_fluido"
-                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Compatibilidad con sistemas de
+                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Compatibilidad con sistemas de
                             fluidos</label>
                         <select name="sistema_fluido" id="sistema_fluido" class="form-select sz p-2" disabled>
                             <option value="">-- Seleccione --</option>
@@ -529,7 +534,7 @@
 
                     <div class="col-xs-12 col-md-3 my-2">
                         <label for="analisis_microbial"
-                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Análisis
+                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Análisis
                             de Agua y Ensayo Microbial</label>
                         <select name="analisis_microbial" id="analisis_microbial" class="form-select sz p-2" disabled>
                             <option value="">-- Seleccione --</option>
@@ -544,7 +549,7 @@
                     </div>
 
                     <div class="col-xs-12 col-md-3 my-2">
-                        <label for="agente_sosten" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Agente
+                        <label for="agente_sosten" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Agente
                             de
                             Sostén</label>
                         <select name="agente_sosten" id="agente_sosten" class="form-select sz p-2" disabled>
@@ -560,7 +565,7 @@
                     </div>
 
                     <div class="col-xs-12 col-md-3 my-2">
-                        <label for="otros" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Otros
+                        <label for="otros" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Otros
                             Análisis</label>
                         <select name="otros" id="otros" class="form-select sz p-2" disabled>
                             <option value="">-- Seleccione --</option>
@@ -575,7 +580,7 @@
                     </div>
 
                     <div class="col-12 my-2">
-                        <label for="comentario" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Comentario
+                        <label for="comentario" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Comentario
                             /
                             Instrucciones</label>
                         <textarea name="comentario" id="comentario" class="form-control sz p-2" rows="3"
@@ -588,7 +593,7 @@
                 <div class="row mt-3">
                     <div class="col-xs-12 col-md-6 my-2">
                         <label for="firma_iniciado_por"
-                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre
+                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre
                             <small>(Iniciado por)</small></label>
                         <select name="firma_iniciado_por" id="firma_iniciado_por" class="form-select sz p-2" disabled>
                             <option value="">-- Seleccione --</option>
@@ -605,7 +610,7 @@
 
                     <div class="col-xs-12 col-md-6 my-2">
                         <label for="fecha_firma_iniciado_por"
-                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de la Firma
+                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de la Firma
                             <small>(*)</small></label>
                         <input type="date" name="fecha_firma_iniciado_por" id="fecha_firma_iniciado_por"
                             class="form-control sz p-2" value="{{ $solicitud_fractura[0]->fecha_firma_iniciado_por }}"
@@ -614,7 +619,7 @@
 
                     <div class="col-xs-12 col-md-6 my-2">
                         <label for="firma_servicios_tecnicos"
-                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre
+                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre
                             <small>(Servicios Técnicos)</small></label>
                         <select name="firma_servicios_tecnicos" id="firma_servicios_tecnicos" class="form-select sz p-2"
                             disabled>
@@ -632,7 +637,7 @@
 
                     <div class="col-xs-12 col-md-6 my-2">
                         <label for="fecha_firma_servicios_tecnicos"
-                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de la Firma
+                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de la Firma
                             <small>(*)</small></label>
                         <input type="date" name="fecha_firma_servicios_tecnicos" id="fecha_firma_servicios_tecnicos"
                             class="form-control sz p-2"
@@ -641,7 +646,7 @@
 
                     <div class="col-xs-12 col-md-6 my-2">
                         <label for="firma_laboratorio"
-                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre
+                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre
                             <small>(Laboratorio)</small></label>
                         <select name="firma_laboratorio" id="firma_laboratorio" class="form-select sz p-2" disabled>
                             <option value="">-- Seleccione --</option>
@@ -658,7 +663,7 @@
 
                     <div class="col-xs-12 col-md-6 my-2">
                         <label for="fecha_firma_laboratorio"
-                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de la Firma
+                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de la Firma
                             <small>(*)</small></label>
                         <input type="date" name="fecha_firma_laboratorio" id="fecha_firma_laboratorio"
                             class="form-control sz p-2" value="{{ $solicitud_fractura[0]->fecha_firma_laboratorio }}"
@@ -670,7 +675,7 @@
                 <div class="row mt-3">
                     <div class="col-xs-12 col-md-6 my-2">
                         <label for="firma_reconocimiento"
-                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre
+                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre
                             <small>(Reconocimiento)</small></label>
                         <select name="firma_reconocimiento" id="firma_reconocimiento" class="form-select sz p-2"
                             disabled>
@@ -690,7 +695,7 @@
 
                     <div class="col-xs-12 col-md-6 my-2">
                         <label for="fecha_firma_reconocimiento"
-                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de la Firma
+                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de la Firma
                             <small>(*)</small></label>
                         <input type="date" name="fecha_firma_reconocimiento" id="fecha_firma_reconocimiento"
                             class="form-control sz p-2" value="{{ $solicitud_fractura[0]->fecha_firma_reconocimiento }}"
@@ -711,10 +716,17 @@
                 <div class="row md:w-1/2 mt-1">
                     @foreach ($solicitud->fundamento as $c)
                         <article class="flex gap-3 mt-3">
+                            @if ($c->user_fundamento->img)
                             <div class="flex justify-center items-center w-12 h-12 mx-auto">
-                                <img src="{{ asset('uploads/perfiles') . '/' . $c->user_fundamento->img }}"
+                                <img src="{{  asset('uploads/perfiles') . '/' . $c->user_fundamento->img }}"
                                     class="rounded-full object-cover w-12 h-12" alt="">
                             </div>
+                            @else
+                            <div class="flex justify-center items-center w-14 h-14 mx-auto">
+                                <img src="{{  asset('img/img_default.jpg') }}"
+                                    class="rounded-full object-cover w-14 h-14" alt="">
+                            </div>
+                            @endif
                             <div class="text-sm flex-1">
 
                                 <p class="m-0 flex flex-col md:flex-row md:gap-2 font-bold">
@@ -761,9 +773,9 @@
                                                     Responder
                                                 </button>
                                             </div>
-                                            <form id="form_fundamento" class="mt-3 formRta_0 hidden">
-                                                {{-- <form action="{{ route('fundamento.rta', auth()->user()->id) }}"
-                                                    method="POST" class="mt-3 formRta_0 hidden"> --}}
+                                            {{-- <form id="form_fundamento" class="mt-3 formRta_0 hidden"> --}}
+                                                <form action="{{ route('fundamento.rta', auth()->user()->id) }}"
+                                                    method="POST" class="mt-3 formRta_0 hidden">
                                                 @csrf
                                                 <input type="hidden" name="fundamento_id" value="{{ $c->id }}">
                                                 <textarea name="respuesta" id="respuesta" cols="30" rows="3" class="form-control sz p-2"
@@ -779,7 +791,7 @@
                                                                 d="M6 18 18 6M6 6l12 12" />
                                                         </svg>
                                                         Cancelar</button>
-                                                    <input type="button" id="submitRtaFundamento"
+                                                    <input type="submit"
                                                         class="bg-green-700 bg-opacity-60 text-white font-bold px-2 py-1 rounded-sm hover:shadow-lg transition-all duration-75"
                                                         value="Responder">
                                                 </div>

@@ -38,7 +38,12 @@ a:link {
 }
 
 .sz {
-    font-size: 14px!important;
+    font-size: 12px!important;
+}
+@media (1500px < width < 1920px) {
+    .sz {
+        font-size: 14px!important;
+    }
 }
 
 .fieldset_bg {

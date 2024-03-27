@@ -1,5 +1,5 @@
 <div class="modal fade" id="modalEditUser" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
+    <div class="modal-dialog modal-lg">
         <form action="{{ route('usuario.update') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="modal-content">
@@ -10,7 +10,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-xs-12 col-md-6 border-r">
+                        <div class="col-xs-12 border-r">
                             <div class="row">
                                 <input type="hidden" name="user_id" id="user_id">
                                 <!-- Imagen Perfil -->
@@ -21,7 +21,7 @@
                                             class="rounded-full object-cover w-32 h-32 img_edit" id="img_edit">
                                     </div>
 
-                                    <button class="absolute" style="right: 225px; bottom: 25px;"
+                                    <button class="absolute" style="right: 325px; bottom: 25px;"
                                         onclick="setFileImg('edit_imagen_perfil')">
                                         <div
                                             class="flex justify-center mx-auto p-2 border-1 bg-gray-50 rounded-full">

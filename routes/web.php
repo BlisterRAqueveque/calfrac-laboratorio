@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EnsayoController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\PermisosController;
 use App\Http\Controllers\SolicitudController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\YacimientoController;
@@ -42,20 +43,20 @@ Route::post('/ensayo/create', [EnsayoController::class, 'store'])->name('ensayo.
 Route::post('/ensayo/assigned', [EnsayoController::class, 'assigned'])->name('ensayo.assigned');
 
 # Solicitudes
-Route::get('/solicitud', [SolicitudController::class, 'create'])->name('solicitud.create.show');
+Route::get('/solicitud', [SolicitudController::class, 'create'])->name('solicitud.create.show')->middleware('auth');
 Route::post('/solicitud', [SolicitudController::class, 'store_fractura'])->name('solicitud.fractura');
 Route::post('/solicitud/edicion', [SolicitudController::class, 'update'])->name('solicitud.update');
 Route::post('/solicitud/aprobada', [SolicitudController::class, 'store_aprobar'])->name('solicitud.aprobar');
 Route::get('/solicitud/fractura/{solicitud_id}', [SolicitudController::class, 'show_fractura'])->name('solicitud.fractura.show');
 
 Route::get('/solicitudes', [SolicitudController::class, 'index'])->name('solicitudes');
+Route::post('/respuesta/{user_id}', [SolicitudController::class, 'update_rta'])->name('fundamento.rta');
 
 // Route::post('/solicitud/lodo', [SolicitudController::class, 'store_lodo'])->name('solicitud.lodo');
 
 # Comentarios
 // Route::post('/comentario/{user_id}', [ComentarioController::class, 'store'])->name('comentario.store');
 // Route::post('/respuesta/{user_id}', [ComentarioController::class, 'update'])->name('comentario.update');
-Route::post('/respuesta/{user_id}', [ComentarioController::class, 'rta_solicitud_edicion'])->name('fundamento.rta');
 
 # Clientes
 Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes');
@@ -76,5 +77,11 @@ Route::post('/yacimiento/update', [YacimientoController::class, 'update'])->name
 Route::get('/aditivos', [AditivoController::class, 'index'])->name('aditivos');
 Route::post('/aditivo', [AditivoController::class, 'store'])->name('aditivo.store');
 Route::post('/aditivo/update', [AditivoController::class, 'update'])->name('aditivo.update');
+
+# Permisos
+Route::get('/permisos', [PermisosController::class, 'index'])->name('permisos');
+Route::post('/permiso', [PermisosController::class, 'store'])->name('permiso.store');
+Route::post('/permisos_user', [PermisosController::class, 'user_permission_store'])->name('permisos.user.store');
+Route::get('/testing', [PermisosController::class, 'testing']);
 
 

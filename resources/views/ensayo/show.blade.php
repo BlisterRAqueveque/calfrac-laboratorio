@@ -1,9 +1,9 @@
-<div class="container_mod bg-white p-3 mt-4 shadow-sm tab-pane fade" id="tab2-content" role="tabpanel"
+<div class="container_mod bg-white p-3 mt-4 shadow-sm text-xs xl:text-sm tab-pane fade" id="tab2-content" role="tabpanel"
     aria-labelledby="nav-tab2">
-    <p class="m-0 mt-1 font-bold text-lg tracking-wide">Formulario para crear un Ensayo</p>
+    <p class="m-0 mt-1 font-bold text-md xl:text-lg tracking-wide">Formulario para crear un Ensayo</p>
 
     <!-- Si ya tiene Ensayos asignados, entonces acá se van a ir iterando -->
-    <ul role="tablist" class="nav mt-4 nav-tabs p-1 border-1 items-center rounded-3xl md:rounded-full gap-1"
+    <ul role="tablist" class="nav mt-4 nav-tabs px-1 border-1 items-center rounded-3xl md:rounded-full gap-1"
         id="nav-tab-with-nested-tabs">
         @php
             $i = 1;
@@ -117,11 +117,6 @@
                             data-bs-toggle="tab" href="#tab-ensayo_asignado_{{ $e->id }}"
                             data-bs-target="#tab-ensayo_asignado_{{ $e->id }}" role="tab"
                             aria-selected="false">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.7" stroke="currentColor" class="w-5 h-5">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
-                            </svg>
                             Asignar Ensayo
                         </a>
                     </li>
@@ -135,7 +130,7 @@
                         <div class="row mt-3">
                             <div class="col-xs-12 col-md-3 my-2">
                                 <label for="uso"
-                                    class="text-sm text-gray-700 font-semibold tracking-wide mb-2">¿Cuál
+                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">¿Cuál
                                     será el uso?</label>
                                 <select name="uso" id="uso" class="form-select sz p-2" disabled>
                                     <option value="">-- Seleccione --</option>
@@ -146,7 +141,7 @@
 
                             <div class="col-xs-12 col-md-3 my-2">
                                 <label for="cliente"
-                                    class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Cliente</label>
+                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Cliente</label>
                                 <select name="cliente" id="cliente" class="form-select sz p-2" disabled>
                                     <option value="">-- Seleccione --</option>
                                     <option value="1" {{ $e->cliente == 1 ? 'selected' : '' }}>Cliente 1</option>
@@ -156,7 +151,7 @@
 
                             <div class="col-xs-12 col-md-3 my-2">
                                 <label for="estado"
-                                    class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Estado</label>
+                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Estado</label>
                                 <select name="estado" id="estado" class="form-select sz p-2" disabled>
                                     <option value="">-- Seleccione --</option>
                                     <option value="1" {{ $e->estado == 1 ? 'selected' : '' }}>Estado 1</option>
@@ -166,7 +161,7 @@
 
                             <div class="col-xs-12 col-md-3 my-2">
                                 <label for="numero_lodo"
-                                    class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Nº
+                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Nº
                                     de
                                     Lodo</label>
                                 <input type="number" class="form-control sz p-2" name="numero_lodo"
@@ -176,7 +171,7 @@
 
                             <div class="col-xs-12 col-md-3 my-2">
                                 <label for="tipo_trabajo"
-                                    class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo
+                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo
                                     de
                                     Trabajo</label>
                                 <select name="tipo_trabajo" id="tipo_trabajo" class="form-select sz p-2" disabled>
@@ -192,7 +187,7 @@
 
                             <div class="col-xs-12 col-md-3 my-2">
                                 <label for="nombre_lodo"
-                                    class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre
+                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre
                                     del Lodo</label>
                                 <input type="text" class="form-control sz p-2" name="nombre_lodo"
                                     id="nombre_lodo" placeholder="Ingrese el Nº de lodo"
@@ -201,7 +196,7 @@
 
                             <div class="col-xs-12 col-md-3 my-2">
                                 <label for="fecha_solicitado"
-                                    class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha
+                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha
                                     Solicitado</label>
                                 <input type="date" class="form-control sz p-2" name="fecha_solicitado"
                                     id="fecha_solicitado" value="{{ $e->fecha_solicitado }}" readonly>
@@ -209,7 +204,7 @@
 
                             <div class="col-xs-12 col-md-3 my-2">
                                 <label for="requerido_por"
-                                    class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Requerido
+                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Requerido
                                     por</label>
                                 <input type="text" class="form-control sz p-2" name="requerido_por"
                                     id="requerido_por" value="{{ $e->requerido_por }}" readonly>
@@ -217,7 +212,7 @@
 
                             <div class="col-xs-12 col-md-3 my-2">
                                 <label for="tipo_requerimiento"
-                                    class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de
+                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de
                                     Requerimiento</label>
                                 <select name="tipo_requerimiento" id="tipo_requerimiento" class="form-select sz p-2"
                                     disabled>
@@ -231,7 +226,7 @@
 
                             <div class="col-xs-12 col-md-3 my-2">
                                 <label for="laboratorio"
-                                    class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Laboratorio</label>
+                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Laboratorio</label>
                                 <select name="laboratorio" id="laboratorio" class="form-select sz p-2" disabled>
                                     <option value="">-- Seleccione --</option>
                                     <option value="1" {{ $e->laboratorio == 1 ? 'selected' : '' }}>Laboratorio 1
@@ -243,7 +238,7 @@
 
                             <div class="col-xs-12 col-md-3 my-2">
                                 <label for="well_name"
-                                    class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Well
+                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Well
                                     Name</label>
                                 <input type="text" class="form-control sz p-2" name="well_name" id="well_name"
                                     value="{{ $e->well_name }}" readonly>
@@ -251,7 +246,7 @@
 
                             <div class="col-xs-12 col-md-3 my-2">
                                 <label for="ingeniero"
-                                    class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Ingeniero</label>
+                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Ingeniero</label>
                                 <input type="text" class="form-control sz p-2" name="ingeniero" id="ingeniero"
                                     value="{{ $e->ingeniero }}" readonly>
                             </div>
@@ -261,43 +256,42 @@
 
                     <div class="mt-4 tab-pane fade" id="tab-condiciones_test_{{ $e->id }}" role="tabpanel">
                         <!-- Condiciones del Test -->
-                        <div class="row mt-3">
-                            <span class="ms-1 mb-0 font-light tracking-wide">Datos del Pozo</span>
-                            <hr class="mt-1 w-96">
+                        <span class="ms-1 mb-0 font-light tracking-wide">Datos del Pozo</span>
+                        <hr class="mt-1 w-96">
 
-                            <div class="col-xs-12 col-md-2 my-2">
+                        <div class="grid gap-2 grid-cols-1 md:grid-cols-5 mt-3">
+
+                            <div class="col-span-1 my-2">
                                 <label for="open_hole"
-                                    class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Open
-                                    Hole</label>
-                                <input type="text" class="form-control sz p-2" name="open_hole" id="open_hole"
-                                    value="{{ $e->open_hole ? $e->open_hole : 'No Aplica' }}" readonly>
+                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Open Hole</label>
+                                <input type="text" class="form-control sz p-2" name="open_hole" id="open_hole" value="{{ $e->open_hole ? $e->open_hole : 'No Aplica' }}" readonly>
                             </div>
 
-                            <div class="col-xs-12 col-md-2 my-2">
+                            <div class="col-span-1 my-2">
                                 <label for="densidad_lodo"
-                                    class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Densidad
+                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Densidad
                                     del Lodo <small>(lbm/gal)</small></label>
                                 <input type="text" class="form-control sz p-2" name="densidad_lodo"
                                     id="densidad_lodo"
                                     value="{{ $e->densidad_lodo ? $e->densidad_lodo : 'No Aplica' }}" readonly>
                             </div>
-                            <div class="col-xs-12 col-md-2 my-2">
+                            <div class="col-span-1 my-2">
                                 <label for="md"
-                                    class="text-sm text-gray-700 font-semibold tracking-wide mb-2">MD
+                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">MD
                                     <small>(ft)</small></label>
                                 <input type="text" class="form-control sz p-2" name="md" id="md"
                                     value="{{ $e->md ? $e->md : 'No Aplica' }}" readonly>
                             </div>
-                            <div class="col-xs-12 col-md-2 my-2">
+                            <div class="col-span-1 my-2">
                                 <label for="tvd"
-                                    class="text-sm text-gray-700 font-semibold tracking-wide mb-2">TVD
+                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">TVD
                                     <small>(ft)</small></label>
                                 <input type="text" class="form-control sz p-2" name="tvd" id="tvd"
                                     value="{{ $e->tvd ? $e->tvd : 'No Aplica' }}" readonly>
                             </div>
-                            <div class="col-xs-12 col-md-2 my-2">
+                            <div class="col-span-1 my-2">
                                 <label for="proveedor_lodo"
-                                    class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Proveedor del
+                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Proveedor del
                                     Lodo</label>
                                 <select name="proveedor_lodo" id="proveedor_lodo" class="form-select sz p-2"
                                     disabled>
@@ -310,28 +304,28 @@
                             </div>
                         </div>
 
-                        <div class="row mt-3">
-                            <span class="ms-1 mb-0 font-light tracking-wide">Datos de la Temperatura</span>
-                            <hr class="mt-1 w-96">
-                            <div class="col-xs-12 col-md-2 my-2">
+                        <span class="ms-1 mb-0 font-light tracking-wide">Datos de la Temperatura</span>
+                        <hr class="mt-1 w-auto">
+                        <div class="grid gap-2 grid-cols-1 md:grid-cols-3 mt-3">
+                            <div class="col-span-1 my-2">
                                 <label for="bhse"
-                                    class="text-sm text-gray-700 font-semibold tracking-wide mb-2">BHSE
+                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">BHSE
                                     <small>(degf)</small></label>
                                 <input type="text" class="form-control sz p-2" name="bhse" id="bhse"
                                     value="{{ $e->bhse ? $e->bhse : 'No Aplica' }}" readonly>
                             </div>
 
-                            <div class="col-xs-12 col-md-2 my-2">
+                            <div class="col-span-1 my-2">
                                 <label for="bhct"
-                                    class="text-sm text-gray-700 font-semibold tracking-wide mb-2">BHCT
+                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">BHCT
                                     <small>(degf)</small></label>
                                 <input type="text" class="form-control sz p-2" name="bhct" id="bhct"
                                     value="{{ $e->bhct ? $e->bhct : 'No Aplica' }}" readonly>
                             </div>
 
-                            <div class="col-xs-12 col-md-2 my-2">
+                            <div class="col-span-1 my-2">
                                 <label for="grado_temperatura"
-                                    class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Grad
+                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Grad
                                     Tº</label>
                                 <input type="text" class="form-control sz p-2" name="grado_temperatura"
                                     id="grado_temperatura"
@@ -340,26 +334,26 @@
                             </div>
                         </div>
 
-                        <div class="row mt-3">
-                            <span class="ms-1 mb-0 font-light tracking-wide">Datos Complementarios</span>
-                            <hr class="mt-1 w-96">
-                            <div class="col-xs-12 col-md-2 my-2">
+                        <span class="ms-1 mb-0 font-light tracking-wide">Datos Complementarios</span>
+                        <hr class="mt-1 w-auto">
+                        <div class="grid gap-2 grid-cols-1 md:grid-cols-5 mt-3">
+                            <div class="col-span-1 my-2">
                                 <label for="volumen"
-                                    class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Volumen</label>
+                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Volumen</label>
                                 <input type="text" class="form-control sz p-2" name="volumen" id="volumen"
                                     value="{{ $e->volumen ? $e->volumen : 'No Aplica' }}" readonly>
                             </div>
 
-                            <div class="col-xs-12 col-md-2 my-2">
+                            <div class="col-span-1 my-2">
                                 <label for="caudal"
-                                    class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Caudal</label>
+                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Caudal</label>
                                 <input type="text" class="form-control sz p-2" name="caudal" id="caudal"
                                     value="{{ $e->caudal ? $e->caudal : 'No Aplica' }}" readonly>
                             </div>
 
-                            <div class="col-xs-12 col-md-2 my-2">
+                            <div class="col-span-1 my-2">
                                 <label for="tope_lechada"
-                                    class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tope
+                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Tope
                                     de
                                     Lechada</label>
                                 <input type="text" class="form-control sz p-2" name="tope_lechada"
@@ -367,9 +361,9 @@
                                     readonly>
                             </div>
 
-                            <div class="col-xs-12 col-md-2 my-2">
+                            <div class="col-span-1 my-2">
                                 <label for="base_lechada"
-                                    class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Base
+                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Base
                                     de
                                     Lechada</label>
                                 <input type="text" class="form-control sz p-2" name="base_lechada"
@@ -377,18 +371,18 @@
                                     readonly>
                             </div>
 
-                            <div class="col-xs-12 col-md-2 my-2">
+                            <div class="col-span-1 my-2">
                                 <label for="densidad_lechada"
-                                    class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Densidad
+                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Densidad
                                     de Lechada</label>
                                 <input type="text" class="form-control sz p-2" name="densidad_lechada"
                                     id="densidad_lechada"
                                     value="{{ $e->base_lechada ? $e->base_lechada : 'No Aplica' }}" readonly>
                             </div>
 
-                            <div class="col-12 my-2">
+                            <div class="col-span-5 my-2">
                                 <label for="comentario"
-                                    class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Comentarios /
+                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Comentarios /
                                     Observaciones</label>
                                 <textarea name="comentario" id="comentario" cols="30" rows="4" class="form-control sz p-2" readonly>{{ $e->base_lechada ? $e->base_lechada : 'No Aplica' }}</textarea>
                             </div>

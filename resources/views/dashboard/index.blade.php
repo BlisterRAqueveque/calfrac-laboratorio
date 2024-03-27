@@ -11,26 +11,29 @@
         <div class="flex gap-3">
 
             <div class="flex flex-col w-1/3 gap-3">
-                <article class="bg-white shadow-sm">
-                    <div class="bg-orange-50 p-2 flex gap-2 text-orange-400 text-sm tracking-wide font-light">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-5 h-5">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
-                        </svg>
-                        Testing (Encabezado Gráfico)
-                    </div>
+                {{-- @role('user') --}}
+                    {{-- @if (auth()->user()->hasPermissionTo('hola_mama')) --}}
+                        <article class="bg-white shadow-sm">
+                            <div class="bg-orange-50 p-2 flex gap-2 text-orange-400 text-sm tracking-wide font-light">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor" class="w-5 h-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+                                </svg>
+                                Testing (Encabezado Gráfico)
+                            </div>
 
-                    <div class="p-2">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum, recusandae!
-                    </div>
+                            <div class="p-2">
+                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum, recusandae!
+                            </div>
 
-                    <div class="p-2">
-                        <button class="bg-emerald-500 px-3 py-1 text-white rounded hover:bg-emerald-600">Botón
-                            Gráfico</button>
-                    </div>
-                </article>
-
+                            <div class="p-2">
+                                <button class="bg-emerald-500 px-3 py-1 text-white rounded hover:bg-emerald-600">Botón
+                                    Gráfico</button>
+                            </div>
+                        </article>
+                    {{-- @endif --}}
+                {{-- @endrole --}}
                 <div class="flex gap-2">
                     <article class="bg-white shadow-sm border rounded-md p-3 w-full">
                         <div class="flex justify-between">
@@ -66,6 +69,7 @@
                         </div>
                     </article>
                 </div>
+
                 <div class="flex gap-2">
                     <article class="bg-white shadow-sm border rounded-md p-3 w-full">
                         <div class="flex justify-between">

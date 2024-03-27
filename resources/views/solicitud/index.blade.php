@@ -6,8 +6,9 @@
 
 @section('contenido')
     <section class="container_mod pt-10 md:pt-3">
-        <p class="font-bold uppercase">Histórico de Solicitudes</p>
-        <div class="flex flex-col md:flex-row gap-3"> <!-- Panel de Ventanas -->
+        <p class="font-bold uppercase text-sm xl:text-md">Histórico de Solicitudes</p>
+        <div class="flex flex-col md:flex-row gap-3 text-xs xl:text-sm"> <!-- Panel de Ventanas -->
+
             <article class="bg-white shadow-sm border rounded-md p-3 w-full">
                 <div class="flex justify-between">
                     <div class="flex flex-col">
@@ -88,17 +89,19 @@
 
         <div class="card mt-4">
             <div class="card-header bg-white p-3 flex flex-col md:flex-row items-center justify-between">
-                <p class="mb-0 font-bold uppercase">
+                <p class="mb-0 font-bold uppercase text-xs xl:text-sm">
                     Todas las Solicitudes
                 </p>
-                <a href="{{ route('solicitud.create.show') }}"
-                    class="flex gap-1 items-center text-sm justify-center mt-2 md:mt-0 w-full md:w-auto bg-green-700 bg-opacity-60 text-white p-2 rounded-sm hover:shadow-md transition-all duration-75 font-bold cursor-pointer"
-                    style="text-decoration: none">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-3 h-3">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                    </svg>
-                    Crear Solicitud</a>
+                @can('create', App\Models\Solicitud::class)
+                    <a href="{{ route('solicitud.create.show') }}"
+                        class="flex gap-1 items-center text-xs xl:text-sm justify-center mt-2 md:mt-0 w-full md:w-auto bg-green-700 bg-opacity-60 text-white p-2 rounded-sm hover:shadow-md transition-all duration-75 font-bold cursor-pointer"
+                        style="text-decoration: none">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-3 h-3">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                        </svg>
+                        Crear Solicitud</a>
+                @endcan
             </div>
 
             <div class="card-body p-0">
@@ -117,7 +120,7 @@
                     </div>
                 </div>
 
-                <div class="text-gray-500 text-sm overflow-x-scroll">
+                <div class="text-gray-500 text-xs xl:text-sm overflow-x-scroll md:overflow-x-hidden">
                     <table class="w-full">
                         <thead style="background-color: #f3f9f5">
                             <th class="p-3">#ID</th>
@@ -182,14 +185,14 @@
                                     <td class="p-3">{{ $s->user->nombre }} {{ $s->user->apellido }}</td>
 
                                     @if ($s->ensayo_asignado_id)
-                                        <td class="p-3">
+                                        <td class="p-3 w-72 md:w-96">
                                             <div class="table_btn table_btn_success">
                                                 <div class="w-2 h-2 rounded-full point_success"></div>
                                                 Ensayo #{{ $s->ensayo_asignado_id }}
                                             </div>
                                         </td>
                                     @else
-                                        <td class="p-3">
+                                        <td class="p-3 w-72 md:w-96">
                                             <div class="table_btn table_btn_pendiente">
                                                 <div class="w-2 h-2 rounded-full point_pendiente"></div>
                                                 Sin ensayo asignado
@@ -198,7 +201,7 @@
                                     @endif
 
                                     <td>
-                                        {{ $s->created_at->format('d/m/Y H:i') }}
+                                        {{ $s->created_at->format('d/m/Y H:i') }} hs
                                     </td>
                                 </tr>
                             @endforeach

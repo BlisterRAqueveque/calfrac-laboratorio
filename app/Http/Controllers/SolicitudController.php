@@ -21,11 +21,13 @@ class SolicitudController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     public function create()
     {
+        // dd(auth()->user()->permisos);
+        $this->authorize('create', Solicitud::class);
         $data = [
             'clientes' => Cliente::all(),
             'yacimientos' => Yacimiento::all(),
@@ -226,6 +228,23 @@ class SolicitudController extends Controller
 
         if ($solicitud->id)
             return back()->with('success', 'La solicitud se ha editado correctamente');
+    }
+
+    /**
+     * 
+     */
+    public function update_rta($user_id, Request $request) {
+        $this->validate($request, [
+            'respuesta' => 'required',
+        ]);
+
+        $fundamento = Edicion_Solicitud::find($request->fundamento_id);
+
+        $fundamento->respuesta = $request->respuesta;
+        $fundamento->usuario_rta = $user_id;
+        $fundamento->fecha_hora_rta = date('Y-m-d H:i:s');
+        $fundamento->save();
+        return back();
     }
 
     public function store_lechada(Request $request)

@@ -19,6 +19,7 @@ class ComentarioController extends Controller
     //     ]);
     //     return back();
     // }
+
     // public function update($user_id, Request $request) {
     //     $this->validate($request, [
     //         'respuesta' => 'required',
@@ -33,7 +34,7 @@ class ComentarioController extends Controller
     //     return back();
     // }
 
-    public function rta_solicitud_edicion($user_id, Request $request) {
-        dd($request);
-    }
+    // public function rta_solicitud_edicion($user_id, Request $request) {
+    //     dd($request);
+    // }
 }

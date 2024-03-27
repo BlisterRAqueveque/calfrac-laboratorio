@@ -49,6 +49,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function permisos() {
+        return $this->hasMany(RelPermisosUser::class);
+    }
+
     public function grupo()
     {
         return $this->belongsTo(Grupo::class);
