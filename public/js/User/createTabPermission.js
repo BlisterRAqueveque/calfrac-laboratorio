@@ -36,15 +36,13 @@ function _createTabPermissions(user_permissions) {
   permissionsTab.forEach((e) => {
     let tr, td, svg, path, div, p, span;
 
-    tr = el("tr", {
-      style: "border-bottom: 3px solid white;",
-    });
+    tr = el("tr.border border-b-white dark:border-none");
     td = el("td.cursor-pointer rounded-md", {
       "data-permiso": e.id,
     });
     if (e.tiene_permiso) {
       div = el(
-        "div.flex justify-between items-center border p-2 rounded-sm permission_selected"
+        "div.flex justify-between items-center border p-2 rounded-sm dark:border-none"
       );
       p = el("p.mb-0", e.nombre);
       span = el(
@@ -53,7 +51,7 @@ function _createTabPermissions(user_permissions) {
       );
     } else {
       div = el(
-        "div.flex justify-between items-center border p-2 rounded-sm bg-gray-50"
+        "div.flex justify-between items-center border p-2 rounded-sm dark:border-none dark:bg-gray-900 dark:bg-opacity-80"
       );
       p = el("p.mb-0", e.nombre);
       span = el(

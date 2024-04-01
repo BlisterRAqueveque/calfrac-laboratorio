@@ -3695,7 +3695,7 @@ fieldset:disabled .btn {
 }
 .nav-tabs .nav-item.show .nav-link,
 .nav-tabs .nav-link.active {
-    color: #495057;
+    /* color: #495057; */
     background-color: #fff;
     border-color: #dee2e6 #dee2e6 #fff;
 }
@@ -6124,9 +6124,9 @@ fieldset:disabled .btn {
 .translate-middle-y {
     transform: translateY(-50%) !important;
 }
-.border {
+/* .border {
     border: 1px solid #dee2e6 !important;
-}
+} */
 .border-0 {
     border: 0 !important;
 }
@@ -6805,9 +6805,9 @@ fieldset:disabled .btn {
 .text-dark {
     color: #212529 !important;
 }
-.text-white {
+/* .text-white {
     color: #fff !important;
-}
+} */
 .text-body {
     color: #212529 !important;
 }
@@ -6850,9 +6850,9 @@ fieldset:disabled .btn {
 .bg-body {
     background-color: #fff !important;
 }
-.bg-white {
+/* .bg-white {
     background-color: #fff !important;
-}
+} */
 .bg-transparent {
     background-color: transparent !important;
 }

@@ -8,10 +8,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <style>
-        .permission_selected {
-            background: #c0ddef;
-            border: 1px solid #8db7d1;
-        }
+        /* .permission_selected {
+                background: #c0ddef;
+                border: 1px solid #8db7d1;
+            } */
 
         .permission_new {
             background: #d0f5d5;
@@ -25,16 +25,16 @@
     </style>
 
     <section class="container_mod pt-3">
-        <p class="font-bold uppercase">Histórico de Usuarios</p>
+        <p class="font-bold uppercase dark:text-gray-300 text-sm">Histórico de Usuarios</p>
 
-        <div class="mt-4 bg-white px-3 py-2 border shadow-sm rounded-sm">
+        <div class="mt-4 dark:card-bg-head bg-white px-3 py-2 border dark:border-none shadow-sm rounded-sm">
             <div class="flex flex-col md:flex-row items-center justify-between">
-                <p class="mb-0 font-bold uppercase">
+                <p class="mb-0 font-bold uppercase text-xs xl:text-sm dark:text-gray-300">
                     Todos los usuarios
                 </p>
                 @can('create', App\Models\User::class)
                     <button data-bs-toggle="modal" data-bs-target="#modalCreateUser"
-                        class="flex justify-center gap-1 items-center text-sm w-full md:w-auto bg-green-700 bg-opacity-60 text-white p-2 rounded-sm hover:shadow-md transition-all duration-75 font-bold cursor-pointer"
+                        class="flex justify-center gap-1 items-center text-sm w-full md:w-auto bg-green-700 bg-opacity-60 dark:bg-opacity-50 dark:text-green-500 dark:hover:text-gray-300 text-white p-2 rounded-sm hover:shadow-md transition-all duration-75 font-bold cursor-pointer"
                         style="text-decoration: none">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-3 h-3">
@@ -49,25 +49,25 @@
         <section class="flex flex-col md:flex-row gap-3 mt-4 h-screen" style="max-height: 70vh">
 
             <!-- Tabla de todos los usuarios -->
-            <div class="card w-full md:w-1/2">
+            <div class="card w-full dark:tab_bg md:w-1/2">
                 <div class="row p-3">
                     <div class="col-xs-12 col-md-4 my-2">
-                        <input type="text" class="form-control sz p-2 "
-                            style="background-color: #f3f9f5; border: none;" placeholder="Buscar por nombre">
+                        <input type="text" class="form-control sz p-2 bg-gray-50 border-none dark:inp_bg_2"
+                            placeholder="Buscar por nombre">
                     </div>
                     <div class="col-xs-12 col-md-4 my-2">
-                        <input type="date" class="form-control sz p-2 "
-                            style="background-color: #f3f9f5; border: none;">
+                        <input type="date"
+                            class="form-control sz p-2 dark:inp_bg_2 bg-gray-50  dark:text-gray-400 border-none">
                     </div>
                     <div class="col-xs-12 col-md-4 my-2">
-                        <select class="form-select sz p-2" style="background-color: #f3f9f5; border: none;">
+                        <select class="form-select sz p-2 dark:inp_bg_2 dark:text-gray-400 bg-gray-50 border-none">
                             <option value="">-- Todo --</option>
                         </select>
                     </div>
                 </div>
 
-                <table class="w-full text-sm">
-                    <thead style="background-color: #f3f9f5">
+                <table class="w-full text-sm text-gray-500">
+                    <thead class="dark:card-bg-head" style="background-color: #f3f9f5">
                         <th class="p-3">#ID</th>
                         <th class="p-3">Nombre y Apellido</th>
                         <th class="p-3">Estado</th>
@@ -77,7 +77,7 @@
 
                     <div style="max-height: 70vh;">
                         <div>
-                            <table class="w-full text-sm">
+                            <table class="text-gray-500 w-full text-sm">
                                 <tbody style="max-height: 70vh;overflow-y: scroll">
                                     @foreach ($usuarios as $u)
                                         <tr>
@@ -139,7 +139,8 @@
                                                 }
                                             @endphp
                                             <td class="p-3 sm:w-52 xl:w-auto mx-auto my-0">
-                                                <div class="table_btn text-xs xl:text-sm {{ $class }}">
+                                                <div
+                                                    class="table_btn text-xs xl:text-sm {{ $u->estado == 1 ? 'bg-green-200 dark:bg-green-800 dark:bg-opacity-40 text-green-900 dark:text-green-400' : 'bg-red-200' }}">
                                                     <div
                                                         class=" w-1 h-1 sm:w-1 sm:h-1 xl:w-2 xl:h-2 rounded-full point_success">
                                                     </div>
@@ -150,7 +151,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -160,28 +161,28 @@
             </div>
 
             <!-- Información del usuario -->
-            <div class="card w-full md:w-1/2" style="max-height: 70vh;">
-                <ul role="tablist" class="nav nav-tabs flex  text-center" id="nav-tab-with-nested-tabs"
+            <div class="card dark:border-none w-full md:w-1/2" style="max-height: 70vh;">
+                <ul role="tablist" class="nav nav-tabs flex text-center dark:card-bg-head" id="nav-tab-with-nested-tabs"
                     style="z-index: 999">
                     <li class="nav-item flex-1" role="presentation">
-                        <a class="nav-link nav_tab_mod active" aria-current="page" id="nav-tab1" href="#tab_informacion"
-                            data-bs-toggle="tab" data-bs-target="#tab_informacion" role="tab"
-                            aria-controls="tab_informacion" aria-selected="true">Información</a>
+                        <a class="nav-link nav_tab_mod active text-violet-700 dark:text-gray-400" aria-current="page"
+                            id="nav-tab1" href="#tab_informacion" data-bs-toggle="tab" data-bs-target="#tab_informacion"
+                            role="tab" aria-controls="tab_informacion" aria-selected="true">Información</a>
                     </li>
                     <li class="nav-item flex-1" role="presentation">
-                        <a class="nav-link nav_tab_mod" id="nav-tab2" data-bs-toggle="tab" href="#tab_permisos"
-                            data-bs-target="#tab_permisos" role="tab" aria-controls="tab_permisos"
-                            aria-selected="false">Permisos</a>
+                        <a class="nav-link nav_tab_mod text-violet-700 dark:text-gray-400" id="nav-tab2"
+                            data-bs-toggle="tab" href="#tab_permisos" data-bs-target="#tab_permisos" role="tab"
+                            aria-controls="tab_permisos" aria-selected="false">Permisos</a>
                     </li>
                     <li class="nav-item flex-1" role="presentation">
-                        <a class="nav-link nav_tab_mod" id="nav-tab2" data-bs-toggle="tab" href="#tab_movimientos"
-                            data-bs-target="#tab_movimientos" role="tab" aria-controls="tab_movimientos"
-                            aria-selected="false">Movimientos</a>
+                        <a class="nav-link nav_tab_mod text-violet-700 dark:text-gray-400" id="nav-tab2"
+                            data-bs-toggle="tab" href="#tab_movimientos" data-bs-target="#tab_movimientos"
+                            role="tab" aria-controls="tab_movimientos" aria-selected="false">Movimientos</a>
                     </li>
                 </ul>
-                <div style="max-height: 70vh; overflow: auto">
+                <div class="dark:dark_bg" style="max-height: 70vh; overflow: auto">
 
-                    <div class="tab-content" id="nav-tabs-content">
+                    <div class="tab-content dark:dark_bg" id="nav-tabs-content">
                         <!-- Información del usuario TAB -->
                         <div class="mt-4 tab-pane fade show active" id="tab_informacion" role="tabpanel">
                             <input type="hidden" value="" name="solicitud_id">
@@ -192,19 +193,22 @@
                                     <img src="{{ asset('img/img_default.jpg') }}"
                                         class="rounded-full object-cover w-20 h-20" id="setImg" alt="">
                                 </div>
-                                <p class="mb-0 text-center mt-1" id="setNombre">-</p>
+                                <p class="mb-0 text-center mt-1 dark:text-gray-300" id="setNombre">-</p>
                                 <p class="mb-0 text-center text-sm text-gray-400" id="setGrupo">-</p>
                             </div>
 
                             <!-- Información -->
                             <div class="p-3 text-sm">
-                                <p class="mb-0 uppercase text-gray-500 font-bold">Información del Usuario</p>
+                                <p class="mb-0 uppercase text-gray-500 font-bold dark:text-gray-300">Información del
+                                    Usuario</p>
                                 <div class="mt-2">
-                                    <p id="setEmail"><b>Email :</b> -</p>
-                                    <p id="setTelefono"><b>Teléfono :</b> -</p>
-                                    <p id="setFechaAlta"><b>Fecha de alta :</b> -</p>
-                                    <p id="setUsuarioAlta"><b>¿Quién lo dio de alta? : </b> -</p>
-                                    <p id="setUltimaModificacion"><b>Última Modificación :</b> -</p>
+                                    <p class="dark:text-gray-300 mb-2" id="setEmail"><b>Email :</b> -</p>
+                                    <p class="dark:text-gray-300 mb-2" id="setTelefono"><b>Teléfono :</b> -</p>
+                                    <p class="dark:text-gray-300 mb-2" id="setFechaAlta"><b>Fecha de alta :</b> -</p>
+                                    <p class="dark:text-gray-300 mb-2" id="setUsuarioAlta"><b>¿Quién lo dio de alta? :
+                                        </b> -</p>
+                                    <p class="dark:text-gray-300 mb-2" id="setUltimaModificacion"><b>Última Modificación
+                                            :</b> -</p>
                                 </div>
                             </div>
                         </div>
@@ -215,11 +219,11 @@
 
                                 <thead>
                                     <th
-                                        class="p-2 text-center bg-gray-100 rounded border-gray-100 border-b-4 border-b-white">
+                                        class="p-2 text-center bg-gray-100 dark:card-bg-head dark:text-gray-300 rounded border-gray-100 border-b-4 border-b-white dark:border-gray-600">
                                         Permisos</th>
                                 </thead>
 
-                                <tbody id="container_permisos" class="text-sm font-bold text-gray-700">
+                                <tbody id="container_permisos" class="text-sm font-bold text-gray-700 dark:text-gray-300">
                                     <tr class="text-center">
                                         <td class="py-3"><em class="semibold">Seleccione un usuario para visualizar los
                                                 permisos</em></td>

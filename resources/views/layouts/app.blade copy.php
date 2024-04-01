@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html id="html" lang="en" class="loading">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -13,8 +13,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
         rel="stylesheet">
-        @vite('resources/css/bootstrap.min.css')
-        @vite('resources/css/app.css')
+    @vite('resources/css/app.css')
+    @vite('resources/css/bootstrap.min.css')
     <script src="{{ asset('css/sweetalert2.css') }}"></script>
 </head>
 
@@ -24,9 +24,43 @@
     }
 </style>
 
-<body class="dark:body-bg">
+<body class="bg-test"  x-data="{ darkMode: false }" x-init="
+if (!('darkMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  localStorage.setItem('darkMode', JSON.stringify(true));
+}
+darkMode = JSON.parse(localStorage.getItem('darkMode'));
+$watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))">
     <!-- Barra de Navegación -->
-    <nav class="navegacion dark:nav_no_shadow fixed top-0 w-full dark:dark_bg z-50" style="background: white">
+    <nav class="bg-white navegacion fixed top-0 w-full" style="z-index: 1;">
+        <button type="button" x-bind:class="darkMode ? 'bg-indigo-500' : 'bg-gray-200'"
+        x-on:click="darkMode = !darkMode"
+        class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+        role="switch" aria-checked="false">
+        <span class="sr-only">Dark mode toggle</span>
+        <span x-bind:class="darkMode ? 'translate-x-5 bg-gray-700' : 'translate-x-0 bg-white'"
+            class="pointer-events-none relative inline-block h-5 w-5 transform rounded-full shadow ring-0 transition duration-200 ease-in-out">
+            <span
+                x-bind:class="darkMode ? 'opacity-0 ease-out duration-100' : 'opacity-100 ease-in duration-200'"
+                class="absolute inset-0 flex h-full w-full items-center justify-center transition-opacity"
+                aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-gray-400"
+                    viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                </svg>
+            </span>
+            <span
+                x-bind:class="darkMode ?  'opacity-100 ease-in duration-200' : 'opacity-0 ease-out duration-100'"
+                class="absolute inset-0 flex h-full w-full items-center justify-center transition-opacity"
+                aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-white"
+                    viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                        clip-rule="evenodd" />
+                </svg>
+            </span>
+        </span>
+    </button>
         <div class="container_mod nav_menu py-2">
 
             <div class="md:hidden">
@@ -42,19 +76,20 @@
             </div>
 
             <div class="hidden md:flex items-center">
-                <img src="{{ asset('/img/logo.ico') }}" class="mr-20 rounded-md" alt="Imagen Logo">
+                <img src="{{ asset('/img/logo.ico') }}" class="mr-20" alt="Imagen Logo"
+                    style="border-radius: 5px; box-shadow: 1px -1px 0px 0px rgba(148,148,148,0.75);">
 
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="w-4 h-4 text-gray-500">
+                    stroke="currentColor" class="w-4 h-4">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                 </svg>
-                <input type="text" class="ms-2 bg-gray-100 p-1 ps-3 dark:inp_bg" placeholder="Buscar...">
+                <input type="text" class="ms-2 bg-gray-100 p-1 ps-3" placeholder="Buscar...">
             </div>
 
             <ul class="flex p-0 m-0 gap-2 items-center">
                 <li
-                    class="hidden md:block p-2 rounded-full text-gray-400 hover:bg-blue-50 transition-all duration-250 cursor-pointer">
+                    class="hidden md:block p-2 rounded-full text-gray-500 hover:bg-blue-50 transition-all duration-250 cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -62,18 +97,15 @@
                     </svg>
                 </li>
 
-                <li class="p-2 rounded-full text-gray-400 hover:bg-blue-50 transition-all duration-250 cursor-pointer"
-                    id="toggleTheme">
-                    <div id="iconThemeMode">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
-                        </svg>
-                    </div>
+                <li class="p-2 rounded-full text-gray-500 hover:bg-blue-50 transition-all duration-250 cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
+                    </svg>
                 </li>
 
-                <li class="p-2 rounded-full text-gray-400 hover:bg-blue-50 transition-all duration-250 cursor-pointer">
+                <li class="p-2 rounded-full text-gray-500 hover:bg-blue-50 transition-all duration-250 cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -95,7 +127,7 @@
                         </div>
                     @endif
                     <div class="flex flex-col">
-                        <span class="text-xs xl:text-sm font-semibold tracking-wide dark:text-white">{{ auth()->user()->nombre }}
+                        <span class="text-xs xl:text-sm font-semibold tracking-wide">{{ auth()->user()->nombre }}
                             {{ auth()->user()->apellido }}</span>
                         <small class="text-xs xl:text-sm text-gray-400">{{ auth()->user()->grupo->nombre }}</small>
                     </div>
@@ -103,13 +135,13 @@
                     {{-- <div class="absolute z-50 text-xs xl:text-sm mt-1 rounded bg-white shadow-md w-56 hidden"
                         id="miPerfilConfig"
                         style="box-shadow: 0px 0px 2px 0px rgba(171,171,171,1); top: 55px; left: 0; right: 0;"> --}}
-                    <div class="absolute text-sm nav_tab_profile dark:dark_bg">
+                    <div class="absolute text-sm nav_tab_profile">
                         <ul class="ps-0 p-2 pe-0">
-                            <span class="font-semibold text-gray-700 dark:text-white ps-3">Bienvenido
+                            <span class="font-semibold text-gray-700 ps-3">Bienvenido
                                 {{ auth()->user()->nombre }}</span>
-                            <li class="ps-3 mt-2  hover:bg-gray-100 dark:hover:bg-gray-800 py-2">
+                            <li class="ps-3 mt-2 hover:bg-gray-100 py-2">
                                 <a href=""
-                                    class="text-gray-600 dark:text-gray-400 hover:text-green-900 dark:hover:text-white flex items-center text-sm gap-1">
+                                    class="text-gray-600 hover:text-green-900 flex items-center text-sm gap-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -119,11 +151,11 @@
                                 </a>
                             </li>
 
-                            <li class="ps-3 hover:bg-gray-100 dark:hover:bg-gray-800 py-2 z-50">
+                            <li class="ps-3 hover:bg-gray-100 py-2 z-50">
                                 <form action="{{ route('logout.store') }}" method="POST">
                                     @csrf
                                     <button type="submit"
-                                        class="text-gray-600 dark:text-gray-400 hover:text-green-900 dark:hover:text-white text-sm flex items-center gap-1">
+                                        class="text-gray-600 hover:text-green-900 text-sm flex items-center gap-1">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -144,7 +176,7 @@
         <div class="container_mod navigate py-2">
             <ul class="flex text-sm p-0 m-0 gap-2">
                 <li class="">
-                    <a href="{{ route('dashboard') }}" class="flex items-center text-gray-500 hover:text-green-900 dark:hover:text-white">
+                    <a href="{{ route('dashboard') }}" class="flex items-center text-gray-500 hover:text-green-900">
                         <span class="flex items-center gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -159,7 +191,7 @@
                 @can('view', App\Models\Ensayo::class)
                     <li class="md:relative nav_list">
 
-                        <a href="#/" class="flex items-center gap-2 text-gray-500 hover:text-green-900 dark:hover:text-white">
+                        <a href="#/" class="flex items-center gap-2 text-gray-600 hover:text-green-900">
                             <span class="flex items-center gap-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -176,11 +208,11 @@
 
                         {{-- <div class="md:absolute navigate_tab z-50 text-xs xl:text-sm mt-1 rounded bg-white shadow-md w-48 hidden nav_list_0"
                             style="box-shadow: 0px 0px 2px 0px rgba(171,171,171,1);"> --}}
-                        <div class="navigate_tab text-xs xl:text-sm dark:dark_bg">
+                        <div class="navigate_tab">
                             <ul class="md:p-0 md:w-52">
                                 <li class="ps-2 p-2">
                                     <a href="{{ route('ensayos') }}"
-                                        class="text-gray-600 dark:text-gray-500 hover:text-green-900 dark:hover:text-white flex items-center justify-between">-
+                                        class="text-gray-600 hover:text-green-900 flex items-center justify-between">-
                                         Histórico
                                     </a>
                                 </li>
@@ -191,7 +223,7 @@
 
                 @canany(['view', 'create'], App\Models\Solicitud::class)
                     <li class="relative nav_list">
-                        <a href="#/" class="flex items-center gap-2 text-gray-500 hover:text-green-900 dark:hover:text-white">
+                        <a href="#/" class="flex items-center gap-2 text-gray-500 hover:text-green-900">
                             <span class="flex items-center gap-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -206,12 +238,12 @@
                             </svg>
                         </a>
 
-                        <div class="navigate_tab text-xs xl:text-sm dark:dark_bg">
+                        <div class="navigate_tab">
                             <ul class="md:p-0 md:w-52">
                                 @can('create', App\Models\Solicitud::class)
                                     <li class="ps-2 p-2">
                                         <a href="{{ route('solicitud.create.show') }}"
-                                            class="text-gray-600 dark:text-gray-500 hover:text-green-900 dark:hover:text-white flex items-center justify-between">-
+                                            class="text-gray-600 hover:text-green-900 flex items-center justify-between">-
                                             Crear
                                             solicitud</a>
                                     </li>
@@ -220,7 +252,7 @@
                                 @can('view', App\Models\Solicitud::class)
                                     <li class="ps-2 p-2">
                                         <a href="{{ route('solicitudes') }}"
-                                            class="text-gray-600 dark:text-gray-500 hover:text-green-900 dark:hover:text-white flex items-center justify-between">-
+                                            class="text-gray-600 hover:text-green-900 flex items-center justify-between">-
                                             Histórico</a>
                                     </li>
                                 @endcan
@@ -231,7 +263,7 @@
                 @endcanany
 
                 <li class="relative nav_list">
-                    <a href="#/" class="flex items-center gap-2 text-gray-500 hover:text-green-900 dark:hover:text-white">
+                    <a href="#/" class="flex items-center gap-2 text-gray-500 hover:text-green-900">
                         <span class="flex items-center gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -250,7 +282,7 @@
                 </li>
 
                 <li class="relative nav_list">
-                    <a href="#/" class="flex items-center gap-2 text-gray-500 hover:text-green-900 dark:hover:text-white">
+                    <a href="#/" class="flex items-center gap-2 text-gray-500 hover:text-green-900">
                         <span class="flex items-center gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -267,40 +299,40 @@
                         </svg>
                     </a>
 
-                    <div class="navigate_tab text-xs xl:text-sm dark:dark_bg">
+                    <div class="navigate_tab">
                         <ul class="md:p-0 md:w-52">
                             <li class="ps-2 p-2">
                                 <a href="{{ route('aditivos') }}"
-                                    class="text-gray-600 dark:text-gray-500 hover:text-green-900 dark:hover:text-white flex items-center justify-between">-
+                                    class="text-gray-600 hover:text-green-900 flex items-center justify-between">-
                                     Aditivos</a>
                             </li>
                             <li class="ps-2 p-2">
                                 <a href="{{ route('clientes') }}"
-                                    class="text-gray-600 dark:text-gray-500 hover:text-green-900 dark:hover:text-white flex items-center justify-between">-
+                                    class="text-gray-600 hover:text-green-900 flex items-center justify-between">-
                                     Clientes</a>
                             </li>
                             <li class="ps-2 p-2">
                                 <a href="{{ route('solicitudes') }}"
-                                    class="text-gray-600 dark:text-gray-500 hover:text-green-900 dark:hover:text-white flex items-center justify-between">-
+                                    class="text-gray-600 hover:text-green-900 flex items-center justify-between">-
                                     Movimientos</a>
                             </li>
                             @can('view', App\Models\User::class)
                                 <li class="ps-2 p-2">
                                     <a href="{{ route('usuarios') }}"
-                                        class="text-gray-600 dark:text-gray-500 hover:text-green-900 dark:hover:text-white flex items-center justify-between">-
+                                        class="text-gray-600 hover:text-green-900 flex items-center justify-between">-
                                         Usuarios</a>
                                 </li>
                             @endcan
-                            {{-- <li class="ps-2 p-2">
+                            <li class="ps-2 p-2">
                                 <a href="{{ route('yacimientos') }}"
-                                    class="text-gray-600 dark:text-gray-500 hover:text-green-900 dark:hover:text-white flex items-center justify-between">-
+                                    class="text-gray-600 hover:text-green-900 flex items-center justify-between">-
                                     Yacimientos</a>
                             </li>
                             <li class="ps-2 p-2">
                                 <a href="{{ route('permisos') }}"
-                                    class="text-gray-600 dark:text-gray-500 hover:text-green-900 dark:hover:text-white flex items-center justify-between">-
+                                    class="text-gray-600 hover:text-green-900 flex items-center justify-between">-
                                     Permisos</a>
-                            </li> --}}
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -337,10 +369,8 @@
 
 </html>
 @vite('resources/js/bootstrap.bundle.min.js')
-<script src="{{ asset('js/darkmode.js') }}"></script>
 
 <script src="{{ asset('js/alerts.js') }}"></script>
-
 
 <script>
     const btn_menu = document.getElementById('btn_menu');
@@ -384,4 +414,5 @@
             nav_tab_profile.style.display = 'none';
         }
     })
+
 </script>

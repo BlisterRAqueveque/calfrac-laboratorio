@@ -5,19 +5,19 @@
 @endsection
 
 @section('contenido')
-    <section class="container_mod pt-10 md:pt-3">
-        <p class="font-bold uppercase text-sm xl:text-md">Histórico de Solicitudes</p>
+    <section class="container_mod pt-10 md:pt-5">
+        <p class="font-bold uppercase text-sm xl:text-md dark:text-gray-200 mb-2">Histórico de Solicitudes</p>
         <div class="flex flex-col md:flex-row gap-3 text-xs xl:text-sm"> <!-- Panel de Ventanas -->
 
-            <article class="bg-white shadow-sm border rounded-md p-3 w-full">
+            <article class="dark:tab_bg bg-white shadow-sm border dark:border-gray-800 rounded-md p-3 w-full">
                 <div class="flex justify-between">
                     <div class="flex flex-col">
-                        <p class="font-medium text-gray-700">Total de Solicitudes</p>
-                        <span class="fw-bold">413</span>
-                        <small><span class="fw-bold" [style.color]="color">45 creadas</span> | Este mes</small>
+                        <p class="font-medium text-gray-700 dark:text-gray-400">Total de Solicitudes</p>
+                        <span class="fw-bold dark:text-white">413</span>
+                        <small class="dark:text-gray-400"><span class="fw-bold dark:text-white" [style.color]="color">45 creadas</span> | Este mes</small>
                     </div>
-                    <span class="bg-blue-200 w-10 h-10 rounded-full">
-                        <svg class="w-7 m-auto pt-1.5 text-sky-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    <span class="bg-blue-200 dark:bg-blue-600 dark:bg-opacity-50 w-10 h-10 rounded-full">
+                        <svg class="w-7 m-auto pt-1.5 text-sky-500 dark:text-sky-500" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 0 1-1.125-1.125v-3.75ZM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 0 1-1.125-1.125v-8.25ZM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 0 1-1.125-1.125v-2.25Z" />
@@ -26,14 +26,14 @@
                 </div>
             </article>
 
-            <article class="bg-white shadow-sm border rounded-md p-3 w-full">
+            <article class="dark:tab_bg bg-white dark:border-gray-800 shadow-sm border rounded-md p-3 w-full">
                 <div class="flex justify-between">
                     <div class="flex flex-col">
-                        <p class="font-medium text-gray-700">Solicitudes Pendientes de Respuesta</p>
-                        <span class="fw-bold">153</span>
-                        <small><span class="fw-bold" [style.color]="color">5 nuevos</span> | Hoy</small>
+                        <p class="font-medium text-gray-700 dark:text-gray-400">Solicitudes Pendientes de Respuesta</p>
+                        <span class="fw-bold dark:text-whit">153</span>
+                        <small class="dark:text-gray-400"><span class="fw-bold dark:text-white" [style.color]="color">5 nuevos</span> | Hoy</small>
                     </div>
-                    <span class="bg-orange-200 w-10 h-10 rounded-full">
+                    <span class="bg-orange-200 dark:bg-orange-500 dark:text-orange-400 dark:bg-opacity-50 w-10 h-10 rounded-full">
                         <svg class="w-7 m-auto pt-1.5 text-orange-300" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -43,16 +43,16 @@
                 </div>
             </article>
 
-            <article class="bg-white shadow-sm border rounded-md p-3 w-full">
+            <article class="dark:tab_bg bg-white dark:border-gray-800 shadow-sm border rounded-md p-3 w-full">
                 <div class="flex justify-between">
-                    <div class="flex flex-col">
-                        <p class="font-medium text-gray-700">Solicitudes Completadas</p>
-                        <span class="fw-bold">43</span>
-                        <small><span class="fw-bold" [style.color]="color">2 completadas</span> | Hoy</small>
+                    <div class="flex flex-col gap-2">
+                        <p class="font-medium text-gray-700 dark:text-gray-400">Solicitudes Completadas</p>
+                        <span class="fw-bold dark:text-white">43</span>
+                        <small class="dark:text-gray-400"><span class="fw-bold dark:text-white" [style.color]="color">2 completadas</span> | Hoy</small>
                     </div>
-                    <span class="bg-green-200 w-10 h-10 rounded-full">
+                    <span class="bg-green-200 dark:bg-green-500 dark:bg-opacity-50 w-10 h-10 rounded-full">
 
-                        <svg class="w-7 m-auto pt-1.5 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        <svg class="w-7 m-auto pt-1.5 text-green-600 dark:text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -62,14 +62,14 @@
                 </div>
             </article>
 
-            <article class="bg-white shadow-sm border rounded-md p-3 w-full">
+            <article class="dark:tab_bg bg-white dark:border-gray-800 shadow-sm border rounded-md p-3 w-full">
                 <div class="flex justify-between">
-                    <div class="flex flex-col">
-                        <p class="font-medium text-gray-700">Solicitudes Eliminadas / Canceladas</p>
-                        <span class="fw-bold">43</span>
-                        <small><span class="fw-bold" [style.color]="color">1 eliminada</span> | Hoy</small>
+                    <div class="flex flex-col gap-2">
+                        <p class="font-medium text-gray-700 dark:text-gray-400">Solicitudes Eliminadas / Canceladas</p>
+                        <span class="fw-bold dark:text-white">43</span>
+                        <small class="dark:text-gray-400"><span class="fw-bold dark:text-white" [style.color]="color">1 eliminada</span> | Hoy</small>
                     </div>
-                    <span class="bg-red-200 w-10 h-10 rounded-full">
+                    <span class="bg-red-200 dark:bg-red-600 dark:bg-opacity-50 w-10 h-10 rounded-full">
                         <svg class="w-7 m-auto pt-1.5 text-red-400" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -87,14 +87,14 @@
             </div>
         @endif
 
-        <div class="card mt-4">
-            <div class="card-header bg-white p-3 flex flex-col md:flex-row items-center justify-between">
-                <p class="mb-0 font-bold uppercase text-xs xl:text-sm">
+        <div class="card border dark:border-none mt-4">
+            <div class="card-header dark:card-bg-head bg-white p-3 flex flex-col md:flex-row items-center justify-between">
+                <p class="mb-0 font-bold uppercase text-xs xl:text-sm dark:text-gray-300">
                     Todas las Solicitudes
                 </p>
                 @can('create', App\Models\Solicitud::class)
                     <a href="{{ route('solicitud.create.show') }}"
-                        class="flex gap-1 items-center text-xs xl:text-sm justify-center mt-2 md:mt-0 w-full md:w-auto bg-green-700 bg-opacity-60 text-white p-2 rounded-sm hover:shadow-md transition-all duration-75 font-bold cursor-pointer"
+                        class="flex gap-1 items-center text-xs xl:text-sm justify-center mt-2 md:mt-0 w-full md:w-auto bg-green-700 bg-opacity-60 dark:bg-opacity-50 dark:text-green-500 dark:hover:text-gray-300 text-white p-2 rounded-sm hover:shadow-md transition-all duration-75 font-bold cursor-pointer"
                         style="text-decoration: none">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-3 h-3">
@@ -104,17 +104,17 @@
                 @endcan
             </div>
 
-            <div class="card-body p-0">
+            <div class="card-body dark:tab_bg p-0">
                 <div class="row p-3">
                     <div class="col-xs-12 col-md-4 my-2">
-                        <input type="text" class="form-control sz p-2 " style="background-color: #f3f9f5; border: none;"
-                            placeholder="Buscar por solicitudes">
+                        <input type="text" class="form-control sz p-2 bg-gray-50 border-none dark:inp_bg_2"
+                            placeholder="Buscar por solicitud">
                     </div>
                     <div class="col-xs-12 col-md-4 my-2">
-                        <input type="date" class="form-control sz p-2 " style="background-color: #f3f9f5; border: none;">
+                        <input type="date" class="form-control sz p-2 dark:inp_bg_2 bg-gray-50  dark:text-gray-400 border-none">
                     </div>
                     <div class="col-xs-12 col-md-4 my-2">
-                        <select class="form-select sz p-2" style="background-color: #f3f9f5; border: none;">
+                        <select class="form-select sz p-2 dark:inp_bg_2 dark:text-gray-400 bg-gray-50 border-none">
                             <option value="">-- Todo --</option>
                         </select>
                     </div>
@@ -122,7 +122,7 @@
 
                 <div class="text-gray-500 text-xs xl:text-sm overflow-x-scroll md:overflow-x-hidden">
                     <table class="w-full">
-                        <thead style="background-color: #f3f9f5">
+                        <thead class="dark:card-bg-head" style="background-color: #f3f9f5">
                             <th class="p-3">#ID</th>
                             <th class="p-3">Tipo de Solicitud</th>
                             <th class="p-3">Fecha de Solicitud</th>
@@ -162,14 +162,6 @@
                                                             d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                                                     </svg>
                                                 </a>
-                                                {{-- <button>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                        class="w-4 h-4">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                                                    </svg>
-                                                </button> --}}
                                                 <button>
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                         viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -193,7 +185,7 @@
                                         </td>
                                     @else
                                         <td class="p-3 w-72 md:w-96">
-                                            <div class="table_btn table_btn_pendiente">
+                                            <div class="table_btn table_btn_pendiente dark:bg-gray-700">
                                                 <div class="w-2 h-2 rounded-full point_pendiente"></div>
                                                 Sin ensayo asignado
                                             </div>
@@ -207,13 +199,13 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <div class="flex gap-3 justify-end p-2 px-4">
+                    {{-- <div class="flex gap-3 justify-end p-2 px-4">
                         <button>Anterior</button>
                         <select name="" id="" class="form-control sz p-2 max-w-16 text-center">
                             <option value="">1</option>
                         </select>
                         <button>Siguiente</button>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

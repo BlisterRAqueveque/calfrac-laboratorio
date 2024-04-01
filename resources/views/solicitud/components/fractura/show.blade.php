@@ -32,10 +32,13 @@
                 margin-top: 15px
             }
         }
-    </style>
 
-    <section class="p-2 pb-0 mb-0 relative shadow-sm"
-        style="background-color: #fdf4e5; width: 90%; margin: 0 auto; margin-top: 1px;">
+        .section_bg {
+            background-color: #fdf4e5;
+        }
+    </style>
+{{-- style="background-color: #fdf4e5; width: 90%; margin: 0 auto; margin-top: 1px;" --}}
+    <section class="p-2 pb-0 mb-0 relative shadow-sm section_bg dark:bg-blue-800 dark:bg-opacity-10" style="width: 90%; margin: 0 auto; margin-top: 1px;">
         <section class="p-2 mx-auto pb-0 section_solicitud" style="width: 97%;">
             <div class="flex gap-3">
                 <div class="flex justify-center items-center w-16 h-16 rounded-full bg-gray-200">
@@ -47,21 +50,21 @@
                 </div>
                 <div class="flex flex-col">
                     <div class="flex flex-col md:flex-row md:gap-4">
-                        <span class="text-md xl:text-xl flex items-center gap-3 font-bold text-gray-700">Solicitud de
+                        <span class="text-md xl:text-xl flex items-center gap-3 font-bold text-gray-700 dark:text-white">Solicitud de
                             Fractura -
                             #{{ $solicitud->id }}
                             @php
                                 switch ($solicitud->estado->id) {
                                     case '1':
                                         $estado = $solicitud->estado->nombre;
-                                        $clase = 'estado_pendiente';
+                                        $clase = 'bg-blue-300 dark:bg-blue-500 dark:bg-opacity-50 dark:text-sky-200';
                                         break;
                                     case '2':
-                                        $clase = 'estado_aprobada';
+                                        $clase = 'bg-green-300 dark:bg-green-500 dark:bg-opacity-50 dark:text-green-200';
                                         $estado = $solicitud->estado->nombre;
                                         break;
                                     case '3':
-                                        $clase = 'estado_finalizada';
+                                        $clase = 'bg-green-300 dark:bg-green-500 dark:bg-opacity-50 dark:text-green-200';
                                         $estado = $solicitud->estado->nombre;
                                         break;
                                 }
@@ -87,7 +90,7 @@
                         </small>
                     </div>
                     <div class="flex flex-col mt-2 md:flex-row text-xs md:text-sm md:items-center gap-3 md:gap-10">
-                        <article class="flex items-center gap-1">
+                        <article class="flex items-center gap-1 dark:text-white">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-4 h-4">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -96,47 +99,46 @@
                             {{ $solicitud->user->nombre }} {{ $solicitud->user->apellido }}
                         </article>
 
-                        <article class="flex items-center gap-1">
+                        <article class="flex items-center gap-1 dark:text-white">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-4 h-4">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
                             </svg>
-                            Fecha de Carga: <b class="text-gray-700">{{ $solicitud->created_at->format('d') }} de
+                            Fecha de Carga: <b class="text-gray-700 dark:text-gray-300">{{ $solicitud->created_at->format('d') }} de
                                 {{ $solicitud->created_at->format('M') }}, {{ $solicitud->created_at->format('Y') }}</b>
                         </article>
-
-                        <article class="flex items-center gap-1">
+                        <article class="flex items-center gap-1 dark:text-white">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-4 h-4">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M9 6.75V15m6-6v8.25m.503 3.498 4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 0 0-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0Z" />
                             </svg>
-                            Locación: <b class="text-gray-700">{{ $solicitud->locacion }}</b>
+                            Locación: <b class="text-gray-700 dark:text-gray-300">{{ $solicitud->locacion }}</b>
                         </article>
                     </div>
 
                     <div class="flex mt-2 text-xs md:text-sm items-center gap-10">
-                        <article class="flex items-center gap-1">
+                        <article class="flex items-center gap-1 dark:text-white">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-4 h-4">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
                             </svg>
 
-                            Última edición: <b>{{ $solicitud->updated_at->format('d') }} de
+                            Última edición: <b class="text-gray-700 dark:text-gray-300">{{ $solicitud->updated_at->format('d') }} de
                                 {{ $solicitud->updated_at->format('M') }}, {{ $solicitud->updated_at->format('Y') }}</b>
                         </article>
                     </div>
 
                     <div class="flex flex-col md:flex-row mt-2 text-xs md:text-sm md:items-center gap-2 md:gap-10">
 
-                        <article class="flex items-center gap-1">
+                        <article class="flex items-center gap-1 dark:text-white">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-4 h-4">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                             </svg>
-                            Solicitud Aprobada: <b class="text-gray-700">
+                            Solicitud Aprobada: <b class="text-gray-700 dark:text-gray-300">
                                 @if (!$solicitud->aprobada)
                                     En espera
                                 @else
@@ -148,12 +150,12 @@
                         </article>
 
                         @if ($solicitud->ensayo_asignado_id)
-                            <article class="flex items-center gap-1">
+                            <article class="flex items-center gap-1 dark:text-white">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                                 </svg>
-                                Ensayo Asignado: <b class="text-gray-700"> #{{ $solicitud->ensayo_asignado_id }}</b>
+                                Ensayo Asignado: <b class="text-gray-700 dark:text-gray-300"> #{{ $solicitud->ensayo_asignado_id }}</b>
                             </article>
                         @endif
                     </div>
@@ -166,24 +168,25 @@
             <ul role="tablist" aria-owns="nav-tab1 nav-tab2 nav-tab3 nav-tab4" class="nav nav-tabs text-sm md:text-md"
                 id="nav-tab-with-nested-tabs" style="z-index: 999">
                 <li class="nav-item w-full text-center md:w-auto" role="presentation">
-                    <a class="nav-link nav_tab_mod active" aria-current="page" id="nav-tab1" href="#tab1-content"
+                    <a class="nav-link nav_tab_mod text-violet-800 dark:text-violet-400 active" aria-current="page" id="nav-tab1" href="#tab1-content"
                         data-bs-toggle="tab" data-bs-target="#tab1-content" role="tab" aria-controls="tab1-content"
                         aria-selected="true">Información de la Solicitud</a>
                 </li>
                 @if ($solicitud->aprobada == 1)
                     <li class="nav-item w-full text-center md:w-auto" role="presentation">
-                        <a class="nav-link nav_tab_mod" id="nav-tab2" data-bs-toggle="tab" href="#tab2-content"
-                            data-bs-target="#tab2-content" role="tab" aria-controls="tab2-content"
-                            aria-selected="false">Ensayos</a>
+                        <a class="nav-link nav_tab_mod text-violet-800 dark:text-violet-400" aria-current="page" id="nav-tab1" href="#tab2-content"
+                        data-bs-toggle="tab" data-bs-target="#tab2-content" role="tab" aria" id="nav-tab2" data-bs-toggle="tab"
+                             role="tab">Ensayos</a>
                     </li>
                 @else
                     <div class="flex flex-col md:flex-row text-center items-center">
                         <li data-tooltip-target="tooltip-default"
                             class="nav-item w-full text-center md:w-auto cursor-not-allowed"
                             tooltip="Debe aprobar la solicitud para asignar un ensayo" role="presentation">
-                            <a class="nav-link nav_tab_mod" aria-selected="false">Ensayos </a>
+                            <a class="nav-link nav_tab_mod text-violet-800 dark:text-violet-400 active" aria-current="page" id="nav-tab1" href="#tab1-content"
+                            data-bs-toggle="tab" data-bs-target="#tab1-content" role="tab" aria-selected="false">Ensayos </a>
                         </li>
-                        <small class="text-gray-700">(Debe aprobar la solicitud para asignar un ensayo)</small>
+                        <small class="text-gray-700 dark:text-gray-300">(Debe aprobar la solicitud para asignar un ensayo)</small>
                     </div>
                 @endif
             </ul>
@@ -193,7 +196,7 @@
     </section>
 
     <div class="tab-content" id="nav-tabs-content">
-        <div class="container_mod bg-white p-3 mt-4 shadow-sm tab-pane fade show active" id="tab1-content"
+        <div class="container_mod border dark:border-none bg-white dark:tab_bg p-3 mt-4 shadow-sm tab-pane fade show active" id="tab1-content"
             role="tabpanel" aria-labelledby="nav-tab1">
 
             @if (session('success'))
@@ -205,11 +208,11 @@
 
             <div class="flex items-center justify-between">
                 <div class="flex w-full items-center justify-between flex-col md:flex-row">
-                    <p class="m-0 font-bold text-lg tracking-wide">Información General</p>
+                    <p class="m-0 font-bold text-lg tracking-wide dark:text-gray-300">Información General</p>
                     @if (!$solicitud->aprobada)
                         <div class="flex gap-3">
                             <button
-                                class="bg-cyan-600 text-white font-bold tracking-wide px-3 py-1 rounded-sm flex gap-2 hover:bg-cyan-700 transition-all duration-200"
+                                class="bg-cyan-600 dark:bg-blue-700 dark:bg-opacity-50 dark:text-blue-500 text-white font-bold tracking-wide px-3 py-1 rounded-sm flex gap-2 hover:bg-cyan-700 transition-all duration-200"
                                 id="btnHabilitarEdicion">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -219,7 +222,7 @@
                                 Habilitar Edición
                             </button>
                             <button
-                                class="bg-red-400 text-white font-bold tracking-wide px-3 py-1 rounded-sm flex gap-2 hover:bg-red-500 transition-all duration-200 hidden"
+                                class="bg-red-400 dark:bg-red-700 dark:bg-opacity-50 dark:text-red-600 text-white font-bold tracking-wide px-3 py-1 rounded-sm flex gap-2 hover:bg-red-500 transition-all duration-200 hidden"
                                 id="btnDeshabilitarEdicion">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -237,11 +240,11 @@
                 <input type="hidden" value="{{ $solicitud->id }}" name="solicitud_id">
                 <div class="row mt-3"> <!-- Información General -->
                     <div class="col-xs-12 col-md-6 my-2">
-                        <label for="proyecto_number" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Solo
+                        <label for="proyecto_number" class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Solo
                             uso
                             de
                             Laboratorio - Nº de Proyecto</label>
-                        <input type="number" placeholder="Ingrese el número" class="form-control sz p-2"
+                        <input type="number" placeholder="Ingrese el número" class="form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 sz"
                             name="proyecto_number" id="proyecto_number" min="0"
                             value="{{ $solicitud->proyecto_number }}" readonly>
                         @error('proyecto_number')
@@ -250,9 +253,9 @@
                     </div>
 
                     <div class="col-xs-12 col-md-6 my-2">
-                        <label for="servicio_number" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Nº
+                        <label for="servicio_number" class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Nº
                             Revisión de Solicitud de Servicio</label>
-                        <input type="number" placeholder="Ingrese el número" class="form-control sz p-2"
+                        <input type="number" placeholder="Ingrese el número" class="form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 sz"
                             name="servicio_number" id="servicio_number" min="0"
                             value="{{ $solicitud->servicio_number }}" readonly>
                         @error('servicio_number')
@@ -262,8 +265,8 @@
 
                     <div class="col-xs-12 col-md-3 my-2">
                         <label for="cliente"
-                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Cliente</label>
-                        <input type="text" placeholder="Ingrese el cliente" class="form-control sz p-2"
+                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Cliente</label>
+                        <input type="text" placeholder="Ingrese el cliente" class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
                             name="cliente" id="cliente" value="{{ $solicitud->cliente }}" readonly>
                         @error('cliente')
                             <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
@@ -271,9 +274,9 @@
                     </div>
 
                     <div class="col-xs-12 col-md-2 my-2">
-                        <label for="locacion" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Yacimiento /
+                        <label for="locacion" class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Yacimiento /
                             Locación</label>
-                        <input type="text" placeholder="Ingrese el yacimiento / locación" class="form-control sz p-2"
+                        <input type="text" placeholder="Ingrese el yacimiento / locación" class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
                             name="locacion" id="locacion" value="{{ $solicitud->locacion }}" readonly>
                         @error('locacion')
                             <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
@@ -282,8 +285,8 @@
 
                     <div class="col-xs-12 col-md-2 my-2">
                         <label for="programa"
-                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Programa</label>
-                        <input type="text" placeholder="Ingrese el programa" class="form-control sz p-2"
+                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Programa</label>
+                        <input type="text" placeholder="Ingrese el programa" class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
                             name="programa" id="programa" value="{{ $solicitud->programa }}" readonly>
                         @error('programa')
                             <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
@@ -291,10 +294,10 @@
                     </div>
 
                     <div class="col-xs-12 col-md-2 my-2">
-                        <label for="fecha_solicitud" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha
+                        <label for="fecha_solicitud" class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Fecha
                             de
                             Solicitud</label>
-                        <input type="date" class="form-control sz p-2" name="fecha_solicitud" id="fecha_solicitud"
+                        <input type="date" class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2" name="fecha_solicitud" id="fecha_solicitud"
                             value="{{ $solicitud->fecha_solicitud->format('Y-m-d') }}" readonly>
                         @error('fecha_solicitud')
                             <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
@@ -302,9 +305,9 @@
                     </div>
 
                     <div class="col-xs-12 col-md-3 my-2">
-                        <label for="empresa" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Compañía /
+                        <label for="empresa" class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Compañía /
                             Empresa</label>
-                        <input type="text" placeholder="Ingrese la empresa" class="form-control sz p-2"
+                        <input type="text" placeholder="Ingrese la empresa" class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
                             name="empresa" id="empresa" value="{{ $solicitud->empresa }}" readonly>
                         @error('empresa')
                             <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
@@ -313,10 +316,10 @@
 
                     <div class="col-xs-12 col-md-2 my-2">
                         <label for="fecha_tratamiento"
-                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha
+                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Fecha
                             del
                             Tratamiento</label>
-                        <input type="date" class="form-control sz p-2" name="fecha_tratamiento"
+                        <input type="date" class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2" name="fecha_tratamiento"
                             id="fecha_tratamiento" value="{{ $solicitud->fecha_tratamiento }}" readonly>
                         @error('fecha_tratamiento')
                             <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
@@ -324,8 +327,8 @@
                     </div>
 
                     <div class="col-xs-12 col-md-2 my-2">
-                        <label for="pozo" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Pozo</label>
-                        <input type="text" class="form-control sz p-2" name="pozo" id="pozo"
+                        <label for="pozo" class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Pozo</label>
+                        <input type="text" class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2" name="pozo" id="pozo"
                             placeholder="Ingrese el Pozo" value="{{ $solicitud->pozo }}" readonly>
                         @error('pozo')
                             <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
@@ -333,9 +336,9 @@
                     </div>
 
                     <div class="col-xs-12 col-md-3 my-2">
-                        <label for="rep_compania" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Rep
+                        <label for="rep_compania" class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Rep
                             Compañía</label>
-                        <input type="text" class="form-control sz p-2" name="rep_compania" id="rep_compania"
+                        <input type="text" class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2" name="rep_compania" id="rep_compania"
                             placeholder="Rep Compañía" value="{{ $solicitud->rep_compania }}" readonly>
                         @error('rep_compania')
                             <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
@@ -343,10 +346,10 @@
                     </div>
 
                     <div class="col-xs-12 col-md-2 my-2">
-                        <label for="fecha_reporte" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha
+                        <label for="fecha_reporte" class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Fecha
                             del
                             Reporte</label>
-                        <input type="date" class="form-control sz p-2" name="fecha_reporte" id="fecha_reporte"
+                        <input type="date" class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2" name="fecha_reporte" id="fecha_reporte"
                             value="{{ $solicitud->fecha_reporte }}" readonly>
                         @error('fecha_reporte')
                             <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
@@ -354,9 +357,9 @@
                     </div>
 
                     <div class="col-xs-12 col-md-3 my-2">
-                        <label for="rep_venta" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Rep
+                        <label for="rep_venta" class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Rep
                             Ventas</label>
-                        <input type="text" class="form-control sz p-2" name="rep_venta" id="rep_venta"
+                        <input type="text" class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2" name="rep_venta" id="rep_venta"
                             placeholder="Rep Ventas" value="{{ $solicitud->rep_venta }}" readonly>
                         @error('rep_venta')
                             <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
@@ -364,9 +367,9 @@
                     </div>
 
                     <div class="col-xs-12 col-md-2 my-2">
-                        <label for="fecha_resultados" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha
+                        <label for="fecha_resultados" class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Fecha
                             Resultados</label>
-                        <input type="date" class="form-control sz p-2" name="fecha_resultados" id="fecha_resultados"
+                        <input type="date" class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2" name="fecha_resultados" id="fecha_resultados"
                             value="{{ $solicitud->fecha_resultados }}" readonly>
                         @error('fecha_resultados')
                             <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
@@ -375,8 +378,8 @@
 
                     <div class="col-xs-12 col-md-3 my-2">
                         <label for="equipo"
-                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Equipo</label>
-                        <input type="text" class="form-control sz p-2" name="equipo" id="equipo"
+                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Equipo</label>
+                        <input type="text" class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2" name="equipo" id="equipo"
                             placeholder="Ingrese el equipo" value="{{ $solicitud->equipo }}" readonly>
                         @error('equipo')
                             <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
@@ -385,8 +388,8 @@
 
                     <div class="col-xs-12 col-md-3 my-2">
                         <label for="servicio"
-                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Servicio</label>
-                        <input type="text" class="form-control sz p-2" name="servicio" id="servicio"
+                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Servicio</label>
+                        <input type="text" class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2" name="servicio" id="servicio"
                             placeholder="Ingrese el servicio" value="{{ $solicitud->servicio }}" readonly>
                         @error('servicio')
                             <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
@@ -395,9 +398,9 @@
 
                     <div class="col-xs-12 col-md-2 my-2">
                         <label for="reporte_lab_tall"
-                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Reporte
+                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Reporte
                             Laboratorio Tall</label>
-                        <input type="text" class="form-control sz p-2" name="reporte_lab_tall" id="reporte_lab_tall"
+                        <input type="text" class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2" name="reporte_lab_tall" id="reporte_lab_tall"
                             placeholder="Ingrese el reporte" value="{{ $solicitud->reporte_lab_tall }}" readonly>
                         @error('reporte_lab_tall')
                             <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
@@ -406,9 +409,9 @@
 
                     <div class="col-xs-12 col-md-2 my-2">
                         <label for="reporte_lab_lead"
-                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Reporte
+                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Reporte
                             Laboratorio Lead</label>
-                        <input type="text" class="form-control sz p-2" name="reporte_lab_lead" id="reporte_lab_lead"
+                        <input type="text" class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2" name="reporte_lab_lead" id="reporte_lab_lead"
                             placeholder="Ingrese el reporte" value="{{ $solicitud->reporte_lab_lead }}" readonly>
                         @error('reporte_lab_lead')
                             <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
@@ -416,19 +419,19 @@
                     </div>
                 </div>
 
-                <p class="m-0 mt-3 font-bold text-lg tracking-wide">Informacion del Pozo y Ensayos</p>
+                <p class="m-0 mt-3 font-bold text-lg tracking-wide dark:text-gray-300">Informacion del Pozo y Ensayos</p>
                 <div class="row mt-3">
                     <div class="col-xs-12 col-md-3 my-2">
-                        <label for="fluido" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Fluido del
+                        <label for="fluido" class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Fluido del
                             Reservorio</label>
-                        <input type="text" placeholder="Ingrese el fluido" class="form-control sz p-2" name="fluido"
+                        <input type="text" placeholder="Ingrese el fluido" class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2" name="fluido"
                             id="fluido" value="{{ $solicitud_fractura[0]->fluido ?? 'No Aplica' }}" readonly>
                     </div>
 
                     <div class="col-xs-12 col-md-3 my-2">
                         <label for="formacion"
-                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Formación</label>
-                        <input type="text" placeholder="Ingrese la formación" class="form-control sz p-2"
+                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Formación</label>
+                        <input type="text" placeholder="Ingrese la formación" class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
                             name="formacion" id="formacion"
                             value="{{ $solicitud_fractura[0]->formacion ?? 'No Aplica' }}" readonly>
                     </div>
@@ -436,14 +439,14 @@
                         <div class="row">
                             <div class="col-xs-12 col-md-6">
                                 <label for="bhst"
-                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">BHST</label>
-                                <input type="number" placeholder="Cº / Fº" class="form-control sz p-2" name="bhst"
+                                    class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">BHST</label>
+                                <input type="number" placeholder="Cº / Fº" class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2" name="bhst"
                                     id="bhst" value="{{ $solicitud_fractura[0]->bhst ?? 'No Aplica' }}" readonly>
                             </div>
                             <div class="col-xs-12 col-md-6">
                                 <label for="tipo_temp_bhst"
-                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo</label>
-                                <select name="tipo_temp_bhst" id="tipo_temp_bhst" class="form-select sz p-2" disabled>
+                                    class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Tipo</label>
+                                <select name="tipo_temp_bhst" id="tipo_temp_bhst" class="form-select sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2" disabled>
                                     <option value="">-- Tipo --</option>
                                     <option value="1"
                                         {{ $solicitud_fractura[0]->tipo_temp_bhst == 1 ? 'selected' : '' }}>Cº</option>
@@ -457,16 +460,16 @@
                         <div class="row">
                             <div class="col-xs-12 col-md-6">
                                 <label for="temp_ensayo"
-                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Temp.
+                                    class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Temp.
                                     Ensayo</label>
-                                <input type="number" placeholder="Cº / Fº" class="form-control sz p-2"
+                                <input type="number" placeholder="Cº / Fº" class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
                                     name="temp_ensayo" id="temp_ensayo"
                                     value="{{ $solicitud_fractura[0]->temp_ensayo ?? 'No Aplica' }}" readonly>
                             </div>
                             <div class="col-xs-12 col-md-6">
                                 <label for="tipo_temp_ensayo"
-                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo</label>
-                                <select name="tipo_temp_ensayo" id="tipo_temp_ensayo" class="form-select sz p-2"
+                                    class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Tipo</label>
+                                <select name="tipo_temp_ensayo" id="tipo_temp_ensayo" class="form-select sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
                                     disabled>
                                     <option value="">-- Tipo --</option>
                                     <option value="1"
@@ -478,11 +481,11 @@
                         </div>
                     </div>
                     <div class="col-12 my-2 text-center">
-                        <span class="w-full items-center m-0 text-xs xl:text-sm">¿Hay algún aditivo que no sea de Calfrac para ser
+                        <span class="w-full items-center m-0 text-xs xl:text-sm dark:text-gray-300">¿Hay algún aditivo que no sea de Calfrac para ser
                             usado
                             en
                             este proyecto?</span>
-                        <select name="" id="" class="form-select sz p-2 md:w-1/4 w-full" disabled>
+                        <select name="" id="" class="form-select sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 md:w-1/4 w-full" disabled>
                             <option value="">-- Seleccione --</option>
                             <option value="1">Si</option>
                             <option value="2">No</option>
@@ -490,24 +493,24 @@
                     </div>
 
                     <div class="col-xs-12 col-md-4 my-2">
-                        <label for="proveedor" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre del
+                        <label for="proveedor" class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Nombre del
                             Proveedor</label>
-                        <input type="text" placeholder="Ingrese el proveedor" class="form-control sz p-2"
+                        <input type="text" placeholder="Ingrese el proveedor" class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
                             name="proveedor" id="proveedor"
                             value="{{ $solicitud_fractura[0]->proveedor ?? 'No Aplica' }}" readonly>
                     </div>
                     <div class="col-xs-12 col-md-4 my-2">
-                        <label for="producto" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre del
+                        <label for="producto" class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Nombre del
                             Producto</label>
-                        <input type="text" placeholder="Ingrese el producto" class="form-control sz p-2"
+                        <input type="text" placeholder="Ingrese el producto" class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
                             name="producto" id="producto" value="{{ $solicitud_fractura[0]->producto ?? 'No Aplica' }}"
                             readonly>
                     </div>
                     <div class="col-xs-12 col-md-4 my-2">
                         <label for="concentracion"
-                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Concentración
+                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Concentración
                             a Ensayar</label>
-                        <input type="text" placeholder="Ingrese la concentración" class="form-control sz p-2"
+                        <input type="text" placeholder="Ingrese la concentración" class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
                             name="concentracion" id="concentracion"
                             value="{{ $solicitud_fractura[0]->concentracion ?? 'No Aplica' }}" readonly>
                     </div>
@@ -518,9 +521,9 @@
                 <div class="row mt-3"> <!-- Análisis Requerido -->
                     <div class="col-xs-12 col-md-3 my-2">
                         <label for="sistema_fluido"
-                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Compatibilidad con sistemas de
+                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Compatibilidad con sistemas de
                             fluidos</label>
-                        <select name="sistema_fluido" id="sistema_fluido" class="form-select sz p-2" disabled>
+                        <select name="sistema_fluido" id="sistema_fluido" class="form-select sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2" disabled>
                             <option value="">-- Seleccione --</option>
                             @foreach ($sistemas_fluidos as $e)
                                 @if ($e->id == $solicitud_fractura[0]->sistema_fluido_id)
@@ -534,9 +537,9 @@
 
                     <div class="col-xs-12 col-md-3 my-2">
                         <label for="analisis_microbial"
-                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Análisis
+                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Análisis
                             de Agua y Ensayo Microbial</label>
-                        <select name="analisis_microbial" id="analisis_microbial" class="form-select sz p-2" disabled>
+                        <select name="analisis_microbial" id="analisis_microbial" class="form-select sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2" disabled>
                             <option value="">-- Seleccione --</option>
                             @foreach ($analisis_microbial as $e)
                                 @if ($e->id == $solicitud_fractura[0]->analisis_microbial_id)
@@ -549,10 +552,10 @@
                     </div>
 
                     <div class="col-xs-12 col-md-3 my-2">
-                        <label for="agente_sosten" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Agente
+                        <label for="agente_sosten" class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Agente
                             de
                             Sostén</label>
-                        <select name="agente_sosten" id="agente_sosten" class="form-select sz p-2" disabled>
+                        <select name="agente_sosten" id="agente_sosten" class="form-select sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2" disabled>
                             <option value="">-- Seleccione --</option>
                             @foreach ($agente_sosten as $e)
                                 @if ($e->id == $solicitud_fractura[0]->agente_sosten_id)
@@ -565,9 +568,9 @@
                     </div>
 
                     <div class="col-xs-12 col-md-3 my-2">
-                        <label for="otros" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Otros
+                        <label for="otros" class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Otros
                             Análisis</label>
-                        <select name="otros" id="otros" class="form-select sz p-2" disabled>
+                        <select name="otros" id="otros" class="form-select sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2" disabled>
                             <option value="">-- Seleccione --</option>
                             @foreach ($otros_analisis as $e)
                                 @if ($e->id == $solicitud_fractura[0]->otro_analisis_id)
@@ -580,22 +583,22 @@
                     </div>
 
                     <div class="col-12 my-2">
-                        <label for="comentario" class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Comentario
+                        <label for="comentario" class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Comentario
                             /
                             Instrucciones</label>
-                        <textarea name="comentario" id="comentario" class="form-control sz p-2" rows="3"
+                        <textarea name="comentario" id="comentario" class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2" rows="3"
                             placeholder="Ingrese un comentario / instrucciones - Máximo 300 caracteres" readonly>{{ $solicitud_fractura[0]->comentario ?? 'No hubieron comentarios' }}</textarea>
                     </div>
                 </div> <!-- Análisis Requerido -->
 
-                <p class="m-0 mt-3 font-bold text-lg tracking-wide">Firmas de Autorización</p>
+                <p class="m-0 mt-3 font-bold text-lg tracking-wide dark:text-gray-300">Firmas de Autorización</p>
 
                 <div class="row mt-3">
                     <div class="col-xs-12 col-md-6 my-2">
                         <label for="firma_iniciado_por"
-                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre
+                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Nombre
                             <small>(Iniciado por)</small></label>
-                        <select name="firma_iniciado_por" id="firma_iniciado_por" class="form-select sz p-2" disabled>
+                        <select name="firma_iniciado_por" id="firma_iniciado_por" class="form-select sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2" disabled>
                             <option value="">-- Seleccione --</option>
                             @foreach ($users as $e)
                                 @if ($e->id == $solicitud_fractura[0]->firma_iniciado_por_id)
@@ -610,18 +613,18 @@
 
                     <div class="col-xs-12 col-md-6 my-2">
                         <label for="fecha_firma_iniciado_por"
-                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de la Firma
+                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Fecha de la Firma
                             <small>(*)</small></label>
                         <input type="date" name="fecha_firma_iniciado_por" id="fecha_firma_iniciado_por"
-                            class="form-control sz p-2" value="{{ $solicitud_fractura[0]->fecha_firma_iniciado_por }}"
+                            class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2" value="{{ $solicitud_fractura[0]->fecha_firma_iniciado_por }}"
                             readonly>
                     </div>
 
                     <div class="col-xs-12 col-md-6 my-2">
                         <label for="firma_servicios_tecnicos"
-                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre
+                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Nombre
                             <small>(Servicios Técnicos)</small></label>
-                        <select name="firma_servicios_tecnicos" id="firma_servicios_tecnicos" class="form-select sz p-2"
+                        <select name="firma_servicios_tecnicos" id="firma_servicios_tecnicos" class="form-select sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
                             disabled>
                             <option value="">-- Seleccione --</option>
                             @foreach ($users as $e)
@@ -637,18 +640,18 @@
 
                     <div class="col-xs-12 col-md-6 my-2">
                         <label for="fecha_firma_servicios_tecnicos"
-                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de la Firma
+                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Fecha de la Firma
                             <small>(*)</small></label>
                         <input type="date" name="fecha_firma_servicios_tecnicos" id="fecha_firma_servicios_tecnicos"
-                            class="form-control sz p-2"
+                            class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
                             value="{{ $solicitud_fractura[0]->fecha_firma_servicios_tecnicos }}" readonly>
                     </div>
 
                     <div class="col-xs-12 col-md-6 my-2">
                         <label for="firma_laboratorio"
-                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre
+                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Nombre
                             <small>(Laboratorio)</small></label>
-                        <select name="firma_laboratorio" id="firma_laboratorio" class="form-select sz p-2" disabled>
+                        <select name="firma_laboratorio" id="firma_laboratorio" class="form-select sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2" disabled>
                             <option value="">-- Seleccione --</option>
                             @foreach ($users as $e)
                                 @if ($e->id == $solicitud_fractura[0]->firma_laboratorio_id)
@@ -663,21 +666,21 @@
 
                     <div class="col-xs-12 col-md-6 my-2">
                         <label for="fecha_firma_laboratorio"
-                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de la Firma
+                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Fecha de la Firma
                             <small>(*)</small></label>
                         <input type="date" name="fecha_firma_laboratorio" id="fecha_firma_laboratorio"
-                            class="form-control sz p-2" value="{{ $solicitud_fractura[0]->fecha_firma_laboratorio }}"
+                            class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2" value="{{ $solicitud_fractura[0]->fecha_firma_laboratorio }}"
                             readonly>
                     </div>
                 </div>
 
-                <p class="m-0 mt-3 font-bold text-lg tracking-wide">Reconocimiento</p>
+                <p class="m-0 mt-3 font-bold text-lg tracking-wide dark:text-gray-300">Reconocimiento</p>
                 <div class="row mt-3">
                     <div class="col-xs-12 col-md-6 my-2">
                         <label for="firma_reconocimiento"
-                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre
+                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Nombre
                             <small>(Reconocimiento)</small></label>
-                        <select name="firma_reconocimiento" id="firma_reconocimiento" class="form-select sz p-2"
+                        <select name="firma_reconocimiento" id="firma_reconocimiento" class="form-select sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
                             disabled>
                             <option value="">-- Seleccione --</option>
                             @foreach ($users as $e)
@@ -695,10 +698,10 @@
 
                     <div class="col-xs-12 col-md-6 my-2">
                         <label for="fecha_firma_reconocimiento"
-                            class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de la Firma
+                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Fecha de la Firma
                             <small>(*)</small></label>
                         <input type="date" name="fecha_firma_reconocimiento" id="fecha_firma_reconocimiento"
-                            class="form-control sz p-2" value="{{ $solicitud_fractura[0]->fecha_firma_reconocimiento }}"
+                            class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2" value="{{ $solicitud_fractura[0]->fecha_firma_reconocimiento }}"
                             readonly>
                     </div>
                 </div>
@@ -711,7 +714,7 @@
             </form>
 
             @if ($solicitud->fundamento->count() > 0)
-                <p class="m-0 mt-3 font-bold text-lg tracking-wide">Sector de Comentarios</p>
+                <p class="m-0 mt-3 font-bold text-lg tracking-wide dark:text-gray-300">Sector de Comentarios</p>
 
                 <div class="row md:w-1/2 mt-1">
                     @foreach ($solicitud->fundamento as $c)
@@ -729,14 +732,14 @@
                             @endif
                             <div class="text-sm flex-1">
 
-                                <p class="m-0 flex flex-col md:flex-row md:gap-2 font-bold">
+                                <p class="m-0 flex flex-col md:flex-row md:gap-2 font-bold dark:text-gray-300">
                                     {{ $c->user_fundamento->nombre }}
                                     {{ $c->user_fundamento->apellido }} <small class="text-gray-400"> Realizó una edición
                                         el día {{ $c->created_at->format('d') }}
                                         {{ $c->created_at->format('M') }}
                                         {{ $c->created_at->format('Y') }} -
                                         {{ $c->created_at->format('H:i') }}</small></p>
-                                <p class="mb-0">
+                                <p class="mb-0 dark:text-gray-400">
                                     {{ $c->fundamento }}
                                 </p>
 
@@ -748,13 +751,13 @@
                                                     class="rounded-full object-cover w-12 h-12">
                                             </div>
                                             <div class="text-sm flex flex-col">
-                                                <p class="m-0 font-bold">{{ $c->user_rta->nombre }}
+                                                <p class="m-0 font-bold dark:text-gray-300">{{ $c->user_rta->nombre }}
                                                     {{ $c->user_rta->apellido }} <small
                                                         class="text-gray-400">{{ $c->updated_at->format('d') }}
                                                         {{ $c->updated_at->format('M') }}
                                                         {{ $c->updated_at->format('Y') }} -
                                                         {{ $c->updated_at->format('H:i') }}</small></p>
-                                                <p class="mb-0">
+                                                <p class="mb-0 dark:text-gray-400">
                                                     {{ $c->respuesta }}
                                                 </p>
                                             </div>
@@ -809,7 +812,7 @@
             <!-- Aprobar la solicitud -->
             @if ($solicitud->aprobada)
                 <div
-                    class="mt-3 flex items-center justify-center flex-col md:flex-row gap-3 text-center bg-green-200 border-1 p-1 rounded-sm w-full md:w-1/2 mx-auto border-green-500 text-green-800">
+                    class="mt-3 flex items-center justify-center flex-col md:flex-row gap-3 text-center bg-green-200 dark:bg-green-600 dark:bg-opacity-10 border-1 p-1 rounded-sm w-full md:w-1/2 mx-auto border-green-500 text-green-800 dark:text-green-600">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6 ">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -827,9 +830,9 @@
                             @csrf
                             <input type="hidden" name="solicitud_id" value="{{ $solicitud->id }}">
                             <input type="button" id="btnAprobarSolicitud" value="Aprobar Solicitud"
-                                class="bg-emerald-400 text-white font-bold tracking-wide px-3 py-1 rounded-sm flex gap-2 hover:bg-emerald-500 transition-all duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed">
+                                class="bg-emerald-400 dark:bg-emerald-600 dark:bg-opacity-40 text-white font-bold tracking-wide px-3 py-1 rounded-sm flex gap-2 hover:bg-emerald-500 dark:hover:bg-emerald-600 transition-all duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed">
                         </form>
-                        <p class="mb-0 flex flex-col text-center md:flex-row items-center gap-2 text-gray-600 text-sm">
+                        <p class="mb-0 flex flex-col text-center md:flex-row items-center gap-2 text-gray-600 dark:text-gray-300 text-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.8" stroke="currentColor" class="w-5 h-5">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -885,37 +888,5 @@
 
                 })
             }
-        </script>
-
-        <!-- Función para agregar una edición -->
-        <script>
-            // const submitFundamentoEdicion = document.getElementById('submitFundamentoEdicion');
-
-            // submitFundamentoEdicion.addEventListener('click', e => {
-            //     e.preventDefault();
-
-            //     let form = new FormData(document.getElementById('form_edicion'))
-            //     confirmAlert('¿Está seguro de realizar la edición?',
-            //         'Una vez que se realice la edición se generará un comentario', 1, 'Editar Solicitud').then((
-            //         confirmed) => {
-
-            //         if (confirmed) {
-            //             fetch("{{ route('solicitud.update') }}", {
-            //                     method: 'POST',
-            //                     body: form
-            //                 }).then((response) => response.json())
-            //                 .then((data) => {
-            //                     console.log(data);
-            //                     if (data) {
-            //                         successAlert('¡Edición Exitosa!', 'La edición se realizó correctamente')
-            //                             .then((confirmed) => {
-            //                                 window.location.reload();
-            //                             })
-            //                     }
-            //                 })
-            //         }
-            //     })
-
-            // })
         </script>
     @endsection

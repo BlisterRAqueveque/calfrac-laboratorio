@@ -1,6 +1,6 @@
-<div class="container_mod bg-white p-3 mt-4 shadow-sm tab-pane fade" id="tab2-content" role="tabpanel"
+<div class="container_mod border dark:border-none bg-white dark:tab_bg p-3 mt-4 shadow-sm tab-pane fade" id="tab2-content" role="tabpanel"
     aria-labelledby="nav-tab2">
-    <p class="m-0 mt-1 font-bold text-lg tracking-wide">Formulario para crear un Ensayo</p>
+    <p class="m-0 mt-1 font-bold text-lg tracking-wide dark:text-gray-300">Formulario para crear un Ensayo</p>
 
     @include('ensayo.components.create.form')
     

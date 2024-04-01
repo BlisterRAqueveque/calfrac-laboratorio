@@ -6,11 +6,11 @@ let div_row, article, label, input, select, opt, div_flex;
 btnAddAditivo.addEventListener("click", (e) => {
   e.preventDefault();
   let aux = count;
-  div_row = el("div.row rounded-md p-3 bg-gray-50 border border-gray-100 mb-3");
+  div_row = el("div.row mt-2 rounded-md p-3 bg-gray-50 border mb-3 dark:card-bg-head dark:border-none");
   article = el("article.col-xs-12.col-md-1 my-2");
-  label = el("label.font-semibold tracking-wide sz", "Orden");
+  label = el("label.font-semibold tracking-wide sz dark:text-gray-300", "Orden");
   input = el(
-    "input.form-control orden sz text-center placeholder:text-gray-300 placeholder:font-light",
+    "input.form-control orden sz text-center placeholder:text-gray-300 placeholder:font-light p-2 dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none",
     { value: aux, disabled: "true" }
   );
 
@@ -20,8 +20,8 @@ btnAddAditivo.addEventListener("click", (e) => {
   mount(div_row, article);
 
   article = el("article.col-xs-12.col-md-3 my-2");
-  label = el("label.font-semibold tracking-wide sz", "Material");
-  select = el("select.form-select sz", {
+  label = el("label.font-semibold tracking-wide sz dark:text-gray-300", "Material");
+  select = el("select.form-select sz p-2 dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none", {
     name: `aditivos[${aux}][material]`,
     id: "material",
   });
@@ -41,13 +41,13 @@ btnAddAditivo.addEventListener("click", (e) => {
 
   // Inserta el input de 'Concentración'
   article = el("article.col-xs-12.col-md-3 my-2");
-  label = el("label.font-semibold tracking-wide sz", "Concentración");
+  label = el("label.font-semibold tracking-wide sz dark:text-gray-300", "Concentración");
   div_flex = el("div.flex gap-3");
   input = el(
-    "input.form-control sz text-center placeholder:text-gray-300 placeholder:font-light",
+    "input.form-control sz text-center placeholder:text-gray-300 placeholder:font-light p-2 dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none",
     { placeholder: "00.00", min: "0", name: `aditivos[${aux}][concentracion]` }
   );
-  select = el("select.form-select sz", {
+  select = el("select.form-select sz p-2 dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none", {
     name: `aditivos[${aux}][concentracion_type]`,
     id: "concentracion_type",
   });
@@ -62,8 +62,8 @@ btnAddAditivo.addEventListener("click", (e) => {
 
   // Inserta el input de 'Agregado'
   article = el("article.col-xs-12.col-md-2 my-2");
-  label = el("label.font-semibold tracking-wide sz", "Agregado");
-  select = el("select.form-select sz", {
+  label = el("label.font-semibold tracking-wide sz dark:text-gray-300", "Agregado");
+  select = el("select.form-select sz p-2 dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none", {
     name: `aditivos[${aux}][agregado]`,
     id: "agregado",
   });
@@ -77,9 +77,9 @@ btnAddAditivo.addEventListener("click", (e) => {
 
   // Inserta el input de 'Nº de Lote'
   article = el("article.col-xs-12.col-md-2 my-2");
-  label = el("label.font-semibold tracking-wide sz", "Nº de Lote");
+  label = el("label.font-semibold tracking-wide sz dark:text-gray-300", "Nº de Lote");
   input = el(
-    "input.form-control sz text-center placeholder:text-gray-300 placeholder:font-light",
+    "input.form-control sz text-center placeholder:text-gray-300 placeholder:font-light p-2 dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none",
     {
       type: "number",
       placeholder: "Ingrese el Nº",
@@ -95,7 +95,7 @@ btnAddAditivo.addEventListener("click", (e) => {
   // Inserta el Botón de 'Acciones'
   article = el("article.col-xs-12.col-md-1 my-2 text-center");
   div_flex = el("div.flex flex-col justify-center");
-  label = el("label.font-semibold tracking-wide sz", "Acciones");
+  label = el("label.font-semibold tracking-wide sz dark:text-gray-300", "Acciones");
   let button = el(
     "button.bg-red-600 flex justify-center text-white p-2 rounded-md border border-red-800"
   );

@@ -6,15 +6,15 @@
 
 @section('contenido')
     <section class="container_mod pt-3">
-        <p class="font-bold uppercase">Histórico de Aditivos</p>
+        <p class="font-bold uppercase dark:text-gray-300 text-sm">Histórico de Aditivos</p>
 
-        <div class="card mt-4">
-            <div class="card-header bg-white p-3 flex items-center justify-between">
-                <p class="mb-0 font-bold uppercase">
+        <div class="card dark:border-none mt-4">
+            <div class="card-header dark:card-bg-head bg-white p-3 flex items-center justify-between">
+                <p class="mb-0 font-bold uppercase dark:text-gray-300 text-sm">
                     Todos los aditivos
                 </p>
                 <button data-bs-toggle="modal" data-bs-target="#modalCreateAditivo"
-                    class="flex gap-1 items-center text-sm w-full md:w-auto bg-green-700 bg-opacity-60 text-white p-2 rounded-sm hover:shadow-md transition-all duration-75 font-bold cursor-pointer"
+                    class="flex gap-1 items-center text-sm w-full md:w-auto bg-green-700 bg-opacity-60 dark:bg-opacity-50 dark:text-green-500 dark:hover:text-gray-300 text-white p-2 rounded-sm hover:shadow-md transition-all duration-75 font-bold cursor-pointer"
                     style="text-decoration: none">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-3 h-3">
@@ -23,25 +23,25 @@
                     Crear nuevo aditivo</button>
             </div>
 
-            <div class="card-body p-0">
+            <div class="card-body dark:tab_bg p-0">
                 <div class="row p-3">
                     <div class="col-xs-12 col-md-4 my-2">
-                        <input type="text" class="form-control sz p-2 " style="background-color: #f3f9f5; border: none;"
+                        <input type="text" class="form-control sz p-2 bg-gray-50 border-none dark:inp_bg_2"
                             placeholder="Buscar por aditivo">
                     </div>
                     <div class="col-xs-12 col-md-4 my-2">
-                        <input type="date" class="form-control sz p-2 " style="background-color: #f3f9f5; border: none;">
+                        <input type="date" class="form-control sz p-2 dark:inp_bg_2 bg-gray-50  dark:text-gray-400 border-none">
                     </div>
                     <div class="col-xs-12 col-md-4 my-2">
-                        <select class="form-select sz p-2" style="background-color: #f3f9f5; border: none;">
+                        <select class="form-select sz p-2 dark:inp_bg_2 dark:text-gray-400 bg-gray-50 border-none">
                             <option value="">-- Todo --</option>
                         </select>
                     </div>
                 </div>
 
-                <div class="text-gray-500 text-sm">
+                <div class="text-gray-500 text-xs xl:text-sm">
                     <table class="w-full">
-                        <thead style="background-color: #f3f9f5">
+                        <thead class="dark:card-bg-head" style="background-color: #f3f9f5">
                             <th class="p-3">#ID</th>
                             <th class="p-3">Aditivo</th>
                             <th class="p-3">Usuario Carga</th>
