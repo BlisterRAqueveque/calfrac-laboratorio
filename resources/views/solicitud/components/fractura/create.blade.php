@@ -237,12 +237,13 @@
                 <div class="col-12 my-2 text-center">
                     <span class="w-full items-center m-0 dark:text-gray-300">¿Hay algún aditivo que no sea de Calfrac para ser usado en
                         este proyecto?</span>
-                    <select name="aditivo_extra" id="aditivo_extra" class="form-select dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none sz p-2 mt-1 md:w-1/4 w-full"
-                        onchange="aditivoExtra(this)">
-                        {{-- <option value="">-- Seleccione --</option> --}}
-                        <option value="1">Si</option>
-                        <option value="0" selected>No</option>
-                    </select>
+                        <div class="flex justify-center">
+                            <select name="aditivo_extra" id="aditivo_extra" class="form-select dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none sz p-2 mt-1 md:w-1/4 w-full"
+                                onchange="aditivoExtra(this)">
+                                <option value="1">Si</option>
+                                <option value="0" selected>No</option>
+                            </select>
+                        </div>
                 </div>
 
                 <div class="col-xs-12 col-md-4 my-2">

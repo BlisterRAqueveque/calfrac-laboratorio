@@ -38,7 +38,7 @@
                     </div>
 
                     <div class="p-2">
-                        <button class="bg-emerald-500 px-3 py-1 rounded hover:bg-emerald-600  dark:bg-emerald-800 dark:bg-opacity-60 dark:text-emerald-400 dark:hover:text-emerald-50 transition-all duration-100">Botón
+                        <button class="bg-emerald-500 px-3 py-1 rounded hover:bg-emerald-600 text-white dark:bg-emerald-800 dark:bg-opacity-60 dark:text-emerald-400 dark:hover:text-emerald-50 transition-all duration-100">Botón
                             Gráfico</button>
                     </div> 
                 </article>

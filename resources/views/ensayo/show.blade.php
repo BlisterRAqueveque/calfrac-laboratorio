@@ -257,7 +257,7 @@
                     <div class="mt-4 tab-pane fade" id="tab-condiciones_test_{{ $e->id }}" role="tabpanel">
                         <!-- Condiciones del Test -->
                         <span class="ms-1 mb-0 font-light tracking-wide dark:text-gray-300">Datos del Pozo</span>
-                        <hr class="mt-1 w-96 dark:bg-gray-50">
+                        <hr class="mt-1 w-auto dark:bg-gray-50">
 
                         <div class="grid gap-2 grid-cols-1 md:grid-cols-5 mt-3">
 

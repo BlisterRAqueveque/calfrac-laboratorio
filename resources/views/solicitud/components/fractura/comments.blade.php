@@ -1,5 +1,5 @@
 <section>
-    <div class="row md:w-1/2 mx-auto">
+    <div class="row md:w-1/2 my-3 mx-auto">
         <p class="m-0 font-bold text-lg text-center tracking-wide">Fundamento de la Respuesta</p>
 
         <div class="col-12">

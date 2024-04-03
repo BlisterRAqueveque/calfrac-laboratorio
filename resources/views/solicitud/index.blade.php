@@ -81,10 +81,11 @@
         </div>
 
         @if (session('success'))
-            <div
-                class="mt-3 bg-green-500 opacity-50 text-white p-2 text-center uppercase border-1 border-green-500 rounded-md font-semibold tracking-wide">
-                {{ session('success') }}
-            </div>
+        <div
+        id="alert_success"
+            class="mt-3 bg-green-500 opacity-50 text-white p-2 text-center uppercase border-1 border-green-500 rounded-md font-semibold tracking-wide">
+            {{ session('success') }}
+        </div>
         @endif
 
         <div class="card border dark:border-none mt-4">
@@ -94,7 +95,7 @@
                 </p>
                 @can('create', App\Models\Solicitud::class)
                     <a href="{{ route('solicitud.create.show') }}"
-                        class="flex gap-1 items-center text-xs xl:text-sm justify-center mt-2 md:mt-0 w-full md:w-auto bg-green-700 bg-opacity-60 dark:bg-opacity-50 dark:text-green-500 dark:hover:text-gray-300 text-white p-2 rounded-sm hover:shadow-md transition-all duration-75 font-bold cursor-pointer"
+                        class="flex gap-1 items-center text-xs xl:text-sm justify-center mt-2 md:mt-0 w-full md:w-auto bg-green-700 hover:text-white bg-opacity-60 dark:bg-opacity-50 dark:text-green-500 dark:hover:text-gray-300 text-white p-2 rounded-sm hover:shadow-md transition-all duration-75 font-bold cursor-pointer"
                         style="text-decoration: none">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-3 h-3">
@@ -132,6 +133,8 @@
                         </thead>
 
                         <tbody>
+                            @if ($solicitudes->count() > 0)
+                            
                             @foreach ($solicitudes as $s)
                                 <tr>
                                     <td class="p-3">{{ $s->id }}</td>
@@ -197,8 +200,18 @@
                                     </td>
                                 </tr>
                             @endforeach
+                            @else
+                            <tr>
+                                <td class="text-center p-2" colspan="6">
+                                    <em>No se agregaron solicitudes aún</em>
+                                </td>
+                            </tr>
+                            @endif
                         </tbody>
                     </table>
+                    <div class="px-4 pt-2 pb-1 border-t">
+                        {{ $solicitudes->links() }}
+                    </div>
                     {{-- <div class="flex gap-3 justify-end p-2 px-4">
                         <button>Anterior</button>
                         <select name="" id="" class="form-control sz p-2 max-w-16 text-center">
@@ -207,13 +220,25 @@
                         <button>Siguiente</button>
                     </div> --}}
                 </div>
+                
             </div>
         </div>
     </section>
+    <br>
     <script>
         function redirectToViewSolicitud(solicitud_id) {
             event.preventDefault();
             window.location.replace(`solicitud/fractura/${solicitud_id}`);
         }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', e => {
+            if (document.querySelector('#alert_success')) {
+                setTimeout(() => {
+                    document.querySelector('#alert_success').remove()
+                }, 4000);
+            }
+        })
     </script>
 @endsection

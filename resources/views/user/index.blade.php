@@ -140,7 +140,7 @@
                                             @endphp
                                             <td class="p-3 sm:w-52 xl:w-auto mx-auto my-0">
                                                 <div
-                                                    class="table_btn text-xs xl:text-sm {{ $u->estado == 1 ? 'bg-green-200 dark:bg-green-800 dark:bg-opacity-40 text-green-900 dark:text-green-400' : 'bg-red-200' }}">
+                                                    class="table_btn text-xs xl:text-sm {{ $u->estado == 1 ? 'bg-green-300 bg-opacity-50 dark:bg-green-800 dark:bg-opacity-40 text-green-900 dark:text-green-400' : 'bg-red-200' }}">
                                                     <div
                                                         class=" w-1 h-1 sm:w-1 sm:h-1 xl:w-2 xl:h-2 rounded-full point_success">
                                                     </div>

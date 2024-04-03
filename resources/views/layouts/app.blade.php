@@ -15,7 +15,7 @@
         rel="stylesheet">
         @vite('resources/css/bootstrap.min.css')
         @vite('resources/css/app.css')
-    <script src="{{ asset('css/sweetalert2.css') }}"></script>
+    <link href="{{ asset('css/sweetalert2.css') }}"></link>
 </head>
 
 <style>

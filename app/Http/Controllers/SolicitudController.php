@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SolicitudMail;
 use App\Models\Aditivo;
 use App\Models\AgenteSosten;
 use App\Models\AnalisisMicrobial;
@@ -16,6 +17,7 @@ use App\Models\User;
 use App\Models\Yacimiento;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Mail;
 
 class SolicitudController extends Controller
 {
@@ -92,7 +94,7 @@ class SolicitudController extends Controller
         ]);
 
         # Create el resto de la Solicitud de Fractura
-        SolicitudFractura::create([
+        $solicitud_fractura = SolicitudFractura::create([
             'fluido' => $request->fluido,
             'formacion' => $request->formacion,
             'bhst' => $request->bhst,
@@ -120,11 +122,30 @@ class SolicitudController extends Controller
             'usuario_carga' => auth()->user()->id
         ]);
 
+        # Envío de Emails
+        $correos = [];
+        if ($solicitud_fractura->user_iniciado_por)
+            $correos[] = $solicitud_fractura->user_iniciado_por->email;
+        if ($solicitud_fractura->user_servicio_tecnico)
+            $correos[] = $solicitud_fractura->user_servicio_tecnico->email;
+        if ($solicitud_fractura->user_laboratorio)
+            $correos[] = $solicitud_fractura->user_laboratorio->email;
+        if ($solicitud_fractura->user_reconocimiento)
+            $correos[] = $solicitud_fractura->user_reconocimiento->email;
+
+        $data = [
+            'solicitud_id' => $solicitud->id,
+            'locacion' => $request->locacion,
+            'fecha_solicitud' => $request->fecha_solicitud,
+            'usuario_carga' => auth()->user()->nombre . ' ' . auth()->user()->apellido,
+            'cliente' => $request->cliente,
+            'empresa' => $request->empresa
+        ];
+        $this->_sendEmailNew($data, $correos);
+        // -- Finaliza el envío de emails
+
         if ($solicitud->id)
             return redirect()->route('solicitudes')->with('success', 'La Solicitud de Fractura Nº' . $solicitud->id . ' se ha creado correctamente.');
-
-        # Envío de Emails
-        // En Proceso
     }
 
     /**
@@ -140,6 +161,14 @@ class SolicitudController extends Controller
         $solicitud->usuario_aprobo = auth()->user()->id;
         $solicitud->save();
 
+        # Envío de Email
+        $data = [
+            'solicitud_id' => $solicitud->id,
+            'fecha_aprobada' => $solicitud->fecha_aprobada->format('d/m/Y'),
+            'usuario_aprobo' => $solicitud->user_aprobo->nombre . ' ' . $solicitud->user_aprobo->apellido,
+        ];
+        $this->_sendEmailApproved($data, $solicitud->user->email);
+        // -- Finaliza el envío de email
         return $solicitud->id;
     }
 
@@ -220,12 +249,23 @@ class SolicitudController extends Controller
         $solicitud_fractura->save();
 
         # La fundamentación del por qué se editó la solicitud
-        Edicion_Solicitud::create([
+        $edicion_solicitud = Edicion_Solicitud::create([
             'fundamento' => $request->fundamento_edicion,
             'usuario_fundamento' => auth()->user()->id,
             'solicitud_id' => $solicitud->id
         ]);
 
+        # Envío de Email
+        # => Envía que se editó la Solicitud al usuario quien cargó la solicitud
+        $data = [
+            'solicitud_id' => $solicitud->id,
+            'usuario_edicion' => $edicion_solicitud->user_fundamento->nombre . ' ' . $edicion_solicitud->user_fundamento->apellido,
+            'fecha_edicion' => $edicion_solicitud->created_at->format('d-m-Y'),
+            'fundamento' => $edicion_solicitud->fundamento
+        ];
+        $this->_sendEmailEdition($data, $solicitud->user->email);
+        // -- Finaliza el envío de email
+        
         if ($solicitud->id)
             return back()->with('success', 'La solicitud se ha editado correctamente');
     }
@@ -233,7 +273,8 @@ class SolicitudController extends Controller
     /**
      * 
      */
-    public function update_rta($user_id, Request $request) {
+    public function update_rta($user_id, Request $request)
+    {
         $this->validate($request, [
             'respuesta' => 'required',
         ]);
@@ -257,7 +298,7 @@ class SolicitudController extends Controller
     public function index()
     {
         $data = [
-            'solicitudes' => Solicitud::orderBy('id', 'desc')->get(),
+            'solicitudes' => Solicitud::orderBy('id', 'desc')->paginate(10),
         ];
         return view('solicitud.index', $data);
     }
@@ -276,5 +317,52 @@ class SolicitudController extends Controller
             'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
         return view('solicitud.components.fractura.show', $data);
+    }
+
+    /**
+     * Envía el correo de que se creó una nuevo Solicitud de Fractura
+     * ¿A quién se envía el correo?
+     * => Firma de quién inició la solicitud (opcional)
+     * => Firma del servicio técnico (opcional)
+     * => Firma de laboratorio (opcional)
+     * => Firma de reconocimiento (opcional)
+     */
+    public function _sendEmailNew($data, $correos)
+    {
+        foreach ($correos as $c) {
+            Mail::send('emails.solicitud.new', ['data' => $data], function ($message) use ($c, $data) {
+                $message->to($c)
+                    ->subject('Laboratorio Calfrac | Solicitud de Fractura N°' . $data['solicitud_id']);
+            });
+        };
+    }
+    
+    /**
+     * Envía el correo de que se editó la Solicitud
+     * ¿A quien se envía el correo?
+     * => Al usuario quien cargó la solicitud
+     */
+    public function _sendEmailEdition($data, $correo) {
+        Mail::send('emails.solicitud.edition', ['data' => $data], function ($message) use ($correo, $data) {
+            $message->to($correo)
+                ->subject('Laboratorio Calfrac | Edición de Solicitud de Fractura N°' . $data['solicitud_id']);
+        });
+    }
+
+    /**
+     * Envía el correo de que la solicitud ya está aprobada
+     * ¿A quien se envía el correo?
+     * => Al usuario quien cargó la solicitud
+     */
+    public function _sendEmailApproved($data, $correo) {
+        Mail::send('emails.solicitud.approved', ['data' => $data], function ($message) use ($correo, $data) {
+            $message->to($correo)
+                ->subject('Laboratorio Calfrac | Solicitud de Fractura N°'. $data['solicitud_id'] . ' - Aprobada');
+        });
+    }
+
+    public function viewMail()
+    {
+        return view('emails.solicitud.approved');
     }
 }

@@ -37,4 +37,21 @@ class SolicitudFractura extends Model
         'solicitud_id',
         'usuario_carga',
     ];
+
+    public function user_iniciado_por()
+    {
+        return $this->belongsTo(User::class, 'firma_iniciado_por_id');
+    }
+    public function user_servicio_tecnico()
+    {
+        return $this->belongsTo(User::class, 'firma_servicio_tecnico_id');
+    }
+    public function user_laboratorio()
+    {
+        return $this->belongsTo(User::class, 'firma_laboratorio_id');
+    }
+    public function user_reconocimiento()
+    {
+        return $this->belongsTo(User::class, 'firma_reconocimiento_id');
+    }
 }

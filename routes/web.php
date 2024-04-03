@@ -49,6 +49,10 @@ Route::post('/solicitud/edicion', [SolicitudController::class, 'update'])->name(
 Route::post('/solicitud/aprobada', [SolicitudController::class, 'store_aprobar'])->name('solicitud.aprobar');
 Route::get('/solicitud/fractura/{solicitud_id}', [SolicitudController::class, 'show_fractura'])->name('solicitud.fractura.show');
 
+// Route::get('/send-email', [SolicitudController::class, 'sendEmail']);
+Route::get('/send-email', [SolicitudController::class, 'viewMail']);
+
+
 Route::get('/solicitudes', [SolicitudController::class, 'index'])->name('solicitudes');
 Route::post('/respuesta/{user_id}', [SolicitudController::class, 'update_rta'])->name('fundamento.rta');
 
