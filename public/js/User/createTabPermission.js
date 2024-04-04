@@ -5,6 +5,10 @@
  */
 function _createTabPermissions(user_permissions) {
   container_permisos.innerHTML = "";
+  let darkmode = false;
+  if (localStorage.getItem('darkmode')) {
+    darkmode = true;
+  }
   let permissionsTab = [];
   let permiso;
   let user_permisos = JSON.parse(user_permissions);
@@ -46,7 +50,7 @@ function _createTabPermissions(user_permissions) {
       );
       p = el("p.mb-0", e.nombre);
       span = el(
-        "span.text-xs uppercase font-semibold bg-sky-50 px-2 py-1 rounded-full border text-sky-600 border-sky-500",
+        "span.text-xs uppercase font-semibold px-2 py-1 rounded-full text-sky-600 border-blue-600 bg-blue-200 dark:bg-red-200",
         "asignado"
       );
     } else {
@@ -55,7 +59,7 @@ function _createTabPermissions(user_permissions) {
       );
       p = el("p.mb-0", e.nombre);
       span = el(
-        "span.text-xs uppercase font-semibold bg-white px-2 py-1 rounded-full border text-gray-500 border-gray-500",
+        "span.text-xs uppercase font-semibold px-2 py-1 rounded-full border text-gray-500 border-gray-500 bg-gray-200",
         "sin asignar"
       );
     }

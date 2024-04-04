@@ -8,10 +8,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <style>
-        /* .permission_selected {
-                background: #c0ddef;
-                border: 1px solid #8db7d1;
-            } */
+        .permission_selected {
+            background: #c0ddef;
+            border: 1px solid #8db7d1;
+        }
 
         .permission_new {
             background: #d0f5d5;
@@ -89,7 +89,7 @@
 
                                                     <div class="flex items-center gap-3">
                                                         <button href="" class="text-gray-500"
-                                                            onclick="viewPerfilUser('{{ $u->id }}', '{{ $u->nombre }}', '{{ $u->apellido }}', '{{ $u->grupo->nombre }}', '{{ $u->email }}', '{{ $u->telefono }}','{{ $u->permisos }}', '{{ $u->img }}', '{{ $u->created_at->format('d') }} {{ $u->created_at->format('M') }}, {{ $u->created_at->format('Y') }} a las {{ $u->created_at->format('H:i') }} hs', '{{ $u->user_carga->nombre }} {{ $u->user_carga->apellido }}')">
+                                                            onclick="viewPerfilUser('{{ $u->id }}', '{{ $u->nombre }}', '{{ $u->apellido }}', '{{ $u->grupo->nombre }}', '{{ $u->email }}', '{{ $u->telefono }}','{{ $u->permisos }}', '{{ $u->img }}', '{{ $u->created_at->format('d') }} {{ $u->created_at->format('M') }}, {{ $u->created_at->format('Y') }} a las {{ $u->created_at->format('H:i') }} hs', '{{ $u->user_carga->nombre }} {{ $u->user_carga->apellido }}', '{{ $u->credenciales }}')">
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                                                 class="w-4 h-4">
@@ -211,6 +211,57 @@
                                             :</b> -</p>
                                 </div>
                             </div>
+
+                            <div id="visualize_credentials" style="display: none;">
+                                <div class="flex justify-evenly">
+                                    <button data-bs-toggle="modal" data-bs-target="#modal_credentials"
+                                        class="flex items-center gap-2 bg-green-700 hover:bg-opacity-60 bg-opacity-50 text-zinc-50 font-bold py-1 px-3 rounded-md">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.8" stroke="currentColor" class="w-4 h-4">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
+                                        </svg>
+                                        Enviar Credenciales
+                                    </button>
+                                    {{-- <button
+                                    class="flex gap-2 items-center bg-red-600 bg-opacity-80 text-zinc-50 py-1 px-3 rounded-md">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.8" stroke="currentColor" class="w-4 h-4">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" />
+                                    </svg>
+                                    Desactivar Usuario
+                                </button> --}}
+                                    <button
+                                        class="flex gap-2 items-center bg-green-500 hover:bg-opacity-90 transition-all duration-75 bg-opacity-80 text-zinc-50 py-1 px-3 rounded-md">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.8" stroke="currentColor" class="w-4 h-4">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="m4.5 12.75 6 6 9-13.5" />
+                                        </svg>
+
+                                        Activar Usuario
+                                    </button>
+                                </div>
+
+                                <div class="mt-3 px-3">
+                                    <table class="w-full text-sm">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center border py-2">Envío de Credenciales</th>
+                                            </tr>
+
+                                            <tr>
+                                                <th class="border px-2 py-1 bg-zinc-50">Fecha de envío</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody id="container_credenciales"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <br>
                         </div>
 
                         <!-- Permisos TAB -->
@@ -243,7 +294,7 @@
                             @endcan
                         </div>
 
-                        <!-- Movimientos TAB -->
+                        <!-- Movimientos TAB (En Desarrollo) -->
                         <div class="mt-4 tab-pane p-1 fade overflow-auto" id="tab_movimientos" role="tabpanel">
                             <table class="w-full">
                                 <thead>
@@ -267,24 +318,23 @@
                     </div>
                 </div>
             </div>
+
         </section>
     </section>
 
     <!-- Modal para crear usuario -->
     @include('user.modal.modal_create_user')
-
     <!-- Modal para editar usuario -->
     @include('user.modal.modal_edit_user')
 
-    <script>
-        function redirectToViewSolicitud(solicitud_id) {
-            event.preventDefault();
-            window.location.replace(`solicitud/fractura/${solicitud_id}`);
-        }
-    </script>
+    @include('user.modal.modal_credential')
+
     <script>
         var user_permissions_assigned = [];
 
+        /**
+         * Setea la URL en un Script de JS
+         */
         function _setUrl(url, value) {
             return `{{ asset('${url}/${value}') }}`;
         }
@@ -319,7 +369,6 @@
     <!-- Crea la ventana de 'Permisos' y también poder asignar o remover permisos del usuario -->
     <script src="{{ asset('js/User/createTabPermission.js') }}"></script>
     <script src="{{ asset('js/User/assignedPermission.js') }}"></script>
-
 
     <script>
         var user_permissions_new_user = [];
@@ -358,7 +407,6 @@
             user_permissions_new.value = user_permissions_new_user;
         }
     </script>
-
 
     <!-- Submit para agregar los permisos al usuario -->
     <script>
@@ -399,5 +447,36 @@
 
             })
         }
+    </script>
+
+    <!-- Submit para enviar Credenciales del usuario -->
+    <script>
+        const btnSendCredential = document.getElementById('btnSendCredential');
+        btnSendCredential.addEventListener('click', e => {
+            e.preventDefault();
+            let form = new FormData(document.getElementById('form_credential'));
+            confirmAlert('Se enviarán las credenciales de ingreso al usuario', '¿Está seguro?', 1,
+                'Enviar Credenciales').then((confirmed) => {
+
+                if (confirmed) {
+                    loadingAlert('Envío en progreso, por favor espere',
+                        'Se están enviando las credenciales al usuario');
+
+                    fetch("{{ route('usuario.credencial') }}", {
+                            method: 'POST',
+                            body: form
+                        }).then((response) => response.json())
+                        .then((data) => {
+                            Swal.close();
+                            successAlert('¡Credenciales Enviadas!',
+                                'El usuario ha sido notificado de sus credenciales').then(
+                                (confirmed) => {
+                                    window.location.reload();
+                                })
+                        })
+                }
+            })
+
+        });
     </script>
 @endsection

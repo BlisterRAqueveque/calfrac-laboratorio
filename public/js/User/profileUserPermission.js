@@ -12,7 +12,8 @@ function viewPerfilUser(
   permisos,
   img,
   fecha_alta,
-  usuario_alta
+  usuario_alta,
+  credenciales
 ) {
   document.getElementById("setImg").src = img ? _setUrl('uploads/perfiles', img) : _setUrl('img', 'img_default.jpg');
   document.getElementById("setNombre").textContent = nombre + " " + apellido;
@@ -27,11 +28,19 @@ function viewPerfilUser(
     "setUsuarioAlta"
   ).innerHTML = `<b>¿Quién lo dio de alta? :</b> ${usuario_alta}`;
 
+  // Asignar el email al modal de las credenciales
+  document.getElementById('user_id_credencial').value = id
+  document.getElementById('email_credencial').value = email
+
   if (document.getElementById("btnSubmitUserPermissions")) {
     document.querySelector(".user_id_permission").value = id;
     document.getElementById("btnSubmitUserPermissions").style.display = "block";
   }
+
   _createTabPermissions(permisos);
+
+  document.getElementById('visualize_credentials').style.display = 'block';
+  _createTabCredentials(credenciales);
 }
 
 /**
@@ -57,3 +66,25 @@ function editarUsuario(user) {
 }
 
 let container_permisos = document.getElementById("container_permisos");
+
+/**
+ * Crea la tabla para visualizar las credenciales que se hayan enviado
+ * al usuario seleccionado
+ */
+function _createTabCredentials(credenciales) {
+  let container_credenciales = document.getElementById('container_credenciales');
+  container_credenciales.innerHTML = '';
+  let credentials = JSON.parse(credenciales);
+  if (credentials.length > 0) {
+    credentials.forEach(c => {
+      let {dia, mes, anio, hora, minutos} = formatearFecha(c.created_at)
+      let tr = el('tr');
+      let td = el('td.border px-2 py-1', `El día ${dia}/${mes}/${anio} a las ${hora}:${minutos} hs`)
+      mount(tr, td)
+      mount(container_credenciales, tr)
+    });
+  } else {
+    let tr = el('tr', el('td.border px-2 py-1 text-center', 'No se han enviado credenciales'));
+    mount(container_credenciales, tr)
+  }
+}

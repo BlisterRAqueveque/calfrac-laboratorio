@@ -340,6 +340,7 @@
 <script src="{{ asset('js/darkmode.js') }}"></script>
 
 <script src="{{ asset('js/alerts.js') }}"></script>
+<script src="{{ asset('js/helpers.js') }}"></script>
 
 
 <script>

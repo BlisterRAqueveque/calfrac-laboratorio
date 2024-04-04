@@ -49,3 +49,20 @@ function confirmAlert(
     });
   });
 }
+
+function loadingAlert(title = 'Carga en progreso, por favor espere', html = 'Se están cargando los datos en el sistema', timer = '') {
+  return new Promise((resolve, reject) => {
+    Swal.fire({
+      title: title,
+      html: html,
+      timer: timer,
+      // timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading();
+        
+      },
+    }).then((result) => {
+        resolve(result);
+    });
+  });
+}

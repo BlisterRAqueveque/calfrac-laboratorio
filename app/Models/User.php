@@ -53,6 +53,10 @@ class User extends Authenticatable
         return $this->hasMany(RelPermisosUser::class);
     }
 
+    public function credenciales() {
+        return $this->hasMany(Credencial::class);
+    }
+
     public function grupo()
     {
         return $this->belongsTo(Grupo::class);

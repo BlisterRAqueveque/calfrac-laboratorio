@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Credencial;
 use Illuminate\Support\Str;
 use App\Models\Grupo;
 use App\Models\Permisos;
@@ -10,6 +11,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Intervention\Image\Facades\Image;
+use Mail;
 
 class UserController extends Controller
 {
@@ -142,5 +144,38 @@ class UserController extends Controller
         $user->save();
 
         return back();
+    }
+
+    /**
+     * Cuando se realiza el envío de credenciales
+     * Se almacena la fecha en la que se envío y también el fundamento al momento de enviarla.
+     */
+    public function store_credencial(Request $request)
+    {
+        Credencial::create([
+            'user_id' => $request->user_id_credencial,
+            'fundamento' => $request->fundamento,
+        ]);
+        $user = User::find($request->user_id_credencial);
+        $data = [
+            'correo' => $request->email_credencial,
+            'password' => $request->password_credencial,
+            'fundamento' => $request->fundamento
+        ];
+        $this->_sendEmailCredential($data, $user->email);
+
+        return $user->id;
+    
+    }
+
+    /**
+     * Envía el correo con las credenciales de ingreso
+     */
+    public function _sendEmailCredential($data, $correo)
+    {
+        Mail::send('emails.user.credential', ['data' => $data], function ($message) use ($correo, $data) {
+            $message->to($correo)
+                ->subject('Credenciales de Ingreso | Laboratorio Calfrac');
+        });
     }
 }

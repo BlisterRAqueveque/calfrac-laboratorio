@@ -363,6 +363,6 @@ class SolicitudController extends Controller
 
     public function viewMail()
     {
-        return view('emails.solicitud.approved');
+        return view('emails.user.credential');
     }
 }

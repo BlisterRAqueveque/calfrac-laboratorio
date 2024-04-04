@@ -71,6 +71,7 @@ Route::post('/cliente/update', [ClienteController::class, 'update'])->name('clie
 Route::get('/usuarios', [UserController::class, 'index'])->name('usuarios');
 Route::post('/create/usuario', [UserController::class, 'store'])->name('usuario.store');
 Route::post('/edit/usuario', [UserController::class, 'update'])->name('usuario.update');
+Route::post('/usuario/credencial', [UserController::class, 'store_credencial'])->name('usuario.credencial');
 
 # Yacimientos
 Route::get('/yacimientos', [YacimientoController::class, 'index'])->name('yacimientos');
