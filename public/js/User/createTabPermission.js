@@ -50,7 +50,7 @@ function _createTabPermissions(user_permissions) {
       );
       p = el("p.mb-0", e.nombre);
       span = el(
-        "span.text-xs uppercase font-semibold px-2 py-1 rounded-full text-sky-600 border-blue-600 bg-blue-200 dark:bg-red-200",
+        "span.text-xs uppercase font-semibold px-2 py-1 rounded-full text-sky-600 border-blue-600 dark:bg-red-200",
         "asignado"
       );
     } else {

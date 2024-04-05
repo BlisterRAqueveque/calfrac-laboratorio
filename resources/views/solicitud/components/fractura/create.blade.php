@@ -543,7 +543,7 @@
 <script>
     const btnSendSolicitud = document.getElementById('btnSendSolicitud');
     btnSendSolicitud.addEventListener('click', e => {
-        loadingAlert();
+        loadingAlert('Creando la solicitud, por favor espere', 'Se están enviando los correos desde el sistema');
     })
 </script>
 
@@ -551,9 +551,9 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         @if ($message = session('success'))
-            successAlert('¡Solicitud Editada!', 'La Solicitud de Fractura fue editada correctamente').then(
+            successAlert('¡Solicitud Creada!', 'La Solicitud de Fractura fue creada correctamente').then(
                 (confirmed) => {
-                    window.location.reload();
+                    window.location.replace('solicitudes');
                 })
         @endif
     })
