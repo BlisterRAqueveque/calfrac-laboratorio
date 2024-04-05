@@ -13,7 +13,8 @@ function viewPerfilUser(
   img,
   fecha_alta,
   usuario_alta,
-  credenciales
+  credenciales,
+  estado
 ) {
   document.getElementById("setImg").src = img ? _setUrl('uploads/perfiles', img) : _setUrl('img', 'img_default.jpg');
   document.getElementById("setNombre").textContent = nombre + " " + apellido;
@@ -35,6 +36,17 @@ function viewPerfilUser(
   if (document.getElementById("btnSubmitUserPermissions")) {
     document.querySelector(".user_id_permission").value = id;
     document.getElementById("btnSubmitUserPermissions").style.display = "block";
+  }
+
+  if (estado == 1) {
+    document.getElementById('btnDesactivarUser').style.display = 'flex';
+    document.getElementById('user_id_desactivar').value = id;
+    document.getElementById('btnActivarUser').style.display = 'none';
+  } else {
+    document.getElementById('btnActivarUser').setAttribute('data-id-user', id);
+    document.getElementById('user_id_activar').value = id;
+    document.getElementById('btnDesactivarUser').style.display = 'none';
+    document.getElementById('btnActivarUser').style.display = 'flex';
   }
 
   _createTabPermissions(permisos);

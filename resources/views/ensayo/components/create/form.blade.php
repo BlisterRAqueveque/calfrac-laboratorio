@@ -4,8 +4,10 @@
         <a class="nav-link nav_tab_mod d-flex items-center gap-2 justify-center active text-violet-700" aria-current="page" id="nav-tab1"
             href="#tab-carga_informacion" data-bs-toggle="tab" data-bs-target="#tab-carga_informacion" role="tab"
             aria-controls="tab-carga_informacion" aria-selected="true">
-            <div class="w-4 h-4 xl:w-6 xl:h-6 bg-gray-300 dark:bg-gray-700 rounded-full flex justify-center text-white ">
-                1
+            <div class="w-4 h-4 xl:w-6 xl:h-6 bg-gray-300 dark:bg-gray-700 rounded-full flex justify-center text-white items-center">
+                <span>
+                    1
+                </span>
             </div>
             Carga de Información
         </a>
@@ -14,8 +16,10 @@
         <a class="nav-link nav_tab_mod d-flex items-center justify-center gap-2 text-violet-700" id="nav-tab2" data-bs-toggle="tab"
             href="#tab-condiciones_test" data-bs-target="#tab-condiciones_test" role="tab"
             aria-controls="tab-condiciones_test" aria-selected="false">
-            <div class="w-4 h-4 xl:w-6 xl:h-6 bg-gray-300 dark:bg-gray-700 rounded-full flex justify-center text-white">
-                2
+            <div class="w-4 h-4 xl:w-6 xl:h-6 bg-gray-300 dark:bg-gray-700 rounded-full flex justify-center text-white items-center">
+                <span>
+                    2
+                </span>
             </div>
             Condiciones del Test
         </a>
@@ -24,8 +28,10 @@
         <a class="nav-link nav_tab_mod d-flex items-center justify-center gap-2 text-violet-700" id="nav-tab2" data-bs-toggle="tab"
             href="#tab-aditivos" data-bs-target="#tab-aditivos" role="tab" aria-controls="tab-aditivos"
             aria-selected="false">
-            <div class="w-4 h-4 xl:w-6 xl:h-6 bg-gray-300 dark:bg-gray-700 rounded-full flex justify-center text-white">
-                3
+            <div class="w-4 h-4 xl:w-6 xl:h-6 bg-gray-300 dark:bg-gray-700 rounded-full flex justify-center text-white items-center">
+                <span>
+                    3
+                </span>
             </div>
             Aditivos
         </a>
@@ -34,8 +40,10 @@
         <a class="nav-link nav_tab_mod d-flex items-center justify-center gap-2 text-violet-700" id="nav-tab2" data-bs-toggle="tab"
             href="#tab-requerimientos_ensayo" data-bs-target="#tab-requerimientos_ensayo" role="tab"
             aria-controls="tab-requerimientos_ensayo" aria-selected="false">
-            <div class="w-4 h-4 xl:w-6 xl:h-6 bg-gray-300 dark:bg-gray-700 rounded-full flex justify-center text-white">
-                4
+            <div class="w-4 h-4 xl:w-6 xl:h-6 bg-gray-300 dark:bg-gray-700 rounded-full flex justify-center text-white items-center">
+                <span>
+                    4
+                </span>
             </div>
             Requerimientos del Ensayo
         </a>
@@ -44,8 +52,10 @@
         <a class="nav-link nav_tab_mod d-flex items-center justify-center gap-2 text-violet-700" id="nav-tab2" data-bs-toggle="tab"
             href="#tab-cierre" data-bs-target="#tab-cierre" role="tab" aria-controls="tab-cierre"
             aria-selected="false">
-            <div class="w-4 h-4 xl:w-6 xl:h-6 bg-gray-300 dark:bg-gray-700 rounded-full flex justify-center text-white">
-                5
+            <div class="w-4 h-4 xl:w-6 xl:h-6 bg-gray-300 dark:bg-gray-700 rounded-full flex justify-center text-white items-center">
+                <span>
+                    5
+                </span>
             </div>
             Cierre de Ensayo
         </a>
@@ -359,9 +369,30 @@
                         </svg>
                         Cancelar</button>
                     <button type="submit"
+                    id="btnSendEnsayoSubmit"
                         class="w-full md:w-auto bg-green-700 bg-opacity-60 text-white p-2 rounded-sm hover:shadow-lg transition-all duration-75 font-bold text-sm">Confirmar</button>
                 </div>
             </div>
         </div>
     </div>
 </form>
+
+<!-- Cartel de carga mientras se carga el formulario del Ensayo -->
+<script>
+    const btnSendEnsayoSubmit = document.getElementById('btnSendEnsayoSubmit');
+    btnSendEnsayoSubmit.addEventListener('click', e => {
+        loadingAlert();
+    })
+</script>
+
+<!-- Cartel que muestra que el ensayo fue creado/editado correctamente cuando se hace el submit -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        @if ($message = session('success'))
+            successAlert('Ensayo Creado!', 'El Ensayo fue creado correctamente').then(
+                (confirmed) => {
+                    window.location.reload();
+                })
+        @endif
+    })
+</script>

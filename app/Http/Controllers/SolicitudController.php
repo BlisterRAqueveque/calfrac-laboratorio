@@ -48,7 +48,6 @@ class SolicitudController extends Controller
      */
     public function store_fractura(Request $request)
     {
-
         # Validamos los datos del encabezado general
         $this->validate($request, [
             'proyecto_number' => 'required',
@@ -69,6 +68,8 @@ class SolicitudController extends Controller
             'reporte_lab_tall' => 'required',
             'reporte_lab_lead' => 'required',
         ]);
+        
+
         # Crea la Información General
         $solicitud = Solicitud::create([
             'tipo' => 1,
@@ -145,7 +146,8 @@ class SolicitudController extends Controller
         // -- Finaliza el envío de emails
 
         if ($solicitud->id)
-            return redirect()->route('solicitudes')->with('success', 'La Solicitud de Fractura Nº' . $solicitud->id . ' se ha creado correctamente.');
+            return redirect('solicitud')->with('success', $solicitud->id);
+            // return redirect()->route('solicitudes')->with('success', 'La Solicitud de Fractura Nº' . $solicitud->id . ' se ha creado correctamente.');
     }
 
     /**
@@ -267,7 +269,7 @@ class SolicitudController extends Controller
         // -- Finaliza el envío de email
         
         if ($solicitud->id)
-            return back()->with('success', 'La solicitud se ha editado correctamente');
+            return back()->with('success', $solicitud->id);
     }
 
     /**

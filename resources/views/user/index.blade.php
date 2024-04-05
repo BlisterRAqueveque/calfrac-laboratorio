@@ -89,7 +89,7 @@
 
                                                     <div class="flex items-center gap-3">
                                                         <button href="" class="text-gray-500"
-                                                            onclick="viewPerfilUser('{{ $u->id }}', '{{ $u->nombre }}', '{{ $u->apellido }}', '{{ $u->grupo->nombre }}', '{{ $u->email }}', '{{ $u->telefono }}','{{ $u->permisos }}', '{{ $u->img }}', '{{ $u->created_at->format('d') }} {{ $u->created_at->format('M') }}, {{ $u->created_at->format('Y') }} a las {{ $u->created_at->format('H:i') }} hs', '{{ $u->user_carga->nombre }} {{ $u->user_carga->apellido }}', '{{ $u->credenciales }}')">
+                                                            onclick="viewPerfilUser('{{ $u->id }}', '{{ $u->nombre }}', '{{ $u->apellido }}', '{{ $u->grupo->nombre }}', '{{ $u->email }}', '{{ $u->telefono }}','{{ $u->permisos }}', '{{ $u->img }}', '{{ $u->created_at->format('d') }} {{ $u->created_at->format('M') }}, {{ $u->created_at->format('Y') }} a las {{ $u->created_at->format('H:i') }} hs', '{{ $u->user_carga->nombre }} {{ $u->user_carga->apellido }}', '{{ $u->credenciales }}', '{{ $u->estado }}')">
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                                                 class="w-4 h-4">
@@ -140,9 +140,9 @@
                                             @endphp
                                             <td class="p-3 sm:w-52 xl:w-auto mx-auto my-0">
                                                 <div
-                                                    class="table_btn text-xs xl:text-sm {{ $u->estado == 1 ? 'bg-green-300 bg-opacity-50 dark:bg-green-800 dark:bg-opacity-40 text-green-900 dark:text-green-400' : 'bg-red-200' }}">
+                                                    class="table_btn text-xs xl:text-sm {{ $u->estado == 1 ? 'bg-green-300 bg-opacity-50 dark:bg-green-800 dark:bg-opacity-40 text-green-900 dark:text-green-400' : 'bg-red-200 text-red-800' }}">
                                                     <div
-                                                        class=" w-1 h-1 sm:w-1 sm:h-1 xl:w-2 xl:h-2 rounded-full point_success">
+                                                        class=" w-1 h-1 sm:w-1 sm:h-1 xl:w-2 xl:h-2 rounded-full {{ $u->estado == 1 ? 'bg-green-900' : 'bg-red-800' }}">
                                                     </div>
                                                     {{ $estado }}
                                                 </div>
@@ -223,25 +223,35 @@
                                         </svg>
                                         Enviar Credenciales
                                     </button>
-                                    {{-- <button
-                                    class="flex gap-2 items-center bg-red-600 bg-opacity-80 text-zinc-50 py-1 px-3 rounded-md">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.8" stroke="currentColor" class="w-4 h-4">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" />
-                                    </svg>
-                                    Desactivar Usuario
-                                </button> --}}
-                                    <button
-                                        class="flex gap-2 items-center bg-green-500 hover:bg-opacity-90 transition-all duration-75 bg-opacity-80 text-zinc-50 py-1 px-3 rounded-md">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.8" stroke="currentColor" class="w-4 h-4">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="m4.5 12.75 6 6 9-13.5" />
-                                        </svg>
+                                    <form id="form_desactivar_user">
+                                        @csrf
+                                        <input type="hidden" name="user_id_desactivar" id="user_id_desactivar">
+                                        <button type="button" style="display: none" id="btnDesactivarUser"
+                                            class="flex gap-2 items-center bg-red-600 bg-opacity-80 text-zinc-50 py-1 px-3 rounded-md">
 
-                                        Activar Usuario
-                                    </button>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.8" stroke="currentColor" class="w-4 h-4">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" />
+                                            </svg>
+                                            Desactivar Usuario
+                                        </button>
+                                    </form>
+                                    <form id="form_activar_user">
+                                        @csrf
+                                        <input type="hidden" name="user_id_activar" id="user_id_activar">
+                                        <button style="display: none" id="btnActivarUser"
+                                            class="flex gap-2 items-center bg-green-500 hover:bg-opacity-90 transition-all duration-75 bg-opacity-80 text-zinc-50 py-1 px-3 rounded-md">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.8" stroke="currentColor" class="w-4 h-4">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="m4.5 12.75 6 6 9-13.5" />
+                                            </svg>
+
+                                            Activar Usuario
+                                        </button>
+                                    </form>
+
                                 </div>
 
                                 <div class="mt-3 px-3">
@@ -478,5 +488,67 @@
             })
 
         });
+    </script>
+
+    <!-- Desactivar el usuario -->
+    <script>
+        const btnDesactivarUser = document.getElementById('btnDesactivarUser');
+        btnDesactivarUser.addEventListener('click', e => {
+            e.preventDefault();
+            let form = new FormData(document.getElementById('form_desactivar_user'));
+
+            confirmAlert('¿Está seguro de desactivar al usuario?', '', 1,
+                'Desactivar').then((confirmed) => {
+
+                if (confirmed) {
+                    loadingAlert('Desactivando usuario',
+                        'Por favor espere');
+
+                    fetch("{{ route('usuario.desactivar') }}", {
+                            method: 'POST',
+                            body: form
+                        }).then((response) => response.json())
+                        .then((data) => {
+                            Swal.close();
+                            successAlert('Usuario Desactivado!',
+                                'El usuario ha sido desactivado del sistema').then(
+                                (confirmed) => {
+                                    window.location.reload();
+                                })
+                        })
+                }
+            })
+        })
+    </script>
+
+    <!-- Activar el usuario -->
+    <script>
+        const btnActivarUser = document.getElementById('btnActivarUser');
+        btnActivarUser.addEventListener('click', e => {
+            e.preventDefault();
+            let form = new FormData(document.getElementById('form_activar_user'));
+
+            confirmAlert('¿Está seguro de activar al usuario?', '', 1,
+                'Activar').then((confirmed) => {
+
+                if (confirmed) {
+                    loadingAlert('Activando usuario',
+                        'Por favor espere');
+
+                    fetch("{{ route('usuario.activar') }}", {
+                            method: 'POST',
+                            body: form
+                        }).then((response) => response.json())
+                        .then((data) => {
+                            Swal.close();
+                            successAlert('Usuario Activado!',
+                                'El usuario está habilitado en el sistema').then(
+                                (confirmed) => {
+                                    window.location.reload();
+                                })
+                        })
+                }
+            })
+        })
     </script>
 @endsection

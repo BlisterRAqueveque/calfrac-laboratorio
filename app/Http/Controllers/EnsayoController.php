@@ -76,7 +76,7 @@ class EnsayoController extends Controller
         }
 
         if ($ensayo->id)
-            return back()->with('success', 'El ensayo se ha creado y asignado correctamente');
+        return back()->with('success', $ensayo->id);
     }
 
     public function assigned(Request $request) {

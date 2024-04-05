@@ -3,10 +3,12 @@
         <p class="m-0 font-bold text-lg text-center tracking-wide">Fundamento de la Respuesta</p>
 
         <div class="col-12">
-            <label for="fundamento_edicion" class="text-sm text-gray-300">Ingrese el motivo por el cual realiza la edición de la
+            <label for="fundamento_edicion" class="text-sm text-gray-300">Ingrese el motivo por el cual realiza la edición
+                de la
                 solicitud <span class="text-red-600">*</span></label>
-            <textarea name="fundamento_edicion" id="fundamento_edicion" class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none mt-1" rows="3"
-                placeholder="Ingrese el motivo - Máximo 300 caracteres" maxlength="300" required></textarea>
+            <textarea name="fundamento_edicion" id="fundamento_edicion"
+                class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none mt-1"
+                rows="3" placeholder="Ingrese el motivo - Máximo 300 caracteres" maxlength="300" required></textarea>
             @error('fundamento_edicion')
                 <small class="text-sm text-red-600">El Fundamento es requerido para tener trazabilidad en cuanto a las
                     ediciones</small>
@@ -30,7 +32,8 @@
                 </div>
                 <div class="modal-body text-center">
                     <p class="font-semibold tracking-wide mb-2 dark:text-gray-300">¿Confirma editar la solicitud?</p>
-                    <p class="mb-0 text-sm dark:text-gray-300">Una vez modificada la solicitud, se generará un comentario para comenzar el seguimiento de la misma</p>
+                    <p class="mb-0 text-sm dark:text-gray-300">Una vez modificada la solicitud, se generará un
+                        comentario para comenzar el seguimiento de la misma</p>
                 </div>
                 <div class="modal-footer p-2">
                     <button
@@ -41,7 +44,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                         </svg>
                         Cancelar</button>
-                    <button type="submit"
+                    <button type="submit" data-bs-dismiss="modal" id="btnSendSolicitudEdition"
                         class="w-full md:w-auto bg-green-700 bg-opacity-60 text-white p-2 rounded-sm hover:shadow-lg transition-all duration-75 font-bold text-xs xl:text-sm">Confirmar</button>
                 </div>
             </div>

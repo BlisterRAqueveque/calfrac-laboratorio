@@ -176,25 +176,24 @@
             <ul role="tablist" aria-owns="nav-tab1 nav-tab2 nav-tab3 nav-tab4" class="nav nav-tabs text-sm md:text-md"
                 id="nav-tab-with-nested-tabs" style="z-index: 999">
                 <li class="nav-item w-full text-center md:w-auto" role="presentation">
-                    <a class="nav-link nav_tab_mod text-violet-800 dark:text-violet-400 active" aria-current="page"
+                    <a class="nav-link nav_tab_mod text-violet-800 dark:text-violet-400 @if (!session('success')) active @endif" aria-current="page"
                         id="nav-tab1" href="#tab1-content" data-bs-toggle="tab" data-bs-target="#tab1-content"
                         role="tab" aria-controls="tab1-content" aria-selected="true">Información de la Solicitud</a>
                 </li>
                 @if ($solicitud->aprobada == 1)
                     <li class="nav-item w-full text-center md:w-auto" role="presentation">
-                        <a class="nav-link nav_tab_mod text-violet-800 dark:text-violet-400" aria-current="page"
+                        <a class="nav-link nav_tab_mod text-violet-800 dark:text-violet-400 @if (session('success')) active @endif" aria-current="page"
                             id="nav-tab1" href="#tab2-content" data-bs-toggle="tab" data-bs-target="#tab2-content"
                             role="tab" aria" id="nav-tab2" data-bs-toggle="tab" role="tab">Ensayos</a>
                     </li>
                 @else
                     <div class="flex flex-col md:flex-row text-center items-center">
-                        <li data-tooltip-target="tooltip-default"
-                            class="w-full text-center md:w-auto cursor-not-allowed" role="presentation">
+                        <li data-tooltip-target="tooltip-default" class="w-full text-center md:w-auto cursor-not-allowed"
+                            role="presentation">
                             <a class="nav-link nav_tab_mod text-violet-800 dark:text-violet-400 cursor-not-allowed"
                                 aria-current="page" aria-selected="false">Ensayos </a>
                         </li>
-                        <small class="text-gray-700 text-sm dark:text-gray-200 tracking-wide">(Debe aprobar la solicitud para asignar un
-                            ensayo)</small>
+                        <small class="text-gray-700 text-sm dark:text-gray-200 tracking-wide">(Debe aprobar la solicitud para asignar un ensayo)</small>
                     </div>
                 @endif
             </ul>
@@ -204,15 +203,8 @@
     </section>
 
     <div class="tab-content" id="nav-tabs-content">
-        <div class="container_mod border dark:border-none bg-white dark:tab_bg p-3 mt-4 shadow-sm tab-pane fade show active"
+        <div class="container_mod border dark:border-none bg-white dark:tab_bg p-3 mt-4 shadow-sm tab-pane fade @if (!session('success')) show active @endif"
             id="tab1-content" role="tabpanel" aria-labelledby="nav-tab1">
-
-            @if (session('success'))
-                <div id="alert_success"
-                    class="mt-3 bg-green-500 opacity-50 text-white p-2 text-center uppercase border-1 border-green-500 rounded-md font-semibold tracking-wide mb-3">
-                    {{ session('success') }}
-                </div>
-            @endif
 
             <div class="flex items-center justify-between">
                 <div class="flex w-full items-center justify-between flex-col md:flex-row">
@@ -539,12 +531,16 @@
                         </div>
                     </div>
                     <div class="col-12 my-2 text-center">
-                        <span class="w-full items-center m-0 text-xs xl:text-sm dark:text-gray-300">¿Hay algún aditivo que no sea de Calfrac para ser usado en este proyecto?</span>
-                        <select name="aditivo_extra" class="form-select sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 md:w-1/4 w-full"
+                        <span class="w-full items-center m-0 text-xs xl:text-sm dark:text-gray-300">¿Hay algún aditivo que
+                            no sea de Calfrac para ser usado en este proyecto?</span>
+                        <select name="aditivo_extra"
+                            class="form-select sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 md:w-1/4 w-full"
                             disabled>
                             <option value="">-- Seleccione --</option>
-                            <option {{ $solicitud_fractura[0]->aditivo_extra == 1 ? 'selected' : '' }} value="1">Si</option>
-                            <option {{ $solicitud_fractura[0]->aditivo_extra == 2 ? 'selected' : '' }} value="2">No</option>
+                            <option {{ $solicitud_fractura[0]->aditivo_extra == 1 ? 'selected' : '' }} value="1">Si
+                            </option>
+                            <option {{ $solicitud_fractura[0]->aditivo_extra == 2 ? 'selected' : '' }} value="2">No
+                            </option>
                         </select>
                     </div>
 
@@ -741,7 +737,8 @@
                                     <option value="{{ $e->id }}" selected>{{ $e->nombre }} {{ $e->apellido }}
                                     </option>
                                 @else
-                                    <option value="{{ $e->id }}">{{ $e->nombre }} {{ $e->apellido }}</option>
+                                    <option value="{{ $e->id }}">{{ $e->nombre }} {{ $e->apellido }}
+                                    </option>
                                 @endif
                             @endforeach
                         </select>
@@ -803,6 +800,9 @@
                 <p class="m-0 mt-3 font-bold text-lg tracking-wide dark:text-gray-300">Sector de Comentarios</p>
 
                 <div class="row md:w-1/2 mt-1 mb-2">
+                    @php
+                        $i = 0;
+                    @endphp
                     @foreach ($solicitud->fundamento as $c)
                         <article class="flex gap-3 mt-3">
                             @if ($c->user_fundamento->img)
@@ -832,10 +832,17 @@
                                 <div class="containerRta">
                                     @if ($c->respuesta)
                                         <article class="flex gap-3 mt-4">
+                                            @if($c->user_rta->img)
                                             <div class="flex justify-center items-center w-12 h-12">
                                                 <img src="{{ asset('uploads/perfiles') . '/' . $c->user_rta->img }}"
                                                     class="rounded-full object-cover w-12 h-12">
                                             </div>
+                                            @else
+                                            <div class="flex justify-center items-center w-14 h-14 pb-3">
+                                                <img src="{{ asset('img/img_default.jpg') }}"
+                                                    class="rounded-full object-cover w-14 h-14" alt="">
+                                            </div>
+                                            @endif
                                             <div class="text-sm flex flex-col">
                                                 <p class="m-0 font-bold dark:text-gray-300">{{ $c->user_rta->nombre }}
                                                     {{ $c->user_rta->apellido }} <small
@@ -862,9 +869,8 @@
                                                     Responder
                                                 </button>
                                             </div>
-                                            {{-- <form id="form_fundamento" class="mt-3 formRta_0 hidden"> --}}
                                             <form action="{{ route('fundamento.rta', auth()->user()->id) }}"
-                                                method="POST" class="mt-3 formRta_0 hidden">
+                                                method="POST" class="mt-3 formRta_{{$i}} hidden">
                                                 @csrf
                                                 <input type="hidden" name="fundamento_id" value="{{ $c->id }}">
                                                 <textarea name="respuesta" id="respuesta" cols="30" rows="3" class="form-control sz p-2"
@@ -890,6 +896,9 @@
                                 </div>
                             </div>
                         </article>
+                        @php
+                            $i++;
+                        @endphp
                     @endforeach
                 </div>
             @endif
@@ -957,12 +966,16 @@
                         'Una vez aprobado, la misma no se podrá editar más', 1, 'Aprobar Solicitud').then((
                         confirmed) => {
                         if (confirmed) {
+                            loadingAlert('Aprobación en progreso, por favor espere',
+                                'Se están almacenando los cambios y notificando vía email');
+
                             fetch("{{ route('solicitud.aprobar') }}", {
                                     method: 'POST',
                                     body: form
                                 }).then((response) => response.json())
                                 .then((data) => {
                                     if (data) {
+                                        Swal.close();
                                         successAlert('¡Solicitud Aprobada!',
                                             'La solicitud fue aprobada correctamente').then((
                                             confirmed) => {
@@ -977,13 +990,20 @@
             }
         </script>
 
+        <!-- Cartel de carga que muestra que se están cargando la edición en el sistema -->
         <script>
-            document.addEventListener('DOMContentLoaded', e => {
-                if (document.querySelector('#alert_success')) {
-                    setTimeout(() => {
-                        document.querySelector('#alert_success').remove()
-                    }, 4000);
-                }
+            const btnSendSolicitudEdition = document.getElementById('btnSendSolicitudEdition');
+            btnSendSolicitudEdition.addEventListener('click', e => {
+                loadingAlert('Edición en progreso, por favor espere', 'Se está cargando la edición en el sistema');
+            })
+        </script>
+
+        <!-- Cartel que muestra que la solicitud fue creada/editada correctamente cuando se hace el submit -->
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                @if ($message = session('success'))
+                    successAlert('¡Solicitud Editada!', 'La Solicitud de Fractura fue editada correctamente')
+                @endif
             })
         </script>
     @endsection

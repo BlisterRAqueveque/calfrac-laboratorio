@@ -1,4 +1,4 @@
-<div class="container_mod border dark:border-none bg-white dark:tab_bg p-3 mt-4 shadow-sm text-xs xl:text-sm tab-pane fade" id="tab2-content" role="tabpanel"
+<div class="container_mod border dark:border-none bg-white dark:tab_bg p-3 mt-4 shadow-sm text-xs xl:text-sm tab-pane fade @if (session('success')) show active @endif" id="tab2-content" role="tabpanel"
     aria-labelledby="nav-tab2">
     <p class="m-0 mt-1 font-bold text-md xl:text-lg tracking-wide dark:text-gray-300">Formulario para crear un Ensayo</p>
 
@@ -1097,8 +1097,6 @@
                                             </p>
                                             <p class="mb-0 text-sm">Luego de la asignación del ensayo, la solicitud se
                                                 considera completada para su evaluación y calificación.</p>
-
-
                                         </div>
                                         <div class="modal-footer p-2">
                                             <button
@@ -1112,6 +1110,8 @@
                                                 </svg>
                                                 Cancelar</button>
                                             <button type="submit"
+                                                data-bs-dismiss="modal"
+                                                id="btnAsignarEnsayo"
                                                 class="w-full md:w-auto bg-green-700 bg-opacity-60 text-white p-2 rounded-sm hover:shadow-lg transition-all duration-75 font-bold text-sm">Confirmar</button>
                                         </div>
                                     </div>
@@ -1155,6 +1155,23 @@
             }
         })
     }
+</script>
+
+<!-- Cartel de carga que muestra que se están cargando la edición en el sistema -->
+<script>
+    const btnAsignarEnsayo = document.getElementById('btnAsignarEnsayo');
+    btnAsignarEnsayo.addEventListener('click', e => {
+        loadingAlert('Asignación en progreso, por favor espere', 'Se está cargando la asignación en el sistema');
+    })
+</script>
+
+<!-- Cartel que muestra que la solicitud fue creada/editada correctamente cuando se hace el submit -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        @if ($message = session('success'))
+            successAlert('¡Ensayo Asignado!', 'El Ensayo fue asignado correctamente')
+        @endif
+    })
 </script>
 
 <!-- Crea el submit del ensayo -->

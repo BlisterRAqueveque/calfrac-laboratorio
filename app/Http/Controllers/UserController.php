@@ -165,9 +165,7 @@ class UserController extends Controller
         $this->_sendEmailCredential($data, $user->email);
 
         return $user->id;
-    
     }
-
     /**
      * Envía el correo con las credenciales de ingreso
      */
@@ -177,5 +175,20 @@ class UserController extends Controller
             $message->to($correo)
                 ->subject('Credenciales de Ingreso | Laboratorio Calfrac');
         });
+    }
+
+    public function store_desactivar(Request $request)
+    {
+        $user = User::find($request->user_id_desactivar);
+        $user->estado = 0;
+        $user->save();
+        return $user->id;
+    }
+    public function store_activar(Request $request)
+    {
+        $user = User::find($request->user_id_activar);
+        $user->estado = 1;
+        $user->save();
+        return $user->id;
     }
 }

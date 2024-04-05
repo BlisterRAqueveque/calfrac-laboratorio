@@ -72,6 +72,8 @@ Route::get('/usuarios', [UserController::class, 'index'])->name('usuarios');
 Route::post('/create/usuario', [UserController::class, 'store'])->name('usuario.store');
 Route::post('/edit/usuario', [UserController::class, 'update'])->name('usuario.update');
 Route::post('/usuario/credencial', [UserController::class, 'store_credencial'])->name('usuario.credencial');
+Route::post('/usuario/desactivar', [UserController::class, 'store_desactivar'])->name('usuario.desactivar');
+Route::post('/usuario/activar', [UserController::class, 'store_activar'])->name('usuario.activar');
 
 # Yacimientos
 Route::get('/yacimientos', [YacimientoController::class, 'index'])->name('yacimientos');

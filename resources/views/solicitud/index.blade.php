@@ -80,13 +80,14 @@
             </article>
         </div>
 
-        @if (session('success'))
+        
+        {{-- @if (session('success'))
         <div
         id="alert_success"
             class="mt-3 bg-green-500 opacity-50 text-white p-2 text-center uppercase border-1 border-green-500 rounded-md font-semibold tracking-wide">
             {{ session('success') }}
         </div>
-        @endif
+        @endif --}}
 
         <div class="card border dark:border-none mt-4">
             <div class="card-header dark:card-bg-head bg-white p-3 flex flex-col md:flex-row items-center justify-between">

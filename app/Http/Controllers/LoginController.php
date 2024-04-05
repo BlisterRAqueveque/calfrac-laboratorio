@@ -21,10 +21,17 @@ class LoginController extends Controller
             'password' => 'required'
         ]);
 
-        if (!auth()->attempt($request->only('email', 'password'), $request->remember)) {
+        if (!auth()->attempt($request->only('email', 'password'))) {
             return back()->with('mensaje', 'Credenciales Incorrectas');
         }
+        
+        $user = auth()->user();
+        if ($user->estado == 0) {
+            auth()->logout();
+            return back()->with('mensaje', 'El usuario se encuentra inactivo en el sistema');
+        } else {
+            return redirect()->route('dashboard');
+        }
 
-        return redirect()->route('dashboard');
     }
 }
