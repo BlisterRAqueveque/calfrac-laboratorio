@@ -43,11 +43,15 @@ Route::post('/ensayo/create', [EnsayoController::class, 'store'])->name('ensayo.
 Route::post('/ensayo/assigned', [EnsayoController::class, 'assigned'])->name('ensayo.assigned');
 
 # Solicitudes
+# Fractura
 Route::get('/solicitud', [SolicitudController::class, 'create'])->name('solicitud.create.show')->middleware('auth');
 Route::post('/solicitud', [SolicitudController::class, 'store_fractura'])->name('solicitud.fractura');
 Route::post('/solicitud/edicion', [SolicitudController::class, 'update'])->name('solicitud.update');
 Route::post('/solicitud/aprobada', [SolicitudController::class, 'store_aprobar'])->name('solicitud.aprobar');
 Route::get('/solicitud/fractura/{solicitud_id}', [SolicitudController::class, 'show_fractura'])->name('solicitud.fractura.show');
+
+# Lechada
+Route::post('/solicitud/lechada', [SolicitudController::class, 'store_lechada'])->name('solicitud.lechada');
 
 // Route::get('/send-email', [SolicitudController::class, 'sendEmail']);
 Route::get('/send-email', [SolicitudController::class, 'viewMail']);

@@ -28,9 +28,9 @@ class SolicitudController extends Controller
 
     public function create()
     {
-        // dd(auth()->user()->permisos);
         $this->authorize('create', Solicitud::class);
         $data = [
+            'ensayos' => Ensayo::select('id', 'tvd', 'md', 'densidad_lechada', 'grado_temperatura', 'bhse', 'bhct')->get(),
             'clientes' => Cliente::all(),
             'yacimientos' => Yacimiento::all(),
             'sistemas_fluidos' => SistemasFluidos::all(),
@@ -148,6 +148,58 @@ class SolicitudController extends Controller
         if ($solicitud->id)
             return redirect('solicitud')->with('success', $solicitud->id);
             // return redirect()->route('solicitudes')->with('success', 'La Solicitud de Fractura Nº' . $solicitud->id . ' se ha creado correctamente.');
+    }
+
+    /**
+     * Crea una Solicitud de Lechada
+     * Primero crea el encabezado general, que es la "Solicitud" y luego crea la "Solicitud de Lechada"
+     */
+    public function store_lechada(Request $request) {
+        # Validamos los datos del encabezado general
+        $this->validate($request, [
+            'cliente' => 'required',
+            'locacion' => 'required',
+            'programa' => 'required',
+            'fecha_solicitud' => 'required',
+            'empresa' => 'required',
+            'fecha_tratamiento' => 'required',
+            'pozo' => 'required',
+            'fecha_reporte' => 'required',
+            'fecha_resultados' => 'required',
+            'equipo' => 'required',
+            'servicio' => 'required',
+            'reporte_lab_tall' => 'required',
+            'reporte_lab_lead' => 'required',
+            'tipo_trabajo' => 'required',
+            'tipo_cementacion' => 'required',
+            'ensayo_requerido' => 'required',
+        ]);
+
+        # Solicitud General
+        $solicitud = Solicitud::create([
+            'tipo' => 2,
+            'cliente' => $request->cliente,
+            'locacion' => $request->locacion,
+            'programa' => $request->programa,
+            'fecha_solicitud' => $request->fecha_solicitud,
+            'empresa' => $request->empresa,
+            'fecha_tratamiento' => $request->fecha_tratamiento,
+            'pozo' => $request->pozo,
+            'fecha_reporte' => $request->fecha_reporte,
+            'fecha_resultados' => $request->fecha_resultados,
+            'equipo' => $request->equipo,
+            'servicio' => $request->servicio,
+            'reporte_lab_tall' => $request->reporte_lab_tall,
+            'reporte_lab_lead' => $request->reporte_lab_lead,
+            'tipo_trabajo' => $request->tipo_trabajo,
+            'tipo_cementacion' => $request->tipo_cementacion,
+            'ensayo_requerido' => $request->ensayo_requerido,
+            'estado_solicitud_id' => 1,
+            'user_id' => auth()->user()->id
+        ]);
+
+        // if ($solicitud->id)
+        //     return redirect('solicitud')->with('success', $solicitud->id);
     }
 
     /**
@@ -288,10 +340,6 @@ class SolicitudController extends Controller
         $fundamento->fecha_hora_rta = date('Y-m-d H:i:s');
         $fundamento->save();
         return back();
-    }
-
-    public function store_lechada(Request $request)
-    {
     }
 
     public function store_lodo(Request $request)
