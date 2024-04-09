@@ -45,11 +45,18 @@ class Ensayo extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function aditivos() {
+    public function aditivos()
+    {
         return $this->hasMany(RelAditivosEnsayos::class);
     }
 
-    public function requerimientos() {
+    public function requerimientos()
+    {
         return $this->hasMany(RelRequerimientosEnsayos::class);
+    }
+
+    public function referencias()
+    {
+        return $this->hasMany(RelEnsayoReferenciaSolicitud::class);
     }
 }

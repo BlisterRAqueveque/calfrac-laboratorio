@@ -52,6 +52,7 @@ Route::get('/solicitud/fractura/{solicitud_id}', [SolicitudController::class, 's
 
 # Lechada
 Route::post('/solicitud/lechada', [SolicitudController::class, 'store_lechada'])->name('solicitud.lechada');
+Route::get('/solicitud/lechada/{solicitud_id}', [SolicitudController::class, 'show_lechada'])->name('solicitud.lechada.show');
 
 // Route::get('/send-email', [SolicitudController::class, 'sendEmail']);
 Route::get('/send-email', [SolicitudController::class, 'viewMail']);

@@ -10,109 +10,147 @@
 
             <div class="grid xs:grid-cols-2 md:grid-cols-6 gap-3 mt-3">
                 <div class="col-span-2 xl:col-span-1">
-                    <label for="cliente" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Cliente <span
+                    <label for="cliente_lechada" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Cliente <span
                             class="text-red-500">*</span></label>
-                    <select name="cliente" id="cliente" class="form-select text-sm p-2">
+                    <select name="cliente_lechada" id="cliente_lechada" class="form-select text-sm p-2">
                         <option value="">-- Seleccione --</option>
                         @foreach ($clientes as $c)
-                            <option value="{{ $c->id }}">{{ $c->nombre }}</option>
+                            <option value="{{ $c->id }}" {{ old('cliente_lechada') == $c->id ? 'selected' : '' }}>{{ $c->nombre }}</option>
                         @endforeach
                     </select>
+                    @error('cliente_lechada')
+                        <small class="text-xs text-red-600">El cliente es requerido</small>
+                    @enderror
                 </div>
                 <div class="col-span-2 xl:col-span-1">
-                    <label for="locacion" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Yacimiento /
+                    <label for="locacion_lechada" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Yacimiento /
                         Locación
                         <span class="text-red-500">*</span></label>
-                    <select name="locacion" id="locacion" class="form-select text-sm p-2">
+                    <select name="locacion_lechada" id="locacion_lechada" class="form-select text-sm p-2">
                         <option value="">-- Seleccione --</option>
-                        <option value="1">Yacimiento 1</option>
-                        <option value="2">Yacimiento 2</option>
+                        <option value="1" {{ old('locacion_lechada') == '1' ? 'selected' : '' }}>Yacimiento 1</option>
+                        <option value="2" {{ old('locacion_lechada') == '2' ? 'selected' : '' }}>Yacimiento 2</option>
                         {{-- @foreach ($yacimientos as $y)
                             <option value="{{ $y->id }}">{{ $y->nombre }}</option>
                         @endforeach --}}
                     </select>
+                    @error('locacion_lechada')
+                        <small class="text-xs text-red-600">La locación es requerida</small>
+                    @enderror
                 </div>
                 <div class="col-span-2 xl:col-span-1">
-                    <label for="programa" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Programa <span
+                    <label for="programa_lechada" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Programa <span
                             class="text-red-500">*</span></label>
-                    <input type="text" name="programa" id="programa" class="form-control text-sm p-2"
-                        placeholder="Programa">
+                    <input type="text" name="programa_lechada" id="programa_lechada" class="form-control text-sm p-2"
+                        placeholder="Programa" value="{{ old('programa_lechada') }}">
+                    @error('programa_lechada')
+                        <small class="text-xs text-red-600">El programa es requerido</small>
+                    @enderror
                 </div>
                 <div class="col-span-2 xl:col-span-1">
-                    <label for="fecha_solicitud" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de
+                    <label for="fecha_solicitud_lechada" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de
                         Solicitud <span class="text-red-500">*</span></label>
-                    <input type="date" name="fecha_solicitud" id="fecha_solicitud" class="form-control text-sm p-2">
+                    <input type="date" name="fecha_solicitud_lechada" id="fecha_solicitud_lechada" class="form-control text-sm p-2" value="{{ old('fecha_solicitud_lechada') }}">
+                    @error('fecha_solicitud_lechada')
+                        <small class="text-xs text-red-600">La fecha de solicitud es requerida</small>
+                    @enderror
                 </div>
 
                 <div class="col-span-2">
-                    <label for="empresa" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Empresa <span
+                    <label for="empresa_lechada" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Empresa <span
                             class="text-red-500">*</span></label>
-                    <input type="text" name="empresa" id="empresa" class="form-control text-sm p-2"
-                        placeholder="Empresa / Compañía">
+                    <input type="text" name="empresa_lechada" id="empresa_lechada" class="form-control text-sm p-2"
+                        placeholder="Empresa / Compañía" value="{{ old('empresa_lechada') }}">
+                    @error('empresa_lechada')
+                        <small class="text-xs text-red-600">La empresa es requerida</small>
+                    @enderror
                 </div>
 
                 <div class="col-span-2 xl:col-span-1">
-                    <label for="fecha_tratamiento" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha
+                    <label for="fecha_tratamiento_lechada" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha
                         de Tratamiento <span class="text-red-500">*</span></label>
-                    <input type="date" name="fecha_tratamiento" id="fecha_tratamiento"
-                        class="form-control text-sm p-2">
+                    <input type="date" name="fecha_tratamiento_lechada" id="fecha_tratamiento_lechada"
+                        class="form-control text-sm p-2" value="{{ old('fecha_tratamiento_lechada') }}">
+                    @error('fecha_tratamiento_lechada')
+                        <small class="text-xs text-red-600">La fecha de tratamiento es requerida</small>
+                    @enderror
                 </div>
 
                 <div class="col-span-2 xl:col-span-1">
-                    <label for="pozo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Pozo <span
+                    <label for="pozo_lechada" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Pozo <span
                             class="text-red-500">*</span></label>
-                    <input type="text" name="pozo" id="pozo" class="form-control text-sm p-2"
-                        placeholder="Pozo">
+                    <input type="text" name="pozo_lechada" id="pozo_lechada" class="form-control text-sm p-2"placeholder="Pozo" value="{{ old('pozo_lechada') }}">
+                    @error('pozo_lechada')
+                        <small class="text-xs text-red-600">El pozo es requerido</small>
+                    @enderror
                 </div>
 
                 <div class="col-span-2 xl:col-span-1">
-                    <label for="fecha_reporte" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de
+                    <label for="fecha_reporte_lechada" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de
                         Reporte <span class="text-red-500">*</span></label>
-                    <input type="date" name="fecha_reporte" id="fecha_reporte" class="form-control text-sm p-2">
+                    <input type="date" name="fecha_reporte_lechada" id="fecha_reporte_lechada" class="form-control text-sm p-2" value="{{ old('fecha_reporte_lechada') }}">
+                    @error('fecha_reporte_lechada')
+                        <small class="text-xs text-red-600">La fecha de reporte es requerida</small>
+                    @enderror
                 </div>
 
                 <div class="col-span-2 xl:col-span-1">
-                    <label for="fecha_resultados" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha
+                    <label for="fecha_resultados_lechada" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha
                         de
                         Resultados <span class="text-red-500">*</span></label>
-                    <input type="date" name="fecha_resultados" id="fecha_resultados"
-                        class="form-control text-sm p-2">
+                    <input type="date" name="fecha_resultados_lechada" id="fecha_resultados_lechada"
+                        class="form-control text-sm p-2" value="{{ old('fecha_resultados_lechada') }}">
+                    @error('fecha_resultados_lechada')
+                        <small class="text-xs text-red-600">La fecha de resultados es requerida</small>
+                    @enderror
                 </div>
 
                 <div class="col-span-2 xl:col-span-1">
-                    <label for="equipo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Equipo <span
+                    <label for="equipo_lechada" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Equipo <span
                             class="text-red-500">*</span></label>
-                    <input type="text" name="equipo" id="equipo" class="form-control text-sm p-2"
-                        placeholder="Ingrese el equipo">
+                    <input type="text" name="equipo_lechada" id="equipo_lechada" class="form-control text-sm p-2"
+                        placeholder="Ingrese el equipo" value="{{ old('equipo_lechada') }}">
+                    @error('equipo_lechada')
+                        <small class="text-xs text-red-600">El equipo es requerido</small>
+                    @enderror
                 </div>
 
                 <div class="col-span-2 xl:col-span-1">
-                    <label for="servicio" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Servicio <span
-                            class="text-red-500">*</span></label>
-                    <input type="text" name="servicio" id="servicio" class="form-control text-sm p-2"
-                        placeholder="Ingrese el servicio">
+                    <label for="servicio_lechada" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Servicio
+                        <span class="text-red-500">*</span></label>
+                    <input type="text" name="servicio_lechada" id="servicio_lechada" class="form-control text-sm p-2"
+                        placeholder="Ingrese el servicio" value="{{ old('servicio_lechada') }}">
+                    @error('servicio_lechada')
+                        <small class="text-xs text-red-600">El servicio es requerido</small>
+                    @enderror
                 </div>
 
                 <div class="col-span-2 md:col-span-2 xl:col-span-1">
-                    <label for="reporte_lab_tall"
+                    <label for="reporte_lab_tall_lechada"
                         class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Reporte
                         Laboratorio Tall <span class="text-red-500">*</span></label>
-                    <input type="text" name="reporte_lab_tall" id="reporte_lab_tall"
-                        class="form-control text-sm p-2" placeholder="Ingrese el reporte">
+                    <input type="text" name="reporte_lab_tall_lechada" id="reporte_lab_tall_lechada"
+                        class="form-control text-sm p-2" placeholder="Ingrese el reporte" value="{{ old('reporte_lab_tall_lechada') }}">
+                    @error('reporte_lab_tall_lechada')
+                        <small class="text-xs text-red-600">El Reporte Tall es requerido</small>
+                    @enderror
                 </div>
 
                 <div class="col-span-2 md:col-span-2 xl:col-span-1">
-                    <label for="reporte_lab_lead"
+                    <label for="reporte_lab_lead_lechada"
                         class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Reporte
                         Laboratorio Lead <span class="text-red-500">*</span></label>
-                    <input type="text" name="reporte_lab_lead" id="reporte_lab_lead"
-                        class="form-control text-sm p-2" placeholder="Ingrese el reporte">
+                    <input type="text" name="reporte_lab_lead_lechada" id="reporte_lab_lead_lechada"
+                        class="form-control text-sm p-2" placeholder="Ingrese el reporte" value="{{ old('reporte_lab_lead_lechada') }}">
+                    @error('reporte_lab_lead_lechada')
+                        <small class="text-xs text-red-600">El Reporte Lead es requerido</small>
+                    @enderror
                 </div>
 
                 <div class="col-span-2 xl:col-span-1">
-                    <label for="tipo_trabajo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de
+                    <label for="tipo_trabajo_lechada" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de
                         Trabajo <span class="text-red-500">*</span></label>
-                    <select name="tipo_trabajo" id="tipo_trabajo" class="form-select text-sm p-2">
+                    <select name="tipo_trabajo_lechada" id="tipo_trabajo_lechada" class="form-select text-sm p-2">
                         <option value="">-- Seleccione --</option>
                         <option value="1">Tipo de Trabajo 1</option>
                         <option value="2">Tipo de Trabajo 2</option>
@@ -120,12 +158,15 @@
                             <option value="{{ $tipo->id }}">{{ $tipo->nombre }}</option>
                         @endforeach --}}
                     </select>
+                    @error('tipo_trabajo_lechada')
+                        <small class="text-xs text-red-600">El tipo de trabajo es requerido</small>
+                    @enderror
                 </div>
 
                 <div class="col-span-2 md:col-span-2 xl:col-span-1">
-                    <label for="tipo_cementacion" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo
+                    <label for="tipo_cementacion_lechada" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo
                         de Cementación <span class="text-red-500">*</span></label>
-                    <select name="tipo_cementacion" id="tipo_cementacion" class="form-select text-sm p-2">
+                    <select name="tipo_cementacion_lechada" id="tipo_cementacion_lechada" class="form-select text-sm p-2">
                         <option value="">-- Seleccione --</option>
                         <option value="1">Tipo de Cementación 1</option>
                         <option value="2">Tipo de Cementación 2</option>
@@ -133,14 +174,17 @@
                             <option value="{{ $tipo->id }}">{{ $tipo->nombre }}</option>
                         @endforeach --}}
                     </select>
+                    @error('tipo_cementacion_lechada')
+                        <small class="text-xs text-red-600">El tipo de cementación es requerido</small>
+                    @enderror
                 </div>
 
 
                 <div class="col-span-2 md:col-span-2 xl:col-span-1">
-                    <label for="ensayo_requerido"
+                    <label for="ensayo_requerido_lechada"
                         class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Ensayos
                         Requeridos <span class="text-red-500">*</span></label>
-                    <select name="ensayo_requerido" id="ensayo_requerido" class="form-select sz p-2">
+                    <select name="ensayo_requerido_lechada" id="ensayo_requerido_lechada" class="form-select sz p-2">
                         <option value="">-- Seleccione --</option>
                         <option value="1">Ensayo Requerido 1</option>
                         <option value="2">Ensayo Requerido 2</option>
@@ -148,6 +192,9 @@
                                         <option value="{{ $tipo->id }}">{{ $tipo->nombre }}</option>
                                     @endforeach --}}
                     </select>
+                    @error('ensayo_requerido_lechada')
+                        <small class="text-xs text-red-600">El ensayo es requerido</small>
+                    @enderror
                 </div>
             </div>
 
@@ -175,10 +222,9 @@
                     <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">OH / Trepano
                         <small>(in)</small></label>
                     <div class="grid grid-cols-2 gap-3">
-                        <input type="number" name="OH"
-                            class="form-control text-sm p-2" placeholder="OH">
-                        <input type="number" name="trepano" id=""
-                            class="form-control text-sm p-2" placeholder="Trepano">
+                        <input type="number" name="OH" class="form-control text-sm p-2" placeholder="OH" step=".01">
+                        <input type="number" name="trepano" id="" class="form-control text-sm p-2"
+                            placeholder="Trepano" step=".01">
                     </div>
                 </div>
 
@@ -187,9 +233,9 @@
                         OD</label>
                     <div class="grid grid-cols-2 gap-3">
                         <input type="number" name="casing_id" class="form-control text-sm p-2"
-                            placeholder="Casing ID">
+                            placeholder="Casing ID" step=".01">
                         <input type="number" name="casing_od" class="form-control text-sm p-2"
-                            placeholder="Casing OD">
+                            placeholder="Casing OD" step=".01">
                     </div>
                 </div>
 
@@ -197,7 +243,7 @@
                     <label for="densidad_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Densidad
                         del Lodo (ppg)</label>
                     <input type="number" name="densidad_lodo" id="densidad_lodo" class="form-control text-sm p-2"
-                        placeholder="Densidad del lodo">
+                        placeholder="Densidad del lodo" step=".01">
                 </div>
 
                 <div class="">
@@ -217,10 +263,10 @@
                     <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Profundidad
                         Pozo (MD / TVD) (m)</label>
                     <div class="grid grid-cols-2 gap-3">
-                        <input type="number" min="0" name="profundidad_pozo_md" class="form-control text-sm p-2"
-                            placeholder="MD">
-                        <input type="number" min="0" name="profundidad_pozo_tvd" class="form-control text-sm p-2"
-                            placeholder="TVD">
+                        <input type="number" min="0" name="profundidad_pozo_md"
+                            class="form-control text-sm p-2" placeholder="MD" step=".01">
+                        <input type="number" min="0" name="profundidad_pozo_tvd"
+                            class="form-control text-sm p-2" placeholder="TVD" step=".01">
                     </div>
                 </div>
 
@@ -229,10 +275,8 @@
                         /
                         TVD) (m)</label>
                     <div class="grid grid-cols-2 gap-3">
-                        <input type="text" name="base_md" class="form-control text-sm p-2"
-                            placeholder="MD">
-                        <input type="text" name="base_tvd" class="form-control text-sm p-2"
-                            placeholder="TVD">
+                        <input type="number" name="base_md" class="form-control text-sm p-2" placeholder="MD" step=".01">
+                        <input type="number" name="base_tvd" class="form-control text-sm p-2" placeholder="TVD" step=".01">
                     </div>
                 </div>
 
@@ -241,47 +285,43 @@
                         Slurry
                         (TVD / MD) (m)</label>
                     <div class="grid grid-cols-2 gap-3">
-                        <input type="text" name="top_of_slurry_tvd" class="form-control text-sm p-2"
-                            placeholder="TVD">
-                        <input type="text" name="top_of_slurry_md" class="form-control text-sm p-2"
-                            placeholder="MD">
+                        <input type="number" name="top_of_slurry_tvd" class="form-control text-sm p-2"
+                            placeholder="TVD" step=".01">
+                        <input type="number" name="top_of_slurry_md" class="form-control text-sm p-2"
+                            placeholder="MD" step=".01">
                     </div>
                 </div>
 
                 <div class="">
-                    <label
-                        class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Volumen</label>
-                    <input type="text" name="volumen" class="form-control text-sm p-2"
-                        placeholder="Volumen">
+                    <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Volumen</label>
+                    <input type="number" name="volumen" class="form-control text-sm p-2" placeholder="Volumen" step=".01">
                 </div>
 
                 <div class="">
                     <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Pump
                         Rate</label>
-                    <input type="text" name="pump_rate" class="form-control text-sm p-2"
-                        placeholder="Pump Rate">
+                    <input type="number" name="pump_rate" class="form-control text-sm p-2" placeholder="Pump Rate" step=".01">
                 </div>
 
                 <div class="md:col-span-2 xl:col-span-1">
                     <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Grado de
                         Temperatura Cº</label>
-                    <input type="text" name="grado_temperatura" class="form-control sz p-2"
-                        placeholder="Cº">
+                    <input type="number" name="grado_temperatura" class="form-control sz p-2" placeholder="Cº" step=".01">
                 </div>
 
                 <div class="grid grid-cols-2 col-span-2 xl:col-span-1 gap-3">
                     <div class="xl:col-span-1">
                         <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">BHST
                             Cº</label>
-                        <input type="text" name="bhst" id="" class="form-control text-sm p-2"
-                            placeholder="Cº">
+                        <input type="number" name="bhst" id="" class="form-control text-sm p-2"
+                            placeholder="Cº" step=".01">
                     </div>
 
                     <div class="xl:col-span-1">
                         <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">BHCT
                             Cº</label>
-                        <input type="text" name="bhct" id="" class="form-control sz p-2"
-                            placeholder="Cº">
+                        <input type="number" name="bhct" id="" class="form-control sz p-2"
+                            placeholder="Cº" step=".01">
                     </div>
                 </div>
             </div>
@@ -290,11 +330,11 @@
 
             <p class="m-0 font-bold text-lg my-3 tracking-wide">Requerimientos de Lechada</p>
 
-            <section>
+            <section id="section_desktop_requerimiento">
                 @include('solicitud.components.lechada.desktop.requerimientos')
             </section>
 
-            <section>
+            <section id="section_movil_requerimiento">
                 @include('solicitud.components.lechada.movil.requerimientos')
             </section>
 
@@ -306,7 +346,7 @@
                 <div class="col-span-2 md:col-span-1">
                     <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Ingrese una
                         observación (Opcional)</label>
-                    <textarea name="" id="" rows="5" class="form-control text-sm"
+                    <textarea name="observacion_lechada" rows="5" class="form-control text-sm"
                         placeholder="Máximo 500 caracteres"></textarea>
                 </div>
             </div>
@@ -318,7 +358,7 @@
                 <div>
                     <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">¿Quién
                         autoriza?</label>
-                    <select name="" id="" class="form-select text-sm">
+                    <select name="firma_autorizacion_lechada" class="form-select text-sm">
                         <option value="">-- Seleccione --</option>
                     </select>
                 </div>
@@ -326,7 +366,7 @@
                 <div>
                     <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de
                         Autorización</label>
-                    <input type="date" class="form-control text-sm">
+                    <input type="date" name="fecha_autorizacion_autorizacion" class="form-control text-sm">
                 </div>
             </div>
 
@@ -336,7 +376,7 @@
                 <div>
                     <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">¿Quién
                         reconoce el trabajo?</label>
-                    <select name="" id="" class="form-select text-sm">
+                    <select name="firma_reconocimiento_lechada" class="form-select text-sm">
                         <option value="">-- Seleccione --</option>
                     </select>
                 </div>
@@ -344,7 +384,7 @@
                 <div>
                     <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de
                         Reconocimiento</label>
-                    <input type="date" class="form-control text-sm">
+                    <input type="date" name="fecha_reconocimiento_lechada" class="form-control text-sm">
                 </div>
             </div>
         </div>
@@ -386,8 +426,6 @@
         </div>
     </div>
 </form>
-
-
 
 <!-- Script para agregar una formulación tentativa cuando se escuche por un click -->
 <script src="{{ asset('js/Solicitud/lechada.js') }}"></script>
@@ -550,11 +588,17 @@
 <!-- Cartel que muestra que la solicitud fue creada/editada correctamente cuando se hace el submit -->
 <script>
     document.addEventListener('DOMContentLoaded', () => {
+        if (screen.width <= 768) {
+            document.getElementById('section_desktop_requerimiento').remove();
+        } else {
+            document.getElementById('section_movil_requerimiento').remove();
+        }
+    });
+
         // @if ($message = session('success'))
         //     successAlert('¡Solicitud Creada!', 'La Solicitud de Lechada fue creada correctamente').then(
         //         (confirmed) => {
         //             window.location.replace('solicitudes');
         //         })
         // @endif
-    })
 </script>

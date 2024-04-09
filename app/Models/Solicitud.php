@@ -64,6 +64,10 @@ class Solicitud extends Model
         return $this->belongsTo(Estado_Solicitud::class, 'estado_solicitud_id');
     }
 
+    public function referencias() {
+        return $this->hasMany(RelEnsayoReferenciaSolicitud::class);
+    }
+
     public function fundamento() {
         return $this->hasMany(Edicion_Solicitud::class);
     }

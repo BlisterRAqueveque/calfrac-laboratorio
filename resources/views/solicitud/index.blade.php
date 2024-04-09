@@ -145,9 +145,11 @@
                                                 switch ($s->tipo) {
                                                     case '1':
                                                         echo 'Solicitud de Fractura';
+                                                        $url = 'solicitud.fractura.show';
                                                         break;
-                                                    case '2':
+                                                        case '2':
                                                         echo 'Solicitud de Lechada';
+                                                        $url = 'solicitud.lechada.show';
                                                         break;
                                                     case '3':
                                                         echo 'Solicitud de Lodo';
@@ -155,7 +157,7 @@
                                                 }
                                             @endphp
                                             <div class="flex items-center gap-3">
-                                                <a href="{{ route('solicitud.fractura.show', $s->id) }}"
+                                                <a href="{{ route($url, $s->id) }}"
                                                     class="text-gray-500">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                         viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"

@@ -26,7 +26,7 @@ btnAddFormulacion.addEventListener("click", (e) => {
     el(
       "p.text-sm",
       el("input.form-control text-xs", {
-        name: "formulacion_lote",
+        name: `formulacion[${i}][lote_principal]`,
         placeholder: "N° Lote",
       })
     )
@@ -39,7 +39,7 @@ btnAddFormulacion.addEventListener("click", (e) => {
     el(
       "p.text-sm",
       el("input.form-control text-xs", {
-        name: "formulacion_aditivo",
+        name: `formulacion[${i}][aditivo_principal]`,
         placeholder: "Aditivo",
       })
     )
@@ -52,7 +52,7 @@ btnAddFormulacion.addEventListener("click", (e) => {
     el(
       "p.text-sm",
       el("input.form-control text-xs", {
-        name: "formulacion_concentracion",
+        name: `formulacion[${i}][conc_principal]`,
         placeholder: "0.0%",
       })
     )
@@ -70,7 +70,7 @@ btnAddFormulacion.addEventListener("click", (e) => {
     el(
       "p.text-sm",
       el("input.form-control text-xs", {
-        name: "formulacion_lote",
+        name: `formulacion[${i}][lote_relleno]`,
         placeholder: "N° Lote",
       })
     )
@@ -83,7 +83,7 @@ btnAddFormulacion.addEventListener("click", (e) => {
     el(
       "p.text-sm",
       el("input.form-control text-xs", {
-        name: "formulacion_aditivo",
+        name: `formulacion[${i}][aditivo_relleno]`,
         placeholder: "Aditivo",
       })
     )
@@ -96,7 +96,7 @@ btnAddFormulacion.addEventListener("click", (e) => {
     el(
       "p.text-sm",
       el("input.form-control text-xs", {
-        name: "formulacion_concentracion",
+        name: `formulacion[${i}][conc_relleno]`,
         placeholder: "0.0%",
       })
     )
