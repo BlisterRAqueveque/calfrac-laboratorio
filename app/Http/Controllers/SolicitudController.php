@@ -155,6 +155,8 @@ class SolicitudController extends Controller
      * Primero crea el encabezado general, que es la "Solicitud" y luego crea la "Solicitud de Lechada"
      */
     public function store_lechada(Request $request) {
+        dd($request);
+        
         # Validamos los datos del encabezado general
         $this->validate($request, [
             'cliente' => 'required',

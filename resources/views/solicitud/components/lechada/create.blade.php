@@ -175,7 +175,7 @@
                     <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">OH / Trepano
                         <small>(in)</small></label>
                     <div class="grid grid-cols-2 gap-3">
-                        <input type="number" name="OH" id=""
+                        <input type="number" name="OH"
                             class="form-control text-sm p-2" placeholder="OH">
                         <input type="number" name="trepano" id=""
                             class="form-control text-sm p-2" placeholder="Trepano">
@@ -430,7 +430,6 @@
                 let ensayo_find = ensayos.filter(function(element) {
                     return element.id == select.value;
                 });
-
                 const {
                     id,
                     tvd,
