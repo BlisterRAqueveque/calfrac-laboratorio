@@ -4,6 +4,10 @@
 
 @layer utilities {
 
+  .collapse {
+    visibility: visible;
+  }
+
   .body-bg {
     background-color: #1a1d21
   }
@@ -44,6 +48,18 @@ html.loading {
 body {
   font-family: "Hanken Grotesk", sans-serif !important;
 }
+
+.vscomp-toggle-button {
+  padding: 8px;
+  border-radius: 5px;
+  color: #212529!important;
+  font-weight: 500;
+  border: 1.5px solid rgb(203, 202, 202);
+}
+.vscomp-ele {
+  max-width: 100%!important;
+}
+
 .container_mod {
   width: 85%;
   margin: 0 auto;

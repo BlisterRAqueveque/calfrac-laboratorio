@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "echarts": "^5.5.0",
-        "sweetalert2": "^11.10.6"
+        "sweetalert2": "^11.10.6",
+        "virtual-select-plugin": "^1.0.42"
     }
 }

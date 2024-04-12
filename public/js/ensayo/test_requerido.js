@@ -1,21 +1,25 @@
-const btnAddTest = document.getElementById('btnAddTest');
-const contenedor_tests_requeridos = document.getElementById('contenedor_tests_requeridos');
+const btnAddTest = document.getElementById("btnAddTest");
+const contenedor_tests_requeridos = document.getElementById(
+  "contenedor_tests_requeridos"
+);
 
 let aux = 1;
-btnAddTest.addEventListener('click', e => {
-    e.preventDefault();
+btnAddTest.addEventListener("click", (e) => {
+  e.preventDefault();
 
-    let html = `
+  let html = `
     <div class="mb-3 px-3 ">
 
     <div class="row rounded-md p-3 bg-gray-50 dark:dark_bg border dark:border-none border-gray-100 mb-3">
         <article class="col-xs-12 col-md-3 my-2">
             <label for="test" class="font-semibold tracking-wide sz dark:text-gray-300">Test ${aux}</label>
-            <select name="requerimientos[${aux}][test]" id="test" class="form-select sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none">
+            <select name="requerimientos[${aux}][test]" onchange="selectTest(this, ${aux})" class="form-select sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none">
                 <option value="">-- Seleccione --</option>
-                <option value="1">Test 1</option>
-                <option value="2">Test 2</option>
-                <option value="3">Test 3</option>
+                <option value="1">Tiempo de Bombeabilidad</option>
+                <option value="2">UCA - Resistencia a la Compresión</option>
+                <option value="3">Reología</option>
+                <option value="4">Pérdida de Filtrado</option>
+                <option value="5">Mezclabilidad</option>
             </select>
         </article>
 
@@ -39,7 +43,7 @@ btnAddTest.addEventListener('click', e => {
         <article class="col-xs-12 col-md-4 text-center my-2">
             <label for="" class="font-semibold tracking-wide sz dark:text-gray-300">Resultados</label>
             <div class="flex justify-center">
-                <button class="text-center bg-gray-200 dark:card-bg-head border dark:border-none dark:text-gray-300 rounded-lg px-10 py-1 text-xs xl:text-sm"
+                <button class="text-center bg-gray-200 dark:card-bg-head border dark:border-none dark:text-gray-300 rounded-lg px-10 py-1 text-xs xl:text-sm btn_modal_${aux}"
                     data-bs-toggle="modal" data-bs-target="#modal_resultado_${aux}" onclick="event.preventDefault()">Mostrar
                     Resultados</button>
             </div>
@@ -47,8 +51,7 @@ btnAddTest.addEventListener('click', e => {
 
     </div>
     <!-- Modal de los Resultados -->
-    <div class="modal fade dark:card-bg-head" id="modal_resultado_${aux}" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade dark:card-bg-head" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl dark:card-bg-head">
             <div class="modal-content dark:card-bg-head">
                 <div class="modal-header p-2 dark:text-gray-300">
@@ -421,7 +424,436 @@ btnAddTest.addEventListener('click', e => {
 
     </div> <!-- Requerimientos de Ensayo -->
 </div>
-    `   
-    contenedor_tests_requeridos.innerHTML += html;
-    aux++;
-})
+
+<div class="modal fade dark:card-bg-head" id="modal_tiempo_bombeabilidad" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl dark:card-bg-head">
+            <div class="modal-content dark:card-bg-head">
+            <div class="modal-header p-2 dark:text-gray-300">
+                    <h6 class="modal-title flex gap-3" id="exampleModalLabel">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+                        </svg>
+                        Información Requerida de los Resultados
+                    </h6>
+                    <button type="button" class="btn-close dark:text-gray-300" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <span class="ms-1 mb-0 font-light tracking-wide dark:text-gray-300">Tiempo de Bombeabilidad</span>
+                    <hr class="ms-1 mt-1 dark:bg-gray-500">
+
+                    <div class="row px-3 mb-2">
+                        <div class="col-xs-12 col-md-2 my-2">
+                            <label for="" class="font-semibold tracking-wide sz dark:text-gray-300">Planilla</label>
+                            <input type="number"
+                                class="form-control sz text-center placeholder:text-gray-300 placeholder:font-light dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none"
+                                placeholder="Nº" min="0" name="requerimientos[${aux}][resultados][planilla]">
+                        </div>
+
+                        <div class="col-xs-12 col-md-2 my-2">
+                            <label for="" class="font-semibold tracking-wide sz dark:text-gray-300">Consistómetro
+                                Nº</label>
+                            <input type="number"
+                                class="form-control sz text-center placeholder:text-gray-300 placeholder:font-light dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none"
+                                placeholder="Nº" name="requerimientos[${aux}][resultados][consistometro]" min="0">
+                        </div>
+
+                        <div class="col-xs-12 col-md-3 my-2">
+                            <label for="" class="font-semibold tracking-wide sz dark:text-gray-300">Tiempo de
+                                Acondicionamiento</label>
+                            <input type="text"
+                                class="form-control sz placeholder:text-gray-300 placeholder:font-light dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none"
+                                placeholder="Ingrese el tiempo" name="requerimientos[${aux}][resultados][tiempo_acondicionamiento]">
+                        </div>
+
+                        <div class="col-xs-12 col-md-2 my-2">
+                            <label for="" class="font-semibold tracking-wide sz dark:text-gray-300">Gradiente
+                                <small>(ºF/100
+                                    ft)</small></label>
+                            <input type="number"
+                                class="form-control sz text-center placeholder:text-gray-300 placeholder:font-light dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none"
+                                placeholder="Nº" min="0" name="requerimientos[${aux}][resultados][gradiente]">
+                        </div>
+
+                        <div class="col-xs-12 col-md-2 my-2">
+                            <label for="" class="font-semibold tracking-wide sz dark:text-gray-300">Temperatura
+                                <small>(ºC)</small></label>
+                            <input type="number"
+                                class="form-control sz text-center placeholder:text-gray-300 placeholder:font-light dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none"
+                                placeholder="ºC" min="0" name="requerimientos[${aux}][resultados][temperatura_bombeabilidad]">
+                        </div>
+
+                        <div class="col-xs-12 col-md-2 my-2">
+                            <label for="" class="font-semibold tracking-wide sz dark:text-gray-300">Presión
+                                <small>(psi)</small></label>
+                            <input type="number"
+                                class="form-control sz text-center placeholder:text-gray-300 placeholder:font-light dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none"
+                                placeholder="Nº" min="0" name="requerimientos[${aux}][resultados][presion]">
+                        </div>
+
+                        <div class="col-xs-12 col-md-2 my-2">
+                            <label for="" class="font-semibold tracking-wide sz dark:text-gray-300">40 Bc
+                                <small>(hh:mm)</small></label>
+                            <input type="text"
+                                class="form-control sz text-center placeholder:text-gray-300 placeholder:font-light dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none"
+                                placeholder="hh:mm" name="requerimientos[${aux}][resultados][40_bc]">
+                        </div>
+
+                        <div class="col-xs-12 col-md-2 my-2">
+                            <label for="" class="font-semibold tracking-wide sz dark:text-gray-300">70 Bc
+                                <small>(hh:mm)</small></label>
+                            <input type="text"
+                                class="form-control sz text-center placeholder:text-gray-300 placeholder:font-light dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none"
+                                placeholder="hh:mm" name="requerimientos[${aux}][resultados][70_bc]">
+                        </div>
+
+                        <div class="col-xs-12 col-md-2 my-2">
+                            <label for="" class="font-semibold tracking-wide sz dark:text-gray-300">100 Bc
+                                <small>(hh:mm)</small></label>
+                            <input type="text"
+                                class="form-control sz text-center placeholder:text-gray-300 placeholder:font-light dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none"
+                                placeholder="hh:mm" name="requerimientos[${aux}][resultados][100_bc]">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer p-2">
+                        <div class="flex flex-col justify-center md:flex-row md:justify-end gap-3">
+                            <button type="button"
+                                class="px-4 py-2 w-full md:w-auto bg-gray-300 hover:bg-gray-400 transition-all duration-100 border uppercase tracking-tight font-bold rounded-md text-xs xl:text-sm"
+                                data-bs-dismiss="modal">Cerrar</button>
+                            <button type="button"
+                                class="px-4 py-2 w-full md:w-auto bg-blue-400 hover:bg-blue-500 dark:bg-blue-700 dark:bg-opacity-20 transition-all duration-100 border dark:border-none uppercase tracking-tight font-bold rounded-md text-xs xl:text-sm text-white" data-bs-dismiss="modal">Guardar
+                                Resultados</button>
+                        </div>
+                    </div>
+            </div>
+        </div>        
+    </div>
+
+    <div id="container_modal_tiempo_bombeabilidad_${aux}"></div>
+    <div id="container_modal_uca_${aux}"></div>
+    <div id="container_modal_reologia_${aux}"></div>
+    <div id="container_modal_perdida_filtrado"></div>
+    <div id="container_modal_mezclabilidad"></div>
+</div>
+            `;
+  contenedor_tests_requeridos.innerHTML += html;
+  aux++;
+});
+
+function selectTest(e, aux) {
+  let btn_modal = document.querySelector(`.btn_modal_${aux}`);
+  console.log(e.value);
+  switch (e.value) {
+    case "1":
+      btn_modal.setAttribute(
+        "data-bs-target",
+        `#modal_tiempo_bombeabilidad_${aux}`
+      );
+      _createModalTiempoBombeabilidad(aux);
+      break;
+    case "2":
+      btn_modal.setAttribute("data-bs-target", `#modal_uca_${aux}`);
+      _createModalUca(aux);
+      break;
+      case "3":
+      btn_modal.setAttribute("data-bs-target", `#modal_reologia_${aux}`);
+      _createModalReologia(aux);
+      break;
+  }
+}
+
+function _createModalTiempoBombeabilidad(aux) {
+  let container = document.getElementById(
+    `container_modal_tiempo_bombeabilidad_${aux}`
+  );
+  let html = `
+    <div class="modal fade dark:card-bg-head" id="modal_tiempo_bombeabilidad_${aux}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl dark:card-bg-head">
+            <div class="modal-content dark:card-bg-head">
+            <div class="modal-header p-2 dark:text-gray-300">
+                <h6 class="modal-title flex gap-3" id="exampleModalLabel">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+                    </svg>
+                Información Requerida de los Resultados
+                </h6>
+            <button type="button" class="btn-close dark:text-gray-300" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <span class="ms-1 mb-0 font-light tracking-wide dark:text-gray-300">Tiempo de Bombeabilidad</span>
+            <hr class="ms-1 mt-1 dark:bg-gray-500">
+
+            <div class="row px-3 mb-2">
+                        <div class="col-xs-12 col-md-2 my-2">
+                            <label for="" class="font-semibold tracking-wide sz dark:text-gray-300">Planilla</label>
+                            <input type="number"
+                                class="form-control sz text-center placeholder:text-gray-300 placeholder:font-light dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none"
+                                placeholder="Nº" min="0" name="requerimientos[${aux}][resultados][planilla]">
+                        </div>
+
+                        <div class="col-xs-12 col-md-2 my-2">
+                            <label for="" class="font-semibold tracking-wide sz dark:text-gray-300">Consistómetro
+                                Nº</label>
+                            <input type="number"
+                                class="form-control sz text-center placeholder:text-gray-300 placeholder:font-light dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none"
+                                placeholder="Nº" name="requerimientos[${aux}][resultados][consistometro]" min="0">
+                        </div>
+
+                        <div class="col-xs-12 col-md-3 my-2">
+                            <label for="" class="font-semibold tracking-wide sz dark:text-gray-300">Tiempo de
+                                Acondicionamiento</label>
+                            <input type="text"
+                                class="form-control sz placeholder:text-gray-300 placeholder:font-light dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none"
+                                placeholder="Ingrese el tiempo" name="requerimientos[${aux}][resultados][tiempo_acondicionamiento]">
+                        </div>
+
+                        <div class="col-xs-12 col-md-2 my-2">
+                            <label for="" class="font-semibold tracking-wide sz dark:text-gray-300">Gradiente
+                                <small>(ºF/100
+                                    ft)</small></label>
+                            <input type="number"
+                                class="form-control sz text-center placeholder:text-gray-300 placeholder:font-light dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none"
+                                placeholder="Nº" min="0" name="requerimientos[${aux}][resultados][gradiente]">
+                        </div>
+
+                        <div class="col-xs-12 col-md-2 my-2">
+                            <label for="" class="font-semibold tracking-wide sz dark:text-gray-300">Temperatura
+                                <small>(ºC)</small></label>
+                            <input type="number"
+                                class="form-control sz text-center placeholder:text-gray-300 placeholder:font-light dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none"
+                                placeholder="ºC" min="0" name="requerimientos[${aux}][resultados][temperatura_bombeabilidad]">
+                        </div>
+
+                        <div class="col-xs-12 col-md-2 my-2">
+                            <label for="" class="font-semibold tracking-wide sz dark:text-gray-300">Presión
+                                <small>(psi)</small></label>
+                            <input type="number"
+                                class="form-control sz text-center placeholder:text-gray-300 placeholder:font-light dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none"
+                                placeholder="Nº" min="0" name="requerimientos[${aux}][resultados][presion]">
+                        </div>
+
+                        <div class="col-xs-12 col-md-2 my-2">
+                            <label for="" class="font-semibold tracking-wide sz dark:text-gray-300">40 Bc
+                                <small>(hh:mm)</small></label>
+                            <input type="text"
+                                class="form-control sz text-center placeholder:text-gray-300 placeholder:font-light dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none"
+                                placeholder="hh:mm" name="requerimientos[${aux}][resultados][40_bc]">
+                        </div>
+
+                        <div class="col-xs-12 col-md-2 my-2">
+                            <label for="" class="font-semibold tracking-wide sz dark:text-gray-300">70 Bc
+                                <small>(hh:mm)</small></label>
+                            <input type="text"
+                                class="form-control sz text-center placeholder:text-gray-300 placeholder:font-light dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none"
+                                placeholder="hh:mm" name="requerimientos[${aux}][resultados][70_bc]">
+                        </div>
+
+                        <div class="col-xs-12 col-md-2 my-2">
+                            <label for="" class="font-semibold tracking-wide sz dark:text-gray-300">100 Bc
+                                <small>(hh:mm)</small></label>
+                            <input type="text"
+                                class="form-control sz text-center placeholder:text-gray-300 placeholder:font-light dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none"
+                                placeholder="hh:mm" name="requerimientos[${aux}][resultados][100_bc]">
+                        </div>
+                    </div>
+
+                    <div class="modal-footer p-2">
+                        <div class="flex flex-col justify-center md:flex-row md:justify-end gap-3">
+                            <button type="button"
+                                class="px-4 py-2 w-full md:w-auto bg-gray-300 hover:bg-gray-400 transition-all duration-100 border uppercase tracking-tight font-bold rounded-md text-xs xl:text-sm"
+                                data-bs-dismiss="modal">Cerrar</button>
+                            <button type="button"
+                                class="px-4 py-2 w-full md:w-auto bg-blue-400 hover:bg-blue-500 dark:bg-blue-700 dark:bg-opacity-20 transition-all duration-100 border dark:border-none uppercase tracking-tight font-bold rounded-md text-xs xl:text-sm text-white" data-bs-dismiss="modal">Guardar
+                                Resultados</button>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+    `;
+  container.innerHTML = html;
+
+  // <div class="modal fade dark:card-bg-head" id="modal_tiempo_bombeabilidad"></div>
+  // <div class="modal-dialog modal-xl dark:card-bg-head">
+  //         <div class="modal-content dark:card-bg-head">
+  //         <div class="modal-header p-2 dark:text-gray-300">
+  //                 <h6 class="modal-title flex gap-3" id="exampleModalLabel">
+  //                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+  //                         stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+  //                         <path stroke-linecap="round" stroke-linejoin="round"
+  //                             d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+  //                     </svg>
+  //                     Información Requerida de los Resultados
+  //                 </h6>
+  //                 <button type="button" class="btn-close dark:text-gray-300" data-bs-dismiss="modal"
+  //                     aria-label="Close"></button>
+  //             </div>
+  // let div_modal, div_dialog, div_content, div_header, h6, button_close;
+
+  // div_modal = el('div.modal fade dark:card-bg-head', {id: `modal_tiempo_bombeabilidad_${aux}`})
+  // div_dialog = el('div.modal-dialog modal-xl dark:card-bg-head')
+  // div_content = el('div.modal-content dark:card-bg-head')
+  // div_header = el('div.modal-header p-2 dark:text-gray-300')
+  // h6 = el('h6.modal-title flex gap-3', 'Información Requerida de los Resultados')
+  // button_close = el('button.btn-close dark:text-gray-300', {'data-bs-dismiss': 'modal', 'aria-label': 'Close'})
+  // mount(div_header, h6)
+  // mount(div_header, button_close)
+  // mount(div_content, div_header)
+  // mount(div_dialog, div_content)
+  // mount(div_modal, div_dialog)
+  // mount(container, div_modal)
+}
+
+function _createModalUca(aux) {
+  let container = document.getElementById(`container_modal_uca_${aux}`);
+  let html = `
+    <div class="modal fade dark:card-bg-head" id="modal_uca_${aux}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl dark:card-bg-head">
+            <div class="modal-content dark:card-bg-head">
+                <div class="modal-header p-2 dark:text-gray-300">
+                    <h6 class="modal-title flex gap-3" id="exampleModalLabel">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+                        </svg> Información Requerida de los Resultados
+                    </h6>
+                    <button type="button" class="btn-close dark:text-gray-300" data-bs-dismiss="modal"
+                        aria-label="Close">
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <span class="ms-1 mb-0 font-light tracking-wide dark:text-gray-300">UCA - Resistencia a la Compresión</span>
+                    <hr class="ms-1 mt-1 dark:bg-gray-500">
+
+                    <div class="row px-3 mb-2">
+                        <div class="col-xs-12 col-md-2 text-center my-2">
+                            <label for="" class="font-semibold tracking-wide sz dark:text-gray-300">UCA Nº</label>
+                            <div class="flex gap-3">
+                                <input type="number"
+                                    class="form-control sz text-center placeholder:text-gray-300 placeholder:font-light dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none"
+                                    placeholder="Nº" min="0" name="requerimientos[${aux}][resultados][uca_numero]">
+                                <input type="number"
+                                    class="form-control sz text-center placeholder:text-gray-300 placeholder:font-light dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none"
+                                    placeholder="ºC" min="0" name="requerimientos[${aux}][resultados][uca_temperatura]">
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-md-2 my-2">
+                            <label for="" class="font-semibold tracking-wide sz dark:text-gray-300">50 psi
+                                <small>(hh:mm)</small></label>
+                            <input type="text"
+                                class="form-control sz text-center placeholder:text-gray-300 placeholder:font-light dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none"
+                                placeholder="hh:mm" name="requerimientos[${aux}][resultados][uca_50_psi]">
+                        </div>
+
+                        <div class="col-xs-12 col-md-2 my-2">
+                            <label for="" class="font-semibold tracking-wide sz dark:text-gray-300">500 psi
+                                <small>(hh:mm)</small></label>
+                            <input type="text"
+                                class="form-control sz text-center placeholder:text-gray-300 placeholder:font-light dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none"
+                                placeholder="hh:mm" name="requerimientos[${aux}][resultados][uca_500_psi]">
+                        </div>
+
+                        <div class="col-xs-12 col-md-2 my-2">
+                            <label for="" class="font-semibold tracking-wide sz dark:text-gray-300">1000 psi
+                                <small>(hh:mm)</small></label>
+                            <input type="text"
+                                class="form-control sz text-center placeholder:text-gray-300 placeholder:font-light dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none"
+                                placeholder="hh:mm" name="requerimientos[${aux}][resultados][uca_1000_psi]">
+                        </div>
+
+                        <div class="col-xs-12 col-md-2 my-2">
+                            <label for="" class="font-semibold tracking-wide sz dark:text-gray-300">12 hr
+                                <small>(psi)</small></label>
+                            <input type="number"
+                                class="form-control sz text-center placeholder:text-gray-300 placeholder:font-light dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none"
+                                placeholder="psi" min="0" name="requerimientos[${aux}][resultados][uca_12_hr]">
+                        </div>
+
+                        <div class="col-xs-12 col-md-2 my-2">
+                            <label for="" class="font-semibold tracking-wide sz dark:text-gray-300">24 hr
+                                <small>(psi)</small></label>
+                            <input type="number"
+                                class="form-control sz text-center placeholder:text-gray-300 placeholder:font-light dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none"
+                                placeholder="psi" min="0" name="requerimientos[${aux}][resultados][uca_24_hr]">
+                        </div>
+
+                        <div class="col-xs-12 col-md-3 my-2">
+                            <label for="" class="font-semibold tracking-wide sz dark:text-gray-300">Impedancia
+                                Acústica
+                                <small>(M/rayls)</small></label>
+                            <input type="text"
+                                class="form-control sz text-center placeholder:text-gray-300 placeholder:font-light dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none"
+                                placeholder="M/rayls" name="requerimientos[${aux}][resultados][uca_impedancia_acustica]">
+                        </div>
+
+                        <div class="col-xs-12 col-md-3 my-2">
+                            <label for="" class="font-semibold tracking-wide sz dark:text-gray-300">SGC cero
+                                <small>(hh:mm)</small></label>
+                            <input type="text"
+                                class="form-control sz text-center placeholder:text-gray-300 placeholder:font-light dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none"
+                                placeholder="hh:mm" name="requerimientos[${aux}][resultados][uca_sgc_cero]">
+                        </div>
+
+                        <div class="col-xs-12 col-md-3 my-2">
+                            <label for="" class="font-semibold tracking-wide sz dark:text-gray-300">SGC max
+                                <small>(hh:mm)</small></label>
+                            <input type="text"
+                                class="form-control sz text-center placeholder:text-gray-300 placeholder:font-light dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none"
+                                placeholder="hh:mm" name="requerimientos[${aux}][resultados][uca_sgc_max]">
+                        </div>
+
+                        <div class="col-xs-12 col-md-3 my-2">
+                            <label for="" class="font-semibold tracking-wide sz dark:text-gray-300">Tiempo
+                                <small>(hh:mm)</small></label>
+                            <input type="text"
+                                class="form-control sz text-center placeholder:text-gray-300 placeholder:font-light dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none"
+                                placeholder="hh:mm" name="requerimientos[${aux}][resultados][uca_tiempo]">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    `;
+  container.innerHTML = html;
+}
+
+function _createModalReologia(aux) {
+    let html = `
+    <div class="modal fade dark:card-bg-head" id="modal_uca_${aux}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl dark:card-bg-head">
+            <div class="modal-content dark:card-bg-head">
+                <div class="modal-header p-2 dark:text-gray-300">
+                    <h6 class="modal-title flex gap-3" id="exampleModalLabel">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+                        </svg> Información Requerida de los Resultados
+                    </h6>
+                    <button type="button" class="btn-close dark:text-gray-300" data-bs-dismiss="modal"
+                        aria-label="Close">
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <span class="ms-1 mb-0 font-light tracking-wide dark:text-gray-300">UCA - Resistencia a la Compresión</span>
+                    <hr class="ms-1 mt-1 dark:bg-gray-500">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    `;
+}

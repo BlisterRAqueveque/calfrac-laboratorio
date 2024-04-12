@@ -16,6 +16,10 @@ use App\Models\SistemasFluidos;
 use App\Models\Solicitud;
 use App\Models\SolicitudFractura;
 use App\Models\SolicitudLechada;
+use App\Models\TipoCementacion;
+use App\Models\TipoLodo;
+use App\Models\TipoRequerimientoCemento;
+use App\Models\TipoTrabajoCemento;
 use App\Models\User;
 use App\Models\Yacimiento;
 use Illuminate\Http\Request;
@@ -40,6 +44,10 @@ class SolicitudController extends Controller
             'analisis_microbial' => AnalisisMicrobial::all(),
             'agente_sosten' => AgenteSosten::all(),
             'otros_analisis' => OtrosAnalisis::all(),
+            'tipo_trabajo_cemento' => TipoTrabajoCemento::all(),
+            'tipo_cementacion' => TipoCementacion::all(),
+            'tipo_requerimiento_cemento' => TipoRequerimientoCemento::all(),
+            'tipo_lodo' =>  TipoLodo::all(),
             'users' => User::all(),
         ];
         return view('solicitud.create', $data);
@@ -164,53 +172,47 @@ class SolicitudController extends Controller
             'cliente_lechada' => 'required',
             'locacion_lechada' => 'required',
             'programa_lechada' => 'required',
-            'fecha_solicitud_lechada' => 'required',
             'empresa_lechada' => 'required',
-            'fecha_tratamiento_lechada' => 'required',
             'pozo_lechada' => 'required',
-            'fecha_reporte_lechada' => 'required',
             'fecha_resultados_lechada' => 'required',
             'equipo_lechada' => 'required',
             'servicio_lechada' => 'required',
-            'reporte_lab_tall_lechada' => 'required',
-            'reporte_lab_lead_lechada' => 'required',
+            'tipo_requerimiento_lechada' => 'required',
             'tipo_trabajo_lechada' => 'required',
             'tipo_cementacion_lechada' => 'required',
-            'ensayo_requerido_lechada' => 'required',
+            // 'ensayo_requerido_lechada' => 'required',
+            // 'ensayo_requerido_bullheading' => 'required',
         ]);
 
         # Solicitud General
         $solicitud = Solicitud::create([
             'tipo' => 2,
-            'cliente' => $request->cliente_lechada,
+            'cliente_id' => $request->cliente_lechada,
             'locacion' => $request->locacion_lechada,
             'programa' => $request->programa_lechada,
-            'fecha_solicitud' => $request->fecha_solicitud_lechada,
+            'fecha_solicitud' => date('Y-m-d'),
             'empresa' => $request->empresa_lechada,
-            'fecha_tratamiento' => $request->fecha_tratamiento_lechada,
             'pozo' => $request->pozo_lechada,
-            'fecha_reporte' => $request->fecha_reporte_lechada,
             'fecha_resultados' => $request->fecha_resultados_lechada,
             'equipo' => $request->equipo_lechada,
             'servicio' => $request->servicio_lechada,
-            'reporte_lab_tall' => $request->reporte_lab_tall_lechada,
-            'reporte_lab_lead' => $request->reporte_lab_lead_lechada,
-            'tipo_trabajo' => $request->tipo_trabajo_lechada,
-            'tipo_cementacion' => $request->tipo_cementacion_lechada,
-            'ensayo_requerido' => $request->ensayo_requerido_lechada,
+            'tipo_requerimiento_cemento_id' => $request->tipo_requerimiento_lechada,
+            'tipo_trabajo_cemento_id' => $request->tipo_trabajo_lechada,
+            'tipo_cementacion_id' => $request->tipo_cementacion_lechada,
             'estado_solicitud_id' => 1,
             'user_id' => auth()->user()->id
         ]);
 
         # Solicitud de Lechada
         SolicitudLechada::create([
+            'ensayo_requerido_principal' => $request->ensayo_requerido_principal == 'on' ? 1 : 0,
+            'ensayo_requerido_bullheading' => $request->ensayo_requerido_bullheading == 'on' ? 1 : 0,
             'OH' => $request->OH,
             'trepano' => $request->trepano,
             'casing_id' => $request->casing_id,
             'casing_od' => $request->casing_od,
             'densidad_lodo' => $request->densidad_lodo,
             'tipo_lodo' => $request->tipo_lodo,
-            'cia' => $request->cia,
             'profundidad_pozo_md' => $request->profundidad_pozo_md,
             'profundidad_pozo_tvd' => $request->profundidad_pozo_tvd,
             'base_md' => $request->base_md,
@@ -222,34 +224,21 @@ class SolicitudController extends Controller
             'grado_temperatura' => $request->grado_temperatura,
             'bhst' => $request->bhst,
             'bhct' => $request->bhct,
-            'reologia_principal' => $request->reologia_principal,
-            'reologia_relleno' => $request->reologia_relleno,
-            'densidad_principal' => $request->densidad_principal,
-            'densidad_relleno' => $request->densidad_relleno,
-            'filtrado_principal' => $request->filtrado_principal,
-            'filtrado_relleno' => $request->filtrado_relleno,
-            'bombeabilidad_principal' => $request->bombeabilidad_principal,
-            'bombeabilidad_relleno' => $request->bombeabilidad_relleno,
-            'resistencia_compresion_principal' => $request->resistencia_compresion_principal,
-            'resistencia_compresion_relleno' => $request->resistencia_compresion_relleno,
-            'tiempo_50_psi_principal' => $request->tiempo_50_psi_principal,
-            'tiempo_50_psi_relleno' => $request->tiempo_50_psi_relleno,
-            'tiempo_500_psi_principal' => $request->tiempo_500_psi_principal,
-            'tiempo_500_psi_relleno' => $request->tiempo_500_psi_relleno,
-            'resistencia_12_hs_principal' => $request->resistencia_12_hs_principal,
-            'resistencia_8_hs_relleno' => $request->resistencia_8_hs_relleno,
-            'resistencia_24_hs_principal' => $request->resistencia_24_hs_principal,
-            'resistencia_12_hs_relleno' => $request->resistencia_12_hs_relleno,
-            'agua_libre_principal' => $request->agua_libre_principal,
-            'agua_libre_relleno' => $request->agua_libre_relleno,
-            'sgs_principal' => $request->sgs_principal,
-            'sgs_relleno' => $request->sgs_relleno,
-            'tipo_cemento_principal' => $request->tipo_cemento_principal,
-            'tipo_cemento_relleno' => $request->tipo_cemento_relleno,
+            'reologia' => $request->reologia,
+            'densidad' => $request->densidad,
+            'filtrado' => $request->filtrado,
+            'bombeabilidad' => $request->bombeabilidad,
+            'tiempo_50_psi' => $request->tiempo_50_psi == 'on' ? 1 : 0,
+            'tiempo_500_psi' => $request->tiempo_500_psi == 'on' ? 1 : 0,
+            'resistencia_12_hs' => $request->resistencia_12_hs == 'on' ? 1 : 0,
+            'resistencia_24_hs' => $request->resistencia_24_hs == 'on' ? 1 : 0,
+            'agua_libre' => $request->agua_libre,
+            'sgs' => $request->sgs,
+            'tipo_cemento' => $request->tipo_cemento,
             'observacion' => $request->observacion_lechada,
-            'firma_autorizacion_lechada' => $request->firma_autorizacion_lechada,
-            'fecha_autorizacion' => $request->fecha_autorizacion_autorizacion,
-            'firma_reconocimiento_lechada' => $request->firma_reconocimiento_lechada,
+            'firma_autorizacion_id' => auth()->user()->id,
+            'fecha_autorizacion' => date('Y-m-d'),
+            'firma_reconocimiento_id' => $request->firma_reconocimiento_lechada,
             'fecha_reconocimiento' => $request->fecha_reconocimiento_lechada,
             'solicitud_id' => $solicitud->id,
             'usuario_carga' => auth()->user()->id
@@ -472,7 +461,13 @@ class SolicitudController extends Controller
             'ensayos_referencia' => RelEnsayoReferenciaSolicitud::where('solicitud_id', $solicitud_id)->get(),
             'formulacion_tentativa' => RelFormulacionTentativa::where('solicitud_id', $solicitud_id)->get(),
             'solicitud_lechada' => SolicitudLechada::where('solicitud_id', $solicitud_id)->get(),
+            'sistemas_fluidos' => SistemasFluidos::all(),
+            'analisis_microbial' => AnalisisMicrobial::all(),
+            'agente_sosten' => AgenteSosten::all(),
+            'otros_analisis' => OtrosAnalisis::all(),
+            'aditivos' => Aditivo::all(),
             'users' => User::all(),
+            'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
         return view('solicitud.components.lechada.show', $data);
     }

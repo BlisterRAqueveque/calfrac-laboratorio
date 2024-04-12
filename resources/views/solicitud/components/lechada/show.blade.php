@@ -154,7 +154,7 @@
                             </b>
                         </article>
 
-                        {{-- @if ($solicitud->ensayo_asignado_id)
+                        @if ($solicitud->ensayo_asignado_id)
                             <article class="flex items-center gap-1 dark:text-white">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
@@ -163,7 +163,7 @@
                                 Ensayo Asignado: <b class="text-gray-700 dark:text-gray-300">
                                     #{{ $solicitud->ensayo_asignado_id }}</b>
                             </article>
-                        @endif --}}
+                        @endif
                     </div>
                 </div>
 
@@ -179,11 +179,12 @@
                         data-bs-target="#tab1-content" role="tab" aria-controls="tab1-content"
                         aria-selected="true">Información de la Solicitud</a>
                 </li>
-                {{-- @if ($solicitud->aprobada == 1)
+                @if ($solicitud->aprobada == 1)
                     <li class="nav-item w-full text-center md:w-auto" role="presentation">
-                        <a class="nav-link nav_tab_mod text-violet-800 dark:text-violet-400 @if (session('success')) active @endif" aria-current="page"
-                            id="nav-tab1" href="#tab2-content" data-bs-toggle="tab" data-bs-target="#tab2-content"
-                            role="tab" aria" id="nav-tab2" data-bs-toggle="tab" role="tab">Ensayos</a>
+                        <a class="nav-link nav_tab_mod text-violet-800 dark:text-violet-400 @if (session('success')) active @endif"
+                            aria-current="page" id="nav-tab2" href="#tab2-content" data-bs-toggle="tab"
+                            data-bs-target="#tab2-content" role="tab" aria" id="nav-tab2" data-bs-toggle="tab"
+                            role="tab">Ensayos</a>
                     </li>
                 @else
                     <div class="flex flex-col md:flex-row text-center items-center">
@@ -192,9 +193,10 @@
                             <a class="nav-link nav_tab_mod text-violet-800 dark:text-violet-400 cursor-not-allowed"
                                 aria-current="page" aria-selected="false">Ensayos </a>
                         </li>
-                        <small class="text-gray-700 text-sm dark:text-gray-200 tracking-wide">(Debe aprobar la solicitud para asignar un ensayo)</small>
+                        <small class="text-gray-700 text-sm dark:text-gray-200 tracking-wide">(Debe aprobar la solicitud
+                            para asignar un ensayo)</small>
                     </div>
-                @endif --}}
+                @endif
             </ul>
 
         </section>
@@ -744,38 +746,49 @@
                     </div>
                 </div>
             @endif
+        </div>
 
-            <!-- Función para aprobar la solicitud -->
-            <script>
-                const btnAprobarSolicitud = document.getElementById('btnAprobarSolicitud');
-                btnAprobarSolicitud.addEventListener('click', e => {
-                    e.preventDefault();
+        @if ($ensayos->count() > 0)
+            @include('ensayo.show')
+        @else
+            @include('ensayo.create')
+        @endif
+        <br>
+    </div>
 
-                    let form = new FormData(document.getElementById('form_aprobar_solicitud'))
-                    confirmAlert('¿Está seguro de aprobar la solicitud?',
-                        'Una vez aprobado, la misma no se podrá editar más', 1, 'Aprobar Solicitud').then((
-                        confirmed) => {
-                        if (confirmed) {
-                            loadingAlert('Aprobación en progreso, por favor espere',
-                                'Se están almacenando los cambios y notificando vía email');
+    <!-- Función para aprobar la solicitud -->
+    <script>
+        const btnAprobarSolicitud = document.getElementById('btnAprobarSolicitud');
+        if (btnAprobarSolicitud) {
+            btnAprobarSolicitud.addEventListener('click', e => {
+                e.preventDefault();
 
-                            fetch("{{ route('solicitud.aprobar') }}", {
-                                    method: 'POST',
-                                    body: form
-                                }).then((response) => response.json())
-                                .then((data) => {
-                                    if (data) {
-                                        Swal.close();
-                                        successAlert('¡Solicitud Aprobada!',
-                                            'La solicitud fue aprobada correctamente').then((
-                                            confirmed) => {
-                                            window.location.reload();
-                                        })
-                                    }
-                                })
-                        }
-                    })
+                let form = new FormData(document.getElementById('form_aprobar_solicitud'))
+                confirmAlert('¿Está seguro de aprobar la solicitud?',
+                    'Una vez aprobado, la misma no se podrá editar más', 1, 'Aprobar Solicitud').then((
+                    confirmed) => {
+                    if (confirmed) {
+                        loadingAlert('Aprobación en progreso, por favor espere',
+                            'Se están almacenando los cambios y notificando vía email');
 
+                        fetch("{{ route('solicitud.aprobar') }}", {
+                                method: 'POST',
+                                body: form
+                            }).then((response) => response.json())
+                            .then((data) => {
+                                if (data) {
+                                    Swal.close();
+                                    successAlert('¡Solicitud Aprobada!',
+                                        'La solicitud fue aprobada correctamente').then((
+                                        confirmed) => {
+                                        window.location.reload();
+                                    })
+                                }
+                            })
+                    }
                 })
-            </script>
-        @endsection
+
+            })
+        }
+    </script>
+@endsection

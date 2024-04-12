@@ -336,12 +336,11 @@
 </body>
 
 </html>
+@vite('resources/js/app.js')
 @vite('resources/js/bootstrap.bundle.min.js')
 <script src="{{ asset('js/darkmode.js') }}"></script>
-
 <script src="{{ asset('js/alerts.js') }}"></script>
 <script src="{{ asset('js/helpers.js') }}"></script>
-
 
 <script>
     const btn_menu = document.getElementById('btn_menu');
