@@ -467,14 +467,6 @@
                 </button>
             </div>
 
-            {{-- <section id="section_desktop_requerimiento">
-                @include('solicitud.components.lechada.desktop.requerimientos')
-            </section> --}}
-
-            {{-- <section id="section_movil_requerimiento">
-                @include('solicitud.components.lechada.movil.requerimientos')
-            </section> --}}
-
             <hr class="my-4">
 
             <p class="m-0 font-bold text-lg my-3 tracking-wide">Observación / Comentarios</p>

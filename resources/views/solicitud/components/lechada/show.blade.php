@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('titulo')
-    Solicitud Lechada #1- Laboratorio
+    Solicitud Lechada #{{ $solicitud->id }}
 @endsection
 
 @section('contenido')
@@ -54,7 +54,7 @@
                             class="text-md xl:text-xl flex items-center gap-3 font-bold text-gray-700 dark:text-white">Solicitud
                             de
                             Lechada -
-                            #2
+                            #{{ $solicitud->id }}
                             @php
                                 switch ($solicitud->estado->id) {
                                     case '1':
@@ -210,29 +210,29 @@
             <div class="flex items-center justify-between">
                 <div class="flex w-full items-center justify-between flex-col md:flex-row">
                     <p class="m-0 font-bold text-lg tracking-wide dark:text-gray-300">Información General</p>
-                    {{-- @if (!$solicitud->aprobada) --}}
-                    <div class="flex gap-3">
-                        <button
-                            class="bg-cyan-600 dark:bg-blue-600 dark:hover:bg-blue-700 dark:bg-opacity-70 dark:text-blue-300 text-white font-bold tracking-wide px-3 py-1 rounded-sm flex gap-2 hover:bg-cyan-700 transition-all duration-200"
-                            id="btnHabilitarEdicion">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                            </svg>
-                            Habilitar Edición
-                        </button>
-                        <button
-                            class="bg-red-400 dark:bg-red-700 dark:bg-opacity-50 dark:text-red-600 text-white font-bold tracking-wide px-3 py-1 rounded-sm flex gap-2 hover:bg-red-500 transition-all duration-200 hidden"
-                            id="btnDeshabilitarEdicion">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                            </svg>
-                            Deshabilitar Edición
-                        </button>
-                    </div>
-                    {{-- @endif --}}
+                    @if (!$solicitud->aprobada)
+                        <div class="flex gap-3">
+                            <button
+                                class="bg-cyan-600 dark:bg-blue-600 dark:hover:bg-blue-700 dark:bg-opacity-70 dark:text-blue-300 text-white font-bold tracking-wide px-3 py-1 rounded-sm flex gap-2 hover:bg-cyan-700 transition-all duration-200"
+                                id="btnHabilitarEdicion">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                </svg>
+                                Habilitar Edición
+                            </button>
+                            <button
+                                class="bg-red-400 dark:bg-red-700 dark:bg-opacity-50 dark:text-red-600 text-white font-bold tracking-wide px-3 py-1 rounded-sm flex gap-2 hover:bg-red-500 transition-all duration-200 hidden"
+                                id="btnDeshabilitarEdicion">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                                </svg>
+                                Deshabilitar Edición
+                            </button>
+                        </div>
+                    @endif
                 </div>
             </div>
 
@@ -245,8 +245,10 @@
                         <label for="cliente_lechada"
                             class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Cliente <span
                                 class="text-red-500">*</span></label>
-                        <select name="cliente_lechada" id="cliente_lechada" class="form-select text-sm p-2" disabled>
-                            <option value="">-- Seleccione --</option>
+                        <select name="cliente_lechada" id="cliente_lechada" class="text-sm inp_edit" disabled>
+                            @foreach ($clientes as $c)
+                                <option value="{{ $c->id }}">{{ $c->nombre }}</option>
+                            @endforeach
                         </select>
                         @error('cliente_lechada')
                             <small class="text-xs text-red-600">El cliente es requerido</small>
@@ -254,10 +256,13 @@
                     </div>
                     <div class="col-span-2 xl:col-span-1">
                         <label for="locacion_lechada"
-                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Yacimiento / Locación</label>
-                        <input type="text" name="locacion_lechada" id="locacion_lechada"
-                            class="form-control text-sm p-2" placeholder="Programa" value="{{ $solicitud->locacion }}"
-                            readonly>
+                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Yacimiento / Locación <span
+                                class="text-red-500">*</span></label>
+                        <select name="locacion_lechada" id="locacion_lechada" class="text-sm" disabled>
+                            <option value="">-- Seleccione --</option>
+                            <option value="1" {{ $solicitud->locacion == 1 ? 'selected' : '' }}>Yacimiento 1</option>
+                            <option value="2" {{ $solicitud->locacion == 2 ? 'selected' : '' }}>Yacimiento 2</option>
+                        </select>
                         @error('locacion_lechada')
                             <small class="text-xs text-red-600">La locación es requerida</small>
                         @enderror
@@ -278,7 +283,8 @@
                             class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de
                             Solicitud <span class="text-red-500">*</span></label>
                         <input type="date" name="fecha_solicitud_lechada" id="fecha_solicitud_lechada"
-                            class="form-control text-sm p-2" value="{{ $solicitud->fecha_solicitud }}" readonly>
+                            class="form-control text-sm p-2" value="{{ $solicitud->fecha_solicitud->format('Y-m-d') }}"
+                            readonly>
                         @error('fecha_solicitud_lechada')
                             <small class="text-xs text-red-600">La fecha de solicitud es requerida</small>
                         @enderror
@@ -295,18 +301,7 @@
                             <small class="text-xs text-red-600">La empresa es requerida</small>
                         @enderror
                     </div>
-
-                    <div class="col-span-2 xl:col-span-1">
-                        <label for="fecha_tratamiento_lechada"
-                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha
-                            de Tratamiento <span class="text-red-500">*</span></label>
-                        <input type="date" name="fecha_tratamiento_lechada" id="fecha_tratamiento_lechada"
-                            class="form-control text-sm p-2" value="{{ $solicitud->fecha_tratamiento }}" readonly>
-                        @error('fecha_tratamiento_lechada')
-                            <small class="text-xs text-red-600">La fecha de tratamiento es requerida</small>
-                        @enderror
-                    </div>
-
+                    
                     <div class="col-span-2 xl:col-span-1">
                         <label for="pozo_lechada" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Pozo
                             <span class="text-red-500">*</span></label>
@@ -314,17 +309,6 @@
                             class="form-control text-sm p-2"placeholder="Pozo" value="{{ $solicitud->pozo }}" readonly>
                         @error('pozo_lechada')
                             <small class="text-xs text-red-600">El pozo es requerido</small>
-                        @enderror
-                    </div>
-
-                    <div class="col-span-2 xl:col-span-1">
-                        <label for="fecha_reporte_lechada"
-                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de
-                            Reporte <span class="text-red-500">*</span></label>
-                        <input type="date" name="fecha_reporte_lechada" id="fecha_reporte_lechada"
-                            class="form-control text-sm p-2" value="{{ $solicitud->fecha_reporte }}" readonly>
-                        @error('fecha_reporte_lechada')
-                            <small class="text-xs text-red-600">La fecha de reporte es requerida</small>
                         @enderror
                     </div>
 
@@ -362,27 +346,16 @@
                         @enderror
                     </div>
 
-                    <div class="col-span-2 md:col-span-2 xl:col-span-1">
-                        <label for="reporte_lab_tall_lechada"
-                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Reporte
-                            Laboratorio Tall <span class="text-red-500">*</span></label>
-                        <input type="text" name="reporte_lab_tall_lechada" id="reporte_lab_tall_lechada"
-                            class="form-control text-sm p-2" placeholder="Ingrese el reporte"
-                            value="{{ $solicitud->reporte_lab_tall }}" readonly>
-                        @error('reporte_lab_tall_lechada')
-                            <small class="text-xs text-red-600">El Reporte Tall es requerido</small>
-                        @enderror
-                    </div>
-
-                    <div class="col-span-2 md:col-span-2 xl:col-span-1">
-                        <label for="reporte_lab_lead_lechada"
-                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Reporte
-                            Laboratorio Lead <span class="text-red-500">*</span></label>
-                        <input type="text" name="reporte_lab_lead_lechada" id="reporte_lab_lead_lechada"
-                            class="form-control text-sm p-2" placeholder="Ingrese el reporte"
-                            value="{{ $solicitud->reporte_lab_lead }}" readonly>
-                        @error('reporte_lab_lead_lechada')
-                            <small class="text-xs text-red-600">El Reporte Lead es requerido</small>
+                    <div class="col-span-2 xl:col-span-1">
+                        <label for="tipo_requerimiento_lechada"
+                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de Requerimiento <span class="text-red-500">*</span></label>
+                        <select name="tipo_requerimiento_lechada" id="tipo_requerimiento_lechada" disabled>
+                            @foreach ($tipo_requerimiento_cemento as $tipo)
+                                <option value="{{ $tipo->id }}" {{ $solicitud->tipo_requerimiento_cemento_id == $tipo->id ? 'selected' : '' }}>{{ $tipo->nombre }}</option>
+                            @endforeach
+                        </select>
+                        @error('tipo_requerimiento_lechada')
+                            <small class="text-xs text-red-600">El tipo de requerimiento es requerido</small>
                         @enderror
                     </div>
 
@@ -390,16 +363,12 @@
                         <label for="tipo_trabajo_lechada"
                             class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de
                             Trabajo <span class="text-red-500">*</span></label>
-                        <select name="tipo_trabajo_lechada" id="tipo_trabajo_lechada" class="form-select text-sm p-2"
-                            disabled>
-                            <option value="">-- Seleccione --</option>
-                            <option value="1" {{ $solicitud->tipo_trabajo == '1' ? 'selected' : '' }}>Tipo de Trabajo
-                                1</option>
-                            <option value="2" {{ $solicitud->tipo_trabajo == '2' ? 'selected' : '' }}>Tipo de Trabajo
-                                2</option>
-                            {{-- @foreach ($tipo_trabajo as $tipo)
-                                <option value="{{ $tipo->id }}">{{ $tipo->nombre }}</option>
-                            @endforeach --}}
+                        <select name="tipo_trabajo_lechada" id="tipo_trabajo_lechada" class="text-sm" disabled>
+                            @foreach ($tipo_trabajos as $tipo)
+                                <option value="{{ $tipo->id }}"
+                                    {{ $solicitud->tipo_trabajo == $tipo->id ? 'selected' : '' }}>{{ $tipo->nombre }}
+                                </option>
+                            @endforeach
                         </select>
                         @error('tipo_trabajo_lechada')
                             <small class="text-xs text-red-600">El tipo de trabajo es requerido</small>
@@ -410,16 +379,13 @@
                         <label for="tipo_cementacion_lechada"
                             class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo
                             de Cementación <span class="text-red-500">*</span></label>
-                        <select name="tipo_cementacion_lechada" id="tipo_cementacion_lechada"
-                            class="form-select text-sm p-2" disabled>
+                        <select name="tipo_cementacion_lechada" id="tipo_cementacion_lechada" class="text-sm" disabled>
                             <option value="">-- Seleccione --</option>
-                            <option value="1" {{ $solicitud->tipo_cementacion == '1' ? 'selected' : '' }}>Tipo de
-                                Cementación 1</option>
-                            <option value="2" {{ $solicitud->tipo_cementacion == '2' ? 'selected' : '' }}>Tipo de
-                                Cementación 2</option>
-                            {{-- @foreach ($tipo_trabajo as $tipo)
-                                <option value="{{ $tipo->id }}">{{ $tipo->nombre }}</option>
-                            @endforeach --}}
+                            @foreach ($tipo_cementacion as $tipo)
+                                <option value="{{ $tipo->id }}"
+                                    {{ $solicitud->tipo_cementacion_id == $tipo->id ? 'selected' : '' }}>
+                                    {{ $tipo->nombre }}</option>
+                            @endforeach
                         </select>
                         @error('tipo_cementacion_lechada')
                             <small class="text-xs text-red-600">El tipo de cementación es requerido</small>
@@ -431,17 +397,17 @@
                         <label for="ensayo_requerido_lechada"
                             class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Ensayos
                             Requeridos <span class="text-red-500">*</span></label>
-                        <select name="ensayo_requerido_lechada" id="ensayo_requerido_lechada"
-                            class="form-select text-sm p-2" disabled>
-                            <option value="">-- Seleccione --</option>
-                            <option value="1" {{ $solicitud->ensayo_requerido == '1' ? 'selected' : '' }}>Ensayo
-                                Requerido 1</option>
-                            <option value="2" {{ $solicitud->ensayo_requerido == '2' ? 'selected' : '' }}>Ensayo
-                                Requerido 2</option>
-                            {{-- @foreach ($tipo_trabajo as $tipo)
-                                            <option value="{{ $tipo->id }}">{{ $tipo->nombre }}</option>
-                                        @endforeach --}}
-                        </select>
+                        <div class="flex gap-1">
+                            <label for="ensayo_requerido_principal"
+                                class="bg-gray-200 p-1 w-full max-w-28 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
+                                <input type="checkbox" name="ensayo_requerido_principal" id="ensayo_requerido_principal" {{ $solicitud_lechada[0]->ensayo_requerido_principal == 1 ? 'checked' : '' }} disabled>
+                                Principal</label>
+                            <label for="ensayo_requerido_bullheading"
+                                class="bg-gray-200 p-1 w-full max-w-28 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
+                                <input type="checkbox" name="ensayo_requerido_bullheading"
+                                    id="ensayo_requerido_bullheading" {{ $solicitud_lechada[0]->ensayo_requerido_relleno == 1 ? 'checked' : '' }} disabled>
+                                Bullheading</label>
+                        </div>
                         @error('ensayo_requerido_lechada')
                             <small class="text-xs text-red-600">El ensayo es requerido</small>
                         @enderror
@@ -627,11 +593,7 @@
 
                 <p class="m-0 font-bold text-lg my-3 tracking-wide">Requerimientos de Lechada</p>
 
-                <section id="section_desktop_requerimiento">
-                    @include('solicitud.components.lechada.desktop.show_requerimientos_dk')
-                </section>
-
-                <hr class="my-4">
+                @include('solicitud.components.lechada.requerimientos')
 
                 <p class="m-0 font-bold text-lg my-3 tracking-wide">Observación / Comentarios</p>
 
@@ -668,7 +630,7 @@
                         <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de
                             Autorización</label>
                         <input type="date" name="fecha_autorizacion_autorizacion"
-                            value="{{ $solicitud_lechada[0]->fecha_reconocimiento }}" readonly
+                            value="{{ $solicitud_lechada[0]->fecha_autorizacion }}" readonly
                             class="form-control text-sm">
                     </div>
                 </div>
@@ -704,7 +666,6 @@
                 </div>
 
                 <hr class="my-4">
-
 
             </form>
 
@@ -755,6 +716,31 @@
         @endif
         <br>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            VirtualSelect.init({
+                ele: "#cliente_lechada",
+                placeholder: "Seleccione el cliente",
+            });
+            VirtualSelect.init({
+                ele: "#locacion_lechada",
+                placeholder: "Seleccione el yacimiento",
+            });
+            VirtualSelect.init({
+                ele: "#tipo_requerimiento_lechada",
+                placeholder: "Seleccione el tipo de requerimiento",
+            });
+            VirtualSelect.init({
+                ele: "#tipo_trabajo_lechada",
+                placeholder: "Seleccione el tipo de trabajo",
+            });
+            VirtualSelect.init({
+                ele: "#tipo_cementacion_lechada",
+                placeholder: "Seleccione el tipo de cementación",
+            });
+        })
+    </script>
 
     <!-- Función para aprobar la solicitud -->
     <script>

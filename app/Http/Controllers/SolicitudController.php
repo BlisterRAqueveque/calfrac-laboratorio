@@ -467,6 +467,10 @@ class SolicitudController extends Controller
             'otros_analisis' => OtrosAnalisis::all(),
             'aditivos' => Aditivo::all(),
             'users' => User::all(),
+            'clientes' => Cliente::all(),
+            'tipo_requerimiento_cemento' => TipoRequerimientoCemento::all(),
+            'tipo_trabajos' => TipoTrabajoCemento::all(),
+            'tipo_cementacion' => TipoCementacion::all(),
             'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
         return view('solicitud.components.lechada.show', $data);
