@@ -10,6 +10,7 @@ use App\Models\Cliente;
 use App\Models\Edicion_Solicitud;
 use App\Models\Ensayo;
 use App\Models\OtrosAnalisis;
+use App\Models\RelAditivoSolicitudLechada;
 use App\Models\RelEnsayoReferenciaSolicitud;
 use App\Models\RelFormulacionTentativa;
 use App\Models\SistemasFluidos;
@@ -204,7 +205,7 @@ class SolicitudController extends Controller
         ]);
 
         # Solicitud de Lechada
-        SolicitudLechada::create([
+        $solicitud_lechada = SolicitudLechada::create([
             'ensayo_requerido_principal' => $request->ensayo_requerido_principal == 'on' ? 1 : 0,
             'ensayo_requerido_bullheading' => $request->ensayo_requerido_bullheading == 'on' ? 1 : 0,
             'OH' => $request->OH,
@@ -247,6 +248,7 @@ class SolicitudController extends Controller
         // == Relaciones ==
 
         # Ensayos de Referencias
+        /*
         $ensayos_referencias = $request->ensayo_referencia;
 
         if ($ensayos_referencias && count($ensayos_referencias) > 0) {
@@ -265,20 +267,17 @@ class SolicitudController extends Controller
                 }
             }
         }
+        */
 
         # Formulaciones Tentativas
-        $formulaciones = $request->formulacion;
+        if ($request->aditivos) {
 
-        if ($formulaciones && count($formulaciones) > 0) {
-            foreach ($formulaciones as $value) {
-                RelFormulacionTentativa::create([
-                    'solicitud_id' => $solicitud->id,
-                    'lote_principal' => $value['lote_principal'],
-                    'aditivo_principal' => $value['aditivo_principal'],
-                    'conc_principal' => $value['conc_principal'],
-                    'lote_relleno' => $value['lote_relleno'],
-                    'aditivo_relleno' => $value['aditivo_relleno'],
-                    'conc_relleno' => $value['conc_relleno'],
+            foreach ($request->aditivos as $formulacion) {
+                RelAditivoSolicitudLechada::create([
+                    'solicitud_lechada_id' => $solicitud_lechada->id,
+                    'lote' => $formulacion['lote'],
+                    'aditivo' => $formulacion['aditivo'],
+                    'concentracion' => $formulacion['concentracion'],
                 ]);
             }
         }
@@ -454,13 +453,14 @@ class SolicitudController extends Controller
         return view('solicitud.components.fractura.show', $data);
     }
 
-    public function show_lechada($solicitud_id) {
+    public function show_lechada($solicitud_id)
+    {
 
         $data = [
             'solicitud' => Solicitud::find($solicitud_id),
             'ensayos_referencia' => RelEnsayoReferenciaSolicitud::where('solicitud_id', $solicitud_id)->get(),
-            'formulacion_tentativa' => RelFormulacionTentativa::where('solicitud_id', $solicitud_id)->get(),
             'solicitud_lechada' => SolicitudLechada::where('solicitud_id', $solicitud_id)->get(),
+            // 'formulacion_tentativa' => RelAditivoSolicitudLechada::where('solicitud_lechada_id', $solicitud_id)->get(),
             'sistemas_fluidos' => SistemasFluidos::all(),
             'analisis_microbial' => AnalisisMicrobial::all(),
             'agente_sosten' => AgenteSosten::all(),

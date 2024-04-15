@@ -440,25 +440,7 @@
                 <p>Aditivo</p>
                 <p>Conc (% BWOC)</p>
             </div>
-            <div id="container_formulaciones_tentativas">
-                {{-- <div class="flex justify-between mb-2">
-                    <button
-                        class="bg-red-600 bg-opacity-70 border border-red-600 w-7 h-auto text-white flex justify-center items-center rounded-l-md hover:bg-red-500 cursor-pointer transition-all duration-500">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
-                        </svg>
-                    </button>
-                    <div class="w-full grid grid-cols-3 bg-gray-100 gap-3 p-2">
-                        <input type="text" class="form-control text-xs rounded-l-none p-2 col-span-3 md:col-span-1"
-                            placeholder="Lote">
-                        <input type="text" class="form-control text-xs p-2 col-span-3 md:col-span-1"
-                            placeholder="Aditivo">
-                        <input type="text" class="form-control text-xs p-2 col-span-3 md:col-span-1"
-                            placeholder="Concentración">
-                    </div>
-                </div> --}}
-            </div>
+            <div id="container_formulaciones_tentativas"></div>
 
             <div class="text-center mt-3">
                 <button id="btnAddFormulacion"
@@ -595,43 +577,13 @@
         document.getElementById("tipo_lodo").setValue(0);
         
     })
-    
 </script>
+
+<!-- Create Ensayos de Referencia -->
+<script src="{{ asset('js/Solicitud/lechada/ens_ref.js') }}"></script>
 
 <!-- Create formulación tentativa -->
-<script>
-    const container_formulaciones_tentativas = document.getElementById('container_formulaciones_tentativas');
-    const btnAddFormulacion = document.getElementById('btnAddFormulacion');
-    let aux_aditivo = 0
-    btnAddFormulacion.addEventListener('click', e => {
-        e.preventDefault();
-        let flex, button, div, input;
-
-        flex = el('div.flex justify-between mb-2')
-        button = el('button.bg-red-600 bg-opacity-70 border border-red-600 w-7 h-auto text-white flex justify-center items-center rounded-l-md hover:bg-red-500 cursor-pointer transition-all duration-500', '-')
-        div = el('div.w-full grid grid-cols-3 bg-gray-100 gap-3 p-2')
-        
-        // Lote
-        input = el('input.form-control text-xs rounded-l-none p-2 col-span-3 md:col-span-1', {placeholder: 'Lote', 'name': `aditivos[${aux_aditivo}][lote]`})
-        mount(div, input)
-
-        // Aditivo
-        input = el('input.form-control text-xs rounded-l-none p-2 col-span-3 md:col-span-1', {placeholder: 'Aditivo', 'name': `aditivos[${aux_aditivo}][aditivo]`})
-        mount(div, input)
-        
-        // Concentración
-        input = el('input.form-control text-xs rounded-l-none p-2 col-span-3 md:col-span-1', {placeholder: 'Concentración', 'name': `aditivos[${aux_aditivo}][concentracion]`})
-        mount(div, input)
-
-        mount(flex, button)
-        mount(flex, div)
-        mount(container_formulaciones_tentativas, flex)
-        
-        aux_aditivo++
-    })
-
-</script>
-
+<script src="{{ asset('js/Solicitud/lechada/aditivos.js') }}"></script>
 <script>
     // const ensayos = {!! json_encode($ensayos) !!}
     // const btnAddEnsayoRef = document.querySelector('#btnAddEnsayoRef');

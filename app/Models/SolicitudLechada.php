@@ -59,4 +59,12 @@ class SolicitudLechada extends Model
     {
         return $this->belongsTo(User::class, 'firma_reconocimiento_id');
     }
+
+    public function formulacion_tentativa() {
+        return $this->hasMany(RelAditivoSolicitudLechada::class);
+    }
+
+    public function rel_reologia() {
+        return $this->hasMany(RelReologiaSolicitudEnsayo::class);
+    }
 }

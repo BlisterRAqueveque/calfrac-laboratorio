@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ensayo;
 use App\Models\RelAditivosEnsayos;
+use App\Models\RelReologiaSolicitudEnsayo;
 use App\Models\RelRequerimientosEnsayos;
 use App\Models\Solicitud;
 use Illuminate\Http\Request;
@@ -14,51 +15,54 @@ class EnsayoController extends Controller
     {
         $this->middleware('auth');
     }
-    
-    public function create() {
+
+    public function create()
+    {
         return view('ensayo.create');
     }
 
-    public function index() {
+    public function index()
+    {
         $data = [
             'ensayos' => Ensayo::all()
         ];
         return view('ensayo.index', $data);
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         # Validaciones (Consultar que se valida)
-        
+
         # Crear el Ensayo
         $ensayo = Ensayo::create([
-            'uso' => $request->uso, 
-            'cliente' => $request->cliente, 
-            'estado' => $request->estado, 
-            'numero_lodo' => $request->numero_lodo, 
-            'tipo_trabajo' => $request->tipo_trabajo, 
-            'nombre_lodo' => $request->nombre_lodo, 
-            'fecha_solicitado' => $request->fecha_solicitado, 
-            'requerido_por' => $request->requerido_por, 
-            'tipo_requerimiento' => $request->tipo_requerimiento, 
-            'laboratorio' => $request->laboratorio, 
-            'well_name' => $request->well_name, 
-            'ingeniero' => $request->ingeniero, 
-            'open_hole' => $request->open_hole, 
-            'densidad_lodo' => $request->densidad_lodo, 
-            'md' => $request->md, 
-            'tvd' => $request->tvd, 
-            'proveedor_lodo' => $request->proveedor_lodo, 
-            'bhse' => $request->bhse, 
-            'bhct' => $request->bhct, 
-            'grado_temperatura' => $request->grado_temperatura, 
-            'volumen' => $request->volumen, 
-            'caudal' => $request->caudal, 
-            'tope_lechada' => $request->tope_lechada, 
-            'base_lechada' => $request->base_lechada, 
-            'densidad_lechada' => $request->densidad_lechada, 
-            'comentario' => $request->comentario, 
-            'solicitud_id' => $request->solicitud_id, 
-            'user_id' => auth()->user()->id, 
+            'uso' => $request->uso,
+            'cliente' => $request->cliente,
+            'estado' => $request->estado,
+            'numero_lodo' => $request->numero_lodo,
+            'tipo_trabajo' => $request->tipo_trabajo,
+            'nombre_lodo' => $request->nombre_lodo,
+            'fecha_solicitado' => $request->fecha_solicitado,
+            'requerido_por' => $request->requerido_por,
+            'tipo_requerimiento' => $request->tipo_requerimiento,
+            'laboratorio' => $request->laboratorio,
+            'well_name' => $request->well_name,
+            'ingeniero' => $request->ingeniero,
+            'open_hole' => $request->open_hole,
+            'densidad_lodo' => $request->densidad_lodo,
+            'md' => $request->md,
+            'tvd' => $request->tvd,
+            'proveedor_lodo' => $request->proveedor_lodo,
+            'bhse' => $request->bhse,
+            'bhct' => $request->bhct,
+            'grado_temperatura' => $request->grado_temperatura,
+            'volumen' => $request->volumen,
+            'caudal' => $request->caudal,
+            'tope_lechada' => $request->tope_lechada,
+            'base_lechada' => $request->base_lechada,
+            'densidad_lechada' => $request->densidad_lechada,
+            'comentario' => $request->comentario,
+            'solicitud_id' => $request->solicitud_id,
+            'user_id' => auth()->user()->id,
         ]);
 
         # Asignar los aditivos
@@ -67,7 +71,7 @@ class EnsayoController extends Controller
                 $this->_createRelAditivo($aditivo, $ensayo->id);
             }
         }
-        
+
         # Asignar los requerimientos
         if ($request->requerimientos) {
             foreach ($request->requerimientos as $requerimiento) {
@@ -76,23 +80,26 @@ class EnsayoController extends Controller
         }
 
         if ($ensayo->id)
-        return back()->with('success', $ensayo->id);
+            return back()->with('success', $ensayo->id);
     }
 
-    public function assigned(Request $request) {
-        $solicitud = Solicitud::find($request->solicitud_id);
-        $solicitud->ensayo_asignado_id = $request->ensayo_id;
-        $solicitud->fundamento_asignacion = $request->fundamento_asignacion;
-        $solicitud->estado_solicitud_id = 3;
-        $solicitud->fecha_asignacion = date('Y-m-d H:i:s');
+    public function assigned(Request $request)
+    {
 
-        $solicitud->save();
-        
-        if ($solicitud->id)
-            return back()->with('success', 'El ensayo se ha asignado a la solicitud Nº ' . $solicitud->id . ' correctamente');
+        switch ($request->type_of_assignment) {
+            case 'reologia':
+                $rel = RelReologiaSolicitudEnsayo::find($request->id_assignment);
+                $rel->selected = 1;
+                $rel->save();
+                break;
+        }
+
+        if ($rel->id)
+            return back()->with('success', $rel->id);
     }
 
-    protected function _createRelAditivo($aditivo, $ensayo_id) {
+    protected function _createRelAditivo($aditivo, $ensayo_id)
+    {
         RelAditivosEnsayos::create([
             'aditivo_id' => $aditivo['material'],
             'ensayo_id' => $ensayo_id,
@@ -100,11 +107,12 @@ class EnsayoController extends Controller
             'concentracion_type' => $aditivo['concentracion_type'],
             'agregado' => $aditivo['agregado'],
             'numero_lote' => $aditivo['numero_lote'],
-            'user_id' => auth()->user()->id, 
+            'user_id' => auth()->user()->id,
         ]);
     }
 
-    protected function _createRelRequerimiento($requerimiento, $ensayo_id) {
+    protected function _createRelRequerimiento($requerimiento, $ensayo_id)
+    {
         RelRequerimientosEnsayos::create([
             'ensayo_id' => $ensayo_id,
             'test_id' => $requerimiento['test'],
@@ -161,7 +169,46 @@ class EnsayoController extends Controller
             'perdida_volumen' => $requerimiento['resultados']['perdida_volumen'],
             'perdida_api_agua_libre' => $requerimiento['resultados']['perdida_api_agua_libre'],
             'mezclabilidad' => $requerimiento['resultados']['mezclabilidad'],
-            'user_id' => auth()->user()->id, 
+            'user_id' => auth()->user()->id,
         ]);
+    }
+
+    /**
+     * Crea la reología en la tabla 'rel_reologia_solicitud_ensayo'
+     * Con la relación de la solicitud y también la del reporte de ensayo una vez que esté
+     */
+    public function store_reologia(Request $request)
+    {
+        $reologia = RelReologiaSolicitudEnsayo::create([
+            'tem_ambiente_rpm' => $request->tem_ambiente_rpm,
+            'tem_ambiente_300' => $request->tem_ambiente_300,
+            'tem_ambiente_200' => $request->tem_ambiente_200,
+            'tem_ambiente_100' => $request->tem_ambiente_100,
+            'tem_ambiente_60' => $request->tem_ambiente_60,
+            'tem_ambiente_30' => $request->tem_ambiente_30,
+            'tem_ambiente_6' => $request->tem_ambiente_6,
+            'tem_ambiente_3' => $request->tem_ambiente_3,
+            'tem_ensayo_rpm' => $request->tem_ensayo_rpm,
+            'tem_ensayo_300' => $request->tem_ensayo_300,
+            'tem_ensayo_200' => $request->tem_ensayo_200,
+            'tem_ensayo_100' => $request->tem_ensayo_100,
+            'tem_ensayo_60' => $request->tem_ensayo_60,
+            'tem_ensayo_30' => $request->tem_ensayo_30,
+            'tem_ensayo_6' => $request->tem_ensayo_6,
+            'tem_ensayo_3' => $request->tem_ensayo_3,
+            'temp_ambiente' => $request->temp_ambiente,
+            'temp_ensayo' => $request->temp_ensayo,
+            'temp_ambiente_punto_cedencia' => $request->temp_ambiente_punto_cedencia,
+            'temp_ensayo_punto_cedencia' => $request->temp_ensayo_punto_cedencia,
+            'temp_ambiente_gel_10_seg' => $request->temp_ambiente_gel_10_seg,
+            'temp_ensayo_gel_10_seg' => $request->temp_ensayo_gel_10_seg,
+            'temp_ambiente_gel_10_min' => $request->temp_ambiente_gel_10_min,
+            'temp_ensayo_gel_10_min' => $request->temp_ensayo_gel_10_min,
+            'solicitud_lechada_id' => $request->solicitud_lechada_id,
+            'usuario_carga' => auth()->user()->id,
+        ]);
+
+        if ($reologia->id)
+            return back()->with('success_reologia', $reologia->id);
     }
 }
