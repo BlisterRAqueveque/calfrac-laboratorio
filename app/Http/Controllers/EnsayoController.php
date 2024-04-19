@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Ensayo;
 use App\Models\RelAditivosEnsayos;
+use App\Models\RelBombeabilidadSolicitudEnsayo;
+use App\Models\RelPerdidaSolicitudEnsayo;
 use App\Models\RelReologiaSolicitudEnsayo;
 use App\Models\RelRequerimientosEnsayos;
 use App\Models\Solicitud;
@@ -210,5 +212,43 @@ class EnsayoController extends Controller
 
         if ($reologia->id)
             return back()->with('success_reologia', $reologia->id);
+    }
+
+    /**
+     * Crea la pérdida de filtrado en la tabl 'rel_perdida_solicitud_ensayo'
+     * Con la relación de la solicitud y también la del reporte del ensayo una vez que esté
+     */
+    public function store_perdida(Request $request) {
+        $perdida_filtrado = RelPerdidaSolicitudEnsayo::create([
+            'temperatura' => $request->perdida_temperatura,
+            'fluido_acumulado' => $request->perdida_fluido_acumulado,
+            'filtrado_api' => $request->perdida_filtrado_api,
+            'solicitud_lechada_id' => $request->solicitud_lechada_id,
+            'usuario_carga' => auth()->user()->id,
+        ]);
+
+        if ($perdida_filtrado->id)
+            return back()->with('success_perdida_filtrado', $perdida_filtrado->id);
+    }
+
+    public function store_bombeabilidad(Request $request) {
+        $bombeabilidad = RelBombeabilidadSolicitudEnsayo::create([
+            'consistometro' => $request->bombeabilidad_consistometro,
+            'time_acondicionamiento' => $request->bombeabilidad_acondicionamiento,
+            'planilla' => $request->bombeabilidad_planilla,
+            'gradiente' => $request->bombeabilidad_gradiente,
+            'temperatura' => $request->bombeabilidad_temperatura,
+            'presion' => $request->bombeabilidad_presion,
+            '40_bc' => $request->bombeabilidad_40_bc,
+            '70_bc' => $request->bombeabilidad_70_bc,
+            '100_bc' => $request->bombeabilidad_100_bc,
+            'solicitud_lechada_id' => $request->solicitud_lechada_id,
+            'usuario_carga' => auth()->user()->id,
+        ]);
+
+        // ACA TE QUEDASTE | TENES QUE HACER LA CARGA DE LA BOMBEABILIDAD Y LUEGO SEGUIR CON EL RESTO
+
+        if ($bombeabilidad->id)
+            return back()->with('success_bombeabilidad', $bombeabilidad->id);
     }
 }

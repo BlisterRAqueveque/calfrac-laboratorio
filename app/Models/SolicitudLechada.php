@@ -67,4 +67,8 @@ class SolicitudLechada extends Model
     public function rel_reologia() {
         return $this->hasMany(RelReologiaSolicitudEnsayo::class);
     }
+
+    public function rel_perdida_filtrado() {
+        return $this->hasMany(RelPerdidaSolicitudEnsayo::class);
+    }
 }

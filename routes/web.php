@@ -41,7 +41,10 @@ Route::get('/ensayo/create', [EnsayoController::class, 'create'])->name('ensayo.
 Route::get('/ensayos', [EnsayoController::class, 'index'])->name('ensayos');
 Route::post('/ensayo/create', [EnsayoController::class, 'store'])->name('ensayo.store');
 Route::post('/ensayo/assigned', [EnsayoController::class, 'assigned'])->name('ensayo.assigned');
+
 Route::post('/ensayo/reologia', [EnsayoController::class, 'store_reologia'])->name('store_reologia');
+Route::post('/ensayo/perdida', [EnsayoController::class, 'store_perdida'])->name('store_perdida');
+Route::post('/ensayo/bombeabilidad', [EnsayoController::class, 'store_bombeabilidad'])->name('store_bombeabilidad');
 
 # Solicitudes
 # Fractura
