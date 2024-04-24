@@ -71,4 +71,20 @@ class SolicitudLechada extends Model
     public function rel_perdida_filtrado() {
         return $this->hasMany(RelPerdidaSolicitudEnsayo::class);
     }
+
+    public function rel_bombeabilidad() {
+        return $this->hasMany(RelBombeabilidadSolicitudEnsayo::class);
+    }
+
+    public function rel_uca() {
+        return $this->hasMany(RelUcaSolicitudEnsayo::class);
+    }
+
+    public function rel_agua_libre() {
+        return $this->hasMany(RelAguaLibreSolicitudEnsayo::class);
+    }
+
+    public function rel_mezclabilidad() {
+        return $this->hasMany(RelMezclabilidadSolicitudEnsayo::class);
+    }
 }

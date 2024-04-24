@@ -13,17 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('rel_bombeabilidad_solicitud_ensayo', function (Blueprint $table) {
+        Schema::create('rel_uca_solicitud_ensayo', function (Blueprint $table) {
             $table->id();
-            $table->integer('consistometro')->nullable();
-            $table->integer('time_acondicionamiento')->nullable();
-            $table->integer('planilla')->nullable();
-            $table->integer('gradiente')->nullable();
-            $table->integer('temperatura')->nullable();
-            $table->integer('presion')->nullable();
-            $table->time('bc_40')->nullable();
-            $table->time('bc_70')->nullable();
-            $table->time('bc_100')->nullable();
+            $table->integer('principal')->nullable();
+            $table->time('psi_50')->nullable();
+            $table->time('psi_500')->nullable();
+            $table->time('psi_1000')->nullable();
+            $table->integer('hs_12')->nullable();
+            $table->integer('hs_24')->nullable();
+            $table->integer('impedancia_acustica')->nullable();
+            $table->time('sgs_cero')->nullable();
+            $table->time('sgs_max')->nullable();
+            $table->time('tiempo')->nullable();
             $table->unsignedBigInteger('ensayo_id')->nullable();
             $table->foreign('ensayo_id')->references('id')->on('ensayos');
             $table->unsignedBigInteger('solicitud_lechada_id')->nullable();
@@ -41,6 +42,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rel_bombeabilidad_solicitud_ensayo');
+        Schema::dropIfExists('rel_uca_solicitud_ensayo');
     }
 };

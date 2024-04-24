@@ -9,6 +9,7 @@ use App\Models\AnalisisMicrobial;
 use App\Models\Cliente;
 use App\Models\Edicion_Solicitud;
 use App\Models\Ensayo;
+use App\Models\MudCompany;
 use App\Models\OtrosAnalisis;
 use App\Models\RelAditivoSolicitudLechada;
 use App\Models\RelEnsayoReferenciaSolicitud;
@@ -49,6 +50,7 @@ class SolicitudController extends Controller
             'tipo_cementacion' => TipoCementacion::all(),
             'tipo_requerimiento_cemento' => TipoRequerimientoCemento::all(),
             'tipo_lodo' =>  TipoLodo::all(),
+            'mud_company' =>  MudCompany::all(),
             'users' => User::all(),
         ];
         return view('solicitud.create', $data);

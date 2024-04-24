@@ -45,6 +45,9 @@ Route::post('/ensayo/assigned', [EnsayoController::class, 'assigned'])->name('en
 Route::post('/ensayo/reologia', [EnsayoController::class, 'store_reologia'])->name('store_reologia');
 Route::post('/ensayo/perdida', [EnsayoController::class, 'store_perdida'])->name('store_perdida');
 Route::post('/ensayo/bombeabilidad', [EnsayoController::class, 'store_bombeabilidad'])->name('store_bombeabilidad');
+Route::post('/ensayo/uca', [EnsayoController::class, 'store_uca'])->name('store_uca');
+Route::post('/ensayo/agua_libre', [EnsayoController::class, 'store_agua_libre'])->name('store_agua_libre');
+Route::post('/ensayo/mezclabilidad', [EnsayoController::class, 'store_mezclabilidad'])->name('store_mezclabilidad');
 
 # Solicitudes
 # Fractura

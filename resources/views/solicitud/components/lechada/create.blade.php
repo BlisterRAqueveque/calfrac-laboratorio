@@ -276,6 +276,15 @@
                     </select>
                 </div>
 
+                <div>
+                    <label for="mud_company" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Compañía de Lodos</label>
+                    <select name="mud_company" id="mud_company">
+                        @foreach ($mud_company as $tipo)
+                            <option value="{{ $tipo->id }}" {{ old('mud_company') == $tipo->id ? 'selected' : '' }}>{{ $tipo->nombre }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
                 <div class="md:col-span-2 xl:col-span-1">
                     <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Profundidad
                         Pozo (MD / TVD) (m)</label>
@@ -569,13 +578,17 @@
           ele: "#tipo_lodo",
           placeholder: "Seleccione el tipo de lodo",
         });
+        VirtualSelect.init({
+          ele: "#mud_company",
+          placeholder: "Seleccione la compañía",
+        });
         document.getElementById("cliente_lechada").setValue(0);
         document.getElementById("tipo_requerimiento_lechada").setValue(0);
         document.getElementById("tipo_trabajo_lechada").setValue(0);
         document.getElementById("tipo_cementacion_lechada").setValue(0);
         document.getElementById("firma_reconocimiento_lechada").setValue(0);
         document.getElementById("tipo_lodo").setValue(0);
-        
+        document.getElementById("mud_company").setValue(0);
     })
 </script>
 

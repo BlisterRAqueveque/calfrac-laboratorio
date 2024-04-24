@@ -53,7 +53,7 @@
                         <tbody>
                             @foreach ($clientes as $c)
                                 <tr>
-                                    <td class="p-3">1</td>
+                                    <td class="p-3">{{ $c->id }}</td>
                                     <td class="p-3">
                                         <div class="flex justify-between">
                                             {{ $c->nombre }}

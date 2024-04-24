@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Ensayo;
 use App\Models\RelAditivosEnsayos;
+use App\Models\RelAguaLibreSolicitudEnsayo;
 use App\Models\RelBombeabilidadSolicitudEnsayo;
+use App\Models\RelMezclabilidadSolicitudEnsayo;
 use App\Models\RelPerdidaSolicitudEnsayo;
 use App\Models\RelReologiaSolicitudEnsayo;
 use App\Models\RelRequerimientosEnsayos;
+use App\Models\RelUcaSolicitudEnsayo;
 use App\Models\Solicitud;
 use Illuminate\Http\Request;
 
@@ -239,16 +242,58 @@ class EnsayoController extends Controller
             'gradiente' => $request->bombeabilidad_gradiente,
             'temperatura' => $request->bombeabilidad_temperatura,
             'presion' => $request->bombeabilidad_presion,
-            '40_bc' => $request->bombeabilidad_40_bc,
-            '70_bc' => $request->bombeabilidad_70_bc,
-            '100_bc' => $request->bombeabilidad_100_bc,
+            'bc_40' => $request->bombeabilidad_40_bc,
+            'bc_70' => $request->bombeabilidad_70_bc,
+            'bc_100' => $request->bombeabilidad_100_bc,
             'solicitud_lechada_id' => $request->solicitud_lechada_id,
             'usuario_carga' => auth()->user()->id,
         ]);
 
-        // ACA TE QUEDASTE | TENES QUE HACER LA CARGA DE LA BOMBEABILIDAD Y LUEGO SEGUIR CON EL RESTO
-
         if ($bombeabilidad->id)
             return back()->with('success_bombeabilidad', $bombeabilidad->id);
+    }
+
+    public function store_uca(Request $request) {
+        $uca = RelUcaSolicitudEnsayo::create([
+            'principal' => $request->uca_principal,
+            'psi_50' => $request->uca_psi_50,
+            'psi_500' => $request->uca_psi_500,
+            'psi_1000' => $request->uca_psi_1000,
+            'hs_12' => $request->uca_hs_12,
+            'hs_24' => $request->uca_hs_24,
+            'impedancia_acustica' => $request->uca_impedancia_acustica,
+            'sgs_cero' => $request->uca_sgs_cero,
+            'sgs_max' => $request->uca_sgs_max,
+            'tiempo' => $request->uca_tiempo,
+            'solicitud_lechada_id' => $request->solicitud_lechada_id,
+            'usuario_carga' => auth()->user()->id,
+        ]);
+
+        if ($uca->id)
+            return back()->with('success_uca', $uca->id);
+    }
+
+    public function store_agua_libre(Request $request) {
+        $agua_libre = RelAguaLibreSolicitudEnsayo::create([
+            'agua_libre' => $request->agua_libre,
+            'volumen' => $request->agua_libre_volumen,
+            'api_agua_libre' => $request->api_agua_libre,
+            'solicitud_lechada_id' => $request->solicitud_lechada_id,
+            'usuario_carga' => auth()->user()->id,
+        ]);
+
+        if ($agua_libre->id)
+            return back()->with('success_agua_libre', $agua_libre->id);
+    }
+
+    public function store_mezclabilidad(Request $request) {
+        $mezclabilidad = RelMezclabilidadSolicitudEnsayo::create([
+            'mezclabilidad' => $request->mezclabilidad,
+            'solicitud_lechada_id' => $request->solicitud_lechada_id,
+            'usuario_carga' => auth()->user()->id,
+        ]);
+
+        if ($mezclabilidad->id)
+            return back()->with('success_mezclabilidad', $mezclabilidad->id);
     }
 }

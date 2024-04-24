@@ -13,17 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('rel_bombeabilidad_solicitud_ensayo', function (Blueprint $table) {
+        Schema::create('rel_agua_libre_solicitud_ensayo', function (Blueprint $table) {
             $table->id();
-            $table->integer('consistometro')->nullable();
-            $table->integer('time_acondicionamiento')->nullable();
-            $table->integer('planilla')->nullable();
-            $table->integer('gradiente')->nullable();
-            $table->integer('temperatura')->nullable();
-            $table->integer('presion')->nullable();
-            $table->time('bc_40')->nullable();
-            $table->time('bc_70')->nullable();
-            $table->time('bc_100')->nullable();
+            $table->integer('agua_libre')->nullable();
+            $table->integer('volumen')->nullable();
+            $table->integer('api_agua_libre')->nullable();
             $table->unsignedBigInteger('ensayo_id')->nullable();
             $table->foreign('ensayo_id')->references('id')->on('ensayos');
             $table->unsignedBigInteger('solicitud_lechada_id')->nullable();
@@ -41,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rel_bombeabilidad_solicitud_ensayo');
+        Schema::dropIfExists('rel_agua_libre_solicitud_ensayo');
     }
 };
