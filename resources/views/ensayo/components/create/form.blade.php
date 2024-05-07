@@ -1,3 +1,4 @@
+@livewireStyles
 <ul role="tablist" aria-owns="nav-tab1 nav-tab2 nav-tab3 nav-tab4" class="nav mt-4 nav-tabs" id="nav-tab-with-nested-tabs"
     style="z-index: 999">
     <li class="nav-item w-full md:w-auto text-xs xl:text-sm" role="presentation">
@@ -85,24 +86,27 @@
 <div class="tab-content" id="nav-tabs-content">
     <input type="hidden" value="{{ $solicitud->id }}" name="solicitud_id">
 
-    <!-- Reología -->
+    {{-- Reología --}}
     @include('ensayo.components.create.reologia')
-    
+
     <!-- Perdida de Filtrado -->
-    @include('ensayo.components.create.perdida')
-    
+    {{-- @livewire('ensayo.perdida', ['lechada' => $solicitud_lechada[0], 'rel_perdida_filtrado' => $solicitud_lechada[0]->rel_perdida_filtrado]) --}}
+
+
+    {{-- @include('ensayo.components.create.perdida') --}}
+
     <!-- Bombeabilidad -->
-    @include('ensayo.components.create.bombeabilidad')
+    {{-- @include('ensayo.components.create.bombeabilidad') --}}
 
     <!-- UCA - Resistencia a la Compresión -->
-    @include('ensayo.components.create.uca')
+    {{-- @include('ensayo.components.create.uca') --}}
 
     <!-- Agua Libre -->
-    @include('ensayo.components.create.agua_libre')
-    
+    {{-- @include('ensayo.components.create.agua_libre') --}}
+
     <!-- Mezclabilidad -->
-    @include('ensayo.components.create.mezclabilidad')
-    
+    {{-- @include('ensayo.components.create.mezclabilidad') --}}
+
 </div>
 
 <!-- Modal -->
@@ -146,12 +150,12 @@
                         }).then((response) => response.json())
                         .then((data) => {
                             if (data) {
-                                console.log(data);
-                                successAlert('¡Registro Asignado!',
-                                    'El registro se asignó correctamente.').then(
-                                    (confirmed) => {
-                                        // window.location.reload();
-                                    })
+                                console.log(data.success_reologia);
+                                // successAlert('¡Registro Asignado!',
+                                //     'El registro se asignó correctamente.').then(
+                                //     (confirmed) => {
+                                //         window.location.reload();
+                                //     })
                             }
                         })
                 }
@@ -167,14 +171,17 @@
         loadingAlert();
     })
 </script>
+<script src="{{ asset('js/ensayo/create/componentReologia.js') }}"></script>
 
 <!-- Cartel que muestra que el registro fue creado correctamente cuando se hace el submit -->
 <script>
+    let nav_tab1 = document.getElementById('nav-tab1'); 
     document.addEventListener('DOMContentLoaded', () => {
         @if ($message = session('success_reologia'))
             successAlert('¡Registro de Reología Creada Correctamente!', 'La Reología se creó correctamente')
                 .then(
                     (confirmed) => {
+                        nav_tab1.classList.add('active')
                         // window.location.reload();
                     })
         @endif
@@ -215,3 +222,5 @@
         @endif
     })
 </script>
+
+@livewireScripts

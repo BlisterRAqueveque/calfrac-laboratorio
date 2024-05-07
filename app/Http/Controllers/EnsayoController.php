@@ -214,14 +214,15 @@ class EnsayoController extends Controller
         ]);
 
         if ($reologia->id)
-            return back()->with('success_reologia', $reologia->id);
+            return response()->json(['success_reologia' => $reologia]);
     }
 
     /**
      * Crea la pérdida de filtrado en la tabl 'rel_perdida_solicitud_ensayo'
      * Con la relación de la solicitud y también la del reporte del ensayo una vez que esté
      */
-    public function store_perdida(Request $request) {
+    public function store_perdida(Request $request)
+    {
         $perdida_filtrado = RelPerdidaSolicitudEnsayo::create([
             'temperatura' => $request->perdida_temperatura,
             'fluido_acumulado' => $request->perdida_fluido_acumulado,
@@ -234,7 +235,8 @@ class EnsayoController extends Controller
             return back()->with('success_perdida_filtrado', $perdida_filtrado->id);
     }
 
-    public function store_bombeabilidad(Request $request) {
+    public function store_bombeabilidad(Request $request)
+    {
         $bombeabilidad = RelBombeabilidadSolicitudEnsayo::create([
             'consistometro' => $request->bombeabilidad_consistometro,
             'time_acondicionamiento' => $request->bombeabilidad_acondicionamiento,
@@ -253,7 +255,8 @@ class EnsayoController extends Controller
             return back()->with('success_bombeabilidad', $bombeabilidad->id);
     }
 
-    public function store_uca(Request $request) {
+    public function store_uca(Request $request)
+    {
         $uca = RelUcaSolicitudEnsayo::create([
             'principal' => $request->uca_principal,
             'psi_50' => $request->uca_psi_50,
@@ -273,7 +276,8 @@ class EnsayoController extends Controller
             return back()->with('success_uca', $uca->id);
     }
 
-    public function store_agua_libre(Request $request) {
+    public function store_agua_libre(Request $request)
+    {
         $agua_libre = RelAguaLibreSolicitudEnsayo::create([
             'agua_libre' => $request->agua_libre,
             'volumen' => $request->agua_libre_volumen,
@@ -286,7 +290,8 @@ class EnsayoController extends Controller
             return back()->with('success_agua_libre', $agua_libre->id);
     }
 
-    public function store_mezclabilidad(Request $request) {
+    public function store_mezclabilidad(Request $request)
+    {
         $mezclabilidad = RelMezclabilidadSolicitudEnsayo::create([
             'mezclabilidad' => $request->mezclabilidad,
             'solicitud_lechada_id' => $request->solicitud_lechada_id,
