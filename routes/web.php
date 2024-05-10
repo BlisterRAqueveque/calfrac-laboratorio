@@ -48,6 +48,11 @@ Route::post('/ensayo/bombeabilidad', [EnsayoController::class, 'store_bombeabili
 Route::post('/ensayo/uca', [EnsayoController::class, 'store_uca'])->name('store_uca');
 Route::post('/ensayo/agua_libre', [EnsayoController::class, 'store_agua_libre'])->name('store_agua_libre');
 Route::post('/ensayo/mezclabilidad', [EnsayoController::class, 'store_mezclabilidad'])->name('store_mezclabilidad');
+Route::post('/ensayo/generate/{solicitud_id}', [EnsayoController::class, 'assignedReporteSolicitud'])->name('assignedReport');
+
+# G
+Route::get('/check_report/{solicitud_id}', [SolicitudController::class, '_generate_report'])->name('check_report');
+
 
 # Solicitudes
 # Fractura

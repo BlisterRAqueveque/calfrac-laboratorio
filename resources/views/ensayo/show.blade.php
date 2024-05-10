@@ -1137,8 +1137,8 @@
 <script>
     let aditivos = {!! json_encode($aditivos) !!}
 </script>
-<script src="{{ asset('js/ensayo/add_aditivo.js') }}"></script>
-<script src="{{ asset('js/ensayo/test_requerido.js') }}"></script>
+{{-- <script src="{{ asset('js/ensayo/add_aditivo.js') }}"></script>
+<script src="{{ asset('js/ensayo/test_requerido.js') }}"></script> --}}
 
 <!-- Script que quita y agrega clases de la navegación de intentos -->
 <script>

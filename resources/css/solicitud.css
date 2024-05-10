@@ -1,0 +1,39 @@
+.estado_pendiente {
+  background: rgb(118, 158, 201);
+  letter-spacing: 0.5px;
+}
+
+.estado_aprobada {
+  background: rgb(170, 214, 209);
+  letter-spacing: 0.5px;
+}
+
+.estado_finalizada {
+  background: rgb(170, 214, 170);
+  letter-spacing: 0.5px;
+}
+
+.section_solicitud {
+  margin-top: 0px;
+}
+
+@media (100px < width < 1200px) {
+  .section_solicitud {
+    margin-top: 15px;
+  }
+}
+
+.section_bg {
+  background-color: #fdf4e5;
+}
+
+.solicitud_aprobada {
+  border: 1px solid #a4d9a4;
+  color: #417041;
+  background-color: rgb(116 213 152 / 50%);
+}
+.solicitud_finalizada {
+  border: 1px solid#6bc56b;
+  color: #319231;
+  background-color: #23b25880;
+}

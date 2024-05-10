@@ -39,7 +39,8 @@ class SolicitudController extends Controller
     {
         $this->authorize('create', Solicitud::class);
         $data = [
-            'ensayos' => Ensayo::select('id', 'tvd', 'md', 'densidad_lechada', 'grado_temperatura', 'bhse', 'bhct')->get(),
+            'ensayos' => Ensayo::where('tipo', 'CN')->get(),
+            // 'ensayos' => Ensayo::select('id', 'tvd', 'md', 'densidad_lechada', 'grado_temperatura', 'bhse', 'bhct')->get(),
             'clientes' => Cliente::all(),
             'yacimientos' => Yacimiento::all(),
             'sistemas_fluidos' => SistemasFluidos::all(),
@@ -461,8 +462,7 @@ class SolicitudController extends Controller
         $data = [
             'solicitud' => Solicitud::find($solicitud_id),
             'ensayos_referencia' => RelEnsayoReferenciaSolicitud::where('solicitud_id', $solicitud_id)->get(),
-            'solicitud_lechada' => SolicitudLechada::where('solicitud_id', $solicitud_id)->get(),
-            // 'formulacion_tentativa' => RelAditivoSolicitudLechada::where('solicitud_lechada_id', $solicitud_id)->get(),
+            's_l' => SolicitudLechada::where('solicitud_id', $solicitud_id)->get(),
             'sistemas_fluidos' => SistemasFluidos::all(),
             'analisis_microbial' => AnalisisMicrobial::all(),
             'agente_sosten' => AgenteSosten::all(),
@@ -473,9 +473,60 @@ class SolicitudController extends Controller
             'tipo_requerimiento_cemento' => TipoRequerimientoCemento::all(),
             'tipo_trabajos' => TipoTrabajoCemento::all(),
             'tipo_cementacion' => TipoCementacion::all(),
-            'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
+            // 'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
+        $generate_report = $this->_generate_report($solicitud_id);
+        $data['generar_reporte'] = $generate_report->original['generate_report'];
         return view('solicitud.components.lechada.show', $data);
+    }
+    /**
+     * Se que es un código asqueroso, pero una condición si o si depende de la otra
+     */
+    public function _generate_report($solicitud_id)
+    {
+        $generar_reporte = false;
+        $solicitud_lechada = SolicitudLechada::where('solicitud_id', $solicitud_id)->get();
+
+        // Reología
+        if (count($solicitud_lechada[0]->rel_reologia) > 0) {
+            // Pérdida de Filtrado
+            if (count($solicitud_lechada[0]->rel_perdida_filtrado) > 0) {
+                // UCA
+                if (count($solicitud_lechada[0]->rel_uca) > 0) {
+                    // Agua Libre
+                    if (count($solicitud_lechada[0]->rel_agua_libre) > 0) {
+                        // Mezclabilidad
+                        if (count($solicitud_lechada[0]->rel_mezclabilidad) > 0) {
+                            // Bombeabilidad
+                            if (count($solicitud_lechada[0]->rel_bombeabilidad) > 0) {
+                                foreach ($solicitud_lechada[0]->rel_bombeabilidad as $b) {
+                                    if ($b->selected) {
+                                        $generar_reporte = true;
+                                        break;
+                                    } else {
+                                        $generar_reporte = false;
+                                    }
+                                }
+                            } else {
+                                $generar_reporte = false;
+                            }
+                        } else {
+                            $generar_reporte = false;
+                        }
+                    } else {
+                        $generar_reporte = false;
+                    }
+                } else {
+                    $generar_reporte = false;
+                }
+            } else {
+                $generar_reporte = false;
+            }
+        } else {
+            $generar_reporte = false;
+        }
+        return response()->json(['generate_report' => $generar_reporte]);
+        // echo json_encode($generar_reporte);
     }
 
     /**

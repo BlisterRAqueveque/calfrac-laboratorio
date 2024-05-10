@@ -12,7 +12,8 @@
                 <div class="col-span-2 xl:col-span-1">
                     <label for="cliente_lechada" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Cliente
                         <span class="text-red-500">*</span></label>
-                    <select name="cliente_lechada" id="cliente_lechada" class="text-sm" data-search="true" data-silent-initial-value-set="true">
+                    <select name="cliente_lechada" id="cliente_lechada" class="text-sm" data-search="true"
+                        data-silent-initial-value-set="true">
                         @foreach ($clientes as $c)
                             <option value="{{ $c->id }}"
                                 {{ old('cliente_lechada') == $c->id ? 'selected' : '' }}>{{ $c->nombre }}</option>
@@ -61,7 +62,8 @@
                 </div>
 
                 <div class="col-span-2">
-                    <label for="empresa_lechada" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Empresa / Compañía
+                    <label for="empresa_lechada" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Empresa
+                        / Compañía
                         <span class="text-red-500">*</span></label>
                     <input type="text" name="empresa_lechada" id="empresa_lechada" class="form-control text-sm p-2"
                         placeholder="Empresa / Compañía" value="{{ old('empresa_lechada') }}">
@@ -138,7 +140,8 @@
 
                 <div class="col-span-2 xl:col-span-1">
                     <label for="tipo_requerimiento_lechada"
-                        class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de Requerimiento <span class="text-red-500">*</span></label>
+                        class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de Requerimiento <span
+                            class="text-red-500">*</span></label>
                     <select name="tipo_requerimiento_lechada" id="tipo_requerimiento_lechada">
                         @foreach ($tipo_requerimiento_cemento as $tipo)
                             <option value="{{ $tipo->id }}">{{ $tipo->nombre }}</option>
@@ -194,7 +197,7 @@
                     <select name="tipo_cementacion_lechada" id="tipo_cementacion_lechada">
                         @foreach ($tipo_cementacion as $tipo)
                             <option value="{{ $tipo->id }}">{{ $tipo->nombre }}</option>
-                        @endforeach 
+                        @endforeach
                     </select>
                     @error('tipo_cementacion_lechada')
                         <small class="text-xs text-red-600">El tipo de cementación es requerido</small>
@@ -206,11 +209,14 @@
                         class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Ensayos
                         Requeridos <span class="text-red-500">*</span></label>
                     <div class="flex gap-1">
-                        <label for="ensayo_requerido_principal" class="bg-gray-200 p-1 w-full max-w-28 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
+                        <label for="ensayo_requerido_principal"
+                            class="bg-gray-200 p-1 w-full max-w-28 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
                             <input type="checkbox" name="ensayo_requerido_principal" id="ensayo_requerido_principal">
                             Principal</label>
-                        <label for="ensayo_requerido_bullheading" class="bg-gray-200 p-1 w-full max-w-28 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
-                            <input type="checkbox" name="ensayo_requerido_bullheading" id="ensayo_requerido_bullheading">
+                        <label for="ensayo_requerido_bullheading"
+                            class="bg-gray-200 p-1 w-full max-w-28 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
+                            <input type="checkbox" name="ensayo_requerido_bullheading"
+                                id="ensayo_requerido_bullheading">
                             Bullheading</label>
                     </div>
                 </div>
@@ -220,7 +226,26 @@
 
             <p class="m-0 font-bold text-lg my-3 tracking-wide">Ensayo Referencia</p>
 
-            <section class="container_ensayo_referencia rounded-md"></section>
+            <section class="container_ensayo_referencia rounded-md">
+                {{-- <div class="grid grid-cols-3 items-center">
+                    <div class="col-span-1">
+                        <label for=""
+                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Seleccione el Ensayo</label>
+                        <div class="flex items-center flex-1 gap-3">
+                            <select class="form-select text-sm p-2">
+                                <option value="">-- Seleccione --</option>
+                                <option value="">CN-3-24</option>
+                            </select>
+                            <a class="w-1/2 flex justify-center gap-2 items-center bg-slate-100 text-gray-700 border py-1 rounded-sm hover:bg-slate-200 hover:text-gray-700 cursor-pointer transition-all duration-200">
+                                Visualizar Ensayo
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-4 h-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+                                  </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div> --}}
+            </section>
 
             <div class="text-center mt-3">
                 <button id="btnAddEnsayoRef"
@@ -241,10 +266,10 @@
                     <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">OH / Trepano
                         <small>(in)</small></label>
                     <div class="grid grid-cols-2 gap-3">
-                        <input type="number" name="OH" class="form-control text-sm p-2" value="{{ old('OH') }}" placeholder="OH"
-                            step=".01">
-                        <input type="number" name="trepano" value="{{ old('trepano') }}" class="form-control text-sm p-2"
-                            placeholder="Trepano" step=".01">
+                        <input type="number" name="OH" class="form-control text-sm p-2"
+                            value="{{ old('OH') }}" placeholder="OH" step=".01">
+                        <input type="number" name="trepano" value="{{ old('trepano') }}"
+                            class="form-control text-sm p-2" placeholder="Trepano" step=".01">
                     </div>
                 </div>
 
@@ -262,7 +287,8 @@
                 <div class="">
                     <label for="densidad_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Densidad
                         del Lodo (ppg)</label>
-                    <input type="number" name="densidad_lodo" id="densidad_lodo" value="{{ old('densidad_lodo') }}" class="form-control text-sm p-2"
+                    <input type="number" name="densidad_lodo" id="densidad_lodo"
+                        value="{{ old('densidad_lodo') }}" class="form-control text-sm p-2"
                         placeholder="Densidad del lodo" step=".01">
                 </div>
 
@@ -271,16 +297,19 @@
                         lodo</label>
                     <select name="tipo_lodo" id="tipo_lodo">
                         @foreach ($tipo_lodo as $tipo)
-                            <option value="{{ $tipo->id }}" {{ old('tipo_lodo') == $tipo->id ? 'selected' : '' }}>{{ $tipo->nombre }}</option>
-                        @endforeach 
+                            <option value="{{ $tipo->id }}"
+                                {{ old('tipo_lodo') == $tipo->id ? 'selected' : '' }}>{{ $tipo->nombre }}</option>
+                        @endforeach
                     </select>
                 </div>
 
                 <div>
-                    <label for="mud_company" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Compañía de Lodos</label>
+                    <label for="mud_company" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Compañía
+                        de Lodos</label>
                     <select name="mud_company" id="mud_company">
                         @foreach ($mud_company as $tipo)
-                            <option value="{{ $tipo->id }}" {{ old('mud_company') == $tipo->id ? 'selected' : '' }}>{{ $tipo->nombre }}</option>
+                            <option value="{{ $tipo->id }}"
+                                {{ old('mud_company') == $tipo->id ? 'selected' : '' }}>{{ $tipo->nombre }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -290,9 +319,11 @@
                         Pozo (MD / TVD) (m)</label>
                     <div class="grid grid-cols-2 gap-3">
                         <input type="number" min="0" name="profundidad_pozo_md"
-                            class="form-control text-sm p-2" value="{{ old('profundidad_pozo_md') }}" placeholder="MD" step=".01">
+                            class="form-control text-sm p-2" value="{{ old('profundidad_pozo_md') }}"
+                            placeholder="MD" step=".01">
                         <input type="number" min="0" name="profundidad_pozo_tvd"
-                            class="form-control text-sm p-2" value="{{ old('profundidad_pozo_tvd') }}" placeholder="TVD" step=".01">
+                            class="form-control text-sm p-2" value="{{ old('profundidad_pozo_tvd') }}"
+                            placeholder="TVD" step=".01">
                     </div>
                 </div>
 
@@ -301,10 +332,10 @@
                         /
                         TVD) (m)</label>
                     <div class="grid grid-cols-2 gap-3">
-                        <input type="number" name="base_md" value="{{ old('base_md') }}" class="form-control text-sm p-2" placeholder="MD"
-                            step=".01">
-                        <input type="number" name="base_tvd" value="{{ old('base_tvd') }}" class="form-control text-sm p-2" placeholder="TVD"
-                            step=".01">
+                        <input type="number" name="base_md" value="{{ old('base_md') }}"
+                            class="form-control text-sm p-2" placeholder="MD" step=".01">
+                        <input type="number" name="base_tvd" value="{{ old('base_tvd') }}"
+                            class="form-control text-sm p-2" placeholder="TVD" step=".01">
                     </div>
                 </div>
 
@@ -313,46 +344,46 @@
                         Slurry
                         (TVD / MD) (m)</label>
                     <div class="grid grid-cols-2 gap-3">
-                        <input type="number" name="top_of_slurry_tvd" value="{{ old('top_of_slurry_tvd') }}" class="form-control text-sm p-2"
-                            placeholder="TVD" step=".01">
-                        <input type="number" name="top_of_slurry_md" value="{{ old('top_of_slurry_md') }}" class="form-control text-sm p-2"
-                            placeholder="MD" step=".01">
+                        <input type="number" name="top_of_slurry_tvd" value="{{ old('top_of_slurry_tvd') }}"
+                            class="form-control text-sm p-2" placeholder="TVD" step=".01">
+                        <input type="number" name="top_of_slurry_md" value="{{ old('top_of_slurry_md') }}"
+                            class="form-control text-sm p-2" placeholder="MD" step=".01">
                     </div>
                 </div>
 
                 <div class="">
                     <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Volumen</label>
-                    <input type="number" name="volumen" class="form-control text-sm p-2" value="{{ old('volumen') }}" placeholder="Volumen"
-                        step=".01">
+                    <input type="number" name="volumen" class="form-control text-sm p-2"
+                        value="{{ old('volumen') }}" placeholder="Volumen" step=".01">
                 </div>
 
                 <div class="">
                     <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Pump
                         Rate</label>
-                    <input type="number" name="pump_rate" value="{{ old('pump_rate') }}" class="form-control text-sm p-2" placeholder="Pump Rate"
-                        step=".01">
+                    <input type="number" name="pump_rate" value="{{ old('pump_rate') }}"
+                        class="form-control text-sm p-2" placeholder="Pump Rate" step=".01">
                 </div>
 
                 <div class="md:col-span-2 xl:col-span-1">
                     <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Gradiente de
                         Temperatura Cº</label>
-                    <input type="number" name="grado_temperatura" value="{{ old('grado_temperatura') }}" class="form-control sz p-2" placeholder="Cº"
-                        step=".01">
+                    <input type="number" name="grado_temperatura" value="{{ old('grado_temperatura') }}"
+                        class="form-control sz p-2" placeholder="Cº" step=".01">
                 </div>
 
                 <div class="grid grid-cols-2 col-span-2 xl:col-span-1 gap-3">
                     <div class="xl:col-span-1">
                         <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">BHST
                             Cº</label>
-                        <input type="number" name="bhst" value="{{ old('bhst') }}" class="form-control text-sm p-2"
-                            placeholder="Cº" step=".01">
+                        <input type="number" name="bhst" value="{{ old('bhst') }}"
+                            class="form-control text-sm p-2" placeholder="Cº" step=".01">
                     </div>
 
                     <div class="xl:col-span-1">
                         <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">BHCT
                             Cº</label>
-                        <input type="number" name="bhct" value="{{ old('bhct') }}" class="form-control sz p-2"
-                            placeholder="Cº" step=".01">
+                        <input type="number" name="bhct" value="{{ old('bhct') }}"
+                            class="form-control sz p-2" placeholder="Cº" step=".01">
                     </div>
                 </div>
             </div>
@@ -366,29 +397,29 @@
                 <div class="col-span-5 md:col-span-1">
                     <label for=""
                         class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Reología</label>
-                    <input type="text" name="reologia" value="{{ old('reologia') }}" class="form-control text-sm"
-                        placeholder="Ingrese la reología">
+                    <input type="text" name="reologia" value="{{ old('reologia') }}"
+                        class="form-control text-sm" placeholder="Ingrese la reología">
                 </div>
 
                 <div class="col-span-5 md:col-span-1">
                     <label for=""
                         class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Densidad</label>
-                    <input type="text" name="densidad" value="{{ old('densidad') }}" class="form-control text-sm"
-                        placeholder="Ingrese la densidad">
+                    <input type="text" name="densidad" value="{{ old('densidad') }}"
+                        class="form-control text-sm" placeholder="Ingrese la densidad">
                 </div>
 
                 <div class="col-span-5 md:col-span-1">
                     <label for=""
                         class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Filtrado</label>
-                    <input type="text" name="filtrado" value="{{ old('filtrado') }}" class="form-control text-sm"
-                        placeholder="Ingrese el filtrado">
+                    <input type="text" name="filtrado" value="{{ old('filtrado') }}"
+                        class="form-control text-sm" placeholder="Ingrese el filtrado">
                 </div>
 
                 <div class="col-span-5 md:col-span-1">
                     <label for=""
                         class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Bombeabilidad</label>
-                    <input type="text" name="bombeabilidad" value="{{ old('bombeabilidad') }}" class="form-control text-sm"
-                        placeholder="Ingrese la bombeabilidad">
+                    <input type="text" name="bombeabilidad" value="{{ old('bombeabilidad') }}"
+                        class="form-control text-sm" placeholder="Ingrese la bombeabilidad">
                 </div>
             </div>
 
@@ -400,19 +431,23 @@
                 <p class="text-sm pb-1">Reportar a las 24 hr, bajo la siguiente consideración:</p>
                 <div class="grid grid-cols-5 gap-2">
                     <div class="flex items-center gap-2 col-span-5 md:col-span-1">
-                        <input type="checkbox" {{ old('tiempo_50_psi') ? 'checked' : '' }} name="tiempo_50_psi" id="tiempo_50_psi">
+                        <input type="checkbox" {{ old('tiempo_50_psi') ? 'checked' : '' }} name="tiempo_50_psi"
+                            id="tiempo_50_psi">
                         <label for="tiempo_50_psi" class="text-sm cursor-pointer">Tiempo @ 50 psi</label>
                     </div>
                     <div class="flex items-center gap-2 col-span-5 md:col-span-1">
-                        <input type="checkbox" {{ old('tiempo_500_psi') ? 'checked' : '' }} name="tiempo_500_psi" id="tiempo_500_psi">
+                        <input type="checkbox" {{ old('tiempo_500_psi') ? 'checked' : '' }} name="tiempo_500_psi"
+                            id="tiempo_500_psi">
                         <label for="tiempo_500_psi" class="text-sm cursor-pointer">Tiempo @ 500 psi</label>
                     </div>
                     <div class="flex items-center gap-2 col-span-5 md:col-span-1">
-                        <input type="checkbox" {{ old('resistencia_12_hs') ? 'checked' : '' }} name="resistencia_12_hs" id="resistencia_12_hs">
+                        <input type="checkbox" {{ old('resistencia_12_hs') ? 'checked' : '' }}
+                            name="resistencia_12_hs" id="resistencia_12_hs">
                         <label for="resistencia_12_hs" class="text-sm cursor-pointer">Resistencia a las 12 hs.</label>
                     </div>
                     <div class="flex items-center gap-2 col-span-5 md:col-span-1">
-                        <input type="checkbox" {{ old('resistencia_24_hs') ? 'checked' : '' }} name="resistencia_24_hs" id="resistencia_24_hs">
+                        <input type="checkbox" {{ old('resistencia_24_hs') ? 'checked' : '' }}
+                            name="resistencia_24_hs" id="resistencia_24_hs">
                         <label for="resistencia_24_hs" class="text-sm cursor-pointer">Resistencia a las 24 hs.</label>
                     </div>
                 </div>
@@ -422,11 +457,13 @@
                 <div class="col-span-4 md:col-span-1">
                     <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Agua
                         Libre</label>
-                    <input type="text" name="agua_libre" value="{{ old('agua_libre') }}" class="form-control text-sm" placeholder="0.0%">
+                    <input type="text" name="agua_libre" value="{{ old('agua_libre') }}"
+                        class="form-control text-sm" placeholder="0.0%">
                 </div>
                 <div class="col-span-4 md:col-span-1">
                     <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">SGS</label>
-                    <input type="text" name="sgs" value="{{ old('sgs') }}" class="form-control text-sm" placeholder="SGS">
+                    <input type="text" name="sgs" value="{{ old('sgs') }}" class="form-control text-sm"
+                        placeholder="SGS">
                 </div>
             </div>
 
@@ -439,7 +476,8 @@
                         <label for="" class="text-sm mt-3 text-gray-700 font-semibold tracking-wide mb-2">Tipo
                             de
                             Cemento</label>
-                        <input type="text" name="tipo_cemento" value="{{ old('sgs') }}" class="form-control text-sm" placeholder="Ingrese el tipo de cemento">
+                        <input type="text" name="tipo_cemento" value="{{ old('sgs') }}"
+                            class="form-control text-sm" placeholder="Ingrese el tipo de cemento">
                     </div>
                 </div>
             </div>
@@ -478,14 +516,16 @@
                 <div class="grid">
                     <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">¿Quién
                         autoriza?</label>
-                    <input type="text" class="form-control text-sm" value="{{ auth()->user()->nombre }} {{ auth()->user()->apellido }}" readonly>
+                    <input type="text" class="form-control text-sm"
+                        value="{{ auth()->user()->nombre }} {{ auth()->user()->apellido }}" readonly>
                     </select>
                 </div>
 
                 <div>
                     <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de
                         Autorización</label>
-                    <input type="date" name="fecha_autorizacion_autorizacion" class="form-control text-sm" value="@php echo date('Y-m-d') @endphp" readonly>
+                    <input type="date" name="fecha_autorizacion_autorizacion" class="form-control text-sm"
+                        value="@php echo date('Y-m-d') @endphp" readonly>
                 </div>
             </div>
 
@@ -495,17 +535,21 @@
                 <div class="grid">
                     <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">¿Quién
                         reconoce el trabajo?</label>
-                    <select name="firma_reconocimiento_lechada" id="firma_reconocimiento_lechada" data-search="true" data-silent-initial-value-set="true">
+                    <select name="firma_reconocimiento_lechada" id="firma_reconocimiento_lechada" data-search="true"
+                        data-silent-initial-value-set="true">
                         @foreach ($users as $u)
-                        <option value="{{ $u->id }}" {{ old('firma_reconocimiento_lechada') == $u->id ? 'selected' : '' }}>{{ $u->nombre }} {{ $u->apellido }}</option>
-                    @endforeach
+                            <option value="{{ $u->id }}"
+                                {{ old('firma_reconocimiento_lechada') == $u->id ? 'selected' : '' }}>
+                                {{ $u->nombre }} {{ $u->apellido }}</option>
+                        @endforeach
                     </select>
                 </div>
 
                 <div>
                     <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de
                         Reconocimiento</label>
-                    <input type="date" name="fecha_reconocimiento_lechada" value="{{ old('fecha_reconocimiento_lechada') }}" class="form-control text-sm">
+                    <input type="date" name="fecha_reconocimiento_lechada"
+                        value="{{ old('fecha_reconocimiento_lechada') }}" class="form-control text-sm">
                 </div>
             </div>
         </div>
@@ -551,36 +595,35 @@
 <!-- Script para agregar una formulación tentativa cuando se escuche por un click -->
 {{-- <script src="{{ asset('js/Solicitud/lechada.js') }}"></script> --}}
 <script>
-    
     document.addEventListener('DOMContentLoaded', () => {
         VirtualSelect.init({
-          ele: "#cliente_lechada",
-          placeholder: "Seleccione el cliente",
+            ele: "#cliente_lechada",
+            placeholder: "Seleccione el cliente",
         });
         VirtualSelect.init({
-          ele: "#tipo_requerimiento_lechada",
-          placeholder: "Seleccione el tipo de requerimiento",
+            ele: "#tipo_requerimiento_lechada",
+            placeholder: "Seleccione el tipo de requerimiento",
         });
         VirtualSelect.init({
-          ele: "#tipo_trabajo_lechada",
-          placeholder: "Seleccione el tipo de trabajo",
+            ele: "#tipo_trabajo_lechada",
+            placeholder: "Seleccione el tipo de trabajo",
         });
         VirtualSelect.init({
-          ele: "#tipo_cementacion_lechada",
-          placeholder: "Seleccione el tipo de cementación",
+            ele: "#tipo_cementacion_lechada",
+            placeholder: "Seleccione el tipo de cementación",
         });
-        
+
         VirtualSelect.init({
-          ele: "#firma_reconocimiento_lechada",
-          placeholder: "Seleccione quien reconoce",
-        });
-        VirtualSelect.init({
-          ele: "#tipo_lodo",
-          placeholder: "Seleccione el tipo de lodo",
+            ele: "#firma_reconocimiento_lechada",
+            placeholder: "Seleccione quien reconoce",
         });
         VirtualSelect.init({
-          ele: "#mud_company",
-          placeholder: "Seleccione la compañía",
+            ele: "#tipo_lodo",
+            placeholder: "Seleccione el tipo de lodo",
+        });
+        VirtualSelect.init({
+            ele: "#mud_company",
+            placeholder: "Seleccione la compañía",
         });
         document.getElementById("cliente_lechada").setValue(0);
         document.getElementById("tipo_requerimiento_lechada").setValue(0);
@@ -598,17 +641,52 @@
 <!-- Create formulación tentativa -->
 <script src="{{ asset('js/Solicitud/lechada/aditivos.js') }}"></script>
 <script>
-    // const ensayos = {!! json_encode($ensayos) !!}
-    // const btnAddEnsayoRef = document.querySelector('#btnAddEnsayoRef');
-    // const container_ensayo_referencia = document.querySelector('.container_ensayo_referencia');
-    // let aux = 1;
+    let ensayos = {!! json_encode($ensayos) !!}
+    const btnAddEnsayoRef = document.querySelector('#btnAddEnsayoRef');
+    const container_ensayo_referencia = document.querySelector('.container_ensayo_referencia');
+    let aux = 1;
+    btnAddEnsayoRef.addEventListener('click', e => {
+        e.preventDefault()
+        div = el('div.grid grid-cols-3 items-center')
+        let colSpan = el('div.col-span-1')
+        let label = el('label.text-sm text-gray-700 font-semibold tracking-wide mb-2', 'Seleccione el Ensayo')
+        let flex = el('div.flex items-center flex-1 gap-3')
+        let select = el('select.form-select text-sm p-2', el('option', {value: ''}, '-- Seleccione --'))
+
+        ensayos.forEach(ens => {
+            const {id, tipo, incrementable, anio} = ens
+            mount(select, el('option', {value: id}, `${tipo}-${incrementable}-${anio}`))
+        });
+        select.setAttribute('onChange', `selectEnsayo(this, ${aux})`)
+        
+        mount(flex, select)
+        mount(flex, el('div.w-1/2 flex justify-center gap-2 items-center', {id: `flex_ensayo_${aux}`}))
+
+        mount(colSpan, label)
+        mount(colSpan, flex)
+        mount(div, colSpan)
+        mount(container_ensayo_referencia, div)
+        aux++;
+    })
+    const selectEnsayo = (e, aux) => {
+        event.preventDefault();
+        let flex_div = document.getElementById(`flex_ensayo_${aux}`)
+
+        if (e.value == '') {
+            flex_div.innerHTML = ''
+        } else {
+            let a = el('a.bg-slate-100 text-gray-700 border py-1 rounded-sm hover:bg-slate-200 hover:text-gray-700 cursor-pointer transition-all duration-200 px-3', 'Visualizar Ensayo')
+            setChildren(flex_div, a)
+        }
+
+    }
     // btnAddEnsayoRef.addEventListener('click', e => {
     //     e.preventDefault();
     //     let div_grid, div, div_grid_second, second_div, select, input;
 
     //     div_grid = el('div.grid md:grid-cols-6 gap-3 mt-4 relative');
 
-    //     // Seleccione el Ensayo
+    //     //     // Seleccione el Ensayo
     //     div = el('div', el('label.text-sm text-gray-700 font-semibold tracking-wide mb-2', {
     //         for: 'ensayo_id'
     //     }, 'Seleccione el Ensayo'));

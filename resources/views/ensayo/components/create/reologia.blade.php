@@ -1,6 +1,6 @@
 <div class="mt-4 tab-pane fade show active" id="tab-reologia" role="tabpanel"> <!-- Reología -->
 
-    @if (count($solicitud_lechada[0]->rel_reologia) > 0)
+    @if (count($s_l[0]->rel_reologia) > 0)
         <div class="mb-2 text-center">
             <h5 class="mb-1">Registro de Reología</h5>
             {{-- <small>(Recuerde que debe seleccionar de todos los intentos una Reología correctamente)</small> --}}
@@ -25,25 +25,57 @@
                     <tbody class="bg-gray-50">
                         <tr class="border-b">
                             <td class="py-2 px-1 text-center">T° Ambiente</td>
-                            <td class="py-2 px-1 text-center">{{ $solicitud_lechada[0]->rel_reologia[0]->tem_ambiente_rpm . '°C' ? $solicitud_lechada[0]->rel_reologia[0]->tem_ambiente_rpm : '-'}}°C</td>
-                            <td class="py-2 px-1 text-center">{{ $solicitud_lechada[0]->rel_reologia[0]->tem_abiente_300 ? $solicitud_lechada[0]->rel_reologia[0]->tem_abiente_300 : '-'}}</td>
-                            <td class="py-2 px-1 text-center">{{ $solicitud_lechada[0]->rel_reologia[0]->tem_abiente_200 ? $solicitud_lechada[0]->rel_reologia[0]->tem_abiente_200 : '-'}}</td>
-                            <td class="py-2 px-1 text-center">{{ $solicitud_lechada[0]->rel_reologia[0]->tem_abiente_100 ? $solicitud_lechada[0]->rel_reologia[0]->tem_abiente_100 : '-'}}</td>
-                            <td class="py-2 px-1 text-center">{{ $solicitud_lechada[0]->rel_reologia[0]->tem_abiente_60 ? $solicitud_lechada[0]->rel_reologia[0]->tem_abiente_60 : '-'}}</td>
-                            <td class="py-2 px-1 text-center">{{ $solicitud_lechada[0]->rel_reologia[0]->tem_ambiente_30 ? $solicitud_lechada[0]->rel_reologia[0]->tem_ambiente_30 : '-'}}</td>
-                            <td class="py-2 px-1 text-center">{{ $solicitud_lechada[0]->rel_reologia[0]->tem_abiente_6 ? $solicitud_lechada[0]->rel_reologia[0]->tem_abiente_6 : '-'}}</td>
-                            <td class="py-2 px-1 text-center">{{ $solicitud_lechada[0]->rel_reologia[0]->tem_abiente_3 ? $solicitud_lechada[0]->rel_reologia[0]->tem_abiente_3 : '-'}}</td>
+                            <td class="py-2 px-1 text-center">
+                                {{ $s_l[0]->rel_reologia[0]->tem_ambiente_rpm . '°C' ? $s_l[0]->rel_reologia[0]->tem_ambiente_rpm : '-' }}°C
+                            </td>
+                            <td class="py-2 px-1 text-center">
+                                {{ $s_l[0]->rel_reologia[0]->tem_abiente_300 ? $s_l[0]->rel_reologia[0]->tem_abiente_300 : '-' }}
+                            </td>
+                            <td class="py-2 px-1 text-center">
+                                {{ $s_l[0]->rel_reologia[0]->tem_abiente_200 ? $s_l[0]->rel_reologia[0]->tem_abiente_200 : '-' }}
+                            </td>
+                            <td class="py-2 px-1 text-center">
+                                {{ $s_l[0]->rel_reologia[0]->tem_abiente_100 ? $s_l[0]->rel_reologia[0]->tem_abiente_100 : '-' }}
+                            </td>
+                            <td class="py-2 px-1 text-center">
+                                {{ $s_l[0]->rel_reologia[0]->tem_abiente_60 ? $s_l[0]->rel_reologia[0]->tem_abiente_60 : '-' }}
+                            </td>
+                            <td class="py-2 px-1 text-center">
+                                {{ $s_l[0]->rel_reologia[0]->tem_ambiente_30 ? $s_l[0]->rel_reologia[0]->tem_ambiente_30 : '-' }}
+                            </td>
+                            <td class="py-2 px-1 text-center">
+                                {{ $s_l[0]->rel_reologia[0]->tem_abiente_6 ? $s_l[0]->rel_reologia[0]->tem_abiente_6 : '-' }}
+                            </td>
+                            <td class="py-2 px-1 text-center">
+                                {{ $s_l[0]->rel_reologia[0]->tem_abiente_3 ? $s_l[0]->rel_reologia[0]->tem_abiente_3 : '-' }}
+                            </td>
                         </tr>
                         <tr class="border-b">
                             <td class="py-2 px-1 text-center">T° Ensayo</td>
-                            <td class="py-2 px-1 text-center">{{ $solicitud_lechada[0]->rel_reologia[0]->tem_ensayo_rpm . '°C' ? $solicitud_lechada[0]->rel_reologia[0]->tem_ensayo_rpm : '-'}}°C</td>
-                            <td class="py-2 px-1 text-center">{{ $solicitud_lechada[0]->rel_reologia[0]->tem_ensayo_300 ? $solicitud_lechada[0]->rel_reologia[0]->tem_ensayo_300 : '-'}}</td>
-                            <td class="py-2 px-1 text-center">{{ $solicitud_lechada[0]->rel_reologia[0]->tem_ensayo_200 ? $solicitud_lechada[0]->rel_reologia[0]->tem_ensayo_200 : '-'}}</td>
-                            <td class="py-2 px-1 text-center">{{ $solicitud_lechada[0]->rel_reologia[0]->tem_ensayo_100 ? $solicitud_lechada[0]->rel_reologia[0]->tem_ensayo_100 : '-'}}</td>
-                            <td class="py-2 px-1 text-center">{{ $solicitud_lechada[0]->rel_reologia[0]->tem_ensayo_60 ? $solicitud_lechada[0]->rel_reologia[0]->tem_ensayo_60 : '-'}}</td>
-                            <td class="py-2 px-1 text-center">{{ $solicitud_lechada[0]->rel_reologia[0]->tem_ambiente_30 ? $solicitud_lechada[0]->rel_reologia[0]->tem_ambiente_30 : '-'}}</td>
-                            <td class="py-2 px-1 text-center">{{ $solicitud_lechada[0]->rel_reologia[0]->tem_ensayo_6 ? $solicitud_lechada[0]->rel_reologia[0]->tem_ensayo_6 : '-'}}</td>
-                            <td class="py-2 px-1 text-center">{{ $solicitud_lechada[0]->rel_reologia[0]->tem_ensayo_3 ? $solicitud_lechada[0]->rel_reologia[0]->tem_ensayo_3 : '-'}}</td>
+                            <td class="py-2 px-1 text-center">
+                                {{ $s_l[0]->rel_reologia[0]->tem_ensayo_rpm . '°C' ? $s_l[0]->rel_reologia[0]->tem_ensayo_rpm : '-' }}°C
+                            </td>
+                            <td class="py-2 px-1 text-center">
+                                {{ $s_l[0]->rel_reologia[0]->tem_ensayo_300 ? $s_l[0]->rel_reologia[0]->tem_ensayo_300 : '-' }}
+                            </td>
+                            <td class="py-2 px-1 text-center">
+                                {{ $s_l[0]->rel_reologia[0]->tem_ensayo_200 ? $s_l[0]->rel_reologia[0]->tem_ensayo_200 : '-' }}
+                            </td>
+                            <td class="py-2 px-1 text-center">
+                                {{ $s_l[0]->rel_reologia[0]->tem_ensayo_100 ? $s_l[0]->rel_reologia[0]->tem_ensayo_100 : '-' }}
+                            </td>
+                            <td class="py-2 px-1 text-center">
+                                {{ $s_l[0]->rel_reologia[0]->tem_ensayo_60 ? $s_l[0]->rel_reologia[0]->tem_ensayo_60 : '-' }}
+                            </td>
+                            <td class="py-2 px-1 text-center">
+                                {{ $s_l[0]->rel_reologia[0]->tem_ambiente_30 ? $s_l[0]->rel_reologia[0]->tem_ambiente_30 : '-' }}
+                            </td>
+                            <td class="py-2 px-1 text-center">
+                                {{ $s_l[0]->rel_reologia[0]->tem_ensayo_6 ? $s_l[0]->rel_reologia[0]->tem_ensayo_6 : '-' }}
+                            </td>
+                            <td class="py-2 px-1 text-center">
+                                {{ $s_l[0]->rel_reologia[0]->tem_ensayo_3 ? $s_l[0]->rel_reologia[0]->tem_ensayo_3 : '-' }}
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -58,39 +90,53 @@
                     <tbody class="bg-gray-50">
                         <tr class="border-b">
                             <td class="py-2 px-1 text-center"></td>
-                            <td class="py-2 px-1 text-center">{{ $solicitud_lechada[0]->rel_reologia[0]->temp_ambiente ? $solicitud_lechada[0]->rel_reologia[0]->temp_ambiente : '-'}}°C</td>
-                            <td class="py-2 px-1 text-center">{{ $solicitud_lechada[0]->rel_reologia[0]->temp_ensayo ? $solicitud_lechada[0]->rel_reologia[0]->temp_ensayo : '-'}}°C</td>
+                            <td class="py-2 px-1 text-center">
+                                {{ $s_l[0]->rel_reologia[0]->temp_ambiente ? $s_l[0]->rel_reologia[0]->temp_ambiente : '-' }}°C
+                            </td>
+                            <td class="py-2 px-1 text-center">
+                                {{ $s_l[0]->rel_reologia[0]->temp_ensayo ? $s_l[0]->rel_reologia[0]->temp_ensayo : '-' }}°C
+                            </td>
                         </tr>
                         <tr class="border-b">
                             <td class="py-2 px-1 text-center">Punto de Cedencia (lb/100ft2)</td>
-                            <td class="py-2 px-1 text-center">{{ $solicitud_lechada[0]->rel_reologia[0]->temp_ambiente_punto_cedencia ? $solicitud_lechada[0]->rel_reologia[0]->temp_ambiente_punto_cedencia : '-'}}</td>
-                            <td class="py-2 px-1 text-center">{{ $solicitud_lechada[0]->rel_reologia[0]->temp_ensayo_punto_cedencia ? $solicitud_lechada[0]->rel_reologia[0]->temp_ensayo_punto_cedencia : '-'}}</td>
+                            <td class="py-2 px-1 text-center">
+                                {{ $s_l[0]->rel_reologia[0]->temp_ambiente_punto_cedencia ? $s_l[0]->rel_reologia[0]->temp_ambiente_punto_cedencia : '-' }}
+                            </td>
+                            <td class="py-2 px-1 text-center">
+                                {{ $s_l[0]->rel_reologia[0]->temp_ensayo_punto_cedencia ? $s_l[0]->rel_reologia[0]->temp_ensayo_punto_cedencia : '-' }}
+                            </td>
                         </tr>
                         <tr class="border-b">
                             <td class="py-2 px-1 text-center">Gel 10 segundos</td>
-                            <td class="py-2 px-1 text-center">{{ $solicitud_lechada[0]->rel_reologia[0]->temp_ambiente_gel_10_seg ? $solicitud_lechada[0]->rel_reologia[0]->temp_ambiente_gel_10_seg : '-'}}</td>
-                            <td class="py-2 px-1 text-center">{{ $solicitud_lechada[0]->rel_reologia[0]->temp_ensayo_gel_10_seg ? $solicitud_lechada[0]->rel_reologia[0]->temp_ensayo_gel_10_seg : '-'}}</td>
+                            <td class="py-2 px-1 text-center">
+                                {{ $s_l[0]->rel_reologia[0]->temp_ambiente_gel_10_seg ? $s_l[0]->rel_reologia[0]->temp_ambiente_gel_10_seg : '-' }}
+                            </td>
+                            <td class="py-2 px-1 text-center">
+                                {{ $s_l[0]->rel_reologia[0]->temp_ensayo_gel_10_seg ? $s_l[0]->rel_reologia[0]->temp_ensayo_gel_10_seg : '-' }}
+                            </td>
                         </tr>
                         <tr class="border-b">
                             <td class="py-2 px-1 text-center">Gel 10 minutos</td>
-                            <td class="py-2 px-1 text-center">{{ $solicitud_lechada[0]->rel_reologia[0]->temp_ambiente_gel_10_min ? $solicitud_lechada[0]->rel_reologia[0]->temp_ambiente_gel_10_min : '-'}}</td>
-                            <td class="py-2 px-1 text-center">{{ $solicitud_lechada[0]->rel_reologia[0]->temp_ensayo_gel_10_min ? $solicitud_lechada[0]->rel_reologia[0]->temp_ensayo_gel_10_min : '-'}}</td>
+                            <td class="py-2 px-1 text-center">
+                                {{ $s_l[0]->rel_reologia[0]->temp_ambiente_gel_10_min ? $s_l[0]->rel_reologia[0]->temp_ambiente_gel_10_min : '-' }}
+                            </td>
+                            <td class="py-2 px-1 text-center">
+                                {{ $s_l[0]->rel_reologia[0]->temp_ensayo_gel_10_min ? $s_l[0]->rel_reologia[0]->temp_ensayo_gel_10_min : '-' }}
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-
-        <hr class="my-3">
     @else
-    <div class="accordion" id="accordionReologia"></div>
+        <div class="accordion" id="accordionReologia"></div>
     @endif
 
-    @if (count($solicitud_lechada[0]->rel_reologia) == 0)
+    @if (count($s_l[0]->rel_reologia) == 0)
         {{-- <form action="{{ route('store_reologia') }}" method="POST"> --}}
         <form id="form_reologia" method="POST">
             @csrf
-            <input type="hidden" name="solicitud_lechada_id" value="{{ $solicitud_lechada[0]->id }}">
+            <input type="hidden" name="solicitud_lechada_id" value="{{ $s_l[0]->id }}">
             <div class="row mt-3 py-2 px-5">
                 <table class="w-full text-sm border border-gray-300">
                     <thead class="bg-gray-200 text-gray-700">
@@ -205,30 +251,38 @@
 <script>
     const btn_submit_reologia = document.getElementById('btn_submit_reologia');
 
-    btn_submit_reologia.addEventListener('click', e => {
-        e.preventDefault();
-        let form = new FormData(document.getElementById('form_reologia'))
+    if (btn_submit_reologia) {
+        btn_submit_reologia.addEventListener('click', e => {
+            e.preventDefault();
+            let form = new FormData(document.getElementById('form_reologia'))
 
-        confirmAlert().then((confirmed) => {
-            if (confirmed) {
-                fetch("{{ route('store_reologia') }}", {
-                        method: 'POST',
-                        body: form
-                    }).then((response) => response.json())
-                    .then((data) => {
-                        if (data) {
-                            componentReologia(data.success_reologia)
-                            document.getElementById('form_reologia').style.display = 'none'
-                            console.log(data);
-                            successAlert('¡Registro Asignado!',
-                                'El registro se asignó correctamente.').then(
-                                (confirmed) => {
-                                    // window.location.reload();
+            confirmAlert().then((confirmed) => {
+                if (confirmed) {
+                    fetch("{{ route('store_reologia') }}", {
+                            method: 'POST',
+                            body: form
+                        }).then((response) => response.json())
+                        .then((data) => {
+                            if (data) {
+                                componentReologia(data.success_reologia)
+                                document.getElementById('form_reologia').style.display = 'none'
+                                console.log(data);
+                                successAlert('¡Registro Asignado!',
+                                    'El registro se asignó correctamente.').then(
+                                    (confirmed) => {
+                                        // window.location.reload();
+                                    })
+                                let solicitud_id = {!! json_encode($solicitud->id) !!}
+                                checkGenerateReport(solicitud_id)
+                                .then((data) => {
+                                    if (data.generate_report) {
+                                        document.querySelector('#tab_g_report_js').classList.remove('d-none')
+                                    }
                                 })
-                        }
-                    })
-            }
+                            }
+                        })
+                }
+            })
         })
-        // alert('Cargando reologia..')
-    })
+    }
 </script>

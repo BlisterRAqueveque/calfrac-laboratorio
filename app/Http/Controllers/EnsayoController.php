@@ -90,17 +90,12 @@ class EnsayoController extends Controller
 
     public function assigned(Request $request)
     {
-
-        switch ($request->type_of_assignment) {
-            case 'reologia':
-                $rel = RelReologiaSolicitudEnsayo::find($request->id_assignment);
-                $rel->selected = 1;
-                $rel->save();
-                break;
-        }
+        $rel = RelBombeabilidadSolicitudEnsayo::find($request->id_assignment);
+        $rel->selected = 1;
+        $rel->save();
 
         if ($rel->id)
-            return back()->with('success', $rel->id);
+            return response()->json(['id_rel_bomb' => $rel->id]);
     }
 
     protected function _createRelAditivo($aditivo, $ensayo_id)
@@ -232,12 +227,15 @@ class EnsayoController extends Controller
         ]);
 
         if ($perdida_filtrado->id)
-            return back()->with('success_perdida_filtrado', $perdida_filtrado->id);
+            return response()->json(['success_filtrado' => $perdida_filtrado]);
     }
 
+    /**
+     * 
+     */
     public function store_bombeabilidad(Request $request)
     {
-        $bombeabilidad = RelBombeabilidadSolicitudEnsayo::create([
+        $bomb_id = RelBombeabilidadSolicitudEnsayo::create([
             'consistometro' => $request->bombeabilidad_consistometro,
             'time_acondicionamiento' => $request->bombeabilidad_acondicionamiento,
             'planilla' => $request->bombeabilidad_planilla,
@@ -251,8 +249,17 @@ class EnsayoController extends Controller
             'usuario_carga' => auth()->user()->id,
         ]);
 
+        $bombeabilidad = RelBombeabilidadSolicitudEnsayo::find($bomb_id->id);
+
+        // $bombeabilidad->created_at = 'el día ' . $bombeabilidad->created_at->format('d') . 'de' . ' ' . $bombeabilidad->created_at->format('M') . ', ' . $bombeabilidad->created_at->format('Y') . ' a las ' . $bombeabilidad->created_at->format('H:i') . ' hs';
+        $bombeabilidad->usuario_carga = $bombeabilidad->user->nombre . ' ' . $bombeabilidad->user->apellido;
+        $bombeabilidad->dia = $bombeabilidad->created_at->format('d');
+        $bombeabilidad->mes = $bombeabilidad->created_at->format('M');
+        $bombeabilidad->anio = $bombeabilidad->created_at->format('Y');
+        $bombeabilidad->time = $bombeabilidad->created_at->format('H:i');
+
         if ($bombeabilidad->id)
-            return back()->with('success_bombeabilidad', $bombeabilidad->id);
+            return response()->json(['success_bombeabilidad' => $bombeabilidad]);
     }
 
     public function store_uca(Request $request)
@@ -273,7 +280,7 @@ class EnsayoController extends Controller
         ]);
 
         if ($uca->id)
-            return back()->with('success_uca', $uca->id);
+            return response()->json(['success_uca' => $uca]);
     }
 
     public function store_agua_libre(Request $request)
@@ -287,7 +294,7 @@ class EnsayoController extends Controller
         ]);
 
         if ($agua_libre->id)
-            return back()->with('success_agua_libre', $agua_libre->id);
+            return response()->json(['success_agua_libre' => $agua_libre]);
     }
 
     public function store_mezclabilidad(Request $request)
@@ -299,6 +306,44 @@ class EnsayoController extends Controller
         ]);
 
         if ($mezclabilidad->id)
-            return back()->with('success_mezclabilidad', $mezclabilidad->id);
+            return response()->json(['success_mezclabilidad' => $mezclabilidad]);
+    }
+
+    /**
+     * 
+     */
+    public function assignedReporteSolicitud($solicitud_id)
+    {
+
+        $solicitud = Solicitud::find($solicitud_id);
+        $tipo_ensayo = "";
+        switch ($solicitud->tipo) {
+            case '2': // Lechada y/o Cementación
+                $tipo_ensayo = 'CN';
+                break;
+            case '3': // Lodo
+                $tipo_ensayo = 'CL'; // No se si se abrevia asi pero qcyo, consultar
+                break;
+        }
+
+        $last_ensayo = Ensayo::where('tipo', $tipo_ensayo)->latest('created_at')->first();
+
+        $year = substr(date('Y'), -2);
+
+        if ($year == $last_ensayo->anio) {
+            $year = intval($year);
+        }
+
+        $ensayo = Ensayo::create([
+            'incrementable' => $last_ensayo->incrementable + 1,
+            'tipo' => $tipo_ensayo,
+            'anio' => $year,
+            'user_id' => auth()->user()->id
+        ]);
+
+        $solicitud->ensayo_asignado_id = $ensayo->id;
+        $solicitud->estado_solicitud_id = 3; // Finalizada
+        $solicitud->save();
+        return response()->json(['success' => $ensayo->id]);
     }
 }

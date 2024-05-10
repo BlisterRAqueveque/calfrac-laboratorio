@@ -6,8 +6,9 @@
 
 @section('contenido')
     @vite('resources/css/solicitud.css')
-    <section class="p-2 pb-0 mb-0 relative shadow-sm section_bg dark:bg-blue-800 dark:bg-opacity-20 w-11/12 mx-auto">
-        <section class="p-2 mx-auto pb-0 section_solicitud w-11/12">
+    <section class="p-2 pb-0 mb-0 relative shadow-sm section_bg dark:bg-blue-800 dark:bg-opacity-20"
+        style="width: 90%; margin: 0 auto; margin-top: 1px;">
+        <section class="p-2 mx-auto pb-0 section_solicitud" style="width: 97%;">
             <div class="flex gap-3">
                 <div class="flex justify-center items-center w-16 h-16 rounded-full bg-white shadow-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -16,12 +17,10 @@
                             d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z" />
                     </svg>
                 </div>
-
                 <div class="flex flex-col">
-                    <div class="flex flex-col md:flex-row gap-1 md:gap-3">
+                    <div class="flex flex-col md:flex-row md:gap-4">
                         <span
-                            class="text-md xl:text-xl flex items-center gap-3 font-bold text-gray-700 dark:text-white">Solicitud
-                            de Lechada -
+                            class="text-md xl:text-xl flex items-center gap-3 font-bold text-gray-700 dark:text-white">Solicitud de Lechada -
                             #{{ $solicitud->id }}
                             @php
                                 switch ($solicitud->estado->id) {
@@ -30,7 +29,8 @@
                                         $clase = 'bg-blue-300 dark:bg-blue-500 dark:bg-opacity-50 dark:text-sky-200';
                                         break;
                                     case '2':
-                                        $clase = 'solicitud_aprobada';
+                                        $clase =
+                                            'solicitud_aprobada';
                                         $estado = $solicitud->estado->nombre;
                                         break;
                                     case '3':
@@ -59,57 +59,62 @@
                             {{ $estado }}
                         </small>
                     </div>
-                    <div class="grid md:grid-cols-2 xl:grid-cols-3 text-xs md:text-sm md:items-center gap-3 lg:gap-10 mt-3">
-                        <article class="col-span-3 md:col-span-1  flex items-center gap-1 dark:text-white">
-                            <x-icons.user class="w-4 h-4" stroke-width="1.5" /> {{ $solicitud->user->nombre }}
-                            {{ $solicitud->user->apellido }}
+                    <div class="grid grid-cols-3 text-xs md:text-sm md:items-center gap-3 lg:gap-10">
+                        <article class="flex items-center gap-1 dark:text-white">
+                            <x-icons.user class="w-4 h-4" stroke-width="1.5"/> {{ $solicitud->user->nombre }} {{ $solicitud->user->apellido }}
                         </article>
 
-                        <article class="col-span-3 md:col-span-1 flex items-center gap-1 dark:text-white">
-                            <x-icons.calendar class="w-4 h-4" stroke-width="1.5" />
+                        <article class="flex items-center gap-1 dark:text-white">
+                            <x-icons.calendar class="w-4 h-4" stroke-width="1.5"/>
                             Fecha de Carga: <b
                                 class="text-gray-700 dark:text-gray-300">{{ $solicitud->created_at->format('d') }} de
-                                {{ $solicitud->created_at->locale('es')->monthName }},
-                                {{ $solicitud->created_at->format('Y') }}</b>
+                                {{ $solicitud->created_at->format('M') }}, {{ $solicitud->created_at->format('Y') }}</b>
                         </article>
-                        <article class="col-span-3 md:col-span-1 flex items-center gap-1 dark:text-white">
-                            <x-icons.map class="w-4 h-4" stroke-width="1.5" />
+                        <article class="flex items-center gap-1 dark:text-white">
+                            <x-icons.map class="w-4 h-4" stroke-width="1.5"/>
                             Locación: <b class="text-gray-700 dark:text-gray-300">{{ $solicitud->locacion }}</b>
                         </article>
-                        <article class="col-span-3 md:col-span-1 flex items-center gap-1 dark:text-white">
-                            <x-icons.pencil class="w-4 h-4" stroke-width="1.5" />
+                    {{-- </div> --}}
+
+                    {{-- <div class="flex mt-2 text-xs md:text-sm items-center gap-3 lg:gap-10"> --}}
+                        <article class="flex items-center gap-1 dark:text-white">
+                            <x-icons.pencil class="w-4 h-4" stroke-width="1.5"/>
                             Última edición: <b
                                 class="text-gray-700 dark:text-gray-300">{{ $solicitud->updated_at->format('d') }} de
-                                {{ $solicitud->updated_at->locale('es')->monthName }},
-                                {{ $solicitud->updated_at->format('Y') }}</b>
+                                {{ $solicitud->updated_at->format('M') }}, {{ $solicitud->updated_at->format('Y') }}</b>
                         </article>
-                        <article class="col-span-3 md:col-span-1 flex items-center gap-1 dark:text-white">
-                            <x-icons.check class="w-4 h-4" stroke-width="1.5" />
+                    {{-- </div> --}}
+
+                    <div class="col-span-3flex flex-col md:flex-row mt-2 text-xs md:text-sm md:items-center gap-2 md:gap-10">
+
+                        <article class="flex items-center gap-1 dark:text-white">
+                            <x-icons.check class="w-4 h-4" stroke-width="1.5"/>
                             Solicitud Aprobada: <b class="text-gray-700 dark:text-gray-300">
                                 @if (!$solicitud->aprobada)
                                     En espera
                                 @else
                                     {{ $solicitud->fecha_aprobada->format('d') }} de
-                                    {{ $solicitud->fecha_aprobada->locale('es')->monthName }},
+                                    {{ $solicitud->fecha_aprobada->format('M') }},
                                     {{ $solicitud->fecha_aprobada->format('Y') }}
                                 @endif
                             </b>
                         </article>
-                        <article class="col-span-3 md:col-span-1 flex items-center gap-1 dark:text-white">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="w-4 h-4">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                            </svg>
-                            Ensayo Asignado: <b class="text-gray-700 dark:text-gray-300">
-                                @if ($solicitud->ensayo)
-                                {{ $solicitud->ensayo->tipo }}-{{ $solicitud->ensayo->incrementable }}-{{ $solicitud->ensayo->anio }}</b>
-                                @else
-                                En espera
-                                @endif
-                        </article>
+
+                        @if ($solicitud->ensayo_asignado_id)
+                            <article class="flex items-center gap-1 dark:text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                                </svg>
+                                Ensayo Asignado: <b class="text-gray-700 dark:text-gray-300">
+                                    {{ $solicitud->ensayo->tipo }}-{{ $solicitud->ensayo->incrementable }}-{{ $solicitud->ensayo->anio }}</b>
+                            </article>
+                        @endif
                     </div>
                 </div>
+
             </div>
+
             <br>
 
             <ul role="tablist" aria-owns="nav-tab1 nav-tab2 nav-tab3 nav-tab4" class="nav nav-tabs text-sm md:text-md"
@@ -139,7 +144,9 @@
                     </div>
                 @endif
             </ul>
+
         </section>
+
     </section>
 
     <div class="tab-content" id="nav-tabs-content">
@@ -182,8 +189,8 @@
                 <div class="grid xs:grid-cols-2 md:grid-cols-6 gap-3 mt-3">
                     <div class="col-span-2 xl:col-span-1">
                         <label for="cliente_lechada"
-                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Cliente
-                            <span class="text-red-500">*</span></label>
+                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Cliente <span
+                                class="text-red-500">*</span></label>
                         <select name="cliente_lechada" id="cliente_lechada" class="text-sm inp_edit" disabled>
                             @foreach ($clientes as $c)
                                 <option value="{{ $c->id }}">{{ $c->nombre }}</option>
@@ -231,8 +238,8 @@
 
                     <div class="col-span-2">
                         <label for="empresa_lechada"
-                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Empresa
-                            <span class="text-red-500">*</span></label>
+                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Empresa <span
+                                class="text-red-500">*</span></label>
                         <input type="text" name="empresa_lechada" id="empresa_lechada"
                             class="form-control text-sm p-2" placeholder="Empresa / Compañía"
                             value="{{ $solicitud->empresa }}" readonly>
@@ -607,7 +614,8 @@
             </form>
 
             @if ($solicitud->aprobada)
-                <div class="mt-3 flex items-center justify-center flex-col md:flex-row gap-3 text-center bg_approved">
+                <div
+                    class="mt-3 flex items-center justify-center flex-col md:flex-row gap-3 text-center bg-green-500 bg-opacity-40 dark:bg-green-600 dark:bg-opacity-10 border-1 p-1 rounded-sm w-full md:w-1/2 mx-auto border-green-500 text-green-800 dark:text-green-600">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6 ">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -616,7 +624,7 @@
                     <span>Solicitud aprobada por {{ $solicitud->user_aprobo->nombre }}
                         {{ $solicitud->user_aprobo->apellido }} el día {{ $solicitud->fecha_aprobada->format('d') }}
                         de
-                        {{ $solicitud->fecha_aprobada->locale('es')->monthName }},
+                        {{ $solicitud->fecha_aprobada->format('M') }},
                         {{ $solicitud->fecha_aprobada->format('Y') }}</span>
                 </div>
             @else
@@ -649,21 +657,10 @@
             @include('ensayo.show')
             @else
             @endif --}}
-        @include('ensayo.create')
+            @include('ensayo.create')
         <br>
     </div>
-    <div class="container">
-        <div class="inline-block">
-            <a href="{{ route('solicitudes') }}" class="flex gap-1 items-center btn_submit font-semibold tracking-wide py-1 px-3">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-4 h-4">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
-                  </svg>
-                  
-                Volver al histórico
-            </a>
-        </div>
-    </div>
-    <br>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             VirtualSelect.init({

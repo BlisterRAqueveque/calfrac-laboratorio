@@ -3,12 +3,9 @@
     <p class="m-0 mt-1 font-bold text-lg tracking-wide dark:text-gray-300">Formulario para crear un Ensayo</p>
 
     @include('ensayo.components.create.form')
-    
 </div>  
 
 <!-- Agrega aditivos -->
 <script>
     let aditivos = {!! json_encode($aditivos) !!}
 </script>
-<script src="{{ asset('js/ensayo/add_aditivo.js') }}"></script>
-<script src="{{ asset('js/ensayo/test_requerido.js') }}"></script>

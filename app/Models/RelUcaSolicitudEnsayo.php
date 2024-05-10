@@ -17,7 +17,7 @@ class RelUcaSolicitudEnsayo extends Model
         'psi_1000',
         'hs_12',
         'hs_24',
-        'impedancia_austica',
+        'impedancia_acustica',
         'sgs_cero',
         'sgs_max',
         'tiempo',

@@ -186,7 +186,7 @@
                                         <td class="p-3 w-72 md:w-96">
                                             <div class="table_btn table_btn_success">
                                                 <div class="w-2 h-2 rounded-full point_success"></div>
-                                                Ensayo #{{ $s->ensayo_asignado_id }}
+                                                {{ $s->ensayo->tipo }}-{{ $s->ensayo->incrementable }}-{{ $s->ensayo->anio }}
                                             </div>
                                         </td>
                                     @else

@@ -19,8 +19,8 @@ Laboratorio - Crear Solicitud
             <label for="solicitud-lodo" class="solicitud-label dark:shadow-gray-700 p-3 rounded-md border dark:border-gray-600 dark:tab_bg dark:text-gray-400 w-full cursor-pointer text-center max-w-60">Solicitud Lodo</label>
         </div>
       
-        <section class="solicitud_contenedor" style="display: none">@include('solicitud.components.fractura.create')</section>
-        <section class="solicitud_contenedor" style="display: block">@include('solicitud.components.lechada.create')</section>
+        <section class="solicitud_contenedor" style="display: block">@include('solicitud.components.fractura.create')</section>
+        <section class="solicitud_contenedor" style="display: none">@include('solicitud.components.lechada.create')</section>
         <section class="solicitud_contenedor" style="display: none">@include('solicitud.components.lodo.create')</section>
 
     </section>

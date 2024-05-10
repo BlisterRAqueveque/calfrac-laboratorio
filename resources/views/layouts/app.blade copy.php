@@ -357,7 +357,7 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
 
         @media (100px < width < 1200px) {
             .top_cs {
-                margin-top: 113px
+                margin-top: 74px
             }
         }
     </style>

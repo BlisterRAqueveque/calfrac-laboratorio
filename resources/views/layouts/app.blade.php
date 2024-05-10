@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html id="html" lang="en" class="loading">
+{{-- <html id="html" lang="en" class="loading"> --}}
+    <html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -62,7 +63,7 @@
                     </svg>
                 </li>
 
-                <li class="p-2 rounded-full text-gray-400 hover:bg-blue-50 transition-all duration-250 cursor-pointer"
+                {{-- <li class="p-2 rounded-full text-gray-400 hover:bg-blue-50 transition-all duration-250 cursor-pointer"
                     id="toggleTheme">
                     <div id="iconThemeMode">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -71,7 +72,7 @@
                                 d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
                         </svg>
                     </div>
-                </li>
+                </li> --}}
 
                 <li class="p-2 rounded-full text-gray-400 hover:bg-blue-50 transition-all duration-250 cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -315,7 +316,8 @@
     <script>
         const {
             el,
-            mount
+            mount,
+            setChildren
         } = redom;
     </script>
     <style>
@@ -325,7 +327,7 @@
 
         @media (100px < width < 1200px) {
             .top_cs {
-                margin-top: 113px
+                margin-top: 74px
             }
         }
     </style>
@@ -338,7 +340,7 @@
 </html>
 @vite('resources/js/app.js')
 @vite('resources/js/bootstrap.bundle.min.js')
-<script src="{{ asset('js/darkmode.js') }}"></script>
+{{-- <script src="{{ asset('js/darkmode.js') }}"></script> --}}
 <script src="{{ asset('js/alerts.js') }}"></script>
 <script src="{{ asset('js/helpers.js') }}"></script>
 
