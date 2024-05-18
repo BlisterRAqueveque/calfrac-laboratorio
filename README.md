@@ -22,16 +22,21 @@ Una vez que se completa el Ensayo, se genera un reporte, y la Solicitud queda fi
 ## Guía de Instalación
 - (1) La primera vez que se clona el repositorio, se debe de ejecutar los siguientes comandos en la consola (Siempre dentro de la carpeta).
 
-    composer install
+```
+ composer install
+```
 
-    npm install
-
+```
+npm install
+```
 
 - (2) Correr XAMPP o Laragon, depende el apache que tengan.
 
 - (3) Cuando se instalen las dependencias necesarias, se debe generar la migración de la base de datos. El siguiente comando se ejecutará en la terminal.
 
-    php artisan migrate
+```
+php artisan migrate
+```
 
 - (4) La base de datos desde un inicio está vacía, para ello, se requiere tener copia de la base de datos de producción o solicitarlo a algún compañero que esté trabajando con este sistema.
 
@@ -46,6 +51,10 @@ El sistema iniciará correctamente, pero si se desea realizar cargas de solicitu
 
 - (5) Iniciar el proyecto
 
-    php artisan serve
+```
+php artisan serve
+```
 
-    npm run dev
+```
+npm run dev
+```
