@@ -28,15 +28,11 @@
                         class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Yacimiento /
                         Locación
                         <span class="text-red-500">*</span></label>
-                    <select name="locacion_lechada" id="locacion_lechada" class="form-select text-sm p-2">
-                        <option value="">-- Seleccione --</option>
-                        <option value="1" {{ old('locacion_lechada') == '1' ? 'selected' : '' }}>Yacimiento 1
-                        </option>
-                        <option value="2" {{ old('locacion_lechada') == '2' ? 'selected' : '' }}>Yacimiento 2
-                        </option>
-                        {{-- @foreach ($yacimientos as $y)
-                            <option value="{{ $y->id }}">{{ $y->nombre }}</option>
-                        @endforeach --}}
+                    <select name="locacion_lechada" id="locacion_lechada" class="text-sm" data-search="true">
+                        @foreach ($yacimientos as $y)
+                        <option value="{{ $y->id }}"
+                            {{ old('locacion_lechada') == $y->id ? 'selected' : '' }}>{{ $y->nombre }}</option>
+                    @endforeach
                     </select>
                     @error('locacion_lechada')
                         <small class="text-xs text-red-600">La locación es requerida</small>
@@ -601,6 +597,10 @@
             placeholder: "Seleccione el cliente",
         });
         VirtualSelect.init({
+            ele: "#locacion_lechada",
+            placeholder: "Seleccione el Yacimiento",
+        });
+        VirtualSelect.init({
             ele: "#tipo_requerimiento_lechada",
             placeholder: "Seleccione el tipo de requerimiento",
         });
@@ -626,6 +626,7 @@
             placeholder: "Seleccione la compañía",
         });
         document.getElementById("cliente_lechada").setValue(0);
+        document.getElementById("locacion_lechada").setValue(0);
         document.getElementById("tipo_requerimiento_lechada").setValue(0);
         document.getElementById("tipo_trabajo_lechada").setValue(0);
         document.getElementById("tipo_cementacion_lechada").setValue(0);
@@ -647,20 +648,31 @@
     let aux = 1;
     btnAddEnsayoRef.addEventListener('click', e => {
         e.preventDefault()
-        div = el('div.grid grid-cols-3 items-center')
-        let colSpan = el('div.col-span-1')
+        div = el('div.grid grid-cols-3 items-center', {id: `div_ens_ref_${aux}`})
+        let colSpan = el('div.col-span-2')
         let label = el('label.text-sm text-gray-700 font-semibold tracking-wide mb-2', 'Seleccione el Ensayo')
         let flex = el('div.flex items-center flex-1 gap-3')
-        let select = el('select.form-select text-sm p-2', el('option', {value: ''}, '-- Seleccione --'))
+        let select = el('select.form-select text-sm p-2', {name: 'ensayos_ref[]'}, el('option', {
+            value: ''
+        }, '-- Seleccione --'))
 
         ensayos.forEach(ens => {
-            const {id, tipo, incrementable, anio} = ens
-            mount(select, el('option', {value: id}, `${tipo}-${incrementable}-${anio}`))
+            const {
+                id,
+                tipo,
+                incrementable,
+                anio
+            } = ens
+            mount(select, el('option', {
+                value: id
+            }, `${tipo}-${incrementable}-${anio}`))
         });
         select.setAttribute('onChange', `selectEnsayo(this, ${aux})`)
-        
+
         mount(flex, select)
-        mount(flex, el('div.w-1/2 flex justify-center gap-2 items-center', {id: `flex_ensayo_${aux}`}))
+        mount(flex, el('div.w-1/2 flex justify-center gap-2 items-center', {
+            id: `flex_ensayo_${aux}`
+        }))
 
         mount(colSpan, label)
         mount(colSpan, flex)
@@ -675,8 +687,19 @@
         if (e.value == '') {
             flex_div.innerHTML = ''
         } else {
-            let a = el('a.bg-slate-100 text-gray-700 border py-1 rounded-sm hover:bg-slate-200 hover:text-gray-700 cursor-pointer transition-all duration-200 px-3', 'Visualizar Ensayo')
-            setChildren(flex_div, a)
+            let divGrid = el('div.grid grid-cols-2 gap-3')
+            let a = el(
+                'a.bg-slate-100 w-full text-gray-700 border py-1 rounded-sm hover:bg-slate-200 hover:text-gray-700 cursor-pointer transition-all duration-200 px-3',
+                'Visualizar Ensayo')
+            let button = el('button.bg-red-600 text-white font-semibold px-10 hover:bg-red-700 transition-all',
+                'Descartar')
+            button.addEventListener('click', e => {
+                event.preventDefault();
+                document.getElementById(`div_ens_ref_${aux}`).remove()
+            })
+            mount(divGrid, a)
+            mount(divGrid, button)
+            setChildren(flex_div, divGrid)
         }
 
     }

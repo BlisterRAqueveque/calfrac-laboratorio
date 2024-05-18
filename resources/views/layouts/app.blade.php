@@ -292,11 +292,12 @@
                                         Usuarios</a>
                                 </li>
                             @endcan
-                            {{-- <li class="ps-2 p-2">
+                            <li class="ps-2 p-2">
                                 <a href="{{ route('yacimientos') }}"
                                     class="text-gray-600 dark:text-gray-500 hover:text-green-900 dark:hover:text-white flex items-center justify-between">-
                                     Yacimientos</a>
                             </li>
+                        {{--
                             <li class="ps-2 p-2">
                                 <a href="{{ route('permisos') }}"
                                     class="text-gray-600 dark:text-gray-500 hover:text-green-900 dark:hover:text-white flex items-center justify-between">-

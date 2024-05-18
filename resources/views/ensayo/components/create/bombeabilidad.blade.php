@@ -26,6 +26,9 @@
                             data-bs-target="#bombeabilidad_{{ $bombeabilidad->id }}" aria-expanded="false"
                             aria-controls="bombeabilidad_{{ $bombeabilidad->id }}">
                             Bombeabilidad - Intento Nº{{ $i }}
+                            @if ($bombeabilidad->selected)
+                                <x-icons.check class="w-4 h-4 ms-2" stroke-width="2" />
+                            @endif
                         </button>
                     </h2>
                     <div id="bombeabilidad_{{ $bombeabilidad->id }}" class="accordion-collapse collapse"
@@ -142,7 +145,8 @@
                                         class="text-sm text-gray-700 font-semibold tracking-wide mb-2">40 Bc
                                         (hh:mm)</label>
                                     <input type="time" class="form-control text-sm p-2"
-                                        value="{{ $bombeabilidad->bc_40 ? $bombeabilidad->bc_40 : '00:00' }}" readonly>
+                                        value="{{ $bombeabilidad->bc_40 ? $bombeabilidad->bc_40 : '00:00' }}"
+                                        readonly>
                                 </div>
 
                                 <div>
@@ -290,6 +294,7 @@
                         .then((data) => {
                             if (data) {
                                 // Genera la vista del 'accordion' con los datos que se insertaron previamente
+                                console.log('Bombeabilidad: ', data);
                                 componentBombeabilidad(data.success_bombeabilidad)
                                 // Limpia el formulario, todos los values del inp que tengan la clase 'inp_b'
                                 clearInputs('inp_b')
@@ -340,7 +345,8 @@
                             checkGenerateReport(solicitud_id)
                                 .then((data) => {
                                     if (data.generate_report) {
-                                        document.querySelector('#tab_g_report_js').classList.remove('d-none')
+                                        document.querySelector('#tab_g_report_js').classList.remove(
+                                            'd-none')
                                     }
                                 })
                         }

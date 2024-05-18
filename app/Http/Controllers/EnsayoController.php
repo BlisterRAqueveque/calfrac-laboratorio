@@ -330,12 +330,15 @@ class EnsayoController extends Controller
 
         $year = substr(date('Y'), -2);
 
-        if ($year == $last_ensayo->anio) {
-            $year = intval($year);
-        }
+        // if ($last_ensayo) {
+        //     if ($year == $last_ensayo->anio) {
+        //         $year = intval($year);
+        //     }
+        // }
+        $year = intval($year);
 
         $ensayo = Ensayo::create([
-            'incrementable' => $last_ensayo->incrementable + 1,
+            'incrementable' => $last_ensayo ? $last_ensayo->incrementable + 1 : 1,
             'tipo' => $tipo_ensayo,
             'anio' => $year,
             'user_id' => auth()->user()->id

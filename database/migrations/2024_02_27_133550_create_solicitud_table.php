@@ -23,10 +23,8 @@ return new class extends Migration
             $table->string('programa')->nullable();
             $table->date('fecha_solicitud')->nullable();
             $table->string('empresa')->nullable();
-            // $table->date('fecha_tratamiento')->nullable();
             $table->string('pozo')->nullable();
             $table->string('rep_compania')->nullable();
-            // $table->date('fecha_reporte')->nullable();
             $table->string('rep_venta')->nullable();
             $table->date('fecha_resultados')->nullable();
             $table->string('equipo')->nullable();

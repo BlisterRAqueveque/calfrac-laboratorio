@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EnsayoController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\PermisosController;
 use App\Http\Controllers\SolicitudController;
 use App\Http\Controllers\UserController;
@@ -65,6 +66,7 @@ Route::get('/solicitud/fractura/{solicitud_id}', [SolicitudController::class, 's
 # Lechada
 Route::post('/solicitud/lechada', [SolicitudController::class, 'store_lechada'])->name('solicitud.lechada');
 Route::get('/solicitud/lechada/{solicitud_id}', [SolicitudController::class, 'show_lechada'])->name('solicitud.lechada.show');
+Route::post('/solicitud/edicion/lechada', [SolicitudController::class, 'update_lechada'])->name('solicitud.update.lechada');
 
 // Route::get('/send-email', [SolicitudController::class, 'sendEmail']);
 Route::get('/send-email', [SolicitudController::class, 'viewMail']);
@@ -108,4 +110,5 @@ Route::post('/permiso', [PermisosController::class, 'store'])->name('permiso.sto
 Route::post('/permisos_user', [PermisosController::class, 'user_permission_store'])->name('permisos.user.store');
 Route::get('/testing', [PermisosController::class, 'testing']);
 
-
+# PDF's
+Route::get('create-pdf-file', [PDFController::class, 'index']);

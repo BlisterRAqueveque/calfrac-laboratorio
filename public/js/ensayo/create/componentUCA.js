@@ -29,7 +29,7 @@ const componentUCA = (data = "") => {
     "50 psi (hh:mm)"
   );
   input = el("input.form-control text-sm p-2", {
-    type: "time",
+    type: "text",
     value: data.psi_50 ? data.psi_50 : '00:00',
     readonly: true,
   });
@@ -44,7 +44,7 @@ const componentUCA = (data = "") => {
     "500 psi (hh:mm)"
   );
   input = el("input.form-control text-sm p-2", {
-    type: "time",
+    type: "text",
     value: data.psi_500 ? data.psi_500 : '00:00',
     readonly: true,
   });
@@ -59,7 +59,7 @@ const componentUCA = (data = "") => {
     "1000 psi (hh:mm)"
   );
   input = el("input.form-control text-sm p-2", {
-    type: "time",
+    type: "text",
     value: data.psi_1000 ? data.psi_1000 : '00:00',
     readonly: true,
   });
@@ -124,7 +124,7 @@ const componentUCA = (data = "") => {
     "SGS cero (hh:mm)"
   );
   input = el("input.form-control text-sm p-2", {
-    type: "time",
+    type: "text",
     value: data.sgs_cero ? data.sgs_cero : '00:00',
     readonly: true,
   });
@@ -141,7 +141,7 @@ const componentUCA = (data = "") => {
     "SGS max (hh:mm)"
   );
   input = el("input.form-control text-sm p-2", {
-    type: "time",
+    type: "text",
     value: data.sgs_max ? data.sgs_max : '00:00',
     readonly: true,
   });
@@ -158,7 +158,7 @@ const componentUCA = (data = "") => {
     "Tiempo (hh:mm)"
   );
   input = el("input.form-control text-sm p-2", {
-    type: "time",
+    type: "text",
     value: data.tiempo ? data.tiempo : '00:00',
     readonly: true,
   });

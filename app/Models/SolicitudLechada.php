@@ -17,6 +17,7 @@ class SolicitudLechada extends Model
         'casing_od',
         'densidad_lodo',
         'tipo_lodo',
+        'mud_company',
         'profundidad_pozo_md',
         'profundidad_pozo_tvd',
         'base_md',
@@ -58,6 +59,11 @@ class SolicitudLechada extends Model
     public function user_reconocimiento()
     {
         return $this->belongsTo(User::class, 'firma_reconocimiento_id');
+    }
+
+    public function mud_company()
+    {
+        return $this->belongsTo(MudCompany::class, 'mud_company_id');
     }
 
     public function formulacion_tentativa() {

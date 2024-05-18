@@ -1,35 +1,37 @@
 <div class="mt-4 tab-pane fade" id="tab-perdida_filtrado" role="tabpanel" aria-labelledby="nav-tab_condiciones_test">
 
     <div id="registro_filtrado">
-        <div class="flex justify-center">
-            <p>Registro de Pérdida de Filtrado</p>
-        </div>
+        @if (count($s_l[0]->rel_perdida_filtrado) > 0)
+            <div class="flex justify-center">
+                <p>Registro de Pérdida de Filtrado</p>
+            </div>
 
-        <div class="grid grid-cols-3 gap-3 mb-3">
-            <div>
-                <label for="perdida_temperatura"
-                    class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Temperatura °C</label>
-                <input type="text" class="form-control text-sm p-2"
-                    value="{{ $s_l[0]->rel_perdida_filtrado[0]->temperatura }}" readonly>
+            <div class="grid grid-cols-3 gap-3 mb-3">
+                <div>
+                    <label for="perdida_temperatura"
+                        class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Temperatura °C</label>
+                    <input type="text" class="form-control text-sm p-2"
+                        value="{{ $s_l[0]->rel_perdida_filtrado[0]->temperatura }}" readonly>
+                </div>
+                <div>
+                    <label for="perdida_fluido_acumulado"
+                        class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fluido Acumulado mL</label>
+                    <input type="text" class="form-control text-sm p-2"
+                        value="{{ $s_l[0]->rel_perdida_filtrado[0]->fluido_acumulado }}" readonly>
+                </div>
+                <div>
+                    <label for="perdida_filtrado_api"
+                        class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Filtrado API
+                        ml/30min</label>
+                    <input type="text" class="form-control text-sm p-2"
+                        value="{{ $s_l[0]->rel_perdida_filtrado[0]->filtrado_api }}" readonly>
+                </div>
             </div>
-            <div>
-                <label for="perdida_fluido_acumulado"
-                    class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fluido Acumulado mL</label>
-                <input type="text" class="form-control text-sm p-2"
-                    value="{{ $s_l[0]->rel_perdida_filtrado[0]->fluido_acumulado }}" readonly>
-            </div>
-            <div>
-                <label for="perdida_filtrado_api"
-                    class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Filtrado API
-                    ml/30min</label>
-                <input type="text" class="form-control text-sm p-2"
-                    value="{{ $s_l[0]->rel_perdida_filtrado[0]->filtrado_api }}" readonly>
-            </div>
-        </div>
+        @endif
     </div>
 
     <!-- Pérdida de Filtrado -->
-    @if (count($s_l[0]->rel_reologia) == 0)
+    @if (count($s_l[0]->rel_perdida_filtrado) == 0)
         <form id="form_filtrado" class="mt-3" method="POST">
             @csrf
             <input type="hidden" name="solicitud_lechada_id" value="{{ $s_l[0]->id }}">
@@ -88,11 +90,12 @@
 
                                 let solicitud_id = {!! json_encode($solicitud->id) !!}
                                 checkGenerateReport(solicitud_id)
-                                .then((data) => {
-                                    if (data.generate_report) {
-                                        document.querySelector('#tab_g_report_js').classList.remove('d-none')
-                                    }
-                                })
+                                    .then((data) => {
+                                        if (data.generate_report) {
+                                            document.querySelector('#tab_g_report_js').classList
+                                                .remove('d-none')
+                                        }
+                                    })
                             }
                         })
                 }

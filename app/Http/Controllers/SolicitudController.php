@@ -40,7 +40,6 @@ class SolicitudController extends Controller
         $this->authorize('create', Solicitud::class);
         $data = [
             'ensayos' => Ensayo::where('tipo', 'CN')->get(),
-            // 'ensayos' => Ensayo::select('id', 'tvd', 'md', 'densidad_lechada', 'grado_temperatura', 'bhse', 'bhct')->get(),
             'clientes' => Cliente::all(),
             'yacimientos' => Yacimiento::all(),
             'sistemas_fluidos' => SistemasFluidos::all(),
@@ -184,8 +183,6 @@ class SolicitudController extends Controller
             'tipo_requerimiento_lechada' => 'required',
             'tipo_trabajo_lechada' => 'required',
             'tipo_cementacion_lechada' => 'required',
-            // 'ensayo_requerido_lechada' => 'required',
-            // 'ensayo_requerido_bullheading' => 'required',
         ]);
 
         # Solicitud General
@@ -210,13 +207,14 @@ class SolicitudController extends Controller
         # Solicitud de Lechada
         $solicitud_lechada = SolicitudLechada::create([
             'ensayo_requerido_principal' => $request->ensayo_requerido_principal == 'on' ? 1 : 0,
-            'ensayo_requerido_bullheading' => $request->ensayo_requerido_bullheading == 'on' ? 1 : 0,
+            'ensayo_requerido_relleno' => $request->ensayo_requerido_bullheading == 'on' ? 1 : 0,
             'OH' => $request->OH,
             'trepano' => $request->trepano,
             'casing_id' => $request->casing_id,
             'casing_od' => $request->casing_od,
             'densidad_lodo' => $request->densidad_lodo,
             'tipo_lodo' => $request->tipo_lodo,
+            'mud_company_id' => $request->mud_company,
             'profundidad_pozo_md' => $request->profundidad_pozo_md,
             'profundidad_pozo_tvd' => $request->profundidad_pozo_tvd,
             'base_md' => $request->base_md,
@@ -359,8 +357,8 @@ class SolicitudController extends Controller
         $solicitud->servicio = $request->servicio;
         $solicitud->reporte_lab_tall = $request->reporte_lab_tall;
         $solicitud->reporte_lab_lead = $request->reporte_lab_lead;
-        $solicitud->save();
         $solicitud->updated_at = date('Y-m-d H:i:s');
+        $solicitud->save();
 
         # Editando los datos de la solicitud de fractura
         $solicitud_fractura = SolicitudFractura::where('solicitud_id', $solicitud->id)->first();
@@ -470,6 +468,7 @@ class SolicitudController extends Controller
             'aditivos' => Aditivo::all(),
             'users' => User::all(),
             'clientes' => Cliente::all(),
+            'yacimientos' => Yacimiento::all(),
             'tipo_requerimiento_cemento' => TipoRequerimientoCemento::all(),
             'tipo_trabajos' => TipoTrabajoCemento::all(),
             'tipo_cementacion' => TipoCementacion::all(),
@@ -479,6 +478,122 @@ class SolicitudController extends Controller
         $data['generar_reporte'] = $generate_report->original['generate_report'];
         return view('solicitud.components.lechada.show', $data);
     }
+
+    public function update_lechada(Request $request)
+    {
+        $aditivos_request = $request->aditivos;
+        $id_aditivos = array_column($aditivos_request, 'id');
+
+        # Validamos los datos del encabezado general
+        $this->validate($request, [
+            'cliente_lechada' => 'required',
+            'locacion_lechada' => 'required',
+            'programa_lechada' => 'required',
+            'empresa_lechada' => 'required',
+            'pozo_lechada' => 'required',
+            'fecha_resultados_lechada' => 'required',
+            'equipo_lechada' => 'required',
+            'servicio_lechada' => 'required',
+            'tipo_requerimiento_lechada' => 'required',
+            'tipo_trabajo_lechada' => 'required',
+            'tipo_cementacion_lechada' => 'required',
+        ]);
+
+        // Change => Datos de la solicitud general
+        $solicitud = Solicitud::find($request->solicitud_id);
+        $solicitud->locacion = $request->locacion_lechada;
+        $solicitud->programa = $request->programa_lechada;
+        $solicitud->empresa = $request->empresa_lechada;
+        $solicitud->pozo = $request->pozo_lechada;
+        $solicitud->fecha_resultados = $request->fecha_resultados_lechada;
+        $solicitud->equipo = $request->equipo_lechada;
+        $solicitud->servicio = $request->servicio_lechada;
+        $solicitud->tipo_requerimiento_cemento_id = $request->tipo_requerimiento_lechada;
+        $solicitud->tipo_trabajo_cemento_id = $request->tipo_trabajo_lechada;
+        $solicitud->tipo_cementacion_id = $request->tipo_cementacion_lechada;
+        $solicitud->save();
+
+        // Change => Datos de la solicitud de lechada
+        $solicitud_lechada = SolicitudLechada::where('solicitud_id', $solicitud->id)->first();
+        $solicitud_lechada->ensayo_requerido_principal = $request->ensayo_requerido_principal == 'on' ? 1 : 0;
+        $solicitud_lechada->ensayo_requerido_relleno = $request->ensayo_requerido_bullheading == 'on' ? 1 : 0;
+        $solicitud_lechada->OH = $request->OH;
+        $solicitud_lechada->trepano = $request->trepano;
+        $solicitud_lechada->casing_id = $request->casing_id;
+        $solicitud_lechada->casing_od = $request->casing_od;
+        $solicitud_lechada->densidad_lodo = $request->densidad_lodo;
+        $solicitud_lechada->tipo_lodo = $request->tipo_lodo;
+        $solicitud_lechada->profundidad_pozo_md = $request->profundidad_pozo_md;
+        $solicitud_lechada->profundidad_pozo_tvd = $request->profundidad_pozo_tvd;
+        $solicitud_lechada->base_md = $request->base_md;
+        $solicitud_lechada->base_tvd = $request->base_tvd;
+        $solicitud_lechada->top_of_slurry_tvd = $request->top_of_slurry_tvd;
+        $solicitud_lechada->top_of_slurry_md = $request->top_of_slurry_md;
+        $solicitud_lechada->volumen = $request->volumen;
+        $solicitud_lechada->pump_rate = $request->pump_rate;
+        $solicitud_lechada->grado_temperatura = $request->grado_temperatura;
+        $solicitud_lechada->bhst = $request->bhst;
+        $solicitud_lechada->bhct = $request->bhct;
+        $solicitud_lechada->reologia = $request->reologia;
+        $solicitud_lechada->densidad = $request->densidad;
+        $solicitud_lechada->filtrado = $request->filtrado;
+        $solicitud_lechada->bombeabilidad = $request->bombeabilidad;
+        $solicitud_lechada->tiempo_50_psi = $request->tiempo_50_psi == 'on' ? 1 : 0;
+        $solicitud_lechada->tiempo_500_psi = $request->tiempo_500_psi == 'on' ? 1 : 0;
+        $solicitud_lechada->resistencia_12_hs = $request->resistencia_12_hs == 'on' ? 1 : 0;
+        $solicitud_lechada->resistencia_24_hs = $request->resistencia_24_hs == 'on' ? 1 : 0;
+        $solicitud_lechada->agua_libre = $request->agua_libre;
+        $solicitud_lechada->sgs = $request->sgs;
+        $solicitud_lechada->tipo_cemento = $request->tipo_cemento;
+        $solicitud_lechada->observacion = $request->observacion_lechada;
+        $solicitud_lechada->firma_reconocimiento_id = $request->firma_reconocimiento_lechada;
+        $solicitud_lechada->fecha_reconocimiento = $request->fecha_reconocimiento_lechada;
+        $solicitud_lechada->save();
+
+        $aditivos_bd = RelAditivoSolicitudLechada::where('solicitud_lechada_id', $solicitud_lechada->id)->get();
+
+        # Formulaciones Tentativas (Actualizar)
+        if ($request->aditivos) {
+
+            foreach ($request->aditivos as $formulacion) {
+                $rel = RelAditivoSolicitudLechada::find($formulacion['id']);
+                $rel->lote = $formulacion['lote'];
+                $rel->aditivo = $formulacion['aditivo'];
+                $rel->concentracion = $formulacion['concentracion'];
+                $rel->save();
+            }
+        }
+        # Formulaciones Tentativas (Nuevas a agregar)
+        if ($request->formulacion_new) {
+            foreach ($request->formulacion_new as $formulacion) {
+                RelAditivoSolicitudLechada::create([
+                    'solicitud_lechada_id' => $solicitud_lechada->id,
+                    'lote' => $formulacion['lote'],
+                    'aditivo' => $formulacion['aditivo'],
+                    'concentracion' => $formulacion['concentracion'],
+                ]);
+            }
+        }
+        # Eliminar las formulaciones se seleccionar para eliminar
+        $aditivos_delete = [];
+        foreach ($aditivos_bd as $a_b_d) {
+            if (!in_array($a_b_d['id'], $id_aditivos)) {
+                $aditivo_del = RelAditivoSolicitudLechada::find($a_b_d['id']);
+                $aditivo_del->delete();
+            }
+        }
+
+        # El fundamento del por qué se editó la solicitud
+        $edicion_solicitud = Edicion_Solicitud::create([
+            'fundamento' => $request->fundamento_edicion,
+            'usuario_fundamento' => auth()->user()->id,
+            'solicitud_id' => $solicitud->id
+        ]);
+
+        if ($solicitud->id)
+            return back()->with('success', $solicitud->id);
+    }
+
     /**
      * Se que es un código asqueroso, pero una condición si o si depende de la otra
      */

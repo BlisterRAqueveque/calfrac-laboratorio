@@ -9,7 +9,7 @@ class YacimientoController extends Controller
 {
     public function index() {
         $data = [
-            'yacimientos' => Yacimiento::all()
+            'yacimientos' => Yacimiento::paginate(10)
         ];
         return view('yacimiento.index', $data);
     }  

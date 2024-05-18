@@ -107,7 +107,7 @@ const componentBombeabilidad = (data = "") => {
                                         (psi)
                                     </label>
                                     <input type="text" class="form-control text-sm p-2"
-                                        value="${data.presion ? data.presion : 'No aplica'}}"
+                                        value="${data.presion ? data.presion : 'No aplica'}"
                                         readonly>
                                 </div>
 
@@ -115,8 +115,8 @@ const componentBombeabilidad = (data = "") => {
                                     <label for="bombeabilidad_40_bc"
                                         class="text-sm text-gray-700 font-semibold tracking-wide mb-2">40 Bc
                                         (hh:mm)</label>
-                                    <input type="time" class="form-control text-sm p-2"
-                                        value="${data.bc_40 ? data.bc_40 : '00:00'}}"
+                                    <input type="text" class="form-control text-sm p-2"
+                                        value="${data.bc_40 ? data.bc_40 : '00:00'}"
                                         readonly>
                                 </div>
 
@@ -124,8 +124,8 @@ const componentBombeabilidad = (data = "") => {
                                     <label for="bombeabilidad_70_bc"
                                         class="text-sm text-gray-700 font-semibold tracking-wide mb-2">70 Bc
                                         (hh:mm)</label>
-                                    <input type="time" class="form-control text-sm p-2"
-                                        value="${data.bc_70 ? data.bc_70 : '00:00'}}"
+                                    <input type="text" class="form-control text-sm p-2"
+                                        value="${data.bc_70 ? data.bc_70 : '00:00'}"
                                         readonly>
                                 </div>
 
@@ -133,8 +133,8 @@ const componentBombeabilidad = (data = "") => {
                                     <label for="bombeabilidad_100_bc"
                                         class="text-sm text-gray-700 font-semibold tracking-wide mb-2">100 Bc
                                         (hh:mm)</label>
-                                    <input type="time" class="form-control text-sm p-2"
-                                        value="${data.bc_100 ? data.bc_100 : '00:00'}}"
+                                    <input type="text" class="form-control text-sm p-2"
+                                        value="${data.bc_100 ? data.bc_100 : '00:00'}"
                                         readonly>
                                 </div>
 

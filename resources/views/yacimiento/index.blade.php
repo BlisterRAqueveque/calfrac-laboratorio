@@ -53,7 +53,7 @@
                         <tbody>
                             @foreach ($yacimientos as $y)
                                 <tr>
-                                    <td class="p-3">1</td>
+                                    <td class="p-3">{{ $y->id }}</td>
                                     <td class="p-3">
                                         <div class="flex justify-between">
                                             {{ $y->nombre }}
@@ -88,12 +88,8 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <div class="flex gap-3 justify-end p-2 px-4">
-                        <button>Anterior</button>
-                        <select name="" id="" class="form-control sz p-2 max-w-16 text-center">
-                            <option value="">1</option>
-                        </select>
-                        <button>Siguiente</button>
+                    <div class="px-4 pt-2 pb-1 border-t">
+                        {{ $yacimientos->links() }}
                     </div>
                 </div>
             </div>

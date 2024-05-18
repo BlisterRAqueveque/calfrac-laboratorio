@@ -21,6 +21,8 @@ return new class extends Migration
             $table->float('casing_od')->nullable();
             $table->float('densidad_lodo')->nullable();
             $table->integer('tipo_lodo')->nullable();
+            $table->unsignedBigInteger('mud_company_id')->nullable();
+            $table->foreign('mud_company_id')->references('id')->on('mud_company');
             $table->float('profundidad_pozo_md')->nullable();
             $table->float('profundidad_pozo_tvd')->nullable();
             $table->float('base_md')->nullable();

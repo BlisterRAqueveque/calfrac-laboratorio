@@ -78,4 +78,12 @@ class Solicitud extends Model
         return $this->hasMany(Edicion_Solicitud::class);
     }
 
+    public function cliente() {
+        return $this->belongsTo(Cliente::class, 'cliente_id');
+    }
+
+    public function tipo_cementacion() {
+        return $this->belongsTo(TipoCementacion::class, 'tipo_cementacion_id');
+    }
+
 }
