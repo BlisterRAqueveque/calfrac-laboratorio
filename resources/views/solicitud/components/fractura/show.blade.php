@@ -5,6 +5,7 @@
 @endsection
 
 @section('contenido')
+    @vite('resources/css/solicitud.css')
 
     <!-- TODO | Pasar estos estilos a otro lado -->
     <style>
@@ -64,7 +65,7 @@
                                         break;
                                     case '2':
                                         $clase =
-                                            'bg-green-500 bg-opacity-50 dark:bg-green-500 dark:bg-opacity-50 dark:text-green-200';
+                                            'solicitud_aprobada';
                                         $estado = $solicitud->estado->nombre;
                                         break;
                                     case '3':
@@ -120,7 +121,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M9 6.75V15m6-6v8.25m.503 3.498 4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 0 0-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0Z" />
                             </svg>
-                            Locación: <b class="text-gray-700 dark:text-gray-300">{{ $solicitud->locacion }}</b>
+                            Locación: <b class="text-gray-700 dark:text-gray-300">{{ $solicitud->locacion->nombre }}</b>
                         </article>
                     </div>
 
@@ -176,26 +177,11 @@
             <ul role="tablist" aria-owns="nav-tab1 nav-tab2 nav-tab3 nav-tab4" class="nav nav-tabs text-sm md:text-md"
                 id="nav-tab-with-nested-tabs" style="z-index: 999">
                 <li class="nav-item w-full text-center md:w-auto" role="presentation">
-                    <a class="nav-link nav_tab_mod text-violet-800 dark:text-violet-400 @if (!session('success')) active @endif" aria-current="page"
-                        id="nav-tab1" href="#tab1-content" data-bs-toggle="tab" data-bs-target="#tab1-content"
-                        role="tab" aria-controls="tab1-content" aria-selected="true">Información de la Solicitud</a>
+                    <a class="nav-link nav_tab_mod text-violet-800 dark:text-violet-400 active"
+                        aria-current="page" id="nav-tab1" href="#tab1-content" data-bs-toggle="tab"
+                        data-bs-target="#tab1-content" role="tab" aria-controls="tab1-content"
+                        aria-selected="true">Información de la Solicitud</a>
                 </li>
-                @if ($solicitud->aprobada == 1)
-                    <li class="nav-item w-full text-center md:w-auto" role="presentation">
-                        <a class="nav-link nav_tab_mod text-violet-800 dark:text-violet-400 @if (session('success')) active @endif" aria-current="page"
-                            id="nav-tab1" href="#tab2-content" data-bs-toggle="tab" data-bs-target="#tab2-content"
-                            role="tab" aria" id="nav-tab2" data-bs-toggle="tab" role="tab">Ensayos</a>
-                    </li>
-                @else
-                    <div class="flex flex-col md:flex-row text-center items-center">
-                        <li data-tooltip-target="tooltip-default" class="w-full text-center md:w-auto cursor-not-allowed"
-                            role="presentation">
-                            <a class="nav-link nav_tab_mod text-violet-800 dark:text-violet-400 cursor-not-allowed"
-                                aria-current="page" aria-selected="false">Ensayos </a>
-                        </li>
-                        <small class="text-gray-700 text-sm dark:text-gray-200 tracking-wide">(Debe aprobar la solicitud para asignar un ensayo)</small>
-                    </div>
-                @endif
             </ul>
 
         </section>
@@ -203,7 +189,7 @@
     </section>
 
     <div class="tab-content" id="nav-tabs-content">
-        <div class="container_mod border dark:border-none bg-white dark:tab_bg p-3 mt-4 shadow-sm tab-pane fade @if (!session('success')) show active @endif"
+        <div class="container_mod border dark:border-none bg-white dark:tab_bg p-3 mt-4 shadow-sm tab-pane fade show active"
             id="tab1-content" role="tabpanel" aria-labelledby="nav-tab1">
 
             <div class="flex items-center justify-between">
@@ -270,9 +256,12 @@
                     <div class="col-xs-12 col-md-3 my-2">
                         <label for="cliente"
                             class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Cliente</label>
-                        <input type="text" placeholder="Ingrese el cliente"
-                            class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
-                            name="cliente" id="cliente" value="{{ $solicitud->cliente }}" readonly>
+                            <select name="cliente_fractura" id="cliente_fractura" class="text-sm inp_edit" disabled>
+                                @foreach ($clientes as $c)
+                                    <option value="{{ $c->id }}"
+                                        {{ $c->id == $solicitud->cliente_id ? 'selected' : '' }}>{{ $c->nombre }}</option>
+                                @endforeach
+                            </select>
                         @error('cliente')
                             <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
                         @enderror
@@ -283,9 +272,12 @@
                             class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Yacimiento
                             /
                             Locación</label>
-                        <input type="text" placeholder="Ingrese el yacimiento / locación"
-                            class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
-                            name="locacion" id="locacion" value="{{ $solicitud->locacion }}" readonly>
+                        <select name="locacion_fractura" id="locacion_fractura" class="text-sm inp_edit" disabled>
+                            @foreach ($yacimientos as $y)
+                                <option value="{{ $y->id }}"
+                                    {{ $y->id == $solicitud->locacion_id ? 'selected' : '' }}>{{ $y->nombre }}</option>
+                            @endforeach
+                        </select>
                         @error('locacion')
                             <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
                         @enderror
@@ -329,7 +321,7 @@
                         @enderror
                     </div>
 
-                    <div class="col-xs-12 col-md-2 my-2">
+                    {{-- <div class="col-xs-12 col-md-2 my-2">
                         <label for="fecha_tratamiento"
                             class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Fecha
                             del
@@ -341,7 +333,7 @@
                         @error('fecha_tratamiento')
                             <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
                         @enderror
-                    </div>
+                    </div> --}}
 
                     <div class="col-xs-12 col-md-2 my-2">
                         <label for="pozo"
@@ -368,7 +360,7 @@
                         @enderror
                     </div>
 
-                    <div class="col-xs-12 col-md-2 my-2">
+                    {{-- <div class="col-xs-12 col-md-2 my-2">
                         <label for="fecha_reporte"
                             class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Fecha
                             del
@@ -379,7 +371,7 @@
                         @error('fecha_reporte')
                             <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
                         @enderror
-                    </div>
+                    </div> --}}
 
                     <div class="col-xs-12 col-md-3 my-2">
                         <label for="rep_venta"
@@ -822,7 +814,7 @@
                                     {{ $c->user_fundamento->nombre }}
                                     {{ $c->user_fundamento->apellido }} <small class="text-gray-400"> Realizó una edición
                                         el día {{ $c->created_at->format('d') }}
-                                        {{ $c->created_at->format('M') }}
+                                        {{ $c->created_at->locale('es')->monthName }}
                                         {{ $c->created_at->format('Y') }} -
                                         {{ $c->created_at->format('H:i') }}</small></p>
                                 <p class="mb-0 dark:text-gray-400">
@@ -832,16 +824,16 @@
                                 <div class="containerRta">
                                     @if ($c->respuesta)
                                         <article class="flex gap-3 mt-4">
-                                            @if($c->user_rta->img)
-                                            <div class="flex justify-center items-center w-12 h-12">
-                                                <img src="{{ asset('uploads/perfiles') . '/' . $c->user_rta->img }}"
-                                                    class="rounded-full object-cover w-12 h-12">
-                                            </div>
+                                            @if ($c->user_rta->img)
+                                                <div class="flex justify-center items-center w-12 h-12">
+                                                    <img src="{{ asset('uploads/perfiles') . '/' . $c->user_rta->img }}"
+                                                        class="rounded-full object-cover w-12 h-12">
+                                                </div>
                                             @else
-                                            <div class="flex justify-center items-center w-14 h-14 pb-3">
-                                                <img src="{{ asset('img/img_default.jpg') }}"
-                                                    class="rounded-full object-cover w-14 h-14" alt="">
-                                            </div>
+                                                <div class="flex justify-center items-center w-14 h-14 pb-3">
+                                                    <img src="{{ asset('img/img_default.jpg') }}"
+                                                        class="rounded-full object-cover w-14 h-14" alt="">
+                                                </div>
                                             @endif
                                             <div class="text-sm flex flex-col">
                                                 <p class="m-0 font-bold dark:text-gray-300">{{ $c->user_rta->nombre }}
@@ -849,14 +841,14 @@
                                                         class="text-gray-400">{{ $c->updated_at->format('d') }}
                                                         {{ $c->updated_at->format('M') }}
                                                         {{ $c->updated_at->format('Y') }} -
-                                                        {{ $c->updated_at->format('H:i') }}</small></p>
+                                                        {{ $c->updated_at->format('H:i') }} hs</small></p>
                                                 <p class="mb-0 dark:text-gray-400">
                                                     {{ $c->respuesta }}
                                                 </p>
                                             </div>
                                         </article>
                                     @else
-                                        @if (auth()->user()->id != $c->user_fundamento->id)
+                                    @if (auth()->user()->id != $c->user_fundamento->id || auth()->user()->is_admin && $solicitud->estado->id == 1)
                                             <div
                                                 class="bg-gray-200 inline-block px-2 rounded-md mt-3 cursor-pointer hover:bg-gray-300 transition-all duration-300">
                                                 <button class="flex gap-2 items-center rtaComment">
@@ -870,7 +862,7 @@
                                                 </button>
                                             </div>
                                             <form action="{{ route('fundamento.rta', auth()->user()->id) }}"
-                                                method="POST" class="mt-3 formRta_{{$i}} hidden">
+                                                method="POST" class="mt-3 formRta_{{ $i }} hidden">
                                                 @csrf
                                                 <input type="hidden" name="fundamento_id" value="{{ $c->id }}">
                                                 <textarea name="respuesta" id="respuesta" cols="30" rows="3" class="form-control sz p-2"
@@ -906,18 +898,18 @@
             <hr class="dark:bg-gray-400">
             <!-- Aprobar la solicitud -->
             @if ($solicitud->aprobada)
-                <div
-                    class="mt-3 flex items-center justify-center flex-col md:flex-row gap-3 text-center bg-green-500 bg-opacity-40 dark:bg-green-600 dark:bg-opacity-10 border-1 p-1 rounded-sm w-full md:w-1/2 mx-auto border-green-500 text-green-800 dark:text-green-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-6 h-6 ">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                    </svg>
-                    <span>Solicitud aprobada por {{ $solicitud->user_aprobo->nombre }}
-                        {{ $solicitud->user_aprobo->apellido }} el día {{ $solicitud->fecha_aprobada->format('d') }} de
-                        {{ $solicitud->fecha_aprobada->format('M') }},
-                        {{ $solicitud->fecha_aprobada->format('Y') }}</span>
-                </div>
+            <div class="mt-3 flex items-center justify-center flex-col md:flex-row gap-3 text-center bg_approved">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6 ">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+                <span>Solicitud aprobada por {{ $solicitud->user_aprobo->nombre }}
+                    {{ $solicitud->user_aprobo->apellido }} el día {{ $solicitud->fecha_aprobada->format('d') }}
+                    de
+                    {{ $solicitud->fecha_aprobada->locale('es')->monthName }},
+                    {{ $solicitud->fecha_aprobada->format('Y') }}</span>
+            </div>
             @else
                 <div class="row mt-3">
                     <div class="flex flex-col items-center gap-2">
@@ -934,25 +926,34 @@
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
                             </svg>
-                            Al aprobar la solicitud, da por confirmado que la misma se encuentra en condiciones de asignarle
-                            un
-                            ensayo. (La misma ya no se podrá editar)
+                            Al aprobar la solicitud, da por confirmado que la misma se encuentra en condiciones de finalizar
+                            el reporte
                         </p>
                     </div>
                 </div>
             @endif
 
         </div>
-
-        @if ($ensayos->count() > 0)
-            @include('ensayo.show')
-        @else
-            @include('ensayo.create')
-        @endif
         <br>
+
 
         <script src="{{ asset('js/Solicitud/comment.js') }}"></script>
         <script src="{{ asset('js/Solicitud/edition.js') }}"></script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                VirtualSelect.init({
+                    ele: "#cliente_fractura",
+                    placeholder: "Seleccione el cliente",
+                });
+                VirtualSelect.init({
+                    ele: "#locacion_fractura",
+                    placeholder: "Seleccione el Yacimiento",
+                });
+                // document.getElementById("cliente_fractura").setValue(0);
+                // document.getElementById("locacion_fractura").setValue(0);
+            })
+        </script>
 
         <!-- Función para aprobar la solicitud -->
         <script>

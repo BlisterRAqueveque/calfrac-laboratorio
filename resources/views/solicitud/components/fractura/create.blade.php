@@ -1,5 +1,3 @@
-
-
 <form action="{{ route('solicitud.fractura') }}" method="POST">
     @csrf
     <section class="card border dark:border-gray-800">
@@ -38,11 +36,15 @@
                     <label for="cliente"
                         class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Cliente <span
                             class="text-red-500">*</span></label>
-                    <input type="text" placeholder="Ingrese el cliente"
-                        class="sz form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
-                        name="cliente" id="cliente">
-                    @error('cliente')
-                        <small class="text-xs text-red-600">{{ $message }}</small>
+                    <select name="cliente_fractura" id="cliente_fractura" class="text-sm" data-search="true"
+                        data-silent-initial-value-set="true">
+                        @foreach ($clientes as $c)
+                            <option value="{{ $c->id }}"
+                                {{ old('cliente_fractura') == $c->id ? 'selected' : '' }}>{{ $c->nombre }}</option>
+                        @endforeach
+                    </select>
+                    @error('cliente_fractura')
+                        <small class="text-xs text-red-600">El cliente es requerido</small>
                     @enderror
                 </div>
 
@@ -50,12 +52,15 @@
                     <label for="locacion"
                         class="text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Yacimiento /
                         Locación <span class="text-red-500">*</span></label>
-                    <input type="text" placeholder="Ingrese el yacimiento / locación"
-                        class="sz form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
-                        name="locacion" id="locacion" min="0">
-                    @error('locacion')
-                        <small class="text-xs text-red-600">{{ $message }}</small>
-                    @enderror
+                        <select name="locacion_fractura" id="locacion_fractura" class="text-sm" data-search="true">
+                            @foreach ($yacimientos as $y)
+                            <option value="{{ $y->id }}"
+                                {{ old('locacion_fractura') == $y->id ? 'selected' : '' }}>{{ $y->nombre }}</option>
+                        @endforeach
+                        </select>
+                        @error('locacion_fractura')
+                            <small class="text-xs text-red-600">La locación es requerida</small>
+                        @enderror
                 </div>
 
                 <div class="col-xs-12 col-md-2 my-2">
@@ -94,7 +99,7 @@
                     @enderror
                 </div>
 
-                <div class="col-xs-12 col-md-2 my-2">
+                {{-- <div class="col-xs-12 col-md-2 my-2">
                     <label for="fecha_tratamiento"
                         class=" text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2 text-sm">Fecha
                         del
@@ -105,7 +110,7 @@
                     @error('fecha_tratamiento')
                         <small class="text-xs text-red-600">{{ $message }}</small>
                     @enderror
-                </div>
+                </div> --}}
 
                 <div class="col-xs-12 col-md-2 my-2">
                     <label for="pozo"
@@ -520,6 +525,21 @@
 <br>
 
 <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        VirtualSelect.init({
+            ele: "#cliente_fractura",
+            placeholder: "Seleccione el cliente",
+        });
+        VirtualSelect.init({
+            ele: "#locacion_fractura",
+            placeholder: "Seleccione el Yacimiento",
+        });
+        document.getElementById("cliente_fractura").setValue(0);
+        document.getElementById("locacion_fractura").setValue(0);
+    })
+</script>
+
+<script>
     const aditivo_extra_inp = document.querySelectorAll('.aditivo_extra_inp');
 
     function aditivoExtra(e) {
@@ -543,7 +563,8 @@
 <script>
     const btnSendSolicitud = document.getElementById('btnSendSolicitud');
     btnSendSolicitud.addEventListener('click', e => {
-        loadingAlert('Creando la solicitud, por favor espere', 'Se están enviando los correos desde el sistema');
+        loadingAlert('Creando la solicitud, por favor espere',
+        'Se están enviando los correos desde el sistema');
     })
 </script>
 

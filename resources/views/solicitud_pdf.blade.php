@@ -320,7 +320,7 @@
                     </td>
                 </tr>
             @endforeach
-            
+
             <tr>
                 <td colspan="2" style="border-right: 1px solid #494949; border-top: 1px solid #494949"></td>
                 <td class="d_g_second_td midd_m" style="border-bottom: 0">
@@ -375,66 +375,82 @@
         </th>
     </table>
 
-    <table width='100%' style="border: 1px solid #494949; border-radius: 5px; margin-top: 5px;">
-        <tr>
-            <td class="d_g_first_td" style="width: 20%">
-                <b>Consistómetro N°</b>
-            </td>
-            <td
-                style="color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949">
-                {{ $s_l[0]->rel_bombeabilidad[0]->consistometro ? $s_l[0]->rel_bombeabilidad[0]->consistometro : 'No aplica' }}
-            </td>
-            <td class="d_g_first_td">
-                <b>Tiempo de Acondicionamiento</b>
-            </td>
-            <td
-                style="width: 10%; color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949">
-                {{ $s_l[0]->rel_bombeabilidad[0]->time_acondicionamiento ? $s_l[0]->rel_bombeabilidad[0]->time_acondicionamiento : 'No aplica' }}
-            </td>
-            <td class="d_g_last_td" style="width: 15%; border-right: 0">
-                <b>Planilla N° {{ $s_l[0]->rel_bombeabilidad[0]->planilla ? $s_l[0]->rel_bombeabilidad[0]->planilla : '---' }}</b>
-            </td>
-        </tr>
-        <tr>
-            <td style="color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949"
-                colspan="2">
-                <b>Gradiente:</b> {{ $s_l[0]->rel_bombeabilidad[0]->gradiente ? $s_l[0]->rel_bombeabilidad[0]->gradiente : 'No aplica' }} <small>(°F/100ft)</small>
-            </td>
-            <td
-                style="color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949">
-                <b>Temperatura:</b> {{ $s_l[0]->rel_bombeabilidad[0]->temperatura ? $s_l[0]->rel_bombeabilidad[0]->temperatura : 'No aplica' }}
-                <small>(°C)</small>
-            </td>
-            <td style="width: 30%; color: #686868; text-align: center; font-size: 13px; border-bottom: 1px solid #494949"
-                colspan="2">
-                <b>Presión:</b> {{ $s_l[0]->rel_bombeabilidad[0]->presion ? $s_l[0]->rel_bombeabilidad[0]->presion : 'No aplica' }}<small>(psi)</small>
-            </td>
-        </tr>
-        <tr>
-            <td style="color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949"
-                colspan="2">
-                <b>40 Bc:</b> {{ $s_l[0]->rel_bombeabilidad[0]->bc_40 ? $s_l[0]->rel_bombeabilidad[0]->bc_40 : 'No aplica' }} <small>(hh:mm)</small>
-            </td>
-            <td
-                style="color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949">
-                <b>70 Bc:</b> {{ $s_l[0]->rel_bombeabilidad[0]->bc_70 ? $s_l[0]->rel_bombeabilidad[0]->bc_70 : 'No aplica' }} <small>(hh:mm)</small>
-            </td>
-            <td style="width: 30%; color: #686868; text-align: center; font-size: 13px; border-bottom: 1px solid #494949"
-                colspan="2">
-                <b>100 Bc:</b> {{ $s_l[0]->rel_bombeabilidad[0]->bc_100 ? $s_l[0]->rel_bombeabilidad[0]->bc_100 : 'No aplica' }} <small>(hh:mm)</small>
-            </td>
-        </tr>
+    @foreach ($s_l[0]->rel_bombeabilidad as $bombeabilidad)
+        @if ($bombeabilidad->selected)
+            <table width='100%' style="border: 1px solid #494949; border-radius: 5px; margin-top: 5px;">
+                <tr>
+                    <td class="d_g_first_td" style="width: 20%">
+                        <b>Consistómetro N°</b>
+                    </td>
+                    <td
+                        style="color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949">
+                        {{ $bombeabilidad->consistometro ? $bombeabilidad->consistometro : 'No aplica' }}
+                    </td>
+                    <td class="d_g_first_td">
+                        <b>Tiempo de Acondicionamiento</b>
+                    </td>
+                    <td
+                        style="width: 10%; color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949">
+                        {{ $bombeabilidad->time_acondicionamiento ? $bombeabilidad->time_acondicionamiento : 'No aplica' }}
+                    </td>
+                    <td class="d_g_last_td" style="width: 15%; border-right: 0">
+                        <b>Planilla N°
+                            {{ $bombeabilidad->planilla ? $bombeabilidad->planilla : '---' }}</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949"
+                        colspan="2">
+                        <b>Gradiente:</b>
+                        {{ $bombeabilidad->gradiente ? $bombeabilidad->gradiente : 'No aplica' }}
+                        <small>(°F/100ft)</small>
+                    </td>
+                    <td
+                        style="color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949">
+                        <b>Temperatura:</b>
+                        {{ $bombeabilidad->temperatura ? $bombeabilidad->temperatura : 'No aplica' }}
+                        <small>(°C)</small>
+                    </td>
+                    <td style="width: 30%; color: #686868; text-align: center; font-size: 13px; border-bottom: 1px solid #494949"
+                        colspan="2">
+                        <b>Presión:</b>
+                        {{ $bombeabilidad->presion ? $bombeabilidad->presion : 'No aplica' }}<small>(psi)</small>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949"
+                        colspan="2">
+                        <b>40 Bc:</b>
+                        {{ $bombeabilidad->bc_40 ? $bombeabilidad->bc_40 : 'No aplica' }}
+                        <small>(hh:mm)</small>
+                    </td>
+                    <td
+                        style="color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949">
+                        <b>70 Bc:</b>
+                        {{ $bombeabilidad->bc_70 ? $bombeabilidad->bc_70 : 'No aplica' }}
+                        <small>(hh:mm)</small>
+                    </td>
+                    <td style="width: 30%; color: #686868; text-align: center; font-size: 13px; border-bottom: 1px solid #494949"
+                        colspan="2">
+                        <b>100 Bc:</b>
+                        {{ $bombeabilidad->bc_100 ? $bombeabilidad->bc_100 : 'No aplica' }}
+                        <small>(hh:mm)</small>
+                    </td>
+                </tr>
 
-        <tr>
-            <td colspan="5" style="text-align: center; padding-top: 10px">Adjunto</td>
-        </tr>
-        <tr>
-            <td colspan="5" style="padding: 5px">
-                <div style="width: 100%; height: 250px; background-color: #e1e1e1; border-radius: 5px">
-                </div>
-            </td>
-        </tr>
-    </table>
+                <tr>
+                    <td colspan="5" style="text-align: center; padding-top: 10px"><h5 style="margin: 0; padding: 0">Adjunto</h5></td>
+                </tr>
+                <tr>
+                    <td colspan="5" style="padding: 5px">
+                        <div style="width: 100%; height: 250px; overflow: hidden; display: flex; justify-content: center; align-items: center; text-align: center">
+                            <img src="{{ public_path('uploads/ensayos/') . $bombeabilidad->img }}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        @endif
+    @endforeach
 
     <table width='100%' style="border: 1px solid #494949; border-radius: 5px; margin: 20px 0"></table>
     {{-- Quien lo ralizó | Quién lo revisó | Quién lo solicitó --}}
@@ -538,13 +554,13 @@
             </td>
         </tr>
 
-
         <tr>
-            <td colspan="4" style="text-align: center; padding-top: 10px">Adjunto</td>
+            <td colspan="5" style="text-align: center; padding-top: 10px"><h5 style="margin: 0; padding: 0">Adjunto</h5></td>
         </tr>
         <tr>
-            <td colspan="4" style="padding: 5px">
-                <div style="width: 100%; height: 250px; background-color: #e1e1e1; border-radius: 5px">
+            <td colspan="5" style="padding: 5px">
+                <div style="width: 100%; height: 250px; overflow: hidden; display: flex; justify-content: center; align-items: center; text-align: center">
+                    <img src="{{ public_path('uploads/ensayos/') . $s_l[0]->rel_uca[0]->img }}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
                 </div>
             </td>
         </tr>

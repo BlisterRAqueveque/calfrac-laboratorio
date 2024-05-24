@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('hs_12')->nullable();
             $table->integer('hs_24')->nullable();
             $table->integer('impedancia_acustica')->nullable();
+            $table->string('img')->nullable();
             $table->time('sgs_cero')->nullable();
             $table->time('sgs_max')->nullable();
             $table->time('tiempo')->nullable();

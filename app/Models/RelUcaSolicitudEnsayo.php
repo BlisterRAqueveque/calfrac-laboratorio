@@ -18,6 +18,7 @@ class RelUcaSolicitudEnsayo extends Model
         'hs_12',
         'hs_24',
         'impedancia_acustica',
+        'img',
         'sgs_cero',
         'sgs_max',
         'tiempo',

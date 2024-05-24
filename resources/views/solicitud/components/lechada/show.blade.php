@@ -12,7 +12,8 @@
         #locacion_lechada,
         #tipo_requerimiento_lechada,
         #tipo_trabajo_lechada,
-        #tipo_cementacion_lechada {
+        #tipo_cementacion_lechada,
+        #mud_company {
             background: #b9b9b9;
             border-radius: 5px;
         }
@@ -90,7 +91,8 @@
                         </article>
                         <article class="col-span-3 md:col-span-1 flex items-center gap-1 dark:text-white">
                             <x-icons.map class="w-4 h-4" stroke-width="1.5" />
-                            Locación: <b class="text-gray-700 dark:text-gray-300">{{ $solicitud->locacion }}</b>
+                            Locación: <b
+                                class="text-gray-700 dark:text-gray-300">{{ $solicitud->locacion ? $solicitud->locacion->nombre : '' }}</b>
                         </article>
                         <article class="col-span-3 md:col-span-1 flex items-center gap-1 dark:text-white">
                             <x-icons.pencil class="w-4 h-4" stroke-width="1.5" />
@@ -132,7 +134,7 @@
             <ul role="tablist" aria-owns="nav-tab1 nav-tab2 nav-tab3 nav-tab4" class="nav nav-tabs text-sm md:text-md"
                 id="nav-tab-with-nested-tabs" style="z-index: 999">
                 <li class="nav-item w-full text-center md:w-auto" role="presentation">
-                    <a class="nav-link nav_tab_mod text-violet-800 dark:text-violet-400 @if (!session('success')) active @endif"
+                    <a class="nav-link nav_tab_mod text-violet-800 dark:text-violet-400 active"
                         aria-current="page" id="nav-tab1" href="#tab1-content" data-bs-toggle="tab"
                         data-bs-target="#tab1-content" role="tab" aria-controls="tab1-content"
                         aria-selected="true">Información de la Solicitud</a>
@@ -160,7 +162,7 @@
     </section>
 
     <div class="tab-content" id="nav-tabs-content">
-        <div class="container_mod border dark:border-none bg-white dark:tab_bg p-3 mt-4 shadow-sm tab-pane fade @if (!session('success')) show active @endif"
+        <div class="container_mod border dark:border-none bg-white dark:tab_bg p-3 mt-4 shadow-sm tab-pane fade show active"
             id="tab1-content" role="tabpanel" aria-labelledby="nav-tab1">
 
             <div class="flex items-center justify-between">
@@ -203,7 +205,8 @@
                             <span class="text-red-500">*</span></label>
                         <select name="cliente_lechada" id="cliente_lechada" class="text-sm inp_edit" disabled>
                             @foreach ($clientes as $c)
-                                <option value="{{ $c->id }}" {{ $c->id == $solicitud->cliente_id ? 'selected' : '' }}>{{ $c->nombre }}</option>
+                                <option value="{{ $c->id }}"
+                                    {{ $c->id == $solicitud->cliente_id ? 'selected' : '' }}>{{ $c->nombre }}</option>
                             @endforeach
                         </select>
                         @error('cliente_lechada')
@@ -216,10 +219,10 @@
                                 class="text-red-500">*</span></label>
                         <select name="locacion_lechada" id="locacion_lechada" class="text-sm inp_edit" disabled>
                             @foreach ($yacimientos as $y)
-                            <option value="{{ $y->id }}" {{ $y->id == $solicitud->locacion ? 'selected' : '' }}>{{ $y->nombre }}</option>
-                        @endforeach
-
-                    </select>
+                                <option value="{{ $y->id }}"
+                                    {{ $y->id == $solicitud->locacion_id ? 'selected' : '' }}>{{ $y->nombre }}</option>
+                            @endforeach
+                        </select>
                         @error('locacion_lechada')
                             <small class="text-xs text-red-600">La locación es requerida</small>
                         @enderror
@@ -307,7 +310,8 @@
                         <label for="tipo_requerimiento_lechada"
                             class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de Requerimiento <span
                                 class="text-red-500">*</span></label>
-                        <select name="tipo_requerimiento_lechada" id="tipo_requerimiento_lechada" class="inp_edit" disabled>
+                        <select name="tipo_requerimiento_lechada" id="tipo_requerimiento_lechada" class="inp_edit"
+                            disabled>
                             @foreach ($tipo_requerimiento_cemento as $tipo)
                                 <option value="{{ $tipo->id }}"
                                     {{ $solicitud->tipo_requerimiento_cemento_id == $tipo->id ? 'selected' : '' }}>
@@ -339,7 +343,8 @@
                         <label for="tipo_cementacion_lechada"
                             class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo
                             de Cementación <span class="text-red-500">*</span></label>
-                        <select name="tipo_cementacion_lechada" id="tipo_cementacion_lechada" class="text-sm inp_edit" disabled>
+                        <select name="tipo_cementacion_lechada" id="tipo_cementacion_lechada" class="text-sm inp_edit"
+                            disabled>
                             <option value="">-- Seleccione --</option>
                             @foreach ($tipo_cementacion as $tipo)
                                 <option value="{{ $tipo->id }}"
@@ -360,8 +365,9 @@
                         <div class="flex gap-1">
                             <label for="ensayo_requerido_principal"
                                 class="bg-gray-200 p-1 w-full max-w-28 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
-                                <input type="checkbox" name="ensayo_requerido_principal" id="ensayo_requerido_principal" class="inp_edit"
-                                    {{ $s_l[0]->ensayo_requerido_principal == 1 ? 'checked' : '' }} disabled>
+                                <input type="checkbox" name="ensayo_requerido_principal" id="ensayo_requerido_principal"
+                                    class="inp_edit" {{ $s_l[0]->ensayo_requerido_principal == 1 ? 'checked' : '' }}
+                                    disabled>
                                 Principal</label>
                             <label for="ensayo_requerido_bullheading"
                                 class="bg-gray-200 p-1 w-full max-w-28 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
@@ -467,9 +473,18 @@
                     </div>
 
                     <div class="">
-                        <label for="cia" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Compañía de Lodos</label>
-                        <input type="text" name="cia" id="cia" class="form-control text-sm p-2"
-                            placeholder="CIA" value="{{ $s_l[0]->mud_company->nombre }}" readonly>
+                        <label for="cia" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Compañía de
+                            Lodos</label>
+                        <select name="mud_company" id="mud_company" class="text-sm inp_edit" disabled>
+                            @foreach ($mud_company as $mud)
+                                <option value="{{ $mud->id }}"
+                                    {{ $mud->id == $s_l[0]->mud_company_id ? 'selected' : '' }}>
+                                    {{ $mud->nombre }}</option>
+                                {{-- <option value="{{ $mud->id }}"
+                                    {{ $solicitud->mud_company_id == $mud->id ? 'selected' : '' }}>
+                                    {{ $mud->nombre }}</option> --}}
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="md:col-span-2 xl:col-span-1">
@@ -656,7 +671,7 @@
                                         el día {{ $c->created_at->format('d') }}
                                         {{ $c->created_at->locale('es')->monthName }}
                                         {{ $c->created_at->format('Y') }} -
-                                        {{ $c->created_at->format('H:i') }}</small></p>
+                                        {{ $c->created_at->format('H:i') }} hs</small></p>
                                 <p class="mb-0 dark:text-gray-400">
                                     {{ $c->fundamento }}
                                 </p>
@@ -664,16 +679,16 @@
                                 <div class="containerRta">
                                     @if ($c->respuesta)
                                         <article class="flex gap-3 mt-4">
-                                            @if($c->user_rta->img)
-                                            <div class="flex justify-center items-center w-12 h-12">
-                                                <img src="{{ asset('uploads/perfiles') . '/' . $c->user_rta->img }}"
-                                                    class="rounded-full object-cover w-12 h-12">
-                                            </div>
+                                            @if ($c->user_rta->img)
+                                                <div class="flex justify-center items-center w-12 h-12">
+                                                    <img src="{{ asset('uploads/perfiles') . '/' . $c->user_rta->img }}"
+                                                        class="rounded-full object-cover w-12 h-12">
+                                                </div>
                                             @else
-                                            <div class="flex justify-center items-center w-14 h-14 pb-3">
-                                                <img src="{{ asset('img/img_default.jpg') }}"
-                                                    class="rounded-full object-cover w-14 h-14" alt="">
-                                            </div>
+                                                <div class="flex justify-center items-center w-14 h-14 pb-3">
+                                                    <img src="{{ asset('img/img_default.jpg') }}"
+                                                        class="rounded-full object-cover w-14 h-14" alt="">
+                                                </div>
                                             @endif
                                             <div class="text-sm flex flex-col">
                                                 <p class="m-0 font-bold dark:text-gray-300">{{ $c->user_rta->nombre }}
@@ -681,14 +696,14 @@
                                                         class="text-gray-400">{{ $c->updated_at->format('d') }}
                                                         {{ $c->updated_at->locale('es')->monthName }}
                                                         {{ $c->updated_at->format('Y') }} -
-                                                        {{ $c->updated_at->format('H:i') }}</small></p>
+                                                        {{ $c->updated_at->format('H:i') }} hs</small></p>
                                                 <p class="mb-0 dark:text-gray-400">
                                                     {{ $c->respuesta }}
                                                 </p>
                                             </div>
                                         </article>
                                     @else
-                                        @if (auth()->user()->id != $c->user_fundamento->id || auth()->user()->is_admin)
+                                        @if (auth()->user()->id != $c->user_fundamento->id || auth()->user()->is_admin && $solicitud->estado->id == 1)
                                             <div
                                                 class="bg-gray-200 inline-block px-2 rounded-md mt-3 cursor-pointer hover:bg-gray-300 transition-all duration-300">
                                                 <button class="flex gap-2 items-center rtaComment">
@@ -702,7 +717,8 @@
                                                 </button>
                                             </div>
                                             <form action="{{ route('fundamento.rta', auth()->user()->id) }}"
-                                                method="POST" class="mt-3 formRta_{{$i}} hidden">
+                                                method="POST" class="mt-3 formRta_{{ $i }} hidden"
+                                                data-btn-rta="{{ $i }}">
                                                 @csrf
                                                 <input type="hidden" name="fundamento_id" value="{{ $c->id }}">
                                                 <textarea name="respuesta" id="respuesta" cols="30" rows="3" class="form-control sz p-2"
@@ -723,14 +739,14 @@
                                                         value="Responder">
                                                 </div>
                                             </form>
+                                            @php
+                                                $i++;
+                                            @endphp
                                         @endif
                                     @endif
                                 </div>
                             </div>
                         </article>
-                        @php
-                            $i++;
-                        @endphp
                     @endforeach
                 </div>
             @endif
@@ -777,14 +793,12 @@
             </div>
 
         </div>
+        @if ($solicitud->aprobada == 1)
+            @include('ensayo.create')
+        @endif
 
-        {{-- @if ($ensayos->count() > 0)
-            @include('ensayo.show')
-            @else
-            @endif --}}
-        @include('ensayo.create')
-        <br>
     </div>
+    <br>
     <div class="container">
         <div class="inline-block">
             <a href="{{ route('solicitudes') }}"
@@ -799,6 +813,7 @@
         </div>
     </div>
     <br>
+    <script src="{{ asset('js/Solicitud/comment.js') }}"></script>
     <script src="{{ asset('js/Solicitud/lechada/edition.js') }}"></script>
 
     <script>
@@ -822,6 +837,10 @@
             VirtualSelect.init({
                 ele: "#tipo_cementacion_lechada",
                 placeholder: "Seleccione el tipo de cementación",
+            });
+            VirtualSelect.init({
+                ele: "#mud_company",
+                placeholder: "Seleccione la compañía",
             });
         })
     </script>

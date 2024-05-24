@@ -13,6 +13,7 @@ use App\Models\RelRequerimientosEnsayos;
 use App\Models\RelUcaSolicitudEnsayo;
 use App\Models\Solicitud;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class EnsayoController extends Controller
 {
@@ -235,6 +236,36 @@ class EnsayoController extends Controller
      */
     public function store_bombeabilidad(Request $request)
     {
+        # Insertar adjunto (Si es que hay)
+        $image = $request->file('file_upload_bombeabilidad');
+
+        if ($image) {
+            # Nombre y destino
+            $imageName = time() . '_bombeabilidad.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('/uploads/ensayos');
+    
+            # Si no existe la carpeta de destino, la crea y guarda la img
+            if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 0755, true);
+            }
+    
+            $img = Image::make($image->getRealPath());
+    
+            $width = $img->width();
+            $height = $img->height();
+    
+            # Redimensionar si la img es mayor a 1000x1000
+            if ($width > 1000 || $height > 1000) {
+                $img->resize(1000, 1000, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+            }
+    
+            $img->save($destinationPath . '/' . $imageName);
+        } else {
+            $imageName = '';
+        }
+
         $bomb_id = RelBombeabilidadSolicitudEnsayo::create([
             'consistometro' => $request->bombeabilidad_consistometro,
             'time_acondicionamiento' => $request->bombeabilidad_acondicionamiento,
@@ -245,6 +276,7 @@ class EnsayoController extends Controller
             'bc_40' => $request->bombeabilidad_40_bc,
             'bc_70' => $request->bombeabilidad_70_bc,
             'bc_100' => $request->bombeabilidad_100_bc,
+            'img' => $imageName,
             'solicitud_lechada_id' => $request->solicitud_lechada_id,
             'usuario_carga' => auth()->user()->id,
         ]);
@@ -264,6 +296,32 @@ class EnsayoController extends Controller
 
     public function store_uca(Request $request)
     {
+        # Insertar adjunto (Si es que hay)
+        $image = $request->file('file_upload_uca');
+
+        # Nombre y destino
+        $imageName = time() . '_uca.' . $image->getClientOriginalExtension();
+        $destinationPath = public_path('/uploads/ensayos');
+
+        # Si no existe la carpeta de destino, la crea y guarda la img
+        if (!file_exists($destinationPath)) {
+            mkdir($destinationPath, 0755, true);
+        }
+
+        $img = Image::make($image->getRealPath());
+
+        $width = $img->width();
+        $height = $img->height();
+
+        # Redimensionar si la img es mayor a 1000x1000
+        if ($width > 1000 || $height > 1000) {
+            $img->resize(1000, 1000, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+        }
+
+        $img->save($destinationPath . '/' . $imageName);
+
         $uca = RelUcaSolicitudEnsayo::create([
             'principal' => $request->uca_principal,
             'psi_50' => $request->uca_psi_50,
@@ -272,6 +330,7 @@ class EnsayoController extends Controller
             'hs_12' => $request->uca_hs_12,
             'hs_24' => $request->uca_hs_24,
             'impedancia_acustica' => $request->uca_impedancia_acustica,
+            'img' => $imageName,
             'sgs_cero' => $request->uca_sgs_cero,
             'sgs_max' => $request->uca_sgs_max,
             'tiempo' => $request->uca_tiempo,

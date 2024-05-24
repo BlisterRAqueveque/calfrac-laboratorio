@@ -14,7 +14,7 @@ class Solicitud extends Model
         'proyecto_number',
         'servicio_number',
         'cliente_id',
-        'locacion',
+        'locacion_id',
         'programa',
         'fecha_solicitud',
         'empresa',
@@ -58,6 +58,11 @@ class Solicitud extends Model
     public function user_aprobo()
     {
         return $this->belongsTo(User::class, 'usuario_aprobo');
+    }
+
+    public function locacion()
+    {
+        return $this->belongsTo(Yacimiento::class, 'locacion_id');
     }
 
     public function estado()

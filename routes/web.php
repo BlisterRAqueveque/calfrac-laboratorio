@@ -50,6 +50,7 @@ Route::post('/ensayo/uca', [EnsayoController::class, 'store_uca'])->name('store_
 Route::post('/ensayo/agua_libre', [EnsayoController::class, 'store_agua_libre'])->name('store_agua_libre');
 Route::post('/ensayo/mezclabilidad', [EnsayoController::class, 'store_mezclabilidad'])->name('store_mezclabilidad');
 Route::post('/ensayo/generate/{solicitud_id}', [EnsayoController::class, 'assignedReporteSolicitud'])->name('assignedReport');
+Route::post('/ensayo/pdf/{solicitud_id}', [EnsayoController::class, 'pdfReport'])->name('pdfReport');
 
 # G
 Route::get('/check_report/{solicitud_id}', [SolicitudController::class, '_generate_report'])->name('check_report');
@@ -111,4 +112,6 @@ Route::post('/permisos_user', [PermisosController::class, 'user_permission_store
 Route::get('/testing', [PermisosController::class, 'testing']);
 
 # PDF's
-Route::get('create-pdf-file', [PDFController::class, 'index']);
+Route::get('/pdf/report/lechada/{solicitud_id}', [PDFController::class, 'pdf_report_lechada'])->name('pdf_report_lechada');
+Route::post('/pdf/report/lechada/send/{solicitud_id}', [PDFController::class, 'pdf_send_report_lechada'])->name('pdf_send_report_lechada');
+Route::get('/pdf/view', [PDFController::class, 'pdf_view']);

@@ -9,7 +9,8 @@ if (btnHabilitarEdicionLechada) {
         document.getElementsByName('tipo_requerimiento_lechada')[1].removeAttribute('disabled');
         document.getElementsByName('tipo_trabajo_lechada')[1].removeAttribute('disabled');
         document.getElementsByName('tipo_cementacion_lechada')[1].removeAttribute('disabled');
-
+        document.getElementsByName('mud_company')[1].removeAttribute('disabled');
+        
         let all_fields = document.querySelectorAll('.form-control');
         for (let i = 0; i < all_fields.length; i++) {
             all_fields[i].removeAttribute('readonly');        

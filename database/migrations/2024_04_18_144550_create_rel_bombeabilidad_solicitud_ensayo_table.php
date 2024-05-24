@@ -24,6 +24,7 @@ return new class extends Migration
             $table->time('bc_40')->nullable();
             $table->time('bc_70')->nullable();
             $table->time('bc_100')->nullable();
+            $table->string('img')->nullable();
             $table->unsignedBigInteger('ensayo_id')->nullable();
             $table->foreign('ensayo_id')->references('id')->on('ensayos');
             $table->unsignedBigInteger('solicitud_lechada_id')->nullable();

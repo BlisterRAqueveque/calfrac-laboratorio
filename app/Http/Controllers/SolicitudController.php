@@ -66,15 +66,15 @@ class SolicitudController extends Controller
         $this->validate($request, [
             'proyecto_number' => 'required',
             'servicio_number' => 'required',
-            'cliente' => 'required',
-            'locacion' => 'required',
+            'cliente_fractura' => 'required',
+            'locacion_fractura' => 'required',
             'programa' => 'required',
             'fecha_solicitud' => 'required',
             'empresa' => 'required',
-            'fecha_tratamiento' => 'required',
+            // 'fecha_tratamiento' => 'required',
             'pozo' => 'required',
             'rep_compania' => 'required',
-            'fecha_reporte' => 'required',
+            // 'fecha_reporte' => 'required',
             'rep_venta' => 'required',
             'fecha_resultados' => 'required',
             'equipo' => 'required',
@@ -89,15 +89,15 @@ class SolicitudController extends Controller
             'tipo' => 1,
             'proyecto_number' => $request->proyecto_number,
             'servicio_number' => $request->servicio_number,
-            'cliente' => $request->cliente,
-            'locacion' => $request->locacion,
+            'cliente_id' => $request->cliente_fractura,
+            'locacion_id' => $request->locacion_fractura,
             'programa' => $request->programa,
             'fecha_solicitud' => $request->fecha_solicitud,
             'empresa' => $request->empresa,
-            'fecha_tratamiento' => $request->fecha_tratamiento,
+            // 'fecha_tratamiento' => $request->fecha_tratamiento,
             'pozo' => $request->pozo,
             'rep_compania' => $request->rep_compania,
-            'fecha_reporte' => $request->fecha_reporte,
+            // 'fecha_reporte' => $request->fecha_reporte,
             'rep_venta' => $request->rep_venta,
             'fecha_resultados' => $request->fecha_resultados,
             'equipo' => $request->equipo,
@@ -150,7 +150,7 @@ class SolicitudController extends Controller
 
         $data = [
             'solicitud_id' => $solicitud->id,
-            'locacion' => $request->locacion,
+            'locacion_id' => $request->locacion,
             'fecha_solicitud' => $request->fecha_solicitud,
             'usuario_carga' => auth()->user()->nombre . ' ' . auth()->user()->apellido,
             'cliente' => $request->cliente,
@@ -189,7 +189,7 @@ class SolicitudController extends Controller
         $solicitud = Solicitud::create([
             'tipo' => 2,
             'cliente_id' => $request->cliente_lechada,
-            'locacion' => $request->locacion_lechada,
+            'locacion_id' => $request->locacion_lechada,
             'programa' => $request->programa_lechada,
             'fecha_solicitud' => date('Y-m-d'),
             'empresa' => $request->empresa_lechada,
@@ -306,7 +306,8 @@ class SolicitudController extends Controller
             'fecha_aprobada' => $solicitud->fecha_aprobada->format('d/m/Y'),
             'usuario_aprobo' => $solicitud->user_aprobo->nombre . ' ' . $solicitud->user_aprobo->apellido,
         ];
-        $this->_sendEmailApproved($data, $solicitud->user->email);
+        # Comentado por el momento (Se puede descomentar)
+        // $this->_sendEmailApproved($data, $solicitud->user->email);
         // -- Finaliza el envío de email
         return $solicitud->id;
     }
@@ -320,15 +321,15 @@ class SolicitudController extends Controller
         $this->validate($request, [
             'proyecto_number' => 'required',
             'servicio_number' => 'required',
-            'cliente' => 'required',
-            'locacion' => 'required',
+            'cliente_fractura' => 'required',
+            'locacion_fractura' => 'required',
             'programa' => 'required',
             'fecha_solicitud' => 'required',
             'empresa' => 'required',
-            'fecha_tratamiento' => 'required',
+            // 'fecha_tratamiento' => 'required',
             'pozo' => 'required',
             'rep_compania' => 'required',
-            'fecha_reporte' => 'required',
+            // 'fecha_reporte' => 'required',
             'rep_venta' => 'required',
             'fecha_resultados' => 'required',
             'equipo' => 'required',
@@ -342,15 +343,15 @@ class SolicitudController extends Controller
         $solicitud = Solicitud::find($request->solicitud_id);
         $solicitud->proyecto_number = $request->proyecto_number;
         $solicitud->servicio_number = $request->servicio_number;
-        $solicitud->cliente = $request->cliente;
-        $solicitud->locacion = $request->locacion;
+        $solicitud->cliente_id = $request->cliente_fractura;
+        $solicitud->locacion_id = $request->locacion_fractura;
         $solicitud->programa = $request->programa;
         $solicitud->fecha_solicitud = $request->fecha_solicitud;
         $solicitud->empresa = $request->empresa;
-        $solicitud->fecha_tratamiento = $request->fecha_tratamiento;
+        // $solicitud->fecha_tratamiento = $request->fecha_tratamiento;
         $solicitud->pozo = $request->pozo;
         $solicitud->rep_compania = $request->rep_compania;
-        $solicitud->fecha_reporte = $request->fecha_reporte;
+        // $solicitud->fecha_reporte = $request->fecha_reporte;
         $solicitud->rep_venta = $request->rep_venta;
         $solicitud->fecha_resultados = $request->fecha_resultados;
         $solicitud->equipo = $request->equipo;
@@ -402,8 +403,9 @@ class SolicitudController extends Controller
             'fecha_edicion' => $edicion_solicitud->created_at->format('d-m-Y'),
             'fundamento' => $edicion_solicitud->fundamento
         ];
-        $this->_sendEmailEdition($data, $solicitud->user->email);
-        // -- Finaliza el envío de email
+
+        # Correo comentado por el momento, se puede desactivar por mientras
+        // $this->_sendEmailEdition($data, $solicitud->user->email);
 
         if ($solicitud->id)
             return back()->with('success', $solicitud->id);
@@ -449,7 +451,9 @@ class SolicitudController extends Controller
             'otros_analisis' => OtrosAnalisis::all(),
             'aditivos' => Aditivo::all(),
             'users' => User::all(),
-            'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
+            'clientes' => Cliente::all(),
+            'yacimientos' => Yacimiento::all(),
+            // 'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
         return view('solicitud.components.fractura.show', $data);
     }
@@ -472,6 +476,7 @@ class SolicitudController extends Controller
             'tipo_requerimiento_cemento' => TipoRequerimientoCemento::all(),
             'tipo_trabajos' => TipoTrabajoCemento::all(),
             'tipo_cementacion' => TipoCementacion::all(),
+            'mud_company' => MudCompany::all(),
             // 'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
         $generate_report = $this->_generate_report($solicitud_id);
@@ -501,7 +506,7 @@ class SolicitudController extends Controller
 
         // Change => Datos de la solicitud general
         $solicitud = Solicitud::find($request->solicitud_id);
-        $solicitud->locacion = $request->locacion_lechada;
+        $solicitud->locacion_id = $request->locacion_lechada;
         $solicitud->programa = $request->programa_lechada;
         $solicitud->empresa = $request->empresa_lechada;
         $solicitud->pozo = $request->pozo_lechada;

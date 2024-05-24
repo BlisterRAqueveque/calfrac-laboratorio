@@ -19,7 +19,8 @@ return new class extends Migration
             $table->integer('proyecto_number')->nullable();
             $table->integer('servicio_number')->nullable();
             $table->foreignId('cliente_id')->constrained()->onDelete('restrict');
-            $table->integer('locacion')->nullable();
+            $table->unsignedBigInteger('locacion_id')->nullable();
+            $table->foreign('locacion_id')->references('id')->on('yacimientos');
             $table->string('programa')->nullable();
             $table->date('fecha_solicitud')->nullable();
             $table->string('empresa')->nullable();
@@ -29,9 +30,9 @@ return new class extends Migration
             $table->date('fecha_resultados')->nullable();
             $table->string('equipo')->nullable();
             $table->string('servicio')->nullable();
-            $table->foreignId('tipo_requerimiento_cemento_id')->references('id')->on('tipo_requerimiento_cemento');
-            $table->foreignId('tipo_trabajo_cemento_id')->references('id')->on('tipo_trabajo_cemento');
-            $table->foreignId('tipo_cementacion_id')->references('id')->on('tipo_cementacion');
+            $table->foreignId('tipo_requerimiento_cemento_id')->references('id')->on('tipo_requerimiento_cemento')->nullable();
+            $table->foreignId('tipo_trabajo_cemento_id')->references('id')->on('tipo_trabajo_cemento')->nullable();
+            $table->foreignId('tipo_cementacion_id')->references('id')->on('tipo_cementacion')->nullable();
             $table->string('reporte_lab_tall')->nullable();
             $table->string('reporte_lab_lead')->nullable();
             $table->integer('solicitud')->nullable();

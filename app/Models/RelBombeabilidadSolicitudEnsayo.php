@@ -20,6 +20,7 @@ class RelBombeabilidadSolicitudEnsayo extends Model
         'bc_40',
         'bc_70',
         'bc_100',
+        'img',
         'ensayo_id',
         'solicitud_lechada_id',
         'selected',

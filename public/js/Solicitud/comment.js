@@ -13,7 +13,8 @@ for (let i = 0; i < rtaComment.length; i++) {
 function removeRta(btnCancel) {
     event.preventDefault();
     let btnComment = btnCancel.parentElement.parentElement.getAttribute('data-btn-rta');
-    document.querySelector(`.${btnComment}`).classList.remove('hidden');
+    rtaComment[btnComment].classList.remove('hidden');
+    // document.querySelector(`.rtaComment${btnComment}`).classList.remove('hidden');
     btnCancel.parentElement.parentElement.classList.add('hidden');
 
 }

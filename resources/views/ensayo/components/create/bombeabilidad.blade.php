@@ -27,7 +27,11 @@
                             aria-controls="bombeabilidad_{{ $bombeabilidad->id }}">
                             Bombeabilidad - Intento Nº{{ $i }}
                             @if ($bombeabilidad->selected)
-                                <x-icons.check class="w-4 h-4 ms-2" stroke-width="2" />
+                                <div class="bombeabilidad_check_{{ $bombeabilidad->id }}">
+                                    <x-icons.check class="w-4 h-4 ms-2" stroke-width="2" />
+                                </div>
+                            @else
+                                <div class="bombeabilidad_check_{{ $bombeabilidad->id }}"></div>
                             @endif
                         </button>
                     </h2>
@@ -51,16 +55,6 @@
 
                                 @if ($form_bombeabilidad)
                                     <div class="flex items-center gap-3 bombeabilidad_selected">
-                                        <x-button
-                                            style="w-full md:w-auto bg-red-700 bg-opacity-60 text-white p-2 rounded-sm hover:shadow-lg transition-all duration-75 font-bold text-sm flex items-center gap-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.8" stroke="currentColor" class="w-4 h-4">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                                            </svg>
-
-                                            Eliminar
-                                        </x-button>
                                         {{-- <form action="{{ route('ensayo.assigned') }}" method="POST"> --}}
                                         <form id="form_assignment_{{ $bombeabilidad->id }}">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -70,7 +64,7 @@
                                                 value="{{ $bombeabilidad->id }}">
                                             <x-button data-form="form_assignment_{{ $bombeabilidad->id }}"
                                                 style="w-full md:w-auto bg-green-700 bg-opacity-60 text-white p-2 rounded-sm hover:shadow-lg transition-all duration-75 font-bold text-sm flex items-center gap-2"
-                                                onClick="submitBombeabilidadSelected('form_assignment_{{ $bombeabilidad->id }}')">
+                                                onClick="submitBombeabilidadSelected({{ $bombeabilidad->id }})">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                     viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"
                                                     class="w-4 h-4">
@@ -167,6 +161,44 @@
                                         readonly>
                                 </div>
 
+                                <!-- The Modal -->
+                                <div id="myModalBombeabilidad_{{ $bombeabilidad->id }}" class="modal myModalBombeabilidad">
+                                    <div class="modal-content">
+                                        <span id="closeImgBombeabilidad_{{ $bombeabilidad->id }}" class="closeImg closeImgBombeabilidad">&times;</span>
+                                        <img id="modalImgBombeabilidad_{{ $bombeabilidad->id }}" style="width: auto;">
+                                    </div>
+                                </div>
+
+                                <div class="col-span-3">
+                                    <div class="mb-2 mt-2 text-center">
+                                        <h5 class="mb-1">Adjunto</h5>
+                                        @if ($bombeabilidad->img)
+                                            <section>
+                                                <div
+                                                    class="relative md:w-1/2 xl:w-1/3 mx-auto flex items-center p-2 border rounded-md border-gray-200 hover:bg-gray-50 ">
+                                                    <div class="w-12 h-12 rounded-full bg-gray-100 flex-shrink-0">
+                                                        <img src="{{ asset('uploads/ensayos/') . '/' . $bombeabilidad->img }}"
+                                                            class="w-12 h-12 object-cover rounded-full cursor-pointer"
+                                                            alt=""
+                                                            onclick="openModalBombeabilidad('myModalBombeabilidad_{{ $bombeabilidad->id }}', 'modalImgBombeabilidad_{{ $bombeabilidad->id }}', '{{ asset('uploads/ensayos/') . '/' . $bombeabilidad->img }}')">
+                                                    </div>
+                                                    <div class="text-left w-full ms-2">
+                                                        <h6 class="text-md">Archivo adjunto</h6>
+                                                        <div
+                                                            class="flex justify-between items-center text-gray-500 text-sm">
+                                                            <p class="mb-0">{{ $bombeabilidad->img }}</p>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </section>
+                                        @else
+                                            <p><em>No se cargó un adjunto</em></p>
+                                        @endif
+                                    </div>
+                                </div>
+
+
                             </div>
                         </div>
                     </div>
@@ -257,6 +289,57 @@
                 </div>
 
             </div>
+
+            <div class="mb-2 mt-2 text-center">
+                <h5 class="mb-1">Adjuntos a cargar (Opcional)</h5>
+                <section id="container_file_bombeabilidad">
+                    {{-- <div
+                        class="relative w-1/3 mx-auto flex items-center p-2 border rounded-md border-gray-200 hover:bg-gray-50 cursor-pointer">
+                        <div class="w-12 h-12 rounded-full bg-gray-100 flex-shrink-0">
+                            <img src="{{ asset('img/imgperfil.jpg') }}" class="w-12 h-12 object-cover rounded-full"
+                                alt="">
+                        </div>
+                        <div class="text-left w-full ms-2">
+                            <h6 class="text-md">Archivo cargado</h6>
+                            <div class="flex justify-between items-center text-gray-500 text-sm">
+                                <p class="mb-0">grafico_prueba.jpg</p>
+                                <small><b>Tamaño: 750kb</b></small>
+                            </div>
+                        </div>
+                        <button class="absolute top-0 right-0 hover:bg-gray-200">
+                            <x-icons.close></x-icons.close>
+                        </button>
+                    </div> --}}
+                </section>
+
+                <!-- The Modal -->
+                <div id="myModalBombeabilidad" class="modal">
+                    <div class="modal-content">
+                        <span class="closeImg">&times;</span>
+                        <img id="modalImgBombeabilidad" style="width: auto;">
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 w-1/2 mx-auto py-8 flex items-center justify-center rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer transition-all duration-100"
+                    onclick="createFile('file_upload_bombeabilidad')" id="section_upload_image_bombeabilidad">
+                    <div class="flex flex-col items-center">
+                        <div class="p-3 bg-white rounded-full border">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 16.5V9.75m0 0 3 3m-3-3-3 3M6.75 19.5a4.5 4.5 0 0 1-1.41-8.775 5.25 5.25 0 0 1 10.233-2.33 3 3 0 0 1 3.758 3.848A3.752 3.752 0 0 1 18 19.5H6.75Z" />
+                            </svg>
+                        </div>
+
+                        <h5><b>Haga click</b> para adjuntar un archivo</h5>
+                        <p><small>(Máximo tamaño del archivo 10mb)</small></p>
+                    </div>
+                </div>
+                <input type="file" id="file_upload_bombeabilidad" name="file_upload_bombeabilidad"
+                    onchange="_listenChange(event, 'container_file_bombeabilidad', 'section_upload_image_bombeabilidad', 'myModalBombeabilidad', 'modalImgBombeabilidad')"
+                    hidden>
+            </div>
+
             <div class="flex justify-center">
                 <x-button type="button" id="btn_submit_bombeabilidad"
                     style="w-full md:w-auto bg-green-700 bg-opacity-60 text-white p-2 rounded-sm hover:shadow-lg transition-all duration-75 font-bold text-sm">Crear
@@ -272,6 +355,36 @@
     document.addEventListener('DOMContentLoaded', e => {
         cant_bombeabilidad = document.querySelectorAll('.accordion_length_bombeabilidad').length
     })
+</script>
+
+{{-- Subir gráfico adjunto UCA --}}
+<script>
+    // Modal open img UCA
+    let myModalBombeabilidad = document.querySelectorAll('.myModalBombeabilidad');
+    let spanImgCloseBombeabilidad = document.querySelectorAll('.closeImgBombeabilidad');
+    if (spanImgCloseBombeabilidad) {
+        for (let i = 0; i < spanImgCloseBombeabilidad.length; i++) {
+            spanImgCloseBombeabilidad[i].addEventListener('click', e => {
+                e.preventDefault();
+                myModalBombeabilidad[i].style.display = "none";
+                document.body.classList.remove('modal-open');
+            })
+        }
+    }
+
+    function openModalBombeabilidad(modal, modal_img, src) {
+        document.getElementById(modal).style.display = "block";
+        console.log('Esta es la img dle modal: ', document.getElementById(modal_img))
+        document.getElementById(modal_img).src = src;
+        document.body.classList.add('modal-open');
+    }
+
+    // window.onclick = function(event) {
+    //     if (event.target == modal) {
+    //         myModalBombeabilidad.style.display = "none";
+    //         document.body.classList.remove('modal-open');
+    //     }
+    // }
 </script>
 
 <script>
@@ -294,10 +407,16 @@
                         .then((data) => {
                             if (data) {
                                 // Genera la vista del 'accordion' con los datos que se insertaron previamente
-                                console.log('Bombeabilidad: ', data);
                                 componentBombeabilidad(data.success_bombeabilidad)
                                 // Limpia el formulario, todos los values del inp que tengan la clase 'inp_b'
                                 clearInputs('inp_b')
+                                document.getElementById('container_file_bombeabilidad').style
+                                    .display = 'none';
+                                document.getElementById('container_file_bombeabilidad').innerHTML =
+                                    '';
+                                document.getElementById('section_upload_image_bombeabilidad').style
+                                    .display = 'block';
+                                document.getElementById('file_upload_bombeabilidad').value = '';
                                 successAlert('¡Registro Asignado!',
                                     'El registro se asignó correctamente.')
                             }
@@ -315,7 +434,7 @@
      */
     const submitBombeabilidadSelected = (id_form_selected) => {
         event.preventDefault();
-        let form = new FormData(document.getElementById(id_form_selected));
+        let form = new FormData(document.getElementById(`form_assignment_${id_form_selected}`));
         confirmAlert().then((confirmed) => {
             if (confirmed) {
                 fetch("{{ route('ensayo.assigned') }}", {
@@ -328,7 +447,7 @@
                     }).then((response) => response.json())
                     .then((data) => {
                         if (data) {
-                            console.log(data)
+                            // console.log(data)
                             successAlert('¡Tiempo de Bombeabilidad Seleccionado!',
                                 'Registro seleccionado correctamente.')
                             let btns_hide = document.querySelectorAll('.bombeabilidad_selected');
@@ -336,9 +455,9 @@
                             btns_hide.forEach(btn_h => {
                                 btn_h.remove();
                             });
-                            document.querySelector(`.bomb_header_${data.id_rel_bomb}`).classList.add(
-                                'bg-green-50')
-
+                            // document.querySelector(`.bomb_header_${data.id_rel_bomb}`).classList.add('bg-green-50')
+                            document.querySelector(`.bombeabilidad_check_${id_form_selected}`)
+                                .innerHTML = `<x-icons.check class="w-4 h-4 ms-2" stroke-width="2" />`
                             document.getElementById('form_bombeabilidad').style.display = 'none'
 
                             let solicitud_id = {!! json_encode($solicitud->id) !!}
