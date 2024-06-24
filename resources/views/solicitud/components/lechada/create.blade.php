@@ -488,7 +488,7 @@
             <div class="text-center mt-3">
                 <button id="btnAddFormulacion"
                     class="text-sm mt-2 bg-gray-200 hover:bg-gray-300 text-gray-600 p-1 rounded-md px-3 border transition-all duration-200 border-gray-300">
-                    Agregar Formulación
+                    Agregar Formulación del Colchón
                 </button>
             </div>
 

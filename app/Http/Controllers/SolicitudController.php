@@ -24,6 +24,8 @@ use App\Models\TipoRequerimientoCemento;
 use App\Models\TipoTrabajoCemento;
 use App\Models\User;
 use App\Models\Yacimiento;
+use  App\Models\Servicios;
+use  App\Models\TipoLodo_Lodos;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Mail;
@@ -52,6 +54,8 @@ class SolicitudController extends Controller
             'tipo_lodo' =>  TipoLodo::all(),
             'mud_company' =>  MudCompany::all(),
             'users' => User::all(),
+            'servicios' => Servicios::all(),
+            'tipo_lodo_Lodos' => TipoLodo_Lodos::all(),
         ];
         return view('solicitud.create', $data);
     }
