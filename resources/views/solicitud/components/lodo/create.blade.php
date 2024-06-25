@@ -32,7 +32,7 @@
                         class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Yacimiento /
                         Locación
                         <span class="text-red-500">*</span></label>
-                    <select name="locacion_lechada" id="locacion_lechada" class="text-sm" data-search="true" >
+                    <select name="locacion_lechada" id="locacion_lechada" class="text-sm" data-search="true" data-silent-initial-value-set="true" >
                         
                         @foreach ($yacimientos as $y)
                         <option value="{{ $y->id }}"
@@ -65,13 +65,15 @@
                         <small class="text-red-700 font-semibold"><em>{{ $message }}</em></small>
                     @enderror
                 </div>
-                <!-- TODO Hay que agregar el Tipo de Lodo en la tabla SOLICITUD -->
                 <div class="col-span-2 xl:col-span-1">
                     <label for="tipo_lodo" class="text-sm text-gray-700 font-semibold tracking-wide">Tipo de Lodo
                         <small>(*)</small></label>
-                    <input type="text" placeholder="Ingrese el tipo de lodo"
-                        class="form-control sz placeholder:text-gray-300 placeholder:font-light" name="tipo_lodo"
-                        id="tipo_lodo">
+                        <select name="tipo_lodo" id="tipo_lodo" class="text-sm" data-search="true" data-silent-initial-value-set="true" >
+                            @foreach($tipo_lodo_Lodos as $tl)
+                            <option value="{{$tl->id}}"
+                                {{ old('tipo_lodo') == $tl->id ? 'selected' : '' }}>{{ $tl->nombre }}</option>
+                            @endforeach
+                        </select>
                     @error('tipo_lodo')
                         <small class="text-red-700 font-semibold"><em>{{ $message }}</em></small>
                     @enderror
@@ -80,10 +82,10 @@
                 <div class="col-span-2 xl:col-span-1">
                     <label for="servicios_lodo" class="text-sm text-gray-700 font-semibold tracking-wide">Servicio
                         <small>(*)</small></label>
-                    <select name="servicios_lodo" id="servicios_lodo" class="text-sm" data-search="true">
-                            @foreach($servicios as $s)
-                            <option value="{{$s->id}}"
-                                {{old('servicios_lodo')== $s->id ? 'selected' : ''}}> {{$s->nombre}} </option>
+                    <select name="servicios_lodo" id="servicios_lodo" class="text-sm" data-search="true"  data-silent-initial-value-set="true" >
+                            @foreach($servicios as $sv)
+                            <option value="{{$sv->id}}"
+                                {{ old('servicios_lodo') == $sv->id ? 'selected' : '' }}> {{$sv->servicio}}</option>
                             @endforeach
                     </select>
                     @error('servicios_lodo')
@@ -92,12 +94,15 @@
                 </div>
 
                 <div class="col-span-2 xl:col-span-1">
-                    <label for="tipo_lodo" class="text-sm text-gray-700 font-semibold tracking-wide">Compañia de Lodo
+                    <label for="mud_company" class="text-sm text-gray-700 font-semibold tracking-wide">Compañia de Lodo
                         <small>(*)</small></label>
-                    <input type="text" placeholder="Ingrese el tipo de lodo"
-                        class="form-control sz placeholder:text-gray-300 placeholder:font-light" name="tipo_lodo"
-                        id="tipo_lodo">
-                    @error('tipo_lodo')
+                        <select name="mud_company" id="mud_company" class="text-sm" data-search="true"  data-silent-initial-value-set="true" >
+                            @foreach($mud_company as $mc)
+                            <option value="{{$mc->id}}"
+                                {{ old('mud_company') == $mc->id ? 'selected' : '' }}> {{$mc->nombre}}</option>
+                            @endforeach
+                    </select>
+                    @error('mud_company')
                         <small class="text-red-700 font-semibold"><em>{{ $message }}</em></small>
                     @enderror
                 </div>
@@ -134,34 +139,31 @@
                     <label for="profundidad" class="text-sm text-gray-700 font-semibold tracking-wide">Profundidad
                         <small>(*)(MD/TVD)(m)</small></label>
                 <div class="col-xs-12 col-md-9 my-2 d-flex no-bot-padding">
-                    <select name="cliente_lechada" id="cliente_lechada" class="text-sm" data-search="true"
-                    data-silent-initial-value-set="true">
-                    @foreach ($clientes as $c)
-                        <option value="{{ $c->id }}"
-                            {{ old('cliente_lechada') == $c->id ? 'selected' : '' }}>{{ $c->nombre }}</option>
-                    @endforeach
-                 <select name="cliente_lechada2" id="cliente_lechada2" class="text-sm" data-search="true"
-                data-silent-initial-value-set="true">
-                @foreach ($clientes as $d)
-                    <option value="{{ $d->id }}"
-                        {{ old('cliente_lechada') == $d->id ? 'selected' : '' }}>{{ $d->nombre }}</option>
-                @endforeach 
+                    <input type="text" placeholder="MD"
+                        class="form-control sz placeholder:text-gray-300 placeholder:font-light" name="profundidad_md"
+                        id="profundidad_md">
+                    
+                    <input type="text" placeholder="TVD"
+                        class="form-control sz placeholder:text-gray-300 placeholder:font-light" name="profundidad_tvd"
+                        id="profundidad_tvd">
                 </div>
                     @error('profundidad')
                         <small class="text-red-700 font-semibold"><em>{{ $message }}</em></small>
                     @enderror
                 </div>
             </div>
-            <span class="ms-2 mb-0 font-light tracking-wide">Ensayos requeridos</span>
+            <span class="ms-2 mb-0 font-light tracking-wide">Ensayos requeridos (*)</span>
             <hr class="ms-2 mt-1">
                 <div class="row p-2">
                     <div class="col-xs-12 col-md-3 my-2">
-                        <label for="ensayos" class="text-sm text-gray-700 font-semibold tracking-wide">Ensayos Requeridos
-                            <small>(*)</small></label>
-                        <select name='ensayos' type="text" placeholder="Ingrese el ensayo"
-                            class="form-control sz placeholder:text-gray-300 placeholder:font-light" name="ensayos"
-                            id="ensayos" multiple='multiple'>
-                        </select>
+                        
+                        <select name='ensayos' id="ensayos"class="text-sm" data-search="true"  data-silent-initial-value-set="true">
+                        @foreach($ensayos_lodo as $sl)
+                        <option value="{{$sl->id}}"
+                            {{ old('ensayos_lodo') == $sl->id ? 'selected' : '' }}> {{$sl->nombre}}</option>
+                        @endforeach
+                    </select>
+
                         @error('ensayos')
                             <small class="text-red-700 font-semibold"><em>{{ $message }}</em></small>
                         @enderror
@@ -280,6 +282,12 @@
                 </div>
             </div>
         </section>
+        <div class="flex items-center gap-3 md:justify-end mt-4 px-3 md:px-auto">
+            <button id="btnSubmitSolicitud"
+                class="w-full md:w-auto bg-green-700 bg-opacity-60 text-white p-2 rounded-sm hover:shadow-lg transition-all duration-75 font-bold"
+                data-bs-toggle="modal" data-bs-target="#modal_confirm_lechada" onclick="event.preventDefault()">Enviar
+                Solicitud</button>
+        </div>
     </fieldset>
 </form>
 
