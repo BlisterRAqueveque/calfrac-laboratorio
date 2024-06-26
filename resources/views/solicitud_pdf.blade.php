@@ -204,7 +204,7 @@
 
                 </td>
                 <td style="width: 40%;color: #686868; text-align: center; font-size: 13px;">
-                    {{ $solicitud->locacion->nombre}}
+                    {{ $solicitud->locacion }}
                 </td>
             </tr>
             <tr>
@@ -766,7 +766,7 @@
                 Temperatura
             </td>
             <td class="d_g_second_td">
-                Fluido Acumulado 
+                Fluido Acumulado
             </td>
             <td class="d_g_last_td">
                 Filtrado API
@@ -815,7 +815,7 @@
             </td>
             <td
                 style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 0">
-                {{ $s_l[0]->rel_agua_libre[0]->volumen ? $s_l[0]->rel_agua_libre[0]->volumen . 'mL' : 'No aplica' }}
+                {{ $s_l[0]->rel_agua_libre[0]->volumen ? $s_l[0]->rel_agua_libre[0]->volumen . ' mL' : 'No aplica' }}
             </td>
             <td
                 style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 0; border-right: 0">

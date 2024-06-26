@@ -382,7 +382,8 @@
 
                             <div class="col-span-5 my-2">
                                 <label for="comentario"
-                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2 dark:text-gray-300">Comentarios/Observaciones</label>
+                                    class="text-xs xl:text-sm text-gray-700 font-semibold tracking-wide mb-2 dark:text-gray-300">Comentarios /
+                                    Observaciones</label>
                                 <textarea name="comentario" id="comentario" cols="30" rows="4" class="form-control sz p-2 dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none" readonly>{{ $e->base_lechada ? $e->base_lechada : 'No Aplica' }}</textarea>
                             </div>
                         </div>

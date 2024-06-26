@@ -17,7 +17,6 @@
     <main>
         <div style="display: flex; justify-content: center; flex-direction: column; align-items: center">
             <h3 style="letter-spacing: .8px; margin-bottom: 0">Solicitud de Fractura</h3>
-            <p style="margin: 0 auto; font-weight: 500">{{ $data['locacion'] }}</p>
             <p style="margin: 0 auto; font-weight: 700">N°{{ $data['solicitud_id'] }}</p>
         </div>
 
@@ -39,7 +38,7 @@
             <p style="margin-bottom: 0"><b>Cliente:</b> {{ $data['cliente'] }}</p>
             <p style="margin-bottom: 0"><b>Compañía:</b> {{ $data['empresa'] }}</p>
         </div>
-
+        
         <div style="display: flex; justify-content: center; margin-bottom: 10px">
             <button style="background: #006F53; color: white; padding: 10px 15px; border: 0; border-radius: 5px; cursor: pointer;">Ver Solicitud</button>
         </div>

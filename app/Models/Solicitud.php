@@ -17,7 +17,7 @@ class Solicitud extends Model
         'locacion_id',
         'programa',
         'fecha_solicitud',
-        //'empresa',
+        'empresa',
         'fecha_tratamiento',
         'pozo',
         'rep_compania',

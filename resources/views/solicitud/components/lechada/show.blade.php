@@ -13,8 +13,6 @@
         #tipo_requerimiento_lechada,
         #tipo_trabajo_lechada,
         #tipo_cementacion_lechada,
-        #sgs,
-        #agua_libre,
         #mud_company {
             background: #b9b9b9;
             border-radius: 5px;
@@ -24,9 +22,7 @@
             display: none;
         }
     </style>
-    {{--
-        Aca esta la view de Infromacion de la Solicitud cuando das click en el ojito en historico
-    --}}
+
     <section class="p-2 pb-0 mb-0 relative shadow-sm section_bg dark:bg-blue-800 dark:bg-opacity-20 w-11/12 mx-auto">
         <section class="p-2 mx-auto pb-0 section_solicitud w-11/12">
             <div class="flex gap-3">
@@ -219,7 +215,7 @@
                     </div>
                     <div class="col-span-2 xl:col-span-1">
                         <label for="locacion_lechada"
-                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Yacimiento/Locación <span
+                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Yacimiento / Locación <span
                                 class="text-red-500">*</span></label>
                         <select name="locacion_lechada" id="locacion_lechada" class="text-sm inp_edit" disabled>
                             @foreach ($yacimientos as $y)
@@ -254,7 +250,7 @@
                         @enderror
                     </div>
 
-                    {{--<div class="col-span-2">
+                    <div class="col-span-2">
                         <label for="empresa_lechada"
                             class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Empresa
                             <span class="text-red-500">*</span></label>
@@ -264,7 +260,7 @@
                         @error('empresa_lechada')
                             <small class="text-xs text-red-600">La empresa es requerida</small>
                         @enderror
-                    </div>--}}
+                    </div>
 
                     <div class="col-span-2 xl:col-span-1">
                         <label for="pozo_lechada" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Pozo
@@ -361,7 +357,6 @@
                         @enderror
                     </div>
 
-                    <br>
 
                     <div class="col-span-2 md:col-span-2 xl:col-span-1">
                         <label for="ensayo_requerido_lechada"
@@ -380,12 +375,6 @@
                                     id="ensayo_requerido_bullheading" class="inp_edit"
                                     {{ $s_l[0]->ensayo_requerido_relleno == 1 ? 'checked' : '' }} disabled>
                                 Bullheading</label>
-                            <label for="ensayo_requerido_tapon"
-                                class="bg-gray-200 p-1 w-full max-w-28 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
-                                <input type="checkbox" name="ensayo_requerido_tapon"
-                                    id="ensayo_requerido_tapon" class="inp_edit"
-                                    {{ $s_l[0]->ensayo_requerido_tapon == 1 ? 'checked' : '' }} disabled>
-                                Tapón</label>
                         </div>
                         @error('ensayo_requerido_lechada')
                             <small class="text-xs text-red-600">El ensayo es requerido</small>
@@ -406,12 +395,12 @@
                                 value="Ensayo Nº{{ $e_r->id }}" readonly>
                         </div>
                         <div class="md:col-span-3 xl:col-span-2"><label
-                                class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tope de Lechada <small>(MD/TVD)(m)</small></label>
+                                class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Top of Slurry (m)</label>
                             <div class="grid grid-cols-2 gap-2">
-                                <input class="form-control text-sm p-2 testing_1" value="{{ $e_r->top_of_slurry_md }}"
-                                    min="0" placeholder="MD" readonly="true">
                                 <input class="form-control text-sm p-2 testing_1 top_of_slurry_tvd_1" min="0"
                                     value="{{ $e_r->top_of_slurry_tvd }}" placeholder="TVD" readonly="true">
+                                <input class="form-control text-sm p-2 testing_1" value="{{ $e_r->top_of_slurry_md }}"
+                                    min="0" placeholder="MD" readonly="true">
                             </div>
                         </div>
                         <div class="md:col-span-2 xl:col-span-1">
@@ -421,20 +410,20 @@
                         </div>
                         <div class="md:col-span-2 xl:col-span-1"><label
                                 class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Grado de Temperatura
-                                <small>(°C)</small>
+                                (Cº)
                             </label>
                             <input class="form-control text-sm p-2 testing_1" placeholder="Ingrese la Temperatura ºC"
                                 readonly="true" value="{{ $e_r->grado_temperatura }}">
                         </div>
                         <div class="grid col-span-1 grid-cols-2 gap-3">
                             <div>
-                                <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">BHCE <small>(°C)</small>
+                                <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">BHCE Cº
                                 </label>
                                 <input class="form-control text-sm p-2 testing_1" placeholder="BHCE" readonly="true"
                                     value="{{ $e_r->bhce }}">
                             </div>
                             <div>
-                                <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">BHCT <small>(°C)</small></label>
+                                <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">BHCT Cº</label>
                                 <input class="form-control text-sm p-2 testing_1" placeholder="BHCT" readonly="true"
                                     value="{{ $e_r->bhct }}">
                             </div>
@@ -447,7 +436,7 @@
 
                 <div class="grid md:grid-cols-5 gap-3 mt-3">
                     <div>
-                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">OH/Trepano
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">OH / Trepano
                             <small>(in)</small></label>
                         <div class="grid grid-cols-2 gap-3">
                             <input type="number" name="OH" class="form-control text-sm p-2" placeholder="OH"
@@ -459,7 +448,7 @@
 
                     <div class="">
                         <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Casing ID y
-                            OD <small>(in)</small></label>
+                            OD</label>
                         <div class="grid grid-cols-2 gap-3">
                             <input type="number" name="casing_id" class="form-control text-sm p-2"
                                 placeholder="Casing ID" step=".01" value="{{ $s_l[0]->casing_id }}" readonly>
@@ -470,7 +459,7 @@
 
                     <div class="">
                         <label for="densidad_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Densidad
-                            del Lodo <small>(ppg)</small></label>
+                            del Lodo (ppg)</label>
                         <input type="number" name="densidad_lodo" id="densidad_lodo" class="form-control text-sm p-2"
                             placeholder="Densidad del lodo" step=".01" value="{{ $s_l[0]->densidad_lodo }}"
                             readonly>
@@ -500,7 +489,7 @@
 
                     <div class="md:col-span-2 xl:col-span-1">
                         <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Profundidad
-                            Pozo <small>(MD/TVD) (m)</small></label>
+                            Pozo (MD / TVD) (m)</label>
                         <div class="grid grid-cols-2 gap-3">
                             <input type="number" min="0" name="profundidad_pozo_md"
                                 class="form-control text-sm p-2" placeholder="MD" step=".01"
@@ -512,7 +501,9 @@
                     </div>
 
                     <div class="">
-                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Base de Lechada <small>(MD/TVD) (m)</small></label>
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Base (MD
+                            /
+                            TVD) (m)</label>
                         <div class="grid grid-cols-2 gap-3">
                             <input type="number" name="base_md" class="form-control text-sm p-2" placeholder="MD"
                                 step=".01" value="{{ $s_l[0]->base_md }}" readonly>
@@ -522,49 +513,51 @@
                     </div>
 
                     <div class="md:col-span-2 xl:col-span-1">
-                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tope de Lechada <small>(MD/TVD) (m)</small></label>
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Top of
+                            Slurry
+                            (TVD / MD) (m)</label>
                         <div class="grid grid-cols-2 gap-3">
-                            <input type="number" name="top_of_slurry_md" class="form-control text-sm p-2"
-                                placeholder="MD" step=".01" value="{{ $s_l[0]->top_of_slurry_md }}" readonly>
                             <input type="number" name="top_of_slurry_tvd" class="form-control text-sm p-2"
                                 placeholder="TVD" step=".01" value="{{ $s_l[0]->top_of_slurry_tvd }}" readonly>
+                            <input type="number" name="top_of_slurry_md" class="form-control text-sm p-2"
+                                placeholder="MD" step=".01" value="{{ $s_l[0]->top_of_slurry_md }}" readonly>
                         </div>
                     </div>
 
                     <div class="">
-                        <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Volumen <small>(bbl)</small></label>
+                        <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Volumen</label>
                         <input type="number" name="volumen" class="form-control text-sm p-2" placeholder="Volumen"
                             step=".01" value="{{ $s_l[0]->volumen }}" readonly>
                     </div>
 
                     <div class="">
-                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Caudal <small>(bpm)</small></label>
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Pump
+                            Rate</label>
                         <input type="number" name="pump_rate" class="form-control text-sm p-2" placeholder="Pump Rate"
                             step=".01" value="{{ $s_l[0]->pump_rate }}" readonly>
                     </div>
 
                     <div class="md:col-span-2 xl:col-span-1">
                         <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Grado de
-                            Temperatura <small>(°C)</small></label>
+                            Temperatura Cº</label>
                         <input type="number" name="grado_temperatura" class="form-control sz p-2" placeholder="Cº"
                             step=".01" value="{{ $s_l[0]->grado_temperatura }}" readonly>
-                    </div>
-
-                    <div class="xl:col-span-1">
-                        <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">BHCT
-                            <small>(°C)</small></label>
-                        <input type="number" name="bhct" id="" class="form-control sz p-2"
-                            placeholder="Cº" step=".01" value="{{ $s_l[0]->bhct }}" readonly>
                     </div>
 
                     <div class="grid grid-cols-2 col-span-2 xl:col-span-1 gap-3">
                         <div class="xl:col-span-1">
                             <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">BHST
-                                <small>(°C)</small></label>
+                                Cº</label>
                             <input type="number" name="bhst" id="" class="form-control text-sm p-2"
                                 placeholder="Cº" step=".01" value="{{ $s_l[0]->bhst }}" readonly>
                         </div>
 
+                        <div class="xl:col-span-1">
+                            <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">BHCT
+                                Cº</label>
+                            <input type="number" name="bhct" id="" class="form-control sz p-2"
+                                placeholder="Cº" step=".01" value="{{ $s_l[0]->bhct }}" readonly>
+                        </div>
                     </div>
                 </div>
 
@@ -574,7 +567,7 @@
 
                 @include('solicitud.components.lechada.requerimientos')
 
-                <p class="m-0 font-bold text-lg my-3 tracking-wide">Observación/Comentarios</p>
+                <p class="m-0 font-bold text-lg my-3 tracking-wide">Observación / Comentarios</p>
 
                 <div class="grid mt-3">
                     <div class="col-span-2 md:col-span-1">

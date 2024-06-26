@@ -15,7 +15,7 @@
                 </div>
                 <div>
                     <label for="perdida_fluido_acumulado"
-                        class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fluido Acumulado &lt;mL</label>
+                        class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fluido Acumulado mL</label>
                     <input type="text" class="form-control text-sm p-2"
                         value="{{ $s_l[0]->rel_perdida_filtrado[0]->fluido_acumulado }}" readonly>
                 </div>

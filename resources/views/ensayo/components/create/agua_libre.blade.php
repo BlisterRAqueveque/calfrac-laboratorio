@@ -9,7 +9,7 @@
             </div>
             <div>
                 <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Volumen
-                    &lt;mL</label>
+                    mL</label>
                 <input type="number" class="form-control text-sm p-2"
                     value="{{ $s_l[0]->rel_agua_libre[0]->volumen ? $s_l[0]->rel_agua_libre[0]->volumen : '0' }}"
                     readonly>

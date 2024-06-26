@@ -450,7 +450,7 @@
                     </div>
                 </div>
 
-                <p class="m-0 mt-3 font-bold text-lg tracking-wide dark:text-gray-300">Información del Pozo y Ensayos</p>
+                <p class="m-0 mt-3 font-bold text-lg tracking-wide dark:text-gray-300">Informacion del Pozo y Ensayos</p>
                 <div class="row mt-3">
                     <div class="col-xs-12 col-md-3 my-2">
                         <label for="fluido"

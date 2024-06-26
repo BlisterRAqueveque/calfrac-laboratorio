@@ -24,8 +24,10 @@ use App\Models\TipoRequerimientoCemento;
 use App\Models\TipoTrabajoCemento;
 use App\Models\User;
 use App\Models\Yacimiento;
-use App\Models\AguaLibre;
-use App\Models\Sgs;
+use App\Models\Servicios;
+use App\Models\TipoLodo_Lodos;
+use App\Models\Equipos;
+use App\Models\EnsayosLodo;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Mail;
@@ -54,8 +56,10 @@ class SolicitudController extends Controller
             'tipo_lodo' =>  TipoLodo::all(),
             'mud_company' =>  MudCompany::all(),
             'users' => User::all(),
-            'sgs' => Sgs::all(),
-            'agua_libre' => AguaLibre::all(),
+            'servicios' => Servicios::all(),
+            'tipo_lodo_Lodos' => TipoLodo_Lodos::all(),
+            'equipos' => Equipos::all(),
+            'ensayos_lodo' => EnsayosLodo::all()
         ];
         return view('solicitud.create', $data);
     }
@@ -74,7 +78,7 @@ class SolicitudController extends Controller
             'locacion_fractura' => 'required',
             'programa' => 'required',
             'fecha_solicitud' => 'required',
-            // 'empresa' => 'required',
+            'empresa' => 'required',
             // 'fecha_tratamiento' => 'required',
             'pozo' => 'required',
             'rep_compania' => 'required',
@@ -97,7 +101,7 @@ class SolicitudController extends Controller
             'locacion_id' => $request->locacion_fractura,
             'programa' => $request->programa,
             'fecha_solicitud' => $request->fecha_solicitud,
-            // 'empresa' => $request->empresa,
+            'empresa' => $request->empresa,
             // 'fecha_tratamiento' => $request->fecha_tratamiento,
             'pozo' => $request->pozo,
             'rep_compania' => $request->rep_compania,
@@ -141,8 +145,11 @@ class SolicitudController extends Controller
             'usuario_carga' => auth()->user()->id
         ]);
 
+        $emailsAEnviar = [];
+         
         # Envío de Emails
         $correos = [];
+        /*
         if ($solicitud_fractura->user_iniciado_por)
             $correos[] = $solicitud_fractura->user_iniciado_por->email;
         if ($solicitud_fractura->user_servicio_tecnico)
@@ -151,7 +158,9 @@ class SolicitudController extends Controller
             $correos[] = $solicitud_fractura->user_laboratorio->email;
         if ($solicitud_fractura->user_reconocimiento)
             $correos[] = $solicitud_fractura->user_reconocimiento->email;
-
+        //Podria hardcodear mi email aca para probar?
+        */
+        $correos[] = "franco.marquez@blistertechnologies.com";
         $data = [
             'solicitud_id' => $solicitud->id,
             'locacion_id' => $request->locacion,
@@ -160,7 +169,8 @@ class SolicitudController extends Controller
             'cliente' => $request->cliente,
             'empresa' => $request->empresa
         ];
-        $this->_sendEmailNew($data, $correos);
+        $this->_sendEmailNew($data, $correos);         //Podria hardcodear mi email aca para probar?
+
         // -- Finaliza el envío de emails
 
         if ($solicitud->id)
@@ -179,7 +189,7 @@ class SolicitudController extends Controller
             'cliente_lechada' => 'required',
             'locacion_lechada' => 'required',
             'programa_lechada' => 'required',
-            //'empresa_lechada' => 'required',
+            'empresa_lechada' => 'required',
             'pozo_lechada' => 'required',
             'fecha_resultados_lechada' => 'required',
             'equipo_lechada' => 'required',
@@ -196,7 +206,7 @@ class SolicitudController extends Controller
             'locacion_id' => $request->locacion_lechada,
             'programa' => $request->programa_lechada,
             'fecha_solicitud' => date('Y-m-d'),
-            //'empresa' => $request->empresa_lechada,
+            'empresa' => $request->empresa_lechada,
             'pozo' => $request->pozo_lechada,
             'fecha_resultados' => $request->fecha_resultados_lechada,
             'equipo' => $request->equipo_lechada,
@@ -212,7 +222,6 @@ class SolicitudController extends Controller
         $solicitud_lechada = SolicitudLechada::create([
             'ensayo_requerido_principal' => $request->ensayo_requerido_principal == 'on' ? 1 : 0,
             'ensayo_requerido_relleno' => $request->ensayo_requerido_bullheading == 'on' ? 1 : 0,
-            'ensayo_requerido_tapon' => $request->ensayo_requerido_tapon == 'on' ? 1 : 0,
             'OH' => $request->OH,
             'trepano' => $request->trepano,
             'casing_id' => $request->casing_id,
@@ -237,7 +246,6 @@ class SolicitudController extends Controller
             'bombeabilidad' => $request->bombeabilidad,
             'tiempo_50_psi' => $request->tiempo_50_psi == 'on' ? 1 : 0,
             'tiempo_500_psi' => $request->tiempo_500_psi == 'on' ? 1 : 0,
-            'tiempo_1000_psi' => $request->tiempo_1000_psi == 'on' ? 1 : 0,
             'resistencia_12_hs' => $request->resistencia_12_hs == 'on' ? 1 : 0,
             'resistencia_24_hs' => $request->resistencia_24_hs == 'on' ? 1 : 0,
             'agua_libre' => $request->agua_libre,
@@ -353,7 +361,7 @@ class SolicitudController extends Controller
         $solicitud->locacion_id = $request->locacion_fractura;
         $solicitud->programa = $request->programa;
         $solicitud->fecha_solicitud = $request->fecha_solicitud;
-        // $solicitud->empresa = $request->empresa;
+        $solicitud->empresa = $request->empresa;
         // $solicitud->fecha_tratamiento = $request->fecha_tratamiento;
         $solicitud->pozo = $request->pozo;
         $solicitud->rep_compania = $request->rep_compania;
@@ -483,7 +491,7 @@ class SolicitudController extends Controller
             'tipo_trabajos' => TipoTrabajoCemento::all(),
             'tipo_cementacion' => TipoCementacion::all(),
             'mud_company' => MudCompany::all(),
-            // 'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
+            //'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
         $generate_report = $this->_generate_report($solicitud_id);
         $data['generar_reporte'] = $generate_report->original['generate_report'];
@@ -500,7 +508,7 @@ class SolicitudController extends Controller
             'cliente_lechada' => 'required',
             'locacion_lechada' => 'required',
             'programa_lechada' => 'required',
-            // 'empresa_lechada' => 'required',
+            'empresa_lechada' => 'required',
             'pozo_lechada' => 'required',
             'fecha_resultados_lechada' => 'required',
             'equipo_lechada' => 'required',
@@ -514,7 +522,7 @@ class SolicitudController extends Controller
         $solicitud = Solicitud::find($request->solicitud_id);
         $solicitud->locacion_id = $request->locacion_lechada;
         $solicitud->programa = $request->programa_lechada;
-        // $solicitud->empresa = $request->empresa_lechada;
+        $solicitud->empresa = $request->empresa_lechada;
         $solicitud->pozo = $request->pozo_lechada;
         $solicitud->fecha_resultados = $request->fecha_resultados_lechada;
         $solicitud->equipo = $request->equipo_lechada;
@@ -528,7 +536,6 @@ class SolicitudController extends Controller
         $solicitud_lechada = SolicitudLechada::where('solicitud_id', $solicitud->id)->first();
         $solicitud_lechada->ensayo_requerido_principal = $request->ensayo_requerido_principal == 'on' ? 1 : 0;
         $solicitud_lechada->ensayo_requerido_relleno = $request->ensayo_requerido_bullheading == 'on' ? 1 : 0;
-        $solicitud_lechada->ensayo_requerido_tapon = $request->ensayo_requerido_tapon == 'on' ? 1 : 0;
         $solicitud_lechada->OH = $request->OH;
         $solicitud_lechada->trepano = $request->trepano;
         $solicitud_lechada->casing_id = $request->casing_id;
@@ -552,7 +559,6 @@ class SolicitudController extends Controller
         $solicitud_lechada->bombeabilidad = $request->bombeabilidad;
         $solicitud_lechada->tiempo_50_psi = $request->tiempo_50_psi == 'on' ? 1 : 0;
         $solicitud_lechada->tiempo_500_psi = $request->tiempo_500_psi == 'on' ? 1 : 0;
-        $solicitud_lechada->tiempo_1000_psi = $request->tiempo_1000_psi == 'on' ? 1 : 0;
         $solicitud_lechada->resistencia_12_hs = $request->resistencia_12_hs == 'on' ? 1 : 0;
         $solicitud_lechada->resistencia_24_hs = $request->resistencia_24_hs == 'on' ? 1 : 0;
         $solicitud_lechada->agua_libre = $request->agua_libre;

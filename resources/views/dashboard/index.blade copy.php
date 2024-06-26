@@ -6,7 +6,7 @@
 
 @section('contenido')
     <section class="container_mod pt-4">
-        <h6 class="font-bold uppercase">¡Buenas Noches Team!</h6>
+        <h6 class="font-bold uppercase">¡Buenas Noches Mirko!</h6>
 
         <div class="flex gap-3">
 
