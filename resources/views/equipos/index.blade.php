@@ -111,4 +111,7 @@
 
 @include('equipos.modal.modal_edit_equipo')
 
+@include('equipos.modal.modal_delete_equipo')
+
+
 <script src="{{ asset('js/equipos/equipos.js') }}"></script>
