@@ -1,25 +1,31 @@
+{{--
+    Hi :) 
+    Acá esta la view en Información de la Solicitud
+    Parte: Requerimientos de Lechada
+--}}
+
 <div class="grid grid-cols-5 gap-3">
 
     <div class="col-span-5 md:col-span-1">
-        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Reología</label>
+        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Reología <small>(Si/No)</small></label>
         <input type="text" name="reologia" value="{{ $s_l[0]->reologia }}" class="form-control text-sm"
             placeholder="Ingrese la reología" readonly>
     </div>
 
     <div class="col-span-5 md:col-span-1">
-        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Densidad</label>
+        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Densidad <small>(ppg)</small></label>
         <input type="text" name="densidad" value="{{ $s_l[0]->densidad }}" class="form-control text-sm"
             placeholder="Ingrese la densidad" readonly>
     </div>
 
     <div class="col-span-5 md:col-span-1">
-        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Filtrado</label>
+        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Filtrado <small>&ltmL</small></label>
         <input type="text" name="filtrado" value="{{ $s_l[0]->filtrado }}" class="form-control text-sm"
             placeholder="Ingrese el filtrado" readonly>
     </div>
 
     <div class="col-span-5 md:col-span-1">
-        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Bombeabilidad</label>
+        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Bombeabilidad <small>Tiempo (min)</small></label>
         <input type="text" name="bombeabilidad" value="{{ $s_l[0]->bombeabilidad }}" class="form-control text-sm"
             placeholder="Ingrese la bombeabilidad" readonly>
     </div>
@@ -43,6 +49,11 @@
             <label for="tiempo_500_psi" class="text-sm cursor-pointer">Tiempo @ 500 psi</label>
         </div>
         <div class="flex items-center gap-2 col-span-5 md:col-span-1">
+            <input type="checkbox" {{ $s_l[0]->tiempo_1000_psi == 1 ? 'checked' : '' }} name="tiempo_1000_psi"
+                id="tiempo_500_psi" class='inp_edit' disabled>
+            <label for="tiempo_1000_psi" class="text-sm cursor-pointer">Tiempo @ 1000 psi</label>
+        </div>
+        <div class="flex items-center gap-2 col-span-5 md:col-span-1">
             <input type="checkbox" {{ $s_l[0]->resistencia_12_hs == 1 ? 'checked' : '' }} name="resistencia_12_hs"
                 id="resistencia_12_hs" class='inp_edit' disabled>
             <label for="resistencia_12_hs" class="text-sm cursor-pointer">Resistencia a las 12 hs.</label>
@@ -58,12 +69,12 @@
 <div class="grid grid-cols-4 gap-3 mt-2">
     <div class="col-span-4 md:col-span-1">
         <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Agua
-            Libre</label>
+            Libre <small>%</small></label>
         <input type="text" name="agua_libre" value="{{ $s_l[0]->agua_libre ? $s_l[0]->agua_libre : 'No aplica' }}"
             class="form-control text-sm" placeholder="0.0%" readonly>
     </div>
     <div class="col-span-4 md:col-span-1">
-        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">SGS</label>
+        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">SGS <small>(min)</small></label>
         <input type="text" name="sgs" value="{{ $s_l[0]->sgs ? $s_l[0]->sgs : 'No aplica' }}"
             class="form-control text-sm" placeholder="SGS" readonly>
     </div>

@@ -37,4 +37,8 @@ class EquiposController extends Controller
         $equipo->save();
         return back();
     }
+
+    public function delete(Request $request){
+        
+    }
 }
