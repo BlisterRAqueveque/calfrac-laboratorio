@@ -115,3 +115,4 @@
 
 
 <script src="{{ asset('js/equipos/equipos.js') }}"></script>
+

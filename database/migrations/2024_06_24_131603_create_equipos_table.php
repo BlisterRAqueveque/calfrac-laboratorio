@@ -14,7 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('equipos', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->ipAddress('nombre');
+            $table->morphs('used_id');
+            $table->tinyInteger('estado')->default('1');
             $table->timestamps();
         });
     }
