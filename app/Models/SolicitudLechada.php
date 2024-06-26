@@ -31,12 +31,14 @@ class SolicitudLechada extends Model
         'bhct',
         'ensayo_requerido_principal',
         'ensayo_requerido_relleno',
+        'ensayo_requerido_tapon',
         'reologia',
         'densidad',
         'filtrado',
         'bombeabilidad',
         'tiempo_50_psi',
         'tiempo_500_psi',
+        'tiempo_1000_psi',
         'resistencia_12_hs',
         'resistencia_24_hs',
         'agua_libre',
@@ -65,7 +67,14 @@ class SolicitudLechada extends Model
     {
         return $this->belongsTo(MudCompany::class, 'mud_company_id');
     }
+    public function sgs() {
+        return $this->belongsTo(Sgs::class, 'sgs');
+    }
 
+    public function agua_libre() {
+        return $this->belongsTo(AguaLibre::class, 'agua_libre');
+    }
+    
     public function formulacion_tentativa() {
         return $this->hasMany(RelAditivoSolicitudLechada::class);
     }
@@ -92,10 +101,5 @@ class SolicitudLechada extends Model
 
     public function rel_mezclabilidad() {
         return $this->hasMany(RelMezclabilidadSolicitudEnsayo::class);
-    }
-    public function buscar_mail($userId){
-        //paso el id usuario
-        //where con el id, busco en la bd el email -> return email
-        return User::where('id', $userId)->pluck('email')->first();
     }
 }
