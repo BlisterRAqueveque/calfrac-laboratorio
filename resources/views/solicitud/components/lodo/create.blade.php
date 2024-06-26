@@ -12,12 +12,12 @@
             <span class="ms-2 mb-0 font-light tracking-wide">Datos del Pozo</span>
             <hr class="ms-2 mt-1">
 
-            <div class="grid xs:grid-cols-2 md:grid-cols-3 gap-3 mt-3">
+            <div class="grid xs:grid-cols-2 md:grid-cols-3 gap-3 mt-3"> 
                 <div class="col-span-2 xl:col-span-1">
                     <label for="cliente_lechada" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Cliente
                         <span class="text-red-500">*</span></label>
                     <select name="cliente_lechada" id="cliente_lechada" class="text-sm" data-search="true"
-                        data-silent-initial-value-set="true" multiple="multiple">
+                        data-silent-initial-value-set="true" multiple="true">
                         @foreach ($clientes as $c)
                             <option value="{{ $c->id }}"
                                 {{ old('cliente_lechada') == $c->id ? 'selected' : '' }}>{{ $c->nombre }}</option>

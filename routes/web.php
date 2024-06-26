@@ -111,6 +111,9 @@ Route::post('/aditivo/update', [AditivoController::class, 'update'])->name('adit
 
 #Equipos
 Route::get('/equipos', [EquiposController::class, 'index'])->name('equipos');
+Route::post('/equipos', [EquiposController::class, 'store'])->name('equipos.store');
+Route::post('/equipos/update', [EquiposController::class, 'update'])->name('equipos.update');
+
 
 
 # Permisos

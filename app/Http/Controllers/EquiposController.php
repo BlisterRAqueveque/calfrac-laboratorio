@@ -16,15 +16,25 @@ class EquiposController extends Controller
 
     public function store(Request $request) {
         $this->validate($request, [
-            'equipos' => 'required',
+            'equipo' => 'required',
         ]);
 
         Equipos::create([
-            'nombre' => $request->equipos,
+            'nombre' => $request->equipo,
             'user_id' => auth()->user()->id
         ]);
 
         return back();
     }
 
+    public function update(Request $request) {
+        $this->validate($request, [
+            'edit_equipo' => 'required',
+        ]);
+        $equipo = Equipos::find($request->equipo_id);
+        $equipo->nombre = $request->edit_equipo;
+        $equipo->updated_at = date('Y-m-d H:i:s');
+        $equipo->save();
+        return back();
+    }
 }

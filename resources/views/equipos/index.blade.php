@@ -12,14 +12,14 @@
                 <p class="mb-0 font-bold uppercase dark:text-gray-300 text-sm">
                     Todos los equipos
                 </p>
-                <button data-bs-toggle="modal" data-bs-target="#modalCreateAditivo"
+                <button data-bs-toggle="modal" data-bs-target="#modalCreateEquipo"
                     class="flex gap-1 items-center text-sm w-full md:w-auto bg-green-700 bg-opacity-60 dark:bg-opacity-50 dark:text-green-500 dark:hover:text-gray-300 text-white p-2 rounded-sm hover:shadow-md transition-all duration-75 font-bold cursor-pointer"
                     style="text-decoration: none">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-3 h-3">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
-                    Crear nuevo equipo, no tocar porque esta con lo de aditivo</button>
+                    Crear nuevo equipo</button>
             </div>
 
         <div class="card-body dark:tab_bg p-0">
@@ -52,12 +52,12 @@
                         <tbody>
                             @foreach ($equipos as $e)
                                 <tr>
-                                    <td class="p-3">1</td>
+                                    <td class="p-3">{{$e->id}}</td>
                                     <td class="p-3">
                                         <div class="flex justify-between">
                                             {{ $e->nombre }}
                                             <div class="flex items-center gap-3">
-                                                <button data-bs-toggle="modal" data-bs-target="#modalEditarAditivo" onclick="editarAditivo({{ $e }})">
+                                                <button data-bs-toggle="modal" data-bs-target="#modalEditarEquipo" onclick="editarEquipo({{ $e }})">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                         viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                                         class="w-4 h-4">
@@ -79,8 +79,14 @@
                                     <td class="p-3">{{ $e->user->nombre }} {{ $e->user->apellido }}</td>
                                     <td class="p-3">{{ $e->created_at->format('d/m/Y') }} a las
                                         {{ $e->created_at->format('H:i') }} hs</td>
-                                        <td class="p-3">{{ $e->updated_at->format('d/m/Y') }} a las
-                                            {{ $e->updated_at->format('H:i') }} hs</td>
+                                        <td class="p-3">
+                                            @if ($e->updated_at)
+                                              {{ $e->updated_at->format('d/m/Y') }} a las
+                                              {{ $e->updated_at->format('H:i') }} hs
+                                            @else
+                                              -
+                                            @endif
+                                          </td>
                                     <td class="p-3">Activo</td>
                                     <td></td>
                                 </tr>
@@ -100,3 +106,9 @@
   
 @endsection
 
+
+@include('equipos.modal.modal_create_equipo')
+
+@include('equipos.modal.modal_edit_equipo')
+
+<script src="{{ asset('js/equipos/equipos.js') }}"></script>
