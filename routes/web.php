@@ -12,6 +12,7 @@ use App\Http\Controllers\PermisosController;
 use App\Http\Controllers\SolicitudController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\YacimientoController;
+use App\Http\Controllers\EquiposController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -69,6 +70,9 @@ Route::post('/solicitud/lechada', [SolicitudController::class, 'store_lechada'])
 Route::get('/solicitud/lechada/{solicitud_id}', [SolicitudController::class, 'show_lechada'])->name('solicitud.lechada.show');
 Route::post('/solicitud/edicion/lechada', [SolicitudController::class, 'update_lechada'])->name('solicitud.update.lechada');
 
+# Lodo
+
+
 // Route::get('/send-email', [SolicitudController::class, 'sendEmail']);
 Route::get('/send-email', [SolicitudController::class, 'viewMail']);
 
@@ -104,6 +108,14 @@ Route::post('/yacimiento/update', [YacimientoController::class, 'update'])->name
 Route::get('/aditivos', [AditivoController::class, 'index'])->name('aditivos');
 Route::post('/aditivo', [AditivoController::class, 'store'])->name('aditivo.store');
 Route::post('/aditivo/update', [AditivoController::class, 'update'])->name('aditivo.update');
+
+#Equipos
+Route::get('/equipos', [EquiposController::class, 'index'])->name('equipos');
+Route::post('/equipos', [EquiposController::class, 'store'])->name('equipos.store');
+Route::post('/equipos/update', [EquiposController::class, 'update'])->name('equipos.update');
+Route::post('/equipos/delete', [EquiposController::class, 'delete'])->name('equipos.delete');
+
+
 
 # Permisos
 Route::get('/permisos', [PermisosController::class, 'index'])->name('permisos');

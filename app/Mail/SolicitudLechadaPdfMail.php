@@ -67,6 +67,6 @@ class SolicitudLechadaPdfMail extends Mailable
      */
     public function attachments()
     {
-        return [];
+        return []; // Aca no iria el pdf para mandarlo por mail? 
     }
 }

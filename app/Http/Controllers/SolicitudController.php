@@ -26,6 +26,10 @@ use App\Models\User;
 use App\Models\Yacimiento;
 use App\Models\AguaLibre;
 use App\Models\Sgs;
+use App\Models\Servicios;
+use App\Models\TipoLodo_Lodos;
+use App\Models\Equipos;
+use App\Models\EnsayosLodo;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Mail;
@@ -56,6 +60,10 @@ class SolicitudController extends Controller
             'users' => User::all(),
             'sgs' => Sgs::all(),
             'agua_libre' => AguaLibre::all(),
+            'servicios' => Servicios::all(),
+            'tipo_lodo_Lodos' => TipoLodo_Lodos::all(),
+            'equipos' => Equipos::all(),
+            'ensayos_lodo' => EnsayosLodo::all()
         ];
         return view('solicitud.create', $data);
     }
@@ -141,8 +149,11 @@ class SolicitudController extends Controller
             'usuario_carga' => auth()->user()->id
         ]);
 
+        $emailsAEnviar = [];
+         
         # Envío de Emails
         $correos = [];
+        /*
         if ($solicitud_fractura->user_iniciado_por)
             $correos[] = $solicitud_fractura->user_iniciado_por->email;
         if ($solicitud_fractura->user_servicio_tecnico)
@@ -151,7 +162,9 @@ class SolicitudController extends Controller
             $correos[] = $solicitud_fractura->user_laboratorio->email;
         if ($solicitud_fractura->user_reconocimiento)
             $correos[] = $solicitud_fractura->user_reconocimiento->email;
-
+        //Podria hardcodear mi email aca para probar?
+        */
+        $correos[] = "franco.marquez@blistertechnologies.com";
         $data = [
             'solicitud_id' => $solicitud->id,
             'locacion_id' => $request->locacion,
@@ -160,7 +173,8 @@ class SolicitudController extends Controller
             'cliente' => $request->cliente,
             'empresa' => $request->empresa
         ];
-        $this->_sendEmailNew($data, $correos);
+        $this->_sendEmailNew($data, $correos);         //Podria hardcodear mi email aca para probar?
+
         // -- Finaliza el envío de emails
 
         if ($solicitud->id)
@@ -483,7 +497,7 @@ class SolicitudController extends Controller
             'tipo_trabajos' => TipoTrabajoCemento::all(),
             'tipo_cementacion' => TipoCementacion::all(),
             'mud_company' => MudCompany::all(),
-            // 'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
+            //'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
         $generate_report = $this->_generate_report($solicitud_id);
         $data['generar_reporte'] = $generate_report->original['generate_report'];
