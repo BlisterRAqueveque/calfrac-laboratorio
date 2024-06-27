@@ -13,11 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('equipos', function (Blueprint $table) {
-            $table->increments('id');
-            $table->ipAddress('nombre');
-            $table->morphs('used_id');
-            $table->timestamps();
+        Schema::table('equipos', function (Blueprint $table) {
+            $table->tinyInteger('estado')->default('1');
         });
     }
 
@@ -28,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('equipos');
+        Schema::table('equipos', function (Blueprint $table) {
+            //
+        });
     }
 };
