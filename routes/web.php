@@ -111,9 +111,9 @@ Route::post('/aditivo/update', [AditivoController::class, 'update'])->name('adit
 
 #Equipos
 Route::get('/equipos', [EquiposController::class, 'index'])->name('equipos');
-Route::post('/equipos', [EquiposController::class, 'store'])->name('equipos.store');
-Route::post('/equipos/update', [EquiposController::class, 'update'])->name('equipos.update');
-Route::post('/equipos/delete', [EquiposController::class, 'delete'])->name('equipos.delete');
+Route::post('/equipo', [EquiposController::class, 'store'])->name('equipos.store');
+Route::post('/equipo/update', [EquiposController::class, 'update'])->name('equipos.update');
+Route::post('/equipo/deshabilitar', [EquiposController::class, 'deshabilitar'])->name('equipos.deshabilitar');
 
 
 
