@@ -122,6 +122,16 @@
                     @enderror
                 </div>
 
+                {{--
+                        <select name="equipos" id="equipos">
+                        @foreach ($equipos as $tipo)
+                            <option value="{{ $tipo->id }}">{{ $tipo->nombre }}</option>
+                        @endforeach
+                    </select>
+                    @error('tipo_requerimiento_lechada')
+                        <small class="text-xs text-red-600">El tipo de requerimiento es requerido</small>
+                    @enderror
+                --}}
                 <div class="col-span-2 xl:col-span-1">
                     <label for="servicio_lechada"
                         class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Servicio
@@ -418,7 +428,7 @@
                         class="form-control text-sm" placeholder="Ingrese el filtrado">
                 </div>
 
-                <div class="col-span-5 md:col-span-1">
+                <div class="col-span-5 md:col-span-1 ">
                     <label for=""
                         class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Bombeabilidad <small>Tiempo (min)</small></label>
                     <input type="text" name="bombeabilidad" value="{{ old('bombeabilidad') }}"
