@@ -171,7 +171,7 @@ class SolicitudController extends Controller
             'fecha_solicitud' => $request->fecha_solicitud,
             'usuario_carga' => auth()->user()->nombre . ' ' . auth()->user()->apellido,
             'cliente' => $request->cliente,
-            'empresa' => $request->empresa
+            //'empresa' => $request->empresa
         ];
         $this->_sendEmailNew($data, $correos);         //Podria hardcodear mi email aca para probar?
 
@@ -345,7 +345,7 @@ class SolicitudController extends Controller
             'locacion_fractura' => 'required',
             'programa' => 'required',
             'fecha_solicitud' => 'required',
-            'empresa' => 'required',
+            // 'empresa' => 'required',
             // 'fecha_tratamiento' => 'required',
             'pozo' => 'required',
             'rep_compania' => 'required',
@@ -473,6 +473,7 @@ class SolicitudController extends Controller
             'users' => User::all(),
             'clientes' => Cliente::all(),
             'yacimientos' => Yacimiento::all(),
+            'equipos' => Equipos::all(),
             // 'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
         return view('solicitud.components.fractura.show', $data);

@@ -36,7 +36,7 @@
             <p style="margin-bottom: 0"><b>Fecha de Solicitud:</b> {{ $data['fecha_solicitud'] }}</p>
             <p style="margin-bottom: 0"><b>Usuario carga:</b> {{ $data['usuario_carga'] }}</p>
             <p style="margin-bottom: 0"><b>Cliente:</b> {{ $data['cliente'] }}</p>
-            <p style="margin-bottom: 0"><b>Compañía:</b> {{ $data['empresa'] }}</p>
+            {{--<p style="margin-bottom: 0"><b>Compañía:</b> {{ $data['empresa'] }}</p>--}}
         </div>
         
         <div style="display: flex; justify-content: center; margin-bottom: 10px">
