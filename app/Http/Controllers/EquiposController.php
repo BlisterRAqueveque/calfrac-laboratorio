@@ -40,5 +40,18 @@ class EquiposController extends Controller
 
     public function delete(Request $request){
         
+        $this->validate($request, [
+            'delete_equipo' => 'required',
+        ]);
+            $equipo = Equipos::findOrFail($request->equipo_id);
+
+            if($equipo){
+                $equipo->estado = '0';
+                return back();
+            }else{
+                return back()->withError('Equipo no encontrado con ID: ' . $request->equipo_id);
+            }
+        
     }
+
 }
