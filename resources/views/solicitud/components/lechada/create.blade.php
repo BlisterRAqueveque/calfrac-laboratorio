@@ -115,22 +115,35 @@
                 <div class="col-span-2 xl:col-span-1">
                     <label for="equipo_lechada" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Equipo
                         <span class="text-red-500">*</span></label>
-                    <input type="text" name="equipo_lechada" id="equipo_lechada" class="form-control text-sm p-2"
-                        placeholder="Ingrese el equipo" value="{{ old('equipo_lechada') }}">
-                    @error('equipo_lechada')
+                        <select name="equipo_lechada" id="equipo_lechada" class="text-sm" data-search="true">
+                            @foreach ($equipos as $equipo)
+                            <option value="{{ $equipo->id }}"
+                                {{ old('equipo_lechada') == $equipo->id ? 'selected' : '' }}>{{ $equipo->nombre }}</option>
+                    @endforeach
+                </select>
+                @error('equipo_lechada')
                         <small class="text-xs text-red-600">El equipo es requerido</small>
                     @enderror
                 </div>
 
+
                 {{--
-                        <select name="equipos" id="equipos">
-                        @foreach ($equipos as $tipo)
-                            <option value="{{ $tipo->id }}">{{ $tipo->nombre }}</option>
-                        @endforeach
+                                    <label for="equipo_lechada" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Equipo
+                        <span class="text-red-500">*</span></label>
+                <div class="col-span-2 xl:col-span-1">
+                    <label for="locacion_lechada"
+                        class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Yacimiento/Locación
+                        <span class="text-red-500">*</span></label>
+                    <select name="locacion_lechada" id="locacion_lechada" class="text-sm" data-search="true">
+                        @foreach ($yacimientos as $y)
+                        <option value="{{ $y->id }}"
+                            {{ old('locacion_lechada') == $y->id ? 'selected' : '' }}>{{ $y->nombre }}</option>
+                    @endforeach
                     </select>
-                    @error('tipo_requerimiento_lechada')
-                        <small class="text-xs text-red-600">El tipo de requerimiento es requerido</small>
+                    @error('locacion_lechada')
+                        <small class="text-xs text-red-600">La locación es requerida</small>
                     @enderror
+                </div>
                 --}}
                 <div class="col-span-2 xl:col-span-1">
                     <label for="servicio_lechada"
@@ -666,6 +679,10 @@
             ele: "#agua_libre",
             placeholder: "Seleccione agua libre",
         });
+        VirtualSelect.init({
+            ele: "#equipo_lechada",
+            placeholder: "Seleccione equipo",
+        });
         document.getElementById("cliente_lechada").setValue(0);
         document.getElementById("locacion_lechada").setValue(0);
         document.getElementById("tipo_requerimiento_lechada").setValue(0);
@@ -676,6 +693,7 @@
         document.getElementById("mud_company").setValue(0);
         document.getElementById("sgs").setValue(0);
         document.getElementById("agua_libre").setValue(0);
+        document.getElementById("equipo_lechada").setValue(0);
     })
 </script>
 

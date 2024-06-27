@@ -497,6 +497,7 @@ class SolicitudController extends Controller
             'tipo_trabajos' => TipoTrabajoCemento::all(),
             'tipo_cementacion' => TipoCementacion::all(),
             'mud_company' => MudCompany::all(),
+            'equipos'=> Equipos::all(),
             //'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
         $generate_report = $this->_generate_report($solicitud_id);

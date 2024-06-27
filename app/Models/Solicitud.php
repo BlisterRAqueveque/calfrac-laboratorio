@@ -91,4 +91,8 @@ class Solicitud extends Model
         return $this->belongsTo(TipoCementacion::class, 'tipo_cementacion_id');
     }
 
+    public function equipos() {
+        return $this->belongsTo(Equipos::class, 'equipos');
+    }
+
 }
