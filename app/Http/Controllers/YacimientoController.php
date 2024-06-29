@@ -37,4 +37,22 @@ class YacimientoController extends Controller
         $yacimiento->save();
         return back();
     }
+
+    public function deshabilitar(Request $request)
+    {
+        $this->validate($request, [
+            'delete_yacimiento' => 'required',
+        ]);
+
+
+        $yacimiento = Yacimiento::findOrFail($request->yacimiento2_id);
+
+        if ($yacimiento) {
+            $yacimiento->estado = 0;
+            $yacimiento->save();
+            return back();
+        } else {
+            return back()->withError('Yacimiento no encontrado con ID: ' . $request->yacimiento_id);
+        }
+    }
 }

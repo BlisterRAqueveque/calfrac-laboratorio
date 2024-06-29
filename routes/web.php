@@ -104,6 +104,8 @@ Route::post('/usuario/activar', [UserController::class, 'store_activar'])->name(
 Route::get('/yacimientos', [YacimientoController::class, 'index'])->name('yacimientos');
 Route::post('/yacimiento', [YacimientoController::class, 'store'])->name('yacimiento.store');
 Route::post('/yacimiento/update', [YacimientoController::class, 'update'])->name('yacimiento.update');
+Route::post('/yacimiento/deshabilitar', [YacimientoController::class, 'deshabilitar'])->name('yacimiento.deshabilitar');
+
 
 # Aditivos
 Route::get('/aditivos', [AditivoController::class, 'index'])->name('aditivos');
