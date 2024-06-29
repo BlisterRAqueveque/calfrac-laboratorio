@@ -90,6 +90,7 @@ Route::post('/respuesta/{user_id}', [SolicitudController::class, 'update_rta'])-
 Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes');
 Route::post('/cliente', [ClienteController::class, 'store'])->name('cliente.store');
 Route::post('/cliente/update', [ClienteController::class, 'update'])->name('cliente.update');
+Route::post('/cliente/deshabilitar', [ClienteController::class, 'deshabilitar'])->name('cliente.deshabilitar');
 
 # Usuarios
 Route::get('/usuarios', [UserController::class, 'index'])->name('usuarios');
@@ -108,6 +109,8 @@ Route::post('/yacimiento/update', [YacimientoController::class, 'update'])->name
 Route::get('/aditivos', [AditivoController::class, 'index'])->name('aditivos');
 Route::post('/aditivo', [AditivoController::class, 'store'])->name('aditivo.store');
 Route::post('/aditivo/update', [AditivoController::class, 'update'])->name('aditivo.update');
+Route::post('/aditivo/deshabilitar', [AditivoController::class, 'deshabilitar'])->name('aditivo.deshabilitar');
+
 
 #Equipos
 Route::get('/equipos', [EquiposController::class, 'index'])->name('equipos');

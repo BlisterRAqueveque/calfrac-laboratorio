@@ -66,7 +66,7 @@
                                                             d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                                                     </svg>
                                                 </button>
-                                                <button>
+                                                <button  data-bs-toggle="modal" data-bs-target="#modalEliminarCliente" id="botonDeshabilitar" onclick="deshabilitarCliente({{ $c }})">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                         viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                                         class="w-4 h-4">
@@ -82,7 +82,13 @@
                                         {{ $c->created_at->format('H:i') }} hs</td>
                                         <td class="p-3">{{ $c->updated_at->format('d/m/Y') }} a las
                                             {{ $c->updated_at->format('H:i') }} hs</td>
-                                    <td class="p-3">Activo</td>
+                                    <td class="p-3">
+                                        @if ($c->estado===1)
+                                        Activo
+                                    @else
+                                        Inactivo
+                                    @endif
+                                    </td>
                                     <td></td>
                                 </tr>
                             @endforeach
@@ -106,6 +112,10 @@
     <!-- Modal para editar un cliente -->
     @include('cliente.modal.modal_edit_cliente')
 
+    <!-- Modal para deshabilitar un cliente -->
+
+    @include('cliente.modal.modal_delete_cliente')
+
 
     <script src="{{ asset('js/Cliente/cliente.js') }}"></script>
     <script>
@@ -115,3 +125,41 @@
         }
     </script>
 @endsection
+
+<!-- Deshabilitar Equipo -->
+<script>
+    const btnEliminarCliente = document.getElementById('botonDeshabilitar');     
+
+    btnEliminarCliente.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    const form = document.getElementById('form_deshabilitar_cliente');
+    const formData = new FormData(form); // Create FormData from the form
+
+    confirmAlert('¿Está seguro de eliminar al cliente?', '', 1, 'Desactivar')
+        .then((confirmed) => {
+        if (confirmed) {
+            loadingAlert('Desactivando cliente', 'Por favor espere');
+
+            fetch(`${route('cliente.deshabilitar')}`, {
+            method: 'POST',
+            body: formData,
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                Swal.close();
+                successAlert('Cliente eliminado!', 'El Cliente ha sido eliminado del sistema')
+                .then((confirmed) => {
+                    if (confirmed) {
+                    window.location.reload();
+                    }
+                });
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+        });
+    });
+
+</script>

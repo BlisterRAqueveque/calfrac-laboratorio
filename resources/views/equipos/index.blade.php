@@ -139,7 +139,7 @@
     confirmAlert('¿Está seguro de eliminar al equipo?', '', 1, 'Desactivar')
         .then((confirmed) => {
         if (confirmed) {
-            loadingAlert('Desactivando usuario', 'Por favor espere');
+            loadingAlert('Desactivando equipo', 'Por favor espere');
 
             fetch(`${route('equipos.deshabilitar')}`, {
             method: 'POST',
