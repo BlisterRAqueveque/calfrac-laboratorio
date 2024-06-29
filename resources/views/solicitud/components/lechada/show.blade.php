@@ -15,6 +15,7 @@
         #tipo_cementacion_lechada,
         #sgs,
         #agua_libre,
+        #equipo_lechada,
         #mud_company {
             background: #b9b9b9;
             border-radius: 5px;
@@ -138,10 +139,9 @@
             <ul role="tablist" aria-owns="nav-tab1 nav-tab2 nav-tab3 nav-tab4" class="nav nav-tabs text-sm md:text-md"
                 id="nav-tab-with-nested-tabs" style="z-index: 999">
                 <li class="nav-item w-full text-center md:w-auto" role="presentation">
-                    <a class="nav-link nav_tab_mod text-violet-800 dark:text-violet-400 active"
-                        aria-current="page" id="nav-tab1" href="#tab1-content" data-bs-toggle="tab"
-                        data-bs-target="#tab1-content" role="tab" aria-controls="tab1-content"
-                        aria-selected="true">Información de la Solicitud</a>
+                    <a class="nav-link nav_tab_mod text-violet-800 dark:text-violet-400 active" aria-current="page"
+                        id="nav-tab1" href="#tab1-content" data-bs-toggle="tab" data-bs-target="#tab1-content"
+                        role="tab" aria-controls="tab1-content" aria-selected="true">Información de la Solicitud</a>
                 </li>
                 @if ($solicitud->aprobada == 1)
                     <li class="nav-item w-full text-center md:w-auto" role="presentation">
@@ -210,7 +210,8 @@
                         <select name="cliente_lechada" id="cliente_lechada" class="text-sm inp_edit" disabled>
                             @foreach ($clientes as $c)
                                 <option value="{{ $c->id }}"
-                                    {{ $c->id == $solicitud->cliente_id ? 'selected' : '' }}>{{ $c->nombre }}</option>
+                                    {{ $c->id == $solicitud->cliente_id ? 'selected' : '' }}>{{ $c->nombre }}
+                                </option>
                             @endforeach
                         </select>
                         @error('cliente_lechada')
@@ -254,7 +255,7 @@
                         @enderror
                     </div>
 
-                    {{--<div class="col-span-2">
+                    {{-- <div class="col-span-2">
                         <label for="empresa_lechada"
                             class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Empresa
                             <span class="text-red-500">*</span></label>
@@ -264,7 +265,7 @@
                         @error('empresa_lechada')
                             <small class="text-xs text-red-600">La empresa es requerida</small>
                         @enderror
-                    </div>--}}
+                    </div> --}}
 
                     <div class="col-span-2 xl:col-span-1">
                         <label for="pozo_lechada" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Pozo
@@ -291,12 +292,22 @@
                     <div class="col-span-2 xl:col-span-1">
                         <label for="equipo_lechada" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Equipo
                             <span class="text-red-500">*</span></label>
-                        <input type="text" name="equipo_lechada" id="equipo_lechada" class="form-control text-sm p-2"
-                            placeholder="Ingrese el equipo" value="{{ $solicitud->equipo }}" readonly>
+                        {{-- <input type="text" name="equipo_lechada" id="equipo_lechada" class="form-control text-sm p-2"
+                            placeholder="Ingrese el equipo" value="{{ $solicitud->equipo }}" readonly> --}}
+                        <select name="equipo_lechada" id="equipo_lechada" class="text-sm inp_edit" disabled>
+                            @foreach ($equipos as $equipo)
+                               <option value="{{ $equipo->id }}"
+                                {{ $equipo->id == $solicitud->equipo ? 'selected' : '' }}>{{ $equipo->nombre }}
+                                </option>
+                            @endforeach
+                        </select>
+                        {{-- <2?php echo "<pre>"; var_dump($equipos); echo "</pre>"; ?> --}}
+                    
                         @error('equipo_lechada')
                             <small class="text-xs text-red-600">El equipo es requerido</small>
                         @enderror
                     </div>
+
 
                     <div class="col-span-2 xl:col-span-1">
                         <label for="servicio_lechada"
@@ -382,9 +393,8 @@
                                 Bullheading</label>
                             <label for="ensayo_requerido_tapon"
                                 class="bg-gray-200 p-1 w-full max-w-28 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
-                                <input type="checkbox" name="ensayo_requerido_tapon"
-                                    id="ensayo_requerido_tapon" class="inp_edit"
-                                    {{ $s_l[0]->ensayo_requerido_tapon == 1 ? 'checked' : '' }} disabled>
+                                <input type="checkbox" name="ensayo_requerido_tapon" id="ensayo_requerido_tapon"
+                                    class="inp_edit" {{ $s_l[0]->ensayo_requerido_tapon == 1 ? 'checked' : '' }} disabled>
                                 Tapón</label>
                         </div>
                         @error('ensayo_requerido_lechada')
@@ -406,7 +416,8 @@
                                 value="Ensayo Nº{{ $e_r->id }}" readonly>
                         </div>
                         <div class="md:col-span-3 xl:col-span-2"><label
-                                class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tope de Lechada <small>(MD/TVD)(m)</small></label>
+                                class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tope de Lechada
+                                <small>(MD/TVD)(m)</small></label>
                             <div class="grid grid-cols-2 gap-2">
                                 <input class="form-control text-sm p-2 testing_1" value="{{ $e_r->top_of_slurry_md }}"
                                     min="0" placeholder="MD" readonly="true">
@@ -428,13 +439,15 @@
                         </div>
                         <div class="grid col-span-1 grid-cols-2 gap-3">
                             <div>
-                                <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">BHCE <small>(°C)</small>
+                                <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">BHCE
+                                    <small>(°C)</small>
                                 </label>
                                 <input class="form-control text-sm p-2 testing_1" placeholder="BHCE" readonly="true"
                                     value="{{ $e_r->bhce }}">
                             </div>
                             <div>
-                                <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">BHCT <small>(°C)</small></label>
+                                <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">BHCT
+                                    <small>(°C)</small></label>
                                 <input class="form-control text-sm p-2 testing_1" placeholder="BHCT" readonly="true"
                                     value="{{ $e_r->bhct }}">
                             </div>
@@ -512,7 +525,8 @@
                     </div>
 
                     <div class="">
-                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Base de Lechada <small>(MD/TVD) (m)</small></label>
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Base de
+                            Lechada <small>(MD/TVD) (m)</small></label>
                         <div class="grid grid-cols-2 gap-3">
                             <input type="number" name="base_md" class="form-control text-sm p-2" placeholder="MD"
                                 step=".01" value="{{ $s_l[0]->base_md }}" readonly>
@@ -522,7 +536,8 @@
                     </div>
 
                     <div class="md:col-span-2 xl:col-span-1">
-                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tope de Lechada <small>(MD/TVD) (m)</small></label>
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tope de
+                            Lechada <small>(MD/TVD) (m)</small></label>
                         <div class="grid grid-cols-2 gap-3">
                             <input type="number" name="top_of_slurry_md" class="form-control text-sm p-2"
                                 placeholder="MD" step=".01" value="{{ $s_l[0]->top_of_slurry_md }}" readonly>
@@ -532,13 +547,15 @@
                     </div>
 
                     <div class="">
-                        <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Volumen <small>(bbl)</small></label>
+                        <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Volumen
+                            <small>(bbl)</small></label>
                         <input type="number" name="volumen" class="form-control text-sm p-2" placeholder="Volumen"
                             step=".01" value="{{ $s_l[0]->volumen }}" readonly>
                     </div>
 
                     <div class="">
-                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Caudal <small>(bpm)</small></label>
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Caudal
+                            <small>(bpm)</small></label>
                         <input type="number" name="pump_rate" class="form-control text-sm p-2" placeholder="Pump Rate"
                             step=".01" value="{{ $s_l[0]->pump_rate }}" readonly>
                     </div>
@@ -710,7 +727,7 @@
                                             </div>
                                         </article>
                                     @else
-                                        @if (auth()->user()->id != $c->user_fundamento->id || auth()->user()->is_admin && $solicitud->estado->id == 1)
+                                        @if (auth()->user()->id != $c->user_fundamento->id || (auth()->user()->is_admin && $solicitud->estado->id == 1))
                                             <div
                                                 class="bg-gray-200 inline-block px-2 rounded-md mt-3 cursor-pointer hover:bg-gray-300 transition-all duration-300">
                                                 <button class="flex gap-2 items-center rtaComment">
@@ -848,6 +865,10 @@
             VirtualSelect.init({
                 ele: "#mud_company",
                 placeholder: "Seleccione la compañía",
+            });
+            VirtualSelect.init({
+                ele: "#equipo_lechada",
+                placeholder: "Seleccione equipo",
             });
         })
     </script>
