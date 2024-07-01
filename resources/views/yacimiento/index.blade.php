@@ -66,7 +66,7 @@
                                                             d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                                                     </svg>
                                                 </button>
-                                                <button data-bs-toggle="modal" data-bs-target="#modalEliminarYacimiento" id="botonDeshabilitar" onclick="deshabilitarYacimiento({{ $y }})">
+                                                <button>
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                         viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                                         class="w-4 h-4">
@@ -82,13 +82,7 @@
                                         {{ $y->created_at->format('H:i') }} hs</td>
                                         <td class="p-3">{{ $y->updated_at->format('d/m/Y') }} a las
                                             {{ $y->updated_at->format('H:i') }} hs</td>
-                                    <td class="p-3">
-                                        @if ($y->estado===1)
-                                        Activo
-                                    @else
-                                        Inactivo
-                                    @endif
-                                    </td>
+                                    <td class="p-3">Activo</td>
                                     <td></td>
                                 </tr>
                             @endforeach
@@ -102,16 +96,12 @@
         </div>
     </section>
 
-@endsection
-
     <!-- Modal para crear un yacimiento -->
     @include('yacimiento.modal.modal_create_yacimiento')
 
-    <!-- Modal para editar un yacimiento -->
+    <!-- Modal para editar un cliente -->
     @include('yacimiento.modal.modal_edit_yacimiento')
 
-    <!-- Modal para deshabilitar un yacimiento -->
-    @include('yacimiento.modal.modal_delete_yacimiento')
 
     <script src="{{ asset('js/Yacimiento/yacimiento.js') }}"></script>
     <script>
@@ -120,41 +110,4 @@
             window.location.replace(`solicitud/fractura/${solicitud_id}`);
         }
     </script>
-
-    <!-- Desactivar el yacimiento -->
- <script>
-    const btnEliminarYacimiento = document.getElementById('botonDeshabilitar');     
-
-    btnEliminarYacimiento.addEventListener('click', (e) => {
-    e.preventDefault();
-
-    const form = document.getElementById('form_deshabilitar_yacimiento'); /
-    const formData = new FormData(form); // Create FormData from the form
-
-    confirmAlert('¿Está seguro de eliminar al Yacimiento?', '', 1, 'Desactivar')
-        .then((confirmed) => {
-        if (confirmed) {
-            loadingAlert('Desactivando Yacimiento', 'Por favor espere');
-
-            fetch(`${route('yacimiento.deshabilitar')}`, {
-            method: 'POST',
-            body: formData,
-            })
-            .then((response) => response.json())
-            .then((data) => {
-                Swal.close();
-                successAlert('Yacimiento eliminado!', 'El Yacimiento ha sido eliminado del sistema')
-                .then((confirmed) => {
-                    if (confirmed) {
-                    window.location.reload();
-                    }
-                });
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-        }
-        });
-    });
-
-</script>
+@endsection

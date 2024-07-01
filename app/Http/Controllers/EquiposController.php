@@ -9,7 +9,7 @@ class EquiposController extends Controller
 {
     public function index(){
         $data = [
-            'equipos' => Equipos::all()
+            'equipos' => Equipos::paginate(10)
         ];
         return view('equipos.index',$data);
     }

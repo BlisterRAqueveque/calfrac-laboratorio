@@ -11,7 +11,7 @@ class ClienteController extends Controller
     {
 
         $data = [
-            'clientes' => Cliente::all()
+            'clientes' => Cliente::paginate(10)
         ];
 
         return view('cliente.index', $data);

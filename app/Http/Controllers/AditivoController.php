@@ -10,7 +10,7 @@ class AditivoController extends Controller
     public function index()
     {
         $data = [
-            'aditivos' => Aditivo::all()
+            'aditivos' => Aditivo::paginate(10)
         ];
         return view('aditivo.index', $data);
     }
