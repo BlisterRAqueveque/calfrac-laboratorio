@@ -38,15 +38,17 @@ class EquiposController extends Controller
         return back();
     }
 
-    public function delete(Request $request){
-        
+    public function deshabilitar(Request $request){
         $this->validate($request, [
             'delete_equipo' => 'required',
         ]);
-            $equipo = Equipos::findOrFail($request->equipo_id);
-
-            if($equipo){
-                $equipo->estado = '0';
+       
+        
+          $equipo = Equipos::findOrFail($request->equipo2_id);
+       
+           if($equipo){
+                $equipo->estado = 0;
+                $equipo->save();
                 return back();
             }else{
                 return back()->withError('Equipo no encontrado con ID: ' . $request->equipo_id);

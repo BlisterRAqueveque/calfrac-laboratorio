@@ -7,14 +7,16 @@ use Illuminate\Http\Request;
 
 class AditivoController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $data = [
             'aditivos' => Aditivo::all()
         ];
         return view('aditivo.index', $data);
-    }  
+    }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $this->validate($request, [
             'aditivo' => 'required',
         ]);
@@ -27,7 +29,8 @@ class AditivoController extends Controller
         return back();
     }
 
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
         $this->validate($request, [
             'edit_aditivo' => 'required',
         ]);
@@ -36,5 +39,23 @@ class AditivoController extends Controller
         $aditivo->updated_at = date('Y-m-d H:i:s');
         $aditivo->save();
         return back();
+    }
+
+    public function deshabilitar(Request $request)
+    {
+        $this->validate($request, [
+            'deshabilitar_aditivo' => 'required',
+        ]);
+
+
+        $aditivo = Aditivo::findOrFail($request->aditivo2_id);
+
+        if ($aditivo) {
+            $aditivo->estado = 0;
+            $aditivo->save();
+            return back();
+        } else {
+            return back()->withError('Aditivo no encontrado con ID: ' . $request->aditivo_id);
+        }
     }
 }

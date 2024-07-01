@@ -1,20 +1,21 @@
-<div class="modal fade" id="modalEditarEquipo" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="modalEliminarCliente" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
-        <form action="{{ route('equipos.update') }}" method="POST">
+        <form action="{{ route('cliente.deshabilitar') }}" method="POST" enctype="multipart/form-data" id="form_deshabilitar_cliente">
             @csrf
+ 
             <div class="modal-content">
                 <div class="modal-header dark:bg-violet-950 dark:bg-opacity-90 dark:text-gray-300">
-                    <h1 class="modal-title fs-5 text-md font-bold tracking-wide m-0">Editar Equipo</h1>
+                    <h1 class="modal-title fs-5 text-md font-bold tracking-wide m-0">Eliminar cliente</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body dark:dark_bg">
                     <div class="row">
-                        <div class="col-12" >
-                            <input type="text" name="equipo_id" id="equipo_id">
-                            <label for="edit_equipo" class="text-sm dark:text-gray-300">Nombre del Equipo <span
+                        <div class="col-12">
+                            <input type="text" name="cliente2_id" id="cliente2_id">
+                            <label for="deshabilitar_cliente" class="text-sm dark:text-gray-300">Nombre del cliente <span
                                     class="text-red-500">*</span></label>
-                            <input type="text" name="edit_equipo" id="edit_equipo" class="form-control sz py-2 mt-1 dark:inp_bg_2 bg-gray-50  dark:text-gray-400 border-none">
-                            @error('edit_equipo')
+                            <input type="text" name="deshabilitar_cliente" id="deshabilitar_cliente" class="form-control sz py-2 mt-1 dark:inp_bg_2 bg-gray-50  dark:text-gray-400 border-none">
+                            @error('deshabilitar_cliente')
                                 <small class="text-sm text-red-600">{{ $message }}</small>
                             @enderror
                         </div>
@@ -31,7 +32,7 @@
                         Cancelar</button>
                     <input type="submit"
                         class="text-xs xl:text-sm w-full md:w-auto bg-green-700 bg-opacity-60 text-white p-2 rounded-sm hover:shadow-lg transition-all duration-75 font-bold"
-                        value="Editar Equipo">
+                        value="Eliminar Cliente">
                 </div>
             </div>
         </form>
