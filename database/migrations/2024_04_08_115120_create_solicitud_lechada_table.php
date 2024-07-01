@@ -36,12 +36,14 @@ return new class extends Migration
             $table->float('bhct')->nullable();
             $table->tinyInteger('ensayo_requerido_principal')->nullable()->default(0)->comment('1: Se necesita el Ensayo principal | 0: No se necesita');
             $table->tinyInteger('ensayo_requerido_relleno')->nullable()->default(0)->comment('1: Se necesita el Ensayo relleno | 0: No se necesita');
+            $table->tinyInteger('ensayo_requerido_tapon')->nullable()->default(0)->comment('1: Se necesita el Ensayo tapon | 0: No se necesita');
             $table->string('reologia')->nullable();
             $table->string('densidad')->nullable();
             $table->string('filtrado')->nullable();
             $table->string('bombeabilidad')->nullable();
             $table->tinyInteger('tiempo_50_psi')->nullable();
             $table->tinyInteger('tiempo_500_psi')->nullable();
+            $table->tinyInteger('tiempo_1000_psi')->nullable();
             $table->tinyInteger('resistencia_12_hs')->nullable();
             $table->tinyInteger('resistencia_24_hs')->nullable();
             $table->string('agua_libre')->nullable();

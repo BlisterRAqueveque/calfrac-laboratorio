@@ -405,7 +405,7 @@
 
                 <hr class="my-4">
 
-                <p class="m-0 font-bold text-lg my-3 tracking-wide">Ensayos de Referencia</p>
+                {{--<p class="m-0 font-bold text-lg my-3 tracking-wide">Ensayos de Referencia</p>--}}
 
                 @foreach ($ensayos_referencia as $e_r)
                     <div class="grid md:grid-cols-6 gap-3 mt-4 relative">
@@ -415,6 +415,7 @@
                             <input type="text" name="" class="form-control text-sm p-2"
                                 value="Ensayo Nº{{ $e_r->id }}" readonly>
                         </div>
+                        
                         <div class="md:col-span-3 xl:col-span-2"><label
                                 class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tope de Lechada
                                 <small>(MD/TVD)(m)</small></label>

@@ -13,9 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('solicitud_lechada', function (Blueprint $table) {
-            $table->tinyInteger('ensayo_requerido_tapon')->nullable()->default(0)->comment('1: Se necesita el Ensayo tapon | 0: No se necesita');
-            $table->tinyInteger('tiempo_1000_psi')->nullable();
+        Schema::table('ensayos', function (Blueprint $table) {
+            $table->tinyInteger('estado')->default('1');
         });
     }
 
@@ -26,8 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('solicitud_lechada', function (Blueprint $table) {
-            //
+        Schema::table('ensayos', function (Blueprint $table) {
+            $table->dropColumn('estado');
         });
     }
 };

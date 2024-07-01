@@ -45,7 +45,7 @@ class SolicitudController extends Controller
     {
         $this->authorize('create', Solicitud::class);
         $data = [
-            'ensayos' => Ensayo::where('tipo', 'CN')->get(),
+            'ensayos' => Ensayo::where('tipo', 'CN')->where('estado', 1)->get(),
             'clientes' => Cliente::all(),
             'yacimientos' => Yacimiento::all(),
             'sistemas_fluidos' => SistemasFluidos::all(),
@@ -264,8 +264,10 @@ class SolicitudController extends Controller
             'fecha_reconocimiento' => $request->fecha_reconocimiento_lechada,
             'solicitud_id' => $solicitud->id,
             'usuario_carga' => auth()->user()->id
+
         ]);
 
+        
         // == Relaciones ==
 
         # Ensayos de Referencias

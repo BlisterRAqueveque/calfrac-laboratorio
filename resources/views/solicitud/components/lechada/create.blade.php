@@ -287,7 +287,6 @@
             </div>
 
             <hr class="my-4">
-
             <p class="m-0 font-bold text-lg my-3 tracking-wide">Ensayo Solicitado</p>
             <div class="grid md:grid-cols-5 gap-3 mt-3">
                 <div>
@@ -492,7 +491,7 @@
                         class="form-control text-sm" placeholder="0.0%">--}}
                     <select name="agua_libre" value="{{ old('agua_libre') }}" class="text-sm inp_edit"  id="agua_libre">
                         @foreach ($agua_libre as $tipo)
-                            <option value="{{ $tipo->id }}">{{ $tipo->opciones}}</option>
+                            <option value="{{ $tipo->opciones }}">{{ $tipo->opciones}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -502,7 +501,7 @@
                         placeholder="SGS">--}}
                     <select name="sgs" value="{{ old('sgs') }}" class="text-sm inp_edit"  id="sgs">
                         @foreach ($sgs as $tipo)
-                            <option value="{{ $tipo->id }}">{{ $tipo->opciones}}</option>
+                            <option value="{{ $tipo->opciones }}">{{ $tipo->opciones}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -744,16 +743,18 @@
     const selectEnsayo = (e, aux) => {
         event.preventDefault();
         let flex_div = document.getElementById(`flex_ensayo_${aux}`)
-
         if (e.value == '') {
             flex_div.innerHTML = ''
         } else {
-            let divGrid = el('div.grid grid-cols-2 gap-3')
+            let divGrid = el('div.grid grid-cols-2 gap-3 md:grid-cols-2')
+
+            let ensayoUrl = `http://127.0.0.1:8000/pdf/report/lechada/${e.value}`; 
+
             let a = el(
-                'a.bg-slate-100 w-full text-gray-700 border py-1 rounded-sm hover:bg-slate-200 hover:text-gray-700 cursor-pointer transition-all duration-200 px-3',
-                'Visualizar Ensayo')
-            let button = el('button.bg-red-600 text-white font-semibold px-10 hover:bg-red-700 transition-all',
-                'Descartar')
+                'a.bg-slate-100 w-full text-gray-700 border py-1 rounded-sm hover:bg-slate-200 hover:text-gray-700 cursor-pointer transition-all duration-200 px-3 md:px-5 lg:px-7',
+                'Visualizar', {href: ensayoUrl, target: '_blank'})
+            let button = el('button.bg-red-600 text-white font-semibold px-10 hover:bg-red-700 transition-all md:px-5 lg:px-7',
+                'Borrar')
             button.addEventListener('click', e => {
                 event.preventDefault();
                 document.getElementById(`div_ens_ref_${aux}`).remove()

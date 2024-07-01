@@ -7,6 +7,7 @@ let aux_aditivo = 0;
 /**
  * Crea las formulaciones para agregar los lotes, aditivos y/o también la concentración
  */
+
 btnAddFormulacion.addEventListener("click", (e) => {
   e.preventDefault();
   let flex, button, div, input;

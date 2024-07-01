@@ -17,6 +17,7 @@ return new class extends Migration
             $table->increments('id');
             $table->ipAddress('nombre');
             $table->morphs('used_id');
+            $table->tinyInteger('estado')->default('1');
             $table->timestamps();
         });
     }
