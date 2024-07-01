@@ -32,7 +32,7 @@
                     @enderror
                 </div>
 
-                <div class="col-xs-12 col-md-3 my-2">
+                <div class="col-xs-12 col-md-2 my-2">
                     <label for="cliente"
                         class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Cliente <span
                             class="text-red-500">*</span></label>
@@ -50,8 +50,7 @@
 
                 <div class="col-xs-12 col-md-2 my-2">
                     <label for="locacion"
-                        class="text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Yacimiento /
-                        Locación <span class="text-red-500">*</span></label>
+                        class="text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Yacimiento/Locación <span class="text-red-500">*</span></label>
                         <select name="locacion_fractura" id="locacion_fractura" class="text-sm" data-search="true">
                             @foreach ($yacimientos as $y)
                             <option value="{{ $y->id }}"
@@ -87,7 +86,7 @@
                     @enderror
                 </div>
 
-                <div class="col-xs-12 col-md-3 my-2">
+                {{--<div class="col-xs-12 col-md-3 my-2">
                     <label for="empresa"
                         class=" text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2 text-sm">Compañía /
                         Empresa <span class="text-red-500">*</span></label>
@@ -97,7 +96,7 @@
                     @error('empresa')
                         <small class="text-xs text-red-600">{{ $message }}</small>
                     @enderror
-                </div>
+                </div>--}}
 
                 {{-- <div class="col-xs-12 col-md-2 my-2">
                     <label for="fecha_tratamiento"
@@ -124,7 +123,7 @@
                     @enderror
                 </div>
 
-                <div class="col-xs-12 col-md-3 my-2">
+                <div class="col-xs-12 col-md-2 my-2">
                     <label for="rep_compania"
                         class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Rep
                         Compañía <span class="text-red-500">*</span></label>
@@ -149,7 +148,7 @@
                     @enderror
                 </div>
 
-                <div class="col-xs-12 col-md-3 my-2">
+                <div class="col-xs-12 col-md-2 my-2">
                     <label for="rep_venta"
                         class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Rep Ventas
                         <span class="text-red-500">*</span></label>
@@ -170,19 +169,22 @@
                     @enderror
                 </div>
 
-                <div class="col-xs-12 col-md-3 my-2">
+                <div class="col-xs-12 col-md-2 my-2">
                     <label for="equipo"
                         class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Equipo <span
                             class="text-red-500">*</span></label>
-                    <input type="text"
-                        class="form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 sz"
-                        name="equipo" id="equipo" placeholder="Ingrese el equipo">
+                        <select name="equipo" id="equipo" class="text-sm" data-search="true">
+                            @foreach ($equipos as $equipo)
+                            <option value="{{ $equipo->id }}"
+                                {{ old('equipo') == $equipo->id ? 'selected' : '' }}>{{ $equipo->nombre }}</option>
+                        @endforeach
+                    </select>
                     @error('equipo')
                         <small class="text-xs text-red-600">{{ $message }}</small>
                     @enderror
                 </div>
 
-                <div class="col-xs-12 col-md-3 my-2">
+                <div class="col-xs-12 col-md-2 my-2">
                     <label for="servicio"
                         class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Servicio
                         <span class="text-red-500">*</span></label>
@@ -534,8 +536,13 @@
             ele: "#locacion_fractura",
             placeholder: "Seleccione el Yacimiento",
         });
+        VirtualSelect.init({
+            ele: "#equipo",
+            placeholder: "Seleccione el equipo",
+        });
         document.getElementById("cliente_fractura").setValue(0);
         document.getElementById("locacion_fractura").setValue(0);
+        document.getElementById("equipo").setValue(0);
     })
 </script>
 
@@ -572,7 +579,7 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         @if ($message = session('success'))
-            successAlert('¡Solicitud Creada!', 'La Solicitud de Fractura fue creada correctamente').then(
+            successAlert('¡Solicitud Creada!', 'La Solicitud fue creada correctamente').then(
                 (confirmed) => {
                     window.location.replace('solicitudes');
                 })

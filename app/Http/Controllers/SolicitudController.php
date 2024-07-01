@@ -45,7 +45,7 @@ class SolicitudController extends Controller
     {
         $this->authorize('create', Solicitud::class);
         $data = [
-            'ensayos' => Ensayo::where('tipo', 'CN')->get(),
+            'ensayos' => Ensayo::where('tipo', 'CN')->where('estado', 1)->get(),
             'clientes' => Cliente::all(),
             'yacimientos' => Yacimiento::all(),
             'sistemas_fluidos' => SistemasFluidos::all(),
@@ -171,7 +171,7 @@ class SolicitudController extends Controller
             'fecha_solicitud' => $request->fecha_solicitud,
             'usuario_carga' => auth()->user()->nombre . ' ' . auth()->user()->apellido,
             'cliente' => $request->cliente,
-            'empresa' => $request->empresa
+            //'empresa' => $request->empresa
         ];
         $this->_sendEmailNew($data, $correos);         //Podria hardcodear mi email aca para probar?
 
@@ -264,8 +264,10 @@ class SolicitudController extends Controller
             'fecha_reconocimiento' => $request->fecha_reconocimiento_lechada,
             'solicitud_id' => $solicitud->id,
             'usuario_carga' => auth()->user()->id
+
         ]);
 
+        
         // == Relaciones ==
 
         # Ensayos de Referencias
@@ -345,7 +347,7 @@ class SolicitudController extends Controller
             'locacion_fractura' => 'required',
             'programa' => 'required',
             'fecha_solicitud' => 'required',
-            'empresa' => 'required',
+            // 'empresa' => 'required',
             // 'fecha_tratamiento' => 'required',
             'pozo' => 'required',
             'rep_compania' => 'required',
@@ -473,6 +475,7 @@ class SolicitudController extends Controller
             'users' => User::all(),
             'clientes' => Cliente::all(),
             'yacimientos' => Yacimiento::all(),
+            'equipos' => Equipos::all(),
             // 'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
         return view('solicitud.components.fractura.show', $data);

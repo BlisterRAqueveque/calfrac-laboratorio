@@ -253,7 +253,7 @@
                         @enderror
                     </div>
 
-                    <div class="col-xs-12 col-md-3 my-2">
+                    <div class="col-xs-12 col-md-2 my-2">
                         <label for="cliente"
                             class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Cliente</label>
                             <select name="cliente_fractura" id="cliente_fractura" class="text-sm inp_edit" disabled>
@@ -308,7 +308,7 @@
                         @enderror
                     </div>
 
-                    <div class="col-xs-12 col-md-3 my-2">
+                    <div class="col-xs-12 col-md-2 my-2">
                         <label for="empresa"
                             class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Compañía
                             /
@@ -347,7 +347,7 @@
                         @enderror
                     </div>
 
-                    <div class="col-xs-12 col-md-3 my-2">
+                    <div class="col-xs-12 col-md-2 my-2">
                         <label for="rep_compania"
                             class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Rep
                             Compañía</label>
@@ -373,7 +373,7 @@
                         @enderror
                     </div> --}}
 
-                    <div class="col-xs-12 col-md-3 my-2">
+                    <div class="col-xs-12 col-md-2 my-2">
                         <label for="rep_venta"
                             class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Rep
                             Ventas</label>
@@ -399,19 +399,22 @@
                         @enderror
                     </div>
 
-                    <div class="col-xs-12 col-md-3 my-2">
+                    <div class="col-xs-12 col-md-2 my-2">
                         <label for="equipo"
                             class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Equipo</label>
-                        <input type="text"
-                            class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
-                            name="equipo" id="equipo" placeholder="Ingrese el equipo"
-                            value="{{ $solicitud->equipo }}" readonly>
+                            <select name="equipo" id="equipo" class="text-sm inp_edit" disabled>
+                                @foreach ($equipos as $equipo)
+                                   <option value="{{ $equipo->id }}"
+                                    {{ $equipo->id == $solicitud->equipo ? 'selected' : '' }}>{{ $equipo->nombre }}
+                                    </option>
+                                @endforeach
+                            </select>
                         @error('equipo')
                             <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
                         @enderror
                     </div>
 
-                    <div class="col-xs-12 col-md-3 my-2">
+                    <div class="col-xs-12 col-md-2 my-2">
                         <label for="servicio"
                             class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Servicio</label>
                         <input type="text"
@@ -949,6 +952,10 @@
                 VirtualSelect.init({
                     ele: "#locacion_fractura",
                     placeholder: "Seleccione el Yacimiento",
+                });
+                VirtualSelect.init({
+                    ele: "#equipo",
+                    placeholder: "Seleccione el equipo",
                 });
                 // document.getElementById("cliente_fractura").setValue(0);
                 // document.getElementById("locacion_fractura").setValue(0);
