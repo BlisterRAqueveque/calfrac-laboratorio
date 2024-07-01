@@ -90,6 +90,7 @@ Route::post('/respuesta/{user_id}', [SolicitudController::class, 'update_rta'])-
 Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes');
 Route::post('/cliente', [ClienteController::class, 'store'])->name('cliente.store');
 Route::post('/cliente/update', [ClienteController::class, 'update'])->name('cliente.update');
+Route::post('/cliente/deshabilitar', [ClienteController::class, 'deshabilitar'])->name('cliente.deshabilitar');
 
 # Usuarios
 Route::get('/usuarios', [UserController::class, 'index'])->name('usuarios');
@@ -103,17 +104,21 @@ Route::post('/usuario/activar', [UserController::class, 'store_activar'])->name(
 Route::get('/yacimientos', [YacimientoController::class, 'index'])->name('yacimientos');
 Route::post('/yacimiento', [YacimientoController::class, 'store'])->name('yacimiento.store');
 Route::post('/yacimiento/update', [YacimientoController::class, 'update'])->name('yacimiento.update');
+Route::post('/yacimiento/deshabilitar', [YacimientoController::class, 'deshabilitar'])->name('yacimiento.deshabilitar');
+
 
 # Aditivos
 Route::get('/aditivos', [AditivoController::class, 'index'])->name('aditivos');
 Route::post('/aditivo', [AditivoController::class, 'store'])->name('aditivo.store');
 Route::post('/aditivo/update', [AditivoController::class, 'update'])->name('aditivo.update');
+Route::post('/aditivo/deshabilitar', [AditivoController::class, 'deshabilitar'])->name('aditivo.deshabilitar');
+
 
 #Equipos
 Route::get('/equipos', [EquiposController::class, 'index'])->name('equipos');
-Route::post('/equipos', [EquiposController::class, 'store'])->name('equipos.store');
-Route::post('/equipos/update', [EquiposController::class, 'update'])->name('equipos.update');
-Route::post('/equipos/delete', [EquiposController::class, 'delete'])->name('equipos.delete');
+Route::post('/equipo', [EquiposController::class, 'store'])->name('equipos.store');
+Route::post('/equipo/update', [EquiposController::class, 'update'])->name('equipos.update');
+Route::post('/equipo/deshabilitar', [EquiposController::class, 'deshabilitar'])->name('equipos.deshabilitar');
 
 
 

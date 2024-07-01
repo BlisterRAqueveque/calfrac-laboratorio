@@ -3,6 +3,7 @@
     Laboratorio - Equipos
 @endsection
 
+
 @section('contenido')
     <section class="container_mod pt-3">
         <p class="font-bold uppercase dark:text-gray-300 text-sm">Equipos</p>
@@ -65,7 +66,7 @@
                                                             d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                                                     </svg>
                                                 </button>
-                                                <button data-bs-toggle="modal" data-bs-target="#modalEliminarEquipo" onclick="deleteEquipo({{ $e }})">
+                                                <button data-bs-toggle="modal" data-bs-target="#modalEliminarEquipo" id="botonEliminar" onclick="deleteEquipo({{ $e }})">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                         viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                                         class="w-4 h-4">
@@ -87,8 +88,14 @@
                                               -
                                             @endif
                                           </td>
-                                    <td class="p-3">Activo</td>
-                                    <td></td>
+                                    <td class="p-3">
+                                        @if ($e->estado===1)
+                                            Activo
+                                        @else
+                                            Inactivo
+                                        @endif
+                                    </td>
+                                          
                                 </tr>
                             @endforeach
                         </tbody>
@@ -107,6 +114,9 @@
 @endsection
 
 
+
+    
+
 @include('equipos.modal.modal_create_equipo')
 
 @include('equipos.modal.modal_edit_equipo')
@@ -116,3 +126,40 @@
 
 <script src="{{ asset('js/equipos/equipos.js') }}"></script>
 
+ <!-- Desactivar el equipo -->
+ <script>
+    const btnEliminarEquipo = document.getElementById('botonEliminar');     
+
+    btnEliminarEquipo.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    const form = document.getElementById('form_deshabilitar_equipo'); /
+    const formData = new FormData(form); // Create FormData from the form
+
+    confirmAlert('¿Está seguro de eliminar al equipo?', '', 1, 'Desactivar')
+        .then((confirmed) => {
+        if (confirmed) {
+            loadingAlert('Desactivando equipo', 'Por favor espere');
+
+            fetch(`${route('equipos.deshabilitar')}`, {
+            method: 'POST',
+            body: formData,
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                Swal.close();
+                successAlert('Equipo eliminado!', 'El Equipo ha sido eliminado del sistema')
+                .then((confirmed) => {
+                    if (confirmed) {
+                    window.location.reload();
+                    }
+                });
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+        });
+    });
+
+</script>
