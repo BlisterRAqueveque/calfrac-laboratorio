@@ -46,23 +46,23 @@ class SolicitudController extends Controller
         $this->authorize('create', Solicitud::class);
         $data = [
             'ensayos' => Ensayo::where('tipo', 'CN')->where('estado', 1)->get(),
-            'clientes' => Cliente::all(),
-            'yacimientos' => Yacimiento::all(),
-            'sistemas_fluidos' => SistemasFluidos::all(),
-            'analisis_microbial' => AnalisisMicrobial::all(),
-            'agente_sosten' => AgenteSosten::all(),
-            'otros_analisis' => OtrosAnalisis::all(),
-            'tipo_trabajo_cemento' => TipoTrabajoCemento::all(),
-            'tipo_cementacion' => TipoCementacion::all(),
-            'tipo_requerimiento_cemento' => TipoRequerimientoCemento::all(),
-            'tipo_lodo' =>  TipoLodo::all(),
-            'mud_company' =>  MudCompany::all(),
+            'clientes' => Cliente::where('estado', 1)->get(),
+            'yacimientos' => Yacimiento::where('estado', 1)->get(),
+            'sistemas_fluidos' => SistemasFluidos::where('activo', 1)->get(),
+            'analisis_microbial' => AnalisisMicrobial::where('activo', 1)->get(),
+            'agente_sosten' => AgenteSosten::where('activo', 1)->get(),
+            'otros_analisis' => OtrosAnalisis::where('activo', 1)->get(),
+            'tipo_trabajo_cemento' => TipoTrabajoCemento::where('estado', 1)->get(),
+            'tipo_cementacion' => TipoCementacion::where('estado', 1)->get(),
+            'tipo_requerimiento_cemento' => TipoRequerimientoCemento::where('estado', 1)->get(),
+            'tipo_lodo' =>  TipoLodo::where('estado', 1)->get(),
+            'mud_company' =>  MudCompany::where('activo', 1)->get(),
             'users' => User::all(),
             'sgs' => Sgs::all(),
             'agua_libre' => AguaLibre::all(),
             'servicios' => Servicios::all(),
             'tipo_lodo_Lodos' => TipoLodo_Lodos::all(),
-            'equipos' => Equipos::all(),
+            'equipos' => Equipos::where('estado', 1)->get(),
             'ensayos_lodo' => EnsayosLodo::all()
         ];
         return view('solicitud.create', $data);
@@ -150,7 +150,7 @@ class SolicitudController extends Controller
         ]);
 
         $emailsAEnviar = [];
-         
+
         # Envío de Emails
         $correos = [];
         /*
@@ -267,7 +267,7 @@ class SolicitudController extends Controller
 
         ]);
 
-        
+
         // == Relaciones ==
 
         # Ensayos de Referencias
@@ -500,7 +500,7 @@ class SolicitudController extends Controller
             'tipo_trabajos' => TipoTrabajoCemento::all(),
             'tipo_cementacion' => TipoCementacion::all(),
             'mud_company' => MudCompany::all(),
-            'equipos'=> Equipos::all(),
+            'equipos' => Equipos::all(),
             //'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
         $generate_report = $this->_generate_report($solicitud_id);
@@ -627,14 +627,34 @@ class SolicitudController extends Controller
 
     /**
      * Se que es un código asqueroso, pero una condición si o si depende de la otra
+     * ya lo arregle pa (f.m)
      */
     public function _generate_report($solicitud_id)
     {
         $generar_reporte = false;
         $solicitud_lechada = SolicitudLechada::where('solicitud_id', $solicitud_id)->get();
 
-        // Reología
-        if (count($solicitud_lechada[0]->rel_reologia) > 0) {
+        $count_reologia = count($solicitud_lechada[0]->rel_reologia);
+        $count_perdida = count($solicitud_lechada[0]->rel_perdida_filtrado);
+        $count_rel_uca = count($solicitud_lechada[0]->rel_uca);
+        $count_rel_agua_libre = count($solicitud_lechada[0]->rel_agua_libre);
+        $count_rel_mezclabilidad = count($solicitud_lechada[0]->rel_mezclabilidad);
+        $count_rel_bombeabilidad = count($solicitud_lechada[0]->rel_bombeabilidad);
+
+        if (($count_reologia > 0) && ($count_perdida > 0) && ($count_rel_uca > 0) && ($count_rel_agua_libre > 0) && ($count_rel_mezclabilidad > 0)) {
+            if ($count_rel_bombeabilidad > 0) {
+                foreach ($solicitud_lechada[0]->rel_bombeabilidad as $b) {
+                    if ($b->selected) {
+                        $generar_reporte = true;
+                        break;
+                    }
+                }
+            }
+            return response()->json(['generate_report' => $generar_reporte]);
+        }
+    }
+    // Reología
+    /*  if (count($solicitud_lechada[0]->rel_reologia) > 0) {
             // Pérdida de Filtrado
             if (count($solicitud_lechada[0]->rel_perdida_filtrado) > 0) {
                 // UCA
@@ -665,15 +685,15 @@ class SolicitudController extends Controller
                 } else {
                     $generar_reporte = false;
                 }
-            } else {
+            } else {/*  
                 $generar_reporte = false;
             }
         } else {
             $generar_reporte = false;
-        }
-        return response()->json(['generate_report' => $generar_reporte]);
-        // echo json_encode($generar_reporte);
-    }
+        } */
+
+    // echo json_encode($generar_reporte);
+        
 
     /**
      * Envía el correo de que se creó una nuevo Solicitud de Fractura
