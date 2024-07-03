@@ -22,6 +22,7 @@ return new class extends Migration
             // $table->foreign('solicitud_lechada_id')->references('id')->on('solicitud_lechada');
             $table->foreignId('user_id')->constrained()->onDelete('restrict')->comment('Usuario carga');
             $table->timestamps();
+            // $table->tinyInteger('estado')->default(1);
         });
 
         // Schema::table('solicitud', function (Blueprint $table) {

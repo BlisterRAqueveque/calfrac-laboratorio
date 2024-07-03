@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('ensayos', function (Blueprint $table) {
-            $table->tinyInteger('estado')->default('1');
+            $table->tinyInteger('estado')->default(1);
         });
     }
 

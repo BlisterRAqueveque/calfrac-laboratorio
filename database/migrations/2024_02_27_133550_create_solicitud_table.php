@@ -19,8 +19,7 @@ return new class extends Migration
             $table->integer('proyecto_number')->nullable();
             $table->integer('servicio_number')->nullable();
             $table->foreignId('cliente_id')->constrained()->onDelete('restrict');
-            $table->unsignedBigInteger('locacion_id')->nullable();
-            $table->foreign('locacion_id')->references('id')->on('yacimientos');
+            $table->foreignId('locacion_id')->constrained(table:'yacimientos');
             $table->string('programa')->nullable();
             $table->date('fecha_solicitud')->nullable();
             $table->string('empresa')->nullable();
@@ -45,6 +44,7 @@ return new class extends Migration
             $table->text('fundamento_asignacion')->nullable();
             $table->dateTime('fecha_asignacion')->nullable();
             $table->tinyInteger('activo')->default(1)->comment('1: Activo - 0: Inactivo (Visualizacion en el sistema)');
+            $table->string('tipo_lodo', length: 50)->default('1');
             $table->foreignId('user_id')->constrained()->onDelete('restrict');
             $table->timestamps();
         });

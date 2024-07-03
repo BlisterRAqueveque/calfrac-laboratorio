@@ -1,4 +1,4 @@
-<form action="" method="POST">
+<form action="{{ route('solicitud.lodo') }}" method="POST">
     @csrf
     <fieldset class="shadow border bg-gray-50 rounded-md ps-5">
         <legend class="fieldset_bg text-white rounded p-1 float-none">
@@ -14,78 +14,81 @@
 
             <div class="grid xs:grid-cols-2 md:grid-cols-3 gap-3 mt-3"> 
                 <div class="col-span-2 xl:col-span-1">
-                    <label for="cliente_lechada" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Cliente
+                    <label for="cliente_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Cliente
                         <span class="text-red-500">*</span></label>
-                    <select name="cliente_lechada" id="cliente_lechada" class="text-sm" data-search="true"
+                    <select name="cliente_lodo" id="cliente_lodo" class="text-sm" data-search="true"
                         data-silent-initial-value-set="true" multiple="true">
                         @foreach ($clientes as $c)
                             <option value="{{ $c->id }}"
-                                {{ old('cliente_lechada') == $c->id ? 'selected' : '' }}>{{ $c->nombre }}</option>
+                                {{ old('cliente_lodo') == $c->id ? 'selected' : '' }}>{{ $c->nombre }}</option>
                         @endforeach
                     </select>
-                    @error('cliente_lechada')
+                    @error('cliente_lodo')
                         <small class="text-xs text-red-600">El cliente es requerido</small>
                     @enderror
                 </div>
+
                 <div class="col-span-2 xl:col-span-1">
-                    <label for="locacion_lechada"
-                        class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Yacimiento /
+                    <label for="locacion_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Yacimiento /
                         Locación
                         <span class="text-red-500">*</span></label>
-                    <select name="locacion_lechada" id="locacion_lechada" class="text-sm" data-search="true" data-silent-initial-value-set="true" >
-                        
+                    <select name="locacion_lodo" id="locacion_lodo" class="text-sm" data-search="true" data-silent-initial-value-set="true" >  
                         @foreach ($yacimientos as $y)
                         <option value="{{ $y->id }}"
-                            {{ old('locacion_lechada') == $y->id ? 'selected' : '' }}>{{ $y->nombre }}</option>
+                            {{ old('locacion_lodo') == $y->id ? 'selected' : '' }}>{{ $y->nombre }}</option>
                     @endforeach
                     </select>
-                    @error('locacion_lechada')
+                    @error('locacion_lodo')
                         <small class="text-xs text-red-600">La locación es requerida</small>
                     @enderror
                 </div>
 
                 <div class="col-span-2 xl:col-span-1">
-                    <label for="pozo" class="text-sm text-gray-700 font-semibold tracking-wide">Pozo
+                    <label for="pozo_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Pozo
                         <small>(*)</small></label>
                     <input type="text" placeholder="Ingrese el pozo"
-                        class="form-control sz placeholder:text-gray-300 placeholder:font-light" name="pozo"
-                        id="pozo">
-                    @error('pozo')
+                        class="form-control sz placeholder:text-gray-300 placeholder:font-light" name="pozo_lodo"
+                        id="pozo_lodo">
+                    @error('pozo_lodo')
                         <small class="text-red-700 font-semibold"><em>{{ $message }}</em></small>
                     @enderror
                 </div>
 
                 <div class="col-span-2 xl:col-span-1">
-                    <label for="equipo" class="text-sm text-gray-700 font-semibold tracking-wide">Equipo
+                    <label for="equipo_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Equipo
                         <small>(*)</small></label>
-                    <input type="text" placeholder="Ingrese el equipo"
-                        class="form-control sz placeholder:text-gray-300 placeholder:font-light" name="equipo"
-                        id="equipo">
-                    @error('equipo')
+                        <select name="equipo_lodo" id="equipo_lodo" class="text-sm" data-search="true" data-silent-initial-value-set="true" multiple="false">
+                            @foreach($equipos as $eq)
+                            <option value="{{$eq->id}}"
+                                {{ old('equipo_lodo') == $eq->id ? 'selected' : '' }}>{{ $eq->nombre }}</option>
+                            @endforeach
+                        </select>
+                    @error('equipo_lodo')
                         <small class="text-red-700 font-semibold"><em>{{ $message }}</em></small>
                     @enderror
                 </div>
+
                 <div class="col-span-2 xl:col-span-1">
-                    <label for="tipo_lodo" class="text-sm text-gray-700 font-semibold tracking-wide">Tipo de Lodo
+                    <label for="tipo_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de Lodo
                         <small>(*)</small></label>
-                        <select name="tipo_lodo" id="tipo_lodo" class="text-sm" data-search="true" data-silent-initial-value-set="true" >
+                        <select name="tipo_lodo" id="tipo_lodo" class="text-sm" data-search="true" data-silent-initial-value-set="true" multiple="false">
                             @foreach($tipo_lodo_Lodos as $tl)
                             <option value="{{$tl->id}}"
                                 {{ old('tipo_lodo') == $tl->id ? 'selected' : '' }}>{{ $tl->nombre }}</option>
                             @endforeach
                         </select>
                     @error('tipo_lodo')
-                        <small class="text-red-700 font-semibold"><em>{{ $message }}</em></small>
+                        <small class="text-xs text-red-700 font-semibold"><em>{{ $message }}</em></small>
                     @enderror
                 </div>
 
                 <div class="col-span-2 xl:col-span-1">
-                    <label for="servicios_lodo" class="text-sm text-gray-700 font-semibold tracking-wide">Servicio
+                    <label for="servicios_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Servicio
                         <small>(*)</small></label>
                     <select name="servicios_lodo" id="servicios_lodo" class="text-sm" data-search="true"  data-silent-initial-value-set="true" >
                             @foreach($servicios as $sv)
                             <option value="{{$sv->id}}"
-                                {{ old('servicios_lodo') == $sv->id ? 'selected' : '' }}> {{$sv->servicio}}</option>
+                                {{ old('servicios_lodo') == $sv->id ? 'selected' : '' }}> {{$sv->nombre}}</option>
                             @endforeach
                     </select>
                     @error('servicios_lodo')
@@ -94,9 +97,9 @@
                 </div>
 
                 <div class="col-span-2 xl:col-span-1">
-                    <label for="mud_company" class="text-sm text-gray-700 font-semibold tracking-wide">Compañia de Lodo
+                    <label for="mud_company" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Compañia de Lodo
                         <small>(*)</small></label>
-                        <select name="mud_company" id="mud_company" class="text-sm" data-search="true"  data-silent-initial-value-set="true" >
+                        <select name="mud_company" id="mud_company" class="text-sm" data-search="true"  data-silent-initial-value-set="true" multiple="false" >
                             @foreach($mud_company as $mc)
                             <option value="{{$mc->id}}"
                                 {{ old('mud_company') == $mc->id ? 'selected' : '' }}> {{$mc->nombre}}</option>
@@ -108,12 +111,12 @@
                 </div>
 
                 <div class="col-span-2 xl:col-span-1">
-                    <label for="tipo_lodo" class="text-sm text-gray-700 font-semibold tracking-wide">Densidad del Lodo (ppg)
+                    <label for="densidad_lodo_3" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Densidad del Lodo (ppg)
                         <small>(*)</small></label>
-                        <input type="number" name="densidad_lodo" id="densidad_lodo"
-                        value="{{ old('densidad_lodo') }}" class="form-control text-sm p-2"
-                        placeholder="Densidad del lodo" step=".01">
-                    @error('tipo_lodo')
+                        <input type="number" name="densidad_lodo_3" id="densidad_lodo_3"
+                        value="{{ old('densidad_lodo_3') }}" class="form-control text-sm p-2"
+                        placeholder="Ingrese la densidad del lodo" step=".01">
+                    @error('densidad')
                         <small class="text-red-700 font-semibold"><em>{{ $message }}</em></small>
                     @enderror
                 </div>
@@ -125,7 +128,7 @@
             
             <div class="row p-2">
                 <div class="col-xs-12 col-md-3 my-2">
-                    <label for="temperatura" class="text-sm text-gray-700 font-semibold tracking-wide">Temperatura °C
+                    <label for="temperatura" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Temperatura °C
                         <small>(*)</small></label>
                     <input type="text" placeholder="Ingrese la temperatura"
                         class="form-control sz placeholder:text-gray-300 placeholder:font-light" name="temperatura"
@@ -157,7 +160,7 @@
                 <div class="row p-2">
                     <div class="col-xs-12 col-md-3 my-2">
                         
-                        <select name='ensayos' id="ensayos"class="text-sm" data-search="true"  data-silent-initial-value-set="true">
+                        <select name='ensayos' id="ensayos" class="text-sm" data-search="true"  data-silent-initial-value-set="true" multiple="true">
                         @foreach($ensayos_lodo as $sl)
                         <option value="{{$sl->id}}"
                             {{ old('ensayos_lodo') == $sl->id ? 'selected' : '' }}> {{$sl->nombre}}</option>
@@ -172,7 +175,7 @@
                  </div>
 
 
-            <span class="ms-2 mb-0 font-light tracking-wide">Requerimientos de Lodo</span>
+            <span class="ms-2 mb-0 font-light tracking-wide">Requerimientos de Colchon</span>
             <hr class="ms-2 mt-1">
 
                 <div class="grid grid-cols-3 text-center bg-gray-100 py-2 my-3">
@@ -180,10 +183,10 @@
                     <p>Aditivo</p>
                     <p>Conc (% BWOC)</p>
                 </div>
-            <div id="container_formulaciones_tentativas"></div>
+            <div id="container_formulaciones_tentativas_lodo"></div>
 
             <div class="text-center mt-3">
-                <button id="btnAddFormulacion"
+                <button id="btnAddFormulacionLodo"
                     class="text-sm mt-2 bg-gray-200 hover:bg-gray-300 text-gray-600 p-1 rounded-md px-3 border transition-all duration-200 border-gray-300">
                     Agregar Formulación del Colchón
                 </button>
@@ -233,8 +236,8 @@
             <div class="col-span-2 md:col-span-1">
                 <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Ingrese una
                     observación (Opcional)</label>
-                <textarea name="observacion_lechada" rows="5" class="form-control text-sm"
-                    placeholder="Máximo 500 caracteres">{{ old('observacion_lechada') }}</textarea>
+                <textarea name="observacion_lodo" rows="5" class="form-control text-sm"
+                    placeholder="Máximo 500 caracteres">{{ old('observacion_lodo') }}</textarea>
             </div>
         </div>
     
@@ -253,7 +256,7 @@
                 <div>
                     <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de
                         Autorización</label>
-                    <input type="date" name="fecha_autorizacion_autorizacion" class="form-control text-sm"
+                    <input type="date" name="fecha_autorizacion_lodo" class="form-control text-sm"
                         value="@php echo date('Y-m-d') @endphp" readonly>
                 </div>
             </div>
@@ -264,11 +267,11 @@
                 <div class="grid">
                     <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">¿Quién
                         reconoce el trabajo?</label>
-                    <select name="firma_reconocimiento_lechada" id="firma_reconocimiento_lechada" data-search="true"
+                    <select name="firma_reconocimiento_lodo" id="firma_reconocimiento_lodo" data-search="true"
                         data-silent-initial-value-set="true">
                         @foreach ($users as $u)
                             <option value="{{ $u->id }}"
-                                {{ old('firma_reconocimiento_lechada') == $u->id ? 'selected' : '' }}>
+                                {{ old('firma_reconocimiento_lodo') == $u->id ? 'selected' : '' }}>
                                 {{ $u->nombre }} {{ $u->apellido }}</option>
                         @endforeach
                     </select>
@@ -277,26 +280,70 @@
                 <div>
                     <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de
                         Reconocimiento</label>
-                    <input type="date" name="fecha_reconocimiento_lechada"
-                        value="{{ old('fecha_reconocimiento_lechada') }}" class="form-control text-sm">
+                    <input type="date" name="fecha_reconocimiento_lodo"
+                        value="{{ old('fecha_reconocimiento_lodo') }}" class="form-control text-sm">
                 </div>
             </div>
         </section>
         <div class="flex items-center gap-3 md:justify-end mt-4 px-3 md:px-auto">
-            <button id="btnSubmitSolicitud"
+            <!button id="btnSubmitSolicitudLodo"
                 class="w-full md:w-auto bg-green-700 bg-opacity-60 text-white p-2 rounded-sm hover:shadow-lg transition-all duration-75 font-bold"
-                data-bs-toggle="modal" data-bs-target="#modal_confirm_lechada" onclick="event.preventDefault()">Enviar
-                Solicitud</button>
+                data-bs-toggle="modal" data-bs-target="#modal_confirm_lodo" onclick="event.preventDefault()">Enviar
+                Solicitud</!button>
+            <button id="btnSubmitSolicitudLodo"
+            class="w-full md:w-auto bg-green-700 bg-opacity-60 text-white p-2 rounded-sm hover:shadow-lg transition-all duration-75 font-bold"">
+            Enviar
+            Solicitud
+            </button>
         </div>
     </fieldset>
 </form>
+<script src="{{ asset('js/Solicitud/lodo/aditivos_lodo.js') }}"></script>
+@include('solicitud.components.lodo.modal_confirmar_solicitud')
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         VirtualSelect.init({
-            ele: "#cliente_lechada",
+            ele: "#cliente_lodo",
             placeholder: "Seleccione el cliente",
         });
-    });
-    document.getElementById("cliente_lechada").setValue(0);
+        VirtualSelect.init({
+            ele: "#locacion_lodo",
+            placeholder: "Seleccione la Locación",
+        });
+        VirtualSelect.init({
+            ele: "#equipo_lodo",
+            placeholder: "Seleccione el equipo",
+        });
+        VirtualSelect.init({
+            ele: "#tipo_lodo",
+            placeholder: "Seleccione el tipo de lodo",
+        });
+        VirtualSelect.init({
+            ele: "#servicios_lodo",
+            placeholder: "Seleccione el servicio",
+        });
+        VirtualSelect.init({
+            ele: "#mud_company",
+            placeholder: "Seleccione la compañia de lodo",
+        });
+        VirtualSelect.init({
+            ele: "#ensayos",
+            placeholder: "Seleccione los ensayos",
+        });
+        VirtualSelect.init({
+            ele: "#firma_reconocimiento_lodo",
+            placeholder: "Seleccione quien reconoce",
+        });
+             
+        document.getElementById("cliente_lodo").setValue(0);
+        document.getElementById("locacion_lodo").setValue(0);
+        document.getElementById("equipo_lodo").setValue(0);
+        document.getElementById("tipo_lodo").setValue(0);
+        document.getElementById("servicios_lodo").setValue(0);
+        document.getElementById("mud_company").setValue(0);
+        document.getElementById("ensayos").setValue(0);
+        document.getElementById("firma_reconocimiento_lodo").setValue(0);
+
+    })
 </script>

@@ -161,6 +161,7 @@
                                                             break;
                                                         case '3':
                                                             echo 'Solicitud de Lodo';
+                                                            $url = 'solicitud.lodo.show';
                                                             break;
                                                     }
                                                 @endphp

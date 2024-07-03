@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('equipos', function (Blueprint $table) {
-            $table->increments('id');
-            $table->ipAddress('nombre');
-            $table->foreignId('user_id')->references('id')->on('users');
-            $table->tinyInteger('estado')->default(1);
-            $table->timestamps();
+        Schema::table('ensayos_lodo', function (Blueprint $table) {
+            $table->string('nombre');
+
         });
     }
 
@@ -29,6 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('equipos');
+        Schema::table('ensayos_lodo', function (Blueprint $table) {
+            $table->dropColumn('nombre');
+        });
     }
 };

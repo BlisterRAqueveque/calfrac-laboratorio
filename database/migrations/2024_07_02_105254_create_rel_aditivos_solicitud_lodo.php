@@ -13,11 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('equipos', function (Blueprint $table) {
-            $table->increments('id');
-            $table->ipAddress('nombre');
-            $table->foreignId('user_id')->references('id')->on('users');
-            $table->tinyInteger('estado')->default(1);
+        Schema::create('rel_aditivos_solicitud_lodo', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('solicitud_lodo_id')->references('id')->on('solicitud_lodo');
+            $table->string('lote');
+            $table->string('aditivo');
+            $table->string('concentracion');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('equipos');
+        Schema::dropIfExists('rel_aditivos_solicitud_lodo');
     }
 };
