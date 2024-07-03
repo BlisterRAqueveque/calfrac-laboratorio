@@ -19,8 +19,7 @@ return new class extends Migration
             $table->integer('proyecto_number')->nullable();
             $table->integer('servicio_number')->nullable();
             $table->foreignId('cliente_id')->constrained()->onDelete('restrict');
-            $table->unsignedBigInteger('locacion_id')->nullable();
-            $table->foreign('locacion_id')->references('id')->on('yacimientos');
+            $table->foreignId('locacion_id')->constrained(table:'yacimientos');
             $table->string('programa')->nullable();
             $table->date('fecha_solicitud')->nullable();
             $table->string('empresa')->nullable();

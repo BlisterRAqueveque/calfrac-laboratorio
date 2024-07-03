@@ -11,9 +11,6 @@ class SolicitudLodo extends Model
     protected $table = 'solicitud_lodo';
 
     protected $fillable = [
-      'id',
-      'created_at',
-      'updated_at',
       'tipo_lodo',
       'profundidad_md',
       'profundidad_tvd',
@@ -24,5 +21,27 @@ class SolicitudLodo extends Model
       'firma_reconocimiento_id',
       'fecha_reconocimiento'  
     ];
+
+    
+    public function user_iniciado_por()
+    {
+        return $this->belongsTo(User::class, 'firma_iniciado_por_id');
+    }
+    public function user_servicio_tecnico()
+    {
+        return $this->belongsTo(User::class, 'firma_servicio_tecnico_id');
+    }
+    public function user_laboratorio()
+    {
+        return $this->belongsTo(User::class, 'firma_laboratorio_id');
+    }
+    public function user_reconocimiento()
+    {
+        return $this->belongsTo(User::class, 'firma_reconocimiento_id');
+    }
+
+    public function formulacion_tentativa() {
+      return $this->hasMany(RelAditivoSolicitudLodo::class);
+  }
 
 }

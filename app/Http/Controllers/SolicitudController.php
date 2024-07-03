@@ -12,6 +12,7 @@ use App\Models\Ensayo;
 use App\Models\MudCompany;
 use App\Models\OtrosAnalisis;
 use App\Models\RelAditivoSolicitudLechada;
+use App\Models\RelAditivoSolicitudLodo;
 use App\Models\RelEnsayoReferenciaSolicitud;
 use App\Models\RelFormulacionTentativa;
 use App\Models\SistemasFluidos;
@@ -30,6 +31,7 @@ use App\Models\Servicios;
 use App\Models\TipoLodo_Lodos;
 use App\Models\Equipos;
 use App\Models\EnsayosLodo;
+use App\Models\SolicitudLodo;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Mail;
@@ -450,9 +452,70 @@ class SolicitudController extends Controller
         $fundamento->save();
         return back();
     }
-
+    /**
+     * Crea una nueva Solicitud de Lodo
+     * Primero crea el encabezado general, que es la "Solicitud" y luego crea la "Solicitud de Lodo"
+     */
     public function store_lodo(Request $request)
     {
+        # Validamos los datos del encabezado general
+        $this->validate($request, [
+            'cliente_lodo' => 'required',
+            'locacion_lodo' => 'required',
+            'pozo_lodo' => 'required',
+            'tipo_lodo' => 'required',
+            'equipo_lodo' => 'required',
+            'servicios_lodo' => 'required',
+            'mud_company' => 'required',
+            'densidad_lodo_3' => 'required',
+            'temperatura' => 'required',
+            'profundidad_md' => 'required',
+            'profundidad_tvd' => 'required',
+            'ensayos' => 'required',
+            'vol_colchon' => 'required',
+            'densidad_colchon' => 'required',
+            'tiempo_contacto' => 'required',
+        ]);
+
+        # Solicitud General
+        $solicitud = Solicitud::create([
+            'tipo' => 3,
+            'cliente_id' => $request->cliente_lodo,
+            'locacion_id' => $request->locacion_lodo,
+            'fecha_solicitud' => date('Y-m-d'),
+            'pozo' => $request->pozo_lodo,
+            'equipo' => $request->equipo_lodo,
+            'servicio' => $request->servicios_lodo,
+            'estado_solicitud_id' => 1,
+            'user_id' => auth()->user()->id
+        ]);
+        # Solicitud Lodo
+        $solicitud_lodo = SolicitudLodo::create([
+            'tipo_lodo' => $request->tipo_lodo,
+            'profundidad_md' => $request->profundidad_md,
+            'profundidad_tvd' => $request->profundidad_tvd,
+            'solicitud_id' => $solicitud->id,
+            'usuario_carga' => auth()->user()->id,
+            'firma_autorizacion_id' => auth()->user()->id,
+            'fecha_autorizacion' => date('Y-m-d'),
+            'firma_reconocimiento_id' => $request->firma_reconocimiento_lodo,
+            'fecha_reconocimiento'  => $request->fecha_reconocimiento_lodo,
+        ]);
+
+        # Formulaciones Tentativas
+        if ($request->aditivos) {
+
+            foreach ($request->aditivos as $formulacion) {
+                RelAditivoSolicitudLodo::create([
+                    'solicitud_lodo_id' => $solicitud_lodo->id,
+                    'lote' => $formulacion['lote'],
+                    'aditivo' => $formulacion['aditivo'],
+                    'concentracion' => $formulacion['concentracion'],
+                ]);
+            }
+        }
+        if ($solicitud->id)
+            return redirect('solicitud')->with('success', $solicitud->id);
     }
     public function index()
     {
@@ -650,6 +713,7 @@ class SolicitudController extends Controller
                     }
                 }
             }
+            //  echo json_encode($generar_reporte);
             return response()->json(['generate_report' => $generar_reporte]);
         }
     }
@@ -693,7 +757,7 @@ class SolicitudController extends Controller
         } */
 
     // echo json_encode($generar_reporte);
-        
+
 
     /**
      * Envía el correo de que se creó una nuevo Solicitud de Fractura
