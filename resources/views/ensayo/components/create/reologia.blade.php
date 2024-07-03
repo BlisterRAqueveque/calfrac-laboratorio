@@ -82,19 +82,19 @@
                 <table class="w-full text-sm mt-3 border border-gray-300">
                     <thead class="bg-gray-200 text-gray-700">
                         <tr>
-                            <th class="p-1 text-center border border-gray-300"></th>
+                            <th class="p-1 text-center border border-gray-300">Temperatura °C</th>
                             <th class="p-1 text-center border border-gray-300">T° Ambiente</th>
                             <th class="p-1 text-center border border-gray-300">T° Ensayo</th>
                         </tr>
                     </thead>
                     <tbody class="bg-gray-50">
                         <tr class="border-b">
-                            <td class="py-2 px-1 text-center"></td>
+                            <td class="py-2 px-1 text-center">Viscosidad Plastica (cp)</td>
                             <td class="py-2 px-1 text-center">
-                                {{ $s_l[0]->rel_reologia[0]->temp_ambiente ? $s_l[0]->rel_reologia[0]->temp_ambiente : '-' }}°C
+                                {{ $s_l[0]->rel_reologia[0]->temp_ambiente ? $s_l[0]->rel_reologia[0]->temp_ambiente : '-' }}
                             </td>
                             <td class="py-2 px-1 text-center">
-                                {{ $s_l[0]->rel_reologia[0]->temp_ensayo ? $s_l[0]->rel_reologia[0]->temp_ensayo : '-' }}°C
+                                {{ $s_l[0]->rel_reologia[0]->temp_ensayo ? $s_l[0]->rel_reologia[0]->temp_ensayo : '-' }}
                             </td>
                         </tr>
                         <tr class="border-b">
@@ -199,7 +199,7 @@
                 <table class="w-full text-sm mt-3 border border-gray-300">
                     <thead class="bg-gray-200 text-gray-700">
                         <tr>
-                            <th class="p-1 text-center border border-gray-300"></th>
+                            <th class="p-1 text-center border border-gray-300">Temperatura °C</th>
                             <th class="p-1 text-center border border-gray-300">Tº Ambiente</th>
                             <th class="p-1 text-center border border-gray-300">Tº Ensayo</th>
                         </tr>
@@ -207,11 +207,11 @@
 
                     <tbody class="bg-gray-50">
                         <tr class="border-b">
-                            <td class="py-2 px-1 text-center"></td>
+                            <td class="py-2 px-1 text-center">Viscosidad Plastica (cp)</td>
                             <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
-                                    placeholder="Ingrese un ºC" name="temp_ambiente"></td>
+                                    placeholder="Ingrese viscosidad plastica" name="temp_ambiente"></td>
                             <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
-                                    placeholder="Ingrese un ºC" name="temp_ensayo"></td>
+                                    placeholder="Ingrese viscosidad plastica" name="temp_ensayo"></td>
                         </tr>
                         <tr class="border-b">
                             <td class="py-2 px-1 text-center">Punto de Cedencia (lb/100ft2)

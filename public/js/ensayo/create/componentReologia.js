@@ -116,7 +116,7 @@ const componentReologia = (data = "") => {
   td = el("td.py-2 px-1 text-center", `${data.temp_ensayo ? data.temp_ensayo : ''}°C`);
   mount(tr, td);
 
-  // Punto de Cedencia
+  // Punto de Ceciaden
   mount(tbody, tr);
   tr = el("tr.border-b");
   td = el("td.py-2 px-1 text-center", "Punto de Cedencia (lb/100ft2)");

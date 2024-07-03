@@ -389,13 +389,18 @@
                                 class="bg-gray-200 p-1 w-full max-w-28 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
                                 <input type="checkbox" name="ensayo_requerido_bullheading"
                                     id="ensayo_requerido_bullheading" class="inp_edit"
-                                    {{ $s_l[0]->ensayo_requerido_relleno == 1 ? 'checked' : '' }} disabled>
+                                    {{ $s_l[0]->ensayo_requerido_bullheading== 1 ? 'checked' : '' }} disabled>
                                 Bullheading</label>
                             <label for="ensayo_requerido_tapon"
                                 class="bg-gray-200 p-1 w-full max-w-28 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
                                 <input type="checkbox" name="ensayo_requerido_tapon" id="ensayo_requerido_tapon"
                                     class="inp_edit" {{ $s_l[0]->ensayo_requerido_tapon == 1 ? 'checked' : '' }} disabled>
                                 Tapón</label>
+                            <label for="ensayo_requerido_relleno"
+                                class="bg-gray-200 p-1 w-full max-w-28 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
+                                <input type="checkbox" name="ensayo_requerido_relleno" id="ensayo_requerido_relleno"
+                                    class="inp_edit" {{ $s_l[0]->ensayo_requerido_relleno == 1 ? 'checked' : '' }} disabled>
+                                Relleno</label>
                         </div>
                         @error('ensayo_requerido_lechada')
                             <small class="text-xs text-red-600">El ensayo es requerido</small>

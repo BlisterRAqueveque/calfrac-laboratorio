@@ -26,10 +26,6 @@ use App\Models\User;
 use App\Models\Yacimiento;
 use App\Models\AguaLibre;
 use App\Models\Sgs;
-use App\Models\Servicios;
-use App\Models\TipoLodo_Lodos;
-use App\Models\Equipos;
-use App\Models\EnsayosLodo;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Mail;
@@ -45,7 +41,7 @@ class SolicitudController extends Controller
     {
         $this->authorize('create', Solicitud::class);
         $data = [
-            'ensayos' => Ensayo::where('tipo', 'CN')->where('estado', 1)->get(),
+            'ensayos' => Ensayo::where('tipo', 'CN')->get(),
             'clientes' => Cliente::all(),
             'yacimientos' => Yacimiento::all(),
             'sistemas_fluidos' => SistemasFluidos::all(),
@@ -60,10 +56,6 @@ class SolicitudController extends Controller
             'users' => User::all(),
             'sgs' => Sgs::all(),
             'agua_libre' => AguaLibre::all(),
-            'servicios' => Servicios::all(),
-            'tipo_lodo_Lodos' => TipoLodo_Lodos::all(),
-            'equipos' => Equipos::all(),
-            'ensayos_lodo' => EnsayosLodo::all()
         ];
         return view('solicitud.create', $data);
     }
@@ -149,11 +141,8 @@ class SolicitudController extends Controller
             'usuario_carga' => auth()->user()->id
         ]);
 
-        $emailsAEnviar = [];
-         
         # Envío de Emails
         $correos = [];
-        /*
         if ($solicitud_fractura->user_iniciado_por)
             $correos[] = $solicitud_fractura->user_iniciado_por->email;
         if ($solicitud_fractura->user_servicio_tecnico)
@@ -162,19 +151,16 @@ class SolicitudController extends Controller
             $correos[] = $solicitud_fractura->user_laboratorio->email;
         if ($solicitud_fractura->user_reconocimiento)
             $correos[] = $solicitud_fractura->user_reconocimiento->email;
-        //Podria hardcodear mi email aca para probar?
-        */
-        $correos[] = "franco.marquez@blistertechnologies.com";
+
         $data = [
             'solicitud_id' => $solicitud->id,
             'locacion_id' => $request->locacion,
             'fecha_solicitud' => $request->fecha_solicitud,
             'usuario_carga' => auth()->user()->nombre . ' ' . auth()->user()->apellido,
             'cliente' => $request->cliente,
-            //'empresa' => $request->empresa
+            'empresa' => $request->empresa
         ];
-        $this->_sendEmailNew($data, $correos);         //Podria hardcodear mi email aca para probar?
-
+        $this->_sendEmailNew($data, $correos);
         // -- Finaliza el envío de emails
 
         if ($solicitud->id)
@@ -225,8 +211,7 @@ class SolicitudController extends Controller
         # Solicitud de Lechada
         $solicitud_lechada = SolicitudLechada::create([
             'ensayo_requerido_principal' => $request->ensayo_requerido_principal == 'on' ? 1 : 0,
-            'ensayo_requerido_bullheading' => $request->ensayo_requerido_bullheading == 'on' ? 1 : 0,
-            'ensayo_requerido_relleno' => $request->ensayo_requerido_relleno == 'on' ? 1 : 0,
+            'ensayo_requerido_relleno' => $request->ensayo_requerido_bullheading == 'on' ? 1 : 0,
             'ensayo_requerido_tapon' => $request->ensayo_requerido_tapon == 'on' ? 1 : 0,
             'OH' => $request->OH,
             'trepano' => $request->trepano,
@@ -265,10 +250,8 @@ class SolicitudController extends Controller
             'fecha_reconocimiento' => $request->fecha_reconocimiento_lechada,
             'solicitud_id' => $solicitud->id,
             'usuario_carga' => auth()->user()->id
-
         ]);
 
-        
         // == Relaciones ==
 
         # Ensayos de Referencias
@@ -348,7 +331,7 @@ class SolicitudController extends Controller
             'locacion_fractura' => 'required',
             'programa' => 'required',
             'fecha_solicitud' => 'required',
-            // 'empresa' => 'required',
+            'empresa' => 'required',
             // 'fecha_tratamiento' => 'required',
             'pozo' => 'required',
             'rep_compania' => 'required',
@@ -476,7 +459,6 @@ class SolicitudController extends Controller
             'users' => User::all(),
             'clientes' => Cliente::all(),
             'yacimientos' => Yacimiento::all(),
-            'equipos' => Equipos::all(),
             // 'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
         return view('solicitud.components.fractura.show', $data);
@@ -501,8 +483,7 @@ class SolicitudController extends Controller
             'tipo_trabajos' => TipoTrabajoCemento::all(),
             'tipo_cementacion' => TipoCementacion::all(),
             'mud_company' => MudCompany::all(),
-            'equipos'=> Equipos::all(),
-            //'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
+            // 'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
         $generate_report = $this->_generate_report($solicitud_id);
         $data['generar_reporte'] = $generate_report->original['generate_report'];

@@ -121,7 +121,6 @@ Route::post('/equipo/update', [EquiposController::class, 'update'])->name('equip
 Route::post('/equipo/deshabilitar', [EquiposController::class, 'deshabilitar'])->name('equipos.deshabilitar');
 
 
-
 # Permisos
 Route::get('/permisos', [PermisosController::class, 'index'])->name('permisos');
 Route::post('/permiso', [PermisosController::class, 'store'])->name('permiso.store');

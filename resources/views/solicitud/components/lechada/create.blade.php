@@ -236,16 +236,16 @@
                             <input type="checkbox" name="ensayo_requerido_bullheading"
                                 id="ensayo_requerido_bullheading">
                             Bullheading</label>
-                        {{--<label for="ensayo_requerido_cabecera"
-                            class="bg-gray-200 p-1 w-full max-w-28 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
-                            <input type="checkbox" name="ensayo_requerido_cabecera"
-                                id="ensayo_requerido_cabecera">
-                            Cabecera</label>--}}
                         <label for="ensayo_requerido_tapon"
                             class="bg-gray-200 p-1 w-full max-w-28 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
                             <input type="checkbox" name="ensayo_requerido_tapon"
                                 id="ensayo_requerido_tapon">
                             Tapón</label>
+                        <label for="ensayo_requerido_relleno"
+                            class="bg-gray-200 p-1 w-full max-w-28 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
+                            <input type="checkbox" name="ensayo_requerido_relleno"
+                                id="ensayo_requerido_relleno">
+                            Relleno</label>
                     </div>
                 </div>
             </div>
@@ -740,6 +740,7 @@
         mount(container_ensayo_referencia, div)
         aux++;
     })
+    
     const selectEnsayo = (e, aux) => {
         event.preventDefault();
         let flex_div = document.getElementById(`flex_ensayo_${aux}`)

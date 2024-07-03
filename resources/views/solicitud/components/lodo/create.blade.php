@@ -291,3 +291,12 @@
     </fieldset>
 </form>
 
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        VirtualSelect.init({
+            ele: "#cliente_lechada",
+            placeholder: "Seleccione el cliente",
+        });
+    });
+    document.getElementById("cliente_lechada").setValue(0);
+</script>
