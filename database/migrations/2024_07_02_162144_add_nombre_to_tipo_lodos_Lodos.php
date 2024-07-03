@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::table('tipo_lodos_Lodos', function (Blueprint $table) {
             $table->string('nombre');
+            $table->tinyInteger('estado')->default(1);
         });
     }
 
@@ -27,7 +28,7 @@ return new class extends Migration
     {
         Schema::table('tipo_lodos_Lodos', function (Blueprint $table) {
             $table->dropColumn('nombre');
-
+            $table->dropColumn('estado');
         });
     }
 };

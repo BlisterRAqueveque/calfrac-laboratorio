@@ -37,6 +37,7 @@ return new class extends Migration
             $table->tinyInteger('ensayo_requerido_principal')->nullable()->default(0)->comment('1: Se necesita el Ensayo principal | 0: No se necesita');
             $table->tinyInteger('ensayo_requerido_relleno')->nullable()->default(0)->comment('1: Se necesita el Ensayo relleno | 0: No se necesita');
             $table->tinyInteger('ensayo_requerido_tapon')->nullable()->default(0)->comment('1: Se necesita el Ensayo tapon | 0: No se necesita');
+            $table->tinyInteger('ensayo_requerido_bullheading')->nullable()->default(0)->comment('1: Se necesita el Ensayo bullheading | 0: No se necesita');
             $table->string('reologia')->nullable();
             $table->string('densidad')->nullable();
             $table->string('filtrado')->nullable();

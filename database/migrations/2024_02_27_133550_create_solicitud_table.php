@@ -44,6 +44,7 @@ return new class extends Migration
             $table->text('fundamento_asignacion')->nullable();
             $table->dateTime('fecha_asignacion')->nullable();
             $table->tinyInteger('activo')->default(1)->comment('1: Activo - 0: Inactivo (Visualizacion en el sistema)');
+            $table->string('tipo_lodo', length: 50)->default('1');
             $table->foreignId('user_id')->constrained()->onDelete('restrict');
             $table->timestamps();
         });
