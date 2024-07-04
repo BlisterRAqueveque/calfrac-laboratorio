@@ -372,7 +372,6 @@
                             class="form-control text-sm p-2" placeholder="MD" step=".01">
                         <input type="number" name="top_of_slurry_tvd" value="{{ old('top_of_slurry_tvd') }}"
                             class="form-control text-sm p-2" placeholder="TVD" step=".01">
-
                     </div>
                 </div>
 

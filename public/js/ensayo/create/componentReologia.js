@@ -67,7 +67,6 @@ const componentReologia = (data = "") => {
   mount(tr, td);
 
   mount(tbody, tr);
-
   tr = el("tr.border-b");
   td = el("td.py-2 px-1 text-center", "T° Ensayo");
   mount(tr, td);
@@ -75,17 +74,17 @@ const componentReologia = (data = "") => {
   mount(tr, td);
   td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_300 ? data.tem_ensayo_300 : '-'}`);
   mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_300 ? data.tem_ensayo_300 : '-'}`);
+  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_200 ? data.tem_ensayo_200 : '-'}`);
   mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_300 ? data.tem_ensayo_300 : '-'}`);
+  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_100 ? data.tem_ensayo_100 : '-'}`);
   mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_300 ? data.tem_ensayo_300 : '-'}`);
+  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_60 ? data.tem_ensayo_60 : '-'}`);
   mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_300 ? data.tem_ensayo_300 : '-'}`);
+  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_30 ? data.tem_ensayo_30 : '-'}`);
   mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_300 ? data.tem_ensayo_300 : '-'}`);
+  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_6 ? data.tem_ensayo_6 : '-'}`);
   mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_300 ? data.tem_ensayo_300 : '-'}`);
+  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_3 ? data.tem_ensayo_3 : '-'}`);
   mount(tr, td);
 
   mount(tbody, tr);
