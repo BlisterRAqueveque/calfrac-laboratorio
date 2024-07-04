@@ -715,8 +715,8 @@ class SolicitudController extends Controller
                 }
             }
             //  echo json_encode($generar_reporte);
-            return response()->json(['generate_report' => $generar_reporte]);
         }
+        return response()->json(['generate_report' => $generar_reporte]);
     }
     // Reología
     /*  if (count($solicitud_lechada[0]->rel_reologia) > 0) {
