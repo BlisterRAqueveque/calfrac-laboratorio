@@ -158,7 +158,7 @@
             <span class="ms-2 mb-0 font-light tracking-wide">Ensayos requeridos (*)</span>
             <hr class="ms-2 mt-1">
                 <div class="row p-2">
-                    <div class="col-xs-12 col-md-3 my-2">
+                    <div class="col-xs-12 col-md-6 my-2">
                         
                         <select name='ensayos' id="ensayos" class="text-sm" data-search="true"  data-silent-initial-value-set="true" multiple="true">
                         @foreach($ensayos_lodo as $sl)
