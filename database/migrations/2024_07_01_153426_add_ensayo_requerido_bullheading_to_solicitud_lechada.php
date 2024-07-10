@@ -26,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('solicitud_lechada', function (Blueprint $table) {
-            //
+            $table->dropColumn('ensayo_requerido_bullheading');
         });
     }
 };

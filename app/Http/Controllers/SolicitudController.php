@@ -609,8 +609,9 @@ class SolicitudController extends Controller
         // Change => Datos de la solicitud de lechada
         $solicitud_lechada = SolicitudLechada::where('solicitud_id', $solicitud->id)->first();
         $solicitud_lechada->ensayo_requerido_principal = $request->ensayo_requerido_principal == 'on' ? 1 : 0;
-        $solicitud_lechada->ensayo_requerido_relleno = $request->ensayo_requerido_bullheading == 'on' ? 1 : 0;
+        $solicitud_lechada->ensayo_requerido_bullheading = $request->ensayo_requerido_bullheading == 'on' ? 1 : 0;
         $solicitud_lechada->ensayo_requerido_tapon = $request->ensayo_requerido_tapon == 'on' ? 1 : 0;
+        $solicitud_lechada->ensayo_requerido_relleno = $request->ensayo_requerido_relleno == 'on' ? 1 : 0;
         $solicitud_lechada->OH = $request->OH;
         $solicitud_lechada->trepano = $request->trepano;
         $solicitud_lechada->casing_id = $request->casing_id;

@@ -147,7 +147,7 @@
                     <li class="nav-item w-full text-center md:w-auto" role="presentation">
                         <a class="nav-link nav_tab_mod text-violet-800 dark:text-violet-400 @if (session('success')) active @endif"
                             aria-current="page" id="nav-tab2" href="#tab2-content" data-bs-toggle="tab"
-                            data-bs-target="#tab2-content" role="tab" aria" id="nav-tab2" data-bs-toggle="tab"
+                            data-bs-target="#tab2-content" role="tab aria" id="nav-tab2" data-bs-toggle="tab"
                             role="tab">Ensayo</a>
                     </li>
                 @else
