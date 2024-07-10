@@ -13,9 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('tipo_lodos_Lodos', function (Blueprint $table) {
+        Schema::create('rel_ensayos_requeridos_lodo', function (Blueprint $table) {
+            $table->id();
             $table->string('nombre');
-            $table->tinyInteger('estado')->default(1);
+            $table->foreignId('id_ensayo')->constrained(table:'ensayos_lodo');
+            $table->timestamps();
         });
     }
 
@@ -26,9 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('tipo_lodos_Lodos', function (Blueprint $table) {
-            $table->dropColumn('nombre');
-            $table->dropColumn('estado');
-        });
+        Schema::dropIfExists('rel_ensayos_requeridos_lodo');
     }
 };

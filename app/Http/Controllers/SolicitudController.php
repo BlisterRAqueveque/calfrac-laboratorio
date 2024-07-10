@@ -698,7 +698,7 @@ class SolicitudController extends Controller
     {
         $generar_reporte = false;
         $solicitud_lechada = SolicitudLechada::where('solicitud_id', $solicitud_id)->get();
-
+        /* 
         $count_reologia = count($solicitud_lechada[0]->rel_reologia);
         $count_perdida = count($solicitud_lechada[0]->rel_perdida_filtrado);
         $count_rel_uca = count($solicitud_lechada[0]->rel_uca);
@@ -714,13 +714,10 @@ class SolicitudController extends Controller
                         break;
                     }
                 }
-            }
-            //  echo json_encode($generar_reporte);
-        }
-        return response()->json(['generate_report' => $generar_reporte]);
-    }
-    // Reología
-    /*  if (count($solicitud_lechada[0]->rel_reologia) > 0) {
+            } */
+        //  echo json_encode($generar_reporte);
+        // Reología
+        if (count($solicitud_lechada[0]->rel_reologia) > 0) {
             // Pérdida de Filtrado
             if (count($solicitud_lechada[0]->rel_perdida_filtrado) > 0) {
                 // UCA
@@ -751,14 +748,16 @@ class SolicitudController extends Controller
                 } else {
                     $generar_reporte = false;
                 }
-            } else {/*  
+            } else {
                 $generar_reporte = false;
             }
         } else {
             $generar_reporte = false;
-        } */
+        }
 
-    // echo json_encode($generar_reporte);
+        echo json_encode($generar_reporte);
+        return response()->json(['generate_report' => $generar_reporte]);
+    }
 
 
     /**
