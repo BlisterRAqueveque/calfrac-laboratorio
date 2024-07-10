@@ -133,3 +133,4 @@ Route::get('/testing', [PermisosController::class, 'testing']);
 Route::get('/pdf/report/lechada/{solicitud_id}', [PDFController::class, 'pdf_report_lechada'])->name('pdf_report_lechada');
 Route::post('/pdf/report/lechada/send/{solicitud_id}', [PDFController::class, 'pdf_send_report_lechada'])->name('pdf_send_report_lechada');
 Route::get('/pdf/view', [PDFController::class, 'pdf_view']);
+# Route::get('/pdf/report/lechadas/{solicitud_id}', [PDFController::class, 'pdf_report_lechada'])->name('pdf_report_lechadas');
