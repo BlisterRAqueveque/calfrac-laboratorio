@@ -20,7 +20,7 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'cliente' => 'required',
+            'cliente' => 'required|unique:clientes,nombre',
         ]);
 
         Cliente::create([
