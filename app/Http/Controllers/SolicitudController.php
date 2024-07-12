@@ -688,6 +688,22 @@ class SolicitudController extends Controller
             return back()->with('success', $solicitud->id);
     }
 
+    public function update_lodo(Request $request){
+        $aditivos_request = $request->aditivos;
+        $id_aditivos = array_column($aditivos_request, 'id');
+
+        # Validamos los datos del encabezado general
+        $this->validate($request, [
+            'cliente_lodo' => 'required',
+            'locacion_lodo' => 'required',
+            'programa_lodo' => 'required',
+            'pozo_lodo' => 'required',
+            'fecha_resultados_lodo' => 'required',
+            'equipo_lodo' => 'required',
+            'servicio_lodo' => 'required',
+        ]);
+
+    }
     /**
      * Se que es un código asqueroso, pero una condición si o si depende de la otra
      * ya lo arregle pa (f.m)

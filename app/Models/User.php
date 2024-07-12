@@ -28,6 +28,7 @@ class User extends Authenticatable
         'password',
         'usuario_carga_id',
         'estado',
+        'firma'
     ];
 
     /**

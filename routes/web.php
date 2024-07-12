@@ -75,6 +75,7 @@ Route::post('/solicitud/lodo', [SolicitudController::class, 'store_lodo'])->name
 Route::get('/solicitudes/lodo/{solicitud_id}', [SolicitudController::class, 'show_lodo'])->name('solicitud.lodo.show');
 Route::post('/solicitud/edicion/lodo', [SolicitudController::class, 'update_lodo'])->name('solicitud.update.lodo');
 
+
 // Route::get('/send-email', [SolicitudController::class, 'sendEmail']);
 Route::get('/send-email', [SolicitudController::class, 'viewMail']);
 

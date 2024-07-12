@@ -554,4 +554,22 @@
             })
         })
     </script>
+
+    <!-- Agregar firma -->
+    <script>
+        function setFirma(id) {
+                    event.preventDefault();
+                    document.getElementById(id).click();
+                }
+
+        function displayFirma(e, id_firma) {
+            if (e.files[0]) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    document.querySelector(`.${id_firma}`).setAttribute('src', e.target.result);
+                }
+                reader.readAsDataURL(e.files[0]);
+            }
+        }
+    </script>
 @endsection
