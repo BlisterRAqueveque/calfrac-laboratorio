@@ -1,13 +1,15 @@
 <div class="mt-4 tab-pane fade show active" id="tab-reologia" role="tabpanel"> <!-- Reología -->
 
     @if (count($s_l[0]->rel_reologia) > 0)
-        <div class="mb-2 text-center">
-            <h5 class="mb-1">Registro de Reología</h5>
-            {{-- <small>(Recuerde que debe seleccionar de todos los intentos una Reología correctamente)</small> --}}
-        </div>
 
         <div class="accordion" id="accordionReologia">
             <div>
+                <div class="mb-2 text-center">
+                    <h5 class="mb-1 text-center ">Registro de Reologías </h5>
+                    <br>
+                    <h5 class="mb-1 text-center ">Reología (avg reads)<span class="text-red-500"> *</span></h5>
+                    {{-- <small>(Recuerde que debe seleccionar de todos los intentos una Reología correctamente)</small> --}}
+                </div>
                 <table class="w-full text-sm border border-gray-300">
                     <thead class="bg-gray-200 text-gray-700">
                         <tr>
@@ -29,25 +31,25 @@
                                 {{ $s_l[0]->rel_reologia[0]->tem_ambiente_rpm . '°C' ? $s_l[0]->rel_reologia[0]->tem_ambiente_rpm : '-' }}°C
                             </td>
                             <td class="py-2 px-1 text-center">
-                                {{ $s_l[0]->rel_reologia[0]->tem_abiente_300 ? $s_l[0]->rel_reologia[0]->tem_abiente_300 : '-' }}
+                                {{ $s_l[0]->rel_reologia[0]->tem_ambiente_300 ? $s_l[0]->rel_reologia[0]->tem_ambiente_300 : '-' }}
                             </td>
                             <td class="py-2 px-1 text-center">
-                                {{ $s_l[0]->rel_reologia[0]->tem_abiente_200 ? $s_l[0]->rel_reologia[0]->tem_abiente_200 : '-' }}
+                                {{ $s_l[0]->rel_reologia[0]->tem_ambiente_200 ? $s_l[0]->rel_reologia[0]->tem_ambiente_200 : '-' }}
                             </td>
                             <td class="py-2 px-1 text-center">
-                                {{ $s_l[0]->rel_reologia[0]->tem_abiente_100 ? $s_l[0]->rel_reologia[0]->tem_abiente_100 : '-' }}
+                                {{ $s_l[0]->rel_reologia[0]->tem_ambiente_100 ? $s_l[0]->rel_reologia[0]->tem_ambiente_100 : '-' }}
                             </td>
                             <td class="py-2 px-1 text-center">
-                                {{ $s_l[0]->rel_reologia[0]->tem_abiente_60 ? $s_l[0]->rel_reologia[0]->tem_abiente_60 : '-' }}
+                                {{ $s_l[0]->rel_reologia[0]->tem_ambiente_60 ? $s_l[0]->rel_reologia[0]->tem_ambiente_60 : '-' }}
                             </td>
                             <td class="py-2 px-1 text-center">
                                 {{ $s_l[0]->rel_reologia[0]->tem_ambiente_30 ? $s_l[0]->rel_reologia[0]->tem_ambiente_30 : '-' }}
                             </td>
                             <td class="py-2 px-1 text-center">
-                                {{ $s_l[0]->rel_reologia[0]->tem_abiente_6 ? $s_l[0]->rel_reologia[0]->tem_abiente_6 : '-' }}
+                                {{ $s_l[0]->rel_reologia[0]->tem_ambiente_6 ? $s_l[0]->rel_reologia[0]->tem_ambiente_6 : '-' }}
                             </td>
                             <td class="py-2 px-1 text-center">
-                                {{ $s_l[0]->rel_reologia[0]->tem_abiente_3 ? $s_l[0]->rel_reologia[0]->tem_abiente_3 : '-' }}
+                                {{ $s_l[0]->rel_reologia[0]->tem_ambiente_3 ? $s_l[0]->rel_reologia[0]->tem_ambiente_3 : '-' }}
                             </td>
                         </tr>
                         <tr class="border-b">
@@ -68,7 +70,7 @@
                                 {{ $s_l[0]->rel_reologia[0]->tem_ensayo_60 ? $s_l[0]->rel_reologia[0]->tem_ensayo_60 : '-' }}
                             </td>
                             <td class="py-2 px-1 text-center">
-                                {{ $s_l[0]->rel_reologia[0]->tem_ambiente_30 ? $s_l[0]->rel_reologia[0]->tem_ambiente_30 : '-' }}
+                                {{ $s_l[0]->rel_reologia[0]->tem_ensayo_30 ? $s_l[0]->rel_reologia[0]->tem_ensayo_30 : '-' }}
                             </td>
                             <td class="py-2 px-1 text-center">
                                 {{ $s_l[0]->rel_reologia[0]->tem_ensayo_6 ? $s_l[0]->rel_reologia[0]->tem_ensayo_6 : '-' }}
@@ -82,19 +84,19 @@
                 <table class="w-full text-sm mt-3 border border-gray-300">
                     <thead class="bg-gray-200 text-gray-700">
                         <tr>
-                            <th class="p-1 text-center border border-gray-300"></th>
+                            <th class="p-1 text-center border border-gray-300">Temperatura °C</th>
                             <th class="p-1 text-center border border-gray-300">T° Ambiente</th>
                             <th class="p-1 text-center border border-gray-300">T° Ensayo</th>
                         </tr>
                     </thead>
                     <tbody class="bg-gray-50">
                         <tr class="border-b">
-                            <td class="py-2 px-1 text-center"></td>
+                            <td class="py-2 px-1 text-center">Viscosidad Plastica (cp)</td>
                             <td class="py-2 px-1 text-center">
-                                {{ $s_l[0]->rel_reologia[0]->temp_ambiente ? $s_l[0]->rel_reologia[0]->temp_ambiente : '-' }}°C
+                                {{ $s_l[0]->rel_reologia[0]->temp_ambiente ? $s_l[0]->rel_reologia[0]->temp_ambiente : '-' }}
                             </td>
                             <td class="py-2 px-1 text-center">
-                                {{ $s_l[0]->rel_reologia[0]->temp_ensayo ? $s_l[0]->rel_reologia[0]->temp_ensayo : '-' }}°C
+                                {{ $s_l[0]->rel_reologia[0]->temp_ensayo ? $s_l[0]->rel_reologia[0]->temp_ensayo : '-' }}
                             </td>
                         </tr>
                         <tr class="border-b">
@@ -126,6 +128,158 @@
                         </tr>
                     </tbody>
                 </table>
+                <br>
+                <div class="mb-2">
+                    <h5 class="mb-1 text-center">Reología (up reads)</h5>
+                    {{-- <small>(Recuerde que debe seleccionar de todos los intentos una Reología correctamente)</small> --}}
+                </div>
+                    <table class="w-full text-sm border border-gray-300">
+                        <thead class="bg-gray-200 text-gray-700">
+                            <tr>
+                                <th class="border border-gray-300"></th>
+                                <th class="p-1 text-center border border-gray-300">RPM</th>
+                                <th class="p-1 text-center border border-gray-300">300</th>
+                                <th class="p-1 text-center border border-gray-300">200</th>
+                                <th class="p-1 text-center border border-gray-300">100</th>
+                                <th class="p-1 text-center border border-gray-300">60</th>
+                                <th class="p-1 text-center border border-gray-300">30</th>
+                                <th class="p-1 text-center border border-gray-300">6</th>
+                                <th class="p-1 text-center border border-gray-300">3</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-gray-50">
+                            <tr class="border-b">
+                                <td class="py-2 px-1 text-center">T° Ambiente</td>
+                                <td class="py-2 px-1 text-center">
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_rpm_up . '°C' ? $s_l[0]->rel_reologia[0]->tem_ambiente_rpm_up : '-' }}°C
+                                </td>
+                                <td class="py-2 px-1 text-center">
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_300_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_300_up : '-' }}
+                                </td>
+                                <td class="py-2 px-1 text-center">
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_200_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_200_up : '-' }}
+                                </td>
+                                <td class="py-2 px-1 text-center">
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_100_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_100_up : '-' }}
+                                </td>
+                                <td class="py-2 px-1 text-center">
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_60_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_60_up : '-' }}
+                                </td>
+                                <td class="py-2 px-1 text-center">
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_30_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_30_up : '-' }}
+                                </td>
+                                <td class="py-2 px-1 text-center">
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_6_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_6_up : '-' }}
+                                </td>
+                                <td class="py-2 px-1 text-center">
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_3_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_3_up : '-' }}
+                                </td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="py-2 px-1 text-center">T° Ensayo</td>
+                                <td class="py-2 px-1 text-center">
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_rpm_up . '°C' ? $s_l[0]->rel_reologia[0]->tem_ensayo_rpm_up : '-' }}°C
+                                </td>
+                                <td class="py-2 px-1 text-center">
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_300_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_300_up : '-' }}
+                                </td>
+                                <td class="py-2 px-1 text-center">
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_200_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_200_up : '-' }}
+                                </td>
+                                <td class="py-2 px-1 text-center">
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_100_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_100_up : '-' }}
+                                </td>
+                                <td class="py-2 px-1 text-center">
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_60_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_60_up : '-' }}
+                                </td>
+                                <td class="py-2 px-1 text-center">
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_30_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_30_up : '-' }}
+                                </td>
+                                <td class="py-2 px-1 text-center">
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_6_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_6_up : '-' }}
+                                </td>
+                                <td class="py-2 px-1 text-center">
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_3_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_3_up : '-' }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                    <div class="mb-2 ">
+                        <h5 class="mb-1 text-center">Reología (down reads)</h5>
+                        {{-- <small>(Recuerde que debe seleccionar de todos los intentos una Reología correctamente)</small> --}}
+                    </div>
+                        <table class="w-full text-sm border border-gray-300">
+                            <thead class="bg-gray-200 text-gray-700">
+                                <tr>
+                                    <th class="border border-gray-300"></th>
+                                    <th class="p-1 text-center border border-gray-300">RPM</th>
+                                    <th class="p-1 text-center border border-gray-300">300</th>
+                                    <th class="p-1 text-center border border-gray-300">200</th>
+                                    <th class="p-1 text-center border border-gray-300">100</th>
+                                    <th class="p-1 text-center border border-gray-300">60</th>
+                                    <th class="p-1 text-center border border-gray-300">30</th>
+                                    <th class="p-1 text-center border border-gray-300">6</th>
+                                    <th class="p-1 text-center border border-gray-300">3</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-gray-50">
+                                <tr class="border-b">
+                                    <td class="py-2 px-1 text-center">T° Ambiente</td>
+                                    <td class="py-2 px-1 text-center">
+                                        {{ $s_l[0]->rel_reologia[0]->tem_ambiente_rpm_down . '°C' ? $s_l[0]->rel_reologia[0]->tem_ambiente_rpm_down : '-' }}°C
+                                    </td>
+                                    <td class="py-2 px-1 text-center">
+                                        {{ $s_l[0]->rel_reologia[0]->tem_ambiente_300_down ? $s_l[0]->rel_reologia[0]->tem_ambiente_300_down : '-' }}
+                                    </td>
+                                    <td class="py-2 px-1 text-center">
+                                        {{ $s_l[0]->rel_reologia[0]->tem_ambiente_200_down ? $s_l[0]->rel_reologia[0]->tem_ambiente_200_down : '-' }}
+                                    </td>
+                                    <td class="py-2 px-1 text-center">
+                                        {{ $s_l[0]->rel_reologia[0]->tem_ambiente_100_down ? $s_l[0]->rel_reologia[0]->tem_ambiente_100_down : '-' }}
+                                    </td>
+                                    <td class="py-2 px-1 text-center">
+                                        {{ $s_l[0]->rel_reologia[0]->tem_ambiente_60_down ? $s_l[0]->rel_reologia[0]->tem_ambiente_60_down : '-' }}
+                                    </td>
+                                    <td class="py-2 px-1 text-center">
+                                        {{ $s_l[0]->rel_reologia[0]->tem_ambiente_30_down ? $s_l[0]->rel_reologia[0]->tem_ambiente_30_down : '-' }}
+                                    </td>
+                                    <td class="py-2 px-1 text-center">
+                                        {{ $s_l[0]->rel_reologia[0]->tem_ambiente_6_down ? $s_l[0]->rel_reologia[0]->tem_ambiente_6_down : '-' }}
+                                    </td>
+                                    <td class="py-2 px-1 text-center">
+                                        {{ $s_l[0]->rel_reologia[0]->tem_ambiente_6_down ? $s_l[0]->rel_reologia[0]->tem_ambiente_3_down : '-' }}
+                                    </td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="py-2 px-1 text-center">T° Ensayo</td>
+                                    <td class="py-2 px-1 text-center">
+                                        {{ $s_l[0]->rel_reologia[0]->tem_ensayo_rpm_down . '°C' ? $s_l[0]->rel_reologia[0]->tem_ensayo_rpm_down : '-' }}°C
+                                    </td>
+                                    <td class="py-2 px-1 text-center">
+                                        {{ $s_l[0]->rel_reologia[0]->tem_ensayo_300_down ? $s_l[0]->rel_reologia[0]->tem_ensayo_300_down : '-' }}
+                                    </td>
+                                    <td class="py-2 px-1 text-center">
+                                        {{ $s_l[0]->rel_reologia[0]->tem_ensayo_200_down ? $s_l[0]->rel_reologia[0]->tem_ensayo_200_down : '-' }}
+                                    </td>
+                                    <td class="py-2 px-1 text-center">
+                                        {{ $s_l[0]->rel_reologia[0]->tem_ensayo_100_down ? $s_l[0]->rel_reologia[0]->tem_ensayo_100_down : '-' }}
+                                    </td>
+                                    <td class="py-2 px-1 text-center">
+                                        {{ $s_l[0]->rel_reologia[0]->tem_ensayo_60_down ? $s_l[0]->rel_reologia[0]->tem_ensayo_60_down : '-' }}
+                                    </td>
+                                    <td class="py-2 px-1 text-center">
+                                        {{ $s_l[0]->rel_reologia[0]->tem_ensayo_30_down ? $s_l[0]->rel_reologia[0]->tem_ensayo_30_down : '-' }}
+                                    </td>
+                                    <td class="py-2 px-1 text-center">
+                                        {{ $s_l[0]->rel_reologia[0]->tem_ensayo_6_down ? $s_l[0]->rel_reologia[0]->tem_ensayo_6_down : '-' }}
+                                    </td>
+                                    <td class="py-2 px-1 text-center">
+                                        {{ $s_l[0]->rel_reologia[0]->tem_ensayo_3_down ? $s_l[0]->rel_reologia[0]->tem_ensayo_3_down : '-' }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                    </table>
             </div>
         </div>
     @else
@@ -133,9 +287,18 @@
     @endif
 
     @if (count($s_l[0]->rel_reologia) == 0)
-        {{-- <form action="{{ route('store_reologia') }}" method="POST"> --}}
         <form id="form_reologia" method="POST">
             @csrf
+            <div class="mb-2 text-center">
+                <h5 class="mb-1">Registros de Reologías</h5>
+                <br>
+            </div>
+            
+        {{-- <form action="{{ route('store_reologia') }}" method="POST"> --}}
+            <div class="mb-2 text-center">
+                <h5 class="mb-1">Reología (avg reads)<span class="text-red-500"> *<small> requerido</small></span></h5>
+                {{-- <small>(Recuerde que debe seleccionar de todos los intentos una Reología correctamente)</small> --}}
+            </div>
             <input type="hidden" name="solicitud_lechada_id" value="{{ $s_l[0]->id }}">
             <div class="row mt-3 py-2 px-5">
                 <table class="w-full text-sm border border-gray-300">
@@ -157,7 +320,11 @@
                         <tr class="border-b">
                             <td class="py-2 px-1">Tº Ambiente</td>
                             <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
-                                    placeholder="Cº" name="tem_ambiente_rpm"></td>
+                                    placeholder="Cº" name="tem_ambiente_rpm">
+                                @error('tem_ambiente_rpm')
+                                    <small class="text-xs text-red-600">Temperatura ambiente rmp es requerido</small>
+                                @enderror    
+                            </td>
                             <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
                                     placeholder="Ingrese un resultado" name="tem_ambiente_300"></td>
                             <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
@@ -199,7 +366,7 @@
                 <table class="w-full text-sm mt-3 border border-gray-300">
                     <thead class="bg-gray-200 text-gray-700">
                         <tr>
-                            <th class="p-1 text-center border border-gray-300"></th>
+                            <th class="p-1 text-center border border-gray-300">Temperatura °C</th>
                             <th class="p-1 text-center border border-gray-300">Tº Ambiente</th>
                             <th class="p-1 text-center border border-gray-300">Tº Ensayo</th>
                         </tr>
@@ -207,11 +374,11 @@
 
                     <tbody class="bg-gray-50">
                         <tr class="border-b">
-                            <td class="py-2 px-1 text-center"></td>
+                            <td class="py-2 px-1 text-center">Viscosidad Plastica (cp)</td>
                             <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
-                                    placeholder="Ingrese un ºC" name="temp_ambiente"></td>
+                                    placeholder="Ingrese viscosidad plastica" name="temp_ambiente"></td>
                             <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
-                                    placeholder="Ingrese un ºC" name="temp_ensayo"></td>
+                                    placeholder="Ingrese viscosidad plastica" name="temp_ensayo"></td>
                         </tr>
                         <tr class="border-b">
                             <td class="py-2 px-1 text-center">Punto de Cedencia (lb/100ft2)
@@ -237,6 +404,130 @@
                         </tr>
                     </tbody>
                 </table>
+                <div class="mb-2 text-center">
+                    <br>
+                    <h5 class="mb-1">Reología (up reads)</h5>
+                </div>
+                <table class="w-full text-sm border border-gray-300">
+                    <thead class="bg-gray-200 text-gray-700">
+                        <tr>
+                            <th class="border border-gray-300"></th>
+                            <th class="p-1 text-center border border-gray-300">RPM ºC</th>
+                            <th class="p-1 text-center border border-gray-300">300</th>
+                            <th class="p-1 text-center border border-gray-300">200</th>
+                            <th class="p-1 text-center border border-gray-300">100</th>
+                            <th class="p-1 text-center border border-gray-300">60</th>
+                            <th class="p-1 text-center border border-gray-300">30</th>
+                            <th class="p-1 text-center border border-gray-300">6</th>
+                            <th class="p-1 text-center border border-gray-300">3</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="bg-gray-50">
+                        <tr class="border-b">
+                            <td class="py-2 px-1">Tº Ambiente</td>
+                            <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Cº" name="tem_ambiente_rpm_up"></td>
+                            <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="tem_ambiente_300_up"></td>
+                            <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="tem_ambiente_200_up"></td>
+                            <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="tem_ambiente_100_up"></td>
+                            <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="tem_ambiente_60_up"></td>
+                            <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="tem_ambiente_30_up"></td>
+                            <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="tem_ambiente_6_up"></td>
+                            <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="tem_ambiente_3_up"></td>
+                        </tr>
+
+                        <tr class="border-b">
+                            <td class="py-2 px-1">Tº Ensayo</td>
+                            <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Cº" name="tem_ensayo_rpm_up"></td>
+                            <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="tem_ensayo_300_up"></td>
+                            <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="tem_ensayo_200_up"></td>
+                            <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="tem_ensayo_100_up"></td>
+                            <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="tem_ensayo_60_up"></td>
+                            <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="tem_ensayo_30_up"></td>
+                            <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="tem_ensayo_6_up"></td>
+                            <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="tem_ensayo_3_up"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                <div class="mb-2 text-center">
+                    <br>
+                    <h5 class="mb-1">Reología (down reads)</h5>
+                </div>
+                <table class="w-full text-sm border border-gray-300">
+                    <thead class="bg-gray-200 text-gray-700">
+                        <tr>
+                            <th class="border border-gray-300"></th>
+                            <th class="p-1 text-center border border-gray-300">RPM ºC</th>
+                            <th class="p-1 text-center border border-gray-300">300</th>
+                            <th class="p-1 text-center border border-gray-300">200</th>
+                            <th class="p-1 text-center border border-gray-300">100</th>
+                            <th class="p-1 text-center border border-gray-300">60</th>
+                            <th class="p-1 text-center border border-gray-300">30</th>
+                            <th class="p-1 text-center border border-gray-300">6</th>
+                            <th class="p-1 text-center border border-gray-300">3</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="bg-gray-50">
+                        <tr class="border-b">
+                            <td class="py-2 px-1">Tº Ambiente</td>
+                            <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Cº" name="tem_ambiente_rpm_down"></td>
+                            <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="tem_ambiente_300_down"></td>
+                            <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="tem_ambiente_200_down"></td>
+                            <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="tem_ambiente_100_down"></td>
+                            <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="tem_ambiente_60_down"></td>
+                            <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="tem_ambiente_30_down"></td>
+                            <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="tem_ambiente_6_down"></td>
+                            <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="tem_ambiente_3_down"></td>
+                        </tr>
+
+                        <tr class="border-b">
+                            <td class="py-2 px-1">Tº Ensayo</td>
+                            <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Cº" name="tem_ensayo_rpm_down"></td>
+                            <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="tem_ensayo_300_down"></td>
+                            <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="tem_ensayo_200_down"></td>
+                            <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="tem_ensayo_100_down"></td>
+                            <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="tem_ensayo_60_down"></td>
+                            <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="tem_ensayo_30_down"></td>
+                            <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="tem_ensayo_6_down"></td>
+                            <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="tem_ensayo_3_down"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
             </div>
             <div class="flex justify-center">
                 <x-button type="click" id="btn_submit_reologia"
@@ -264,9 +555,9 @@
                         }).then((response) => response.json())
                         .then((data) => {
                             if (data) {
+                        
                                 componentReologia(data.success_reologia)
                                 document.getElementById('form_reologia').style.display = 'none'
-                                console.log(data);
                                 successAlert('¡Registro Asignado!',
                                     'El registro se asignó correctamente.').then(
                                     (confirmed) => {

@@ -12,7 +12,6 @@ use App\Models\Ensayo;
 use App\Models\MudCompany;
 use App\Models\OtrosAnalisis;
 use App\Models\RelAditivoSolicitudLechada;
-use App\Models\RelAditivoSolicitudLodo;
 use App\Models\RelEnsayoReferenciaSolicitud;
 use App\Models\RelFormulacionTentativa;
 use App\Models\SistemasFluidos;
@@ -27,11 +26,6 @@ use App\Models\User;
 use App\Models\Yacimiento;
 use App\Models\AguaLibre;
 use App\Models\Sgs;
-use App\Models\Servicios;
-use App\Models\TipoLodo_Lodos;
-use App\Models\Equipos;
-use App\Models\EnsayosLodo;
-use App\Models\SolicitudLodo;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Mail;
@@ -47,25 +41,21 @@ class SolicitudController extends Controller
     {
         $this->authorize('create', Solicitud::class);
         $data = [
-            'ensayos' => Ensayo::where('tipo', 'CN')->where('estado', 1)->get(),
-            'clientes' => Cliente::where('estado', 1)->get(),
-            'yacimientos' => Yacimiento::where('estado', 1)->get(),
-            'sistemas_fluidos' => SistemasFluidos::where('activo', 1)->get(),
-            'analisis_microbial' => AnalisisMicrobial::where('activo', 1)->get(),
-            'agente_sosten' => AgenteSosten::where('activo', 1)->get(),
-            'otros_analisis' => OtrosAnalisis::where('activo', 1)->get(),
-            'tipo_trabajo_cemento' => TipoTrabajoCemento::where('estado', 1)->get(),
-            'tipo_cementacion' => TipoCementacion::where('estado', 1)->get(),
-            'tipo_requerimiento_cemento' => TipoRequerimientoCemento::where('estado', 1)->get(),
-            'tipo_lodo' =>  TipoLodo::where('estado', 1)->get(),
-            'mud_company' =>  MudCompany::where('activo', 1)->get(),
+            'ensayos' => Ensayo::where('tipo', 'CN')->get(),
+            'clientes' => Cliente::all(),
+            'yacimientos' => Yacimiento::all(),
+            'sistemas_fluidos' => SistemasFluidos::all(),
+            'analisis_microbial' => AnalisisMicrobial::all(),
+            'agente_sosten' => AgenteSosten::all(),
+            'otros_analisis' => OtrosAnalisis::all(),
+            'tipo_trabajo_cemento' => TipoTrabajoCemento::all(),
+            'tipo_cementacion' => TipoCementacion::all(),
+            'tipo_requerimiento_cemento' => TipoRequerimientoCemento::all(),
+            'tipo_lodo' =>  TipoLodo::all(),
+            'mud_company' =>  MudCompany::all(),
             'users' => User::all(),
             'sgs' => Sgs::all(),
             'agua_libre' => AguaLibre::all(),
-            'servicios' => Servicios::all(),
-            'tipo_lodo_Lodos' => TipoLodo_Lodos::all(),
-            'equipos' => Equipos::where('estado', 1)->get(),
-            'ensayos_lodo' => EnsayosLodo::all()
         ];
         return view('solicitud.create', $data);
     }
@@ -151,11 +141,8 @@ class SolicitudController extends Controller
             'usuario_carga' => auth()->user()->id
         ]);
 
-        $emailsAEnviar = [];
-
         # Envío de Emails
         $correos = [];
-        /*
         if ($solicitud_fractura->user_iniciado_por)
             $correos[] = $solicitud_fractura->user_iniciado_por->email;
         if ($solicitud_fractura->user_servicio_tecnico)
@@ -164,19 +151,16 @@ class SolicitudController extends Controller
             $correos[] = $solicitud_fractura->user_laboratorio->email;
         if ($solicitud_fractura->user_reconocimiento)
             $correos[] = $solicitud_fractura->user_reconocimiento->email;
-        //Podria hardcodear mi email aca para probar?
-        */
-        $correos[] = "franco.marquez@blistertechnologies.com";
+
         $data = [
             'solicitud_id' => $solicitud->id,
             'locacion_id' => $request->locacion,
             'fecha_solicitud' => $request->fecha_solicitud,
             'usuario_carga' => auth()->user()->nombre . ' ' . auth()->user()->apellido,
             'cliente' => $request->cliente,
-            //'empresa' => $request->empresa
+            'empresa' => $request->empresa
         ];
-        $this->_sendEmailNew($data, $correos);         //Podria hardcodear mi email aca para probar?
-
+        $this->_sendEmailNew($data, $correos);
         // -- Finaliza el envío de emails
 
         if ($solicitud->id)
@@ -227,8 +211,7 @@ class SolicitudController extends Controller
         # Solicitud de Lechada
         $solicitud_lechada = SolicitudLechada::create([
             'ensayo_requerido_principal' => $request->ensayo_requerido_principal == 'on' ? 1 : 0,
-            'ensayo_requerido_bullheading' => $request->ensayo_requerido_bullheading == 'on' ? 1 : 0,
-            'ensayo_requerido_relleno' => $request->ensayo_requerido_relleno == 'on' ? 1 : 0,
+            'ensayo_requerido_relleno' => $request->ensayo_requerido_bullheading == 'on' ? 1 : 0,
             'ensayo_requerido_tapon' => $request->ensayo_requerido_tapon == 'on' ? 1 : 0,
             'OH' => $request->OH,
             'trepano' => $request->trepano,
@@ -267,9 +250,7 @@ class SolicitudController extends Controller
             'fecha_reconocimiento' => $request->fecha_reconocimiento_lechada,
             'solicitud_id' => $solicitud->id,
             'usuario_carga' => auth()->user()->id
-
         ]);
-
 
         // == Relaciones ==
 
@@ -350,7 +331,7 @@ class SolicitudController extends Controller
             'locacion_fractura' => 'required',
             'programa' => 'required',
             'fecha_solicitud' => 'required',
-            // 'empresa' => 'required',
+            'empresa' => 'required',
             // 'fecha_tratamiento' => 'required',
             'pozo' => 'required',
             'rep_compania' => 'required',
@@ -453,70 +434,9 @@ class SolicitudController extends Controller
         $fundamento->save();
         return back();
     }
-    /**
-     * Crea una nueva Solicitud de Lodo
-     * Primero crea el encabezado general, que es la "Solicitud" y luego crea la "Solicitud de Lodo"
-     */
+
     public function store_lodo(Request $request)
     {
-        # Validamos los datos del encabezado general
-        $this->validate($request, [
-            'cliente_lodo' => 'required',
-            'locacion_lodo' => 'required',
-            'pozo_lodo' => 'required',
-            'tipo_lodo' => 'required',
-            'equipo_lodo' => 'required',
-            'servicios_lodo' => 'required',
-            'mud_company' => 'required',
-            'densidad_lodo_3' => 'required',
-            'temperatura' => 'required',
-            'profundidad_md' => 'required',
-            'profundidad_tvd' => 'required',
-            'ensayos' => 'required',
-            'vol_colchon' => 'required',
-            'densidad_colchon' => 'required',
-            'tiempo_contacto' => 'required',
-        ]);
-
-        # Solicitud General
-        $solicitud = Solicitud::create([
-            'tipo' => 3,
-            'cliente_id' => $request->cliente_lodo,
-            'locacion_id' => $request->locacion_lodo,
-            'fecha_solicitud' => date('Y-m-d'),
-            'pozo' => $request->pozo_lodo,
-            'equipo' => $request->equipo_lodo,
-            'servicio' => $request->servicios_lodo,
-            'estado_solicitud_id' => 1,
-            'user_id' => auth()->user()->id
-        ]);
-        # Solicitud Lodo
-        $solicitud_lodo = SolicitudLodo::create([
-            'tipo_lodo' => $request->tipo_lodo,
-            'profundidad_md' => $request->profundidad_md,
-            'profundidad_tvd' => $request->profundidad_tvd,
-            'solicitud_id' => $solicitud->id,
-            'usuario_carga' => auth()->user()->id,
-            'firma_autorizacion_id' => auth()->user()->id,
-            'fecha_autorizacion' => date('Y-m-d'),
-            'firma_reconocimiento_id' => $request->firma_reconocimiento_lodo,
-            'fecha_reconocimiento'  => $request->fecha_reconocimiento_lodo,
-        ]);
-
-        # Formulaciones Tentativas
-        if ($request->aditivos) {
-
-            foreach ($request->aditivos as $formulacion) {
-                RelAditivoSolicitudLodo::create([
-                    'solicitud_lodo_id' => $solicitud_lodo->id,
-                    'lote' => $formulacion['lote'],
-                    'aditivo' => $formulacion['aditivo'],
-                    'concentracion' => $formulacion['concentracion'],
-                ]);
-            }
-        }
-        if ($solicitud->id)
-            return redirect('solicitud')->with('success', $solicitud->id);
     }
     public function index()
     {
@@ -539,7 +459,6 @@ class SolicitudController extends Controller
             'users' => User::all(),
             'clientes' => Cliente::all(),
             'yacimientos' => Yacimiento::all(),
-            'equipos' => Equipos::all(),
             // 'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
         return view('solicitud.components.fractura.show', $data);
@@ -564,8 +483,7 @@ class SolicitudController extends Controller
             'tipo_trabajos' => TipoTrabajoCemento::all(),
             'tipo_cementacion' => TipoCementacion::all(),
             'mud_company' => MudCompany::all(),
-            'equipos' => Equipos::all(),
-            //'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
+            // 'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
         $generate_report = $this->_generate_report($solicitud_id);
         $data['generar_reporte'] = $generate_report->original['generate_report'];
@@ -609,9 +527,8 @@ class SolicitudController extends Controller
         // Change => Datos de la solicitud de lechada
         $solicitud_lechada = SolicitudLechada::where('solicitud_id', $solicitud->id)->first();
         $solicitud_lechada->ensayo_requerido_principal = $request->ensayo_requerido_principal == 'on' ? 1 : 0;
-        $solicitud_lechada->ensayo_requerido_bullheading = $request->ensayo_requerido_bullheading == 'on' ? 1 : 0;
+        $solicitud_lechada->ensayo_requerido_relleno = $request->ensayo_requerido_bullheading == 'on' ? 1 : 0;
         $solicitud_lechada->ensayo_requerido_tapon = $request->ensayo_requerido_tapon == 'on' ? 1 : 0;
-        $solicitud_lechada->ensayo_requerido_relleno = $request->ensayo_requerido_relleno == 'on' ? 1 : 0;
         $solicitud_lechada->OH = $request->OH;
         $solicitud_lechada->trepano = $request->trepano;
         $solicitud_lechada->casing_id = $request->casing_id;
@@ -690,48 +607,14 @@ class SolicitudController extends Controller
             return back()->with('success', $solicitud->id);
     }
 
-    public function update_lodo(Request $request){
-        $aditivos_request = $request->aditivos;
-        $id_aditivos = array_column($aditivos_request, 'id');
-
-        # Validamos los datos del encabezado general
-        $this->validate($request, [
-            'cliente_lodo' => 'required',
-            'locacion_lodo' => 'required',
-            'programa_lodo' => 'required',
-            'pozo_lodo' => 'required',
-            'fecha_resultados_lodo' => 'required',
-            'equipo_lodo' => 'required',
-            'servicio_lodo' => 'required',
-        ]);
-
-    }
     /**
      * Se que es un código asqueroso, pero una condición si o si depende de la otra
-     * ya lo arregle pa (f.m)
      */
     public function _generate_report($solicitud_id)
     {
         $generar_reporte = false;
         $solicitud_lechada = SolicitudLechada::where('solicitud_id', $solicitud_id)->get();
-        /* 
-        $count_reologia = count($solicitud_lechada[0]->rel_reologia);
-        $count_perdida = count($solicitud_lechada[0]->rel_perdida_filtrado);
-        $count_rel_uca = count($solicitud_lechada[0]->rel_uca);
-        $count_rel_agua_libre = count($solicitud_lechada[0]->rel_agua_libre);
-        $count_rel_mezclabilidad = count($solicitud_lechada[0]->rel_mezclabilidad);
-        $count_rel_bombeabilidad = count($solicitud_lechada[0]->rel_bombeabilidad);
 
-        if (($count_reologia > 0) && ($count_perdida > 0) && ($count_rel_uca > 0) && ($count_rel_agua_libre > 0) && ($count_rel_mezclabilidad > 0)) {
-            if ($count_rel_bombeabilidad > 0) {
-                foreach ($solicitud_lechada[0]->rel_bombeabilidad as $b) {
-                    if ($b->selected) {
-                        $generar_reporte = true;
-                        break;
-                    }
-                }
-            } */
-        //  echo json_encode($generar_reporte);
         // Reología
         if (count($solicitud_lechada[0]->rel_reologia) > 0) {
             // Pérdida de Filtrado
@@ -770,11 +653,9 @@ class SolicitudController extends Controller
         } else {
             $generar_reporte = false;
         }
-
-        echo json_encode($generar_reporte);
         return response()->json(['generate_report' => $generar_reporte]);
+        // echo json_encode($generar_reporte);
     }
-
 
     /**
      * Envía el correo de que se creó una nuevo Solicitud de Fractura

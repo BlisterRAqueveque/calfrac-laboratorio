@@ -13,19 +13,20 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('ensayos', function (Blueprint $table) {
-            $table->tinyInteger('estado')->default(1);
+        Schema::table('solicitud_lechada', function (Blueprint $table) {
+            $table->tinyInteger('ensayo_requerido_bullheading')->nullable()->default(0)->comment('1: Se necesita el Ensayo bullheading | 0: No se necesita');
         });
     }
 
     /**
      * Reverse the migrations.
+     *
      * @return void
      */
     public function down()
     {
-        Schema::table('ensayos', function (Blueprint $table) {
-            $table->dropColumn('estado');
+        Schema::table('solicitud_lechada', function (Blueprint $table) {
+            $table->dropColumn('ensayo_requerido_bullheading');
         });
     }
 };
