@@ -25,7 +25,7 @@
 
                                     <div class="flex justify-center items-center w-32 h-32 mx-auto">
                                         <img src="{{ asset('img/img_default.jpg') }}"
-                                            class="rounded-full object-cover w-32 h-32 img_default" alt="">
+                                            class="rounded-full object-cover w-32 h-32 img_default_profile" alt="">
                                     </div>
 
                                     <button class="absolute" style="right: 225px; bottom: 25px;"
@@ -39,7 +39,7 @@
                                         </div>
                                     </button>
                                     <input type="file" name="imagen_perfil"
-                                        onChange="displayImage(this, 'img_default')" id="imagen_perfil" hidden>
+                                        onChange="displayImage(this, 'img_default_profile')" id="imagen_perfil" hidden >
                                 </div>
 
                                 <!-- Información del Usuario -->
@@ -108,7 +108,31 @@
                                         <small class="text-sm text-red-600">{{ $message }}</small>
                                     @enderror
                                 </div>
+
+                                 <!-- firma Perfil -->
+                                 <div class="flex relative flex-col justify-center p-4">
+                                    Firma:
+                                    <div class="flex justify-center items-center w-32 h-32 mx-auto">
+                                        <img src="{{ asset('img/img_default.jpg') }}"
+                                            class="rounded-full object-cover w-32 h-32 img_default_firma" alt="">
+                                    </div>
+
+                                    <button class="absolute" style="right: 225px; bottom: 25px;"
+                                        onclick="setFirma('imagen_firma')">
+                                        <div class="flex justify-center mx-auto p-2 border-1 bg-gray-50 rounded-full">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                                            </svg>
+                                        </div>
+                                    </button>
+                                    <input type="file" name="imagen_firma"
+                                        onChange="displayFirma(this, 'img_default_firma')" id="imagen_firma" hidden >
+                                </div>
                             </div>
+
+
                         </div>
 
                         <div class="col-xs-12 col-md-6 text-sm">
@@ -153,7 +177,7 @@
                     </button>
                     <input type="submit"
                         class="text-sm w-full md:w-auto bg-green-700 bg-opacity-60 text-white p-2 rounded-sm hover:shadow-lg transition-all duration-75 font-bold"
-                        value="Crear Usuario">
+                        value="Crear Usuario" >
                 </div>
             </div>
         </form>

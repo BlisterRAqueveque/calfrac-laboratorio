@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Equipos;
 use Illuminate\Http\Request;
+use Validator;
 
 class EquiposController extends Controller
 {
@@ -18,10 +19,10 @@ class EquiposController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'equipo' => 'required',
+        $this->validate($request,[
+            'equipo' => 'required|unique:equipos,nombre', //Esto valida que "equipo" no se repita en la tabla equipos, columna nombre
         ]);
-
+        
         Equipos::create([
             'nombre' => $request->equipo,
             'user_id' => auth()->user()->id
@@ -29,41 +30,23 @@ class EquiposController extends Controller
 
         return back();
     }
-    //Borrar columna de ultima edicion en la view
     public function update(Request $request)
     {
 
         $this->validate($request, [
             'edit_equipo' => 'required',
         ]);
-        $equipo = Equipos::find($request->equipo_id);
-        $equipo->nombre = $request->edit_equipo;
-        $equipo->updated_at = date('Y-m-d H:i:s');
-        $equipo->save();
-        return back();
-    }
 
-    public function editar(Request $request)
-    {
-        /*Cuando el usuario edita un equipo, se crea una nueva version
-        Para mantener las versiones viejas en las solicitudes viejas*/
-        $this->validate($request, [
-            'equipo' => 'required',
-        ]);
-
-        //deshabilitar el otro
+        //Deshabilito el equipo a editar
+        $equipoExistente = Equipos::find($request->equipo_id);
+        if($equipoExistente){
+            $equipoExistente->estado = 0;
+        }
         
-        $equipoExistente = Equipos::find($request->id);
-        //$versionActual = $equipoExistente->version;
-
-        //Al editar, deshabilito el que "edite".
-        $equipoExistente->estado = 0;
-
-        //Creo un nuevo equipo, con la version actualizada
+        //Creo un nuevo equipo
         Equipos::create([
-            'nombre' => $request->equipo,
+            'nombre' => $request->edit_equipo,
             'user_id' => auth()->user()->id
-            //'version' => $versionActual + 1,
         ]);
 
         return back();
@@ -89,18 +72,18 @@ class EquiposController extends Controller
     public function habilitar(Request $request)
     {
         $this->validate($request, [
-            'delete_equipo' => 'required',
+            'habilitar_equipo' => 'required',
+            'nombre_equipo' => 'required|unique:equipos,nombre'
         ]);
-        //Check ids y labels
 
-        $equipo = Equipos::findOrFail($request->equipo2_id);
+        $equipo = Equipos::findOrFail($request->equipo3_id);
 
         if ($equipo) {
             $equipo->estado = 1;
             $equipo->save();
             return back();
         } else {
-            return back()->withError('Equipo no encontrado con ID: ' . $request->equipo_id);
+            return back()->withError('Equipo no encontrado con ID: ' . $request->equipo3_id);
         }
     }
 }

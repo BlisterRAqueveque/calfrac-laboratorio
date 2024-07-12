@@ -18,7 +18,7 @@ class AditivoController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'aditivo' => 'required',
+            'aditivo' => 'required|unique:aditivos,nombre',
         ]);
 
         Aditivo::create([

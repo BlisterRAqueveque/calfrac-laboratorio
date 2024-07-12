@@ -16,7 +16,7 @@ class YacimientoController extends Controller
 
     public function store(Request $request) {
         $this->validate($request, [
-            'yacimiento' => 'required',
+            'yacimiento' => 'required|unique:yacimientos,nombre',
         ]);
 
         Yacimiento::create([

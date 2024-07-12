@@ -13,8 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('equipos', function (Blueprint $table) {
-            $table->tinyInteger('version')->default(1);
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('firma')->nullable();
+
         });
     }
 
@@ -25,8 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('equipos', function (Blueprint $table) {
-            $table->dropColumn('version');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('firma');
         });
     }
 };

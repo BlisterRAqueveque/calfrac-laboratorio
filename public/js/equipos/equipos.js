@@ -11,3 +11,9 @@ function editarEquipo(equipo) {
     document.getElementById('edit_equipo').value = equipo.nombre;
 }
 
+function habilitarEquipo(equipo3){
+    event.preventDefault();
+    document.getElementById('equipo3_id').value = equipo3.id;
+    document.getElementById('habilitar_equipo').value = equipo3.nombre;
+
+}

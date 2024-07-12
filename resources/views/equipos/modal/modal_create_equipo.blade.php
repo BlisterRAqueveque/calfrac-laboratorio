@@ -29,7 +29,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                         </svg>
                         Cancelar</button>
-                    <input type="submit"
+                        <input type="submit"
                         class="text-xs xl:text-sm w-full md:w-auto bg-green-700 bg-opacity-60 text-white p-2 rounded-sm hover:shadow-lg transition-all duration-75 font-bold"
                         value="Crear Equipo">
                 </div>

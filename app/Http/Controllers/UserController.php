@@ -62,6 +62,25 @@ class UserController extends Controller
             $imagenServidor->save($imagenPath);
         }
 
+        if ($request->imagen_firma) {
+            $firma = $request->file('imagen_firma');
+
+            // Generar un ID único
+            $nombreImagenFirma = Str::uuid() . "." . $firma->extension();
+
+            // Imagen que se va a almacenar en BD (InterventionImage)
+            $imagenServidorFirma = Image::make($firma);
+
+            // Ajustar la imagen width: 1000px & height: 1000px;
+            $imagenServidorFirma->fit(1000, 1000);
+
+            // Ruta de la Imagen
+            $firmaPath = public_path('uploads/firmas') . '/' . $nombreImagenFirma;
+
+            // Guardar la Imagen
+            $imagenServidorFirma->save($firmaPath);
+        }
+
         $is_admin = 0;
         if ($request->grupo == 1)
             $is_admin = 1;
@@ -77,6 +96,8 @@ class UserController extends Controller
             'is_admin' => $is_admin,
             'password' => Hash::make($request->password),
             'usuario_carga_id' => auth()->user()->id,
+            'firma' => isset($nombreImagenFirma) ? $nombreImagenFirma : '',
+
         ]);
 
         if ($request->user_permissions_new) {
@@ -107,23 +128,42 @@ class UserController extends Controller
 
         if ($request->edit_imagen_perfil) {
             $imagen = $request->file('edit_imagen_perfil');
-
+        
+        if ($request->edit_firma) {
+            $firma = $request->file('edit_firma');
+        }
             // Generar un ID único
             $nombreImagen = Str::uuid() . "." . $imagen->extension();
+
+             // Generar un ID único para la firma
+             $nombreImagenFirma = Str::uuid() . "." . $firma->extension();
 
             // Imagen que se va a almacenar en BD (InterventionImage)
             $imagenServidor = Image::make($imagen);
 
+            // Imagen que se va a almacenar en BD (InterventionImage)
+            $imagenServidorFirma = Image::make($firma);
+
             // Ajustar la imagen width: 1000px & height: 1000px;
             $imagenServidor->fit(1000, 1000);
 
-            // Ruta de la Imagen
+            //
+            $imagenServidorFirma->fit(1000, 1000);
+
+            // Ruta de la Imagen de perfil
             $imagenPath = public_path('uploads/perfiles') . '/' . $nombreImagen;
+
+            // Ruta de la imagen de la firma
+            $firmaPath = public_path('uploads/firmas') . '/' . $nombreImagenFirma;
 
             // Guardar la Imagen
             $imagenServidor->save($imagenPath);
 
+            //
+            $imagenServidorFirma->save($firmaPath);
+
             // Eliminar imagen anterior (Si es que existe)
+
         }
 
         $is_admin = 0;
@@ -138,6 +178,7 @@ class UserController extends Controller
         $user->email = $request->edit_email;
         $user->telefono = $request->edit_telefono;
         $user->img = isset($nombreImagen) ? $nombreImagen : $user->img;
+        $user->firma = isset($nombreImagenFirma) ? $nombreImagenFirma : $user->firma;
         $user->password = $request->edit_password ? Hash::make($request->edit_password) : $user->password;
         $user->grupo_id = $request->edit_grupo;
         $user->is_admin = $is_admin;

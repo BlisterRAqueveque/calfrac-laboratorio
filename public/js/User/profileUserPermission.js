@@ -75,6 +75,13 @@ function editarUsuario(user) {
   document.getElementById("edit_email").value = user.email;
   document.getElementById("edit_telefono").value = user.telefono;
   document.getElementById("edit_grupo").value = user.grupo_id;
+  if(user.firma){
+    document.getElementById(
+      "firma_edit"
+    ).src = _setUrl('uploads/firmas', user.firma); 
+  } else {
+    document.getElementById("firma_edit").src = _setUrl('img', 'img_default.jpg');
+  }
 }
 
 let container_permisos = document.getElementById("container_permisos");
