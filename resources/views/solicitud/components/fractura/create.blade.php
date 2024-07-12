@@ -202,9 +202,11 @@
                     <label for="distrito"
                         class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Distrito
                         <span class="text-red-500">*</span></label>
-                    <input type="text"
-                        class="form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 sz"
-                        name="distrito" id="distrito" placeholder="Ingrese el distrito">
+                        <select name="distrito" id="distrito" class="text-sm inp_edit"  id="distrito">
+                            @foreach ($distrito as $tipo)
+                                <option value="{{ $tipo->id }}">{{ $tipo->opciones }}</option>
+                            @endforeach
+                        </select>
                     @error('distrito')
                         <small class="text-xs text-red-600">Distrito es requerido</small>
                     @enderror
@@ -256,14 +258,14 @@
                 </div>
                 <div class="col-xs-12 col-md-3 my-2">
                     <div class="row">
-                        <div class="col-xs-12 col-md-6">
+                        <div class="col-xs-12 col-md-12">
                             <label for="bhst"
                                 class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">BHST</label>
-                            <input type="number" placeholder="Cº / Fº"
+                            <input type="number" placeholder="Cº"
                                 class="form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 sz"
                                 name="bhst" id="bhst">
                         </div>
-                        <div class="col-xs-12 col-md-6">
+                        {{--<div class="col-xs-12 col-md-6">
                             <label for="tipo_temp_bhst"
                                 class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Tipo</label>
                             <select name="tipo_temp_bhst" id="tipo_temp_bhst"
@@ -272,20 +274,20 @@
                                 <option value="1">Cº</option>
                                 <option value="2">Fº</option>
                             </select>
-                        </div>
+                        </div>--}}
                     </div>
                 </div>
                 <div class="col-xs-12 col-md-3 my-2">
                     <div class="row">
-                        <div class="col-xs-12 col-md-6">
+                        <div class="col-xs-12 col-md-12">
                             <label for="temp_ensayo"
                                 class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Temp.
                                 Ensayo</label>
-                            <input type="number" placeholder="Cº / Fº"
+                            <input type="number" placeholder="Cº"
                                 class="form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 sz"
                                 name="temp_ensayo" id="temp_ensayo">
                         </div>
-                        <div class="col-xs-12 col-md-6">
+                        {{--<div class="col-xs-12 col-md-6">
                             <label for="tipo_temp_ensayo"
                                 class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Tipo</label>
                             <select name="tipo_temp_ensayo" id="tipo_temp_ensayo"
@@ -294,7 +296,7 @@
                                 <option value="1">Cº</option>
                                 <option value="2">Fº</option>
                             </select>
-                        </div>
+                        </div>--}}
                     </div>
                 </div>
                 <div class="col-12 my-2 text-center">
@@ -558,10 +560,15 @@
             ele: "#servicios_fractura",
             placeholder: "Seleccione el servicio",
         });
+        VirtualSelect.init({
+            ele: "#distrito",
+            placeholder: "Seleccione el distrito",
+        });
         document.getElementById("cliente_fractura").setValue(0);
         document.getElementById("locacion_fractura").setValue(0);
         document.getElementById("equipo").setValue(0);
         document.getElementById("servicios_fractura").setValue(0);
+        document.getElementById("distrito").setValue(0);
     })
 </script>
 

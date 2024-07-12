@@ -432,10 +432,13 @@
                     <div class="col-xs-12 col-md-2 my-2">
                         <label for="distrito"
                             class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Distrito</label>
-                        <input type="text"
-                            class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
-                            name="distrito" id="distrito" placeholder="Ingrese el distrito"
-                            value="{{ $solicitud->distrito }}" readonly>
+                        <select name="distrito" id="distrito" class="text-sm inp_edit" disabled>
+                            @foreach ($distrito as $tipo)
+                                <option value="{{ $tipo->id }}"
+                                    {{ $solicitud->distrito == $tipo->id ? 'selected' : '' }}>{{ $tipo->opciones }}
+                                </option>
+                                @endforeach
+                        </select>
                         @error('distrito')
                             <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
                         @enderror
@@ -491,15 +494,15 @@
                     </div>
                     <div class="col-xs-12 col-md-3 my-2">
                         <div class="row">
-                            <div class="col-xs-12 col-md-6">
+                            <div class="col-xs-12 col-md-12">
                                 <label for="bhst"
                                     class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">BHST</label>
-                                <input type="number" placeholder="Cº / Fº"
+                                <input type="number" placeholder="Cº"
                                     class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
                                     name="bhst" id="bhst"
                                     value="{{ $solicitud_fractura[0]->bhst ?? 'No Aplica' }}" readonly>
                             </div>
-                            <div class="col-xs-12 col-md-6">
+                            {{--<div class="col-xs-12 col-md-6">
                                 <label for="tipo_temp_bhst"
                                     class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Tipo</label>
                                 <select name="tipo_temp_bhst" id="tipo_temp_bhst"
@@ -511,21 +514,21 @@
                                     <option value="2"
                                         {{ $solicitud_fractura[0]->tipo_temp_bhst == 2 ? 'selected' : '' }}>Fº</option>
                                 </select>
-                            </div>
+                            </div>--}}
                         </div>
                     </div>
                     <div class="col-xs-12 col-md-3 my-2">
                         <div class="row">
-                            <div class="col-xs-12 col-md-6">
+                            <div class="col-xs-12 col-md-12">
                                 <label for="temp_ensayo"
                                     class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Temp.
                                     Ensayo</label>
-                                <input type="number" placeholder="Cº / Fº"
+                                <input type="number" placeholder="Cº"
                                     class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
                                     name="temp_ensayo" id="temp_ensayo"
                                     value="{{ $solicitud_fractura[0]->temp_ensayo ?? 'No Aplica' }}" readonly>
                             </div>
-                            <div class="col-xs-12 col-md-6">
+                            {{--<div class="col-xs-12 col-md-6">
                                 <label for="tipo_temp_ensayo"
                                     class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Tipo</label>
                                 <select name="tipo_temp_ensayo" id="tipo_temp_ensayo"
@@ -537,7 +540,7 @@
                                     <option value="2"
                                         {{ $solicitud_fractura[0]->tipo_temp_ensayo == 1 ? 'selected' : '' }}>Fº</option>
                                 </select>
-                            </div>
+                            </div>--}}
                         </div>
                     </div>
                     <div class="col-12 my-2 text-center">
@@ -975,6 +978,10 @@
                 VirtualSelect.init({
                     ele: "#servicios_fractura",
                     placeholder: "Seleccione el servicio",
+                });
+                VirtualSelect.init({
+                    ele: "#distrito",
+                    placeholder: "Seleccione el distrito",
                 });
                 // document.getElementById("cliente_fractura").setValue(0);
                 // document.getElementById("locacion_fractura").setValue(0);

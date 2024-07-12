@@ -99,6 +99,8 @@ class Solicitud extends Model
     public function servicios_fractura() {
         return $this->belongsTo(ServiciosFractura::class, 'id');
     }
-    
 
+    public function distrito() {
+        return $this->belongsTo(Distrito::class, 'id');
+    }
 }

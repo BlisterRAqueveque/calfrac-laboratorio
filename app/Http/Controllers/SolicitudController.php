@@ -18,6 +18,7 @@ use App\Models\RelFormulacionTentativa;
 use App\Models\SistemasFluidos;
 use App\Models\Solicitud;
 use App\Models\SolicitudFractura;
+use App\Models\Distrito;
 use App\Models\SolicitudLechada;
 use App\Models\TipoCementacion;
 use App\Models\ServiciosFractura;
@@ -67,6 +68,7 @@ class SolicitudController extends Controller
             'tipo_lodo_Lodos' => TipoLodo_Lodos::all(),
             'equipos' => Equipos::where('estado', 1)->get(),
             'servicios_fractura' => ServiciosFractura:: all(),
+            'distrito' => Distrito::all(),
             'ensayos_lodo' => EnsayosLodo::all()
         ];
         return view('solicitud.create', $data);
@@ -547,6 +549,7 @@ class SolicitudController extends Controller
             'yacimientos' => Yacimiento::all(),
             'equipos' => Equipos::all(),
             'servicios_fractura' => ServiciosFractura::all(),
+            'distrito' => Distrito::all(),
             // 'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
         return view('solicitud.components.fractura.show', $data);
