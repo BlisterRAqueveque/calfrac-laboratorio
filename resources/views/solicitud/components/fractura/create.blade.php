@@ -8,7 +8,7 @@
             <p class="m-0 font-bold text-lg tracking-wide">Información General</p>
 
             <div class="row mt-3"> <!-- Información General -->
-                <div class="col-xs-12 col-md-6 my-2">
+                {{--<div class="col-xs-12 col-md-6 my-2">
                     <label for="proyecto_number"
                         class="text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Solo uso
                         de
@@ -19,7 +19,7 @@
                     @error('proyecto_number')
                         <small class="text-xs text-red-600">El Nº del Proyecto es requerido</small>
                     @enderror
-                </div>
+                </div>--}}
                 <div class="col-xs-12 col-md-6 my-2">
                     <label for="servicio_number"
                         class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Nº
@@ -70,7 +70,7 @@
                         class="sz form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
                         name="programa" id="programa" min="0">
                     @error('programa')
-                        <small class="text-xs text-red-600">{{ $message }}</small>
+                        <small class="text-xs text-red-600">Programa es requerido</small>
                     @enderror
                 </div>
 
@@ -82,7 +82,7 @@
                         class="form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none sz p-2"
                         max="@php echo date('Y-m-d') @endphp" name="fecha_solicitud" id="fecha_solicitud">
                     @error('fecha_solicitud')
-                        <small class="text-xs text-red-600">{{ $message }}</small>
+                        <small class="text-xs text-red-600">Fecha de solicitud es requerida</small>
                     @enderror
                 </div>
 
@@ -119,7 +119,7 @@
                         class="form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 sz"
                         name="pozo" id="pozo" placeholder="Ingrese el Pozo">
                     @error('pozo')
-                        <small class="text-xs text-red-600">{{ $message }}</small>
+                        <small class="text-xs text-red-600">Pozo es requerido</small>
                     @enderror
                 </div>
 
@@ -131,11 +131,11 @@
                         class="form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 sz"
                         name="rep_compania" id="rep_compania" placeholder="Rep Compañía">
                     @error('rep_compania')
-                        <small class="text-xs text-red-600">{{ $message }}</small>
+                        <small class="text-xs text-red-600">Rep Compania es requerido</small>
                     @enderror
                 </div>
 
-                <div class="col-xs-12 col-md-2 my-2">
+                {{--<div class="col-xs-12 col-md-2 my-2">
                     <label for="fecha_reporte"
                         class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Fecha
                         del
@@ -146,9 +146,9 @@
                     @error('fecha_reporte')
                         <small class="text-xs text-red-600">{{ $message }}</small>
                     @enderror
-                </div>
+                </div>--}}
 
-                <div class="col-xs-12 col-md-2 my-2">
+                {{--<div class="col-xs-12 col-md-2 my-2">
                     <label for="rep_venta"
                         class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Rep Ventas
                         <span class="text-red-500">*</span></label>
@@ -167,7 +167,7 @@
                     @error('fecha_resultados')
                         <small class="text-xs text-red-600">{{ $message }}</small>
                     @enderror
-                </div>
+                </div>--}}
 
                 <div class="col-xs-12 col-md-2 my-2">
                     <label for="equipo"
@@ -180,23 +180,37 @@
                         @endforeach
                     </select>
                     @error('equipo')
-                        <small class="text-xs text-red-600">{{ $message }}</small>
+                        <small class="text-xs text-red-600">Equipo es requerido</small>
                     @enderror
                 </div>
 
                 <div class="col-xs-12 col-md-2 my-2">
-                    <label for="servicio"
+                    <label for="servicios_fractura"
                         class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Servicio
+                        <span class="text-red-500">*</span></label>
+                    <select name="servicios_fractura" id="servicios_fractura" class="text-sm inp_edit"  id="servicios_fractura">
+                        @foreach ($servicios_fractura as $tipo)
+                            <option value="{{ $tipo->id }}">{{ $tipo->opciones }}</option>
+                        @endforeach
+                    </select>
+                    @error('servicios_fractura')
+                        <small class="text-xs text-red-600">Servicio es requerido</small>
+                    @enderror
+                </div>
+
+               <div class="col-xs-12 col-md-2 my-2">
+                    <label for="distrito"
+                        class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Distrito
                         <span class="text-red-500">*</span></label>
                     <input type="text"
                         class="form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 sz"
-                        name="servicio" id="servicio" placeholder="Ingrese el servicio">
-                    @error('servicio')
-                        <small class="text-xs text-red-600">{{ $message }}</small>
+                        name="distrito" id="distrito" placeholder="Ingrese el distrito">
+                    @error('distrito')
+                        <small class="text-xs text-red-600">Distrito es requerido</small>
                     @enderror
                 </div>
 
-                <div class="col-xs-12 col-md-2 my-2">
+                {{--<div class="col-xs-12 col-md-2 my-2">
                     <label for="reporte_lab_tall"
                         class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Reporte
                         Laboratorio Tall <span class="text-red-500">*</span></label>
@@ -218,7 +232,7 @@
                     @error('reporte_lab_lead')
                         <small class="text-xs text-red-600">{{ $message }}</small>
                     @enderror
-                </div>
+                </div>--}}
 
             </div> <!-- Información General -->
 
@@ -540,9 +554,14 @@
             ele: "#equipo",
             placeholder: "Seleccione el equipo",
         });
+        VirtualSelect.init({
+            ele: "#servicios_fractura",
+            placeholder: "Seleccione el servicio",
+        });
         document.getElementById("cliente_fractura").setValue(0);
         document.getElementById("locacion_fractura").setValue(0);
         document.getElementById("equipo").setValue(0);
+        document.getElementById("servicios_fractura").setValue(0);
     })
 </script>
 

@@ -225,7 +225,7 @@
                 @csrf
                 <input type="hidden" value="{{ $solicitud->id }}" name="solicitud_id">
                 <div class="row mt-3"> <!-- Información General -->
-                    <div class="col-xs-12 col-md-6 my-2">
+                    {{--<div class="col-xs-12 col-md-6 my-2">
                         <label for="proyecto_number"
                             class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Solo
                             uso
@@ -238,7 +238,7 @@
                         @error('proyecto_number')
                             <small class="text-sm text-red-600">El Nº del Proyecto es requerido</small>
                         @enderror
-                    </div>
+                    </div>--}}
 
                     <div class="col-xs-12 col-md-6 my-2">
                         <label for="servicio_number"
@@ -308,7 +308,7 @@
                         @enderror
                     </div>
 
-                    <div class="col-xs-12 col-md-2 my-2">
+                    {{--<div class="col-xs-12 col-md-2 my-2">
                         <label for="empresa"
                             class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Compañía
                             /
@@ -319,7 +319,7 @@
                         @error('empresa')
                             <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
                         @enderror
-                    </div>
+                    </div>--}}
 
                     {{-- <div class="col-xs-12 col-md-2 my-2">
                         <label for="fecha_tratamiento"
@@ -373,7 +373,7 @@
                         @enderror
                     </div> --}}
 
-                    <div class="col-xs-12 col-md-2 my-2">
+                    {{--<div class="col-xs-12 col-md-2 my-2">
                         <label for="rep_venta"
                             class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Rep
                             Ventas</label>
@@ -397,7 +397,7 @@
                         @error('fecha_resultados')
                             <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
                         @enderror
-                    </div>
+                    </div>--}}
 
                     <div class="col-xs-12 col-md-2 my-2">
                         <label for="equipo"
@@ -415,18 +415,33 @@
                     </div>
 
                     <div class="col-xs-12 col-md-2 my-2">
-                        <label for="servicio"
+                        <label for="servicios_fractura"
                             class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Servicio</label>
-                        <input type="text"
-                            class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
-                            name="servicio" id="servicio" placeholder="Ingrese el servicio"
-                            value="{{ $solicitud->servicio }}" readonly>
-                        @error('servicio')
+                        <select name="servicios_fractura" id="servicios_fractura" class="text-sm inp_edit" disabled>
+                            @foreach ($servicios_fractura as $tipo)
+                                <option value="{{ $tipo->id }}"
+                                    {{ $solicitud->servicios_fractura == $tipo->id ? 'selected' : '' }}>{{ $tipo->opciones }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('servicios_fractura')
                             <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
                         @enderror
                     </div>
 
                     <div class="col-xs-12 col-md-2 my-2">
+                        <label for="distrito"
+                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Distrito</label>
+                        <input type="text"
+                            class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
+                            name="distrito" id="distrito" placeholder="Ingrese el distrito"
+                            value="{{ $solicitud->distrito }}" readonly>
+                        @error('distrito')
+                            <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
+                        @enderror
+                    </div>
+
+                    {{--<div class="col-xs-12 col-md-2 my-2">
                         <label for="reporte_lab_tall"
                             class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Reporte
                             Laboratorio Tall</label>
@@ -451,7 +466,7 @@
                             <small class="text-xs xl:text-sm text-red-600">{{ $message }}</small>
                         @enderror
                     </div>
-                </div>
+                </div>--}}
 
                 <p class="m-0 mt-3 font-bold text-lg tracking-wide dark:text-gray-300">Información del Pozo y Ensayos</p>
                 <div class="row mt-3">
@@ -956,6 +971,10 @@
                 VirtualSelect.init({
                     ele: "#equipo",
                     placeholder: "Seleccione el equipo",
+                });
+                VirtualSelect.init({
+                    ele: "#servicios_fractura",
+                    placeholder: "Seleccione el servicio",
                 });
                 // document.getElementById("cliente_fractura").setValue(0);
                 // document.getElementById("locacion_fractura").setValue(0);

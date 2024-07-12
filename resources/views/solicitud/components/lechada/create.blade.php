@@ -125,26 +125,7 @@
                         <small class="text-xs text-red-600">El equipo es requerido</small>
                     @enderror
                 </div>
-
-
-                {{--
-                                    <label for="equipo_lechada" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Equipo
-                        <span class="text-red-500">*</span></label>
-                <div class="col-span-2 xl:col-span-1">
-                    <label for="locacion_lechada"
-                        class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Yacimiento/Locación
-                        <span class="text-red-500">*</span></label>
-                    <select name="locacion_lechada" id="locacion_lechada" class="text-sm" data-search="true">
-                        @foreach ($yacimientos as $y)
-                        <option value="{{ $y->id }}"
-                            {{ old('locacion_lechada') == $y->id ? 'selected' : '' }}>{{ $y->nombre }}</option>
-                    @endforeach
-                    </select>
-                    @error('locacion_lechada')
-                        <small class="text-xs text-red-600">La locación es requerida</small>
-                    @enderror
-                </div>
-                --}}
+                
                 <div class="col-span-2 xl:col-span-1">
                     <label for="servicio_lechada"
                         class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Servicio

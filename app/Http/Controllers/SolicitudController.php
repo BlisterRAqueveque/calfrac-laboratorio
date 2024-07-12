@@ -20,6 +20,7 @@ use App\Models\Solicitud;
 use App\Models\SolicitudFractura;
 use App\Models\SolicitudLechada;
 use App\Models\TipoCementacion;
+use App\Models\ServiciosFractura;
 use App\Models\TipoLodo;
 use App\Models\TipoRequerimientoCemento;
 use App\Models\TipoTrabajoCemento;
@@ -65,6 +66,7 @@ class SolicitudController extends Controller
             'servicios' => Servicios::all(),
             'tipo_lodo_Lodos' => TipoLodo_Lodos::all(),
             'equipos' => Equipos::where('estado', 1)->get(),
+            'servicios_fractura' => ServiciosFractura:: all(),
             'ensayos_lodo' => EnsayosLodo::all()
         ];
         return view('solicitud.create', $data);
@@ -78,7 +80,7 @@ class SolicitudController extends Controller
     {
         # Validamos los datos del encabezado general
         $this->validate($request, [
-            'proyecto_number' => 'required',
+            //'proyecto_number' => 'required',
             'servicio_number' => 'required',
             'cliente_fractura' => 'required',
             'locacion_fractura' => 'required',
@@ -89,19 +91,20 @@ class SolicitudController extends Controller
             'pozo' => 'required',
             'rep_compania' => 'required',
             // 'fecha_reporte' => 'required',
-            'rep_venta' => 'required',
-            'fecha_resultados' => 'required',
+            //'rep_venta' => 'required',
+            //'fecha_resultados' => 'required',
             'equipo' => 'required',
-            'servicio' => 'required',
-            'reporte_lab_tall' => 'required',
-            'reporte_lab_lead' => 'required',
+            'servicios_fractura' => 'required',
+            'distrito' => 'required',
+            //'reporte_lab_tall' => 'required',
+            //'reporte_lab_lead' => 'required',
         ]);
 
 
         # Crea la Información General
         $solicitud = Solicitud::create([
             'tipo' => 1,
-            'proyecto_number' => $request->proyecto_number,
+            //'proyecto_number' => $request->proyecto_number,
             'servicio_number' => $request->servicio_number,
             'cliente_id' => $request->cliente_fractura,
             'locacion_id' => $request->locacion_fractura,
@@ -112,12 +115,13 @@ class SolicitudController extends Controller
             'pozo' => $request->pozo,
             'rep_compania' => $request->rep_compania,
             // 'fecha_reporte' => $request->fecha_reporte,
-            'rep_venta' => $request->rep_venta,
-            'fecha_resultados' => $request->fecha_resultados,
+            //'rep_venta' => $request->rep_venta,
+            //'fecha_resultados' => $request->fecha_resultados,
             'equipo' => $request->equipo,
-            'servicio' => $request->servicio,
-            'reporte_lab_tall' => $request->reporte_lab_tall,
-            'reporte_lab_lead' => $request->reporte_lab_lead,
+            'servicios_fractura' => $request->servicios_fractura,
+            'distrito' => $request->distrito,
+            //'reporte_lab_tall' => $request->reporte_lab_tall,
+            //'reporte_lab_lead' => $request->reporte_lab_lead,
             'estado_solicitud_id' => 1,
             'user_id' => auth()->user()->id
         ]);
@@ -344,7 +348,7 @@ class SolicitudController extends Controller
     {
         # Validamos los datos del encabezado general
         $this->validate($request, [
-            'proyecto_number' => 'required',
+            //'proyecto_number' => 'required',
             'servicio_number' => 'required',
             'cliente_fractura' => 'required',
             'locacion_fractura' => 'required',
@@ -355,18 +359,19 @@ class SolicitudController extends Controller
             'pozo' => 'required',
             'rep_compania' => 'required',
             // 'fecha_reporte' => 'required',
-            'rep_venta' => 'required',
+            //'rep_venta' => 'required',
             'fecha_resultados' => 'required',
             'equipo' => 'required',
-            'servicio' => 'required',
-            'reporte_lab_tall' => 'required',
-            'reporte_lab_lead' => 'required',
+            'servicios_fractura' => 'required',
+            'distrito' => 'required',
+            //'reporte_lab_tall' => 'required',
+            //'reporte_lab_lead' => 'required',
             'fundamento_edicion' => 'required'
         ]);
 
         # Editando los datos de la solicitud en general
         $solicitud = Solicitud::find($request->solicitud_id);
-        $solicitud->proyecto_number = $request->proyecto_number;
+        //$solicitud->proyecto_number = $request->proyecto_number;
         $solicitud->servicio_number = $request->servicio_number;
         $solicitud->cliente_id = $request->cliente_fractura;
         $solicitud->locacion_id = $request->locacion_fractura;
@@ -377,12 +382,13 @@ class SolicitudController extends Controller
         $solicitud->pozo = $request->pozo;
         $solicitud->rep_compania = $request->rep_compania;
         // $solicitud->fecha_reporte = $request->fecha_reporte;
-        $solicitud->rep_venta = $request->rep_venta;
-        $solicitud->fecha_resultados = $request->fecha_resultados;
+        //$solicitud->rep_venta = $request->rep_venta;
+        //$solicitud->fecha_resultados = $request->fecha_resultados;
         $solicitud->equipo = $request->equipo;
-        $solicitud->servicio = $request->servicio;
-        $solicitud->reporte_lab_tall = $request->reporte_lab_tall;
-        $solicitud->reporte_lab_lead = $request->reporte_lab_lead;
+        $solicitud->servicios_fractura = $request->servicios_fractura;
+        $solicitud->distrito = $request->distrito;
+        //$solicitud->reporte_lab_tall = $request->reporte_lab_tall;
+        //$solicitud->reporte_lab_lead = $request->reporte_lab_lead;
         $solicitud->updated_at = date('Y-m-d H:i:s');
         $solicitud->save();
 
@@ -540,6 +546,7 @@ class SolicitudController extends Controller
             'clientes' => Cliente::all(),
             'yacimientos' => Yacimiento::all(),
             'equipos' => Equipos::all(),
+            'servicios_fractura' => ServiciosFractura::all(),
             // 'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
         return view('solicitud.components.fractura.show', $data);

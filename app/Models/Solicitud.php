@@ -11,21 +11,22 @@ class Solicitud extends Model
     protected $table = 'solicitud';
     protected $fillable = [
         'tipo',
-        'proyecto_number',
+        //'proyecto_number',
         'servicio_number',
         'cliente_id',
         'locacion_id',
         'programa',
         'fecha_solicitud',
         //'empresa',
-        'fecha_tratamiento',
+        //'fecha_tratamiento',
         'pozo',
         'rep_compania',
-        'fecha_reporte',
-        'rep_venta',
-        'fecha_resultados',
+        //'fecha_reporte',
+        //'rep_venta',
+        //'fecha_resultados',
         'equipo',
-        'servicio',
+        'servicios_fractura',
+        'distrito',
         'tipo_requerimiento_cemento_id',
         'tipo_trabajo_cemento_id',
         'tipo_cementacion_id',
@@ -94,5 +95,10 @@ class Solicitud extends Model
     public function equipos() {
         return $this->belongsTo(Equipos::class, 'equipos');
     }
+
+    public function servicios_fractura() {
+        return $this->belongsTo(ServiciosFractura::class, 'id');
+    }
+    
 
 }
