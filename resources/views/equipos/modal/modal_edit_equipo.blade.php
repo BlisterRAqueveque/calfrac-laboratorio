@@ -10,7 +10,7 @@
                 <div class="modal-body dark:dark_bg">
                     <div class="row">
                         <div class="col-12" >
-                            <input type="text" name="equipo_id" id="equipo_id">
+                            <input type="text" name="equipo_id" id="equipo_id" hidden>
                             <label for="edit_equipo" class="text-sm dark:text-gray-300">Nombre del Equipo <span
                                     class="text-red-500">*</span></label>
                             <input type="text" name="edit_equipo" id="edit_equipo" class="form-control sz py-2 mt-1 dark:inp_bg_2 bg-gray-50  dark:text-gray-400 border-none">

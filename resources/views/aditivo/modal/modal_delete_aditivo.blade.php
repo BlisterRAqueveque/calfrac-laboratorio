@@ -11,7 +11,7 @@
                 <div class="modal-body dark:dark_bg">
                     <div class="row">
                         <div class="col-12">
-                            <input type="text" name="aditivo2_id" id="aditivo2_id">
+                            <input type="text" name="aditivo2_id" id="aditivo2_id" hidden>
                             <label for="deshabilitar_aditivo" class="text-sm dark:text-gray-300">Nombre del Aditivo <span
                                     class="text-red-500">*</span></label>
                             <input type="text" readonly="true" name="deshabilitar_aditivo" id="deshabilitar_aditivo" class="form-control sz py-2 mt-1 dark:inp_bg_2 bg-gray-50  dark:text-gray-400 border-none">
