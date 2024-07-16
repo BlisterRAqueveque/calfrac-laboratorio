@@ -70,7 +70,8 @@ class SolicitudController extends Controller
             'equipos' => Equipos::where('estado', 1)->get(),
             'servicios_fractura' => ServiciosFractura:: all(),
             'distrito' => Distrito::all(),
-            'tipo_ensayos_lodo' => TipoEnsayosLodo::all()
+            //'tipo_ensayos_lodo' => TipoEnsayosLodo::all()
+            'ensayos_lodo' => EnsayosLodo::all()
         ];
         return view('solicitud.create', $data);
     }
@@ -594,6 +595,8 @@ class SolicitudController extends Controller
             'yacimientos' => Yacimiento::all(),
             'mud_company' => MudCompany::all(),
             'equipos' => Equipos::all(),
+            'servicios'=> Servicios::all(),
+            'solicitud_lodo'=> SolicitudLodo::all(),
             //'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
        // $generate_report = $this->_generate_report($solicitud_id);

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('titulo')
-    Solicitud Lodo #{{ $solicitud->id }}
+    Solicitud Lodo #{{ $solicitud->id }} - Laboratorio
 @endsection
 
 @section('contenido')
@@ -188,7 +188,7 @@
                 </div>
             </div>
 
-            <form action="{{ route('solicitud.update.lodo') }}" method="POST">
+            <form action="{{ route('solicitud.update') }}" method="POST">
                 @csrf
                 <input type="hidden" value="{{ $solicitud->id }}" name="solicitud_id">
 
@@ -279,9 +279,16 @@
                         <label for="servicio_lodo"
                             class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Servicio
                             <span class="text-red-500">*</span></label>
-                        <input type="text" name="servicio_lodo" id="servicio_lodo"
+                       {{--<input type="text" name="servicio_lodo" id="servicio_lodo"
                             class="form-control text-sm p-2" placeholder="Ingrese el servicio"
-                            value="{{ $solicitud->servicio }}" readonly>
+                            value="{{ $servicios->nombre }}" readonly>--}}
+                            <select name="servicio_lodo" id="servicio_lodo" class="text-sm inp_edit" disabled>
+                                @foreach ($servicios as $servicio)
+                                   <option value="{{ $servicio->id }}"
+                                    {{ $servicio->id == $solicitud->servicio ? 'selected' : '' }}>{{ $servicio->nombre }}
+                                    </option>
+                                @endforeach
+                            </select>
                         @error('servicio_lodo')
                             <small class="text-xs text-red-600">El servicio es requerido</small>
                         @enderror
@@ -291,7 +298,7 @@
                         <label for="mud_company"
                             class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Compania de Lodo <span class="text-red-500">*</span></label>
                         <input type="text" name="mud_company" id="mud_company"
-                            class="form-control text-sm p-2" value="{{ $solicitud->mud_company }}" readonly>
+                            class="form-control text-sm p-2" value="{{ $solicitud->mud_company ?? 'No seleccionado'}}  " readonly>
                         @error('mud_company')
                             <small class="text-xs text-red-600">La compania de lodo es requerida</small>
                         @enderror
@@ -299,23 +306,140 @@
 
                     <div class="col-span-2 xl:col-span-1">
                         <label for="densidad_lodo"
-                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Densidad del lodo<span class="text-red-500">*</span></label>
+                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Densidad del lodo <span class="text-red-500">*</span></label>
                         <input type="number" name="densidad_lodo" id="densidad_lodo"
-                            class="form-control text-sm p-2" value="{{ $solicitud->densidad_lodo }}" readonly>
+                            class="form-control text-sm p-2" value="{{ $solicitud->densidad_lodo ?? 0}}" readonly>
                         @error('densidad_lodo')
-                            <small class="text-xs text-red-600">La fecha de resultados es requerida</small>
+                            <small class="text-xs text-red-600">La densidad del lodo es requerida</small>
                         @enderror
                     </div>
 
-                    <div>
-                        <p>
-                            Aca recorro los ensayos requeridos, o los pongo como en lechada con un tilde?
-                        </p>
+                   
+                </div>
+                <p class="m-0 font-bold text-lg my-3 tracking-wide">Algo para separar</p>
+
+                <p class="m-0 mt-3 font-bold text-lg tracking-wide dark:text-gray-300">Firmas de Autorización</p>
+
+                <div class="row mt-3">
+                    <div class="col-xs-12 col-md-6 my-2">
+                        <label for="firma_autorizacion"
+                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Nombre
+                            <small>(Quien autoriza)</small></label>
+                        <select name="firma_autorizacion" id="firma_autorizacion"
+                            class="form-select sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
+                            disabled>
+                            <option value="">-- Seleccione --</option>
+                            @foreach ($users as $e)
+                                @if ($e->id == $solicitud_lodo[0]->firma_autorizacion_id)
+                                    <option value="{{ $e->id }}" selected>{{ $e->nombre }} {{ $e->apellido }}
+                                    </option>
+                                @else
+                                    <option value="{{ $e->id }}">{{ $e->nombre }} {{ $e->apellido }}</option>
+                                @endif
+                            @endforeach
+                        </select>
                     </div>
 
-    </div>
+                    <div class="col-xs-12 col-md-6 my-2">
+                        <label for="fecha_autorizacion"
+                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Fecha
+                            de la Firma
+                            <small>(*)</small></label>
+                        <input type="date" name="fecha_autorizacion" id="fecha_autorizacion"
+                            class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
+                            value="{{ $solicitud_lodo[0]->fecha_autorizacion }}" readonly>
+                    </div>
 
-    <hr class="my-4">
+                  
+
+                <p class="m-0 mt-3 font-bold text-lg tracking-wide dark:text-gray-300">Reconocimiento</p>
+                <div class="row mt-3">
+                    <div class="col-xs-12 col-md-6 my-2">
+                        <label for="firma_reconocimiento"
+                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Nombre
+                            <small>(Reconocimiento)</small></label>
+                        <select name="firma_reconocimiento" id="firma_reconocimiento"
+                            class="form-select sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
+                            disabled>
+                            <option value="">-- Seleccione --</option>
+                            @foreach ($users as $e)
+                                @if ($e->id == $solicitud_lodo[0]->firma_reconocimiento_id)
+                                    <option value="{{ $e->id }}" selected>{{ $e->nombre }}
+                                        {{ $e->apellido }}
+                                    </option>
+                                @else
+                                    <option value="{{ $e->id }}">{{ $e->nombre }} {{ $e->apellido }}
+                                    </option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="col-xs-12 col-md-6 my-2">
+                        <label for="fecha_reconocimiento"
+                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Fecha
+                            de la Firma
+                            <small>(*)</small></label>
+                        <input type="date" name="fecha_reconocimiento" id="fecha_reconocimiento"
+                            class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
+                            value="{{ $solicitud_lodo[0]->fecha_reconocimiento }}" readonly>
+                    </div>
+                </div>
+
+                <hr>
+
+            </div>
+        </form>
+   
+
+<!-- aca iria toda la info de la solicitud de lodo para mostrar jeje -->
+            <hr class="dark:bg-gray-400">
+
+
+                    <!-- Aprobar la solicitud -->
+            @if ($solicitud->aprobada)
+            <div class="mt-3 flex items-center justify-center flex-col md:flex-row gap-3 text-center bg_approved">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6 ">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+                <span>Solicitud aprobada por {{ $solicitud->user_aprobo->nombre }}
+                    {{ $solicitud->user_aprobo->apellido }} el día {{ $solicitud->fecha_aprobada->format('d') }}
+                    de
+                    {{ $solicitud->fecha_aprobada->locale('es')->monthName }},
+                    {{ $solicitud->fecha_aprobada->format('Y') }}</span>
+            </div>
+            @else
+                <div class="row mt-3">
+                    <div class="flex flex-col items-center gap-2">
+                        <form id="form_aprobar_solicitud" enctype="multipart/form-data">
+                            @csrf
+                            <input type="hidden" name="solicitud_id" value="{{ $solicitud->id }}">
+                            <input type="button" id="btnAprobarSolicitud" value="Aprobar Solicitud"
+                                class="bg-emerald-400 dark:bg-emerald-600 dark:bg-opacity-40 text-white font-bold tracking-wide px-3 py-1 rounded-sm flex gap-2 hover:bg-emerald-500 dark:hover:bg-emerald-600 transition-all duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed">
+                        </form>
+                        <p
+                            class="mb-0 flex flex-col text-center md:flex-row items-center gap-2 text-gray-600 dark:text-gray-300 text-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.8" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+                            </svg>
+                            Al aprobar la solicitud, da por confirmado que la misma se encuentra en condiciones de finalizar
+                            el reporte
+                        </p>
+                    </div>
+                </div>
+            @endif
+
+
+    </div>
+    <br>
+
+   
+
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             VirtualSelect.init({
@@ -326,14 +450,62 @@
                 ele: "#locacion_lodo",
                 placeholder: "Seleccione el yacimiento",
             });
-            VirtualSelect.init({
+           /* VirtualSelect.init({
                 ele: "#mud_company",
                 placeholder: "Seleccione la compañía",
-            });
+            });*/
             VirtualSelect.init({
                 ele: "#equipo_lodo",
                 placeholder: "Seleccione equipo",
             });
+            VirtualSelect.init({
+                ele: "#servicio_lodo",
+                placeholder: "Seleccione servicio",
+            });
         })
     </script>
+
+     <!-- Función para aprobar la solicitud -->
+     <script>
+        const btnAprobarSolicitudLodo = document.getElementById('btnAprobarSolicitud');
+        if (btnAprobarSolicitudLodo) {
+            btnAprobarSolicitudLodo.addEventListener('click', e => {
+                e.preventDefault();
+               
+                let form = new FormData(document.getElementById('form_aprobar_solicitud'))
+                confirmAlert('¿Está seguro de aprobar la solicitud?',
+                    'Una vez aprobado, la misma no se podrá editar más', 1, 'Aprobar Solicitud').then((
+                    confirmed) => {
+                    if (confirmed) {
+                        loadingAlert('Aprobación en progreso, por favor espere',
+                            'Se están almacenando los cambios y notificando vía email');
+
+                        fetch("{{ route('solicitud.aprobar') }}", {
+                                method: 'POST',
+                                body: form
+                            }).then((response) => response.json())
+                            .then((data) => {
+                                if (data) {
+                                    Swal.close();
+                                    successAlert('¡Solicitud Aprobada!',
+                                        'La solicitud fue aprobada correctamente').then((
+                                        confirmed) => {
+                                        window.location.reload();
+                                    })
+                                }
+                            })
+                    }
+                })
+
+            })
+        }
+    </script>
+      <!-- Cartel que muestra que la solicitud fue creada/editada correctamente cuando se hace el submit -->
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            @if ($message = session('success'))
+                successAlert('¡Solicitud Editada!', 'La Solicitud de Fractura fue editada correctamente')
+            @endif
+        })
+     </script>
 @endsection
