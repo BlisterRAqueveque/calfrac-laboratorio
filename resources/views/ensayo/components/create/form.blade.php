@@ -192,6 +192,7 @@
 <script src="{{ asset('js/ensayo/create/componentAguaLibre.js') }}"></script>
 <script src="{{ asset('js/ensayo/create/componentMezclabilidad.js') }}"></script>
 
+<!-- Esto es para generar el reporte pdf -->
 <script>
     const checkGenerateReport = (solicitud_id) => {
         return new Promise((resolve, reject) => {

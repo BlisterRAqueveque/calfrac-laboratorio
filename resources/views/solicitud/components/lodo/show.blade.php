@@ -126,7 +126,7 @@
                 </div>
             </div>
             <br>
-
+            <!-- Botones de info y ver los ensayos -->
             <ul role="tablist" aria-owns="nav-tab1 nav-tab2 nav-tab3 nav-tab4" class="nav nav-tabs text-sm md:text-md"
                 id="nav-tab-with-nested-tabs" style="z-index: 999">
                 <li class="nav-item w-full text-center md:w-auto" role="presentation">
@@ -137,8 +137,8 @@
                 @if ($solicitud->aprobada == 1)
                     <li class="nav-item w-full text-center md:w-auto" role="presentation">
                         <a class="nav-link nav_tab_mod text-violet-800 dark:text-violet-400 @if (session('success')) active @endif"
-                            aria-current="page" id="nav-tab2" href="#tab2-content" data-bs-toggle="tab"
-                            data-bs-target="#tab2-content" role="tab" aria" id="nav-tab2" data-bs-toggle="tab"
+                            aria-current="page" id="nav-tab-lodo" href="#tab-content-lodo" data-bs-toggle="tab"
+                            data-bs-target="#tab-content-lodo" role="tab" aria" id="nav-tab-lodo" data-bs-toggle="tab"
                             role="tab">Ensayo</a>
                     </li>
                 @else
@@ -432,9 +432,12 @@
                     </div>
                 </div>
             @endif
-
+        
 
     </div>
+    @if ($solicitud->aprobada == 1)
+            @include('ensayos_lodo.create')
+        @endif
     <br>
 
    
