@@ -592,56 +592,56 @@
 
                 <div class="row mt-3"> <!-- Análisis Requerido -->
                     <div class="col-xs-12 col-md-3 my-2">
-                        <label for="sistema_fluido"
+                        <label for="sistemas_fluidos_fractura"
                             class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Compatibilidad
                             con sistemas de
                             fluidos</label>
-                        <select name="sistema_fluido" id="sistema_fluido"
+                        <select name="sistemas_fluidos_fractura" id="sistemas_fluidos_fractura"
                             class="form-select sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
                             disabled>
                             <option value="">-- Seleccione --</option>
-                            @foreach ($sistemas_fluidos as $e)
+                            @foreach ($sistemas_fluidos_fractura as $e)
                                 @if ($e->id == $solicitud_fractura[0]->sistema_fluido_id)
-                                    <option value="{{ $e->id }}" selected>{{ $e->nombre }}</option>
+                                    <option value="{{ $e->id }}" selected>{{ $e->opciones }}</option>
                                 @else
-                                    <option value="{{ $e->id }}">{{ $e->nombre }}</option>
+                                    <option value="{{ $e->id }}">{{ $e->opciones }}</option>
                                 @endif
                             @endforeach
                         </select>
                     </div>
 
                     <div class="col-xs-12 col-md-3 my-2">
-                        <label for="analisis_microbial"
+                        <label for="analisis_agua_microbial"
                             class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Análisis
                             de Agua y Ensayo Microbial</label>
-                        <select name="analisis_microbial" id="analisis_microbial"
+                        <select name="analisis_agua_microbial" id="analisis_agua_microbial"
                             class="form-select sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
                             disabled>
                             <option value="">-- Seleccione --</option>
-                            @foreach ($analisis_microbial as $e)
+                            @foreach ($analisis_agua_microbial as $e)
                                 @if ($e->id == $solicitud_fractura[0]->analisis_microbial_id)
-                                    <option value="{{ $e->id }}" selected>{{ $e->nombre }}</option>
+                                    <option value="{{ $e->id }}" selected>{{ $e->opciones }}</option>
                                 @else
-                                    <option value="{{ $e->id }}">{{ $e->nombre }}</option>
+                                    <option value="{{ $e->id }}">{{ $e->opciones }}</option>
                                 @endif
                             @endforeach
                         </select>
                     </div>
 
                     <div class="col-xs-12 col-md-3 my-2">
-                        <label for="agente_sosten"
+                        <label for="agente_sosten_fractura"
                             class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Agente
                             de
                             Sostén</label>
-                        <select name="agente_sosten" id="agente_sosten"
+                        <select name="agente_sosten_fractura" id="agente_sosten_fractura"
                             class="form-select sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
                             disabled>
                             <option value="">-- Seleccione --</option>
-                            @foreach ($agente_sosten as $e)
+                            @foreach ($agente_sosten_fractura as $e)
                                 @if ($e->id == $solicitud_fractura[0]->agente_sosten_id)
-                                    <option value="{{ $e->id }}" selected>{{ $e->nombre }}</option>
+                                    <option value="{{ $e->id }}" selected>{{ $e->opciones }}</option>
                                 @else
-                                    <option value="{{ $e->id }}">{{ $e->nombre }}</option>
+                                    <option value="{{ $e->id }}">{{ $e->opciones }}</option>
                                 @endif
                             @endforeach
                         </select>
@@ -982,6 +982,18 @@
                 VirtualSelect.init({
                     ele: "#distrito",
                     placeholder: "Seleccione el distrito",
+                });
+                VirtualSelect.init({
+                    ele: "#sistemas_fluidos_fractura",
+                    placeholder: "Seleccione sistema",
+                });
+                VirtualSelect.init({
+                    ele: "#analisis_agua_microbial",
+                    placeholder: "Seleccione analisis",
+                });
+                VirtualSelect.init({
+                    ele: "#agente_sosten_fractura",
+                    placeholder: "Seleccione agente",
                 });
                 // document.getElementById("cliente_fractura").setValue(0);
                 // document.getElementById("locacion_fractura").setValue(0);
