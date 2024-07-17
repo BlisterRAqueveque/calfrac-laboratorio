@@ -9,7 +9,9 @@
 
     <style>
         #cliente_lodo,
-        #locacion_lodo {
+        #locacion_lodo,
+        #equipo_lodo,
+        #servicio_lodo {
             background: #b9b9b9;
             border-radius: 5px;
         }

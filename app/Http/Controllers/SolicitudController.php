@@ -37,10 +37,12 @@ use App\Models\EnsayosLodo;
 use App\Models\SolicitudLodo;
 use App\Models\AgenteSostenFractura;
 use App\Models\AnalisisAguaMicrobialFractura;
+use App\Models\RelEnsayosRequeridosLodo;
 use App\Models\SistemasFluidosFractura;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Mail;
+use Symfony\Component\VarDumper\VarDumper;
 
 class SolicitudController extends Controller
 {
@@ -514,7 +516,25 @@ class SolicitudController extends Controller
             'fecha_autorizacion' => date('Y-m-d'),
             'firma_reconocimiento_id' => $request->firma_reconocimiento_lodo,
             'fecha_reconocimiento'  => $request->fecha_reconocimiento_lodo,
+            'densidad_lodo'=>$request->densidad_lodo_3, // Tiene _3 porque se repetia con el resto de solicitudes
+            'temperatura'=>$request->temperatura,
+            'vol_colchon'=>$request->vol_colchon,
+            'densidad_colchon'=>$request->densidad_colchon,
+            'tiempo_contacto'=>$request->tiempo_contacto,
+            'mud_company'=>$request->mud_company,
+             
         ]);
+      
+        # Ensayos requeridos
+        if($request->ensayos){
+            $ensayos_separados = explode(',',$request->ensayos);      
+            foreach ($ensayos_separados as $ensayo){
+                RelEnsayosRequeridosLodo::create([
+                    'nombre'=> $solicitud_lodo->id, // Cambiar el nombre de la columna  //Nombre seria id_solicitud
+                    'id_ensayo'=> $ensayo
+                ]);
+            }
+        }
 
         # Formulaciones Tentativas
         if ($request->aditivos) {

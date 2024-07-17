@@ -441,7 +441,7 @@ class EnsayoController extends Controller
                 $tipo_ensayo = 'CN';
                 break;
             case '3': // Lodo
-                $tipo_ensayo = 'CL'; // No se si se abrevia asi pero qcyo, consultar
+                $tipo_ensayo = 'LN'; 
                 break;
         }
 

@@ -141,20 +141,35 @@
                 <div class="col-xs-12 col-md-3 my-2" style="display: flex flex-direction: column; ">
                     <label for="profundidad" class="text-sm text-gray-700 font-semibold tracking-wide">Profundidad
                         <small>(*)(MD/TVD)(m)</small></label>
-                <div class="col-xs-12 col-md-9 my-2 d-flex no-bot-padding " style="padding 0 10px;">
+                <div class="col-xs-12 col-md-9 my-2 d-flex no-bot-padding ">
                     <input type="text" placeholder="MD"
                         class="form-control sz placeholder:text-gray-300 placeholder:font-light" name="profundidad_md"
-                        id="profundidad_md">
+                        id="profundidad_md" style="margin-right: 10px;">
                     
                     <input type="text" placeholder="TVD"
                         class="form-control sz placeholder:text-gray-300 placeholder:font-light" name="profundidad_tvd"
-                        id="profundidad_tvd">
+                        id="profundidad_tvd" style="margin-left: 10px;">
                 </div>
                     @error('profundidad')
                         <small class="text-red-700 font-semibold"><em>{{ $message }}</em></small>
                     @enderror
                 </div>
             </div>
+            <p class="m-0 font-bold text-lg my-3 tracking-wide">Ensayo Referencia</p>
+            <section class="container_ensayo_referencia_lodo rounded-md">
+            </section>
+            <div class="text-center mt-3">
+                <button id="btnAddEnsayoRef_lodo"
+                    class="text-sm mt-2 bg-gray-200 hover:bg-gray-300 text-gray-600 p-1 rounded-md border transition-all duration-200 border-gray-300">
+                    {{-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
+                        stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg> --}}
+                    Agregar Ensayo de Referencia
+                </button>
+            </div>
+
+
             <span class="ms-2 mb-0 font-light tracking-wide">Ensayos requeridos (*)</span>
             <hr class="ms-2 mt-1">
                 <div class="row p-2">
@@ -343,3 +358,4 @@
 
     })
 </script>
+
