@@ -26,6 +26,7 @@ use App\Models\TipoLodo;
 use App\Models\TipoRequerimientoCemento;
 use App\Models\TipoTrabajoCemento;
 use App\Models\User;
+use App\Models\TipoEnsayosLodo;
 use App\Models\Yacimiento;
 use App\Models\AguaLibre;
 use App\Models\Sgs;
@@ -72,7 +73,7 @@ class SolicitudController extends Controller
             'equipos' => Equipos::where('estado', 1)->get(),
             'servicios_fractura' => ServiciosFractura:: all(),
             'distrito' => Distrito::all(),
-            'ensayos_lodo' => EnsayosLodo::all()
+            'tipo_ensayos_lodo' => TipoEnsayosLodo::all()
         ];
         return view('solicitud.create', $data);
     }
@@ -585,6 +586,24 @@ class SolicitudController extends Controller
         return view('solicitud.components.lechada.show', $data);
     }
 
+    public function show_lodo($solicitud_id){
+        
+        $data = [
+            'solicitud' => Solicitud::find($solicitud_id),
+            //'ensayos_referencia' => RelEnsayoReferenciaSolicitud::where('solicitud_id', $solicitud_id)->get(),
+          //  'aditivos' => Aditivo::all(),
+            'users' => User::all(),
+            'clientes' => Cliente::all(),
+            'yacimientos' => Yacimiento::all(),
+            'mud_company' => MudCompany::all(),
+            'equipos' => Equipos::all(),
+            //'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
+        ];
+       // $generate_report = $this->_generate_report($solicitud_id);
+        //$data['generar_reporte'] = $generate_report->original['generate_report'];
+        return view('solicitud.components.lodo.show', $data);
+        
+    }
     public function update_lechada(Request $request)
     {
         $aditivos_request = $request->aditivos;
@@ -718,10 +737,34 @@ class SolicitudController extends Controller
             'servicio_lodo' => 'required',
         ]);
 
+           // Change => Datos de la solicitud general
+           $solicitud = Solicitud::find($request->solicitud_id);
+           $solicitud->locacion_id = $request->locacion_lodo;
+           // $solicitud->empresa = $request->empresa_lodo;
+           $solicitud->pozo = $request->pozo_lodo;
+           $solicitud->fecha_resultados = $request->fecha_resultados_lodo;
+           $solicitud->equipo = $request->equipo_lodo;
+           $solicitud->servicio = $request->servicio_lodo;
+           $solicitud->save();
+
+           $solicitud_lodo = SolicitudLodo::where('solicitud_id', $solicitud->id)->first();
+           $solicitud_lodo->profundidad_md = $request->profundidad_md;
+           $solicitud_lodo->profundidad_tvd = $request->profundidad_tvd;
+           //Aca irian todas las que vayamos agregando mas adelante
+           $solicitud_lodo->save();
+
+
+          // $aditivos_bd = RelAditivoSolicitudLodo::where('solicitud_lodo_id', $solicitud_lodo->id)->get();
+
+          //Aca iria un foreach con los aditivos
+
+
+        if ($solicitud->id)
+        return back()->with('success', $solicitud->id);
     }
     /**
      * Se que es un código asqueroso, pero una condición si o si depende de la otra
-     * ya lo arregle pa (f.m)
+     * 
      */
     public function _generate_report($solicitud_id)
     {

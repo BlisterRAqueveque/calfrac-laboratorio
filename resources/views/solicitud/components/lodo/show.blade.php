@@ -166,7 +166,7 @@
                         <div class="flex gap-3">
                             <button
                                 class="bg-cyan-600 dark:bg-blue-600 dark:hover:bg-blue-700 dark:bg-opacity-70 dark:text-blue-300 text-white font-bold tracking-wide px-3 py-1 rounded-sm flex gap-2 hover:bg-cyan-700 transition-all duration-200"
-                                id="btnHabilitarEdicionLechada">
+                                id="btnHabilitarEdicionLodo">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -176,7 +176,7 @@
                             </button>
                             <button
                                 class="bg-red-400 dark:bg-red-700 dark:bg-opacity-50 dark:text-red-600 text-white font-bold tracking-wide px-3 py-1 rounded-sm flex gap-2 hover:bg-red-500 transition-all duration-200 hidden"
-                                id="btnDeshabilitarEdicionLechada">
+                                id="btnDeshabilitarEdicionLodo">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
@@ -312,5 +312,28 @@
                             Aca recorro los ensayos requeridos, o los pongo como en lechada con un tilde?
                         </p>
                     </div>
+
     </div>
+
+    <hr class="my-4">
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            VirtualSelect.init({
+                ele: "#cliente_lodo",
+                placeholder: "Seleccione el cliente",
+            });
+            VirtualSelect.init({
+                ele: "#locacion_lodo",
+                placeholder: "Seleccione el yacimiento",
+            });
+            VirtualSelect.init({
+                ele: "#mud_company",
+                placeholder: "Seleccione la compañía",
+            });
+            VirtualSelect.init({
+                ele: "#equipo_lodo",
+                placeholder: "Seleccione equipo",
+            });
+        })
+    </script>
 @endsection

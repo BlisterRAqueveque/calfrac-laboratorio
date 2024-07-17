@@ -17,7 +17,7 @@
                     <label for="cliente_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Cliente
                         <span class="text-red-500">*</span></label>
                     <select name="cliente_lodo" id="cliente_lodo" class="text-sm" data-search="true"
-                        data-silent-initial-value-set="true" multiple="true">
+                        data-silent-initial-value-set="true">
                         @foreach ($clientes as $c)
                             <option value="{{ $c->id }}"
                                 {{ old('cliente_lodo') == $c->id ? 'selected' : '' }}>{{ $c->nombre }}</option>
@@ -141,7 +141,7 @@
                 <div class="col-xs-12 col-md-3 my-2" style="display: flex flex-direction: column; ">
                     <label for="profundidad" class="text-sm text-gray-700 font-semibold tracking-wide">Profundidad
                         <small>(*)(MD/TVD)(m)</small></label>
-                <div class="col-xs-12 col-md-9 my-2 d-flex no-bot-padding">
+                <div class="col-xs-12 col-md-9 my-2 d-flex no-bot-padding " style="padding 0 10px;">
                     <input type="text" placeholder="MD"
                         class="form-control sz placeholder:text-gray-300 placeholder:font-light" name="profundidad_md"
                         id="profundidad_md">
@@ -161,9 +161,9 @@
                     <div class="col-xs-12 col-md-6 my-2">
                         
                         <select name='ensayos' id="ensayos" class="text-sm" data-search="true"  data-silent-initial-value-set="true" multiple="true">
-                        @foreach($ensayos_lodo as $sl)
+                        @foreach($tipo_ensayos_lodo as $sl)
                         <option value="{{$sl->id}}"
-                            {{ old('ensayos_lodo') == $sl->id ? 'selected' : '' }}> {{$sl->nombre}}</option>
+                            {{ old('tipo_ensayos_lodo') == $sl->id ? 'selected' : '' }}> {{$sl->nombre}}</option>
                         @endforeach
                     </select>
 
@@ -286,10 +286,6 @@
             </div>
         </section>
         <div class="flex items-center gap-3 md:justify-end mt-4 px-3 md:px-auto">
-            <!button id="btnSubmitSolicitudLodo"
-                class="w-full md:w-auto bg-green-700 bg-opacity-60 text-white p-2 rounded-sm hover:shadow-lg transition-all duration-75 font-bold"
-                data-bs-toggle="modal" data-bs-target="#modal_confirm_lodo" onclick="event.preventDefault()">Enviar
-                Solicitud</!button>
             <button id="btnSubmitSolicitudLodo"
             class="w-full md:w-auto bg-green-700 bg-opacity-60 text-white p-2 rounded-sm hover:shadow-lg transition-all duration-75 font-bold"">
             Enviar
