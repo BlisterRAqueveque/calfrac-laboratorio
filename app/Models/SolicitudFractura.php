@@ -42,16 +42,31 @@ class SolicitudFractura extends Model
     {
         return $this->belongsTo(User::class, 'firma_iniciado_por_id');
     }
+
     public function user_servicio_tecnico()
     {
         return $this->belongsTo(User::class, 'firma_servicio_tecnico_id');
     }
+
     public function user_laboratorio()
     {
         return $this->belongsTo(User::class, 'firma_laboratorio_id');
     }
+
     public function user_reconocimiento()
     {
         return $this->belongsTo(User::class, 'firma_reconocimiento_id');
+    }
+
+    public function analisis_microbial_id() {
+        return $this->belongsTo(AnalisisAguaMicrobialFractura::class, 'id');
+    }
+
+    public function agente_sosten_id() {
+        return $this->belongsTo(AgenteSostenFractura::class, 'id');
+    }
+
+    public function sistema_fluido_id() {
+        return $this->belongsTo(SistemasFluidosFractura::class, 'id');
     }
 }

@@ -343,42 +343,45 @@
 
             <div class="row mt-3"> <!-- Análisis Requerido -->
                 <div class="col-xs-12 col-md-3 my-2">
-                    <label for="sistema_fluido"
+                    <label for="sistemas_fluidos_fractura"
                         class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Compatibilidad
                         con sistemas de
                         fluidos</label>
-                    <select name="sistema_fluido" id="sistema_fluido"
-                        class="form-select dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none sz p-2">
-                        <option value="">-- Seleccione --</option>
-                        @foreach ($sistemas_fluidos as $e)
-                            <option value="{{ $e->id }}">{{ $e->nombre }}</option>
+                    <select name="sistemas_fluidos_fractura" id="sistemas_fluidos_fractura"
+                    class="text-sm" data-search="true"
+                    data-silent-initial-value-set="true">
+                        <option value="sistemas_fluidos_fractura">-- Seleccione--</option>
+                        @foreach ($sistemas_fluidos_fractura as $e)
+                            <option value="{{ $e->id }}">{{ $e->opciones }}</option>
                         @endforeach
                     </select>
                 </div>
 
                 <div class="col-xs-12 col-md-3 my-2">
-                    <label for="analisis_microbial"
+                    <label for="analisis_agua_microbial"
                         class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Análisis
                         de Agua y Ensayo Microbial</label>
-                    <select name="analisis_microbial" id="analisis_microbial"
-                        class="form-select dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none sz p-2">
+                    <select name="analisis_agua_microbial" id="analisis_agua_microbial"
+                    class="text-sm" data-search="true"
+                    data-silent-initial-value-set="true" multiple="true">
                         <option value="">-- Seleccione --</option>
-                        @foreach ($analisis_microbial as $e)
-                            <option value="{{ $e->id }}">{{ $e->nombre }}</option>
+                        @foreach ($analisis_agua_microbial as $e)
+                            <option value="{{ $e->id }}">{{ $e->opciones }}</option>
                         @endforeach
                     </select>
                 </div>
 
                 <div class="col-xs-12 col-md-3 my-2">
-                    <label for="agente_sosten"
+                    <label for="agente_sosten_fractura"
                         class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Agente
                         de
                         Sostén</label>
-                    <select name="agente_sosten" id="agente_sosten"
-                        class="form-select dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none sz p-2">
+                    <select name="agente_sosten_fractura" id="agente_sosten_fractura"
+                    class="text-sm" data-search="true"
+                    data-silent-initial-value-set="true" multiple="true">
                         <option value="">-- Seleccione --</option>
-                        @foreach ($agente_sosten as $e)
-                            <option value="{{ $e->id }}">{{ $e->nombre }}</option>
+                        @foreach ($agente_sosten_fractura as $e)
+                            <option value="{{ $e->id }}">{{ $e->opciones }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -564,11 +567,26 @@
             ele: "#distrito",
             placeholder: "Seleccione el distrito",
         });
+        VirtualSelect.init({
+            ele: "#sistemas_fluidos_fractura",
+            placeholder: "Seleccione Sistema Fluido",
+        });
+        VirtualSelect.init({
+            ele: "#analisis_agua_microbial",
+            placeholder: "Seleccione analisis",
+        });
+        VirtualSelect.init({
+            ele: "#agente_sosten_fractura",
+            placeholder: "Seleccione agente de sosten",
+        });
         document.getElementById("cliente_fractura").setValue(0);
         document.getElementById("locacion_fractura").setValue(0);
         document.getElementById("equipo").setValue(0);
         document.getElementById("servicios_fractura").setValue(0);
         document.getElementById("distrito").setValue(0);
+        document.getElementById("sistemas_fluidos_fractura").setValue(0);
+        document.getElementById("analisis_agua_microbial").setValue(0);
+        document.getElementById("agente_sosten_fractura").setValue(0);
     })
 </script>
 

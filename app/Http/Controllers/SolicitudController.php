@@ -35,6 +35,9 @@ use App\Models\TipoLodo_Lodos;
 use App\Models\Equipos;
 use App\Models\EnsayosLodo;
 use App\Models\SolicitudLodo;
+use App\Models\AgenteSostenFractura;
+use App\Models\AnalisisAguaMicrobialFractura;
+use App\Models\SistemasFluidosFractura;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Mail;
@@ -53,9 +56,9 @@ class SolicitudController extends Controller
             'ensayos' => Ensayo::where('tipo', 'CN')->where('estado', 1)->get(),
             'clientes' => Cliente::where('estado', 1)->get(),
             'yacimientos' => Yacimiento::where('estado', 1)->get(),
-            'sistemas_fluidos' => SistemasFluidos::where('activo', 1)->get(),
-            'analisis_microbial' => AnalisisMicrobial::where('activo', 1)->get(),
-            'agente_sosten' => AgenteSosten::where('activo', 1)->get(),
+            'sistemas_fluidos_fractura' => SistemasFluidosFractura::where('estado', 1)->get(),
+            'analisis_agua_microbial' => AnalisisAguaMicrobialFractura::where('estado', 1)->get(),
+            'agente_sosten_fractura' => AgenteSostenFractura::where('estado', 1)->get(),
             'otros_analisis' => OtrosAnalisis::where('activo', 1)->get(),
             'tipo_trabajo_cemento' => TipoTrabajoCemento::where('estado', 1)->get(),
             'tipo_cementacion' => TipoCementacion::where('estado', 1)->get(),
@@ -142,9 +145,9 @@ class SolicitudController extends Controller
             'proveedor' => $request->proveedor,
             'producto' => $request->producto,
             'concentracion' => $request->concentracion,
-            'sistema_fluido_id' => $request->sistema_fluido,
-            'analisis_microbial_id' => $request->analisis_microbial,
-            'agente_sosten_id' => $request->agente_sosten,
+            'sistema_fluido_id' => $request->sistema_fluido_fractura,
+            'analisis_microbial_id' => $request->analisis_agua_microbial,
+            'agente_sosten_id' => $request->agente_sosten_fractura,
             'otro_analisis_id' => $request->otros,
             'comentario' => $request->comentario,
             'firma_iniciado_por_id' => $request->firma_iniciado_por,
@@ -541,9 +544,9 @@ class SolicitudController extends Controller
         $data = [
             'solicitud' => Solicitud::find($solicitud_id),
             'solicitud_fractura' => SolicitudFractura::where('solicitud_id', $solicitud_id)->get(),
-            'sistemas_fluidos' => SistemasFluidos::all(),
-            'analisis_microbial' => AnalisisMicrobial::all(),
-            'agente_sosten' => AgenteSosten::all(),
+            'sistemas_fluidos_fractura' => SistemasFluidosFractura::all(),
+            'analisis_agua_microbial' => AnalisisAguaMicrobialFractura::all(),
+            'agente_sosten_fractura' => AgenteSostenFractura::all(),
             'otros_analisis' => OtrosAnalisis::all(),
             'aditivos' => Aditivo::all(),
             'users' => User::all(),
