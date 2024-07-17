@@ -73,7 +73,7 @@ class SolicitudController extends Controller
             'equipos' => Equipos::where('estado', 1)->get(),
             'servicios_fractura' => ServiciosFractura:: all(),
             'distrito' => Distrito::all(),
-            'tipo_ensayos_lodo' => TipoEnsayosLodo::all()
+            //'tipo_ensayos_lodo' => TipoEnsayosLodo::all()
         ];
         return view('solicitud.create', $data);
     }
