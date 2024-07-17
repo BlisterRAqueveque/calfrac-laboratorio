@@ -161,9 +161,9 @@
                     <div class="col-xs-12 col-md-6 my-2">
                         
                         <select name='ensayos' id="ensayos" class="text-sm" data-search="true"  data-silent-initial-value-set="true" multiple="true">
-                        @foreach($tipo_ensayos_lodo as $sl)
+                        @foreach($ensayos_lodo as $sl)
                         <option value="{{$sl->id}}"
-                            {{ old('tipo_ensayos_lodo') == $sl->id ? 'selected' : '' }}> {{$sl->nombre}}</option>
+                            {{ old('ensayos_lodo') == $sl->id ? 'selected' : '' }}> {{$sl->nombre}}</option>
                         @endforeach
                     </select>
 

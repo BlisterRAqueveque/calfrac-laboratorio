@@ -73,7 +73,6 @@ class EquiposController extends Controller
     {
         $this->validate($request, [
             'habilitar_equipo' => 'required',
-            'nombre_equipo' => 'required|unique:equipos,nombre'
         ]);
 
         $equipo = Equipos::findOrFail($request->equipo3_id);

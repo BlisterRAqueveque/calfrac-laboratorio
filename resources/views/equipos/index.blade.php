@@ -131,8 +131,14 @@
     
         const form = document.getElementById('form_deshabilitar_equipo');
         const formData = new FormData(form); // Create FormData from the form
-    
-        confirmAlert('¿Está seguro de eliminar al equipo?', '', 1, 'Desactivar')
+        
+            fetch(`${route('equipos.deshabilitar')}`, {
+                method: 'POST',
+                body: formData,
+                });
+        });
+        
+       /* confirmAlert('¿Está seguro de eliminar al equipo?', '', 1, 'Desactivar')
             .then((confirmed) => {
             if (confirmed) {
                 loadingAlert('Desactivando equipo', 'Por favor espere');
@@ -156,7 +162,7 @@
                 });
             }
             });
-        });
+        });*/
     
     </script>
     <!-- Habilitar el equipo -->
@@ -168,8 +174,12 @@
     
         const form = document.getElementById('form_habilitar_equipo'); 
         const formData = new FormData(form); // Create FormData from the form
-    
-        confirmAlert('¿Está seguro de habilitar al equipo?', '', 1, 'Desactivar')
+        fetch(`${route('equipos.habilitar')}`, {
+                method: 'POST',
+                body: formData,
+                });
+            });
+       /* confirmAlert('¿Está seguro de habilitar al equipo?', '', 1, 'Desactivar')
             .then((confirmed) => {
             if (confirmed) {
                 loadingAlert('Habilitando equipo', 'Por favor espere');
@@ -193,7 +203,7 @@
                 });
             }
             });
-        });
+        });*/
     
     </script>
     
