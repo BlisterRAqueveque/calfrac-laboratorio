@@ -536,7 +536,7 @@
                                                     <div class="modal-body">
                                                         <span class="ms-1 mb-0 font-light tracking-wide dark:text-gray-300">Tiempo de
                                                             Bombeabilidad</span>
-                    <hr class="ms-1 mt-1 dark:bg-gray-500">
+                                                        <hr class="ms-1 mt-1 dark:bg-gray-500">
 
                                                         <div class="row px-3 mb-2">
                                                             <div class="col-xs-12 col-md-2 my-2">

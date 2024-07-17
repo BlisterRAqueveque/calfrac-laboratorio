@@ -103,4 +103,5 @@ class Solicitud extends Model
     public function distrito() {
         return $this->belongsTo(Distrito::class, 'id');
     }
+
 }
