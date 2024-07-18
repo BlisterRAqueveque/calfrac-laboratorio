@@ -9,3 +9,9 @@ function deshabilitarAditivo(aditivo2) {
     document.getElementById('aditivo2_id').value = aditivo2.id;
     document.getElementById('deshabilitar_aditivo').value = aditivo2.nombre;
 }
+
+function habilitarAditivo(aditivo3) {
+    event.preventDefault();
+    document.getElementById('aditivo3_id').value = aditivo3.id;
+    document.getElementById('habilitar_aditivo').value = aditivo3.nombre;
+}

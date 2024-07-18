@@ -76,7 +76,8 @@ class SolicitudController extends Controller
             'servicios_fractura' => ServiciosFractura:: all(),
             'distrito' => Distrito::all(),
             //'tipo_ensayos_lodo' => TipoEnsayosLodo::all()
-            'ensayos_lodo' => EnsayosLodo::all()
+            'ensayos_lodo' => EnsayosLodo::all(),
+            //'solicitud_lodo' => SolicitudLodo:: all()
         ];
         return view('solicitud.create', $data);
     }

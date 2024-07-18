@@ -57,7 +57,25 @@ class ClienteController extends Controller
             $cliente->save();
             return back();
         } else {
-            return back()->withError('Cliente no encontrado con ID: ' . $request->cliente_id);
+            return back()->withError('Cliente no encontrado con ID: ' . $request->cliente2_id);
+        }
+    }
+
+    public function habilitar(Request $request)
+    {
+        $this->validate($request, [
+            'habilitar_cliente' => 'required',
+        ]);
+
+
+        $cliente = Cliente::findOrFail($request->cliente3_id);
+
+        if ($cliente) {
+            $cliente->estado = 1;
+            $cliente->save();
+            return back();
+        } else {
+            return back()->withError('Cliente no encontrado con ID: ' . $request->cliente3_id);
         }
     }
 }

@@ -55,7 +55,25 @@ class AditivoController extends Controller
             $aditivo->save();
             return back();
         } else {
-            return back()->withError('Aditivo no encontrado con ID: ' . $request->aditivo_id);
+            return back()->withError('Aditivo no encontrado con ID: ' . $request->aditivo2_id);
+        }
+    }
+
+    public function habilitar(Request $request)
+    {
+        $this->validate($request, [
+            'habilitar_aditivo' => 'required',
+        ]);
+
+
+        $aditivo = Aditivo::findOrFail($request->aditivo3_id);
+
+        if ($aditivo) {
+            $aditivo->estado = 1;
+            $aditivo->save();
+            return back();
+        } else {
+            return back()->withError('Aditivo no encontrado con ID: ' . $request->aditivo3_id);
         }
     }
 }

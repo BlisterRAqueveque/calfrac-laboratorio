@@ -94,6 +94,7 @@ Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes');
 Route::post('/cliente', [ClienteController::class, 'store'])->name('cliente.store');
 Route::post('/cliente/update', [ClienteController::class, 'update'])->name('cliente.update');
 Route::post('/cliente/deshabilitar', [ClienteController::class, 'deshabilitar'])->name('cliente.deshabilitar');
+Route::post('/cliente/habilitar', [ClienteController::class, 'habilitar'])->name('cliente.habilitar');
 
 # Usuarios
 Route::get('/usuarios', [UserController::class, 'index'])->name('usuarios');
@@ -108,6 +109,7 @@ Route::get('/yacimientos', [YacimientoController::class, 'index'])->name('yacimi
 Route::post('/yacimiento', [YacimientoController::class, 'store'])->name('yacimiento.store');
 Route::post('/yacimiento/update', [YacimientoController::class, 'update'])->name('yacimiento.update');
 Route::post('/yacimiento/deshabilitar', [YacimientoController::class, 'deshabilitar'])->name('yacimiento.deshabilitar');
+Route::post('/yacimiento/habilitar', [YacimientoController::class, 'habilitar'])->name('yacimiento.habilitar');
 
 
 # Aditivos
@@ -115,6 +117,7 @@ Route::get('/aditivos', [AditivoController::class, 'index'])->name('aditivos');
 Route::post('/aditivo', [AditivoController::class, 'store'])->name('aditivo.store');
 Route::post('/aditivo/update', [AditivoController::class, 'update'])->name('aditivo.update');
 Route::post('/aditivo/deshabilitar', [AditivoController::class, 'deshabilitar'])->name('aditivo.deshabilitar');
+Route::post('/aditivo/habilitar', [AditivoController::class, 'habilitar'])->name('aditivo.habilitar');
 
 
 #Equipos

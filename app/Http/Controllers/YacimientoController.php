@@ -52,7 +52,25 @@ class YacimientoController extends Controller
             $yacimiento->save();
             return back();
         } else {
-            return back()->withError('Yacimiento no encontrado con ID: ' . $request->yacimiento_id);
+            return back()->withError('Yacimiento no encontrado con ID: ' . $request->yacimiento2_id);
+        }
+    }
+
+    public function habilitar(Request $request)
+    {
+        $this->validate($request, [
+            'habilitar_yacimiento' => 'required',
+        ]);
+
+
+        $yacimiento = Yacimiento::findOrFail($request->yacimiento3_id);
+
+        if ($yacimiento) {
+            $yacimiento->estado = 1;
+            $yacimiento->save();
+            return back();
+        } else {
+            return back()->withError('Yacimiento no encontrado con ID: ' . $request->yacimiento3_id);
         }
     }
 }

@@ -319,6 +319,11 @@
                    
                 </div>
                 <p class="m-0 font-bold text-lg my-3 tracking-wide">Algo para separar</p>
+                <div class="grid xs:grid-cols-2 md:grid-cols-6 gap-3 mt-3">
+                   <label for='temperatura' class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Temperatura
+                    <span class="text-red-500">*</span></label>
+                    
+                </div>
 
                 <p class="m-0 mt-3 font-bold text-lg tracking-wide dark:text-gray-300">Firmas de Autorización</p>
 
@@ -469,6 +474,8 @@
             });
         })
     </script>
+
+    <script src="{{ asset('js/Solicitud/lodo/edition.js') }}"></script>
 
      <!-- Función para aprobar la solicitud -->
      <script>
