@@ -4,7 +4,7 @@
       @csrf
       <div class="modal-content">
         <div class="modal-header dark:bg-violet-950 dark:bg-opacity-90 dark:text-gray-300">
-          <h1 class="modal-title fs-5 text-md font-bold tracking-wide m-0">Eliminar Equipo</h1>
+          <h1 class="modal-title fs-5 text-md font-bold tracking-wide m-0">Deshabilitar Equipo</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body dark:dark_bg">
@@ -26,7 +26,7 @@
             </svg>
             Cancelar
           </button>
-          <input type="submit" value="Eliminar Equipo" class="text-xs xl:text-sm w-full md:w-auto bg-green-700 bg-opacity-60 text-white p-2 rounded-sm hover:shadow-lg transition-all duration-75 font-bold">
+          <input type="submit" value="Deshabilitar Equipo" class="text-xs xl:text-sm w-full md:w-auto bg-green-700 bg-opacity-60 text-white p-2 rounded-sm hover:shadow-lg transition-all duration-75 font-bold">
         </div>
       </div>
     </form>

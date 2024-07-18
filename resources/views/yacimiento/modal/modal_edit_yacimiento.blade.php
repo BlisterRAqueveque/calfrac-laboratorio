@@ -32,7 +32,7 @@
                         Cancelar</button>
                     <input type="submit"
                         class="text-sm w-full md:w-auto bg-green-700 bg-opacity-60 text-white p-2 rounded-sm hover:shadow-lg transition-all duration-75 font-bold"
-                        value="Editar Cliente">
+                        value="Editar Yacimiento">
                 </div>
             </div>
         </form>

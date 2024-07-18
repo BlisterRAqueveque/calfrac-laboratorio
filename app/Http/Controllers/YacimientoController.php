@@ -29,12 +29,20 @@ class YacimientoController extends Controller
 
     public function update(Request $request) {
         $this->validate($request, [
-            'edit_yacimiento' => 'required',
+            'edit_yacimiento' => 'required|unique:yacimientos,nombre',
         ]);
-        $yacimiento = Yacimiento::find($request->yacimiento_id);
-        $yacimiento->nombre = $request->edit_yacimiento;
-        $yacimiento->updated_at = date('Y-m-d H:i:s');
-        $yacimiento->save();
+
+        //Deshabilito el yacimiento a editar
+        $yacimientoExistente = Yacimiento::find($request->yacimiento_id);
+        if($yacimientoExistente){
+            $yacimientoExistente->estado = 0;
+        }
+
+        Yacimiento::create([
+            'nombre'=>$request->edit_yacimiento,
+            'user_id'=>auth()->user()->id,
+        ]);
+       
         return back();
     }
 

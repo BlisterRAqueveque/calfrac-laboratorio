@@ -34,7 +34,7 @@ class EquiposController extends Controller
     {
 
         $this->validate($request, [
-            'edit_equipo' => 'required',
+            'edit_equipo' => 'required|unique:equipos,nombre',
         ]);
 
         //Deshabilito el equipo a editar

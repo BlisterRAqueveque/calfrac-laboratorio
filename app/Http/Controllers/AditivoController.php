@@ -32,12 +32,17 @@ class AditivoController extends Controller
     public function update(Request $request)
     {
         $this->validate($request, [
-            'edit_aditivo' => 'required',
+            'edit_aditivo' => 'required|unique:aditivo,nombre',
         ]);
-        $aditivo = Aditivo::find($request->aditivo_id);
-        $aditivo->nombre = $request->edit_aditivo;
-        $aditivo->updated_at = date('Y-m-d H:i:s');
-        $aditivo->save();
+        $aditivoExistente = Aditivo::find($request->aditivo_id);
+        if($aditivoExistente){
+            $aditivoExistente->estado = 0;
+        }
+        
+        Aditivo::create([
+            'nombre' => $request->aditivo,
+            'user_id' => auth()->user()->id
+        ]);
         return back();
     }
 

@@ -34,12 +34,19 @@ class ClienteController extends Controller
     public function update(Request $request)
     {
         $this->validate($request, [
-            'edit_cliente' => 'required',
+            'edit_cliente' => 'required|unique:clientes,nombre',
         ]);
-        $cliente = Cliente::find($request->cliente_id);
-        $cliente->nombre = $request->edit_cliente;
-        $cliente->updated_at = date('Y-m-d H:i:s');
-        $cliente->save();
+
+        $clienteExistente = Cliente::find($request->cliente_id);
+        if($clienteExistente){
+            $clienteExistente->estado = 0;
+        }
+
+        Cliente::create([
+            'nombre' => $request->edit_cliente,
+            'user_id' => auth()->user()->id
+        ]);
+
         return back();
     }
 

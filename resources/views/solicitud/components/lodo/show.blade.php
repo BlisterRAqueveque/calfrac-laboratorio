@@ -318,13 +318,68 @@
 
                    
                 </div>
-                <p class="m-0 font-bold text-lg my-3 tracking-wide">Algo para separar</p>
+                <hr class="my-4">
+
+                <p class="m-0 font-bold text-lg my-3 tracking-wide">Condiciones del Test</p>
                 <div class="grid xs:grid-cols-2 md:grid-cols-6 gap-3 mt-3">
+                    <div class="col-span-2 xl:col-span-1">
+
                    <label for='temperatura' class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Temperatura
                     <span class="text-red-500">*</span></label>
-                    
-                </div>
+                    <input type="number" name="temperatura" id="temperatura"
+                            class="form-control text-sm p-2" value="{{ $solicitud_lodo[0]->temperatura ?? 0}}" readonly>
+                    @error('temperatura')
+                        <small class="text-xs text-red-600">La temperatura es requerida</small>
+                    @enderror
+                    </div>
 
+                    <div class="col-span-2 xl:col-span-1">
+
+                        <label for='profundidad_md' class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Profundidad MD
+                         <span class="text-red-500">*</span></label>
+                         <input type="number" name="profundidad_md" id="profundidad_md"
+                                 class="form-control text-sm p-2" value="{{ $solicitud_lodo[0]->profundidad_md ?? 0}}" readonly>
+                         @error('profundidad_md')
+                             <small class="text-xs text-red-600">La profundidad es requerida</small>
+                         @enderror
+                    </div>
+
+                    <div class="col-span-2 xl:col-span-1">
+
+                        <label for='profundidad_tvd' class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Profundidad TVD
+                         <span class="text-red-500">*</span></label>
+                         <input type="number" name="profundidad_tvd" id="profundidad_tvd"
+                                 class="form-control text-sm p-2" value="{{ $solicitud_lodo[0]->profundidad_tvd ?? 0}}" readonly>
+                         @error('profundidad_tvd')
+                             <small class="text-xs text-red-600">La profundidad es requerida</small>
+                         @enderror
+                    </div>
+
+                </div>
+                <hr class="my-4">
+
+                <div class="grid xs:grid-cols-2 md:grid-cols-6 gap-3 mt-3">
+                    <p class="m-0 font-bold text-lg my-3 tracking-wide">Ensayos de referencia</p>
+
+                </div>
+                <hr class="my-4">
+
+                <div class="grid xs:grid-cols-2 md:grid-cols-6 gap-3 mt-3">
+                    <p class="m-0 font-bold text-lg my-3 tracking-wide">Ensayos requeridos</p>
+
+                </div>
+                <hr class="my-4">
+
+                <div class="grid xs:grid-cols-2 md:grid-cols-6 gap-3 mt-3">
+                    <p class="m-0 font-bold text-lg my-3 tracking-wide">Requerimientos del colchon</p>
+
+                </div>
+                <hr class="my-4">
+
+                <div class="grid xs:grid-cols-2 md:grid-cols-6 gap-3 mt-3">
+                    <p class="m-0 font-bold text-lg my-3 tracking-wide">Comentarios/Observaciones</p>
+
+                </div>
                 <p class="m-0 mt-3 font-bold text-lg tracking-wide dark:text-gray-300">Firmas de Autorización</p>
 
                 <div class="row mt-3">
@@ -398,10 +453,7 @@
             </div>
         </form>
    
-
-<!-- aca iria toda la info de la solicitud de lodo para mostrar jeje -->
             <hr class="dark:bg-gray-400">
-
 
                     <!-- Aprobar la solicitud -->
             @if ($solicitud->aprobada)
