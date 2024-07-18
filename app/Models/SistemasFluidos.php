@@ -11,6 +11,9 @@ class SistemasFluidos extends Model
 
     public $timestamps = false;
     protected $table = 'sistemas_fluidos';
-    
-
+    protected $fillable = [
+        'id',
+        'nombre',
+        'activo',
+    ];
 }

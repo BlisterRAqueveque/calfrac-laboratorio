@@ -313,102 +313,127 @@
                     </div>
                 </div>
 
-                <div class="col-xs-12 col-md-4 my-2">
+                <div class="col-xs-12 col-md-3 my-2">
                     <label for="proveedor"
-                        class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Nombre del
+                        class=" dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Nombre del
                         Proveedor</label>
                     <input type="text" placeholder="Ingrese el proveedor"
                         class="form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 sz aditivo_extra_inp"
-                        name="proveedor" id="proveedor" readonly>
+                        name="proveedor" id="proveedor">
                 </div>
-                <div class="col-xs-12 col-md-4 my-2">
+                <div class="col-xs-12 col-md-3 my-2">
                     <label for="producto"
                         class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Nombre del
                         Producto</label>
                     <input type="text" placeholder="Ingrese el producto"
                         class="form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 sz aditivo_extra_inp"
-                        name="producto" id="producto" readonly>
+                        name="producto" id="producto">
                 </div>
-                <div class="col-xs-12 col-md-4 my-2">
+
+                <div class="col-xs-12 col-md-3 my-2">
+                    <label for="estados"
+                        class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Estado físico del producto</label>
+                    <select name="estados" id="estados" class="text-sm inp_edit">
+                        @foreach ($estados as $tipo)
+                            <option value="{{ $tipo->id }}">{{ $tipo->opciones }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="col-xs-12 col-md-3 my-2">
                     <label for="concentracion"
                         class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Concentración
                         a Ensayar</label>
                     <input type="text" placeholder="Ingrese la concentración"
                         class="form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 sz aditivo_extra_inp"
-                        name="concentracion" id="concentracion" readonly>
+                        name="concentracion" id="concentracion">
                 </div>
+
+                <div class="col-12 my-2">
+                    <label for="comentario"
+                        class="text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Comentarios
+                        /
+                        Observaciones</label>
+                    <textarea name="comentario" id="comentario"
+                        class="form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 sz"
+                        rows="3" placeholder="Ingrese un comentario / instrucciones - Máximo 300 caracteres"></textarea>
+                </div>
+
+                
             </div> <!-- Información del Pozo -->
 
             <p class="m-0 mt-3 font-bold text-lg tracking-wide">Análisis Requerido</p>
 
             <div class="row mt-3"> <!-- Análisis Requerido -->
                 <div class="col-xs-12 col-md-3 my-2">
-                    <label for="sistemas_fluidos_fractura"
+                    <label for="sistemas_fluidos"
                         class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Compatibilidad
                         con sistemas de
                         fluidos</label>
-                    <select name="sistemas_fluidos_fractura" id="sistemas_fluidos_fractura"
-                    class="text-sm" data-search="true"
-                    data-silent-initial-value-set="true">
-                        <option value="sistemas_fluidos_fractura">-- Seleccione--</option>
-                        @foreach ($sistemas_fluidos_fractura as $e)
-                            <option value="{{ $e->id }}">{{ $e->opciones }}</option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="col-xs-12 col-md-3 my-2">
-                    <label for="analisis_agua_microbial"
-                        class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Análisis
-                        de Agua y Ensayo Microbial</label>
-                    <select name="analisis_agua_microbial" id="analisis_agua_microbial"
-                    class="text-sm" data-search="true"
-                    data-silent-initial-value-set="true" multiple="true">
-                        <option value="">-- Seleccione --</option>
-                        @foreach ($analisis_agua_microbial as $e)
-                            <option value="{{ $e->id }}">{{ $e->opciones }}</option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="col-xs-12 col-md-3 my-2">
-                    <label for="agente_sosten_fractura"
-                        class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Agente
-                        de
-                        Sostén</label>
-                    <select name="agente_sosten_fractura" id="agente_sosten_fractura"
-                    class="text-sm" data-search="true"
-                    data-silent-initial-value-set="true" multiple="true">
-                        <option value="">-- Seleccione --</option>
-                        @foreach ($agente_sosten_fractura as $e)
-                            <option value="{{ $e->id }}">{{ $e->opciones }}</option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="col-xs-12 col-md-3 my-2">
-                    <label for="otros"
-                        class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Otros
-                        Análisis</label>
-                    <select name="otros" id="otros"
-                        class="form-select dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none sz p-2">
-                        <option value="">-- Seleccione --</option>
-                        @foreach ($otros_analisis as $e)
+                    <select name="sistemas_fluidos" id="sistemas_fluidos" class="text-sm inp_edit">
+                        @foreach ($sistemas_fluidos as $e)
                             <option value="{{ $e->id }}">{{ $e->nombre }}</option>
                         @endforeach
                     </select>
                 </div>
 
-                <div class="col-12 my-2">
-                    <label for="comentario"
-                        class="text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Comentario
-                        /
-                        Instrucciones</label>
-                    <textarea name="comentario" id="comentario"
-                        class="form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 sz"
-                        rows="3" placeholder="Ingrese un comentario / instrucciones - Máximo 300 caracteres"></textarea>
+                <div class="col-xs-12 col-md-3 my-2">
+                    <label for="analisis_microbial"
+                        class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Análisis
+                        de Agua y Ensayo Microbial</label>
+                    <select name="analisis_microbial" id="analisis_microbial" class="text-sm inp_edit"  {{--multiple="true"--}}>
+                        @foreach ($analisis_microbial as $e)
+                            <option value="{{ $e->id }}">{{ $e->nombre }}</option>
+                        @endforeach
+                    </select>
                 </div>
-            </div> <!-- Análisis Requerido -->
+
+                <div class="col-xs-12 col-md-3 my-2">
+                    <label for="agente_sosten"
+                        class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Agente
+                        de
+                        Sostén</label>
+                    <select name="agente_sosten" id="agente_sosten" class="text-sm inp_edit" {{--multiple="true"--}}>
+                        @foreach ($agente_sosten as $e)
+                            <option value="{{ $e->id }}">{{ $e->nombre }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="col-xs-12 col-md-3 my-2">
+                    <label for="otros_analisis"
+                        class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Otros
+                        Análisis</label>
+                        <input type="text"
+                        class="form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 sz"
+                        name="otros_analisis" id="otros_analisis" placeholder="Ingrese otros análisis">
+                </div>
+
+                {{--<div class="col-xs-12 col-md-3 my-2">
+                    <label for="otros"
+                        class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Otros
+                        Análisis</label>
+                        <input type="text"
+                        class="form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 sz"
+                        name="otros" id="otros" placeholder="Ingrese otros análisis">
+                </div>--}}
+
+                <div class="col-span-1 md:col-span-2 xl:col-span-1">
+                    <label for="tipo_ensayo_fractura"
+                        class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de ensayo</label>
+                    <div class="flex gap-1">
+                        <label for="ensayo_estabilidad"
+                            class="bg-gray-200 p-1 w-full max-w-28 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
+                            <input type="checkbox" name="ensayo_estabilidad" id="ensayo_estabilidad">
+                            Estabilidad</label>
+                        <label for="ensayo_ruptura"
+                            class="bg-gray-200 p-1 w-full max-w-28 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
+                            <input type="checkbox" name="ensayo_ruptura"
+                                id="ensayo_ruptura">
+                            Ruptura</label>
+                    </div>
+                </div>
+            </div> 
 
             <p class="m-0 mt-3 font-bold text-lg tracking-wide">Firmas de Autorización</p>
 
@@ -568,31 +593,36 @@
             placeholder: "Seleccione el distrito",
         });
         VirtualSelect.init({
-            ele: "#sistemas_fluidos_fractura",
-            placeholder: "Seleccione Sistema Fluido",
+            ele: "#sistemas_fluidos",
+            placeholder: "Seleccione sistema",
         });
         VirtualSelect.init({
-            ele: "#analisis_agua_microbial",
+            ele: "#analisis_microbial",
             placeholder: "Seleccione analisis",
         });
         VirtualSelect.init({
-            ele: "#agente_sosten_fractura",
-            placeholder: "Seleccione agente de sosten",
+            ele: "#agente_sosten",
+            placeholder: "Seleccione agente",
+        });
+        VirtualSelect.init({
+            ele: "#estados",
+            placeholder: "Seleccione estado",
         });
         document.getElementById("cliente_fractura").setValue(0);
         document.getElementById("locacion_fractura").setValue(0);
         document.getElementById("equipo").setValue(0);
         document.getElementById("servicios_fractura").setValue(0);
         document.getElementById("distrito").setValue(0);
-        document.getElementById("sistemas_fluidos_fractura").setValue(0);
-        document.getElementById("analisis_agua_microbial").setValue(0);
-        document.getElementById("agente_sosten_fractura").setValue(0);
+        document.getElementById("sistemas_fluidos").setValue(0);
+        document.getElementById("analisis_microbial").setValue(0);
+        document.getElementById("agente_sosten").setValue(0);
+        document.getElementById("estados").setValue(0);
     })
 </script>
 
 <script>
     const aditivo_extra_inp = document.querySelectorAll('.aditivo_extra_inp');
-
+ 
     function aditivoExtra(e) {
         event.preventDefault();
         console.log(e.value);

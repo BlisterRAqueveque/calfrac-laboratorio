@@ -557,7 +557,7 @@
                         </select>
                     </div>
 
-                    <div class="col-xs-12 col-md-4 my-2">
+                    <div class="col-xs-12 col-md-3 my-2">
                         <label for="proveedor"
                             class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Nombre
                             del
@@ -567,7 +567,7 @@
                             name="proveedor" id="proveedor"
                             value="{{ $solicitud_fractura[0]->proveedor ?? 'No Aplica' }}" readonly>
                     </div>
-                    <div class="col-xs-12 col-md-4 my-2">
+                    <div class="col-xs-12 col-md-3 my-2">
                         <label for="producto"
                             class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Nombre
                             del
@@ -577,7 +577,27 @@
                             name="producto" id="producto" value="{{ $solicitud_fractura[0]->producto ?? 'No Aplica' }}"
                             readonly>
                     </div>
-                    <div class="col-xs-12 col-md-4 my-2">
+
+                    <div class="col-xs-12 col-md-3 my-2">
+                        <label for="estados"
+                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Estado físico del producto</label>
+                        <select name="estados" id="estados" class="text-sm inp_edit" disabled>
+                            @foreach ($estados as $tipo)
+                                <option value="{{ $tipo->id }}"
+                                    {{ $tipo->id == $solicitud_fractura[0]->estados ? 'selected' : '' }}>{{ $tipo->opciones }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    {{--
+                        <select name="servicios_fractura" id="servicios_fractura" class="text-sm inp_edit" disabled>
+                            @foreach ($servicios_fractura as $tipo)
+                                <option value="{{ $tipo->id }}"
+                                    {{ $solicitud->servicios_fractura == $tipo->id ? 'selected' : '' }}>{{ $tipo->opciones }}
+                                </option>
+                            @endforeach
+                        </select>    
+                    --}}
+                    <div class="col-xs-12 col-md-3 my-2">
                         <label for="concentracion"
                             class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Concentración
                             a Ensayar</label>
@@ -586,77 +606,45 @@
                             name="concentracion" id="concentracion"
                             value="{{ $solicitud_fractura[0]->concentracion ?? 'No Aplica' }}" readonly>
                     </div>
+
+                    <div class="col-12 my-2">
+                        <label for="comentario"
+                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Comentarios
+                            /
+                            Observaciones</label>
+                        <textarea name="comentario" id="comentario"
+                            class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
+                            rows="3" placeholder="Ingrese un comentario / instrucciones - Máximo 300 caracteres" readonly>{{ $solicitud_fractura[0]->comentario ?? 'No hubieron comentarios' }}</textarea>
+                    </div>
+
                 </div> <!-- Información del Pozo -->
 
                 <p class="m-0 mt-3 font-bold text-lg tracking-wide">Análisis Requerido</p>
 
                 <div class="row mt-3"> <!-- Análisis Requerido -->
                     <div class="col-xs-12 col-md-3 my-2">
-                        <label for="sistemas_fluidos_fractura"
+                        <label for="sistemas_fluidos"
                             class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Compatibilidad
                             con sistemas de
                             fluidos</label>
-                        <select name="sistemas_fluidos_fractura" id="sistemas_fluidos_fractura"
-                            class="form-select sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
-                            disabled>
-                            <option value="">-- Seleccione --</option>
-                            @foreach ($sistemas_fluidos_fractura as $e)
+                        <select name="sistemas_fluidos" id="sistemas_fluidos" class="text-sm inp_edit"  disabled>
+                            @foreach ($sistemas_fluidos as $e)
                                 @if ($e->id == $solicitud_fractura[0]->sistema_fluido_id)
-                                    <option value="{{ $e->id }}" selected>{{ $e->opciones }}</option>
+                                    <option value="{{ $e->id }}" selected>{{ $e->nombre}}</option>
                                 @else
-                                    <option value="{{ $e->id }}">{{ $e->opciones }}</option>
+                                    <option value="{{ $e->id }}">{{ $e->nombre }}</option>
                                 @endif
                             @endforeach
                         </select>
                     </div>
 
                     <div class="col-xs-12 col-md-3 my-2">
-                        <label for="analisis_agua_microbial"
+                        <label for="analisis_microbial"
                             class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Análisis
                             de Agua y Ensayo Microbial</label>
-                        <select name="analisis_agua_microbial" id="analisis_agua_microbial"
-                            class="form-select sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
-                            disabled>
-                            <option value="">-- Seleccione --</option>
-                            @foreach ($analisis_agua_microbial as $e)
+                        <select name="analisis_microbial" id="analisis_microbial" class="text-sm inp_edit"  disabled >
+                            @foreach ($analisis_microbial as $e)
                                 @if ($e->id == $solicitud_fractura[0]->analisis_microbial_id)
-                                    <option value="{{ $e->id }}" selected>{{ $e->opciones }}</option>
-                                @else
-                                    <option value="{{ $e->id }}">{{ $e->opciones }}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="col-xs-12 col-md-3 my-2">
-                        <label for="agente_sosten_fractura"
-                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Agente
-                            de
-                            Sostén</label>
-                        <select name="agente_sosten_fractura" id="agente_sosten_fractura"
-                            class="form-select sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
-                            disabled>
-                            <option value="">-- Seleccione --</option>
-                            @foreach ($agente_sosten_fractura as $e)
-                                @if ($e->id == $solicitud_fractura[0]->agente_sosten_id)
-                                    <option value="{{ $e->id }}" selected>{{ $e->opciones }}</option>
-                                @else
-                                    <option value="{{ $e->id }}">{{ $e->opciones }}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="col-xs-12 col-md-3 my-2">
-                        <label for="otros"
-                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Otros
-                            Análisis</label>
-                        <select name="otros" id="otros"
-                            class="form-select sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
-                            disabled>
-                            <option value="">-- Seleccione --</option>
-                            @foreach ($otros_analisis as $e)
-                                @if ($e->id == $solicitud_fractura[0]->otro_analisis_id)
                                     <option value="{{ $e->id }}" selected>{{ $e->nombre }}</option>
                                 @else
                                     <option value="{{ $e->id }}">{{ $e->nombre }}</option>
@@ -665,14 +653,55 @@
                         </select>
                     </div>
 
-                    <div class="col-12 my-2">
-                        <label for="comentario"
-                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Comentario
-                            /
-                            Instrucciones</label>
-                        <textarea name="comentario" id="comentario"
-                            class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
-                            rows="3" placeholder="Ingrese un comentario / instrucciones - Máximo 300 caracteres" readonly>{{ $solicitud_fractura[0]->comentario ?? 'No hubieron comentarios' }}</textarea>
+                    <div class="col-xs-12 col-md-3 my-2">
+                        <label for="agente_sosten"
+                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Agente
+                            de
+                            Sostén</label>
+                        <select name="agente_sosten" id="agente_sosten" class="text-sm inp_edit" disabled>
+                            @foreach ($agente_sosten as $e)
+                                @if ($e->id == $solicitud_fractura[0]->agente_sosten_id)
+                                    <option value="{{ $e->id }}" selected>{{ $e->nombre }}</option>
+                                @else
+                                    <option value="{{ $e->id }}">{{ $e->nombre }}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="col-xs-12 col-md-3 my-2">
+                        <label for="otros_analisis"
+                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Otros
+                            Análisis</label>
+                        <input type="text" placeholder="Ingrese otros análisis" class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
+                            name="otros_analisis" id="otros_analisis"  value="{{ $solicitud_fractura[0]->otros_analisis ?? 'No Aplica' }}"readonly>
+                    </div>
+
+                    {{--<div class="col-xs-12 col-md-3 my-2">
+                        <label for="otros"
+                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Otros
+                            Análisis</label>
+                        <input type="text" class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
+                            name="otros" id="otros" placeholder="Ingrese otros análisis" value="{{ $solicitud->otros }}" readonly>
+                    </div>--}}
+
+                    <div class="col-span-2 md:col-span-2 xl:col-span-1">
+                        <label for="tipo_ensayo_fractura"
+                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de ensayo</label>
+                        <div class="flex gap-1">
+                            <label for="ensayo_estabilidad"
+                                class="bg-gray-200 p-1 w-full max-w-28 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
+                                <input type="checkbox" name="ensayo_estabilidad" id="ensayo_estabilidad"
+                                    class="inp_edit" {{ $solicitud_fractura[0]->ensayo_estabilidad == 1 ? 'checked' : '' }}
+                                    disabled>
+                                Estabilidad</label>
+                            <label for="ensayo_ruptura"
+                                class="bg-gray-200 p-1 w-full max-w-28 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
+                                <input type="checkbox" name="ensayo_ruptura"
+                                    id="ensayo_ruptura" class="inp_edit"
+                                    {{ $solicitud_fractura[0]->ensayo_ruptura == 1 ? 'checked' : '' }} disabled>
+                                Ruptura</label>
+                        </div>
                     </div>
                 </div> <!-- Análisis Requerido -->
 
@@ -984,16 +1013,20 @@
                     placeholder: "Seleccione el distrito",
                 });
                 VirtualSelect.init({
-                    ele: "#sistemas_fluidos_fractura",
+                    ele: "#sistemas_fluidos",
                     placeholder: "Seleccione sistema",
                 });
                 VirtualSelect.init({
-                    ele: "#analisis_agua_microbial",
+                    ele: "#analisis_microbial",
                     placeholder: "Seleccione analisis",
                 });
                 VirtualSelect.init({
-                    ele: "#agente_sosten_fractura",
+                    ele: "#agente_sosten",
                     placeholder: "Seleccione agente",
+                });
+                VirtualSelect.init({
+                    ele: "#estados",
+                    placeholder: "Seleccione el estado fisico",
                 });
                 // document.getElementById("cliente_fractura").setValue(0);
                 // document.getElementById("locacion_fractura").setValue(0);

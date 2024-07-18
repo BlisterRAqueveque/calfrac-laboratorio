@@ -35,9 +35,7 @@ use App\Models\TipoLodo_Lodos;
 use App\Models\Equipos;
 use App\Models\EnsayosLodo;
 use App\Models\SolicitudLodo;
-use App\Models\AgenteSostenFractura;
-use App\Models\AnalisisAguaMicrobialFractura;
-use App\Models\SistemasFluidosFractura;
+use App\Models\Estados;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Mail;
@@ -56,9 +54,9 @@ class SolicitudController extends Controller
             'ensayos' => Ensayo::where('tipo', 'CN')->where('estado', 1)->get(),
             'clientes' => Cliente::where('estado', 1)->get(),
             'yacimientos' => Yacimiento::where('estado', 1)->get(),
-            'sistemas_fluidos_fractura' => SistemasFluidosFractura::where('estado', 1)->get(),
-            'analisis_agua_microbial' => AnalisisAguaMicrobialFractura::where('estado', 1)->get(),
-            'agente_sosten_fractura' => AgenteSostenFractura::where('estado', 1)->get(),
+            'sistemas_fluidos' => SistemasFluidos::where('activo', 1)->get(),
+            'analisis_microbial' => AnalisisMicrobial::where('activo', 1)->get(),
+            'agente_sosten' => AgenteSosten::where('activo', 1)->get(),
             'otros_analisis' => OtrosAnalisis::where('activo', 1)->get(),
             'tipo_trabajo_cemento' => TipoTrabajoCemento::where('estado', 1)->get(),
             'tipo_cementacion' => TipoCementacion::where('estado', 1)->get(),
@@ -74,7 +72,8 @@ class SolicitudController extends Controller
             'servicios_fractura' => ServiciosFractura:: all(),
             'distrito' => Distrito::all(),
             //'tipo_ensayos_lodo' => TipoEnsayosLodo::all()
-            'ensayos_lodo' => EnsayosLodo::all()
+            'ensayos_lodo' => EnsayosLodo::all(),
+            'estados' => Estados::all(),
         ];
         return view('solicitud.create', $data);
     }
@@ -144,11 +143,15 @@ class SolicitudController extends Controller
             'aditivo_extra' => $request->aditivo_extra,
             'proveedor' => $request->proveedor,
             'producto' => $request->producto,
+            'estados' => $request->estados,
             'concentracion' => $request->concentracion,
-            'sistema_fluido_id' => $request->sistema_fluido_fractura,
-            'analisis_microbial_id' => $request->analisis_agua_microbial,
-            'agente_sosten_id' => $request->agente_sosten_fractura,
-            'otro_analisis_id' => $request->otros,
+            'sistema_fluido_id' => $request->sistema_fluido,
+            'analisis_microbial_id' => $request->analisis_microbial,
+            'agente_sosten_id' => $request->agente_sosten,
+            #'otro_analisis_id' => $request->otros,
+            'otros_analisis' => $request->otros_analisis,
+            'ensayo_estabilidad' => $request->ensayo_estabilidad == 'on' ? 1 : 0,
+            'ensayo_ruptura' => $request->ensayo_ruptura == 'on' ? 1 : 0,
             'comentario' => $request->comentario,
             'firma_iniciado_por_id' => $request->firma_iniciado_por,
             'fecha_firma_iniciado_por' => $request->fecha_firma_iniciado_por,
@@ -177,7 +180,7 @@ class SolicitudController extends Controller
             $correos[] = $solicitud_fractura->user_reconocimiento->email;
         //Podria hardcodear mi email aca para probar?
         */
-        $correos[] = "franco.marquez@blistertechnologies.com";
+        #$correos[] = "franco.marquez@blistertechnologies.com";
         $data = [
             'solicitud_id' => $solicitud->id,
             'locacion_id' => $request->locacion,
@@ -409,11 +412,15 @@ class SolicitudController extends Controller
         $solicitud_fractura->tipo_temp_ensayo = $request->tipo_temp_ensayo;
         $solicitud_fractura->proveedor = $request->proveedor;
         $solicitud_fractura->producto = $request->producto;
+        $solicitud_fractura->estados = $request->estados;
         $solicitud_fractura->concentracion = $request->concentracion;
         $solicitud_fractura->sistema_fluido_id = $request->sistema_fluido_id;
         $solicitud_fractura->analisis_microbial_id = $request->analisis_microbial_id;
         $solicitud_fractura->agente_sosten_id = $request->agente_sosten_id;
-        $solicitud_fractura->otro_analisis_id = $request->otro_analisis_id;
+        #$solicitud_fractura->otro_analisis_id = $request->otro_analisis_id;
+        $solicitud_fractura->otros_analisis = $request->otros_analisis;
+        $solicitud_fractura->ensayo_estabilidad = $request->ensayo_estabilidad == 'on' ? 1 : 0;
+        $solicitud_fractura->ensayo_ruptura = $request->ensayo_estabilidad == 'on' ? 1 : 0;
         $solicitud_fractura->comentario = $request->comentario;
         $solicitud_fractura->firma_iniciado_por_id = $request->firma_iniciado_por_id;
         $solicitud_fractura->fecha_firma_iniciado_por = $request->fecha_firma_iniciado_por;
@@ -544,9 +551,9 @@ class SolicitudController extends Controller
         $data = [
             'solicitud' => Solicitud::find($solicitud_id),
             'solicitud_fractura' => SolicitudFractura::where('solicitud_id', $solicitud_id)->get(),
-            'sistemas_fluidos_fractura' => SistemasFluidosFractura::all(),
-            'analisis_agua_microbial' => AnalisisAguaMicrobialFractura::all(),
-            'agente_sosten_fractura' => AgenteSostenFractura::all(),
+            'sistemas_fluidos' => SistemasFluidos::all(),
+            'analisis_microbial' => AnalisisMicrobial::all(),
+            'agente_sosten' => AgenteSosten::all(),
             'otros_analisis' => OtrosAnalisis::all(),
             'aditivos' => Aditivo::all(),
             'users' => User::all(),
@@ -555,6 +562,7 @@ class SolicitudController extends Controller
             'equipos' => Equipos::all(),
             'servicios_fractura' => ServiciosFractura::all(),
             'distrito' => Distrito::all(),
+            'estados' => Estados::all(),
             // 'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
         return view('solicitud.components.fractura.show', $data);
