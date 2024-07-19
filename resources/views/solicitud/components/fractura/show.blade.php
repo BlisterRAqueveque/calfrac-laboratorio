@@ -631,8 +631,6 @@
                             @foreach ($sistemas_fluidos as $e)
                                 @if ($e->id == $solicitud_fractura[0]->sistema_fluido_id)
                                     <option value="{{ $e->id }}" selected>{{ $e->nombre}}</option>
-                                @else
-                                    <option value="{{ $e->id }}">{{ $e->nombre }}</option>
                                 @endif
                             @endforeach
                         </select>
@@ -646,8 +644,6 @@
                             @foreach ($analisis_microbial as $e)
                                 @if ($e->id == $solicitud_fractura[0]->analisis_microbial_id)
                                     <option value="{{ $e->id }}" selected>{{ $e->nombre }}</option>
-                                @else
-                                    <option value="{{ $e->id }}">{{ $e->nombre }}</option>
                                 @endif
                             @endforeach
                         </select>
@@ -662,8 +658,6 @@
                             @foreach ($agente_sosten as $e)
                                 @if ($e->id == $solicitud_fractura[0]->agente_sosten_id)
                                     <option value="{{ $e->id }}" selected>{{ $e->nombre }}</option>
-                                @else
-                                    <option value="{{ $e->id }}">{{ $e->nombre }}</option>
                                 @endif
                             @endforeach
                         </select>
