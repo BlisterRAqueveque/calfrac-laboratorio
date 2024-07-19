@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('agente_sosten_fractura', function (Blueprint $table) {
+        Schema::create('estados', function (Blueprint $table) {
             $table->id();
             $table->string('opciones');
             $table->tinyInteger('estado')->default(1);
-            $table->tinyInteger('check')->default(0);
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('agente_sosten_fractura');
+        Schema::dropIfExists('estados');
     }
 };

@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class AgenteSosten extends Model
 {
     use HasFactory;
-    public $timestamps = false;
     protected $table = 'agente_sosten';
-    
+    protected $fillable = [
+        'id',
+        'nombre',
+        'activo',
+    ];
 }

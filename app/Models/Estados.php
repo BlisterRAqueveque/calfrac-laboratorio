@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AnalisisAguaMicrobialFractura extends Model
+class Estados extends Model
 {
     use HasFactory;
-    protected $table = 'analisis_agua_microbial';
+    protected $table = 'estados';
     protected $fillable = [
         'id',
         'opciones',
         'estado',
-        'check',
     ];
 }

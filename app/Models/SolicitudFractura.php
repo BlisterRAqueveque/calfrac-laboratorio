@@ -20,11 +20,15 @@ class SolicitudFractura extends Model
         'aditivo_extra',
         'proveedor',
         'producto',
+        'estados',
         'concentracion',
         'sistema_fluido_id',
         'analisis_microbial_id',
         'agente_sosten_id',
-        'otro_analisis_id',
+        //'otro_analisis_id',
+        'otros_analisis',
+        'ensayo_estabilidad',
+        'ensayo_ruptura',
         'comentario',
         'firma_iniciado_por_id',
         'fecha_firma_iniciado_por',
@@ -58,15 +62,24 @@ class SolicitudFractura extends Model
         return $this->belongsTo(User::class, 'firma_reconocimiento_id');
     }
 
-    public function analisis_microbial_id() {
-        return $this->belongsTo(AnalisisAguaMicrobialFractura::class, 'id');
+    public function agente_sosten()
+    {
+        return $this->belongsTo(AgenteSosten::class, 'agente_sosten_id');
     }
 
-    public function agente_sosten_id() {
-        return $this->belongsTo(AgenteSostenFractura::class, 'id');
+    public function analisis_microbial()
+    {
+        return $this->belongsTo(AnalisisMicrobial::class, 'analisis_microbial_id');
     }
 
-    public function sistema_fluido_id() {
-        return $this->belongsTo(SistemasFluidosFractura::class, 'id');
+    public function sistemas_fluidos()
+    {
+        return $this->belongsTo(SistemasFluidos::class, 'sistema_fluido_id');
     }
+
+    public function estados()
+    {
+        return $this->belongsTo(Estados::class, 'estados');
+    }
+
 }
