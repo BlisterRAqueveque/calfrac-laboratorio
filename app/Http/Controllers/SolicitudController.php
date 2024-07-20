@@ -71,7 +71,7 @@ class SolicitudController extends Controller
             'servicios' => Servicios::all(),
             'tipo_lodo_Lodos' => TipoLodo_Lodos::all(),
             'equipos' => Equipos::where('estado', 1)->get(),
-            'servicios_fractura' => ServiciosFractura:: all(),
+            'servicios_fractura' => ServiciosFractura::all(),
             'distrito' => Distrito::all(),
             //'tipo_ensayos_lodo' => TipoEnsayosLodo::all()
             'ensayos_lodo' => EnsayosLodo::all(),
@@ -523,25 +523,25 @@ class SolicitudController extends Controller
             'fecha_autorizacion' => date('Y-m-d'),
             'firma_reconocimiento_id' => $request->firma_reconocimiento_lodo,
             'fecha_reconocimiento'  => $request->fecha_reconocimiento_lodo,
-            'densidad_lodo'=>$request->densidad_lodo_3, // Tiene _3 porque se repetia con el resto de solicitudes
-            'temperatura'=>$request->temperatura,
-            'vol_colchon'=>$request->vol_colchon,
-            'densidad_colchon'=>$request->densidad_colchon,
-            'tiempo_contacto'=>$request->tiempo_contacto,
-            'mud_company'=>$request->mud_company,
-            'comentario'=>$request->observacion_lodo,
+            'densidad_lodo' => $request->densidad_lodo_3, // Tiene _3 porque se repetia con el resto de solicitudes
+            'temperatura' => $request->temperatura,
+            'vol_colchon' => $request->vol_colchon,
+            'densidad_colchon' => $request->densidad_colchon,
+            'tiempo_contacto' => $request->tiempo_contacto,
+            'mud_company' => $request->mud_company,
+
         ]);
         
         #Ensayos de referencia
 
 
         # Ensayos requeridos
-        if($request->ensayos){
-            $ensayos_separados = explode(',',$request->ensayos);      
-            foreach ($ensayos_separados as $ensayo){
+        if ($request->ensayos) {
+            $ensayos_separados = explode(',', $request->ensayos);
+            foreach ($ensayos_separados as $ensayo) {
                 RelEnsayosRequeridosLodo::create([
-                    'nombre'=> $solicitud_lodo->id, // Cambiar el nombre de la columna  //Nombre seria id_solicitud
-                    'id_ensayo'=> $ensayo
+                    'nombre' => $solicitud_lodo->id, // Cambiar el nombre de la columna  //Nombre seria id_solicitud
+                    'id_ensayo' => $ensayo
                 ]);
             }
         }
@@ -618,26 +618,44 @@ class SolicitudController extends Controller
         return view('solicitud.components.lechada.show', $data);
     }
 
-    public function show_lodo($solicitud_id){
-        
+    public function show_lodo($solicitud_id)
+    {
+
         $data = [
             'solicitud' => Solicitud::find($solicitud_id),
             //'ensayos_referencia' => RelEnsayoReferenciaSolicitud::where('solicitud_id', $solicitud_id)->get(),
-          //  'aditivos' => Aditivo::all(),
+            //  'aditivos' => Aditivo::all(),
             'users' => User::all(),
             'clientes' => Cliente::all(),
             'yacimientos' => Yacimiento::all(),
             'mud_company' => MudCompany::all(),
             'equipos' => Equipos::all(),
-            'servicios'=> Servicios::all(),
-            'solicitud_lodo'=> SolicitudLodo::where('solicitud_id', $solicitud_id)->get(),
+            'servicios' => Servicios::all(),
+            'solicitud_lodo' => SolicitudLodo::where('solicitud_id', $solicitud_id)->get(),
             //'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
-       // $generate_report = $this->_generate_report($solicitud_id);
+        // $generate_report = $this->_generate_report($solicitud_id);
         //$data['generar_reporte'] = $generate_report->original['generate_report'];
         return view('solicitud.components.lodo.show', $data);
-        
     }
+
+
+    public function obtenerIDSolicitud($ensayo_asignado_id)
+    {
+        // Realiza la consulta para obtener la última solicitud con el ensayo_asignado_id que llega por parametro
+        $solicitud = Solicitud::where('ensayo_asignado_id', $ensayo_asignado_id)
+            ->orderBy('created_at', 'desc') // Ordeno por fecha de creacion al último que fue asignado
+            ->first(); // Obtengo solo el primer resultado
+
+        // Si se encontró la solicitud, devuelve el ID en formato JSON
+        if ($solicitud) {
+            return response()->json(['id' => $solicitud->id]);
+        }
+
+        // Si no se encontró ninguna solicitud, devuelve un mensaje de error
+        return response()->json(['error' => 'Solicitud no encontrada'], 404);
+    }
+
     public function update_lechada(Request $request)
     {
         $aditivos_request = $request->aditivos;
@@ -756,7 +774,8 @@ class SolicitudController extends Controller
             return back()->with('success', $solicitud->id);
     }
 
-    public function update_lodo(Request $request){
+    public function update_lodo(Request $request)
+    {
         $aditivos_request = $request->aditivos;
         $id_aditivos = array_column($aditivos_request, 'id');
 
@@ -771,30 +790,30 @@ class SolicitudController extends Controller
             'servicio_lodo' => 'required',
         ]);
 
-           // Change => Datos de la solicitud general
-           $solicitud = Solicitud::find($request->solicitud_id);
-           $solicitud->locacion_id = $request->locacion_lodo;
-           // $solicitud->empresa = $request->empresa_lodo;
-           $solicitud->pozo = $request->pozo_lodo;
-           $solicitud->fecha_resultados = $request->fecha_resultados_lodo;
-           $solicitud->equipo = $request->equipo_lodo;
-           $solicitud->servicio = $request->servicio_lodo;
-           $solicitud->save();
+        // Change => Datos de la solicitud general
+        $solicitud = Solicitud::find($request->solicitud_id);
+        $solicitud->locacion_id = $request->locacion_lodo;
+        // $solicitud->empresa = $request->empresa_lodo;
+        $solicitud->pozo = $request->pozo_lodo;
+        $solicitud->fecha_resultados = $request->fecha_resultados_lodo;
+        $solicitud->equipo = $request->equipo_lodo;
+        $solicitud->servicio = $request->servicio_lodo;
+        $solicitud->save();
 
-           $solicitud_lodo = SolicitudLodo::where('solicitud_id', $solicitud->id)->first();
-           $solicitud_lodo->profundidad_md = $request->profundidad_md;
-           $solicitud_lodo->profundidad_tvd = $request->profundidad_tvd;
-           //Aca irian todas las que vayamos agregando mas adelante
-           $solicitud_lodo->save();
+        $solicitud_lodo = SolicitudLodo::where('solicitud_id', $solicitud->id)->first();
+        $solicitud_lodo->profundidad_md = $request->profundidad_md;
+        $solicitud_lodo->profundidad_tvd = $request->profundidad_tvd;
+        //Aca irian todas las que vayamos agregando mas adelante
+        $solicitud_lodo->save();
 
 
-          // $aditivos_bd = RelAditivoSolicitudLodo::where('solicitud_lodo_id', $solicitud_lodo->id)->get();
+        // $aditivos_bd = RelAditivoSolicitudLodo::where('solicitud_lodo_id', $solicitud_lodo->id)->get();
 
-          //Aca iria un foreach con los aditivos
+        //Aca iria un foreach con los aditivos
 
 
         if ($solicitud->id)
-        return back()->with('success', $solicitud->id);
+            return back()->with('success', $solicitud->id);
     }
     /**
      * Se que es un código asqueroso, pero una condición si o si depende de la otra
