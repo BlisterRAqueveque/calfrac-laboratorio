@@ -333,7 +333,7 @@
                 <div class="col-xs-12 col-md-3 my-2">
                     <label for="estados" class="text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Estado físico del producto</label>
                     <select name="estados" id="estados" class="text-sm inp_edit">
-                        <option value="">Seleccione un estado</option>
+                        <option value="" selected disabled>Seleccione una opción</option>
                         @foreach ($estados as $tipo)
                             <option value="{{ $tipo->id }}">{{ $tipo->opciones }}</option>
                         @endforeach

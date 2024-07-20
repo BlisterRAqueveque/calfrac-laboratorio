@@ -356,7 +356,7 @@
                             Trabajo <span class="text-red-500">*</span></label>
                         <select name="tipo_trabajo_lechada" id="tipo_trabajo_lechada" class="text-sm inp_edit" disabled>
                             @foreach ($tipo_trabajos as $tipo)
-                                <option value="{{ $tipo->id }}"
+                                <option value="{{ $tipo->id }} "
                                     {{ $solicitud->tipo_trabajo == $tipo->id ? 'selected' : '' }}>{{ $tipo->nombre }}
                                 </option>
                             @endforeach
@@ -511,7 +511,7 @@
                     <div class="">
                         <label for="tipo_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de lodo</label>
                         <select name="tipo_lodo" id="tipo_lodo" class="text-sm inp_edit" disabled>
-                            <option value="">Seleccione un tipo de lodo</option> <!-- Opción predeterminada -->
+                            <option value="" selected disabled>Seleccione un tipo de lodo</option> <!-- Opción predeterminada -->
                             @foreach ($tipo_lodo as $tipo)
                                 <option value="{{ $tipo->id }}" {{ isset($s_l[0]->tipo) && $tipo->id == $s_l[0]->tipo ? 'selected' : '' }}>
                                     {{ $tipo->nombre }}
@@ -523,7 +523,7 @@
                     <div class="">
                         <label for="mud_company" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Compañía de Lodos</label>
                         <select name="mud_company" id="mud_company" class="text-sm inp_edit" disabled>
-                            <option value="" disabled {{ $s_l[0]->mud_company_id == null ? 'selected' : '' }}>Seleccione la compañía</option>
+                            <option value="" selected disabled {{ $s_l[0]->mud_company_id == null ? 'selected' : '' }}>Seleccione la compañía</option>
                             @foreach ($mud_company as $mud)
                                 <option value="{{ $mud->id }}" {{ $mud->id == $s_l[0]->mud_company_id ? 'selected' : '' }}>
                                     {{ $mud->nombre }}</option>
