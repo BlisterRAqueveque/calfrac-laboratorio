@@ -288,6 +288,7 @@ class SolicitudController extends Controller
         ]);
 
 
+
         // == Relaciones ==
 
         # Ensayos de Referencias
@@ -610,6 +611,7 @@ class SolicitudController extends Controller
             'tipo_requerimiento_cemento' => TipoRequerimientoCemento::all(),
             'tipo_trabajos' => TipoTrabajoCemento::all(),
             'tipo_cementacion' => TipoCementacion::all(),
+            'tipo_lodo' => TipoLodo::all(),
             'mud_company' => MudCompany::all(),
             'equipos' => Equipos::all(),
             //'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
@@ -648,6 +650,9 @@ class SolicitudController extends Controller
         } else {
             $id_aditivos = []; // O maneja el caso en que no se envían aditivos
         }
+        # Aca puse un if por un error que tiro previamente
+        # $aditivos_request = $request->aditivos;
+        # $id_aditivos = array_column($aditivos_request, 'id');
         
         # Validamos los datos del encabezado general
         $this->validate($request, [
@@ -690,6 +695,7 @@ class SolicitudController extends Controller
         $solicitud_lechada->casing_od = $request->casing_od;
         $solicitud_lechada->densidad_lodo = $request->densidad_lodo;
         $solicitud_lechada->tipo_lodo = $request->tipo_lodo;
+        $solicitud_lechada->mud_company_id = $request->mud_company;
         $solicitud_lechada->profundidad_pozo_md = $request->profundidad_pozo_md;
         $solicitud_lechada->profundidad_pozo_tvd = $request->profundidad_pozo_tvd;
         $solicitud_lechada->base_md = $request->base_md;

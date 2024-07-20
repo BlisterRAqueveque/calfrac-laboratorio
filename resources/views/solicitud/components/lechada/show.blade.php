@@ -8,6 +8,7 @@
     @vite('resources/css/solicitud.css')
 
     <style>
+        #tipo_lodo,
         #cliente_lechada,
         #locacion_lechada,
         #tipo_requerimiento_lechada,
@@ -320,7 +321,18 @@
                             <small class="text-xs text-red-600">El servicio es requerido</small>
                         @enderror
                     </div>
-
+                    {{--
+                    <div class="col-span-2 xl:col-span-1">
+                        <label for="programa_lechada"
+                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Programa <span
+                                class="text-red-500">*</span></label>
+                        <input type="text" name="programa_lechada" id="programa_lechada"
+                            class="form-control text-sm p-2" placeholder="Programa" value="{{ $solicitud->programa }}"
+                            readonly>
+                        @error('programa_lechada')
+                            <small class="text-xs text-red-600">El programa es requerido</small>
+                        @enderro
+                    --}}
                     <div class="col-span-2 xl:col-span-1">
                         <label for="tipo_requerimiento_lechada"
                             class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de Requerimiento <span
@@ -495,28 +507,56 @@
                             readonly>
                     </div>
 
+
                     <div class="">
-                        <label for="tipo_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de
-                            lodo</label>
-                        <input type="text" name="tipo_lodo" id="tipo_lodo" class="form-control text-sm p-2"
-                            placeholder="Lodo" value="{{ $s_l[0]->tipo_lodo }}" readonly>
+                        <label for="tipo_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de lodo</label>
+                        <select name="tipo_lodo" id="tipo_lodo" class="text-sm inp_edit" disabled>
+                            <option value="">Seleccione un tipo de lodo</option> <!-- Opción predeterminada -->
+                            @foreach ($tipo_lodo as $tipo)
+                                <option value="{{ $tipo->id }}" {{ isset($s_l[0]->tipo) && $tipo->id == $s_l[0]->tipo ? 'selected' : '' }}>
+                                    {{ $tipo->nombre }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="">
-                        <label for="cia" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Compañía de
+                        <label for="mud_company" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Compañía de Lodos</label>
+                        <select name="mud_company" id="mud_company" class="text-sm inp_edit" disabled>
+                            <option value="" disabled {{ $s_l[0]->mud_company_id == null ? 'selected' : '' }}>Seleccione la compañía</option>
+                            @foreach ($mud_company as $mud)
+                                <option value="{{ $mud->id }}" {{ $mud->id == $s_l[0]->mud_company_id ? 'selected' : '' }}>
+                                    {{ $mud->nombre }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    
+                    {{--
+                    Vieja configuracion Lodos
+                    <div class="">
+                        <label for="tipo_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de
+                            lodo</label>
+                        <select name="tipo_lodo" id="tipo_lodo" class="text-sm inp_edit" disabled>
+                            @foreach ($tipo_lodo as $tipo)
+                                <option value="{{ $tipo->id }}"
+                                    {{ $tipo->id == $s_l[0]->tipo ? 'selected' : '' }}>
+                                    {{ $tipo->nombre }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    Vieja configuracion mud_company
+                    <div class="">
+                        <label for="mud_company" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Compañía de
                             Lodos</label>
                         <select name="mud_company" id="mud_company" class="text-sm inp_edit" disabled>
                             @foreach ($mud_company as $mud)
                                 <option value="{{ $mud->id }}"
                                     {{ $mud->id == $s_l[0]->mud_company_id ? 'selected' : '' }}>
                                     {{ $mud->nombre }}</option>
-                                {{-- <option value="{{ $mud->id }}"
-                                    {{ $solicitud->mud_company_id == $mud->id ? 'selected' : '' }}>
-                                    {{ $mud->nombre }}</option> --}}
                             @endforeach
                         </select>
-                    </div>
-
+                    </div>                    
+                    --}}
                     <div class="md:col-span-2 xl:col-span-1">
                         <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Profundidad
                             Pozo <small>(MD/TVD) (m)</small></label>
@@ -876,6 +916,11 @@
                 ele: "#equipo_lechada",
                 placeholder: "Seleccione equipo",
             });
+            VirtualSelect.init({
+                ele: "#tipo_lodo",
+                placeholder: "Seleccione tipo de lodo",
+            });
+            
         })
     </script>
 
