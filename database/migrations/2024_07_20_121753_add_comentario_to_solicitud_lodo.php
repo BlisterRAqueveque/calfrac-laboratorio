@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::table('solicitud_lodo', function (Blueprint $table) {
             $table->text('comentario')->nullable();
+            $table->text('comentario_ensayo_referencia')->nullable();
+
         });
     }
 
@@ -26,7 +28,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('solicitud_lodo', function (Blueprint $table) {
-            $table->dropColumn('comentario');
+            $table->dropColumn(['comentario','comentario_ensayo_referencia']);
          });
     }
 };

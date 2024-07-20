@@ -459,7 +459,7 @@ class SolicitudController extends Controller
     }
 
     /**
-     * 
+     *  Edita una respuesta a un comentario de edicion
      */
     public function update_rta($user_id, Request $request)
     {
@@ -529,7 +529,7 @@ class SolicitudController extends Controller
             'densidad_colchon'=>$request->densidad_colchon,
             'tiempo_contacto'=>$request->tiempo_contacto,
             'mud_company'=>$request->mud_company,
-             
+            'comentario'=>$request->observacion_lodo,
         ]);
       
         # Ensayos requeridos
