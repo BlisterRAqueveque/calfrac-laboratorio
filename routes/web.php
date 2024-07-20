@@ -58,6 +58,10 @@ Route::get('/check_report/{solicitud_id}', [SolicitudController::class, '_genera
 
 
 # Solicitudes
+
+
+Route::get('/obtenerIDSolicitud/{ensayo_asignado_id}', [SolicitudController::class, 'obtenerIDSolicitud'])->name('solicitud.obtener.ensayo');
+
 # Fractura
 Route::get('/solicitud', [SolicitudController::class, 'create'])->name('solicitud.create.show')->middleware('auth');
 Route::post('/solicitud', [SolicitudController::class, 'store_fractura'])->name('solicitud.fractura');
