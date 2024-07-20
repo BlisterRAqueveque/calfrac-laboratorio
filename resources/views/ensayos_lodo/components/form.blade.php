@@ -80,19 +80,7 @@
         </a>
     </li>
 
-    <li class="nav-item w-full md:w-auto text-xs xl:text-sm flex-1" role="presentation">
-        <a class="nav-link nav_tab_mod d-flex items-center justify-center gap-2 text-violet-700" id="nav-tab2"
-            data-bs-toggle="tab" href="#tab_mezclabilidad" data-bs-target="#tab_mezclabilidad" role="tab"
-            aria-controls="tab_mezclabilidad" aria-selected="false">
-            <div
-                class="w-4 h-4 xl:w-5 xl:h-5 bg-gray-400 shadow-sm rounded-full flex justify-center text-white items-center">
-                <span>
-                    7
-                </span>
-            </div>
-            Comportamiento de inhibidor de arcillas
-        </a>
-    </li>
+  
 </ul>
 
 <div class="tab-content" id="nav-tabs-content">
@@ -103,8 +91,6 @@
         {{-- Compatibilidad Espaciador Mecanico-Lodo--}}
         @include('ensayos_lodo.components.compatibilidad_espaciador')
 
-        {{-- Comportamiento inhibidor de arcillas--}}
-        @include('ensayos_lodo.components.comportamiento_inhibidor')
 
         {{-- Humectabilidad--}}
         @include('ensayos_lodo.components.humectabilidad')
