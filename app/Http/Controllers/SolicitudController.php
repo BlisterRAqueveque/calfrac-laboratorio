@@ -512,7 +512,7 @@ class SolicitudController extends Controller
             'estado_solicitud_id' => 1,
             'user_id' => auth()->user()->id
         ]);
-        # Solicitud Lodo
+        # Solicitud Lodo (Condiciones del test)
         $solicitud_lodo = SolicitudLodo::create([
             'tipo_lodo' => $request->tipo_lodo,
             'profundidad_md' => $request->profundidad_md,
@@ -531,7 +531,10 @@ class SolicitudController extends Controller
             'mud_company'=>$request->mud_company,
             'comentario'=>$request->observacion_lodo,
         ]);
-      
+        
+        #Ensayos de referencia
+
+
         # Ensayos requeridos
         if($request->ensayos){
             $ensayos_separados = explode(',',$request->ensayos);      
@@ -543,7 +546,7 @@ class SolicitudController extends Controller
             }
         }
 
-        # Formulaciones Tentativas
+        # Formulaciones Tentativas (Requerimientos del colchon)
         if ($request->aditivos) {
 
             foreach ($request->aditivos as $formulacion) {

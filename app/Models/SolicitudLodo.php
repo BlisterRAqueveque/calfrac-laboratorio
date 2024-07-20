@@ -25,7 +25,9 @@ class SolicitudLodo extends Model
         'temperatura',
         'vol_colchon',
         'densidad_colchon',
-        'tiempo_contacto'
+        'tiempo_contacto',
+        'comentario',
+        'comentario_ensayo_referencia'
 
     ];
 

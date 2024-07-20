@@ -364,21 +364,25 @@
                 </div>
                 <hr class="my-4">
 
-                <div class="grid xs:grid-cols-2 md:grid-cols-6 gap-3 mt-3">
+                <!--div class="grid xs:grid-cols-2 md:grid-cols-6 gap-3 mt-3">
                     <p class="m-0 font-bold text-lg my-3 tracking-wide">Ensayos requeridos</p>
 
-                </div>
+                </!--div>
                 <hr class="my-4">
 
                 <div class="grid xs:grid-cols-2 md:grid-cols-6 gap-3 mt-3">
                     <p class="m-0 font-bold text-lg my-3 tracking-wide">Requerimientos del colchon</p>
 
                 </div>
-                <hr class="my-4">
+                <hr class="my-4" -->
 
-                <div class="grid xs:grid-cols-2 md:grid-cols-6 gap-3 mt-3">
-                    <p class="m-0 font-bold text-lg my-3 tracking-wide">Comentarios/Observaciones</p>
+                <div class="grid mt-3">
+                    <p class="m-0 font-bold text-lg my-3 tracking-wide">Observación/Comentarios</p>
 
+                    <div class="col-span-2 md:col-span-1">
+                        <textarea name="observacion_lodo" rows="5" class="form-control text-sm" placeholder="Máximo 500 caracteres"
+                            readonly> {{ $solicitud_lodo[0]->comentario }}</textarea>
+                    </div>
                 </div>
                 <p class="m-0 mt-3 font-bold text-lg tracking-wide dark:text-gray-300">Firmas de Autorización</p>
 
