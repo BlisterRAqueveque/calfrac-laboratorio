@@ -579,6 +579,20 @@
                     </div>
 
                     <div class="col-xs-12 col-md-3 my-2">
+                        <label for="estados" class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Estado físico del producto</label>
+                        <select name="estados" id="estados" class="text-sm inp_edit" disabled>
+                            <option value="">Seleccione un estado</option>
+                            @foreach ($estados as $tipo)
+                                <option value="{{ $tipo->id }}" {{ $tipo->id == $solicitud_fractura[0]->estados ? 'selected' : '' }}>
+                                    {{ $tipo->opciones }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    {{--
+                    Vieja configuracion de estado
+                    <div class="col-xs-12 col-md-3 my-2">
                         <label for="estados"
                             class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Estado físico del producto</label>
                         <select name="estados" id="estados" class="text-sm inp_edit" disabled>
@@ -588,7 +602,7 @@
                             @endforeach
                         </select>
                     </div>
-                    {{--
+                    
                         <select name="servicios_fractura" id="servicios_fractura" class="text-sm inp_edit" disabled>
                             @foreach ($servicios_fractura as $tipo)
                                 <option value="{{ $tipo->id }}"
@@ -625,13 +639,52 @@
                     <div class="col-xs-12 col-md-3 my-2">
                         <label for="sistemas_fluidos"
                             class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Compatibilidad
+                            con sistemas de fluidos</label>
+                        <select name="sistemas_fluidos" id="sistemas_fluidos" class="text-sm inp_edit" disabled>
+                            <option value="" {{ is_null($solicitud_fractura[0]->sistema_fuido_id) ? 'selected' : '' }}>Seleccione una opción</option>
+                            @foreach ($sistemas_fluidos as $tipo)
+                                <option value="{{ $tipo->id }}"
+                                    {{ $tipo->id == $solicitud_fractura[0]->sistema_fuido_id ? 'selected' : '' }}>{{ $tipo->nombre }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    
+                    <div class="col-xs-12 col-md-3 my-2">
+                        <label for="analisis_microbial"
+                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Análisis
+                            de Agua y Ensayo Microbial</label>
+                        <select name="analisis_microbial" id="analisis_microbial" class="text-sm inp_edit" disabled>
+                            <option value="" {{ is_null($solicitud_fractura[0]->analisis_microbial_id) ? 'selected' : '' }}>Seleccione una opción</option>
+                            @foreach ($analisis_microbial as $e)
+                                <option value="{{ $e->id }}"
+                                    {{ $e->id == $solicitud_fractura[0]->analisis_microbial_id ? 'selected' : '' }}>{{ $e->nombre }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="col-xs-12 col-md-3 my-2">
+                        <label for="agente_sosten"
+                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Agente
+                            de Sostén</label>
+                        <select name="agente_sosten" id="agente_sosten" class="text-sm inp_edit" disabled>
+                            <option value="" {{ is_null($solicitud_fractura[0]->agente_sosten_id) ? 'selected' : '' }}>Seleccione una opción</option>
+                            @foreach ($agente_sosten as $e)
+                                <option value="{{ $e->id }}"
+                                    {{ $e->id == $solicitud_fractura[0]->agente_sosten_id ? 'selected' : '' }}>{{ $e->nombre }}</option>                    
+                            @endforeach
+                        </select>
+                    </div>
+                    {{--
+                    Vieja configuracion
+                    <div class="col-xs-12 col-md-3 my-2">
+                        <label for="sistemas_fluidos"
+                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Compatibilidad
                             con sistemas de
                             fluidos</label>
-                        <select name="sistemas_fluidos" id="sistemas_fluidos" class="text-sm inp_edit"  disabled>
-                            @foreach ($sistemas_fluidos as $e)
-                                @if ($e->id == $solicitud_fractura[0]->sistema_fluido_id)
-                                    <option value="{{ $e->id }}" selected>{{ $e->nombre}}</option>
-                                @endif
+                        <select name="sistemas_fluidos" id="sistemas_fluidos" class="text-sm inp_edit" disabled>
+                            @foreach ($sistemas_fluidos as $tipo)
+                                <option value="{{ $tipo->id }}"
+                                    {{ $tipo->id == $solicitud_fractura[0]->sistema_fuido_id? 'selected' : '' }}>{{ $tipo->nombre }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -644,6 +697,8 @@
                             @foreach ($analisis_microbial as $e)
                                 @if ($e->id == $solicitud_fractura[0]->analisis_microbial_id)
                                     <option value="{{ $e->id }}" selected>{{ $e->nombre }}</option>
+                                @else
+                                    <option value="{{ $e->id }}">{{ $e->nombre }}</option>
                                 @endif
                             @endforeach
                         </select>
@@ -658,10 +713,13 @@
                             @foreach ($agente_sosten as $e)
                                 @if ($e->id == $solicitud_fractura[0]->agente_sosten_id)
                                     <option value="{{ $e->id }}" selected>{{ $e->nombre }}</option>
+                                @else
+                                    <option value="{{ $e->id }}">{{ $e->nombre }}</option>
                                 @endif
                             @endforeach
                         </select>
                     </div>
+                    --}}
 
                     <div class="col-xs-12 col-md-3 my-2">
                         <label for="otros_analisis"

@@ -331,6 +331,18 @@
                 </div>
 
                 <div class="col-xs-12 col-md-3 my-2">
+                    <label for="estados" class="text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Estado físico del producto</label>
+                    <select name="estados" id="estados" class="text-sm inp_edit">
+                        <option value="">Seleccione un estado</option>
+                        @foreach ($estados as $tipo)
+                            <option value="{{ $tipo->id }}">{{ $tipo->opciones }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                {{--
+                Vieja configuracion de estado
+                <div class="col-xs-12 col-md-3 my-2">
                     <label for="estados"
                         class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Estado físico del producto</label>
                     <select name="estados" id="estados" class="text-sm inp_edit">
@@ -339,6 +351,7 @@
                         @endforeach
                     </select>
                 </div>
+                --}}
 
                 <div class="col-xs-12 col-md-3 my-2">
                     <label for="concentracion"
@@ -365,6 +378,8 @@
             <p class="m-0 mt-3 font-bold text-lg tracking-wide">Análisis Requerido</p>
 
             <div class="row mt-3"> <!-- Análisis Requerido -->
+                {{--
+                Vieja configuracion
                 <div class="col-xs-12 col-md-3 my-2">
                     <label for="sistemas_fluidos"
                         class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Compatibilidad
@@ -381,7 +396,7 @@
                     <label for="analisis_microbial"
                         class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Análisis
                         de Agua y Ensayo Microbial</label>
-                    <select name="analisis_microbial" id="analisis_microbial" class="text-sm inp_edit"  {{--multiple="true"--}}>
+                    <select name="analisis_microbial" id="analisis_microbial" class="text-sm inp_edit"  multiple="true">
                         @foreach ($analisis_microbial as $e)
                             <option value="{{ $e->id }}">{{ $e->nombre }}</option>
                         @endforeach
@@ -393,12 +408,49 @@
                         class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Agente
                         de
                         Sostén</label>
-                    <select name="agente_sosten" id="agente_sosten" class="text-sm inp_edit" {{--multiple="true"--}}>
+                    <select name="agente_sosten" id="agente_sosten" class="text-sm inp_edit" multiple="true">
+                        @foreach ($agente_sosten as $e)
+                            <option value="{{ $e->id }}">{{ $e->nombre }}</option>
+                        @endforeach
+                    </select>
+                </div>--}}
+                <div class="col-xs-12 col-md-3 my-2">
+                    <label for="sistemas_fluidos"
+                        class="text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Compatibilidad
+                        con sistemas de
+                        fluidos</label>
+                    <select name="sistemas_fluidos" id="sistemas_fluidos" class="text-sm inp_edit">
+                        <option value="" selected disabled>Seleccione una opción</option>
+                        @foreach ($sistemas_fluidos as $e)
+                            <option value="{{ $e->id }}">{{ $e->nombre }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                
+                <div class="col-xs-12 col-md-3 my-2">
+                    <label for="analisis_microbial"
+                        class="text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Análisis
+                        de Agua y Ensayo Microbial</label>
+                    <select name="analisis_microbial" id="analisis_microbial" class="text-sm inp_edit">
+                        <option value="" selected disabled>Seleccione una opción</option>
+                        @foreach ($analisis_microbial as $e)
+                            <option value="{{ $e->id }}">{{ $e->nombre }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                
+                <div class="col-xs-12 col-md-3 my-2">
+                    <label for="agente_sosten"
+                        class="text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Agente
+                        de Sostén</label>
+                    <select name="agente_sosten" id="agente_sosten" class="text-sm inp_edit">
+                        <option value="" selected disabled>Seleccione una opción</option>
                         @foreach ($agente_sosten as $e)
                             <option value="{{ $e->id }}">{{ $e->nombre }}</option>
                         @endforeach
                     </select>
                 </div>
+                
 
                 <div class="col-xs-12 col-md-3 my-2">
                     <label for="otros_analisis"

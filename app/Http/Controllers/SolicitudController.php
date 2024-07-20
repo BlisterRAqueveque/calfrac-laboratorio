@@ -146,11 +146,15 @@ class SolicitudController extends Controller
             'aditivo_extra' => $request->aditivo_extra,
             'proveedor' => $request->proveedor,
             'producto' => $request->producto,
-            'estados' => $request->estados,
+            'estados' => $request->estados ?? null,
+            //'estados' => $request->estados, --> vieja configuracion estados
             'concentracion' => $request->concentracion,
-            'sistema_fluido_id' => $request->sistema_fluido,
-            'analisis_microbial_id' => $request->analisis_microbial,
-            'agente_sosten_id' => $request->agente_sosten,
+            'sistema_fluido_id' => $request->sistema_fluido ?? null,
+            'analisis_microbial_id' => $request->analisis_microbial ?? null,
+            'agente_sosten_id' => $request->agente_sosten ?? null,
+            //'sistema_fluido_id' => $request->sistema_fluido, --> idem estados
+            //'analisis_microbial_id' => $request->analisis_microbial, --> idem estados
+            //'agente_sosten_id' => $request->agente_sosten,--> idem estados
             #'otro_analisis_id' => $request->otros,
             'otros_analisis' => $request->otros_analisis,
             'ensayo_estabilidad' => $request->ensayo_estabilidad == 'on' ? 1 : 0,
