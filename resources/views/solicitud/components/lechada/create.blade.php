@@ -704,9 +704,13 @@
                 try {
                     const response = await fetch(`/obtenerIDSolicitud/${ensayoId}`); //Realizo el fetch con la consulta al back, pidiendo una solicitud que contenga el ensayo seleccionado.
                     const data = await response.json(); //Recibo el json enviado desde el back (funcion obtenerIDSolicitud en el controlador de lechada)
-                    const solicitud_id = data.id; // Guardo el valor del id recibido en otra variable
-                    const url = `/solicitud/lechada/${solicitud_id}`; //Seteo URL con el ID recibido
-                    window.open(url, '_blank'); //Abro la solicitud en otra pestaña
+                    if (data.error) {
+                        showModal('No hay solicitudes con este ensayo asignado'); //Si no encuentra una solicitud con ese ensayo, muestra un modal
+                    } else {
+                        const solicitud_id = data.id; // Guardo el valor del id recibido en otra variable
+                        const url = `/solicitud/lechada/${solicitud_id}`; //Seteo URL con el ID recibido
+                        window.open(url, '_blank'); //Abro la solicitud en otra pestaña
+                    }
                 } catch (error) {
                     console.error('Error al obtener la URL:', error);
                 }
@@ -723,6 +727,32 @@
             setChildren(flex_div, divGrid);
         }
     };
+
+    // Función para mostrar el modal
+    const showModal = (message) => {
+        // Crear el contenedor del modal
+        let modal = el('div.fixed.inset-0.flex.items-center.justify-center.z-50', {
+            id: 'modal'
+        });
+        let modalBg = el('div.fixed.inset-0.bg-black.opacity-50.z-40');
+        let modalContent = el('div.bg-white.p-5.rounded.shadow-lg.max-w-md.mx-auto.z-50');
+
+        // Agregar el mensaje
+        let modalMessage = el('p.text-center.mb-4', message);
+        let closeButton = el('button.bg-blue-500.text-white.px-4.py-2.rounded', 'Cerrar');
+
+        closeButton.addEventListener('click', () => {
+            document.body.removeChild(modal);
+        });
+
+        mount(modalContent, modalMessage);
+        mount(modalContent, closeButton);
+        mount(modal, modalBg);
+        mount(modal, modalContent);
+
+        document.body.appendChild(modal);
+    };
+
 
     // btnAddEnsayoRef.addEventListener('click', e => {
     //     e.preventDefault();
