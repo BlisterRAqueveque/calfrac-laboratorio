@@ -124,8 +124,9 @@ class SolicitudController extends Controller
             'rep_compania' => $request->rep_compania,
             // 'fecha_reporte' => $request->fecha_reporte,
             //'rep_venta' => $request->rep_venta,
-            //'fecha_resultados' => $request->fecha_resultados,
+            //'fecha_resultados' => $request->fecha_resultados_lechada,
             'equipo' => $request->equipo,
+            'servicio' => $request->servicio_lechada,
             'servicios_fractura' => $request->servicios_fractura,
             'distrito' => $request->distrito,
             //'reporte_lab_tall' => $request->reporte_lab_tall,
@@ -574,6 +575,9 @@ class SolicitudController extends Controller
             'sistemas_fluidos' => SistemasFluidos::all(),
             'analisis_microbial' => AnalisisMicrobial::all(),
             'agente_sosten' => AgenteSosten::all(),
+            'sistemas_fluidos' => SistemasFluidos::where('activo', 1)->get(),
+            'analisis_microbial' => AnalisisMicrobial::where('activo', 1)->get(),
+            'agente_sosten' => AgenteSosten::where('activo', 1)->get(),
             'otros_analisis' => OtrosAnalisis::all(),
             'aditivos' => Aditivo::all(),
             'users' => User::all(),
@@ -638,8 +642,13 @@ class SolicitudController extends Controller
     public function update_lechada(Request $request)
     {
         $aditivos_request = $request->aditivos;
-        $id_aditivos = array_column($aditivos_request, 'id');
 
+        if (is_array($aditivos_request)) {
+            $id_aditivos = array_column($aditivos_request, 'id');
+        } else {
+            $id_aditivos = []; // O maneja el caso en que no se envían aditivos
+        }
+        
         # Validamos los datos del encabezado general
         $this->validate($request, [
             'cliente_lechada' => 'required',

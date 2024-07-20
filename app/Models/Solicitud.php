@@ -25,6 +25,7 @@ class Solicitud extends Model
         //'rep_venta',
         //'fecha_resultados',
         'equipo',
+        'servicio',
         'servicios_fractura',
         'distrito',
         'tipo_requerimiento_cemento_id',
