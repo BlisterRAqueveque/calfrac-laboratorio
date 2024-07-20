@@ -23,7 +23,7 @@ class Solicitud extends Model
         'rep_compania',
         //'fecha_reporte',
         //'rep_venta',
-        //'fecha_resultados',
+        'fecha_resultados',
         'equipo',
         'servicio',
         'servicios_fractura',
