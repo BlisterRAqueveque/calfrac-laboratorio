@@ -644,7 +644,7 @@
                             <option value="" selected disabled {{ is_null($solicitud_fractura[0]->sistema_fuido_id) ? 'selected' : '' }}>Seleccione una opción</option>
                             @foreach ($sistemas_fluidos as $tipo)
                                 <option value="{{ $tipo->id }}"
-                                    {{ $tipo->id == $solicitud_fractura[0]->sistema_fuido_id ? 'selected' : '' }}>{{ $tipo->nombre }}</option>
+                                    {{ $tipo->id == $solicitud_fractura[0]->sistema_fluido_id ? 'selected' : '' }}>{{ $tipo->nombre }}</option>
                             @endforeach
                         </select>
                     </div>

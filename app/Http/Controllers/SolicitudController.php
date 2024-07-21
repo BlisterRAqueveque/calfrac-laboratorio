@@ -149,7 +149,7 @@ class SolicitudController extends Controller
             'estados' => $request->estados ?? null,
             //'estados' => $request->estados, --> vieja configuracion estados
             'concentracion' => $request->concentracion,
-            'sistema_fluido_id' => $request->sistema_fluido ?? null,
+            'sistema_fluido_id' => $request->sistemas_fluidos ?? null,
             'analisis_microbial_id' => $request->analisis_microbial ?? null,
             'agente_sosten_id' => $request->agente_sosten ?? null,
             //'sistema_fluido_id' => $request->sistema_fluido, --> idem estados
@@ -422,7 +422,7 @@ class SolicitudController extends Controller
         $solicitud_fractura->producto = $request->producto;
         $solicitud_fractura->estados = $request->estados;
         $solicitud_fractura->concentracion = $request->concentracion;
-        $solicitud_fractura->sistema_fluido_id = $request->sistema_fluido_id;
+        $solicitud_fractura->sistema_fluido_id = $request->sistemas_fluidos;
         $solicitud_fractura->analisis_microbial_id = $request->analisis_microbial_id;
         $solicitud_fractura->agente_sosten_id = $request->agente_sosten_id;
         #$solicitud_fractura->otro_analisis_id = $request->otro_analisis_id;
