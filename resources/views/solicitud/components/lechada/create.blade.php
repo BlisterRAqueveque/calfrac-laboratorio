@@ -298,7 +298,7 @@
                 </div>
             </div>
 
-                <div class="">
+                {{--<div class="">
                     <label for="tipo_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de lodo</label>
                     <select name="tipo_lodo" id="tipo_lodo">
                         <option value="">Seleccione un tipo de lodo</option> <!-- Opción predeterminada -->
@@ -316,7 +316,7 @@
                         @endforeach
                     </select>
                 </div>
-                
+            --}}
                 {{--
                 Vieja configuracion Lodos
                 <div class="">

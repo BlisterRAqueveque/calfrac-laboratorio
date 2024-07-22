@@ -9,6 +9,22 @@
 
     <!-- TODO | Pasar estos estilos a otro lado -->
     <style>
+        #cliente_fractura,
+        #locacion_fractura,
+        #equipo,
+        #servicios_fractura,
+        #distrito,
+        #estados,
+        #sistemas_fluidos,
+        #analisis_microbial,
+        #agente_sosten {
+            background: #b9b9b9;
+            border-radius: 5px;
+        }
+
+        .mode_edicion.active {
+            display: none;
+        }
         .estado_pendiente {
             background: rgb(118, 158, 201);
             letter-spacing: .5px;
@@ -758,23 +774,13 @@
                         </div>
                     </div>
                     
-                    <div class="col-xs-12 col-md-3 my-2">
-                        <label for="base_guar"
-                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Carga Polimérica de Sistema base Guar (#)</label>
-                        <input type="text" placeholder="Ingrese el proveedor"
-                            class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
-                            name="base_guar" id="base_guar"
-                            value="{{ $solicitud_fractura[0]->base_guar ?? 'No Aplica' }}" readonly>
-                    </div>
-                    <div class="col-xs-12 col-md-3 my-2">
-                        <label for="base_hvfr"
-                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Carga Polimérica de Sistema base HVFR (gpt o ppt)</label>
-                        <input type="text" placeholder="Ingrese el producto"
-                            class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
-                            name="base_hvfr" id="base_hvfr" value="{{ $solicitud_fractura[0]->base_hvfr ?? 'No Aplica' }}"
-                            readonly>
-                    </div>
-                </div> <!-- Análisis Requerido -->
+                
+                </div> 
+                
+                <!-- Análisis Requerido -->
+                <p class="m-0 font-bold text-lg my-3 tracking-wide">Requerimientos de Lechada</p>
+
+                @include('solicitud.components.fractura.requerimientos')
 
                 <p class="m-0 mt-3 font-bold text-lg tracking-wide dark:text-gray-300">Firmas de Autorización</p>
 

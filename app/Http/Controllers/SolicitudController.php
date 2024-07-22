@@ -12,6 +12,7 @@ use App\Models\Ensayo;
 use App\Models\MudCompany;
 use App\Models\OtrosAnalisis;
 use App\Models\RelAditivoSolicitudLechada;
+use App\Models\RelAditivosSolicitudFractura;
 use App\Models\RelAditivoSolicitudLodo;
 use App\Models\RelEnsayoReferenciaSolicitud;
 use App\Models\RelFormulacionTentativa;
@@ -176,6 +177,18 @@ class SolicitudController extends Controller
             'solicitud_id' => $solicitud->id,
             'usuario_carga' => auth()->user()->id
         ]);
+
+        # Formulaciones Tentativas
+        if ($request->aditivos) {
+            foreach ($request->aditivos as $formulacion) {
+                RelAditivosSolicitudFractura::create([
+                    'solicitud_fractura_id' => $solicitud_fractura->id,
+                    'lote' => $formulacion['lote'],
+                    'aditivo' => $formulacion['aditivo'],
+                    'concentracion' => $formulacion['concentracion'],
+                ]);
+            }
+        }
 
         $emailsAEnviar = [];
 
@@ -369,6 +382,13 @@ class SolicitudController extends Controller
      */
     public function update(Request $request)
     {
+        $aditivos_request = $request->aditivos;
+
+        if (is_array($aditivos_request)) {
+            $id_aditivos = array_column($aditivos_request, 'id');
+        } else {
+            $id_aditivos = []; // O maneja el caso en que no se envían aditivos
+        }
         # Validamos los datos del encabezado general
         $this->validate($request, [
             //'proyecto_number' => 'required',
@@ -447,6 +467,40 @@ class SolicitudController extends Controller
         $solicitud_fractura->fecha_firma_reconocimiento = $request->fecha_firma_reconocimiento;
         $solicitud_fractura->fecha_firma_reconocimiento = $request->fecha_firma_reconocimiento;
         $solicitud_fractura->save();
+
+        $aditivos_bd = RelAditivosSolicitudFractura::where('solicitud_fractura_id', $solicitud_fractura->id)->get();
+
+        # Formulaciones Tentativas (Actualizar)
+        if ($request->aditivos) {
+
+            foreach ($request->aditivos as $formulacion) {
+                $rel = RelAditivosSolicitudFractura::find($formulacion['id']);
+                $rel->lote = $formulacion['lote'];
+                $rel->aditivo = $formulacion['aditivo'];
+                $rel->concentracion = $formulacion['concentracion'];
+                $rel->save();
+            }
+        }
+        # Formulaciones Tentativas (Nuevas a agregar)
+        if ($request->formulacion_new) {
+            foreach ($request->formulacion_new as $formulacion) {
+                RelAditivosSolicitudFractura::create([
+                    'solicitud_fractura_id' => $solicitud_fractura->id,
+                    'lote' => $formulacion['lote'],
+                    'aditivo' => $formulacion['aditivo'],
+                    'concentracion' => $formulacion['concentracion'],
+                ]);
+            }
+        }
+        # Eliminar las formulaciones se seleccionar para eliminar
+        $aditivos_delete = [];
+        foreach ($aditivos_bd as $a_b_d) {
+            if (!in_array($a_b_d['id'], $id_aditivos)) {
+                $aditivo_del = RelAditivosSolicitudFractura::find($a_b_d['id']);
+                $aditivo_del->delete();
+            }
+        }
+
 
         # La fundamentación del por qué se editó la solicitud
         $edicion_solicitud = Edicion_Solicitud::create([

@@ -83,5 +83,9 @@ class SolicitudFractura extends Model
     {
         return $this->belongsTo(Estados::class, 'estados');
     }
+    public function formulacion_tentativa()
+    {
+        return $this->hasMany(RelAditivosSolicitudFractura::class);
+    }
 
 }
