@@ -485,19 +485,37 @@
                             Ruptura</label>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-3 my-2">
-                    <label for="base_guar"
-                        class=" dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Carga Polimérica de Sistema base Guar (#)</label>
-                    <input type="text" placeholder="Ingrese carga polimérica"
-                        class="form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 sz aditivo_extra_inp"
-                        name="base_guar" id="base_guar">
+
+                    <label for="" class="text-sm mt-3 text-gray-700 font-semibold tracking-wide mb-2">Formulación
+                        Tentativa</label>
+                    <div class="col-xs-12 col-md-6 my-2">
+                        <label for="base_guar"
+                            class=" dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Carga Polimérica de Sistema base Guar (#)</label>
+                        <input type="text" placeholder="Ingrese carga polimérica"
+                            class="form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 sz aditivo_extra_inp"
+                            name="base_guar" id="base_guar">
+                    </div>
+                    <div class="col-xs-12 col-md-6 my-2">
+                        <label for="base_hvfr"
+                            class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Carga Polimérica de Sistema base HVFR (gpt o ppt)</label>
+                        <input type="text" placeholder="Ingrese carga polimérica"
+                            class="form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 sz aditivo_extra_inp"
+                            name="base_hvfr" id="base_hvfr">
+                    </div>                        
+    
+    
+                <div class="grid grid-cols-3 text-center bg-gray-100 py-2 my-3">
+                    <p>Lote</p>
+                    <p>Aditivo</p>
+                    <p>Conc (gpt o ppt)</p>
                 </div>
-                <div class="col-xs-12 col-md-3 my-2">
-                    <label for="base_hvfr"
-                        class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Carga Polimérica de Sistema base HVFR (gpt o ppt)</label>
-                    <input type="text" placeholder="Ingrese carga polimérica"
-                        class="form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 sz aditivo_extra_inp"
-                        name="base_hvfr" id="base_hvfr">
+                <div id="container_formulaciones_tentativas"></div>
+    
+                <div class="text-center mt-3">
+                    <button id="btnAddFormulacion"
+                        class="text-sm mt-2 bg-gray-200 hover:bg-gray-300 text-gray-600 p-1 rounded-md px-3 border transition-all duration-200 border-gray-300">
+                        Agregar Formulación
+                    </button>
                 </div>
             </div> 
 
@@ -685,6 +703,9 @@
         document.getElementById("estados").setValue(0);
     })
 </script>
+
+<!-- Create formulación tentativa -->
+<script src="{{ asset('js/Solicitud/fractura/aditivos.js') }}"></script>
 
 <script>
     const aditivo_extra_inp = document.querySelectorAll('.aditivo_extra_inp');

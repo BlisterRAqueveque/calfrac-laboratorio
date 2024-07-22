@@ -13,8 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('solicitud', function (Blueprint $table) {
+        Schema::create('rel_ensayos_comentarios_solicitud', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('solicitud_id')->references('id')->on('solicitud');
             $table->string('comentario_ensayo')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -25,10 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('solicitud', function (Blueprint $table) {
-            $table->dropColumn([
-                'comentario_ensayo'
-            ]);
-        });
+        Schema::dropIfExists('rel_ensayos_comentarios_solicitud');
     }
 };
