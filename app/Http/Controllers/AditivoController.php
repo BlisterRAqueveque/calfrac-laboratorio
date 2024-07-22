@@ -32,7 +32,7 @@ class AditivoController extends Controller
     public function update(Request $request)
     {
         $this->validate($request, [
-            'edit_aditivo' => 'required|unique:aditivo,nombre',
+            'edit_aditivo' => 'required|unique:aditivos,nombre',
         ]);
         $aditivoExistente = Aditivo::find($request->aditivo_id);
         if($aditivoExistente){
@@ -40,7 +40,7 @@ class AditivoController extends Controller
         }
         
         Aditivo::create([
-            'nombre' => $request->aditivo,
+            'nombre' => $request->edit_aditivo,
             'user_id' => auth()->user()->id
         ]);
         return back();
