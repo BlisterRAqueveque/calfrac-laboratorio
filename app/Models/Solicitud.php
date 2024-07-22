@@ -32,6 +32,7 @@ class Solicitud extends Model
         'tipo_trabajo_cemento_id',
         'tipo_cementacion_id',
         'ensayo_requerido',
+        'comentario_ensayo',
         'reporte_lab_tall',
         'reporte_lab_lead',
         'solicitud',
