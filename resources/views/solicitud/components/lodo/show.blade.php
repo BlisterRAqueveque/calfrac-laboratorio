@@ -358,10 +358,6 @@
                 </div>
                 <hr class="my-4">
 
-                <div class="grid xs:grid-cols-2 md:grid-cols-6 gap-3 mt-3">
-                    <p class="m-0 font-bold text-lg my-3 tracking-wide">Ensayos de referencia</p>
-                    
-                </div>
                 
                 <p class="m-0 font-bold text-lg my-3 tracking-wide">Ensayos de Referencia</p>
 
