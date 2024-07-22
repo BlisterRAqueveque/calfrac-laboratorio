@@ -485,6 +485,20 @@
                             Ruptura</label>
                     </div>
                 </div>
+                <div class="col-xs-12 col-md-3 my-2">
+                    <label for="base_guar"
+                        class=" dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Carga Polimérica de Sistema base Guar (#)</label>
+                    <input type="text" placeholder="Ingrese carga polimérica"
+                        class="form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 sz aditivo_extra_inp"
+                        name="base_guar" id="base_guar">
+                </div>
+                <div class="col-xs-12 col-md-3 my-2">
+                    <label for="base_hvfr"
+                        class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Carga Polimérica de Sistema base HVFR (gpt o ppt)</label>
+                    <input type="text" placeholder="Ingrese carga polimérica"
+                        class="form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 sz aditivo_extra_inp"
+                        name="base_hvfr" id="base_hvfr">
+                </div>
             </div> 
 
             <p class="m-0 mt-3 font-bold text-lg tracking-wide">Firmas de Autorización</p>

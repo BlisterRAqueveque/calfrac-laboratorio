@@ -160,6 +160,8 @@ class SolicitudController extends Controller
             'ensayo_estabilidad' => $request->ensayo_estabilidad == 'on' ? 1 : 0,
             'ensayo_ruptura' => $request->ensayo_ruptura == 'on' ? 1 : 0,
             'comentario' => $request->comentario,
+            'base_guar' => $request->base_guar,
+            'base_hvfr' => $request->base_hvfr,
             'firma_iniciado_por_id' => $request->firma_iniciado_por,
             'fecha_firma_iniciado_por' => $request->fecha_firma_iniciado_por,
             'firma_servicio_tecnico_id' => $request->firma_servicios_tecnicos,
@@ -430,6 +432,8 @@ class SolicitudController extends Controller
         $solicitud_fractura->ensayo_estabilidad = $request->ensayo_estabilidad == 'on' ? 1 : 0;
         $solicitud_fractura->ensayo_ruptura = $request->ensayo_estabilidad == 'on' ? 1 : 0;
         $solicitud_fractura->comentario = $request->comentario;
+        $solicitud_fractura->base_guar = $request->base_guar;
+        $solicitud_fractura->base_hvfr = $request->base_hvfr;
         $solicitud_fractura->firma_iniciado_por_id = $request->firma_iniciado_por_id;
         $solicitud_fractura->fecha_firma_iniciado_por = $request->fecha_firma_iniciado_por;
         $solicitud_fractura->firma_servicio_tecnico_id = $request->firma_servicio_tecnico_id;
