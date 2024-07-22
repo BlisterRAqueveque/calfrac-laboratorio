@@ -158,16 +158,14 @@
                 <section class="container_ensayo_referencia_lodo rounded-md">
                 </section>
                 <div class="text-center mt-3">
-                    <button id="btnAddEnsayoRef_lodo"
-                        class="text-sm mt-2 bg-gray-200 hover:bg-gray-300 text-gray-600 p-1 rounded-md border transition-all duration-200 border-gray-300">
+                    <button id="btnAddEnsayoRefLodo" class="text-sm mt-2 bg-gray-200 hover:bg-gray-300 text-gray-600 p-1 rounded-md border transition-all duration-200 border-gray-300">
                         {{-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
-                            stroke="currentColor" class="w-5 h-5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                        </svg> --}}
+                                stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                            </svg> --}}
                         Agregar Ensayo de Referencia
                     </button>
                 </div>
-
                 <hr class="my-4">
 
                 <p class="m-0 font-bold text-lg my-3 tracking-wide">Ensayo Requeridos</p>
@@ -363,3 +361,157 @@
     })
 </script>
 
+<script>
+    let ensayos_referencia_lodo = {!! json_encode($ensayos_sol_lodo) !!}
+    const btnAddEnsayoRefLodo = document.querySelector('#btnAddEnsayoRefLodo');
+    const container_ensayo_referencia_lodo = document.querySelector('.container_ensayo_referencia_lodo');
+    let aux_lodo = 1;
+
+    //{{-- OJO, si formatean el código para acomodarlo, esta línea se convierte en 3 líneas y tira error, para acomodarlo tiene que ser en este formato "{!! json_encode($ensayos) !!}" TAL CUAL, con los mismos espacios. --}}
+    //{{-- Incluso poner el comentario en la misma línea lo rompió --}}
+    //{!! json_encode($ensayos) !!}
+
+
+    btnAddEnsayoRefLodo.addEventListener('click', e => {
+        e.preventDefault();
+        let div = el('div.grid grid-cols-3 items-center', {
+            id: `div_ens_ref_${aux_lodo}`
+        });
+        let colSpan = el('div.col-span-2');
+        let label = el('label.text-sm text-gray-700 font-semibold tracking-wide mb-2', 'Seleccione el Ensayo');
+        let flex = el('div.flex items-center flex-1 gap-3');
+        let select = el('select.form-select text-sm p-2', {
+            id: 'ensayos_ref_lodo',
+            name: 'ensayos_ref_lodo[]'
+        }, el('option', {
+            value: ''
+        }, '-- Seleccione --'));
+
+        ensayos.forEach(ens => {
+            const {
+                id,
+                tipo,
+                incrementable,
+                anio
+            } = ens;
+            mount(select, el('option', {
+                value: id
+            }, `${tipo}-${incrementable}-${anio}`));
+        });
+
+        // Agrego la opción "S/D" al final
+        mount(select, el('option.bg-red-200', {
+            value: 'sd'
+        }, 'S/D'));
+
+        select.setAttribute('onChange', `selectEnsayoLodo(this, ${aux_lodo})`);
+
+        mount(flex, select);
+        mount(flex, el('div.w-1/2 flex justify-center gap-2 items-center', {
+            id: `flex_ensayo_${aux_lodo}`
+        }));
+
+        mount(colSpan, label);
+        mount(colSpan, flex);
+        mount(div, colSpan);
+        mount(container_ensayo_referencia_lodo, div);
+        aux_lodo++;
+    });
+
+    // Función para crear el div y los botones
+    const selectEnsayoLodo = (e, aux_lodo) => {
+
+        event.preventDefault();
+
+        let flex_div = document.getElementById(`flex_ensayo_${aux_lodo}`);
+        flex_div.innerHTML = ''; // Limpiar el contenido anterior
+
+        if (e.value === '') {
+            // No hacer nada si la selección es vacía
+            return;
+        } else if (e.value === 'sd') {
+            // Si el valor es 'S/D', agregar el textarea para comentarios
+            let divGrid = el('div.grid grid-cols-2 gap-3 md:grid-cols-2');
+            let textarea = el('textarea.textarea.form-control.text-sm.p-2', {
+                name: 'comentarios_lodo[]',
+                placeholder: 'Comentarios/Observaciones',
+                rows: 3
+            });
+            mount(divGrid, textarea);
+
+            // Crear el botón de borrar
+            let button = el('button.bg-red-600.text-white.font-semibold.px-10.hover:bg-red-700.transition-all.md:px-5.lg:px-7', 'Borrar');
+            button.addEventListener('click', e => {
+                event.preventDefault();
+                document.getElementById(`div_ens_ref_${aux_lodo}`).remove();
+            });
+            mount(divGrid, button);
+            setChildren(flex_div, divGrid);
+        } else {
+            // Si el valor es otro ensayo, mostrar los botones de visualizar y borrar
+            let divGrid = el('div.grid.grid-cols-2.gap-3.md:grid-cols-2');
+
+            // Agregar el párrafo en miniatura arriba de los botones
+            let pMiniatura = el('p.text-xs.text-gray-500.mb-2.col-span-2', 'Visualizará una solicitud que incluya este ensayo');
+            mount(divGrid, pMiniatura);
+
+            let a = el('a.bg-slate-100.w-full.text-gray-700.border.py-1.rounded-sm.hover:bg-slate-200.hover:text-gray-700.cursor-pointer.transition-all.duration-200.px-3.md:px-5.lg:px-7', 'Visualizar');
+            a.setAttribute('data-ensayo-id', e.value);
+
+            a.addEventListener('click', async (event) => {
+                event.preventDefault();
+                const ensayoId = event.currentTarget.getAttribute('data-ensayo-id'); //Capturo el valor del ensayo seleccionado
+                try {
+                    const response = await fetch(`/obtenerIDSolicitud/${ensayoId}`); //Realizo el fetch con la consulta al back, pidiendo una solicitud que contenga el ensayo seleccionado.
+                    const data = await response.json(); //Recibo el json enviado desde el back (funcion obtenerIDSolicitud en el controlador de lechada)
+                    if (data.error) {
+                        showModalLodo('No hay solicitudes con este ensayo asignado'); //Si no encuentra una solicitud con ese ensayo, muestra un modal
+                    } else {
+                        const solicitud_id = data.id; // Guardo el valor del id recibido en otra variable
+                        const url = `/solicitud/lechada/${solicitud_id}`; //Seteo URL con el ID recibido
+                        window.open(url, '_blank'); //Abro la solicitud en otra pestaña
+                    }
+                } catch (error) {
+                    console.error('Error al obtener la URL:', error);
+                }
+            });
+
+            let button = el('button.bg-red-600.text-white.font-semibold.px-10.hover:bg-red-700.transition-all.md:px-5.lg:px-7', 'Borrar');
+            button.addEventListener('click', e => {
+                event.preventDefault();
+                document.getElementById(`div_ens_ref_${aux}`).remove();
+            });
+
+            mount(divGrid, a);
+            mount(divGrid, button);
+            setChildren(flex_div, divGrid);
+        }
+    };
+
+    // Función para mostrar el modal
+    const showModalLodo = (message) => {
+        // Crear el contenedor del modal
+        let modal = el('div.fixed.inset-0.flex.items-center.justify-center.z-50', {
+            id: 'modal'
+        });
+        let modalBg = el('div.fixed.inset-0.bg-black.opacity-50.z-40');
+        let modalContent = el('div.bg-white.p-5.rounded.shadow-lg.max-w-md.mx-auto.z-50');
+
+        // Agregar el mensaje
+        let modalMessage = el('p.text-center.mb-4', message);
+        let closeButton = el('button.bg-blue-500.text-white.px-4.py-2.rounded', 'Cerrar');
+
+        closeButton.addEventListener('click', () => {
+            document.body.removeChild(modal);
+        });
+
+        mount(modalContent, modalMessage);
+        mount(modalContent, closeButton);
+        mount(modal, modalBg);
+        mount(modal, modalContent);
+
+        document.body.appendChild(modal);
+    };
+
+
+</script>

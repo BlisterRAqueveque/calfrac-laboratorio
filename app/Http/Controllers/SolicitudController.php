@@ -36,6 +36,7 @@ use App\Models\Equipos;
 use App\Models\EnsayosLodo;
 use App\Models\SolicitudLodo;
 use App\Models\Estados;
+use App\Models\RelEnsayoComentarioSolicitud;
 use App\Models\RelEnsayosRequeridosLodo;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -76,6 +77,8 @@ class SolicitudController extends Controller
             //'tipo_ensayos_lodo' => TipoEnsayosLodo::all()
             'ensayos_lodo' => EnsayosLodo::all(),
             'estados' => Estados::all(),
+            'ensayos_sol_lodo' => Ensayo::where('tipo', 'LN')->where('estado', 1)->get(),
+
         ];
         return view('solicitud.create', $data);
     }
@@ -541,11 +544,47 @@ class SolicitudController extends Controller
             'mud_company' => $request->mud_company,
 
         ]);
-        
-        #Ensayos de referencia
+
+        #Ensayos de referencia (Usa la misma tabla que lechada y fractura, asique usar SolicitudGeneral)
+        $ensayos_ref_lodo = $request->ensayos_ref_lodo;
+        $comentarios_lodo = $request->comentarios_lodo;
+
+        if ($ensayos_ref_lodo && count($ensayos_ref_lodo) > 0) {
+            $total_ensayos = count($ensayos_ref_lodo);
+            $index_comentario = 0; // Inicializamos el índice para los comentarios
+
+            foreach ($ensayos_ref_lodo as $i => $valor) {
+                if ($valor !== "sd") {
+                    // Convierto $valor a integer para que lo acepte la base de datos
+                    $ensayo_id = (int) $valor;
+
+                    // Insertar en rel_ensayos_referencia_solicitud
+                    RelEnsayoReferenciaSolicitud::create([
+                        'ensayo_id' => $ensayo_id,
+                        'solicitud_id' => $solicitud->id
+                    ]);
+                } else {
+                    // Si encontramos "sd", insertamos el comentario correspondiente
+                    if ($index_comentario < count($comentarios_lodo)) {
+                        $comentario = $comentarios_lodo[$index_comentario];
+
+                        // Insertar en rel_ensayos_comentarios_solicitud
+                        RelEnsayoComentarioSolicitud::create([
+                            'comentario_ensayo' => $comentario,
+                            'solicitud_id' => $solicitud->id
+                        ]);
+
+                        $index_comentario++; // Avanzamos al siguiente comentario
+                    }
+                }
+            }
+        }
 
 
-        # Ensayos requeridos
+
+
+
+        /* # Ensayos requeridos
         if ($request->ensayos) {
             $ensayos_separados = explode(',', $request->ensayos);
             foreach ($ensayos_separados as $ensayo) {
@@ -567,7 +606,7 @@ class SolicitudController extends Controller
                     'concentracion' => $formulacion['concentracion'],
                 ]);
             }
-        }
+        }*/
         if ($solicitud->id)
             return redirect('solicitud')->with('success', $solicitud->id);
     }
@@ -682,7 +721,7 @@ class SolicitudController extends Controller
         # Aca puse un if por un error que tiro previamente
         # $aditivos_request = $request->aditivos;
         # $id_aditivos = array_column($aditivos_request, 'id');
-        
+
         # Validamos los datos del encabezado general
         $this->validate($request, [
             'cliente_lechada' => 'required',
