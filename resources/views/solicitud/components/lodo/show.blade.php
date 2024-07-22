@@ -360,8 +360,40 @@
 
                 <div class="grid xs:grid-cols-2 md:grid-cols-6 gap-3 mt-3">
                     <p class="m-0 font-bold text-lg my-3 tracking-wide">Ensayos de referencia</p>
-
+                    
                 </div>
+                
+                <p class="m-0 font-bold text-lg my-3 tracking-wide">Ensayos de Referencia</p>
+
+
+
+                <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2" for="ensayo_id">Ensayos seleccionados:</label>
+                <div class="grid md:grid-cols-6 gap-3 mt-4 relative">
+                    @foreach ($ensayos_referencia as $e_r)
+                    <div>
+                        <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2" for="ensayo_id_{{ $loop->index }}">Ensayo seleccionado:</label>
+                        <select name="ensayo_id[]" class="form-control text-sm p-2"  disabled>
+                            @foreach ($ensayos as $ensayo)
+                                <option value="{{ $ensayo->id }}" {{ $ensayo->id == $e_r->ensayo_id ? 'selected' : '' }}>{{ $ensayo->tipo . "-" . $ensayo->incrementable . "-" . $ensayo->anio}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    @endforeach
+                </div>
+                <br>
+                <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2" for="ensayo_id">Comentarios ingresados:</label>
+                <div class="grid md:grid-cols-6 gap-3 mt-4 relative">
+                    @foreach ($comentarios_referencia as $comentario)
+                    
+                        <div>
+                            <input type="text" name="" class="form-control text-sm p-2"
+                                value="{{ $comentario->comentario_ensayo }}" readonly>
+                        </div>
+                    
+                    @endforeach
+                </div>
+                
+            
                 <hr class="my-4">
 
                 <!--div class="grid xs:grid-cols-2 md:grid-cols-6 gap-3 mt-3">

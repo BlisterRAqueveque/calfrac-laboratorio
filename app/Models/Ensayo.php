@@ -21,7 +21,13 @@ class Ensayo extends Model
     {
         return $this->belongsTo(User::class);
     }
-    
+
+    // Relación con RelEnsayoReferenciaSolicitud
+    public function referenciasSolicitud()
+    {
+        return $this->hasMany(RelEnsayoReferenciaSolicitud::class, 'ensayo_id', 'ensayo_id');
+    }
+
     // public function aditivos()
     // {
     //     return $this->hasMany(RelAditivosEnsayos::class);

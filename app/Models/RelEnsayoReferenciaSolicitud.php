@@ -21,10 +21,24 @@ class RelEnsayoReferenciaSolicitud extends Model
         'bhct',
     ];
 
-    public function ensayo() {
+    public function ensayo()
+    {
         return $this->hasMany(Ensayo::class);
     }
-    public function solicitud() {
+    public function solicitud()
+    {
         return $this->hasMany(Solicitud::class);
+    }
+
+    // Relación con Ensayo
+    public function ensayoRelacionado()
+    {
+        return $this->belongsTo(Ensayo::class, 'ensayo_id', 'ensayo_id');
+    }
+
+    // Relación con Solicitud
+    public function solicitudRelacionada()
+    {
+        return $this->belongsTo(Solicitud::class, 'solicitud_id', 'id');
     }
 }

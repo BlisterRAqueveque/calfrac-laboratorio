@@ -580,11 +580,7 @@ class SolicitudController extends Controller
             }
         }
 
-
-
-
-
-        /* # Ensayos requeridos
+        # Ensayos requeridos
         if ($request->ensayos) {
             $ensayos_separados = explode(',', $request->ensayos);
             foreach ($ensayos_separados as $ensayo) {
@@ -606,7 +602,7 @@ class SolicitudController extends Controller
                     'concentracion' => $formulacion['concentracion'],
                 ]);
             }
-        }*/
+        }
         if ($solicitud->id)
             return redirect('solicitud')->with('success', $solicitud->id);
     }
@@ -676,8 +672,11 @@ class SolicitudController extends Controller
 
         $data = [
             'solicitud' => Solicitud::find($solicitud_id),
-            //'ensayos_referencia' => RelEnsayoReferenciaSolicitud::where('solicitud_id', $solicitud_id)->get(),
+            'ensayos_referencia' => Ensayo::leftJoin('rel_ensayo_referencia_solicitud', 'ensayos.id', '=', 'rel_ensayo_referencia_solicitud.ensayo_id')
+                ->where('rel_ensayo_referencia_solicitud.solicitud_id', $solicitud_id)
+                ->get(['ensayos.*', 'rel_ensayo_referencia_solicitud.*']),
             //  'aditivos' => Aditivo::all(),
+            'ensayos' => Ensayo::where('estado', 1)->get(),
             'users' => User::all(),
             'clientes' => Cliente::all(),
             'yacimientos' => Yacimiento::all(),
@@ -685,7 +684,8 @@ class SolicitudController extends Controller
             'equipos' => Equipos::all(),
             'servicios' => Servicios::all(),
             'solicitud_lodo' => SolicitudLodo::where('solicitud_id', $solicitud_id)->get(),
-            //'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
+            'comentarios_referencia' => RelEnsayoComentarioSolicitud::where('solicitud_id', $solicitud_id)->get(),
+            // 'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
         // $generate_report = $this->_generate_report($solicitud_id);
         //$data['generar_reporte'] = $generate_report->original['generate_report'];
