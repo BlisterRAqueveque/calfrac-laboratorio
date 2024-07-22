@@ -422,58 +422,33 @@
 
                 <hr class="my-4">
 
-                {{--<p class="m-0 font-bold text-lg my-3 tracking-wide">Ensayos de Referencia</p>--}}
+                <p class="m-0 font-bold text-lg my-3 tracking-wide">Ensayos de Referencia</p>
 
-                @foreach ($ensayos_referencia as $e_r)
-                    <div class="grid md:grid-cols-6 gap-3 mt-4 relative">
-                        <div>
-                            <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2"
-                                for="ensayo_id">Seleccione el Ensayo</label>
-                            <input type="text" name="" class="form-control text-sm p-2"
-                                value="Ensayo Nº{{ $e_r->id }}" readonly>
-                        </div>
-                        
-                        <div class="md:col-span-3 xl:col-span-2"><label
-                                class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tope de Lechada
-                                <small>(MD/TVD)(m)</small></label>
-                            <div class="grid grid-cols-2 gap-2">
-                                <input class="form-control text-sm p-2 testing_1" value="{{ $e_r->top_of_slurry_md }}"
-                                    min="0" placeholder="MD" readonly="true">
-                                <input class="form-control text-sm p-2 testing_1 top_of_slurry_tvd_1" min="0"
-                                    value="{{ $e_r->top_of_slurry_tvd }}" placeholder="TVD" readonly="true">
-                            </div>
-                        </div>
-                        <div class="md:col-span-2 xl:col-span-1">
-                            <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Densidad (m)</label>
-                            <input class="form-control text-sm p-2 testing_1" placeholder="Ingrese la densidad"
-                                readonly="true" value="{{ $e_r->densidad }}">
-                        </div>
-                        <div class="md:col-span-2 xl:col-span-1"><label
-                                class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Grado de Temperatura
-                                <small>(°C)</small>
-                            </label>
-                            <input class="form-control text-sm p-2 testing_1" placeholder="Ingrese la Temperatura ºC"
-                                readonly="true" value="{{ $e_r->grado_temperatura }}">
-                        </div>
-                        <div class="grid col-span-1 grid-cols-2 gap-3">
-                            <div>
-                                <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">BHCE
-                                    <small>(°C)</small>
-                                </label>
-                                <input class="form-control text-sm p-2 testing_1" placeholder="BHCE" readonly="true"
-                                    value="{{ $e_r->bhce }}">
-                            </div>
-                            <div>
-                                <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">BHCT
-                                    <small>(°C)</small></label>
-                                <input class="form-control text-sm p-2 testing_1" placeholder="BHCT" readonly="true"
-                                    value="{{ $e_r->bhct }}">
-                            </div>
-                        </div>
+                <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2" for="ensayo_id">Ensayos seleccionados:</label>
+                <div class="grid md:grid-cols-6 gap-3 mt-4 relative">
+                    @foreach ($ensayos_referencia as $e_r)
+                    <div>
+                        <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2" for="ensayo_id_{{ $loop->index }}"></label>
+                        <select name="ensayo_id[]" class="form-control text-sm p-2"  disabled>
+                            @foreach ($ensayos as $ensayo)
+                                <option value="{{ $ensayo->id }}" {{ $ensayo->id == $e_r->ensayo_id ? 'selected' : '' }}>{{ $ensayo->tipo . "-" . $ensayo->incrementable . "-" . $ensayo->anio}}</option>
+                            @endforeach
+                        </select>
                     </div>
-                    <hr class="my-3">
-                @endforeach
+                    @endforeach
+                </div>
+                <br>
+                <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2" for="ensayo_id">Comentarios ingresados:</label>
+                <div class="grid md:grid-cols-6 gap-3 mt-4 relative">
+                    @foreach ($comentarios as $comentario)
+                        <div>
+                            <input type="text" name="" class="form-control text-sm p-2"
+                            value="{{ $comentario->comentario_ensayo }}" readonly>
+                        </div>
+                    @endforeach
+                </div>
 
+                <hr class="my-3">
                 <p class="m-0 font-bold text-lg my-3 tracking-wide">Ensayo Solicitado</p>
 
                 <div class="grid md:grid-cols-5 gap-3 mt-3">

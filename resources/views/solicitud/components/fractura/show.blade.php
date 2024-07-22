@@ -486,6 +486,7 @@
                         @enderror
                     </div>
                 </div>--}}
+                <hr class="my-4">
 
                 <p class="m-0 mt-3 font-bold text-lg tracking-wide dark:text-gray-300">Información del Pozo y Ensayos</p>
                 <div class="row mt-3">
@@ -651,6 +652,7 @@
 
                 </div> <!-- Información del Pozo -->
 
+                <hr class="my-4">
                 <p class="m-0 mt-3 font-bold text-lg tracking-wide">Análisis Requerido</p>
 
                 <div class="row mt-3"> <!-- Análisis Requerido -->
@@ -776,12 +778,14 @@
                     
                 
                 </div> 
-                
+                <hr class="my-4">
+
                 <!-- Análisis Requerido -->
-                <p class="m-0 font-bold text-lg my-3 tracking-wide">Requerimientos de Lechada</p>
+                <p class="m-0 font-bold text-lg my-3 tracking-wide">Requerimientos de Fractura</p>
 
                 @include('solicitud.components.fractura.requerimientos')
-
+                
+                <hr class="my-4">
                 <p class="m-0 mt-3 font-bold text-lg tracking-wide dark:text-gray-300">Firmas de Autorización</p>
 
                 <div class="row mt-3">
