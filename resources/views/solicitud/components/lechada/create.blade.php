@@ -298,24 +298,61 @@
                 </div>
             </div>
 
-            <div class="md:col-span-2 xl:col-span-1">
-                <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tope de Lechada
-                    <small>(MD/TVD) (m)</small></label>
-                <div class="grid grid-cols-2 gap-3">
-                    <input type="number" name="top_of_slurry_md" value="{{ old('top_of_slurry_md') }}" class="form-control text-sm p-2" placeholder="MD" step=".01">
-                    <input type="number" name="top_of_slurry_tvd" value="{{ old('top_of_slurry_tvd') }}" class="form-control text-sm p-2" placeholder="TVD" step=".01">
+                <div class="">
+                    <label for="tipo_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de lodo</label>
+                    <select name="tipo_lodo" id="tipo_lodo">
+                        <option value="">Seleccione un tipo de lodo</option> <!-- Opción predeterminada -->
+                        @foreach ($tipo_lodo as $tipo)
+                            <option value="{{ $tipo->id }}" {{ old('tipo_lodo') == $tipo->id ? 'selected' : '' }}>{{ $tipo->nombre }}</option>
+                        @endforeach
+                    </select>
                 </div>
-            </div>
-
-            <div class="">
-                <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Volumen <small>(bbl)</small></label>
-                <input type="number" name="volumen" class="form-control text-sm p-2" value="{{ old('volumen') }}" placeholder="Volumen" step=".01">
-            </div>
-
-            <div class="">
-                <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Caudal <small>(bpm)</small></label>
-                <input type="number" name="pump_rate" value="{{ old('pump_rate') }}" class="form-control text-sm p-2" placeholder="Caudal" step=".01">
-            </div>
+                <div>
+                    <label for="mud_company" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Compañía de Lodos</label>
+                    <select name="mud_company" id="mud_company">
+                        <option value="" selected disabled>Seleccione la compañía</option>
+                        @foreach ($mud_company as $tipo)
+                            <option value="{{ $tipo->id }}" {{ old('mud_company') == $tipo->id ? 'selected' : '' }}>{{ $tipo->nombre }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                
+                {{--
+                Vieja configuracion Lodos
+                <div class="">
+                    <label for="tipo_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de
+                        lodo</label>
+                    <select name="tipo_lodo" id="tipo_lodo">
+                        @foreach ($tipo_lodo as $tipo)
+                            <option value="{{ $tipo->id }}"
+                                {{ old('tipo_lodo') == $tipo->id ? 'selected' : '' }}>{{ $tipo->nombre }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                Vieja configuracion mud_company
+                <div>
+                    <label for="mud_company" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Compañía
+                        de Lodos</label>
+                    <select name="mud_company" id="mud_company">
+                        @foreach ($mud_company as $tipo)
+                            <option value="{{ $tipo->id }}"
+                                {{ old('mud_company') == $tipo->id ? 'selected' : '' }}>{{ $tipo->nombre }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                --}}
+                <div class="md:col-span-2 xl:col-span-1">
+                    <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Profundidad
+                        Pozo <small>(MD/TVD) (m)</small></label>
+                    <div class="grid grid-cols-2 gap-3">
+                        <input type="number" min="0" name="profundidad_pozo_md"
+                            class="form-control text-sm p-2" value="{{ old('profundidad_pozo_md') }}"
+                            placeholder="MD" step=".01">
+                        <input type="number" min="0" name="profundidad_pozo_tvd"
+                            class="form-control text-sm p-2" value="{{ old('profundidad_pozo_tvd') }}"
+                            placeholder="TVD" step=".01">
+                    </div>
+                </div>
 
             <div class="md:col-span-2 xl:col-span-1">
                 <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Gradiente de

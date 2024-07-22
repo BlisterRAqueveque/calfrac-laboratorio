@@ -30,6 +30,8 @@ class SolicitudFractura extends Model
         'ensayo_estabilidad',
         'ensayo_ruptura',
         'comentario',
+        'base_guar',
+        'base_hvfr',
         'firma_iniciado_por_id',
         'fecha_firma_iniciado_por',
         'firma_servicio_tecnico_id',

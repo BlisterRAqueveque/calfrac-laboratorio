@@ -124,8 +124,9 @@ class SolicitudController extends Controller
             'rep_compania' => $request->rep_compania,
             // 'fecha_reporte' => $request->fecha_reporte,
             //'rep_venta' => $request->rep_venta,
-            //'fecha_resultados' => $request->fecha_resultados,
+            //'fecha_resultados' => $request->fecha_resultados_lechada,
             'equipo' => $request->equipo,
+            'servicio' => $request->servicio_lechada,
             'servicios_fractura' => $request->servicios_fractura,
             'distrito' => $request->distrito,
             //'reporte_lab_tall' => $request->reporte_lab_tall,
@@ -145,16 +146,22 @@ class SolicitudController extends Controller
             'aditivo_extra' => $request->aditivo_extra,
             'proveedor' => $request->proveedor,
             'producto' => $request->producto,
-            'estados' => $request->estados,
+            'estados' => $request->estados ?? null,
+            //'estados' => $request->estados, --> vieja configuracion estados
             'concentracion' => $request->concentracion,
-            'sistema_fluido_id' => $request->sistema_fluido,
-            'analisis_microbial_id' => $request->analisis_microbial,
-            'agente_sosten_id' => $request->agente_sosten,
+            'sistema_fluido_id' => $request->sistemas_fluidos ?? null,
+            'analisis_microbial_id' => $request->analisis_microbial ?? null,
+            'agente_sosten_id' => $request->agente_sosten ?? null,
+            //'sistema_fluido_id' => $request->sistema_fluido, --> idem estados
+            //'analisis_microbial_id' => $request->analisis_microbial, --> idem estados
+            //'agente_sosten_id' => $request->agente_sosten,--> idem estados
             #'otro_analisis_id' => $request->otros,
             'otros_analisis' => $request->otros_analisis,
             'ensayo_estabilidad' => $request->ensayo_estabilidad == 'on' ? 1 : 0,
             'ensayo_ruptura' => $request->ensayo_ruptura == 'on' ? 1 : 0,
             'comentario' => $request->comentario,
+            'base_guar' => $request->base_guar,
+            'base_hvfr' => $request->base_hvfr,
             'firma_iniciado_por_id' => $request->firma_iniciado_por,
             'fecha_firma_iniciado_por' => $request->fecha_firma_iniciado_por,
             'firma_servicio_tecnico_id' => $request->firma_servicios_tecnicos,
@@ -287,6 +294,7 @@ class SolicitudController extends Controller
         ]);
 
 
+
         // == Relaciones ==
 
         # Ensayos de Referencias
@@ -416,7 +424,7 @@ class SolicitudController extends Controller
         $solicitud_fractura->producto = $request->producto;
         $solicitud_fractura->estados = $request->estados;
         $solicitud_fractura->concentracion = $request->concentracion;
-        $solicitud_fractura->sistema_fluido_id = $request->sistema_fluido_id;
+        $solicitud_fractura->sistema_fluido_id = $request->sistemas_fluidos;
         $solicitud_fractura->analisis_microbial_id = $request->analisis_microbial_id;
         $solicitud_fractura->agente_sosten_id = $request->agente_sosten_id;
         #$solicitud_fractura->otro_analisis_id = $request->otro_analisis_id;
@@ -424,6 +432,8 @@ class SolicitudController extends Controller
         $solicitud_fractura->ensayo_estabilidad = $request->ensayo_estabilidad == 'on' ? 1 : 0;
         $solicitud_fractura->ensayo_ruptura = $request->ensayo_estabilidad == 'on' ? 1 : 0;
         $solicitud_fractura->comentario = $request->comentario;
+        $solicitud_fractura->base_guar = $request->base_guar;
+        $solicitud_fractura->base_hvfr = $request->base_hvfr;
         $solicitud_fractura->firma_iniciado_por_id = $request->firma_iniciado_por_id;
         $solicitud_fractura->fecha_firma_iniciado_por = $request->fecha_firma_iniciado_por;
         $solicitud_fractura->firma_servicio_tecnico_id = $request->firma_servicio_tecnico_id;
@@ -577,6 +587,9 @@ class SolicitudController extends Controller
             'sistemas_fluidos' => SistemasFluidos::all(),
             'analisis_microbial' => AnalisisMicrobial::all(),
             'agente_sosten' => AgenteSosten::all(),
+            'sistemas_fluidos' => SistemasFluidos::where('activo', 1)->get(),
+            'analisis_microbial' => AnalisisMicrobial::where('activo', 1)->get(),
+            'agente_sosten' => AgenteSosten::where('activo', 1)->get(),
             'otros_analisis' => OtrosAnalisis::all(),
             'aditivos' => Aditivo::all(),
             'users' => User::all(),
@@ -609,6 +622,7 @@ class SolicitudController extends Controller
             'tipo_requerimiento_cemento' => TipoRequerimientoCemento::all(),
             'tipo_trabajos' => TipoTrabajoCemento::all(),
             'tipo_cementacion' => TipoCementacion::all(),
+            'tipo_lodo' => TipoLodo::all(),
             'mud_company' => MudCompany::all(),
             'equipos' => Equipos::all(),
             //'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
@@ -659,8 +673,16 @@ class SolicitudController extends Controller
     public function update_lechada(Request $request)
     {
         $aditivos_request = $request->aditivos;
-        $id_aditivos = array_column($aditivos_request, 'id');
 
+        if (is_array($aditivos_request)) {
+            $id_aditivos = array_column($aditivos_request, 'id');
+        } else {
+            $id_aditivos = []; // O maneja el caso en que no se envían aditivos
+        }
+        # Aca puse un if por un error que tiro previamente
+        # $aditivos_request = $request->aditivos;
+        # $id_aditivos = array_column($aditivos_request, 'id');
+        
         # Validamos los datos del encabezado general
         $this->validate($request, [
             'cliente_lechada' => 'required',
@@ -702,6 +724,7 @@ class SolicitudController extends Controller
         $solicitud_lechada->casing_od = $request->casing_od;
         $solicitud_lechada->densidad_lodo = $request->densidad_lodo;
         $solicitud_lechada->tipo_lodo = $request->tipo_lodo;
+        $solicitud_lechada->mud_company_id = $request->mud_company;
         $solicitud_lechada->profundidad_pozo_md = $request->profundidad_pozo_md;
         $solicitud_lechada->profundidad_pozo_tvd = $request->profundidad_pozo_tvd;
         $solicitud_lechada->base_md = $request->base_md;
