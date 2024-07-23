@@ -242,10 +242,6 @@ class SolicitudController extends Controller
             'tipo_requerimiento_lechada' => 'required',
             'tipo_trabajo_lechada' => 'required',
             'tipo_cementacion_lechada' => 'required',
-            'ensayo_requerido_principal' => 'required',
-            'ensayo_requerido_bullheading' => 'required',
-            'ensayo_requerido_tapon' => 'required',
-            'ensayo_requerido_relleno' => 'required',
         ]);
 
         # Solicitud General

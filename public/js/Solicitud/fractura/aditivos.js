@@ -1,14 +1,14 @@
-const container_formulaciones_tentativas = document.getElementById(
-    "container_formulaciones_tentativas"
+const container_formulaciones_tentativas_fractura = document.getElementById(
+    "container_formulaciones_tentativas_fractura"
   );
-  const btnAddFormulacion = document.getElementById("btnAddFormulacion");
-  let aux_aditivo = 0;
+  const btnAddFormulacionFractura = document.getElementById("btnAddFormulacionFractura");
+  let aux_aditivo_fractura = 0;
   
   /**
    * Crea las formulaciones para agregar los lotes, aditivos y/o también la concentración
    */
   
-  btnAddFormulacion.addEventListener("click", (e) => {
+  btnAddFormulacionFractura.addEventListener("click", (e) => {
     e.preventDefault();
     let flex, button, div, input;
   
@@ -27,14 +27,14 @@ const container_formulaciones_tentativas = document.getElementById(
     // Lote
     input = el(
       "input.form-control text-xs rounded-l-none p-2 col-span-3 md:col-span-1",
-      { placeholder: "Lote", name: `aditivos[${aux_aditivo}][lote]` }
+      { placeholder: "Lote", name: `aditivos[${aux_aditivo_fractura}][lote]` }
     );
     mount(div, input);
   
     // Aditivo
     input = el(
       "input.form-control text-xs rounded-l-none p-2 col-span-3 md:col-span-1",
-      { placeholder: "Aditivo", name: `aditivos[${aux_aditivo}][aditivo]` }
+      { placeholder: "Aditivo", name: `aditivos[${aux_aditivo_fractura}][aditivo]` }
     );
     mount(div, input);
   
@@ -43,14 +43,14 @@ const container_formulaciones_tentativas = document.getElementById(
       "input.form-control text-xs rounded-l-none p-2 col-span-3 md:col-span-1",
       {
         placeholder: "Concentración",
-        name: `aditivos[${aux_aditivo}][concentracion]`,
+        name: `aditivos[${aux_aditivo_fractura}][concentracion]`,
       }
     );
     mount(div, input);
   
     mount(flex, button);
     mount(flex, div);
-    mount(container_formulaciones_tentativas, flex);
+    mount(container_formulaciones_tentativas_fractura, flex);
   
-    aux_aditivo++;
+    aux_aditivo_fractura++;
   });
