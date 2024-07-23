@@ -611,13 +611,14 @@ class SolicitudController extends Controller
                 if ($valor !== "sd") {
                     // Convierto $valor a integer para que lo acepte la base de datos
                     $ensayo_id = (int) $valor;
-
-                    // Insertar en rel_ensayos_referencia_solicitud
-                    RelEnsayoReferenciaSolicitud::create([
-                        'ensayo_id' => $ensayo_id,
-                        'solicitud_id' => $solicitud->id
-                    ]);
-                } else {
+                    if($ensayo_id>0){
+                        // Insertar en rel_ensayos_referencia_solicitud
+                        RelEnsayoReferenciaSolicitud::create([
+                            'ensayo_id' => $ensayo_id,
+                            'solicitud_id' => $solicitud->id
+                        ]);
+                    }
+                    } else {
                     // Si encontramos "sd", insertamos el comentario correspondiente
                     if ($index_comentario < count($comentarios_lodo)) {
                         $comentario = $comentarios_lodo[$index_comentario];
