@@ -308,6 +308,42 @@ class SolicitudController extends Controller
             'usuario_carga' => auth()->user()->id
 
         ]);
+        #Ensayos de referencia (Usa la misma tabla que lechada y fractura, asique usar SolicitudGeneral)
+        $ensayos_ref = $request->ensayos_ref;
+        $comentarios = $request->comentarios;
+
+        if ($ensayos_ref && count($ensayos_ref) > 0) {
+            $total_ensayos = count($ensayos_ref);
+            $index_comentario = 0; // Inicializamos el índice para los comentarios
+
+            foreach ($ensayos_ref as $i => $valor) {
+                if ($valor !== "sd") {
+                    // Convierto $valor a integer para que lo acepte la base de datos
+                    $ensayo_id = (int) $valor;
+
+                    // Insertar en rel_ensayos_referencia_solicitud
+                    RelEnsayoReferenciaSolicitud::create([
+                        'ensayo_id' => $ensayo_id,
+                        'solicitud_id' => $solicitud->id
+                    ]);
+                } else {
+                    // Si encontramos "sd", insertamos el comentario correspondiente
+                    if ($index_comentario < count($comentarios)) {
+                        $comentario = $comentarios[$index_comentario];
+
+                        // Insertar en rel_ensayos_comentarios_solicitud
+                        RelEnsayoComentarioSolicitud::create([
+                            'comentario_ensayo' => $comentario,
+                            'solicitud_id' => $solicitud->id
+                        ]);
+
+                        $index_comentario++; // Avanzamos al siguiente comentario
+                    }
+                }
+            }
+        }
+
+
 
 
 
@@ -469,6 +505,9 @@ class SolicitudController extends Controller
         $solicitud_fractura->save();
 
         $aditivos_bd = RelAditivosSolicitudFractura::where('solicitud_fractura_id', $solicitud_fractura->id)->get();
+         
+
+
 
         # Formulaciones Tentativas (Actualizar)
         if ($request->aditivos) {
@@ -689,6 +728,7 @@ class SolicitudController extends Controller
             'servicios_fractura' => ServiciosFractura::all(),
             'distrito' => Distrito::all(),
             'estados' => Estados::all(),
+            
             // 'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
         return view('solicitud.components.fractura.show', $data);
@@ -698,8 +738,13 @@ class SolicitudController extends Controller
     {
 
         $data = [
+            'ensayos_referencia' => Ensayo::leftJoin('rel_ensayo_referencia_solicitud', 'ensayos.id', '=', 'rel_ensayo_referencia_solicitud.ensayo_id')
+            ->where('rel_ensayo_referencia_solicitud.solicitud_id', $solicitud_id)
+            ->get(['ensayos.*', 'rel_ensayo_referencia_solicitud.*']),
+            'ensayos' => Ensayo::where('estado', 1)->get(),
             'solicitud' => Solicitud::find($solicitud_id),
             'ensayos_referencia' => RelEnsayoReferenciaSolicitud::where('solicitud_id', $solicitud_id)->get(),
+            'comentarios' => RelEnsayoComentarioSolicitud::where('solicitud_id', $solicitud_id)->get(),
             's_l' => SolicitudLechada::where('solicitud_id', $solicitud_id)->get(),
             'sistemas_fluidos' => SistemasFluidos::all(),
             'analisis_microbial' => AnalisisMicrobial::all(),

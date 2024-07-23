@@ -35,7 +35,7 @@
     }
 </style>
 <div id="container_formulaciones_tentativas_delete"></div>
-<div id="container_formulaciones_tentativas">
+<div id="container_formulaciones_tentativas_fractura">
     @php
         $inc = 0;
     @endphp
@@ -124,7 +124,7 @@
         e.parentElement.parentElement.parentElement.remove()
     }
     const btnAddFormulacion = document.getElementById('btnAddFormulacion');
-    let aux = 0;
+    let aux_fractura = 0;
     btnAddFormulacion.addEventListener('click', e => {
         e.preventDefault();
         container_formulaciones_new.innerHTML +=`
@@ -134,9 +134,9 @@
                 <button class="bg-red-700 text-white rounded-md font-semibold px-3" onclick="btnDeleteFormulacion(this.parentElement.parentElement.parentElement.remove())">Eliminar</button>
             </div>
             <input type="text" class="form-control text-xs rounded-l-none p-2 col-span-3 md:col-span-1"
-                placeholder="Lote" name="formulacion_new[${aux}][lote]">
-            <input type="text" class="form-control text-xs p-2 col-span-3 md:col-span-1" placeholder="Aditivo" name="formulacion_new[${aux}][aditivo]">
-            <input type="text" class="form-control text-xs p-2 col-span-3 md:col-span-1" placeholder="Concentración" name="formulacion_new[${aux}][concentracion]">
+                placeholder="Lote" name="formulacion_new[${aux_fractura}][lote]">
+            <input type="text" class="form-control text-xs p-2 col-span-3 md:col-span-1" placeholder="Aditivo" name="formulacion_new[${aux_fractura}][aditivo]">
+            <input type="text" class="form-control text-xs p-2 col-span-3 md:col-span-1" placeholder="Concentración" name="formulacion_new[${aux_fractura}][concentracion]">
         </div>
     </div>`
     });
