@@ -426,13 +426,12 @@
                         @endforeach
                     </select>
                 </div>
-                
+
                 <div class="col-xs-12 col-md-3 my-2">
                     <label for="analisis_microbial"
-                        class="text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Análisis
+                        class="text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2" >Análisis
                         de Agua y Ensayo Microbial</label>
-                    <select name="analisis_microbial" id="analisis_microbial" class="text-sm inp_edit">
-                        <option value="" selected disabled>Seleccione una opción</option>
+                    <select name="analisis_microbial" id="analisis_microbial" class="text-sm inp_edit" data-search="false" multiple="true">
                         @foreach ($analisis_microbial as $e)
                             <option value="{{ $e->id }}">{{ $e->nombre }}</option>
                         @endforeach
@@ -443,8 +442,7 @@
                     <label for="agente_sosten"
                         class="text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Agente
                         de Sostén</label>
-                    <select name="agente_sosten" id="agente_sosten" class="text-sm inp_edit">
-                        <option value="" selected disabled>Seleccione una opción</option>
+                    <select name="agente_sosten" id="agente_sosten" class="text-sm inp_edit" data-search="false" multiple="true">
                         @foreach ($agente_sosten as $e)
                             <option value="{{ $e->id }}">{{ $e->nombre }}</option>
                         @endforeach

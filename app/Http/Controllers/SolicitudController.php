@@ -14,6 +14,8 @@ use App\Models\OtrosAnalisis;
 use App\Models\RelAditivoSolicitudLechada;
 use App\Models\RelAditivosSolicitudFractura;
 use App\Models\RelAditivoSolicitudLodo;
+use App\Models\RelAnalisisMicrobialFractura;
+use App\Models\RelAgenteSostenFractura;
 use App\Models\RelEnsayoReferenciaSolicitud;
 use App\Models\RelFormulacionTentativa;
 use App\Models\SistemasFluidos;
@@ -154,8 +156,8 @@ class SolicitudController extends Controller
             //'estados' => $request->estados, --> vieja configuracion estados
             'concentracion' => $request->concentracion,
             'sistema_fluido_id' => $request->sistemas_fluidos ?? null,
-            'analisis_microbial_id' => $request->analisis_microbial ?? null,
-            'agente_sosten_id' => $request->agente_sosten ?? null,
+            //'analisis_microbial_id' => $request->analisis_microbial ?? null,
+            //'agente_sosten_id' => $request->agente_sosten ?? null,
             //'sistema_fluido_id' => $request->sistema_fluido, --> idem estados
             //'analisis_microbial_id' => $request->analisis_microbial, --> idem estados
             //'agente_sosten_id' => $request->agente_sosten,--> idem estados
@@ -186,6 +188,27 @@ class SolicitudController extends Controller
                     'lote' => $formulacion['lote'],
                     'aditivo' => $formulacion['aditivo'],
                     'concentracion' => $formulacion['concentracion'],
+                ]);
+            }
+        }
+
+        # Ensayos requeridos
+        if ($request->analisis_microbial) {
+            $analisis_separados = explode(',', $request->analisis_microbial);
+            foreach ($analisis_separados as $analisis) {
+                RelAnalisisMicrobialFractura::create([
+                    'solicitud_id' => $solicitud_fractura->id, // Cambiar el nombre de la columna  //Nombre seria id_solicitud
+                    'id_analisis' => $analisis
+                ]);
+            }
+        }
+
+        if ($request->agente_sosten) {
+            $agentes_separados = explode(',', $request->agente_sosten);
+            foreach ($agentes_separados as $agente) {
+                RelAgenteSostenFractura::create([
+                    'solicitud_id' => $solicitud_fractura->id,
+                    'id_agente' => $agente
                 ]);
             }
         }
@@ -484,8 +507,8 @@ class SolicitudController extends Controller
         $solicitud_fractura->estados = $request->estados;
         $solicitud_fractura->concentracion = $request->concentracion;
         $solicitud_fractura->sistema_fluido_id = $request->sistemas_fluidos;
-        $solicitud_fractura->analisis_microbial_id = $request->analisis_microbial_id;
-        $solicitud_fractura->agente_sosten_id = $request->agente_sosten_id;
+        //$solicitud_fractura->analisis_microbial_id = $request->analisis_microbial_id;
+        //$solicitud_fractura->agente_sosten_id = $request->agente_sosten_id;
         #$solicitud_fractura->otro_analisis_id = $request->otro_analisis_id;
         $solicitud_fractura->otros_analisis = $request->otros_analisis;
         $solicitud_fractura->ensayo_estabilidad = $request->ensayo_estabilidad == 'on' ? 1 : 0;
