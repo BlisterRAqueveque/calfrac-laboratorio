@@ -14,4 +14,10 @@ class AnalisisMicrobial extends Model
         'nombre',
         'activo',
     ];
+
+    // Relación con RelAnalisisMicrobialFractura
+    public function referenciasAnalisis()
+    {
+        return $this->hasMany(RelAnalisisMicrobialFractura::class, 'id_analisis');
+    }
 }

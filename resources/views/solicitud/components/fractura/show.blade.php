@@ -656,7 +656,42 @@
                 <p class="m-0 mt-3 font-bold text-lg tracking-wide">Análisis Requerido</p>
 
                 <div class="row mt-3"> <!-- Análisis Requerido -->
-                    <div class="col-xs-12 col-md-3 my-2">
+
+                    <div>
+                        <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2" for="analisis_id">Analisis de Agua Microbial:</label>
+                        <div class="grid md:grid-cols-5 gap-3 mt-4 relative">
+                            @foreach ($analisis_referencia as $a_r)
+                                {{--<label class="text-sm text-gray-700 font-semibold tracking-wide mb-2" for="analisis_id_{{ $loop->index }}"></label>--}}
+                                <select name="analisis_id[]" class="form-control text-sm p-2" disabled >
+                                    @foreach ($analisis_microbial as $analisis)
+                                        <option value="{{ $analisis->id }}" {{ $analisis->id == $a_r->id_analisis ? 'selected' : '' }}> 
+                                            {{ $analisis->nombre }}
+                                        </option>
+                                        <br>
+                                    @endforeach
+                                </select>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <div>
+                        <br>
+                        <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2" for="agente_id">Agente Sosten:</label>
+                        <div class="grid md:grid-cols-5 gap-3 mt-4 relative">
+                            @foreach ($agente_referencia as $agente_r)
+                                {{--<label class="text-sm text-gray-700 font-semibold tracking-wide mb-2" for="analisis_id_{{ $loop->index }}"></label>--}}
+                                <select name="agente_id[]" class="form-control text-sm p-2" disabled >
+                                    @foreach ($agente_sosten as $agente)
+                                        <option value="{{ $agente->id }}" {{ $agente->id == $agente_r->id_agente ? 'selected' : '' }}> 
+                                            {{ $agente->nombre }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6 my-2">
+                        <br>
                         <label for="sistemas_fluidos"
                             class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Compatibilidad
                             con sistemas de fluidos</label>
@@ -668,80 +703,9 @@
                             @endforeach
                         </select>
                     </div>
-                    
-                    <div class="col-xs-12 col-md-3 my-2">
-                        <label for="analisis_microbial"
-                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Análisis
-                            de Agua y Ensayo Microbial</label>
-                        <select name="analisis_microbial" id="analisis_microbial" class="text-sm inp_edit" disabled>
-                            <option value=""selected disabled {{ is_null($solicitud_fractura[0]->analisis_microbial_id) ? 'selected' : '' }}>Seleccione una opción</option>
-                            @foreach ($analisis_microbial as $e)
-                                <option value="{{ $e->id }}"
-                                    {{ $e->id == $solicitud_fractura[0]->analisis_microbial_id ? 'selected' : '' }}>{{ $e->nombre }}</option>
-                            @endforeach
-                        </select>
-                    </div>
 
-                    <div class="col-xs-12 col-md-3 my-2">
-                        <label for="agente_sosten"
-                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Agente
-                            de Sostén</label>
-                        <select name="agente_sosten" id="agente_sosten" class="text-sm inp_edit" disabled>
-                            <option value="" selected disabled {{ is_null($solicitud_fractura[0]->agente_sosten_id) ? 'selected' : '' }}>Seleccione una opción</option>
-                            @foreach ($agente_sosten as $e)
-                                <option value="{{ $e->id }}"
-                                    {{ $e->id == $solicitud_fractura[0]->agente_sosten_id ? 'selected' : '' }}>{{ $e->nombre }}</option>                    
-                            @endforeach
-                        </select>
-                    </div>
-                    {{--
-                    Vieja configuracion
-                    <div class="col-xs-12 col-md-3 my-2">
-                        <label for="sistemas_fluidos"
-                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Compatibilidad
-                            con sistemas de
-                            fluidos</label>
-                        <select name="sistemas_fluidos" id="sistemas_fluidos" class="text-sm inp_edit" disabled>
-                            @foreach ($sistemas_fluidos as $tipo)
-                                <option value="{{ $tipo->id }}"
-                                    {{ $tipo->id == $solicitud_fractura[0]->sistema_fuido_id? 'selected' : '' }}>{{ $tipo->nombre }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="col-xs-12 col-md-3 my-2">
-                        <label for="analisis_microbial"
-                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Análisis
-                            de Agua y Ensayo Microbial</label>
-                        <select name="analisis_microbial" id="analisis_microbial" class="text-sm inp_edit"  disabled >
-                            @foreach ($analisis_microbial as $e)
-                                @if ($e->id == $solicitud_fractura[0]->analisis_microbial_id)
-                                    <option value="{{ $e->id }}" selected>{{ $e->nombre }}</option>
-                                @else
-                                    <option value="{{ $e->id }}">{{ $e->nombre }}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="col-xs-12 col-md-3 my-2">
-                        <label for="agente_sosten"
-                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Agente
-                            de
-                            Sostén</label>
-                        <select name="agente_sosten" id="agente_sosten" class="text-sm inp_edit" disabled>
-                            @foreach ($agente_sosten as $e)
-                                @if ($e->id == $solicitud_fractura[0]->agente_sosten_id)
-                                    <option value="{{ $e->id }}" selected>{{ $e->nombre }}</option>
-                                @else
-                                    <option value="{{ $e->id }}">{{ $e->nombre }}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                    </div>
-                    --}}
-
-                    <div class="col-xs-12 col-md-3 my-2">
+                    <div class="col-xs-12 col-md-6 my-2">
+                        <br>
                         <label for="otros_analisis"
                             class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Otros
                             Análisis</label>
@@ -775,7 +739,7 @@
                                 Ruptura</label>
                         </div>
                     </div>
-                    
+
                 
                 </div> 
                 <hr class="my-4">
