@@ -35,6 +35,8 @@
                             <th class="p-3">Estado</th>
                             <th class="p-3">Fecha de Carga</th>
                             <th class="p-3">Ultima Edición</th>
+                            <th class="p-3">Opciones</th>
+
                         </thead>
                     </table>         
                 </div>
@@ -52,92 +54,6 @@
     
    
 
-    <script src="{{ asset('js/equipos/equipos.js') }}"></script>
-    
-     <!-- Desactivar el equipo -->
-     <script>
-        const btnEliminarEquipo = document.getElementById('botonEliminar');     
-    
-        btnEliminarEquipo.addEventListener('click', (e) => {
-        e.preventDefault();
-    
-        const form = document.getElementById('form_deshabilitar_equipo');
-        const formData = new FormData(form); // Create FormData from the form
-        
-            fetch(`${route('equipos.deshabilitar')}`, {
-                method: 'POST',
-                body: formData,
-                });
-        });
-        
-       /* confirmAlert('¿Está seguro de eliminar al equipo?', '', 1, 'Desactivar')
-            .then((confirmed) => {
-            if (confirmed) {
-                loadingAlert('Desactivando equipo', 'Por favor espere');
-    
-                fetch(`${route('equipos.deshabilitar')}`, {
-                method: 'POST',
-                body: formData,
-                })
-                .then((response) => response.json())
-                .then((data) => {
-                    Swal.close();
-                    successAlert('Equipo eliminado!', 'El Equipo ha sido eliminado del sistema')
-                    .then((confirmed) => {
-                        if (confirmed) {
-                        window.location.reload();
-                        }
-                    });
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
-            }
-            });
-        });*/
-    
-    </script>
-    <!-- Habilitar el equipo -->
-    <script>
-        const btnHabilitarEquipo = document.getElementById('botonHabilitar');     
-    
-        btnHabilitarEquipo.addEventListener('click', (e) => {
-        e.preventDefault();
-    
-        const form = document.getElementById('form_habilitar_equipo'); 
-        const formData = new FormData(form); // Create FormData from the form
-        fetch(`${route('equipos.habilitar')}`, {
-                method: 'POST',
-                body: formData,
-                });
-            });
-       /* confirmAlert('¿Está seguro de habilitar al equipo?', '', 1, 'Desactivar')
-            .then((confirmed) => {
-            if (confirmed) {
-                loadingAlert('Habilitando equipo', 'Por favor espere');
-    
-                fetch(`${route('equipos.habilitar')}`, {
-                method: 'POST',
-                body: formData,
-                })
-                .then((response) => response.json())
-                .then((data) => {
-                    Swal.close();
-                    successAlert('Equipo habilitado!', 'El Equipo ha sido habilitado del sistema')
-                    .then((confirmed) => {
-                        if (confirmed) {
-                        window.location.reload();
-                        }
-                    });
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
-            }
-            });
-        });*/
-    
-    </script>
     
     <!--Validar creacion de equipo 
     <script>
@@ -161,6 +77,7 @@
         $(document).ready(function() {
             $('#tabla_equipo').DataTable({
             processing:true,
+            responsive:true,
             serverSide: true,
             ajax: "{{ route('equipos.filtro') }}",
             columns: [
@@ -169,14 +86,93 @@
                 { data: 'usuario' }, // Mostrar nombre completo del usuario
                 { data: 'estado' },
                 { data: 'created_at' },
-                { data: 'updated_at' }
+                { data: 'updated_at' },
+                { 
+                data: null,
+                render: function(data, type, row) {
+                    return `
+                        <button class="btn-editar" data-id="${row.id}" data-nombre="${row.nombre}">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                        class="w-4 h-4">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                                    </svg>
+                        </button>
+                        <button class="btn-habilitar" data-id="${row.id}" data-nombre="${row.nombre}">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" 
+                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                                                      </svg>
+                        </button>
+                        <button class="btn-deshabilitar" data-id="${row.id}" data-nombre="${row.nombre}">
+                            
+                                                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" 
+                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                                                      </svg>
+                        </button>
+                    `;
+                }
+            }
         ],
             language: {
                 "url": "https://cdn.datatables.net/plug-ins/2.0.2/i18n/es-ES.json"
             }
 
             });
-    });
+
+            // Evento para abrir modal de editar
+        $('#tabla_equipo').on('click', '.btn-editar', function() {
+            let equipoId = $(this).data('id');
+            let equipoNombre = $(this).data('nombre');
+            // Lógica para abrir el modal de editar con el ID de equipoId
+            abrirModalEditar(equipoId,equipoNombre);
+        });
+
+        // Evento para abrir modal de habilitar
+        $('#tabla_equipo').on('click', '.btn-habilitar', function() {
+            let equipoId = $(this).data('id');
+            let equipoNombre = $(this).data('nombre');
+            // Lógica para abrir el modal de habilitar con el ID de equipoId
+            abrirModalHabilitar(equipoId,equipoNombre);
+        });
+
+        // Evento para abrir modal de deshabilitar
+        $('#tabla_equipo').on('click', '.btn-deshabilitar', function() {
+            let equipoId = $(this).data('id');
+            let equipoNombre = $(this).data('nombre');
+            // Lógica para abrir el modal de deshabilitar con el ID de equipoId
+            abrirModalDeshabilitar(equipoId,equipoNombre);
+        });
+
+        // Función para abrir el modal de editar
+        function abrirModalEditar(id,nombre) {
+             // Asigna el ID del equipo al input oculto en el modal
+            $('#equipo_id').val(id);
+            $('#edit_equipo').val(nombre);
+            // Abre el modal de deshabilitar
+            $('#modalEditarEquipo').modal('show');
+        }
+
+        // Función para abrir el modal de habilitar
+        function abrirModalHabilitar(id,nombre) {
+              // Asigna el ID del equipo al input oculto en el modal
+            $('#equipo3_id').val(id);
+            $('#habilitar_equipo').val(nombre);
+            // Abre el modal de deshabilitar
+            $('#modalHabilitarEquipo').modal('show');
+        }
+
+        // Función para abrir el modal de deshabilitar
+        function abrirModalDeshabilitar(id,nombre) {
+             // Asigna el ID del equipo al input oculto en el modal
+            $('#equipo2_id').val(id);
+            $('#delete_equipo').val(nombre);
+            // Abre el modal de deshabilitar
+            $('#modalEliminarEquipo').modal('show');
+        }
+    }); 
     </script>
    
 @endsection

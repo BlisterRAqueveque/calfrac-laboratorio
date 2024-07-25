@@ -26,6 +26,11 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.0/css/dataTables.dataTables.css" />
   
     <script src="https://cdn.datatables.net/2.1.0/js/dataTables.js"></script>
+
+    <!-- Botones de DataTables -->
+    <script src="https://cdn.datatables.net/buttons/3.1.0/js/buttons.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.1.0/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.1.0/js/buttons.print.min.js"></script>
     
 </head>
 
