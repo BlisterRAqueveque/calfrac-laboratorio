@@ -14,4 +14,8 @@ class AgenteSosten extends Model
         'nombre',
         'activo',
     ];
+    public function referenciasAgente()
+    {
+        return $this->hasMany(RelAgenteSostenFractura::class, 'id_agente');
+    }
 }

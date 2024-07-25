@@ -737,12 +737,13 @@ class SolicitudController extends Controller
             'analisis_referencia' => AnalisisMicrobial::leftJoin('rel_analisis_microbial_fractura', 'analisis_microbial.id', '=', 'rel_analisis_microbial_fractura.id_analisis')
             ->where('rel_analisis_microbial_fractura.solicitud_id', $solicitud_id)
             ->get(['analisis_microbial.*', 'rel_analisis_microbial_fractura.*']),
+            'agente_referencia' => AgenteSosten::leftJoin('rel_agente_sosten_fractura', 'agente_sosten.id', '=', 'rel_agente_sosten_fractura.id_agente')
+            ->where('rel_agente_sosten_fractura.solicitud_id', $solicitud_id)
+            ->get(['agente_sosten.*', 'rel_agente_sosten_fractura.*']),
             'solicitud' => Solicitud::find($solicitud_id),
             'solicitud_fractura' => SolicitudFractura::where('solicitud_id', $solicitud_id)->get(),
             'sistemas_fluidos' => SistemasFluidos::all(),
             //'analisis_microbial_fractura' => RelAnalisisMicrobialFractura::where('solicitud_id', $solicitud_id)->get(),
-            'analisis_microbial' => AnalisisMicrobial::all(),
-            'agente_sosten' => AgenteSosten::all(),
             'sistemas_fluidos' => SistemasFluidos::where('activo', 1)->get(),
             'analisis_microbial' => AnalisisMicrobial::where('activo', 1)->get(),
             'agente_sosten' => AgenteSosten::where('activo', 1)->get(),
