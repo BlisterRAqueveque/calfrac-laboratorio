@@ -24,82 +24,20 @@
             </div>
 
         <div class="card-body dark:tab_bg p-0">
-            <div class="row p-3">
-                <div class="col-xs-12 col-md-4 my-2">
-                    <input type="text" class="form-control sz p-2 bg-gray-50 border-none dark:inp_bg_2"
-                        placeholder="Buscar por equipo">
-                </div>
-                <div class="col-xs-12 col-md-4 my-2">
-                    <input type="date" class="form-control sz p-2 dark:inp_bg_2 bg-gray-50  dark:text-gray-400 border-none">
-                </div>
-                <div class="col-xs-12 col-md-4 my-2">
-                    <select class="form-select sz p-2 dark:inp_bg_2 dark:text-gray-400 bg-gray-50 border-none">
-                        <option value="">-- Todo --</option>
-                    </select>
-                </div>
-            </div>
             <div>
 
                 <div class="text-gray-500 text-xs xl:text-sm">
-                    <table class="w-full" id='tabla'>
+                    <table class="w-full>" id="tabla_equipo">
                         <thead class="dark:card-bg-head" style="background-color: #f3f9f5">
                             <th class="p-3">#ID</th>
                             <th class="p-3">Equipo</th>
                             <th class="p-3">Usuario Carga</th>
-                            <th class="p-3">Fecha de Carga</th>
                             <th class="p-3">Estado</th>
+                            <th class="p-3">Fecha de Carga</th>
+                            <th class="p-3">Ultima Edición</th>
                         </thead>
-            
-                        <tbody>
-                            @foreach ($equipos as $e)
-                                <tr class="row-container">
-                                    <td class="p-3">{{$e->id}}</td>
-                                    <td class="p-3">
-                                        <div class="flex justify-between">
-                                            {{ $e->nombre }}
-                                            <div class="flex items-center gap-3">
-                                                <button data-bs-toggle="modal" data-bs-target="#modalEditarEquipo" onclick="editarEquipo({{ $e }})">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                        class="w-4 h-4">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                                                    </svg>
-                                                </button>
-                                                <button data-bs-toggle="modal" data-bs-target="#modalEliminarEquipo" id="botonEliminar" onclick="deleteEquipo({{ $e }})">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" 
-                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                                                      </svg>
-                                                      
-                                                </button>
-                                                <button data-bs-toggle="modal" data-bs-target="#modalHabilitarEquipo" id="botonHabilitar" onclick="habilitarEquipo({{ $e }})">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" 
-                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                                                      </svg>
-                                                      
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="p-3">{{ $e->user->nombre }} {{ $e->user->apellido }}</td>
-                                    <td class="p-3">{{ $e->created_at->format('d/m/Y') }} a las
-                                        {{ $e->created_at->format('H:i') }} hs</td>
-                           
-                                        <td class="p-6">
-                                            <div class="flex items-center">  @if ($e->estado === 1)
-                                                <p class="mr-2">Activo</p>  @else
-                                                <p class="mr-2">Inactivo</p>  @endif
-                                           
-                                          </td>                                       
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    <div class="px-4 pt-2 pb-1 border-t">
-                        {{$equipos->links()}}
-                    </div>
+                    </table>         
+                </div>
             </div>
         </div>
 
@@ -112,8 +50,8 @@
     @include('equipos.modal.modal_delete_equipo')
     @include('equipos.modal.modal_habilitar_equipo')
     
-    
-    
+   
+
     <script src="{{ asset('js/equipos/equipos.js') }}"></script>
     
      <!-- Desactivar el equipo -->
@@ -213,6 +151,34 @@
 
         })
     </script -->
+
+    <script>
+                
+        let tabla = document.getElementById("tabla_equipo");
+
+        //let table = new DataTable('#tabla_equipo')
+
+        $(document).ready(function() {
+            $('#tabla_equipo').DataTable({
+            processing:true,
+            serverSide: true,
+            ajax: "{{ route('equipos.filtro') }}",
+            columns: [
+                { data: 'id' },
+                { data: 'nombre' },
+                { data: 'usuario' }, // Mostrar nombre completo del usuario
+                { data: 'estado' },
+                { data: 'created_at' },
+                { data: 'updated_at' }
+        ],
+            language: {
+                "url": "https://cdn.datatables.net/plug-ins/2.0.2/i18n/es-ES.json"
+            }
+
+            });
+    });
+    </script>
+   
 @endsection
 
 

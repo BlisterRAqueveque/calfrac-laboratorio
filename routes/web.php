@@ -126,6 +126,7 @@ Route::post('/aditivo/habilitar', [AditivoController::class, 'habilitar'])->name
 
 #Equipos
 Route::get('/equipos', [EquiposController::class, 'index'])->name('equipos');
+Route::get('/equipos/filtro', [EquiposController::class, 'getEquipos'])->name('equipos.filtro');;
 Route::post('/equipo', [EquiposController::class, 'store'])->name('equipos.store');
 Route::post('/equipo/update', [EquiposController::class, 'update'])->name('equipos.update');
 Route::post('/equipo/deshabilitar', [EquiposController::class, 'deshabilitar'])->name('equipos.deshabilitar');

@@ -16,6 +16,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "datatables.net-dt": "^2.1.2",
         "echarts": "^5.5.0",
         "sweetalert2": "^11.10.6",
         "virtual-select-plugin": "^1.0.42"

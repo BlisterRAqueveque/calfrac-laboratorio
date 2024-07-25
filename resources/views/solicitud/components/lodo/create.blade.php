@@ -125,7 +125,7 @@
                     <div class="col-xs-12 col-md-3 my-2">
                         <label for="temperatura" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Temperatura °C
                             <small>(*)</small></label>
-                        <input type="text" placeholder="Ingrese la temperatura"
+                        <input type="number" placeholder="Ingrese la temperatura"
                             class="form-control sz placeholder:text-gray-300 placeholder:font-light" name="temperatura"
                             id="temperatura">
                         @error('temperatura')
@@ -137,11 +137,11 @@
                         <label for="profundidad" class="text-sm text-gray-700 font-semibold tracking-wide">Profundidad
                             <small>(*)(MD/TVD)(m)</small></label>
                     <div class="col-xs-12 col-md-9 my-2 d-flex no-bot-padding ">
-                        <input type="text" placeholder="MD"
+                        <input type="number" placeholder="MD"
                             class="form-control sz placeholder:text-gray-300 placeholder:font-light" name="profundidad_md"
                             id="profundidad_md" style="margin-right: 10px;">
                         
-                        <input type="text" placeholder="TVD"
+                        <input type="number" placeholder="TVD"
                             class="form-control sz placeholder:text-gray-300 placeholder:font-light" name="profundidad_tvd"
                             id="profundidad_tvd" style="margin-left: 10px;">
                     </div>
@@ -212,7 +212,7 @@
                     <div class="col-span-2 xl:col-span-1">
                         <label for="vol_colchon" class="text-sm text-gray-700 font-semibold tracking-wide">Volumen de Colchón
                             <small>(bbl)</small></label>
-                        <input type="text" placeholder="Ingrese el volumen de Colchón"
+                        <input type="number" placeholder="Ingrese el volumen de Colchón"
                             class="form-control sz placeholder:text-gray-300 placeholder:font-light" name="vol_colchon"
                             id="vol_colchon">
                         @error('vol_colchon')
@@ -223,7 +223,7 @@
                     <div class="col-span-2 xl:col-span-1">
                         <label for="densidad_colchon" class="text-sm text-gray-700 font-semibold tracking-wide">Densidad de Colchón
                             <small>(ppg)</small></label>
-                        <input type="text" placeholder="Ingrese la densidad de Colchón"
+                        <input type="number" placeholder="Ingrese la densidad de Colchón"
                             class="form-control sz placeholder:text-gray-300 placeholder:font-light" name="densidad_colchon"
                             id="densidad_colchon">
                         @error('densidad_colchon')
@@ -234,7 +234,7 @@
                     <div class="col-span-2 xl:col-span-1">
                         <label for="tiempo_contacto" class="text-sm text-gray-700 font-semibold tracking-wide">Tiempo de contacto
                             <small>(min)</small></label>
-                        <input type="text" placeholder="Ingrese el tiempo de contacto"
+                        <input type="number" placeholder="Ingrese el tiempo de contacto"
                             class="form-control sz placeholder:text-gray-300 placeholder:font-light" name="tiempo_contacto"
                             id="tiempo_contacto">
                         @error('tiempo_contacto')

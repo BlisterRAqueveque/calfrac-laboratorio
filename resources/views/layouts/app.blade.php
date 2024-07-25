@@ -17,6 +17,16 @@
         @vite('resources/css/bootstrap.min.css')
         @vite('resources/css/app.css')
     <link href="{{ asset('css/sweetalert2.css') }}"></link>
+
+    {{-- CDN jquery --}}
+
+    <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    {{-- CDN DataTables --}}
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.0/css/dataTables.dataTables.css" />
+  
+    <script src="https://cdn.datatables.net/2.1.0/js/dataTables.js"></script>
+    
 </head>
 
 <style>
