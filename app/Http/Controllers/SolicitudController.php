@@ -161,7 +161,7 @@ class SolicitudController extends Controller
             //'sistema_fluido_id' => $request->sistema_fluido, --> idem estados
             //'analisis_microbial_id' => $request->analisis_microbial, --> idem estados
             //'agente_sosten_id' => $request->agente_sosten,--> idem estados
-            #'otro_analisis_id' => $request->otros,
+            //'otro_analisis_id' => $request->otros,
             'otros_analisis' => $request->otros_analisis,
             'ensayo_estabilidad' => $request->ensayo_estabilidad == 'on' ? 1 : 0,
             'ensayo_ruptura' => $request->ensayo_ruptura == 'on' ? 1 : 0,
@@ -197,7 +197,7 @@ class SolicitudController extends Controller
             $analisis_separados = explode(',', $request->analisis_microbial);
             foreach ($analisis_separados as $analisis) {
                 RelAnalisisMicrobialFractura::create([
-                    'solicitud_id' => $solicitud_fractura->id, // Cambiar el nombre de la columna  //Nombre seria id_solicitud
+                    'solicitud_id' => $solicitud->id, 
                     'id_analisis' => $analisis
                 ]);
             }
@@ -207,7 +207,7 @@ class SolicitudController extends Controller
             $agentes_separados = explode(',', $request->agente_sosten);
             foreach ($agentes_separados as $agente) {
                 RelAgenteSostenFractura::create([
-                    'solicitud_id' => $solicitud_fractura->id,
+                    'solicitud_id' => $solicitud->id,
                     'id_agente' => $agente
                 ]);
             }
@@ -734,9 +734,13 @@ class SolicitudController extends Controller
     public function show_fractura($solicitud_id)
     {
         $data = [
+            'analisis_referencia' => AnalisisMicrobial::leftJoin('rel_analisis_microbial_fractura', 'analisis_microbial.id', '=', 'rel_analisis_microbial_fractura.id_analisis')
+            ->where('rel_analisis_microbial_fractura.solicitud_id', $solicitud_id)
+            ->get(['analisis_microbial.*', 'rel_analisis_microbial_fractura.*']),
             'solicitud' => Solicitud::find($solicitud_id),
             'solicitud_fractura' => SolicitudFractura::where('solicitud_id', $solicitud_id)->get(),
             'sistemas_fluidos' => SistemasFluidos::all(),
+            //'analisis_microbial_fractura' => RelAnalisisMicrobialFractura::where('solicitud_id', $solicitud_id)->get(),
             'analisis_microbial' => AnalisisMicrobial::all(),
             'agente_sosten' => AgenteSosten::all(),
             'sistemas_fluidos' => SistemasFluidos::where('activo', 1)->get(),
@@ -751,7 +755,6 @@ class SolicitudController extends Controller
             'servicios_fractura' => ServiciosFractura::all(),
             'distrito' => Distrito::all(),
             'estados' => Estados::all(),
-            
             // 'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
         return view('solicitud.components.fractura.show', $data);

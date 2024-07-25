@@ -668,19 +668,35 @@
                             @endforeach
                         </select>
                     </div>
+
+
                     
+                    
+                    {{--<label class="text-sm text-gray-700 font-semibold tracking-wide mb-2" for="analisis_id">Seleccionados:</label>
+                    <div class="grid md:grid-cols-6 gap-3 mt-4 relative">
+                        @foreach ($analisis_referencia as $a_r)
+                        <div>
+                            <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2" for="analisis_id_{{ $loop->index }}"></label>
+                            <select name="analisis_id[]" class="form-control text-sm p-2"  disabled>
+                                @foreach ($analisis_microbial as $analisis)
+                                    <option value="{{ $analisis->id }}" {{ $analisis->id == $a_r->analisis_id ? 'selected' : '' }}> {{ $analisis->id}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        @endforeach
+                    </div>
                     <div class="col-xs-12 col-md-3 my-2">
                         <label for="analisis_microbial"
                             class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Análisis
                             de Agua y Ensayo Microbial</label>
-                        <select name="analisis_microbial" id="analisis_microbial" class="text-sm inp_edit" disabled>
+                        <select name="analisis_microbial[]" id="analisis_microbial" class="text-sm inp_edit" multiple="true" disabled>
                             <option value=""selected disabled {{ is_null($solicitud_fractura[0]->analisis_microbial_id) ? 'selected' : '' }}>Seleccione una opción</option>
                             @foreach ($analisis_microbial as $e)
                                 <option value="{{ $e->id }}"
                                     {{ $e->id == $solicitud_fractura[0]->analisis_microbial_id ? 'selected' : '' }}>{{ $e->nombre }}</option>
                             @endforeach
                         </select>
-                    </div>
+                    </div>--}}
 
                     <div class="col-xs-12 col-md-3 my-2">
                         <label for="agente_sosten"
@@ -775,7 +791,24 @@
                                 Ruptura</label>
                         </div>
                     </div>
-                    
+                    <div>
+                        <br>
+                        <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2" for="analisis_id">Analisis de Agua Microbial:</label>
+                        <div class="grid md:grid-cols-5 gap-3 mt-4 relative">
+                            @foreach ($analisis_referencia as $a_r)
+                            <div>
+                                {{--<label class="text-sm text-gray-700 font-semibold tracking-wide mb-2" for="analisis_id_{{ $loop->index }}"></label>--}}
+                                <select name="analisis_id[]" class="form-control text-sm p-2" disabled >
+                                    @foreach ($analisis_microbial as $analisis)
+                                        <option value="{{ $analisis->id }}" {{ $analisis->id == $a_r->id_analisis ? 'selected' : '' }}> 
+                                            {{ $analisis->nombre }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
                 
                 </div> 
                 <hr class="my-4">
