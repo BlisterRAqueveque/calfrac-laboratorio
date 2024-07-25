@@ -1095,4 +1095,83 @@ class SolicitudController extends Controller
     {
         return view('emails.user.credential');
     }
+
+    public function mostrarTabla(Request $request){
+        // Obtener el número de registros totales
+        $recordsTotal = Solicitud::count();
+        
+        // Consultar las solicitudes con relaciones
+        $query = Solicitud::with(['user', 'ensayo']); // Ajusta las relaciones según tu modelo
+
+        // Filtros de búsqueda y ordenación
+        if ($request->has('search') && !empty($request->search['value'])) {
+            $query->where(function($q) use ($request) {
+                $q->where('id', 'like', '%' . $request->search['value'] . '%')
+                ->orWhere('tipo', 'like', '%' . $request->search['value'] . '%')
+                ->orWhere('fecha_solicitud', 'like', '%' . $request->search['value'] . '%')
+                ->orWhereHas('user', function($q) use ($request) {
+                    $q->where('nombre', 'like', '%' . $request->search['value'] . '%')
+                        ->orWhere('apellido', 'like', '%' . $request->search['value'] . '%');
+                });
+            });
+        }
+
+        // Ordenación
+        if ($request->has('order')) {
+            $orderColumn = $request->order[0]['column'];
+            $orderDirection = $request->order[0]['dir'];
+            $columns = ['id', 'tipo', 'fecha_solicitud', 'user_id', 'ensayo_asignado_id', 'created_at'];
+            $query->orderBy($columns[$orderColumn], $orderDirection);
+        }
+
+        // Paginación
+        $start = $request->start;
+        $length = $request->length;
+        $data = $query->offset($start)->limit($length)->get();
+
+        // Número de registros filtrados
+        $recordsFiltered = $query->count();
+
+        // Formatear los datos
+        $data = $data->map(function($solicitud) {
+            $tipo = '';
+            $accionesUrl = '';
+            switch ($solicitud->tipo) {
+                case '1':
+                    $tipo = 'Solicitud de Fractura';
+                    $accionesUrl = route('solicitud.fractura.show', $solicitud->id);
+                    break;
+                case '2':
+                    $tipo = 'Solicitud de Lechada';
+                    $accionesUrl = route('solicitud.lechada.show', $solicitud->id);
+                    break;
+                case '3':
+                    $tipo = 'Solicitud de Lodo';
+                    $accionesUrl = route('solicitud.lodo.show', $solicitud->id);
+                    break;
+            }
+
+            $ensayoAsignado = $solicitud->tipo != '1'
+                ? ($solicitud->ensayo_asignado_id ? "{$solicitud->ensayo->tipo}-{$solicitud->ensayo->incrementable}-{$solicitud->ensayo->anio}" : 'Sin ensayo asignado')
+                : 'No Aplica';
+
+            return [
+                'id' => $solicitud->id,
+                'tipo_solicitud' => $tipo,
+                'fecha_solicitud' => $solicitud->fecha_solicitud->format('d/m/Y'),
+                'nombre_solicitante' => $solicitud->user->nombre . ' ' . $solicitud->user->apellido,
+                'ensayo_asignado' => $ensayoAsignado,
+                'fecha_carga' => $solicitud->created_at->format('d/m/Y H:i') . ' h',
+                'acciones' => $accionesUrl
+            ];
+        });
+
+        // Retornar respuesta JSON para DataTables
+        return response()->json([
+            'draw' => intval($request->draw),
+            'recordsTotal' => $recordsTotal,
+            'recordsFiltered' => $recordsFiltered,
+            'data' => $data
+        ]);
+    }
 }
