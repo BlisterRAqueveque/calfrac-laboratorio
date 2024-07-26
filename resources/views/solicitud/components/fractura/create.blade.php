@@ -356,7 +356,7 @@
                 <div class="col-xs-12 col-md-3 my-2">
                     <label for="concentracion"
                         class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Concentración
-                        a Ensayar</label>
+                        a Ensayar (gpt o ppt)</label>
                     <input type="text" placeholder="Ingrese la concentración"
                         class="form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 sz aditivo_extra_inp"
                         name="concentracion" id="concentracion">
