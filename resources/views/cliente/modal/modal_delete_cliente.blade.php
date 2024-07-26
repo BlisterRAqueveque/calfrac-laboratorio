@@ -11,7 +11,7 @@
                 <div class="modal-body dark:dark_bg">
                     <div class="row">
                         <div class="col-12">
-                            <input type="text" name="cliente2_id" id="cliente2_id" >
+                            <input type="text" name="cliente2_id" id="cliente2_id" hidden>
                             <label for="deshabilitar_cliente" class="text-sm dark:text-gray-300">Nombre del Cliente <span
                                     class="text-red-500">*</span></label>
                             <input type="text" readonly="true" name="deshabilitar_cliente" id="deshabilitar_cliente" class="form-control sz py-2 mt-1 dark:inp_bg_2 bg-gray-50  dark:text-gray-400 border-none">

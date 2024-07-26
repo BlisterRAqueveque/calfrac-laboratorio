@@ -12,6 +12,7 @@ class Aditivo extends Model
     protected $fillable = [
         'nombre',
         'user_id',
+        'estado'
     ];
 
     public function user()

@@ -262,7 +262,7 @@
                 <div class="grid grid-cols-2 gap-3 mt-3">
                     <div class="grid">
                         <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">¿Quién
-                            autoriza?</label>
+                            solicita?</label>
                         <input type="text" class="form-control text-sm"
                             value="{{ auth()->user()->nombre }} {{ auth()->user()->apellido }}" readonly>
                         </select>

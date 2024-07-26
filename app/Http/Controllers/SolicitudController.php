@@ -658,6 +658,7 @@ class SolicitudController extends Controller
             'densidad_colchon' => $request->densidad_colchon,
             'tiempo_contacto' => $request->tiempo_contacto,
             'mud_company' => $request->mud_company,
+            'comentario' => $request->observacion_lodo
 
         ]);
 
@@ -1197,7 +1198,7 @@ class SolicitudController extends Controller
         return response()->json([
             'draw' => intval($request->draw),
             'recordsTotal' => $recordsTotal,
-            'recordsFiltered' => $recordsFiltered,
+            'recordsFiltered' => $recordsTotal,//$recordsFiltered,
             'data' => $data
         ]);
     }

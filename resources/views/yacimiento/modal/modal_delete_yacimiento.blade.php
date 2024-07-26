@@ -14,7 +14,7 @@
                             <input type="text" name="yacimiento2_id" id="yacimiento2_id" hidden>
                             <label for="delete_yacimiento" class="text-sm dark:text-gray-300">Nombre del Yacimiento <span
                                     class="text-red-500">*</span></label>
-                            <input type="text" name="delete_yacimiento" id="delete_yacimiento" class="form-control sz py-2 mt-1 dark:inp_bg_2 bg-gray-50  dark:text-gray-400 border-none">
+                            <input type="text" name="delete_yacimiento" id="delete_yacimiento" class="form-control sz py-2 mt-1 dark:inp_bg_2 bg-gray-50  dark:text-gray-400 border-none" readonly>
                             @error('delete_yacimiento')
                                 <small class="text-sm text-red-600">{{ $message }}</small>
                             @enderror

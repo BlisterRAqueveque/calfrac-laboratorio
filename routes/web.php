@@ -13,6 +13,7 @@ use App\Http\Controllers\SolicitudController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\YacimientoController;
 use App\Http\Controllers\EquiposController;
+use App\Models\Aditivo;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -97,6 +98,8 @@ Route::post('/respuesta/{user_id}', [SolicitudController::class, 'update_rta'])-
 
 # Clientes
 Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes');
+Route::get('/clientes/tabla', [ClienteController::class, 'getClientes'])->name('clientes.tabla');
+
 Route::post('/cliente', [ClienteController::class, 'store'])->name('cliente.store');
 Route::post('/cliente/update', [ClienteController::class, 'update'])->name('cliente.update');
 Route::post('/cliente/deshabilitar', [ClienteController::class, 'deshabilitar'])->name('cliente.deshabilitar');
@@ -112,6 +115,8 @@ Route::post('/usuario/activar', [UserController::class, 'store_activar'])->name(
 
 # Yacimientos
 Route::get('/yacimientos', [YacimientoController::class, 'index'])->name('yacimientos');
+Route::get('/yacimientos/tabla', [YacimientoController::class, 'getYacimiento'])->name('yacimiento.tabla');
+
 Route::post('/yacimiento', [YacimientoController::class, 'store'])->name('yacimiento.store');
 Route::post('/yacimiento/update', [YacimientoController::class, 'update'])->name('yacimiento.update');
 Route::post('/yacimiento/deshabilitar', [YacimientoController::class, 'deshabilitar'])->name('yacimiento.deshabilitar');
@@ -120,6 +125,7 @@ Route::post('/yacimiento/habilitar', [YacimientoController::class, 'habilitar'])
 
 # Aditivos
 Route::get('/aditivos', [AditivoController::class, 'index'])->name('aditivos');
+Route::get('/aditivos/tabla', [AditivoController::class, 'getAditivos'])->name('aditivos.tabla');
 Route::post('/aditivo', [AditivoController::class, 'store'])->name('aditivo.store');
 Route::post('/aditivo/update', [AditivoController::class, 'update'])->name('aditivo.update');
 Route::post('/aditivo/deshabilitar', [AditivoController::class, 'deshabilitar'])->name('aditivo.deshabilitar');

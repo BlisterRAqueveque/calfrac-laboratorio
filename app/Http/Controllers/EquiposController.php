@@ -23,6 +23,8 @@ class EquiposController extends Controller
 
    public function getEquipos(Request $request)
 {
+    //Esto es para traer la informacion a mostrar en la datatable
+
     if ($request->ajax()) {
         //$equipos = Equipos::select('*');
         $equipos = Equipos::with('user')->select('*');
