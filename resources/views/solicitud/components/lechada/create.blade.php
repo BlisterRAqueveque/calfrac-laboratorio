@@ -9,7 +9,7 @@
             <p class="m-0 font-bold text-lg tracking-wide">Información General</p>
 
             <div class="grid xs:grid-cols-2 md:grid-cols-6 gap-3 mt-3">
-                <div class="col-span-2 xl:col-span-1">
+                <div class="col-span-2 xl:col-span-2">
                     <label for="cliente_lechada" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Cliente
                         <span class="text-red-500">*</span></label>
                     <select name="cliente_lechada" id="cliente_lechada" class="text-sm" data-search="true" data-silent-initial-value-set="true">
@@ -178,8 +178,6 @@
             <small class="text-xs text-red-600">El tipo de cementación es requerido</small>
             @enderror
         </div>
-
-        <br>
         <div class="col-span-1 md:col-span-2 xl:col-span-1">
             <label for="ensayo_requerido_lechada" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de Lechada <span class="text-red-500">*</span></label>
             <div class="flex gap-1">
@@ -397,7 +395,7 @@
                 <input type="text" name="filtrado" value="{{ old('filtrado') }}" class="form-control text-sm" placeholder="Ingrese el filtrado">
             </div>
 
-            <div class="col-span-5 md:col-span-1 ">
+            <div class="col-span-5 md:col-span-2">
                 <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Bombeabilidad <small>Tiempo (min)</small></label>
                 <input type="text" name="bombeabilidad" value="{{ old('bombeabilidad') }}" class="form-control text-sm" placeholder="Operacion + Acondicionamiento">
             </div>
@@ -711,8 +709,8 @@
             let divGrid = el('div.grid grid-cols-2 gap-3 md:grid-cols-2');
             let textarea = el('textarea.textarea.form-control.text-sm.p-2', {
                 name: 'comentarios[]',
-                placeholder: 'Comentarios/Observaciones',
-                rows: 3
+                placeholder: 'Comentario',
+                rows: 1
             });
             mount(divGrid, textarea);
 
@@ -772,7 +770,9 @@
             id: 'modal'
         });
         let modalBg = el('div.fixed.inset-0.bg-black.opacity-50.z-40');
-        let modalContent = el('div.bg-white.p-5.rounded.shadow-lg.max-w-md.mx-auto.z-50');
+        let modalContent = el('div.bg-white.p-5.rounded.shadow-lg.max-w-md.mx-auto.z-50', {
+            style: 'width: 90%; max-width: 800px;' // Ajustar el tamaño del modal aquí
+        });
 
         // Agregar el mensaje
         let modalMessage = el('p.text-center.mb-4', message);

@@ -20,7 +20,7 @@
                         <small class="text-xs text-red-600">El Nº del Proyecto es requerido</small>
                     @enderror
                 </div>--}}
-                <div class="col-xs-12 col-md-6 my-2">
+                <div class="col-xs-12 col-md-4 my-2">
                     <label for="servicio_number"
                         class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Nº
                         Revisión de Solicitud de Servicio <span class="text-red-500">*</span></label>
