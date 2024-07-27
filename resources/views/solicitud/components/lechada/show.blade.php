@@ -486,7 +486,7 @@
                     <div class="">
                         <label for="tipo_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de lodo</label>
                         <select name="tipo_lodo" id="tipo_lodo" class="text-sm inp_edit" disabled>
-                            <option value="" selected disabled>Seleccione un tipo de lodo</option> <!-- Opción predeterminada -->
+                            <!-- <option value="" selected disabled>Seleccione un tipo de lodo</option> Opción predeterminada -->
                             @foreach ($tipo_lodo as $tipo)
                                 <option value="{{ $tipo->id }}" {{ isset($s_l[0]->tipo) && $tipo->id == $s_l[0]->tipo ? 'selected' : '' }}>
                                     {{ $tipo->nombre }}
@@ -498,7 +498,7 @@
                     <div class="">
                         <label for="mud_company" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Compañía de Lodos</label>
                         <select name="mud_company" id="mud_company" class="text-sm inp_edit" disabled>
-                            <option value="" selected disabled {{ $s_l[0]->mud_company_id == null ? 'selected' : '' }}>Seleccione la compañía</option>
+                            <!--<option value="" selected disabled {{ $s_l[0]->mud_company_id == null ? 'selected' : '' }}>Seleccione la compañía</option> -->
                             @foreach ($mud_company as $mud)
                                 <option value="{{ $mud->id }}" {{ $mud->id == $s_l[0]->mud_company_id ? 'selected' : '' }}>
                                     {{ $mud->nombre }}</option>
@@ -583,8 +583,8 @@
 
                     <div class="md:col-span-2 xl:col-span-1">
                         <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Grado de
-                            Temperatura <small>(°C)</small></label>
-                        <input type="number" name="grado_temperatura" class="form-control sz p-2" placeholder="Cº"
+                            Temperatura <small>(F°/100ft)</small></label>
+                        <input type="number" name="grado_temperatura" class="form-control sz p-2" placeholder="F°/100ft"
                             step=".01" value="{{ $s_l[0]->grado_temperatura }}" readonly>
                     </div>
 
@@ -622,6 +622,36 @@
                 </div>
 
                 <hr class="my-4">
+                <p class="m-0 font-bold text-lg my-3 tracking-wide">Reconocimiento de que el trabajo fue solicitado</p>
+
+                <div class="grid grid-cols-2 gap-3 mt-3">
+                    <div>
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">¿Quién
+                            solicita el trabajo?</label>
+                        <select name="firma_reconocimiento_lechada" class="form-select text-sm" disabled>
+                            <option value="">-- Seleccione --</option>
+                            @foreach ($users as $e)
+                                @if ($e->id == $s_l[0]->firma_reconocimiento_id)
+                                    <option value="{{ $e->id }}" selected>{{ $e->nombre }}
+                                        {{ $e->apellido }}
+                                    </option>
+                                @else
+                                    <option value="{{ $e->id }}">{{ $e->nombre }} {{ $e->apellido }}
+                                    </option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de
+                            solicitud</label>
+                        <input type="date" name="fecha_reconocimiento_lechada"
+                            value="{{ $s_l[0]->fecha_reconocimiento }}" readonly class="form-control text-sm">
+                    </div>
+                </div>
+
+
                 <p class="m-0 font-bold text-lg my-3 tracking-wide">Firma de Autorización para realizar el trabajo</p>
 
                 <div class="grid grid-cols-2 gap-3 mt-3">
@@ -651,34 +681,7 @@
                     </div>
                 </div>
 
-                <p class="m-0 font-bold text-lg my-3 tracking-wide">Reconocimiento de que el trabajo fue realizado</p>
 
-                <div class="grid grid-cols-2 gap-3 mt-3">
-                    <div>
-                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">¿Quién
-                            reconoce el trabajo?</label>
-                        <select name="firma_reconocimiento_lechada" class="form-select text-sm" disabled>
-                            <option value="">-- Seleccione --</option>
-                            @foreach ($users as $e)
-                                @if ($e->id == $s_l[0]->firma_reconocimiento_id)
-                                    <option value="{{ $e->id }}" selected>{{ $e->nombre }}
-                                        {{ $e->apellido }}
-                                    </option>
-                                @else
-                                    <option value="{{ $e->id }}">{{ $e->nombre }} {{ $e->apellido }}
-                                    </option>
-                                @endif
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div>
-                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de
-                            Reconocimiento</label>
-                        <input type="date" name="fecha_reconocimiento_lechada"
-                            value="{{ $s_l[0]->fecha_reconocimiento }}" readonly class="form-control text-sm">
-                    </div>
-                </div>
 
                 <hr class="my-4">
 

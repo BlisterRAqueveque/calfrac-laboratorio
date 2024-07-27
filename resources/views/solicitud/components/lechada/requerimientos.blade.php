@@ -24,7 +24,7 @@
             placeholder="Ingrese el filtrado" readonly>
     </div>
 
-    <div class="col-span-5 md:col-span-1">
+    <div class="col-span-5 md:col-span-2">
         <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Bombeabilidad <small>Tiempo (min)</small></label>
         <input type="text" name="bombeabilidad" value="{{ $s_l[0]->bombeabilidad }}" class="form-control text-sm"
             placeholder="Ingrese la bombeabilidad" readonly>
@@ -67,13 +67,13 @@
 </div>
 
 <div class="grid grid-cols-4 gap-3 mt-2">
-    <div class="col-span-4 md:col-span-1">
+    <div class="col-span-4 md:col-span-2">
         <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Agua
             Libre <small>%</small></label>
         <input type="text" name="agua_libre" value="{{ $s_l[0]->agua_libre ? $s_l[0]->agua_libre : 'No aplica' }}"
             class="form-control text-sm" placeholder="0.0%" readonly>
     </div>
-    <div class="col-span-4 md:col-span-1">
+    <div class="col-span-4 md:col-span-2">
         <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">SGS <small>(min)</small></label>
         <input type="text" name="sgs" value="{{ $s_l[0]->sgs ? $s_l[0]->sgs : 'No aplica' }}"
             class="form-control text-sm" placeholder="SGS" readonly>

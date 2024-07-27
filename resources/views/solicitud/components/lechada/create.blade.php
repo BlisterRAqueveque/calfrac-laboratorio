@@ -338,7 +338,6 @@
                         @endforeach
                     </select>
                 </div>
-                --}}
                 <div class="md:col-span-2 xl:col-span-1">
                     <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Profundidad
                         Pozo <small>(MD/TVD) (m)</small></label>
@@ -352,10 +351,37 @@
                     </div>
                 </div>
 
+                --}}
+
             <div class="md:col-span-2 xl:col-span-1">
-                <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Gradiente de
-                    Temperatura <small>(ºC)</small></label>
-                <input type="number" name="grado_temperatura" value="{{ old('grado_temperatura') }}" class="form-control sz p-2" placeholder="ºC" step=".01">
+                <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tope de 
+                    Lechada <small>(MD/TVD) (m)</small></label>
+                <div class="grid grid-cols-2 gap-3">
+                    <input type="number" min="0" name="top_of_slurry_md"
+                        class="form-control text-sm p-2" value="{{ old('top_of_slurry_md') }}"
+                        placeholder="MD" step=".01">
+                    <input type="number" min="0" name="top_of_slurry_tvd"
+                        class="form-control text-sm p-2" value="{{ old('top_of_slurry_tvd') }}"
+                        placeholder="TVD" step=".01">
+                </div>
+            </div>    
+
+            <div class="md:col-span-2 xl:col-span-1">
+                <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Volumen
+                    <small>(bbl)</small></label>
+                <input type="number" name="volumen" value="{{ old('volumen') }}" class="form-control sz p-2" placeholder="Volumen" step=".01">
+            </div>
+
+            <div class="md:col-span-2 xl:col-span-1">
+                <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Caudal
+                    <small>(bpm)</small></label>
+                <input type="number" name="pump_rate" value="{{ old('pump_rate') }}" class="form-control sz p-2" placeholder="Caudal" step=".01">
+            </div>
+
+            <div class="md:col-span-2 xl:col-span-1">
+                <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Grado de
+                    Temperatura <small>(F°/100ft)</small></label>
+                <input type="number" name="grado_temperatura" value="{{ old('grado_temperatura') }}" class="form-control sz p-2" placeholder="(F°/100ft)" step=".01">
             </div>
 
             <div class="xl:col-span-1">
@@ -432,7 +458,7 @@
         </div>
 
         <div class="grid grid-cols-4 gap-3 mt-2">
-            <div class="col-span-4 md:col-span-1">
+            <div class="col-span-4 md:col-span-2">
                 <label for="agua_libre" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Agua
                     Libre <small>%</small></label>
                 {{--<input type="text" name="agua_libre" value="{{ old('agua_libre') }}"
@@ -443,15 +469,15 @@
                     @endforeach
                 </select>
             </div>
-            <div class="col-span-4 md:col-span-1">
+            <div class="col-span-4 md:col-span-2">
                 <label for="sgs" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">SGS <small>(min)</small></label>
-                {{--<input type="text" name="sgs" value="{{ old('sgs') }}" class="form-control text-sm"
-                placeholder="SGS">--}}
-                <select name="sgs" value="{{ old('sgs') }}" class="text-sm inp_edit" id="sgs">
+                <input type="text" name="sgs" value="{{ old('sgs') }}" class="form-control text-sm"
+                placeholder="SGS">
+                {{--<select name="sgs" value="{{ old('sgs') }}" class="text-sm inp_edit" id="sgs">
                     @foreach ($sgs as $tipo)
                     <option value="{{ $tipo->opciones }}">{{ $tipo->opciones}}</option>
                     @endforeach
-                </select>
+                </select>--}}
             </div>
         </div>
 
@@ -496,29 +522,13 @@
         </div>
 
         <hr class="my-4">
-        <p class="m-0 font-bold text-lg my-3 tracking-wide">Firma de Autorización para realizar el trabajo</p>
+
+        <p class="m-0 font-bold text-lg my-3 tracking-wide">Reconocimiento de que el trabajo fue solicitado</p>
 
         <div class="grid grid-cols-2 gap-3 mt-3">
             <div class="grid">
                 <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">¿Quién
-                    autoriza?</label>
-                <input type="text" class="form-control text-sm" value="{{ auth()->user()->nombre }} {{ auth()->user()->apellido }}" readonly>
-                </select>
-            </div>
-
-            <div>
-                <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de
-                    Autorización</label>
-                <input type="date" name="fecha_autorizacion_autorizacion" class="form-control text-sm" value="@php echo date('Y-m-d') @endphp" readonly>
-            </div>
-        </div>
-
-        <p class="m-0 font-bold text-lg my-3 tracking-wide">Reconocimiento de que el trabajo fue realizado</p>
-
-        <div class="grid grid-cols-2 gap-3 mt-3">
-            <div class="grid">
-                <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">¿Quién
-                    reconoce el trabajo?</label>
+                    solicita el trabajo?</label>
                 <select name="firma_reconocimiento_lechada" id="firma_reconocimiento_lechada" data-search="true" data-silent-initial-value-set="true">
                     @foreach ($users as $u)
                     <option value="{{ $u->id }}" {{ old('firma_reconocimiento_lechada') == $u->id ? 'selected' : '' }}>
@@ -530,8 +540,25 @@
 
             <div>
                 <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de
-                    Reconocimiento</label>
+                    solicitud</label>
                 <input type="date" name="fecha_reconocimiento_lechada" value="{{ old('fecha_reconocimiento_lechada') }}" class="form-control text-sm">
+            </div>
+        </div>
+
+        <p class="m-0 font-bold text-lg my-3 tracking-wide">Firma de autorización para realizar el trabajo</p>
+
+        <div class="grid grid-cols-2 gap-3 mt-3">
+            <div class="grid">
+                <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">¿Quién
+                    autoriza?</label>
+                <input type="text" class="form-control text-sm" value="{{ auth()->user()->nombre }} {{ auth()->user()->apellido }}" readonly>
+                </select>
+            </div>
+
+            <div>
+                <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de
+                    autorización</label>
+                <input type="date" name="fecha_autorizacion_autorizacion" class="form-control text-sm" value="@php echo date('Y-m-d') @endphp" readonly>
             </div>
         </div>
         </div>
@@ -595,7 +622,7 @@
 
         VirtualSelect.init({
             ele: "#firma_reconocimiento_lechada",
-            placeholder: "Seleccione quien reconoce",
+            placeholder: "Seleccione quien solicita",
         });
         VirtualSelect.init({
             ele: "#tipo_lodo",
@@ -604,10 +631,6 @@
         VirtualSelect.init({
             ele: "#mud_company",
             placeholder: "Seleccione la compañía",
-        });
-        VirtualSelect.init({
-            ele: "#sgs",
-            placeholder: "Seleccione SGS",
         });
         VirtualSelect.init({
             ele: "#agua_libre",
@@ -625,7 +648,6 @@
         document.getElementById("firma_reconocimiento_lechada").setValue(0);
         document.getElementById("tipo_lodo").setValue(0);
         document.getElementById("mud_company").setValue(0);
-        document.getElementById("sgs").setValue(0);
         document.getElementById("agua_libre").setValue(0);
         document.getElementById("equipo_lechada").setValue(0);
     })
