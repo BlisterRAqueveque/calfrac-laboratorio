@@ -366,10 +366,6 @@ class SolicitudController extends Controller
             }
         }
 
-
-
-
-
         // == Relaciones ==
 
         # Ensayos de Referencias
@@ -403,6 +399,7 @@ class SolicitudController extends Controller
                     'lote' => $formulacion['lote'],
                     'aditivo' => $formulacion['aditivo'],
                     'concentracion' => $formulacion['concentracion'],
+                    'blend' => $formulacion['blend'],
                 ]);
             }
         }
@@ -929,6 +926,7 @@ class SolicitudController extends Controller
                 $rel->lote = $formulacion['lote'];
                 $rel->aditivo = $formulacion['aditivo'];
                 $rel->concentracion = $formulacion['concentracion'];
+                $rel->blend = $formulacion['blend'];
                 $rel->save();
             }
         }
@@ -940,6 +938,7 @@ class SolicitudController extends Controller
                     'lote' => $formulacion['lote'],
                     'aditivo' => $formulacion['aditivo'],
                     'concentracion' => $formulacion['concentracion'],
+                    'blend' => $formulacion['blend'],
                 ]);
             }
         }

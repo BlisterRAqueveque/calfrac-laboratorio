@@ -496,10 +496,11 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-3 text-center bg-gray-100 py-2 my-3">
+        <div class="grid grid-cols-4 text-center bg-gray-100 py-2 my-3">
             <p>Lote</p>
             <p>Aditivo</p>
             <p>Conc (% BWOC)</p>
+            <p>Blend</p>
         </div>
         <div id="container_formulaciones_tentativas"></div>
 

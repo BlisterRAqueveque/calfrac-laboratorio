@@ -95,10 +95,11 @@
     </div>
 </div>
 
-<div class="grid grid-cols-3 text-center bg-gray-100 py-2 my-3">
+<div class="grid grid-cols-4 text-center bg-gray-100 py-2 my-3">
     <p>Lote</p>
     <p>Aditivo</p>
     <p>Conc (% BWOC)</p>
+    <p>Blend</p>
 </div>
 
 <style>
@@ -117,18 +118,20 @@
     @endphp
     @foreach ($s_l[0]->formulacion_tentativa as $formulacion)
         <div class="flex justify-between mb-2 border">
-            <div class="w-full grid grid-cols-3 bg-gray-100 gap-3 p-2">
+            <div class="w-full grid grid-cols-4 bg-gray-100 gap-3 p-2">
                 <input type="hidden" value="{{ $formulacion->id }}" name="aditivos[{{$inc}}][id]">
                 <div class="col-span-3 text-right btn_del_formulacion inactive">
                     <button class="bg-red-700 text-white rounded-md font-semibold px-3"
                         onclick="btnDeleteFormulacion(this, {{ $formulacion }})">Eliminar</button>
                 </div>
-                <input type="text" class="form-control text-xs rounded-l-none p-2 col-span-3 md:col-span-1"
+                <input type="text" class="form-control text-xs rounded-l-none p-2 col-span-4 md:col-span-1"
                     placeholder="Lote" value="{{ $formulacion->lote }}" name="aditivos[{{$inc}}][lote]" readonly>
-                <input type="text" class="form-control text-xs p-2 col-span-3 md:col-span-1"
+                <input type="text" class="form-control text-xs p-2 col-span-4 md:col-span-1"
                     value="{{ $formulacion->aditivo }}" placeholder="Aditivo" name="aditivos[{{$inc}}][aditivo]" readonly>
-                <input type="text" class="form-control text-xs p-2 col-span-3 md:col-span-1"
+                <input type="text" class="form-control text-xs p-2 col-span-4 md:col-span-1"
                     placeholder="Concentración" value="{{ $formulacion->concentracion }}" name="aditivos[{{$inc}}][concentracion]" readonly>
+                <input type="text" class="form-control text-xs p-2 col-span-4 md:col-span-1"
+                    placeholder="Blend" value="{{ $formulacion->blend }}" name="aditivos[{{$inc}}][blend]" readonly>
             </div>
         </div>
         @php
