@@ -1068,9 +1068,9 @@ class SolicitudController extends Controller
         } else {
             $generar_reporte = false;
         }
-
-        echo json_encode($generar_reporte);
+        //echo json_encode($generar_reporte);
         return response()->json(['generate_report' => $generar_reporte]);
+        echo json_encode($generar_reporte);
     }
 
 

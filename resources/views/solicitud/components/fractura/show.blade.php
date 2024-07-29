@@ -567,7 +567,7 @@
                             <select name="aditivo_extra"
                                 class="form-select sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 md:w-1/4 w-full"
                                 disabled>
-                                <option value="">-- Seleccione --</option>
+                                <option value="0">-- Seleccione --</option>
                                 <option {{ $solicitud_fractura[0]->aditivo_extra == 1 ? 'selected' : '' }} value="1">Si
                                 </option>
                                 <option {{ $solicitud_fractura[0]->aditivo_extra == 2 ? 'selected' : '' }} value="2">No
@@ -782,7 +782,7 @@
                             value="{{ $solicitud_fractura[0]->fecha_firma_iniciado_por }}" readonly>
                     </div>
 
-                    <div class="col-xs-12 col-md-6 my-2">
+                    {{--<div class="col-xs-12 col-md-6 my-2">
                         <label for="firma_servicios_tecnicos"
                             class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Nombre
                             <small>(Servicios Técnicos)</small></label>
@@ -809,7 +809,7 @@
                         <input type="date" name="fecha_firma_servicios_tecnicos" id="fecha_firma_servicios_tecnicos"
                             class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
                             value="{{ $solicitud_fractura[0]->fecha_firma_servicios_tecnicos }}" readonly>
-                    </div>
+                    </div>--}}
 
                     <div class="col-xs-12 col-md-6 my-2">
                         <label for="firma_laboratorio"

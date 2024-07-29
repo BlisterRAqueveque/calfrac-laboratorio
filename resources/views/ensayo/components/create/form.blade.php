@@ -80,7 +80,7 @@
         </a>
     </li>
 
-    @if ($solicitud->ensayo_asignado_id == null)
+    @if ($solicitud->ensayo_asignado_id == 'null')
         <li class="nav-item w-full md:w-auto text-xs xl:text-sm flex-1 {{ $generar_reporte ? '' : 'd-none' }} "
             id="tab_g_report_js" role="presentation">
             <a class="nav-link nav_tab_mod d-flex items-center justify-center gap-2 text-violet-700" id="nav-tab2"

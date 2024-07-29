@@ -162,7 +162,7 @@
             <tr>
                 <td style="width: 50%; text-align:center">
                     <div style="width: 50px; height: 50px">
-                        <img src="{{ public_path('img/empresa_logo.png') }}" style="max-width: 100%;" alt="">
+                        {{-- <img src="{{ public_path('img/empresa_logo.png') }}" style="max-width: 100%;" alt=""> --}}
                     </div>
                 </td>
                 <td style="width: 50%; text-align:center; color: white">
@@ -444,7 +444,7 @@
                 <tr>
                     <td colspan="5" style="padding: 5px">
                         <div style="width: 100%; height: 250px; overflow: hidden; display: flex; justify-content: center; align-items: center; text-align: center">
-                            <img src="{{ public_path('uploads/ensayos/') . $bombeabilidad->img }}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
+                            {{-- <img src="{{ public_path('uploads/ensayos/') . $bombeabilidad->img }}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);"> --}}
                         </div>
                     </td>
                 </tr>

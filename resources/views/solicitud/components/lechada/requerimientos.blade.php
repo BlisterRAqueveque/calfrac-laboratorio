@@ -25,9 +25,9 @@
     </div>
 
     <div class="col-span-5 md:col-span-2">
-        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Bombeabilidad <small>Tiempo (min)</small></label>
+        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Bombeabilidad <small>Tiempo Acondicionamiento + Tiempo Operación</small></label>
         <input type="text" name="bombeabilidad" value="{{ $s_l[0]->bombeabilidad }}" class="form-control text-sm"
-            placeholder="Ingrese la bombeabilidad" readonly>
+            placeholder="Tiempo (min)" readonly>
     </div>
 </div>
 
