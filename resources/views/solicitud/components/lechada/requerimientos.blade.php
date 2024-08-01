@@ -24,10 +24,10 @@
             placeholder="Ingrese el filtrado" readonly>
     </div>
 
-    <div class="col-span-5 md:col-span-1">
-        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Bombeabilidad <small>Tiempo (min)</small></label>
+    <div class="col-span-5 md:col-span-2">
+        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Bombeabilidad <small>Tiempo Acondicionamiento + Tiempo Operación</small></label>
         <input type="text" name="bombeabilidad" value="{{ $s_l[0]->bombeabilidad }}" class="form-control text-sm"
-            placeholder="Ingrese la bombeabilidad" readonly>
+            placeholder="Tiempo (min)" readonly>
     </div>
 </div>
 
@@ -67,13 +67,13 @@
 </div>
 
 <div class="grid grid-cols-4 gap-3 mt-2">
-    <div class="col-span-4 md:col-span-1">
+    <div class="col-span-4 md:col-span-2">
         <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Agua
             Libre <small>%</small></label>
         <input type="text" name="agua_libre" value="{{ $s_l[0]->agua_libre ? $s_l[0]->agua_libre : 'No aplica' }}"
             class="form-control text-sm" placeholder="0.0%" readonly>
     </div>
-    <div class="col-span-4 md:col-span-1">
+    <div class="col-span-4 md:col-span-2">
         <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">SGS <small>(min)</small></label>
         <input type="text" name="sgs" value="{{ $s_l[0]->sgs ? $s_l[0]->sgs : 'No aplica' }}"
             class="form-control text-sm" placeholder="SGS" readonly>
@@ -95,10 +95,11 @@
     </div>
 </div>
 
-<div class="grid grid-cols-3 text-center bg-gray-100 py-2 my-3">
+<div class="grid grid-cols-4 text-center bg-gray-100 py-2 my-3">
     <p>Lote</p>
     <p>Aditivo</p>
     <p>Conc (% BWOC)</p>
+    <p>Blend</p>
 </div>
 
 <style>
@@ -117,18 +118,20 @@
     @endphp
     @foreach ($s_l[0]->formulacion_tentativa as $formulacion)
         <div class="flex justify-between mb-2 border">
-            <div class="w-full grid grid-cols-3 bg-gray-100 gap-3 p-2">
+            <div class="w-full grid grid-cols-4 bg-gray-100 gap-3 p-2">
                 <input type="hidden" value="{{ $formulacion->id }}" name="aditivos[{{$inc}}][id]">
                 <div class="col-span-3 text-right btn_del_formulacion inactive">
                     <button class="bg-red-700 text-white rounded-md font-semibold px-3"
                         onclick="btnDeleteFormulacion(this, {{ $formulacion }})">Eliminar</button>
                 </div>
-                <input type="text" class="form-control text-xs rounded-l-none p-2 col-span-3 md:col-span-1"
+                <input type="text" class="form-control text-xs rounded-l-none p-2 col-span-4 md:col-span-1"
                     placeholder="Lote" value="{{ $formulacion->lote }}" name="aditivos[{{$inc}}][lote]" readonly>
-                <input type="text" class="form-control text-xs p-2 col-span-3 md:col-span-1"
+                <input type="text" class="form-control text-xs p-2 col-span-4 md:col-span-1"
                     value="{{ $formulacion->aditivo }}" placeholder="Aditivo" name="aditivos[{{$inc}}][aditivo]" readonly>
-                <input type="text" class="form-control text-xs p-2 col-span-3 md:col-span-1"
+                <input type="text" class="form-control text-xs p-2 col-span-4 md:col-span-1"
                     placeholder="Concentración" value="{{ $formulacion->concentracion }}" name="aditivos[{{$inc}}][concentracion]" readonly>
+                <input type="text" class="form-control text-xs p-2 col-span-4 md:col-span-1"
+                    placeholder="Blend" value="{{ $formulacion->blend }}" name="aditivos[{{$inc}}][blend]" readonly>
             </div>
         </div>
         @php

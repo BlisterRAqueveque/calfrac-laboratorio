@@ -213,7 +213,7 @@
                     <p class="m-0 font-bold text-lg tracking-wide dark:text-gray-300">Información General</p>
                     @if (!$solicitud->aprobada)
                         <div class="flex gap-3">
-                            <button
+                            {{--<button
                                 class="bg-cyan-600 dark:bg-blue-600 dark:hover:bg-blue-700 dark:bg-opacity-70 dark:text-blue-300 text-white font-bold tracking-wide px-3 py-1 rounded-sm flex gap-2 hover:bg-cyan-700 transition-all duration-200"
                                 id="btnHabilitarEdicion">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -222,7 +222,8 @@
                                         d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                                 </svg>
                                 Habilitar Edición
-                            </button>
+                            </button>--}}
+                            
                             <button
                                 class="bg-red-400 dark:bg-red-700 dark:bg-opacity-50 dark:text-red-600 text-white font-bold tracking-wide px-3 py-1 rounded-sm flex gap-2 hover:bg-red-500 transition-all duration-200 hidden"
                                 id="btnDeshabilitarEdicion">
@@ -236,6 +237,7 @@
                     @endif
                 </div>
             </div>
+            
 
             <form action="{{ route('solicitud.update') }}" method="POST">
                 @csrf
@@ -567,7 +569,7 @@
                             <select name="aditivo_extra"
                                 class="form-select sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 md:w-1/4 w-full"
                                 disabled>
-                                <option value="">-- Seleccione --</option>
+                                <option value="0">-- Seleccione --</option>
                                 <option {{ $solicitud_fractura[0]->aditivo_extra == 1 ? 'selected' : '' }} value="1">Si
                                 </option>
                                 <option {{ $solicitud_fractura[0]->aditivo_extra == 2 ? 'selected' : '' }} value="2">No
@@ -782,7 +784,7 @@
                             value="{{ $solicitud_fractura[0]->fecha_firma_iniciado_por }}" readonly>
                     </div>
 
-                    <div class="col-xs-12 col-md-6 my-2">
+                    {{--<div class="col-xs-12 col-md-6 my-2">
                         <label for="firma_servicios_tecnicos"
                             class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Nombre
                             <small>(Servicios Técnicos)</small></label>
@@ -809,7 +811,7 @@
                         <input type="date" name="fecha_firma_servicios_tecnicos" id="fecha_firma_servicios_tecnicos"
                             class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
                             value="{{ $solicitud_fractura[0]->fecha_firma_servicios_tecnicos }}" readonly>
-                    </div>
+                    </div>--}}
 
                     <div class="col-xs-12 col-md-6 my-2">
                         <label for="firma_laboratorio"

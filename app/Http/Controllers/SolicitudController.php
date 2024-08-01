@@ -36,6 +36,7 @@ use App\Models\Sgs;
 use App\Models\Servicios;
 use App\Models\TipoLodo_Lodos;
 use App\Models\Equipos;
+use App\Models\Ingenieros;
 use App\Models\EnsayosLodo;
 use App\Models\SolicitudLodo;
 use App\Models\Estados;
@@ -81,7 +82,7 @@ class SolicitudController extends Controller
             'ensayos_lodo' => EnsayosLodo::all(),
             'estados' => Estados::all(),
             'ensayos_sol_lodo' => Ensayo::where('tipo', 'LN')->where('estado', 1)->get(),
-
+            'names_ingenieros' => User::whereIn('users.grupo_id', [3, 4])->get('users.*'),
         ];
         return view('solicitud.create', $data);
     }
@@ -327,6 +328,8 @@ class SolicitudController extends Controller
             'fecha_autorizacion' => date('Y-m-d'),
             'firma_reconocimiento_id' => $request->firma_reconocimiento_lechada,
             'fecha_reconocimiento' => $request->fecha_reconocimiento_lechada,
+            'firma_solicitante_id' => $request->firma_solicitante_lechada,
+            'fecha_solicitante' => $request->fecha_solicitante_lechada,
             'solicitud_id' => $solicitud->id,
             'usuario_carga' => auth()->user()->id
 
@@ -366,10 +369,6 @@ class SolicitudController extends Controller
             }
         }
 
-
-
-
-
         // == Relaciones ==
 
         # Ensayos de Referencias
@@ -403,6 +402,7 @@ class SolicitudController extends Controller
                     'lote' => $formulacion['lote'],
                     'aditivo' => $formulacion['aditivo'],
                     'concentracion' => $formulacion['concentracion'],
+                    'blend' => $formulacion['blend'],
                 ]);
             }
         }
@@ -787,6 +787,7 @@ class SolicitudController extends Controller
             'tipo_lodo' => TipoLodo::all(),
             'mud_company' => MudCompany::all(),
             'equipos' => Equipos::all(),
+            'names_ingenieros' => User::whereIn('users.grupo_id', [3, 4])->get('users.*'),
             //'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
         $generate_report = $this->_generate_report($solicitud_id);
@@ -917,6 +918,8 @@ class SolicitudController extends Controller
         $solicitud_lechada->observacion = $request->observacion_lechada;
         $solicitud_lechada->firma_reconocimiento_id = $request->firma_reconocimiento_lechada;
         $solicitud_lechada->fecha_reconocimiento = $request->fecha_reconocimiento_lechada;
+        $solicitud_lechada->firma_solicitante_id = $request->firma_solicitante_lechada;
+        $solicitud_lechada->fecha_solicitante = $request->fecha_solicitante_lechada;
         $solicitud_lechada->save();
 
         $aditivos_bd = RelAditivoSolicitudLechada::where('solicitud_lechada_id', $solicitud_lechada->id)->get();
@@ -929,6 +932,7 @@ class SolicitudController extends Controller
                 $rel->lote = $formulacion['lote'];
                 $rel->aditivo = $formulacion['aditivo'];
                 $rel->concentracion = $formulacion['concentracion'];
+                $rel->blend = $formulacion['blend'];
                 $rel->save();
             }
         }
@@ -940,6 +944,7 @@ class SolicitudController extends Controller
                     'lote' => $formulacion['lote'],
                     'aditivo' => $formulacion['aditivo'],
                     'concentracion' => $formulacion['concentracion'],
+                    'blend' => $formulacion['blend'],
                 ]);
             }
         }
@@ -1068,9 +1073,9 @@ class SolicitudController extends Controller
         } else {
             $generar_reporte = false;
         }
-
-        echo json_encode($generar_reporte);
+        //echo json_encode($generar_reporte);
         return response()->json(['generate_report' => $generar_reporte]);
+        echo json_encode($generar_reporte);
     }
 
 

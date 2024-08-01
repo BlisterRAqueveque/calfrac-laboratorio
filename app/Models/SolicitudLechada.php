@@ -50,6 +50,8 @@ class SolicitudLechada extends Model
         'fecha_autorizacion',
         'firma_reconocimiento_id',
         'fecha_reconocimiento',
+        'firma_solicitante_id',
+        'fecha_solicitante',
         'solicitud_id',
         'usuario_carga',
     ];
@@ -62,6 +64,11 @@ class SolicitudLechada extends Model
     public function user_reconocimiento()
     {
         return $this->belongsTo(User::class, 'firma_reconocimiento_id');
+    }
+
+    public function solicitado()
+    {
+        return $this->belongsTo(SolicitudLechada::class, 'firma_solicitante_id');
     }
 
     public function mud_company()

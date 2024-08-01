@@ -187,10 +187,10 @@
                     Cliente
                 </td>
                 <td class="d_g_second_td">
-                    Pozo
+                    Yacimiento
                 </td>
                 <td class="d_g_last_td">
-                    Yacimiento
+                    Pozo
                 </td>
             </tr>
             <tr>
@@ -200,43 +200,72 @@
                 </td>
                 <td
                     style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949;">
-                    {{ $solicitud->pozo }}
+                    {{ $solicitud->locacion->nombre}}
 
                 </td>
                 <td style="width: 40%;color: #686868; text-align: center; font-size: 13px;">
-                    {{ $solicitud->locacion->nombre}}
+                    {{ $solicitud->pozo }}
                 </td>
             </tr>
             <tr>
 
                 <td class="d_g_first_td midd_s">
-                    Trabajo
+                    Programa
                 </td>
                 <td class="d_g_second_td midd_m">
                     Equipo
                 </td>
                 <td class="d_g_last_td midd_e">
-                    MD
+                    Tipo Requerimiento
                 </td>
             </tr>
             <tr>
                 <td
                     style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949;">
-                    {{ $solicitud->tipo_cementacion->nombre }}
+                    {{ $solicitud->programa }}
                 </td>
                 <td
                     style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949;">
-                    {{ $solicitud->equipo }}
+                    {{ $solicitud->equipos->nombre }}
                 </td>
                 <td style="width: 40%;color: #686868; text-align: center; font-size: 13px;">
-                    {{ $s_l[0]->base_md }}
+                    {{ $solicitud->tipo_requerimiento_cemento->nombre }}
                 </td>
             </tr>
             <tr>
 
                 <td class="d_g_first_td midd_s">
-                    TVD
+                    Tipo Trabajo
                 </td>
+                <td class="d_g_second_td midd_m">
+                    Tipo Cementación
+                </td>
+                <td class="d_g_last_td midd_e">
+                    {{--Base (MD/TVD)--}}
+                    Fecha Solicitud
+                </td>
+            </tr>
+            <tr>
+                <td
+                    style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949;">
+                    {{$solicitud->tipo_trabajo_cemento->nombre}}
+                    {{--{{ $s_l[0]->base_tvd }} --}}
+                </td>
+                <td
+                    style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949;">
+                    {{--{{ $s_l[0]->bhct }}--}}
+                    {{ $solicitud->tipo_cementacion->nombre }}
+                </td>
+                <td style="width: 40%;color: #686868; text-align: center; font-size: 13px;">
+                    {{--{{ $s_l[0]->bhst }}--}}
+                    {{ $solicitud->fecha_solicitud->format('Y-m-d') }}
+                </td>
+            </tr>
+            {{--<tr>
+
+                <td class="d_g_first_td midd_s">
+                    {{--Agregar algo--}}
+                {{--</td>
                 <td class="d_g_second_td midd_m">
                     BHCT
                 </td>
@@ -251,12 +280,13 @@
                 </td>
                 <td
                     style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949;">
-                    {{ $s_l[0]->bhct }}
+                    {{ $s_l[0]->base_tvd }}
                 </td>
-                <td style="width: 40%;color: #686868; text-align: center; font-size: 13px;">
-                    {{ $s_l[0]->bhst }}
+                <td
+                    style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949;">
+                    {{ $s_l[0]->base_tvd }}
                 </td>
-            </tr>
+            </tr>  --}}
         </tbody>
     </table>
 
@@ -271,13 +301,10 @@
         <tbody>
             <tr>
 
-                <td class="d_g_first_td" colspan="4">
+                <td class="d_g_first_td" colspan="5">
                     Tipo de Cemento / Marca
                 </td>
-                <td style="color: #686868; text-align: center; font-size: 13px; border-bottom: 1px solid #494949"
-                    colspan="1">
-                    Cemento G
-                </td>
+
             </tr>
 
             <tr>
@@ -294,7 +321,7 @@
                     Units
                 </td>
                 <td class="d_g_last_td" style="border-radius: 0">
-                    OM
+                    Blend
                 </td>
             </tr>
             @foreach ($s_l[0]->formulacion_tentativa as $formulacion)
@@ -316,12 +343,12 @@
                         %BOWC
                     </td>
                     <td style="width: 40%;color: #686868; text-align: center; font-size: 13px;">
-                        1
+                        {{ $formulacion->blend }}
                     </td>
                 </tr>
             @endforeach
 
-            <tr>
+            {{--<tr>
                 <td colspan="2" style="border-right: 1px solid #494949; border-top: 1px solid #494949"></td>
                 <td class="d_g_second_td midd_m" style="border-bottom: 0">
                     Densidad
@@ -362,215 +389,15 @@
                     style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-top: 1px solid #494949">
                     <b>-</b> <small>L/bolsa</small>
                 </td>
-            </tr>
+            </tr>--}}
 
         </tbody>
     </table>
-
-    {{-- Tiempo de Bombeabilidad --}}
-    <table width='100%' style="border: 1px solid #494949; border-radius: 2px; margin-top: 10px">
-        <th
-            style="width: 80%; text-align: center; color: #494949; padding-top: 3px; letter-spacing: 1px; font-size: 13px; background: rgb(214, 232, 238)">
-            Tiempo de Bombeabilidad
-        </th>
-    </table>
-
-    @foreach ($s_l[0]->rel_bombeabilidad as $bombeabilidad)
-        @if ($bombeabilidad->selected)
-            <table width='100%' style="border: 1px solid #494949; border-radius: 5px; margin-top: 5px;">
-                <tr>
-                    <td class="d_g_first_td" style="width: 20%">
-                        <b>Consistómetro N°</b>
-                    </td>
-                    <td
-                        style="color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949">
-                        {{ $bombeabilidad->consistometro ? $bombeabilidad->consistometro : 'No aplica' }}
-                    </td>
-                    <td class="d_g_first_td">
-                        <b>Tiempo de Acondicionamiento</b>
-                    </td>
-                    <td
-                        style="width: 10%; color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949">
-                        {{ $bombeabilidad->time_acondicionamiento ? $bombeabilidad->time_acondicionamiento : 'No aplica' }}
-                    </td>
-                    <td class="d_g_last_td" style="width: 15%; border-right: 0">
-                        <b>Planilla N°
-                            {{ $bombeabilidad->planilla ? $bombeabilidad->planilla : '---' }}</b>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949"
-                        colspan="2">
-                        <b>Gradiente:</b>
-                        {{ $bombeabilidad->gradiente ? $bombeabilidad->gradiente : 'No aplica' }}
-                        <small>(°F/100ft)</small>
-                    </td>
-                    <td
-                        style="color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949">
-                        <b>Temperatura:</b>
-                        {{ $bombeabilidad->temperatura ? $bombeabilidad->temperatura : 'No aplica' }}
-                        <small>(°C)</small>
-                    </td>
-                    <td style="width: 30%; color: #686868; text-align: center; font-size: 13px; border-bottom: 1px solid #494949"
-                        colspan="2">
-                        <b>Presión:</b>
-                        {{ $bombeabilidad->presion ? $bombeabilidad->presion : 'No aplica' }}<small>(psi)</small>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949"
-                        colspan="2">
-                        <b>40 Bc:</b>
-                        {{ $bombeabilidad->bc_40 ? $bombeabilidad->bc_40 : 'No aplica' }}
-                        <small>(hh:mm)</small>
-                    </td>
-                    <td
-                        style="color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949">
-                        <b>70 Bc:</b>
-                        {{ $bombeabilidad->bc_70 ? $bombeabilidad->bc_70 : 'No aplica' }}
-                        <small>(hh:mm)</small>
-                    </td>
-                    <td style="width: 30%; color: #686868; text-align: center; font-size: 13px; border-bottom: 1px solid #494949"
-                        colspan="2">
-                        <b>100 Bc:</b>
-                        {{ $bombeabilidad->bc_100 ? $bombeabilidad->bc_100 : 'No aplica' }}
-                        <small>(hh:mm)</small>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td colspan="5" style="text-align: center; padding-top: 10px"><h5 style="margin: 0; padding: 0">Adjunto</h5></td>
-                </tr>
-                <tr>
-                    <td colspan="5" style="padding: 5px">
-                        <div style="width: 100%; height: 250px; overflow: hidden; display: flex; justify-content: center; align-items: center; text-align: center">
-                            <img src="{{ public_path('uploads/ensayos/') . $bombeabilidad->img }}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        @endif
-    @endforeach
-
-    <table width='100%' style="border: 1px solid #494949; border-radius: 5px; margin: 20px 0"></table>
-    {{-- Quien lo ralizó | Quién lo revisó | Quién lo solicitó --}}
-    <table width='100%' style="border: 1px solid #494949; border-radius: 5px; margin: 15px 0">
-        <tr>
-            <td class="d_g_first_td">
-                Realizado por
-            </td>
-            <td class="d_g_second_td">
-                Revisado por
-            </td>
-            <td class="d_g_last_td">
-                Solicitado por
-            </td>
-        </tr>
-        <tr>
-            <td
-                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; padding: 20px 0">
-                Mirko Dinamarca</td>
-            <td
-                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; padding: 20px 0">
-                Mirko Dinamarca</td>
-            <td style="width: 40%;color: #686868; text-align: center; font-size: 13px; padding: 20px 0">Mirko Dinamarca
-            </td>
-        </tr>
-    </table>
-
-    <div style="page-break-after: always;"></div>
-
-    {{-- UCA - Resistencia a la Compresión --}}
-    <table width='100%' style="border: 1px solid #494949; border-radius: 2px; margin-top: 10px">
-        <th
-            style="width: 80%; text-align: center; color: #494949; padding-top: 3px; letter-spacing: 1px; font-size: 13px; background: rgb(214, 232, 238)">
-            UCA - Resistencia a la Compresión
-        </th>
-    </table>
-
-    <table width='100%' style="border: 1px solid #494949; border-radius: 5px; margin-top: 5px;">
-        <tr>
-            <td class="d_g_first_td" style="width: 20%">
-                <b>UCA N°</b>
-            </td>
-            <td
-                style="color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949">
-                {{ $s_l[0]->rel_uca[0]->id }}
-            </td>
-            <td class="d_g_first_td">
-                <b>Principal</b>
-            </td>
-            <td
-                style="width: 10%; color: #686868; text-align: center; font-size: 13px; border-right: 0; border-bottom: 1px solid #494949">
-                {{ $s_l[0]->rel_uca[0]->principal ? $s_l[0]->rel_uca[0]->principal . '°' : 'No aplica' }}
-            </td>
-        </tr>
-        <tr>
-            <td class="d_g_first_td" style="border-top: 0">50 psi</td>
-            <td class="d_g_first_td" style="border-top: 0">500 psi</td>
-            <td class="d_g_first_td" style="border-top: 0">1000 psi</td>
-            <td class="d_g_first_td" style="border-top: 0; border-right: 0">12 hr</td>
-        </tr>
-        <tr>
-            <td
-                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949;">
-                {{ $s_l[0]->rel_uca[0]->psi_50 ? $s_l[0]->rel_uca[0]->psi_50 . ' (hh:mm)' : 'No aplica' }}
-            </td>
-            <td
-                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949;">
-                {{ $s_l[0]->rel_uca[0]->psi_500 ? $s_l[0]->rel_uca[0]->psi_500 . ' (hh:mm)' : 'No aplica' }}
-            </td>
-            <td
-                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949;">
-                {{ $s_l[0]->rel_uca[0]->psi_1000 ? $s_l[0]->rel_uca[0]->psi_1000 . ' (hh:mm)' : 'No aplica' }}
-            </td>
-            <td
-                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-right: 0; border-bottom: 1px solid #494949;">
-                {{ $s_l[0]->rel_uca[0]->hs_12 ? $s_l[0]->rel_uca[0]->hs_12 . ' hr' : 'No aplica' }}
-            </td>
-        </tr>
-        <tr>
-            <td class="d_g_first_td" style="border-top: 0">24 hr</td>
-            <td class="d_g_first_td" style="border-top: 0">Impedancia Acústica</td>
-            <td class="d_g_first_td" style="border-top: 0">SGS cero</td>
-            <td class="d_g_first_td" style="border-top: 0; border-right: 0">SGS max</td>
-        </tr>
-        <tr>
-            <td
-                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949">
-                {{ $s_l[0]->rel_uca[0]->hs_24 ? $s_l[0]->rel_uca[0]->hs_24 . ' hr' : 'No aplica' }}
-            </td>
-            <td
-                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949;">
-                {{ $s_l[0]->rel_uca[0]->impedancia_acustica ? $s_l[0]->rel_uca[0]->impedancia_acustica : 'No aplica' }}
-            </td>
-            <td
-                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949">
-                {{ $s_l[0]->rel_uca[0]->sgs_cero ? $s_l[0]->rel_uca[0]->sgs_cero . ' (hh:mm)' : 'No aplica' }}
-            </td>
-            <td
-                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-right: 0; border-bottom: 1px solid #494949">
-                {{ $s_l[0]->rel_uca[0]->sgs_max ? $s_l[0]->rel_uca[0]->sgs_max . ' (hh:mm)' : 'No aplica' }}
-            </td>
-        </tr>
-
-        <tr>
-            <td colspan="5" style="text-align: center; padding-top: 10px"><h5 style="margin: 0; padding: 0">Adjunto</h5></td>
-        </tr>
-        <tr>
-            <td colspan="5" style="padding: 5px">
-                <div style="width: 100%; height: 250px; overflow: hidden; display: flex; justify-content: center; align-items: center; text-align: center">
-                    <img src="{{ public_path('uploads/ensayos/') . $s_l[0]->rel_uca[0]->img }}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
-                </div>
-            </td>
-        </tr>
-    </table>
-
     {{-- Reología --}}
     <table width='100%' style="border: 1px solid #494949; border-radius: 2px; margin-top: 10px">
         <th
             style="width: 80%; text-align: center; color: #494949; padding-top: 3px; letter-spacing: 1px; font-size: 13px; background: rgb(214, 232, 238)">
-            Reología
+            Reología (avg reads)
         </th>
     </table>
 
@@ -703,11 +530,12 @@
             </td>
             <td
                 style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949">
-                -
+                {{ $s_l[0]->rel_reologia[0]->temp_ambiente ? $s_l[0]->rel_reologia[0]->temp_ambiente . '°' : 'No aplica' }}
+
             </td>
             <td
                 style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-bottom: 1px solid #494949">
-                -
+                {{ $s_l[0]->rel_reologia[0]->temp_ensayo ? $s_l[0]->rel_reologia[0]->temp_ensayo . '°' : 'No aplica' }}
             </td>
         </tr>
 
@@ -752,6 +580,241 @@
 
     </table>
 
+    {{-- Reología up reads --}}
+    <table width='100%' style="border: 1px solid #494949; border-radius: 2px; margin-top: 10px">
+        <th
+            style="width: 80%; text-align: center; color: #494949; padding-top: 3px; letter-spacing: 1px; font-size: 13px; background: rgb(214, 232, 238)">
+            Reología (up reads)
+        </th>
+    </table>
+    <table width='100%' style="border: 1px solid #494949; border-radius: 5px; margin-top: 5px;">
+        <tr>
+            <td class="d_g_first_td">
+
+            </td>
+            <td class="d_g_first_td">
+                RPM
+            </td>
+            <td class="d_g_second_td">
+                300
+            </td>
+            <td class="d_g_second_td">
+                200
+            </td>
+            <td class="d_g_second_td">
+                100
+            </td>
+            <td class="d_g_second_td">
+                60
+            </td>
+            <td class="d_g_second_td">
+                30
+            </td>
+            <td class="d_g_second_td">
+                6
+            </td>
+            <td class="d_g_last_td">
+                3
+            </td>
+        </tr>
+        <tr>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949">
+                T° Amb.
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949">
+                {{ $s_l[0]->rel_reologia[0]->tem_ambiente_rpm_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_rpm_up . '°' : '-' }}
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949">
+                {{ $s_l[0]->rel_reologia[0]->tem_ambiente_300_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_300_up . '°' : '-' }}
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949">
+                {{ $s_l[0]->rel_reologia[0]->tem_ambiente_200_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_200_up . '°' : '-' }}
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949">
+                {{ $s_l[0]->rel_reologia[0]->tem_ambiente_100_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_100_up . '°' : '-' }}
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949;">
+                {{ $s_l[0]->rel_reologia[0]->tem_ambiente_60_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_60_up . '°' : '-' }}
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949;">
+                {{ $s_l[0]->rel_reologia[0]->tem_ambiente_30_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_30_up . '°' : '-' }}
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949;">
+                {{ $s_l[0]->rel_reologia[0]->tem_ambiente_6_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_6_up . '°' : '-' }}
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949; border-right: 0">
+                {{ $s_l[0]->rel_reologia[0]->tem_ambiente_3_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_3_up . '°' : '-' }}
+            </td>
+
+        </tr>
+        <tr>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949;">
+                T° Ens.
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949;">
+                {{ $s_l[0]->rel_reologia[0]->tem_ensayo_rpm_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_rpm_up . '°' : '-' }}
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949;">
+                {{ $s_l[0]->rel_reologia[0]->tem_ensayo_300_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_300_up . '°' : '-' }}
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949;">
+                {{ $s_l[0]->rel_reologia[0]->tem_ensayo_200_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_200_up . '°' : '-' }}
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949;">
+                {{ $s_l[0]->rel_reologia[0]->tem_ensayo_100_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_100_up . '°' : '-' }}
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949;">
+                {{ $s_l[0]->rel_reologia[0]->tem_ensayo_60_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_60_up . '°' : '-' }}
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949;">
+                {{ $s_l[0]->rel_reologia[0]->tem_ensayo_30_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_30_up . '°' : '-' }}
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949;">
+                {{ $s_l[0]->rel_reologia[0]->tem_ensayo_6_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_6_up . '°' : '-' }}
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-right: 0">
+                {{ $s_l[0]->rel_reologia[0]->tem_ensayo_3_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_3_up . '°' : '-' }}
+            </td>
+        </tr>
+
+    </table>
+
+    {{-- Reología up reads --}}
+    <table width='100%' style="border: 1px solid #494949; border-radius: 2px; margin-top: 10px">
+        <th
+            style="width: 80%; text-align: center; color: #494949; padding-top: 3px; letter-spacing: 1px; font-size: 13px; background: rgb(214, 232, 238)">
+            Reología (down reads)
+        </th>
+    </table>
+    <table width='100%' style="border: 1px solid #494949; border-radius: 5px; margin-top: 5px;">
+        <tr>
+            <td class="d_g_first_td">
+
+            </td>
+            <td class="d_g_first_td">
+                RPM
+            </td>
+            <td class="d_g_second_td">
+                300
+            </td>
+            <td class="d_g_second_td">
+                200
+            </td>
+            <td class="d_g_second_td">
+                100
+            </td>
+            <td class="d_g_second_td">
+                60
+            </td>
+            <td class="d_g_second_td">
+                30
+            </td>
+            <td class="d_g_second_td">
+                6
+            </td>
+            <td class="d_g_last_td">
+                3
+            </td>
+        </tr>
+        <tr>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949">
+                T° Amb.
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949">
+                {{ $s_l[0]->rel_reologia[0]->tem_ambiente_rpm_down ? $s_l[0]->rel_reologia[0]->tem_ambiente_rpm_down . '°' : '-' }}
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949">
+                {{ $s_l[0]->rel_reologia[0]->tem_ambiente_300_down ? $s_l[0]->rel_reologia[0]->tem_ambiente_300_down . '°' : '-' }}
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949">
+                {{ $s_l[0]->rel_reologia[0]->tem_ambiente_200_down ? $s_l[0]->rel_reologia[0]->tem_ambiente_200_down . '°' : '-' }}
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949">
+                {{ $s_l[0]->rel_reologia[0]->tem_ambiente_100_down ? $s_l[0]->rel_reologia[0]->tem_ambiente_100_down . '°' : '-' }}
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949;">
+                {{ $s_l[0]->rel_reologia[0]->tem_ambiente_60_down ? $s_l[0]->rel_reologia[0]->tem_ambiente_60_down . '°' : '-' }}
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949;">
+                {{ $s_l[0]->rel_reologia[0]->tem_ambiente_30_down ? $s_l[0]->rel_reologia[0]->tem_ambiente_30_down . '°' : '-' }}
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949;">
+                {{ $s_l[0]->rel_reologia[0]->tem_ambiente_6_down ? $s_l[0]->rel_reologia[0]->tem_ambiente_6_down . '°' : '-' }}
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949; border-right: 0">
+                {{ $s_l[0]->rel_reologia[0]->tem_ambiente_3_down ? $s_l[0]->rel_reologia[0]->tem_ambiente_3_down . '°' : '-' }}
+            </td>
+
+        </tr>
+        <tr>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949;">
+                T° Ens.
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949;">
+                {{ $s_l[0]->rel_reologia[0]->tem_ensayo_rpm_down ? $s_l[0]->rel_reologia[0]->tem_ensayo_rpm_down . '°' : '-' }}
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949;">
+                {{ $s_l[0]->rel_reologia[0]->tem_ensayo_300_down ? $s_l[0]->rel_reologia[0]->tem_ensayo_300_down . '°' : '-' }}
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949;">
+                {{ $s_l[0]->rel_reologia[0]->tem_ensayo_200_down ? $s_l[0]->rel_reologia[0]->tem_ensayo_200_down . '°' : '-' }}
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949;">
+                {{ $s_l[0]->rel_reologia[0]->tem_ensayo_100_down ? $s_l[0]->rel_reologia[0]->tem_ensayo_100_down . '°' : '-' }}
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949;">
+                {{ $s_l[0]->rel_reologia[0]->tem_ensayo_60_down ? $s_l[0]->rel_reologia[0]->tem_ensayo_60_down . '°' : '-' }}
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949;">
+                {{ $s_l[0]->rel_reologia[0]->tem_ensayo_30_down ? $s_l[0]->rel_reologia[0]->tem_ensayo_30_down . '°' : '-' }}
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949;">
+                {{ $s_l[0]->rel_reologia[0]->tem_ensayo_6_down ? $s_l[0]->rel_reologia[0]->tem_ensayo_6_down . '°' : '-' }}
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-right: 0">
+                {{ $s_l[0]->rel_reologia[0]->tem_ensayo_3_down ? $s_l[0]->rel_reologia[0]->tem_ensayo_3_down . '°' : '-' }}
+            </td>
+        </tr>
+
+    </table>
+    
+
     {{-- Pérdida de Filtrado --}}
     <table width='100%' style="border: 1px solid #494949; border-radius: 2px; margin-top: 10px">
         <th
@@ -787,6 +850,179 @@
             </td>
         </tr>
     </table>
+    <div style="page-break-after: always;"></div>
+    {{-- Tiempo de Bombeabilidad --}}
+    <table width='100%' style="border: 1px solid #494949; border-radius: 2px; margin-top: 10px">
+        <th
+            style="width: 80%; text-align: center; color: #494949; padding-top: 3px; letter-spacing: 1px; font-size: 13px; background: rgb(214, 232, 238)">
+            Tiempo de Bombeabilidad
+        </th>
+    </table>
+
+    @foreach ($s_l[0]->rel_bombeabilidad as $bombeabilidad)
+        @if ($bombeabilidad->selected)
+            <table width='100%' style="border: 1px solid #494949; border-radius: 5px; margin-top: 5px;">
+                <tr>
+                    <td class="d_g_first_td" style="width: 20%">
+                        <b>Consistómetro N°</b>
+                    </td>
+                    <td
+                        style="color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949">
+                        {{ $bombeabilidad->consistometro ? $bombeabilidad->consistometro : 'No aplica' }}
+                    </td>
+                    <td class="d_g_first_td">
+                        <b>Tiempo de Acondicionamiento</b>
+                    </td>
+                    <td
+                        style="width: 10%; color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949">
+                        {{ $bombeabilidad->time_acondicionamiento ? $bombeabilidad->time_acondicionamiento : 'No aplica' }}
+                    </td>
+                    <td class="d_g_last_td" style="width: 15%; border-right: 0">
+                        <b>Planilla N°
+                            {{ $bombeabilidad->planilla ? $bombeabilidad->planilla : '---' }}</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949"
+                        colspan="2">
+                        <b>Gradiente:</b>
+                        {{ $bombeabilidad->gradiente ? $bombeabilidad->gradiente : 'No aplica' }}
+                        <small>(°F/100ft)</small>
+                    </td>
+                    <td
+                        style="color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949">
+                        <b>Temperatura:</b>
+                        {{ $bombeabilidad->temperatura ? $bombeabilidad->temperatura : 'No aplica' }}
+                        <small>(°C)</small>
+                    </td>
+                    <td style="width: 30%; color: #686868; text-align: center; font-size: 13px; border-bottom: 1px solid #494949"
+                        colspan="2">
+                        <b>Presión:</b>
+                        {{ $bombeabilidad->presion ? $bombeabilidad->presion : 'No aplica' }}<small>(psi)</small>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949"
+                        colspan="2">
+                        <b>40 Bc:</b>
+                        {{ $bombeabilidad->bc_40 ? $bombeabilidad->bc_40 : 'No aplica' }}
+                        <small>(hh:mm)</small>
+                    </td>
+                    <td
+                        style="color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949">
+                        <b>70 Bc:</b>
+                        {{ $bombeabilidad->bc_70 ? $bombeabilidad->bc_70 : 'No aplica' }}
+                        <small>(hh:mm)</small>
+                    </td>
+                    <td style="width: 30%; color: #686868; text-align: center; font-size: 13px; border-bottom: 1px solid #494949"
+                        colspan="2">
+                        <b>100 Bc:</b>
+                        {{ $bombeabilidad->bc_100 ? $bombeabilidad->bc_100 : 'No aplica' }}
+                        <small>(hh:mm)</small>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="5" style="text-align: center; padding-top: 10px"><h5 style="margin: 0; padding: 0">Adjunto</h5></td>
+                </tr>
+                <tr>
+                    <td colspan="5" style="padding: 5px">
+                        <div style="width: 100%; height: 250px; overflow: hidden; display: flex; justify-content: center; align-items: center; text-align: center">
+                            <img src="{{ public_path('uploads/ensayos/') . $bombeabilidad->img }}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        @endif
+    @endforeach
+
+
+    {{-- UCA - Resistencia a la Compresión --}}
+    <table width='100%' style="border: 1px solid #494949; border-radius: 2px; margin-top: 10px">
+        <th
+            style="width: 80%; text-align: center; color: #494949; padding-top: 3px; letter-spacing: 1px; font-size: 13px; background: rgb(214, 232, 238)">
+            UCA - Resistencia a la Compresión
+        </th>
+    </table>
+
+    <table width='100%' style="border: 1px solid #494949; border-radius: 5px; margin-top: 5px;">
+        <tr>
+            <td class="d_g_first_td" style="width: 20%">
+                <b>UCA N°</b>
+            </td>
+            <td
+                style="color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949">
+                {{ $s_l[0]->rel_uca[0]->id }}
+            </td>
+            <td class="d_g_first_td">
+                <b>Principal</b>
+            </td>
+            <td
+                style="width: 10%; color: #686868; text-align: center; font-size: 13px; border-right: 0; border-bottom: 1px solid #494949">
+                {{ $s_l[0]->rel_uca[0]->principal ? $s_l[0]->rel_uca[0]->principal . '°' : 'No aplica' }}
+            </td>
+        </tr>
+        <tr>
+            <td class="d_g_first_td" style="border-top: 0">50 psi</td>
+            <td class="d_g_first_td" style="border-top: 0">500 psi</td>
+            <td class="d_g_first_td" style="border-top: 0">1000 psi</td>
+            <td class="d_g_first_td" style="border-top: 0; border-right: 0">12 hr</td>
+        </tr>
+        <tr>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949;">
+                {{ $s_l[0]->rel_uca[0]->psi_50 ? $s_l[0]->rel_uca[0]->psi_50 . ' (hh:mm)' : 'No aplica' }}
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949;">
+                {{ $s_l[0]->rel_uca[0]->psi_500 ? $s_l[0]->rel_uca[0]->psi_500 . ' (hh:mm)' : 'No aplica' }}
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949;">
+                {{ $s_l[0]->rel_uca[0]->psi_1000 ? $s_l[0]->rel_uca[0]->psi_1000 . ' (hh:mm)' : 'No aplica' }}
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-right: 0; border-bottom: 1px solid #494949;">
+                {{ $s_l[0]->rel_uca[0]->hs_12 ? $s_l[0]->rel_uca[0]->hs_12 . ' hr' : 'No aplica' }}
+            </td>
+        </tr>
+        <tr>
+            <td class="d_g_first_td" style="border-top: 0">24 hr</td>
+            <td class="d_g_first_td" style="border-top: 0">Impedancia Acústica</td>
+            <td class="d_g_first_td" style="border-top: 0">SGS cero</td>
+            <td class="d_g_first_td" style="border-top: 0; border-right: 0">SGS max</td>
+        </tr>
+        <tr>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949">
+                {{ $s_l[0]->rel_uca[0]->hs_24 ? $s_l[0]->rel_uca[0]->hs_24 . ' hr' : 'No aplica' }}
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949;">
+                {{ $s_l[0]->rel_uca[0]->impedancia_acustica ? $s_l[0]->rel_uca[0]->impedancia_acustica : 'No aplica' }}
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-bottom: 1px solid #494949">
+                {{ $s_l[0]->rel_uca[0]->sgs_cero ? $s_l[0]->rel_uca[0]->sgs_cero . ' (hh:mm)' : 'No aplica' }}
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; border-right: 0; border-bottom: 1px solid #494949">
+                {{ $s_l[0]->rel_uca[0]->sgs_max ? $s_l[0]->rel_uca[0]->sgs_max . ' (hh:mm)' : 'No aplica' }}
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="5" style="text-align: center; padding-top: 10px"><h5 style="margin: 0; padding: 0">Adjunto</h5></td>
+        </tr>
+        <tr>
+            <td colspan="5" style="padding: 5px">
+                <div style="width: 100%; height: 250px; overflow: hidden; display: flex; justify-content: center; align-items: center; text-align: center">
+                    <img src="{{ public_path('uploads/ensayos/') . $s_l[0]->rel_uca[0]->img }}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
+                </div>
+            </td>
+        </tr>
+    </table>
+
 
     {{-- Agua Libre --}}
     <table width='100%' style="border: 1px solid #494949; border-radius: 2px; margin-top: 10px">
@@ -826,7 +1062,7 @@
 
 
     </table>
-
+    <div style="page-break-after: always;"></div>
     {{-- Mezclabilidad --}}
     <table width='100%' style="border: 1px solid #494949; border-radius: 2px; margin-top: 10px">
         <th
@@ -862,6 +1098,36 @@
                 style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right:0; border-bottom: 0; border-top: 1px solid #494949; padding: 5px">
                 {{ $s_l[0]->observacion }}
             </td>
+        </tr>
+    </table>
+
+    <table width='100%' style="border: 1px solid #494949; border-radius: 5px; margin: 20px 0"></table>
+    {{-- Quien lo ralizó | Quién lo revisó | Quién lo solicitó --}}
+    <table width='100%' style="border: 1px solid #494949; border-radius: 5px; margin: 15px 0">
+        <tr>
+            <td class="d_g_first_td">
+                {{--Realizado por--}}
+                Solicitado por
+            </td>
+            <td class="d_g_second_td">
+                Laboratorio
+            </td>
+            <td class="d_g_last_td">
+                {{--
+                Solicitado por--}}
+                Autoriza
+            </td>
+        </tr>
+        <tr>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; padding: 20px 0">
+            {{--$s_l[0]->solicitado->--}}Working...
+            </td>
+            <td
+                style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949; padding: 20px 0">
+                Working...</td>
+            <td style="width: 40%;color: #686868; text-align: center; font-size: 13px; padding: 20px 0">
+            Working...</td>
         </tr>
     </table>
 

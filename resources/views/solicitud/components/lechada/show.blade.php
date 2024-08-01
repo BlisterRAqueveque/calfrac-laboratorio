@@ -175,7 +175,7 @@
                     <p class="m-0 font-bold text-lg tracking-wide dark:text-gray-300">Información General</p>
                     @if (!$solicitud->aprobada)
                         <div class="flex gap-3">
-                            <button
+                            {{--<button
                                 class="bg-cyan-600 dark:bg-blue-600 dark:hover:bg-blue-700 dark:bg-opacity-70 dark:text-blue-300 text-white font-bold tracking-wide px-3 py-1 rounded-sm flex gap-2 hover:bg-cyan-700 transition-all duration-200"
                                 id="btnHabilitarEdicionLechada">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -184,7 +184,8 @@
                                         d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                                 </svg>
                                 Habilitar Edición
-                            </button>
+                            </button>--}}
+                            
                             <button
                                 class="bg-red-400 dark:bg-red-700 dark:bg-opacity-50 dark:text-red-600 text-white font-bold tracking-wide px-3 py-1 rounded-sm flex gap-2 hover:bg-red-500 transition-all duration-200 hidden"
                                 id="btnDeshabilitarEdicionLechada">
@@ -486,7 +487,7 @@
                     <div class="">
                         <label for="tipo_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de lodo</label>
                         <select name="tipo_lodo" id="tipo_lodo" class="text-sm inp_edit" disabled>
-                            <option value="" selected disabled>Seleccione un tipo de lodo</option> <!-- Opción predeterminada -->
+                            <!-- <option value="" selected disabled>Seleccione un tipo de lodo</option> Opción predeterminada -->
                             @foreach ($tipo_lodo as $tipo)
                                 <option value="{{ $tipo->id }}" {{ isset($s_l[0]->tipo) && $tipo->id == $s_l[0]->tipo ? 'selected' : '' }}>
                                     {{ $tipo->nombre }}
@@ -498,7 +499,7 @@
                     <div class="">
                         <label for="mud_company" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Compañía de Lodos</label>
                         <select name="mud_company" id="mud_company" class="text-sm inp_edit" disabled>
-                            <option value="" selected disabled {{ $s_l[0]->mud_company_id == null ? 'selected' : '' }}>Seleccione la compañía</option>
+                            <!--<option value="" selected disabled {{ $s_l[0]->mud_company_id == null ? 'selected' : '' }}>Seleccione la compañía</option> -->
                             @foreach ($mud_company as $mud)
                                 <option value="{{ $mud->id }}" {{ $mud->id == $s_l[0]->mud_company_id ? 'selected' : '' }}>
                                     {{ $mud->nombre }}</option>
@@ -583,8 +584,8 @@
 
                     <div class="md:col-span-2 xl:col-span-1">
                         <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Grado de
-                            Temperatura <small>(°C)</small></label>
-                        <input type="number" name="grado_temperatura" class="form-control sz p-2" placeholder="Cº"
+                            Temperatura <small>(F°/100ft)</small></label>
+                        <input type="number" name="grado_temperatura" class="form-control sz p-2" placeholder="F°/100ft"
                             step=".01" value="{{ $s_l[0]->grado_temperatura }}" readonly>
                     </div>
 
@@ -622,21 +623,19 @@
                 </div>
 
                 <hr class="my-4">
-                <p class="m-0 font-bold text-lg my-3 tracking-wide">Firma de Autorización para realizar el trabajo</p>
+                <p class="m-0 font-bold text-lg my-3 tracking-wide">Reconocimiento de que el trabajo fue solicitado</p>
 
                 <div class="grid grid-cols-2 gap-3 mt-3">
                     <div>
-                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">¿Quién
-                            autoriza?</label>
-                        <select name="firma_autorizacion_lechada" class="form-select text-sm" disabled>
-                            <option value="">-- Seleccione --</option>
-                            @foreach ($users as $e)
-                                @if ($e->id == $s_l[0]->firma_autorizacion_id)
-                                    <option value="{{ $e->id }}" selected>{{ $e->nombre }}
-                                        {{ $e->apellido }}
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre <small>(Solicitado por)</small></label>
+                        <select name="firma_solicitante_lechada" class="form-select text-sm" disabled>
+                            @foreach ($names_ingenieros as $name)
+                                @if ($name->id == $s_l[0]->firma_solicitante_id)
+                                    <option value="{{ $name->id }}" selected>{{ $name->nombre }}
+                                        {{ $name->apellido }}
                                     </option>
                                 @else
-                                    <option value="{{ $e->id }}">{{ $e->nombre }} {{ $e->apellido }}
+                                    <option value="{{ $name->id }}">{{ $name->nombre }} {{ $name->apellido }}
                                     </option>
                                 @endif
                             @endforeach
@@ -645,18 +644,15 @@
 
                     <div>
                         <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de
-                            Autorización</label>
-                        <input type="date" name="fecha_autorizacion_autorizacion"
-                            value="{{ $s_l[0]->fecha_autorizacion }}" readonly class="form-control text-sm">
+                            la firma</label>
+                        <input type="date" name="fecha_reconocimiento_lechada"
+                            value="{{ $s_l[0]->fecha_reconocimiento }}" readonly class="form-control text-sm">
                     </div>
                 </div>
 
-                <p class="m-0 font-bold text-lg my-3 tracking-wide">Reconocimiento de que el trabajo fue realizado</p>
-
                 <div class="grid grid-cols-2 gap-3 mt-3">
                     <div>
-                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">¿Quién
-                            reconoce el trabajo?</label>
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre <small>(Laboratorio)</small></label>
                         <select name="firma_reconocimiento_lechada" class="form-select text-sm" disabled>
                             <option value="">-- Seleccione --</option>
                             @foreach ($users as $e)
@@ -674,11 +670,41 @@
 
                     <div>
                         <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de
-                            Reconocimiento</label>
+                            la firma</label>
                         <input type="date" name="fecha_reconocimiento_lechada"
                             value="{{ $s_l[0]->fecha_reconocimiento }}" readonly class="form-control text-sm">
                     </div>
                 </div>
+
+
+                <p class="m-0 font-bold text-lg my-3 tracking-wide">Firma de Autorización para realizar el trabajo</p>
+
+                <div class="grid grid-cols-2 gap-3 mt-3">
+                    <div>
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre <small>(Autoriza)</small></label>
+                        <select name="firma_autorizacion_lechada" class="form-select text-sm" disabled>
+                            <option value="">-- Seleccione --</option>
+                            @foreach ($users as $e)
+                                @if ($e->id == $s_l[0]->firma_autorizacion_id)
+                                    <option value="{{ $e->id }}" selected>{{ $e->nombre }}
+                                        {{ $e->apellido }}
+                                    </option>
+                                @else
+                                    <option value="{{ $e->id }}">{{ $e->nombre }} {{ $e->apellido }}
+                                    </option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de la firma</label>
+                        <input type="date" name="fecha_autorizacion_autorizacion"
+                            value="{{ $s_l[0]->fecha_autorizacion }}" readonly class="form-control text-sm">
+                    </div>
+                </div>
+
+
 
                 <hr class="my-4">
 

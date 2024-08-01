@@ -20,7 +20,7 @@
                         <small class="text-xs text-red-600">El Nº del Proyecto es requerido</small>
                     @enderror
                 </div>--}}
-                <div class="col-xs-12 col-md-6 my-2">
+                <div class="col-xs-12 col-md-4 my-2">
                     <label for="servicio_number"
                         class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Nº
                         Revisión de Solicitud de Servicio <span class="text-red-500">*</span></label>
@@ -307,8 +307,9 @@
                         <select name="aditivo_extra" id="aditivo_extra"
                             class="form-select dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none sz p-2 mt-1 md:w-1/4 w-full"
                             onchange="aditivoExtra(this)">
+                            <option value="0"  selected>Seleccione</option>
                             <option value="1">Si</option>
-                            <option value="0" selected>No</option>
+                            <option value="2">No</option>
                         </select>
                     </div>
                 </div>
@@ -507,7 +508,7 @@
                         class="form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 sz">
                 </div>
 
-                <div class="col-xs-12 col-md-6 my-2">
+                {{--<div class="col-xs-12 col-md-6 my-2">
                     <label for="firma_servicios_tecnicos"
                         class=" text-gray-700 dark:text-gray-300  text-sm font-semibold tracking-wide mb-2">Nombre
                         <small>(Servicios Técnicos)</small></label>
@@ -527,7 +528,7 @@
                         <small>(*)</small></label>
                     <input type="date" name="fecha_firma_servicios_tecnicos" id="fecha_firma_servicios_tecnicos"
                         class="form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 sz">
-                </div>
+                </div>--}}
 
                 <div class="col-xs-12 col-md-6 my-2">
                     <label for="firma_laboratorio"

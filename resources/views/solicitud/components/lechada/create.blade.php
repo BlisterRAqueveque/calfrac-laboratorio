@@ -9,7 +9,7 @@
             <p class="m-0 font-bold text-lg tracking-wide">Información General</p>
 
             <div class="grid xs:grid-cols-2 md:grid-cols-6 gap-3 mt-3">
-                <div class="col-span-2 xl:col-span-1">
+                <div class="col-span-2 xl:col-span-2">
                     <label for="cliente_lechada" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Cliente
                         <span class="text-red-500">*</span></label>
                     <select name="cliente_lechada" id="cliente_lechada" class="text-sm" data-search="true" data-silent-initial-value-set="true">
@@ -178,8 +178,6 @@
             <small class="text-xs text-red-600">El tipo de cementación es requerido</small>
             @enderror
         </div>
-
-        <br>
         <div class="col-span-1 md:col-span-2 xl:col-span-1">
             <label for="ensayo_requerido_lechada" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de Lechada <span class="text-red-500">*</span></label>
             <div class="flex gap-1">
@@ -340,7 +338,6 @@
                         @endforeach
                     </select>
                 </div>
-                --}}
                 <div class="md:col-span-2 xl:col-span-1">
                     <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Profundidad
                         Pozo <small>(MD/TVD) (m)</small></label>
@@ -354,10 +351,37 @@
                     </div>
                 </div>
 
+                --}}
+
             <div class="md:col-span-2 xl:col-span-1">
-                <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Gradiente de
-                    Temperatura <small>(ºC)</small></label>
-                <input type="number" name="grado_temperatura" value="{{ old('grado_temperatura') }}" class="form-control sz p-2" placeholder="ºC" step=".01">
+                <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tope de 
+                    Lechada <small>(MD/TVD) (m)</small></label>
+                <div class="grid grid-cols-2 gap-3">
+                    <input type="number" min="0" name="top_of_slurry_md"
+                        class="form-control text-sm p-2" value="{{ old('top_of_slurry_md') }}"
+                        placeholder="MD" step=".01">
+                    <input type="number" min="0" name="top_of_slurry_tvd"
+                        class="form-control text-sm p-2" value="{{ old('top_of_slurry_tvd') }}"
+                        placeholder="TVD" step=".01">
+                </div>
+            </div>    
+
+            <div class="md:col-span-2 xl:col-span-1">
+                <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Volumen
+                    <small>(bbl)</small></label>
+                <input type="number" name="volumen" value="{{ old('volumen') }}" class="form-control sz p-2" placeholder="Volumen" step=".01">
+            </div>
+
+            <div class="md:col-span-2 xl:col-span-1">
+                <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Caudal
+                    <small>(bpm)</small></label>
+                <input type="number" name="pump_rate" value="{{ old('pump_rate') }}" class="form-control sz p-2" placeholder="Caudal" step=".01">
+            </div>
+
+            <div class="md:col-span-2 xl:col-span-1">
+                <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Grado de
+                    Temperatura <small>(F°/100ft)</small></label>
+                <input type="number" name="grado_temperatura" value="{{ old('grado_temperatura') }}" class="form-control sz p-2" placeholder="(F°/100ft)" step=".01">
             </div>
 
             <div class="xl:col-span-1">
@@ -397,9 +421,9 @@
                 <input type="text" name="filtrado" value="{{ old('filtrado') }}" class="form-control text-sm" placeholder="Ingrese el filtrado">
             </div>
 
-            <div class="col-span-5 md:col-span-1 ">
-                <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Bombeabilidad <small>Tiempo (min)</small></label>
-                <input type="text" name="bombeabilidad" value="{{ old('bombeabilidad') }}" class="form-control text-sm" placeholder="Operacion + Acondicionamiento">
+            <div class="col-span-5 md:col-span-2">
+                <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Bombeabilidad <small>Tiempo Acondicionamiento + Tiempo Operación</small></label>
+                <input type="text" name="bombeabilidad" value="{{ old('bombeabilidad') }}" class="form-control text-sm" placeholder="Tiempo (min)">
             </div>
         </div>
 
@@ -434,7 +458,7 @@
         </div>
 
         <div class="grid grid-cols-4 gap-3 mt-2">
-            <div class="col-span-4 md:col-span-1">
+            <div class="col-span-4 md:col-span-2">
                 <label for="agua_libre" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Agua
                     Libre <small>%</small></label>
                 {{--<input type="text" name="agua_libre" value="{{ old('agua_libre') }}"
@@ -445,8 +469,8 @@
                     @endforeach
                 </select>
             </div>
-            <div class="col-span-4 md:col-span-1">
-                <label for="sgs" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">SGS <small>(min)</small></label>
+            <div class="col-span-4 md:col-span-2">
+                <label for="sgs" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">SGS <small>(&lt;min)</small></label>
                 {{--<input type="text" name="sgs" value="{{ old('sgs') }}" class="form-control text-sm"
                 placeholder="SGS">--}}
                 <select name="sgs" value="{{ old('sgs') }}" class="text-sm inp_edit" id="sgs">
@@ -472,10 +496,11 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-3 text-center bg-gray-100 py-2 my-3">
+        <div class="grid grid-cols-4 text-center bg-gray-100 py-2 my-3">
             <p>Lote</p>
             <p>Aditivo</p>
             <p>Conc (% BWOC)</p>
+            <p>Blend</p>
         </div>
         <div id="container_formulaciones_tentativas"></div>
 
@@ -498,29 +523,30 @@
         </div>
 
         <hr class="my-4">
-        <p class="m-0 font-bold text-lg my-3 tracking-wide">Firma de Autorización para realizar el trabajo</p>
 
+        <p class="m-0 font-bold text-lg my-3 tracking-wide">Reconocimiento de que el trabajo fue solicitado</p>
         <div class="grid grid-cols-2 gap-3 mt-3">
-            <div class="grid">
-                <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">¿Quién
-                    autoriza?</label>
-                <input type="text" class="form-control text-sm" value="{{ auth()->user()->nombre }} {{ auth()->user()->apellido }}" readonly>
+        <div class="grid">
+            <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre <small>(Solicitado por)</small></label>
+                <select name="firma_solitante_lechada" id="firma_solicitante_lechada" data-search="true" data-silent-initial-value-set="true">
+                    @foreach ($names_ingenieros as $name)
+                    <option value="{{ $name->id }}" {{ old('firma_solicitante_lechada') == $name->id ? 'selected' : '' }}>
+                        {{ $name->nombre }} {{ $name->apellido }} 
+                    </option>
+                    @endforeach
                 </select>
             </div>
-
             <div>
-                <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de
-                    Autorización</label>
-                <input type="date" name="fecha_autorizacion_autorizacion" class="form-control text-sm" value="@php echo date('Y-m-d') @endphp" readonly>
+                <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de la
+                    firma</label>
+                <input type="date" name="fecha_solicitante_lechada" value="{{ old('fecha_solicitante_lechada') }}" class="form-control text-sm">
             </div>
+
         </div>
 
-        <p class="m-0 font-bold text-lg my-3 tracking-wide">Reconocimiento de que el trabajo fue realizado</p>
-
         <div class="grid grid-cols-2 gap-3 mt-3">
-            <div class="grid">
-                <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">¿Quién
-                    reconoce el trabajo?</label>
+        <div class="grid">
+            <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre <small>(Laboratorio)</small></label>
                 <select name="firma_reconocimiento_lechada" id="firma_reconocimiento_lechada" data-search="true" data-silent-initial-value-set="true">
                     @foreach ($users as $u)
                     <option value="{{ $u->id }}" {{ old('firma_reconocimiento_lechada') == $u->id ? 'selected' : '' }}>
@@ -531,9 +557,25 @@
             </div>
 
             <div>
-                <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de
-                    Reconocimiento</label>
+                <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de la firma</label>
                 <input type="date" name="fecha_reconocimiento_lechada" value="{{ old('fecha_reconocimiento_lechada') }}" class="form-control text-sm">
+            </div>
+        </div>
+
+
+
+        <p class="m-0 font-bold text-lg my-3 tracking-wide">Firma de autorización para realizar el trabajo</p>
+
+        <div class="grid grid-cols-2 gap-3 mt-3">
+            <div class="grid">
+                <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre <small>(Autoriza)</small></label>
+                <input type="text" class="form-control text-sm" value="{{ auth()->user()->nombre }} {{ auth()->user()->apellido }}" readonly>
+                </select>
+            </div>
+
+            <div>
+                <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de la firma</label>
+                <input type="date" name="fecha_autorizacion_autorizacion" class="form-control text-sm" value="@php echo date('Y-m-d') @endphp" readonly>
             </div>
         </div>
         </div>
@@ -594,10 +636,13 @@
             ele: "#tipo_cementacion_lechada",
             placeholder: "Seleccione el tipo de cementación",
         });
-
         VirtualSelect.init({
             ele: "#firma_reconocimiento_lechada",
             placeholder: "Seleccione quien reconoce",
+        });
+        VirtualSelect.init({
+            ele: "#firma_solicitante_lechada",
+            placeholder: "Seleccione quien solicita",
         });
         VirtualSelect.init({
             ele: "#tipo_lodo",
@@ -608,10 +653,6 @@
             placeholder: "Seleccione la compañía",
         });
         VirtualSelect.init({
-            ele: "#sgs",
-            placeholder: "Seleccione SGS",
-        });
-        VirtualSelect.init({
             ele: "#agua_libre",
             placeholder: "Seleccione agua libre",
         });
@@ -619,17 +660,22 @@
             ele: "#equipo_lechada",
             placeholder: "Seleccione equipo",
         });
+        VirtualSelect.init({
+            ele: "#sgs",
+            placeholder: "Seleccione SGS",
+        });
         document.getElementById("cliente_lechada").setValue(0);
         document.getElementById("locacion_lechada").setValue(0);
         document.getElementById("tipo_requerimiento_lechada").setValue(0);
         document.getElementById("tipo_trabajo_lechada").setValue(0);
         document.getElementById("tipo_cementacion_lechada").setValue(0);
         document.getElementById("firma_reconocimiento_lechada").setValue(0);
+        document.getElementById("firma_solicitante_lechada").setValue(0);
         document.getElementById("tipo_lodo").setValue(0);
         document.getElementById("mud_company").setValue(0);
-        document.getElementById("sgs").setValue(0);
         document.getElementById("agua_libre").setValue(0);
         document.getElementById("equipo_lechada").setValue(0);
+        document.getElementById("sgs").setValue(0);
     })
 </script>
 
@@ -711,8 +757,8 @@
             let divGrid = el('div.grid grid-cols-2 gap-3 md:grid-cols-2');
             let textarea = el('textarea.textarea.form-control.text-sm.p-2', {
                 name: 'comentarios[]',
-                placeholder: 'Comentarios/Observaciones',
-                rows: 3
+                placeholder: 'Comentario',
+                rows: 1
             });
             mount(divGrid, textarea);
 
@@ -772,7 +818,9 @@
             id: 'modal'
         });
         let modalBg = el('div.fixed.inset-0.bg-black.opacity-50.z-40');
-        let modalContent = el('div.bg-white.p-5.rounded.shadow-lg.max-w-md.mx-auto.z-50');
+        let modalContent = el('div.bg-white.p-5.rounded.shadow-lg.max-w-md.mx-auto.z-50', {
+            style: 'width: 90%; max-width: 800px;' // Ajustar el tamaño del modal aquí
+        });
 
         // Agregar el mensaje
         let modalMessage = el('p.text-center.mb-4', message);

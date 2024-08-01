@@ -94,8 +94,16 @@ class Solicitud extends Model
         return $this->belongsTo(TipoCementacion::class, 'tipo_cementacion_id');
     }
 
+    public function tipo_requerimiento_cemento () {
+        return $this->belongsTo(TipoRequerimientoCemento::class, 'tipo_requerimiento_cemento_id');
+    }
+
+    public function tipo_trabajo_cemento () {
+        return $this->belongsTo(TipoTrabajoCemento::class, 'tipo_trabajo_cemento_id');
+    }
+
     public function equipos() {
-        return $this->belongsTo(Equipos::class, 'equipos');
+        return $this->belongsTo(Equipos::class, 'equipo');
     }
 
     public function servicios_fractura() {

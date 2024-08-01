@@ -18,7 +18,7 @@ const componentFiltrado = (data = '') => {
   // Fluido Acumulado
   divField = el('div')
   label = el('label.text-sm text-gray-700 font-semibold tracking-wide mb-2', 'Fluido Acumulado mL')
-  input = el('input.form-control text-sm p-2', {'readonly':'true', value:'Probando 2'})
+  input = el('input.form-control text-sm p-2', {'readonly':'true', value:`${data.fluido_acumulado}`})
   mount(divField, label)
   mount(divField, input)
   mount(div, divField)
@@ -27,7 +27,7 @@ const componentFiltrado = (data = '') => {
   // Filtrado API
   divField = el('div')
   label = el('label.text-sm text-gray-700 font-semibold tracking-wide mb-2', 'Filtrado API')
-  input = el('input.form-control text-sm p-2', {'readonly':'true', value:'Probando 3'})
+  input = el('input.form-control text-sm p-2', {'readonly':'true', value:`${data.filtrado_api}`})
   mount(divField, label)
   mount(divField, input)
   mount(div, divField)
