@@ -4,6 +4,12 @@ const container_formulaciones_tentativas = document.getElementById(
 const btnAddFormulacion = document.getElementById("btnAddFormulacion");
 let aux_aditivo = 0;
 
+// Opciones para el select "Blend"
+const blendOptions = [
+  { value: 'Si', text: 'Si' },
+  { value: 'No', text: 'No' },
+];
+
 /**
  * Crea las formulaciones para agregar los lotes, aditivos y/o también la concentración
  */
@@ -48,15 +54,26 @@ btnAddFormulacion.addEventListener("click", (e) => {
   );
   mount(div, input);
 
-  // Blend
-  input = el(
-    "input.form-control text-xs rounded-l-none p-2 col-span-4 md:col-span-1",
-    {
-      placeholder: "Blend",
-      name: `aditivos[${aux_aditivo}][blend]`,
-    }
-  );
-  mount(div, input);
+  // Blend (select)
+  select = el("select.form-control text-xs rounded-l-none p-2 col-span-4 md:col-span-1", {
+    name: `aditivos[${aux_aditivo}][blend]`,
+  });
+
+  // Añadir opción placeholder
+  const placeholderOption = document.createElement('option');
+  placeholderOption.value = '';
+  placeholderOption.textContent = 'Blend';
+  placeholderOption.disabled = true;
+  placeholderOption.selected = true;
+  select.appendChild(placeholderOption);
+
+  blendOptions.forEach(optionData => {
+    const option = document.createElement('option');
+    option.value = optionData.value;
+    option.textContent = optionData.text;
+    select.appendChild(option);
+  });
+  mount(div, select);
 
   mount(flex, button);
   mount(flex, div);

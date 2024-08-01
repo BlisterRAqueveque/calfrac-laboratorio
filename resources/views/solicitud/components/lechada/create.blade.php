@@ -470,14 +470,14 @@
                 </select>
             </div>
             <div class="col-span-4 md:col-span-2">
-                <label for="sgs" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">SGS <small>(min)</small></label>
-                <input type="text" name="sgs" value="{{ old('sgs') }}" class="form-control text-sm"
-                placeholder="SGS">
-                {{--<select name="sgs" value="{{ old('sgs') }}" class="text-sm inp_edit" id="sgs">
+                <label for="sgs" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">SGS <small>(&lt;min)</small></label>
+                {{--<input type="text" name="sgs" value="{{ old('sgs') }}" class="form-control text-sm"
+                placeholder="SGS">--}}
+                <select name="sgs" value="{{ old('sgs') }}" class="text-sm inp_edit" id="sgs">
                     @foreach ($sgs as $tipo)
                     <option value="{{ $tipo->opciones }}">{{ $tipo->opciones}}</option>
                     @endforeach
-                </select>--}}
+                </select>
             </div>
         </div>
 
@@ -525,11 +525,28 @@
         <hr class="my-4">
 
         <p class="m-0 font-bold text-lg my-3 tracking-wide">Reconocimiento de que el trabajo fue solicitado</p>
+        <div class="grid grid-cols-2 gap-3 mt-3">
+        <div class="grid">
+            <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre <small>(Solicitado por)</small></label>
+                <select name="firma_solitante_lechada" id="firma_solicitante_lechada" data-search="true" data-silent-initial-value-set="true">
+                    @foreach ($names_ingenieros as $name)
+                    <option value="{{ $name->id }}" {{ old('firma_solicitante_lechada') == $name->id ? 'selected' : '' }}>
+                        {{ $name->nombre }} {{ $name->apellido }} 
+                    </option>
+                    @endforeach
+                </select>
+            </div>
+            <div>
+                <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de la
+                    firma</label>
+                <input type="date" name="fecha_solicitante_lechada" value="{{ old('fecha_solicitante_lechada') }}" class="form-control text-sm">
+            </div>
+
+        </div>
 
         <div class="grid grid-cols-2 gap-3 mt-3">
-            <div class="grid">
-                <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">¿Quién
-                    solicita el trabajo?</label>
+        <div class="grid">
+            <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre <small>(Laboratorio)</small></label>
                 <select name="firma_reconocimiento_lechada" id="firma_reconocimiento_lechada" data-search="true" data-silent-initial-value-set="true">
                     @foreach ($users as $u)
                     <option value="{{ $u->id }}" {{ old('firma_reconocimiento_lechada') == $u->id ? 'selected' : '' }}>
@@ -540,25 +557,24 @@
             </div>
 
             <div>
-                <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de
-                    solicitud</label>
+                <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de la firma</label>
                 <input type="date" name="fecha_reconocimiento_lechada" value="{{ old('fecha_reconocimiento_lechada') }}" class="form-control text-sm">
             </div>
         </div>
+
+
 
         <p class="m-0 font-bold text-lg my-3 tracking-wide">Firma de autorización para realizar el trabajo</p>
 
         <div class="grid grid-cols-2 gap-3 mt-3">
             <div class="grid">
-                <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">¿Quién
-                    autoriza?</label>
+                <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre <small>(Autoriza)</small></label>
                 <input type="text" class="form-control text-sm" value="{{ auth()->user()->nombre }} {{ auth()->user()->apellido }}" readonly>
                 </select>
             </div>
 
             <div>
-                <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de
-                    autorización</label>
+                <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de la firma</label>
                 <input type="date" name="fecha_autorizacion_autorizacion" class="form-control text-sm" value="@php echo date('Y-m-d') @endphp" readonly>
             </div>
         </div>
@@ -620,9 +636,12 @@
             ele: "#tipo_cementacion_lechada",
             placeholder: "Seleccione el tipo de cementación",
         });
-
         VirtualSelect.init({
             ele: "#firma_reconocimiento_lechada",
+            placeholder: "Seleccione quien reconoce",
+        });
+        VirtualSelect.init({
+            ele: "#firma_solicitante_lechada",
             placeholder: "Seleccione quien solicita",
         });
         VirtualSelect.init({
@@ -641,16 +660,22 @@
             ele: "#equipo_lechada",
             placeholder: "Seleccione equipo",
         });
+        VirtualSelect.init({
+            ele: "#sgs",
+            placeholder: "Seleccione SGS",
+        });
         document.getElementById("cliente_lechada").setValue(0);
         document.getElementById("locacion_lechada").setValue(0);
         document.getElementById("tipo_requerimiento_lechada").setValue(0);
         document.getElementById("tipo_trabajo_lechada").setValue(0);
         document.getElementById("tipo_cementacion_lechada").setValue(0);
         document.getElementById("firma_reconocimiento_lechada").setValue(0);
+        document.getElementById("firma_solicitante_lechada").setValue(0);
         document.getElementById("tipo_lodo").setValue(0);
         document.getElementById("mud_company").setValue(0);
         document.getElementById("agua_libre").setValue(0);
         document.getElementById("equipo_lechada").setValue(0);
+        document.getElementById("sgs").setValue(0);
     })
 </script>
 

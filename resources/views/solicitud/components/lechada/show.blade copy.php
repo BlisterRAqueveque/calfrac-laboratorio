@@ -168,6 +168,7 @@
                                 </svg>
                                 Habilitar Edición
                             </button>
+                            
                             <button
                                 class="bg-red-400 dark:bg-red-700 dark:bg-opacity-50 dark:text-red-600 text-white font-bold tracking-wide px-3 py-1 rounded-sm flex gap-2 hover:bg-red-500 transition-all duration-200 hidden"
                                 id="btnDeshabilitarEdicion">
