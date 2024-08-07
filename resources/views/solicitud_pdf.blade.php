@@ -927,9 +927,15 @@
                 </tr>
                 <tr>
                     <td colspan="5" style="padding: 5px">
+                        @if (file_exists(public_path('uploads/ensayos/') . $bombeabilidad->img) && $bombeabilidad->img)
+                            <img src="{{ public_path('uploads/ensayos/') . $bombeabilidad->img }}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
+                        @else
+                            <p style="text-align: center;">Archivo no dispobible</p>
+                        @endif
+                        {{-- vieja configuración 
                         <div style="width: 100%; height: 250px; overflow: hidden; display: flex; justify-content: center; align-items: center; text-align: center">
                             <img src="{{ public_path('uploads/ensayos/') . $bombeabilidad->img }}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
-                        </div>
+                        </div> --}}
                     </td>
                 </tr>
             </table>
@@ -1017,7 +1023,12 @@
         <tr>
             <td colspan="5" style="padding: 5px">
                 <div style="width: 100%; height: 250px; overflow: hidden; display: flex; justify-content: center; align-items: center; text-align: center">
+                    @if (!empty($s_l[0]->rel_uca[0]->img) && file_exists(public_path('uploads/ensayos/') . $s_l[0]->rel_uca[0]->img))
                     <img src="{{ public_path('uploads/ensayos/') . $s_l[0]->rel_uca[0]->img }}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
+                @else
+                    <p>Archivo no disponible</p>
+                @endif
+                    {{-- vieja conf <img src="{{ public_path('uploads/ensayos/') . $s_l[0]->rel_uca[0]->img }}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);"> --}}
                 </div>
             </td>
         </tr>

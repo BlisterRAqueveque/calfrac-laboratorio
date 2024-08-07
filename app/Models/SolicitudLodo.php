@@ -20,6 +20,8 @@ class SolicitudLodo extends Model
         'fecha_autorizacion',
         'firma_reconocimiento_id',
         'fecha_reconocimiento',
+        'firma_solicitante_id',
+        'fecha_solicitante',
         'mud_company',
         'densidad_lodo',
         'temperatura',
@@ -47,6 +49,10 @@ class SolicitudLodo extends Model
     public function user_reconocimiento()
     {
         return $this->belongsTo(User::class, 'firma_reconocimiento_id');
+    }
+    public function user_solicitante()
+    {
+        return $this->belongsTo(User::class, 'firma_solicitante_id');
     }
 
     public function formulacion_tentativa()

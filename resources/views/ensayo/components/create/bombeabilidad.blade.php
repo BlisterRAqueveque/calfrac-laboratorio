@@ -291,7 +291,7 @@
             </div>
 
             <div class="mb-2 mt-2 text-center">
-                <h5 class="mb-1">Adjuntos a cargar (Opcional)</h5>
+                <h5 class="mb-1">Adjuntos a cargar <span class="text-red-500"><small>(Requerido)</small></span></h5>
                 <section id="container_file_bombeabilidad">
                     {{-- <div
                         class="relative w-1/3 mx-auto flex items-center p-2 border rounded-md border-gray-200 hover:bg-gray-50 cursor-pointer">

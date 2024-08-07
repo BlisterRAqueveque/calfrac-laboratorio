@@ -392,28 +392,56 @@
                 
             
                 <hr class="my-4">
-
-                <!--div class="grid xs:grid-cols-2 md:grid-cols-6 gap-3 mt-3">
-                    <p class="m-0 font-bold text-lg my-3 tracking-wide">Ensayos requeridos</p>
-
-                </!--div>
-                <hr class="my-4">
-
-                <div class="grid xs:grid-cols-2 md:grid-cols-6 gap-3 mt-3">
-                    <p class="m-0 font-bold text-lg my-3 tracking-wide">Requerimientos del colchon</p>
-
-                </div>
-                <hr class="my-4" -->
-
-                <div class="grid mt-3">
-                    <p class="m-0 font-bold text-lg my-3 tracking-wide">Observación/Comentarios</p>
-
-                    <div class="col-span-2 md:col-span-1">
-                        <textarea name="observacion_lodo" rows="5" class="form-control text-sm" placeholder="Máximo 500 caracteres"
-                            readonly> {{ $solicitud_lodo[0]->comentario }}</textarea>
+                <p class="m-0 font-bold text-lg my-3 tracking-wide">Reconocimiento de que el trabajo fue solicitado</p>
+                <div class="grid grid-cols-2 gap-3 mt-3">
+                    <div>
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre <small>(Solicitado por)</small></label>
+                        <select name="firma_solicitante_lodo" class="form-select text-sm" disabled>
+                            @foreach ($names_ingenieros as $name)
+                                @if ($name->id == $solicitud_lodo[0]->firma_solicitante_id)
+                                <option value="{{ $name->id }}" selected>{{ $name->nombre }}
+                                    {{ $name->apellido }}
+                                </option>
+                                @else
+                                    <option value="{{ $name->id }}">{{ $name->nombre }} {{ $name->apellido }}
+                                    </option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>   
+                    <div>
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de
+                            la firma</label>
+                        <input type="date" name="fecha_solicitante_lodo"
+                            value="{{ $solicitud_lodo[0]->fecha_solicitante }}" readonly class="form-control text-sm">
                     </div>
-                </div>
-                <p class="m-0 mt-3 font-bold text-lg tracking-wide dark:text-gray-300">Firmas de Autorización</p>
+                </div> 
+
+                <div class="grid grid-cols-2 gap-3 mt-3">
+                    <div>
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre <small>(Laboratorio)</small></label>
+                        <select name="firma_reconocimiento_lodo" class="form-select text-sm" disabled>
+                            @foreach ($users as $u)
+                                @if ($u->id == $solicitud_lodo[0]->firma_reconocimiento_id)
+                                <option value="{{ $u->id }}" selected>{{ $u->nombre }}
+                                    {{ $u->apellido }}
+                                </option>
+                                @else
+                                    <option value="{{ $u->id }}">{{ $u->nombre }} {{ $u->apellido }}
+                                    </option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+                    <div>
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de
+                            la firma</label>
+                        <input type="date" name="fecha_reconocimiento_lodo"
+                            value="{{ $solicitud_lodo[0]->fecha_reconocimiento }}" readonly class="form-control text-sm">
+                    </div>
+                </div>   
+
+                {{--<p class="m-0 mt-3 font-bold text-lg tracking-wide dark:text-gray-300">Firmas de Autorización</p>
 
                 <div class="row mt-3">
                     <div class="col-xs-12 col-md-6 my-2">
@@ -438,27 +466,22 @@
                     <div class="col-xs-12 col-md-6 my-2">
                         <label for="fecha_autorizacion"
                             class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Fecha
-                            de la Firma
-                            <small>(*)</small></label>
+                            de la Firma </label>
                         <input type="date" name="fecha_autorizacion" id="fecha_autorizacion"
                             class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
                             value="{{ $solicitud_lodo[0]->fecha_autorizacion }}" readonly>
                     </div>
+                <hr>
+                </div>--}}
+                <p class="m-0 font-bold text-lg my-3 tracking-wide">Firma de Autorización para realizar el trabajo</p>
 
-                  
-
-                <p class="m-0 mt-3 font-bold text-lg tracking-wide dark:text-gray-300">Reconocimiento</p>
-                <div class="row mt-3">
-                    <div class="col-xs-12 col-md-6 my-2">
-                        <label for="firma_reconocimiento"
-                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Nombre
-                            <small>(Reconocimiento)</small></label>
-                        <select name="firma_reconocimiento" id="firma_reconocimiento"
-                            class="form-select sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
-                            disabled>
+                <div class="grid grid-cols-2 gap-3 mt-3">
+                    <div>
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre <small>(Autoriza)</small></label>
+                        <select name="firma_autorizacion_lodo" class="form-select text-sm" disabled>
                             <option value="">-- Seleccione --</option>
                             @foreach ($users as $e)
-                                @if ($e->id == $solicitud_lodo[0]->firma_reconocimiento_id)
+                                @if ($e->id == $solicitud_lodo[0]->firma_autorizacion_id)
                                     <option value="{{ $e->id }}" selected>{{ $e->nombre }}
                                         {{ $e->apellido }}
                                     </option>
@@ -470,24 +493,17 @@
                         </select>
                     </div>
 
-                    <div class="col-xs-12 col-md-6 my-2">
-                        <label for="fecha_reconocimiento"
-                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Fecha
-                            de la Firma
-                            <small>(*)</small></label>
-                        <input type="date" name="fecha_reconocimiento" id="fecha_reconocimiento"
-                            class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
-                            value="{{ $solicitud_lodo[0]->fecha_reconocimiento }}" readonly>
+                    <div>
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de la firma</label>
+                        <input type="date" name="fecha_autorizacion"
+                            value="{{ $solicitud_lodo[0]->fecha_autorizacion }}" readonly class="form-control text-sm">
                     </div>
                 </div>
-
-                <hr>
-
-            </div>
         </form>
+        <br>
    
             <hr class="dark:bg-gray-400">
-
+        <br>
                     <!-- Aprobar la solicitud -->
             @if ($solicitud->aprobada)
             <div class="mt-3 flex items-center justify-center flex-col md:flex-row gap-3 text-center bg_approved">

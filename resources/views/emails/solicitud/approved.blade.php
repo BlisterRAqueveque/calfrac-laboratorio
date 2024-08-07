@@ -23,7 +23,7 @@
         <hr>
 
         <div style="padding: 10px; font-size: 14px">
-            <p style="margin: 0 auto">Estimado/da, <br> Nos complace informarle que se ha aprobado la Solicitud de Fractura N°{{ $data['solicitud_id'] }}</p>
+            <p style="margin: 0 auto">Estimado/da, <br> Nos complace informarle que se ha aprobado la Solicitud N°{{ $data['solicitud_id'] }}</p>
         </div>
 
         <div style="padding: 10px; display: flex; flex-direction: column; font-size: 14px">

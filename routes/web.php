@@ -13,6 +13,7 @@ use App\Http\Controllers\SolicitudController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\YacimientoController;
 use App\Http\Controllers\EquiposController;
+use App\Mail\SolicitudLechadaPdfMail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -143,3 +144,4 @@ Route::get('/pdf/report/lechada/{solicitud_id}', [PDFController::class, 'pdf_rep
 Route::post('/pdf/report/lechada/send/{solicitud_id}', [PDFController::class, 'pdf_send_report_lechada'])->name('pdf_send_report_lechada');
 Route::get('/pdf/view', [PDFController::class, 'pdf_view']);
 # Route::get('/pdf/report/lechadas/{solicitud_id}', [PDFController::class, 'pdf_report_lechada'])->name('pdf_report_lechadas');
+

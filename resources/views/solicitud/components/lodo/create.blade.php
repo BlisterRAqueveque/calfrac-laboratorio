@@ -7,8 +7,8 @@
         <div class="card-body">
             <p class="m-0 font-bold text-lg tracking-wide">Información General</p>
 
-                <div class="grid xs:grid-cols-2 md:grid-cols-4 gap-3 mt-3">
-                    <div class="col-span-2 xl:col-span-1">
+                <div class="grid xs:grid-cols-2 md:grid-cols-6 gap-3 mt-3">
+                    <div class="col-span-2 xl:col-span-2">
                         <label for="cliente_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Cliente
                             <span class="text-red-500">*</span></label>
                         <select name="cliente_lodo" id="cliente_lodo" class="text-sm" data-search="true"
@@ -20,6 +20,17 @@
                         </select>
                         @error('cliente_lodo')
                             <small class="text-xs text-red-600">El cliente es requerido</small>
+                        @enderror
+                    </div>
+
+                    <div class="col-span-2 xl:col-span-1">
+                        <label for="pozo_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Pozo
+                            <span class="text-red-500">*</span></label>
+                        <input type="text" placeholder="Ingrese el pozo"
+                        class="form-control text-sm p-2" p name="pozo_lodo"
+                            id="pozo_lodo">
+                        @error('pozo_lodo')
+                            <small class="text-red-700 font-semibold"><em>{{ $message }}</em></small>
                         @enderror
                     </div>
     
@@ -39,19 +50,8 @@
                     </div>
     
                     <div class="col-span-2 xl:col-span-1">
-                        <label for="pozo_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Pozo
-                            <small>(*)</small></label>
-                        <input type="text" placeholder="Ingrese el pozo"
-                            class="form-control sz placeholder:text-gray-300 placeholder:font-light" name="pozo_lodo"
-                            id="pozo_lodo">
-                        @error('pozo_lodo')
-                            <small class="text-red-700 font-semibold"><em>{{ $message }}</em></small>
-                        @enderror
-                    </div>
-    
-                    <div class="col-span-2 xl:col-span-1">
                         <label for="equipo_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Equipo
-                            <small>(*)</small></label>
+                            <span class="text-red-500">*</span></label>
                             <select name="equipo_lodo" id="equipo_lodo" class="text-sm" data-search="true" data-silent-initial-value-set="true" multiple="false">
                                 @foreach($equipos as $eq)
                                 <option value="{{$eq->id}}"
@@ -65,7 +65,7 @@
     
                     <div class="col-span-2 xl:col-span-1">
                         <label for="tipo_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de Lodo
-                            <small>(*)</small></label>
+                            <span class="text-red-500">*</span></label>
                             <select name="tipo_lodo" id="tipo_lodo" class="text-sm" data-search="true" data-silent-initial-value-set="true" multiple="false">
                                 @foreach($tipo_lodo_Lodos as $tl)
                                 <option value="{{$tl->id}}"
@@ -79,7 +79,7 @@
     
                     <div class="col-span-2 xl:col-span-1">
                         <label for="servicios_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Servicio
-                            <small>(*)</small></label>
+                            <span class="text-red-500">*</span></label>
                         <select name="servicios_lodo" id="servicios_lodo" class="text-sm" data-search="true"  data-silent-initial-value-set="true" >
                                 @foreach($servicios as $sv)
                                 <option value="{{$sv->id}}"
@@ -93,7 +93,7 @@
     
                     <div class="col-span-2 xl:col-span-1">
                         <label for="mud_company" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Compañia de Lodo
-                            <small>(*)</small></label>
+                            <span class="text-red-500">*</span></label>
                             <select name="mud_company" id="mud_company" class="text-sm" data-search="true"  data-silent-initial-value-set="true" multiple="false" >
                                 @foreach($mud_company as $mc)
                                 <option value="{{$mc->id}}"
@@ -106,8 +106,8 @@
                     </div>
     
                     <div class="col-span-2 xl:col-span-1">
-                        <label for="densidad_lodo_3" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Densidad del Lodo (ppg)
-                            <small>(*)</small></label>
+                        <label for="densidad_lodo_3" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Densidad del Lodo <small>(ppg)</small>
+                            <span class="text-red-500">*</span></label>
                             <input type="number" name="densidad_lodo_3" id="densidad_lodo_3"
                             value="{{ old('densidad_lodo_3') }}" class="form-control text-sm p-2"
                             placeholder="Ingrese la densidad del lodo" step=".01">
@@ -115,6 +115,7 @@
                             <small class="text-red-700 font-semibold"><em>{{ $message }}</em></small>
                         @enderror
                     </div>
+
                 </div>
 
                 <hr class="my-4">
@@ -257,31 +258,29 @@
                 </div>
 
                 <hr class="my-4">
-
-                <p class="m-0 font-bold text-lg my-3 tracking-wide">Firma de Autorización para realizar el trabajo</p>
-                <div class="grid grid-cols-2 gap-3 mt-3">
-                    <div class="grid">
-                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">¿Quién
-                            autoriza?</label>
-                        <input type="text" class="form-control text-sm"
-                            value="{{ auth()->user()->nombre }} {{ auth()->user()->apellido }}" readonly>
-                        </select>
-                    </div>
-    
-                    <div>
-                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de
-                            Autorización</label>
-                        <input type="date" name="fecha_autorizacion_lodo" class="form-control text-sm"
-                            value="@php echo date('Y-m-d') @endphp" readonly>
-                    </div>
-                </div>
     
                 <p class="m-0 font-bold text-lg my-3 tracking-wide">Reconocimiento de que el trabajo fue realizado</p>
-    
+                <div class="grid grid-cols-2 gap-3 mt-3">
+                <div class="grid">
+                    <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre <small>(Solicitado por)</small></label>
+                        <select name="firma_solicitante_lodo" id="firma_solicitante_lodo" data-search="true" data-silent-initial-value-set="true">
+                            @foreach ($names_ingenieros as $name)
+                            <option value="{{ $name->id }}" {{ old('firma_solicitante_lodo') == $name->id ? 'selected' : '' }}>
+                                {{ $name->nombre }} {{ $name->apellido }} 
+                            </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div>
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de la
+                            firma</label>
+                        <input type="date" name="fecha_solicitante_lodo" value="{{ old('fecha_solicitante_lodo') }}" class="form-control text-sm">
+                    </div>
+        
+                </div>
                 <div class="grid grid-cols-2 gap-3 mt-3">
                     <div class="grid">
-                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">¿Quién
-                            reconoce el trabajo?</label>
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre <small>(Laboratorio)</small></label>
                         <select name="firma_reconocimiento_lodo" id="firma_reconocimiento_lodo" data-search="true"
                             data-silent-initial-value-set="true">
                             @foreach ($users as $u)
@@ -293,10 +292,27 @@
                     </div>
     
                     <div>
-                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de
-                            Reconocimiento</label>
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de la
+                            firma</label>
                         <input type="date" name="fecha_reconocimiento_lodo"
                             value="{{ old('fecha_reconocimiento_lodo') }}" class="form-control text-sm">
+                    </div>
+                </div>
+
+                <p class="m-0 font-bold text-lg my-3 tracking-wide">Firma de Autorización para realizar el trabajo</p>
+                <div class="grid grid-cols-2 gap-3 mt-3">
+                    <div class="grid">
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre <small>(Autoriza)</small></label>
+                        <input type="text" class="form-control text-sm"
+                            value="{{ auth()->user()->nombre }} {{ auth()->user()->apellido }}" readonly>
+                        </select>
+                    </div>
+    
+                    <div>
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de la
+                            firma</label>
+                        <input type="date" name="fecha_autorizacion_lodo" class="form-control text-sm"
+                            value="@php echo date('Y-m-d') @endphp" readonly>
                     </div>
                 </div>
         </div>    
@@ -348,6 +364,10 @@
             ele: "#firma_reconocimiento_lodo",
             placeholder: "Seleccione quien reconoce",
         });
+        VirtualSelect.init({
+            ele: "#firma_solicitante_lodo",
+            placeholder: "Seleccione quien solicita",
+        });
              
         document.getElementById("cliente_lodo").setValue(0);
         document.getElementById("locacion_lodo").setValue(0);
@@ -357,7 +377,7 @@
         document.getElementById("mud_company").setValue(0);
         document.getElementById("ensayos").setValue(0);
         document.getElementById("firma_reconocimiento_lodo").setValue(0);
-
+        document.getElementById("firma_solicitante_lodo").setValue(0);
     })
 </script>
 
