@@ -83,6 +83,7 @@ class SolicitudController extends Controller
             'estados' => Estados::all(),
             'ensayos_sol_lodo' => Ensayo::where('tipo', 'LN')->where('estado', 1)->get(),
             'names_ingenieros' => User::whereIn('users.grupo_id', [3, 4])->get('users.*'),
+            'aditivos' => Aditivo::all(),
         ];
         return view('solicitud.create', $data);
     }
