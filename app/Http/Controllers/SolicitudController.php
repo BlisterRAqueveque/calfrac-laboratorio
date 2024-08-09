@@ -84,6 +84,7 @@ class SolicitudController extends Controller
             'ensayos_sol_lodo' => Ensayo::where('tipo', 'LN')->where('estado', 1)->get(),
             'names_ingenieros' => User::whereIn('users.grupo_id', [3, 4])->get('users.*'),
             'aditivos' => Aditivo::all(),
+            //'name_aditivos' =>
         ];
         return view('solicitud.create', $data);
     }
@@ -541,6 +542,7 @@ class SolicitudController extends Controller
         $solicitud_fractura->firma_reconocimiento_id = $request->firma_reconocimiento_id;
         $solicitud_fractura->fecha_firma_reconocimiento = $request->fecha_firma_reconocimiento;
         $solicitud_fractura->fecha_firma_reconocimiento = $request->fecha_firma_reconocimiento;
+
         $solicitud_fractura->save();
 
         $aditivos_bd = RelAditivosSolicitudFractura::where('solicitud_fractura_id', $solicitud_fractura->id)->get();

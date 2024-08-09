@@ -19,4 +19,9 @@ class RelAditivosSolicitudFractura extends Model
     public function solicitud_fractura() {
         return $this->hasMany(SolicitudFractura::class);
     }
+
+    public function aditivos()
+    {
+        return $this->belongsTo(Aditivo::class, 'aditivo');
+    }
 }

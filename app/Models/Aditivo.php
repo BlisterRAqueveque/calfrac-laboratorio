@@ -18,4 +18,5 @@ class Aditivo extends Model
     {
         return $this->belongsTo(User::class);
     }
+
 }
