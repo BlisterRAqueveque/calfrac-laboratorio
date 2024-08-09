@@ -7,18 +7,17 @@
         <div class="card-body">
             <p class="m-0 font-bold text-lg tracking-wide">Información General</p>
 
-                <div class="grid xs:grid-cols-2 md:grid-cols-6 gap-3 mt-3">
-                    <div class="col-span-2 xl:col-span-2">
-                        <label for="cliente_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Cliente
-                            <span class="text-red-500">*</span></label>
-                        <select name="cliente_lodo" id="cliente_lodo" class="text-sm" data-search="true"
-                            data-silent-initial-value-set="true">
-                            @foreach ($clientes as $c)
-                                <option value="{{ $c->id }}"
-                                    {{ old('cliente_lodo') == $c->id ? 'selected' : '' }}>{{ $c->nombre }}</option>
-                            @endforeach
-                        </select>
-                        @error('cliente_lodo')
+            <div class="grid xs:grid-cols-2 md:grid-cols-5 gap-3 mt-3">
+                <div class="col-span-2 xl:col-span-2">
+                    <label for="cliente_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Cliente
+                        <span class="text-red-500">*</span></label>
+                    <select name="cliente_lodo" id="cliente_lodo" class="text-sm" data-search="true" data-silent-initial-value-set="true">
+                        @foreach ($clientes as $c)
+                            <option value="{{ $c->id }}"
+                                {{ old('cliente_lodo') == $c->id ? 'selected' : '' }}>{{ $c->nombre }}</option>
+                        @endforeach
+                    </select>
+                    @error('cliente_lodo')
                             <small class="text-xs text-red-600">El cliente es requerido</small>
                         @enderror
                     </div>
@@ -117,23 +116,26 @@
                     </div>
 
                 </div>
-
-                <hr class="my-4">
-
-                <p class="m-0 font-bold text-lg my-3 tracking-wide">Condiciones del Test</p>
-
                 <div class="row p-2">
-                    <div class="col-xs-12 col-md-3 my-2">
-                        <label for="temperatura" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Temperatura °C
-                            <small>(*)</small></label>
-                        <input type="text" placeholder="Ingrese la temperatura"
-                            class="form-control sz placeholder:text-gray-300 placeholder:font-light" name="temperatura"
-                            id="temperatura">
-                        @error('temperatura')
-                            <small class="text-red-700 font-semibold"><em>{{ $message }}</em></small>
-                        @enderror
+                <hr class="my-4">
+                <p class="m-0 font-bold text-lg my-3 tracking-wide">Condiciones del Test</p>
+                <div class="grid md:grid-cols-5 gap-3 mt-3">
+                    <div class="md:col-span-2 xl:col-span-1">
+                        <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Grado de
+                            Temperatura <small>(°C)</small></label>
+                        <input type="number" name="temperatura" value="{{ old('temperatura') }}" class="form-control sz p-2" placeholder="(C°)" step=".01">
                     </div>
-    
+
+                    <div class="">
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Profundidad
+                            <small>(MD/TVD) (m)</small></label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <input type="number" min="0" name="profundidad_md" class="form-control text-sm p-2" value="{{ old('profundidad_md') }}" placeholder="MD" step=".01">
+                            <input type="number" min="0" name="profundidad_tvd" class="form-control text-sm p-2" value="{{ old('profundidad_tvd') }}" placeholder="TVD" step=".01">
+                        </div>
+                    </div>
+                    {{-- 
+                    Vieja conf - luego del test delete 
                     <div class="col-xs-12 col-md-3 my-2" style="display: flex flex-direction: column; ">
                         <label for="profundidad" class="text-sm text-gray-700 font-semibold tracking-wide">Profundidad
                             <small>(*)(MD/TVD)(m)</small></label>
@@ -149,9 +151,22 @@
                         @error('profundidad')
                             <small class="text-red-700 font-semibold"><em>{{ $message }}</em></small>
                         @enderror
-                    </div>
-                </div>
+                    </div
 
+                    <div class="col-xs-12 col-md-3 my-2">
+                        <label for="temperatura" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Temperatura °C
+                            <small>(*)</small></label>
+                        <input type="text" placeholder="Ingrese la temperatura"
+                            class="form-control sz placeholder:text-gray-300 placeholder:font-light" name="temperatura"
+                            id="temperatura">
+                        @error('temperatura')
+                            <small class="text-red-700 font-semibold"><em>{{ $message }}</em></small>
+                        @enderror
+                    </div>
+                    --}}
+                </div>
+            </div>
+            
                 <hr class="my-4">
                 
                 <p class="m-0 font-bold text-lg my-3 tracking-wide">Ensayo Referencia</p>
@@ -454,8 +469,8 @@
             let divGrid = el('div.grid grid-cols-2 gap-3 md:grid-cols-2');
             let textarea = el('textarea.textarea.form-control.text-sm.p-2', {
                 name: 'comentarios_lodo[]',
-                placeholder: 'Comentarios/Observaciones',
-                rows: 3
+                placeholder: 'Comentarios',
+                rows: 1,
             });
             mount(divGrid, textarea);
 
