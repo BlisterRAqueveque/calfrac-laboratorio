@@ -11,6 +11,7 @@
         #cliente_lodo,
         #locacion_lodo,
         #equipo_lodo,
+        #mud_company,
         #servicio_lodo {
             background: #b9b9b9;
             border-radius: 5px;
@@ -196,7 +197,7 @@
                 <input type="hidden" value="{{ $solicitud->id }}" name="solicitud_id">
 
                 <div class="grid xs:grid-cols-2 md:grid-cols-6 gap-3 mt-3">
-                    <div class="col-span-2 xl:col-span-1">
+                    <div class="col-span-2 xl:col-span-2">
                         <label for="cliente_lodo"
                             class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Cliente
                             <span class="text-red-500">*</span></label>
@@ -225,7 +226,7 @@
                             <small class="text-xs text-red-600">La locación es requerida</small>
                         @enderror
                     </div>
-                    <div class="col-span-2 xl:col-span-1">
+                    {{--<div class="col-span-2 xl:col-span-1">
                         <label for="fecha_solicitud_lodo"
                             class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de
                             Solicitud <span class="text-red-500">*</span></label>
@@ -235,7 +236,7 @@
                         @error('fecha_solicitud_lodo')
                             <small class="text-xs text-red-600">La fecha de solicitud es requerida</small>
                         @enderror
-                    </div>
+                    </div>--}}
 
                     <div class="col-span-2 xl:col-span-1">
                         <label for="pozo_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Pozo
@@ -247,7 +248,7 @@
                         @enderror
                     </div>
 
-                    <div class="col-span-2 xl:col-span-1">
+                    {{--<div class="col-span-2 xl:col-span-1">
                         <label for="fecha_resultados_lodo"
                             class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha
                             de
@@ -257,7 +258,7 @@
                         @error('fecha_resultados_lodo')
                             <small class="text-xs text-red-600">La fecha de resultados es requerida</small>
                         @enderror
-                    </div>
+                    </div>--}}
 
                     <div class="col-span-2 xl:col-span-1">
                         <label for="equipo_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Equipo
@@ -300,19 +301,27 @@
                     <div class="col-span-2 xl:col-span-1">
                         <label for="mud_company"
                             class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Compania de Lodo <span class="text-red-500">*</span></label>
+                        {{-- vieja conf
                         <input type="text" name="mud_company" id="mud_company"
                             class="form-control text-sm p-2" value="{{ $solicitud->mud_company ?? 'No seleccionado'}}  " readonly>
                         @error('mud_company')
                             <small class="text-xs text-red-600">La compania de lodo es requerida</small>
-                        @enderror
+                        @enderror --}}
+                        <select name="mud_company" id="mud_company" class="text-sm inp_edit" disabled>
+                            <!--<option value="" selected disabled {{ $solicitud_lodo[0]->mud_company == null ? 'selected' : '' }}>Seleccione la compañía</option> -->
+                            @foreach ($mud_company as $mud)
+                                <option value="{{ $mud->id }}" {{ $mud->id == $solicitud_lodo[0]->mud_company ? 'selected' : '' }}>
+                                    {{ $mud->nombre }}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="col-span-2 xl:col-span-1">
-                        <label for="densidad_lodo"
+                        <label for="densidad_lodo_3"
                             class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Densidad del lodo <span class="text-red-500">*</span></label>
-                        <input type="number" name="densidad_lodo" id="densidad_lodo"
-                            class="form-control text-sm p-2" value="{{ $solicitud->densidad_lodo ?? 0}}" readonly>
-                        @error('densidad_lodo')
+                        <input type="number" name="densidad_lodo_3" id="densidad_lodo_3"
+                            class="form-control text-sm p-2" value="{{ $solicitud_lodo[0]->densidad_lodo}}" readonly>
+                        @error('densidad_lodo_3')
                             <small class="text-xs text-red-600">La densidad del lodo es requerida</small>
                         @enderror
                     </div>
@@ -334,6 +343,32 @@
                     @enderror
                     </div>
 
+                    <div class="md:col-span-2 xl:col-span-1">
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Profundidad <small>(MD/TVD) (m)</small></label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <input type="number" min="0" name="profundidad_md"
+                                class="form-control text-sm p-2" placeholder="MD" step=".01"
+                                value="{{ $solicitud_lodo[0]->profundidad_md }}" readonly>
+                            <input type="number" min="0" name="profundidad_tvd"
+                                class="form-control text-sm p-2" placeholder="TVD" step=".01"
+                                value="{{ $solicitud_lodo[0]->profundidad_tvd }}" readonly>
+                        </div>
+                    </div> 
+
+                    {{--
+                    <div class="md:col-span-2 xl:col-span-1">
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Profundidad <small>(MD/TVD) (m)</small></label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <input type="number" min="0" name="profundidad_md"
+                                class="form-control text-sm p-2" placeholder="MD" step=".01"
+                                value="{{ $solicitud_lodo[0]->profundidad_md }}" readonly>
+                            <input type="number" min="0" name="profundidad_tvd"
+                                class="form-control text-sm p-2" placeholder="TVD" step=".01"
+                                value="{{ $solicitud_lodo[0]->profundidad_tvd }}" readonly>
+                        </div>
+                    </div> 
+                    
+                    
                     <div class="col-span-2 xl:col-span-1">
 
                         <label for='profundidad_md' class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Profundidad MD
@@ -354,7 +389,7 @@
                          @error('profundidad_tvd')
                              <small class="text-xs text-red-600">La profundidad es requerida</small>
                          @enderror
-                    </div>
+                    </div> --}}
 
                 </div>
                 <hr class="my-4">
@@ -389,6 +424,7 @@
                     
                     @endforeach
                 </div>
+                @include('solicitud.components.lodo.requerimientos')
                 
             
                 <hr class="my-4">
@@ -561,10 +597,10 @@
                 ele: "#locacion_lodo",
                 placeholder: "Seleccione el yacimiento",
             });
-           /* VirtualSelect.init({
+            VirtualSelect.init({
                 ele: "#mud_company",
                 placeholder: "Seleccione la compañía",
-            });*/
+            });
             VirtualSelect.init({
                 ele: "#equipo_lodo",
                 placeholder: "Seleccione equipo",

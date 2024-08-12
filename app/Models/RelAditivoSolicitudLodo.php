@@ -21,4 +21,9 @@ class RelAditivoSolicitudLodo extends Model
     public function solicitud_lodo() {
         return $this->hasMany(SolicitudLodo::class);
     }
+    
+    public function aditivos()
+    {
+        return $this->belongsTo(Aditivo::class, 'aditivo');
+    }
 }

@@ -110,7 +110,7 @@
                             <input type="number" name="densidad_lodo_3" id="densidad_lodo_3"
                             value="{{ old('densidad_lodo_3') }}" class="form-control text-sm p-2"
                             placeholder="Ingrese la densidad del lodo" step=".01">
-                        @error('densidad')
+                        @error('densidad_lodo_3')
                             <small class="text-red-700 font-semibold"><em>{{ $message }}</em></small>
                         @enderror
                     </div>
@@ -228,7 +228,7 @@
                     <div class="col-span-2 xl:col-span-1">
                         <label for="vol_colchon" class="text-sm text-gray-700 font-semibold tracking-wide">Volumen de Colchón
                             <small>(bbl)</small></label>
-                        <input type="text" placeholder="Ingrese el volumen de Colchón"
+                        <input type="number" placeholder="Ingrese el volumen de Colchón"
                             class="form-control sz placeholder:text-gray-300 placeholder:font-light" name="vol_colchon"
                             id="vol_colchon">
                         @error('vol_colchon')
@@ -395,7 +395,10 @@
         document.getElementById("firma_solicitante_lodo").setValue(0);
     })
 </script>
-
+<script>
+    // Datos de aditivos pasados desde el controlador
+    const aditivos_lodo = @json($aditivos);
+</script>
 <script>
     let ensayos_referencia_lodo = {!! json_encode($ensayos_sol_lodo) !!}
     const btnAddEnsayoRefLodo = document.querySelector('#btnAddEnsayoRefLodo');

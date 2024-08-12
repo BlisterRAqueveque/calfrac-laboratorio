@@ -38,26 +38,33 @@ const container_formulaciones_tentativas_fractura = document.getElementById(
     // );
     // mount(div, input);
     // Aditivo (select)
-  select = document.createElement("select");
-  select.className = "form-control text-xs rounded-l-none p-2 col-span-4 md:col-span-1";
-  select.name = `aditivos[${aux_aditivo_fractura}][aditivo]`;
+    select = document.createElement("select");
+    select.className = "form-control text-xs rounded-l-none p-2 col-span-4 md:col-span-1";
+    select.name = `aditivos[${aux_aditivo_fractura}][aditivo]`;
 
-  // Añadir opción placeholder
-  const placeholderOption = document.createElement('option');
-  placeholderOption.value = '';
-  placeholderOption.textContent = 'Aditivo';
-  placeholderOption.disabled = true;
-  placeholderOption.selected = true;
-  select.appendChild(placeholderOption);
+    // Añadir opción placeholder
+    const placeholderOption = document.createElement('option');
+    placeholderOption.value = '';
+    placeholderOption.textContent = 'Aditivo';
+    placeholderOption.disabled = true;
+    placeholderOption.selected = true;
+    select.appendChild(placeholderOption);
 
-  // Añadir opciones de aditivos
-  aditivos.forEach(aditivo => {
+    // Añadir opción "S/D"
+    const sdOption = document.createElement('option');
+    sdOption.value = 'SD';
+    sdOption.textContent = 'S/D';
+    select.appendChild(sdOption);
+    
+
+    // Añadir opciones de aditivos
+    aditivos.forEach(aditivo => {
     const option = document.createElement('option');
     option.value = aditivo.id;
     option.textContent = aditivo.nombre;
     select.appendChild(option);
-  });
-  div.appendChild(select);
+    });
+    div.appendChild(select);
   
     // Concentración
     input = el(
