@@ -131,12 +131,18 @@ btnAddFormulacion.addEventListener("click", (e) => {
   placeholderOption.selected = true;
   select.appendChild(placeholderOption);
 
+  // Añadir opción "S/D"
+  const sdOption = document.createElement('option');
+  sdOption.value = 'SD';
+  sdOption.textContent = 'S/D';
+  select.appendChild(sdOption);
+
   // Añadir opciones de aditivos
   aditivos.forEach(aditivo => {
-    const option = document.createElement('option');
-    option.value = aditivo.id;
-    option.textContent = aditivo.nombre;
-    select.appendChild(option);
+  const option = document.createElement('option');
+  option.value = aditivo.id;
+  option.textContent = aditivo.nombre;
+  select.appendChild(option);
   });
   div.appendChild(select);
 

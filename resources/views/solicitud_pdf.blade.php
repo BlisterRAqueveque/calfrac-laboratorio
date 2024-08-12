@@ -226,7 +226,7 @@
                 </td>
                 <td
                     style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949;">
-                    {{ $solicitud->equipos->nombre }}
+                    {{ $solicitud->equipos->nombre ?? $solicitud->equipos}}
                 </td>
                 <td style="width: 40%;color: #686868; text-align: center; font-size: 13px;">
                     {{ $solicitud->tipo_requerimiento_cemento->nombre }}

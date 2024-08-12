@@ -50,6 +50,12 @@ const container_formulaciones_tentativas_lodo = document.getElementById(
   placeholderOption.selected = true;
   select.appendChild(placeholderOption);
 
+  // Añadir opción "S/D"
+  const sdOption = document.createElement('option');
+  sdOption.value = 'SD';
+  sdOption.textContent = 'S/D';
+  select.appendChild(sdOption);
+
   // Añadir opciones de aditivos
   aditivos.forEach(aditivo => {
     const option = document.createElement('option');
