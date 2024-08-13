@@ -266,7 +266,8 @@
                                     BHCT:
                                 </td>
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    °C
+                                    {{ $s_l[0]->bhct }} °C
+                                     
                                 </td>
                             </tr>
                             <tr>
@@ -274,7 +275,7 @@
                                     BHST:
                                 </td>
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    °C
+                                    {{ $s_l[0]->bhst }} °C
                                 </td>
                             </tr>
                         </table>
@@ -352,10 +353,10 @@
                             <!-- Filas numeradas del 1 al 10 -->
                             <tr>
                                 <td style="text-align: center; background-color: #ffffff; border: none;">1</td>
-                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">{{ $formulacion->lote ?? "-" }}</td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"> </td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">{{ $formulacion->concentracion ?? "-"  }}</td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"> %BOWC</td>
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
                             </tr>
                             <tr>
@@ -363,7 +364,7 @@
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"> %BOWC</td>
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
                             </tr>
                             <tr>
@@ -371,7 +372,7 @@
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"> %BOWC</td>
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
                             </tr>
                             <tr>
@@ -379,7 +380,7 @@
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"> %BOWC</td>
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
                             </tr>
                             <tr>
@@ -387,7 +388,7 @@
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"> %BOWC</td>
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
                             </tr>
                             <tr>
@@ -395,7 +396,7 @@
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"> %BOWC</td>
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
                             </tr>
                             <tr>
@@ -403,7 +404,7 @@
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"> %BOWC</td>
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
                             </tr>
                             <tr>
@@ -411,7 +412,7 @@
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"> %BOWC</td>
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
                             </tr>
                             <tr>
@@ -419,7 +420,7 @@
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"> %BOWC</td>
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
                             </tr>
                             <tr>
@@ -427,7 +428,7 @@
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"> %BOWC</td>
                                 <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
                             </tr>
                             <tr>
