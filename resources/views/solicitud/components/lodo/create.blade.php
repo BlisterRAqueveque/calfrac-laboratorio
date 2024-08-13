@@ -274,7 +274,7 @@
 
                 <hr class="my-4">
     
-                <p class="m-0 font-bold text-lg my-3 tracking-wide">Reconocimiento de que el trabajo fue realizado</p>
+                <p class="m-0 font-bold text-lg my-3 tracking-wide">Reconocimiento de que el trabajo fue solicitado</p>
                 <div class="grid grid-cols-2 gap-3 mt-3">
                 <div class="grid">
                     <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre <small>(Solicitado por)</small></label>
