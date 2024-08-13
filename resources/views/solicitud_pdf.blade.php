@@ -332,7 +332,7 @@
                     </td>
                     <td
                         style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949;">
-                        {{ $formulacion->aditivos->nombre }}
+                        {{ $formulacion->aditivos->nombre ?? $formulacion->aditivo }}
                     </td>
                     <td
                         style="width: 40%;color: #686868; text-align: center; font-size: 13px; border-right: 1px solid #494949;">
