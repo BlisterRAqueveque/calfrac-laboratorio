@@ -719,7 +719,7 @@ class SolicitudController extends Controller
         # Envio de mails
         $url = route('solicitud.lodo.show', ['solicitud_id' => $solicitud->id]);
         $correos[] = "rocio.carvajal@blistertechnologies.com";
-        // $correos[] = "orodriguez@calfrac.com";
+        $correos[] = "orodriguez@calfrac.com";
         $data = [
             'solicitud_id' => $solicitud->id,
             'locacion_id' => $request->locacion_lodo,
