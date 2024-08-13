@@ -153,7 +153,594 @@
 </head>
 
 <body>
+
     <div class="footer">
+        Calfrac | Laboratorio de Cementación <span class="pagenum"></span>
+    </div>
+    <table width='100%' style="border: 1px solid #000000; font-size: 10px;">
+        <!-- Tamaño de letra uniforme -->
+
+        <div style="border-radius: 3px">
+            <table style="width: 100%;">
+                <tr>
+                    <td style="width: 20%; text-align: center; border: 1px solid #000000; background: #006f53; vertical-align: middle;">
+                        <div style="width: 50px; height: 50px; margin: 0 auto;">
+                            <img src="{{ public_path('img/empresa_logo.png') }}" style="max-width: 100%; height: auto;" alt="">
+                        </div>
+                    </td>
+                    <td style="width: 60%; text-align: center; border: 1px solid #000000;">
+                        <h2 style="color: #000000; margin: 0; padding: 0; font-size: 14px;">Laboratorio de Cementación</h2> <!-- Tamaño más grande para el título -->
+                        <h6 style="margin: 0; padding: 0;">NEUQUEN, ARGENTINA</h6>
+                    </td>
+                    <td style="width: 20%; text-align: center;">
+                        <table style="border-collapse: collapse; width: 100%;">
+                            <tr style="border: 1px solid #000000;">
+                                <td style="border: 1px solid #000000; padding: 5px;">
+                                    Numero:
+                                </td>
+                            </tr>
+                            <tr style="border: 1px solid #000000;">
+                                <td style="border: 1px solid #000000; padding: 5px;">
+                                    Rev:
+                                </td>
+                            </tr>
+                            <tr style="border: 1px solid #000000;">
+                                <td style="border: 1px solid #000000; padding: 5px;">
+                                    Page:
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div style="border-radius: 3px;">
+            <table style="width: 100%;">
+                <tr>
+                    <!-- Columna "Datos Generales" -->
+                    <td style="width: 5%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #006f53; color:white;">
+                        <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 100%; left: 80%; width: 200px; height: 20px; text-align: center;font-size: 13px;">Datos Generales</div>
+                    </td>
+
+                    <!-- Columna con tabla interna -->
+                    <td style="width: 38%; border: 1px solid #494949; padding: 4px; text-align: center; vertical-align: top;">
+                        <table style="width: 100%; border-collapse: collapse; border: none;">
+                            <tr>
+                                <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                    Cliente:
+                                </td>
+                                <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                    {{ $solicitud->cliente->nombre }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                    Pozo:
+                                </td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                    {{ $solicitud->pozo}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                    Yacimiento:
+                                </td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                    {{ $solicitud->locacion->nombre}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                    Trabajo:
+                                </td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                    {{$solicitud->tipo_trabajo_cemento->nombre}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                    Equipo:
+                                </td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                    {{ $solicitud->equipos->nombre }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                    MD:
+                                </td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                    m
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                    TVD:
+                                </td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                    m
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                    BHCT:
+                                </td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                    °C
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                    BHST:
+                                </td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                    °C
+                                </td>
+                            </tr>
+                        </table>
+                        <br>
+                        <br>
+                        <table style="width: 100%; border-collapse: collapse; border: none;">
+                            <tr>
+                                <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                    Objetivo del ensayo:
+                                </td>
+                                <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                    Ensayo N°:
+                                </td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                    Posicion Lechada:
+                                </td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+
+
+                    <!-- Columna "Datos de Lechada" -->
+                    <td style="width: 5%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #006f53; color:white;">
+                        <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 100%; left: 80%; width: 200px; height: 20px; text-align: center;font-size: 13px;">Datos de Lechada</div>
+                    </td>
+
+                    <!-- Columna con tabla interna -->
+                    <td style="width: 38%; border: 1px solid #494949; padding: 4px; text-align: center; vertical-align: top;">
+                        <table style="width: 100%; border-collapse: collapse; border: none;">
+                            <tr>
+                                <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                    Fecha:
+                                </td>
+                                <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                    Tipo de cemento / Marca:
+                                </td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                </td>
+                            </tr>
+                        </table>
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <!-- Fila del encabezado -->
+                            <tr>
+                                <th style="width: 10%; text-align: center; background-color: #ffffff; border: none;">Prod N°</th>
+                                <th style="width: 22%; text-align: center; background-color: #ffffff; border: none;">N° Lote</th>
+                                <th style="width: 22%; text-align: center; background-color: #ffffff; border: none;">Aditivo</th>
+                                <th style="width: 22%; text-align: center; background-color: #ffffff; border: none;">Conc.</th>
+                                <th style="width: 22%; text-align: center; background-color: #ffffff; border: none;">Units</th>
+                                <th style="width: 12%; text-align: center; background-color: #ffffff; border: none;">OM</th>
+                            </tr>
+
+                            <!-- Filas numeradas del 1 al 10 -->
+                            <tr>
+                                <td style="text-align: center; background-color: #ffffff; border: none;">1</td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; background-color: #ffffff; border: none;">2</td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; background-color: #ffffff; border: none;">3</td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; background-color: #ffffff; border: none;">4</td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; background-color: #ffffff; border: none;">5</td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; background-color: #ffffff; border: none;">6</td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; background-color: #ffffff; border: none;">7</td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; background-color: #ffffff; border: none;">8</td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; background-color: #ffffff; border: none;">9</td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; background-color: #ffffff; border: none;">10</td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; background-color: #ffffff; border: none;"></td>
+                                <td style="text-align: center; background-color: #ffffff; border: none;"></td>
+                                <td style="text-align: center; background-color: #ffffff; border: none;">Densidad</td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">g/L: </td>
+                                <td style="text-align: center; background-color: #ffffff; border: none;">ppg</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; background-color: #ffffff; border: none;"></td>
+                                <td style="text-align: center; background-color: #ffffff; border: none;"></td>
+                                <td style="text-align: center; background-color: #ffffff; border: none;">Rendimiento</td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">L/bolsa: </td>
+                                <td style="text-align: center; background-color: #ffffff; border: none;">ft³/bolsa</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; background-color: #ffffff; border: none;"></td>
+                                <td style="text-align: center; background-color: #ffffff; border: none;"></td>
+                                <td style="text-align: center; background-color: #ffffff; border: none;">Req. Agua</td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">%: </td>
+                                <td style="text-align: center; background-color: #ffffff; border: none;">L/bolsa</td>
+                            </tr>
+                        </table>
+
+                    </td>
+
+                </tr>
+            </table>
+        </div>
+        <div style="border-radius: 3px;">
+            <table style="width: 100%;">
+                <tr>
+                    <!-- Columna "Datos Generales" -->
+                    <td style="width: 6%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #006f53; color:white;">
+                        <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 100%; left: 80%; width: 200px; height: 20px; text-align: center;font-size: 13px;">Resultados de los Ensayos</div>
+                    </td>
+
+                    <!-- Columna con tabla interna -->
+                    <td style="width: 47%; padding: 4px; text-align: center; vertical-align: top;">
+                        <br>
+                        <br>
+                        <table style="width: 100%;">
+                            <tr>
+                                <!-- Columna "Datos Generales" -->
+                                <td style="width: 6%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #D3D3D3; color:black;">
+                                    <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 100%; left: 115%; width: 200px; height: 20px; text-align: center;font-size: 13px;">Tiempo de Bombeabilidad</div>
+                                </td>
+
+                                <!-- Columna con tabla interna -->
+                                <td style="width: 94%;  padding: 4px; text-align: center; vertical-align: top;">
+                                    <br>
+                                    <br>
+                                    <table style="width: 100%; border-collapse: collapse; border: none;">
+                                        <tr>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                Consistometro N°:
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                Tiempo de acondicionamiento:
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                Planilla:
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                Gradiente:
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: none; background-color: #ffffff;">
+                                                ºF/100 ft
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                Temperatura:
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: none; background-color: #ffffff;">
+                                                ºC
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                Presion:
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: none; background-color: #ffffff;">
+                                                psi
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <br>
+                                    <table style="width: 100%; border-collapse: collapse; border: none;">
+                                        <tr>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                40 Bc:
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: none; background-color: #ffffff;">
+                                                hh:mm
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                70 Bc:
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: none; background-color: #ffffff;">
+                                                hh:mm
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                100 Bc:
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: none; background-color: #ffffff;">
+                                                hh:mm
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="width: 47%; padding: 4px; text-align: center; vertical-align: top;">
+                        <br>
+                        <br>
+                        <table style="width: 100%;">
+                            <tr>
+                                <!-- Columna "Datos Generales" -->
+                                <td style="width: 6%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #D3D3D3; color:black;">
+                                    <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 100%; left: 115%; width: 200px; height: 20px; text-align: center;font-size: 13px;">UCA - Resistencia a la Compresión</div>
+                                </td>
+
+                                <!-- Columna con tabla interna -->
+                                <td style="width: 94%; padding: 4px; text-align: center; vertical-align: top;">
+                                    <br>
+                                    <table style="width: 100%; border-collapse: collapse; border: none;">
+                                        <tr>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                UCA N°:
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                Principal:
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: none; background-color: #ffffff;">
+                                                °C
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <br>
+                                    <table style="width: 100%; border-collapse: collapse; border: none;">
+                                        <tr>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                50 psi:
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: none; background-color: #ffffff;">
+                                                hh:mm
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                500 psi:
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: none; background-color: #ffffff;">
+                                                hh:mm
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                1000 psi:
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: none; background-color: #ffffff;">
+                                                hh:mm
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                12 hr:
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: none; background-color: #ffffff;">
+                                                psi
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                24 hr:
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: none; background-color: #ffffff;">
+                                                psi
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                            Impedancia Acustica:
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: none; background-color: #ffffff;">
+                                                M/rayls
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                SGS cero:
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: none; background-color: #ffffff;">
+                                                hh:mm
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                SGS max:
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: none; background-color: #ffffff;">
+                                                hh:mm
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                            D Tiempo:
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: none; background-color: #ffffff;">
+                                                hh:mm
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </table>
+
+    <!-- <div class="footer">
         Calfrac | Laboratorio de Cementación <span class="pagenum"></span>
     </div>
 
@@ -172,7 +759,7 @@
         </table>
     </div>
 
-    <!-- Encabezado | Datos generales -->
+   
     <table width='100%' style="border: 1px solid #494949; border-radius: 5px; margin-top: 10px">
         <th style="width: 80%; text-align: center; color: #494949; padding-top: 5px; letter-spacing: 1px;">
             Datos Generales
@@ -1129,7 +1716,7 @@
             <td style="width: 40%;color: #686868; text-align: center; font-size: 13px; padding: 20px 0">
             Working...</td>
         </tr>
-    </table>
+    </table> -->
 
 </body>
 
