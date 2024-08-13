@@ -688,7 +688,7 @@
                                         </tr>
                                         <tr>
                                             <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
-                                            Impedancia Acustica:
+                                                Impedancia Acustica:
                                             </td>
                                             <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
 
@@ -721,13 +721,255 @@
                                         </tr>
                                         <tr>
                                             <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
-                                            D Tiempo:
+                                                D Tiempo:
                                             </td>
                                             <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
 
                                             </td>
                                             <td style="width: 50%; padding: 4px; text-align: left; border: none; background-color: #ffffff;">
                                                 hh:mm
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div style="border-radius: 3px;">
+            <table style="width: 100%;">
+                <tr>
+                    <!-- Columna "Datos Generales" -->
+                    <td style="width: 6%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #006f53; color:white;">
+                        <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 100%; left: 80%; width: 200px; height: 20px; text-align: center;font-size: 13px;">Resultados de los Ensayos</div>
+                    </td>
+
+                    <!-- Columna con tabla interna -->
+                    <td style="width: 47%; padding: 4px; text-align: center; vertical-align: top;">
+                        <br>
+                        <br>
+                        <table style="width: 100%;">
+                            <tr>
+                                <!-- Columna "Datos Generales" -->
+                                <td style="width: 6%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #D3D3D3; color:black;">
+                                    <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 100%; left: 115%; width: 200px; height: 20px; text-align: center;font-size: 13px;">Reología</div>
+                                </td>
+
+                                <!-- Columna con tabla interna -->
+                                <td style="width: 94%;  padding: 4px; text-align: center; vertical-align: top;">
+                                    <table style="width: 100%; border-collapse: collapse; border: none;">
+                                        <tr>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                RPM
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                300
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                200
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                100
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                60
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                30
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                6
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                3
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                T° Amb.
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                T° Ens.
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <br>
+                                    <table style="width: 100%; border-collapse: collapse; border: none;">
+                                        <tr>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                Temperatura °C:
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                T° Amb.
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                T° Ens.
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                Viscosidad Plastica (cp):
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                254.21
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                114.60
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                Punto de Cedencia (lb/100ft2):
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                23.33
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                10.37
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                Gel 10 seg:
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                Gel 10 min:
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="width: 47%; padding: 4px; text-align: center; vertical-align: top;">
+                        <br>
+                        <br>
+                        <table style="width: 100%;">
+                            <tr>
+                                <!-- Columna "Datos Generales" -->
+                                <td style="width: 6%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #D3D3D3; color:black;">
+                                    <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 100%; left: 115%; width: 200px; height: 20px; text-align: center;font-size: 13px;">Pérdida de Filtrado</div>
+                                </td>
+
+                                <!-- Columna con tabla interna -->
+                                <td style="width: 94%; padding: 4px; text-align: center; vertical-align: top;">
+                                    <br>
+                                    <table style="width: 100%; border-collapse: collapse; border: none;">
+                                        <tr>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                Temperatura:
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: none; background-color: #ffffff;">
+                                                °C
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                Fluido Acumulado:
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: none; background-color: #ffffff;">
+                                                mL
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50%; padding: 4px; text-align: right; border: none; background-color: #ffffff;">
+                                                Filtrado API:
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                            </td>
+                                            <td style="width: 50%; padding: 4px; text-align: left; border: none; background-color: #ffffff;">
+                                                mL/30min
                                             </td>
                                         </tr>
                                     </table>
