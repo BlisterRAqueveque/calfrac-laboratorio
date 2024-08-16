@@ -11,6 +11,7 @@
         #cliente_lodo,
         #locacion_lodo,
         #equipo_lodo,
+        #mud_company,
         #servicio_lodo {
             background: #b9b9b9;
             border-radius: 5px;
@@ -196,7 +197,7 @@
                 <input type="hidden" value="{{ $solicitud->id }}" name="solicitud_id">
 
                 <div class="grid xs:grid-cols-2 md:grid-cols-6 gap-3 mt-3">
-                    <div class="col-span-2 xl:col-span-1">
+                    <div class="col-span-2 xl:col-span-2">
                         <label for="cliente_lodo"
                             class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Cliente
                             <span class="text-red-500">*</span></label>
@@ -225,7 +226,7 @@
                             <small class="text-xs text-red-600">La locación es requerida</small>
                         @enderror
                     </div>
-                    <div class="col-span-2 xl:col-span-1">
+                    {{--<div class="col-span-2 xl:col-span-1">
                         <label for="fecha_solicitud_lodo"
                             class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de
                             Solicitud <span class="text-red-500">*</span></label>
@@ -235,7 +236,7 @@
                         @error('fecha_solicitud_lodo')
                             <small class="text-xs text-red-600">La fecha de solicitud es requerida</small>
                         @enderror
-                    </div>
+                    </div>--}}
 
                     <div class="col-span-2 xl:col-span-1">
                         <label for="pozo_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Pozo
@@ -247,7 +248,7 @@
                         @enderror
                     </div>
 
-                    <div class="col-span-2 xl:col-span-1">
+                    {{--<div class="col-span-2 xl:col-span-1">
                         <label for="fecha_resultados_lodo"
                             class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha
                             de
@@ -257,7 +258,7 @@
                         @error('fecha_resultados_lodo')
                             <small class="text-xs text-red-600">La fecha de resultados es requerida</small>
                         @enderror
-                    </div>
+                    </div>--}}
 
                     <div class="col-span-2 xl:col-span-1">
                         <label for="equipo_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Equipo
@@ -300,19 +301,27 @@
                     <div class="col-span-2 xl:col-span-1">
                         <label for="mud_company"
                             class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Compania de Lodo <span class="text-red-500">*</span></label>
+                        {{-- vieja conf
                         <input type="text" name="mud_company" id="mud_company"
                             class="form-control text-sm p-2" value="{{ $solicitud->mud_company ?? 'No seleccionado'}}  " readonly>
                         @error('mud_company')
                             <small class="text-xs text-red-600">La compania de lodo es requerida</small>
-                        @enderror
+                        @enderror --}}
+                        <select name="mud_company" id="mud_company" class="text-sm inp_edit" disabled>
+                            <!--<option value="" selected disabled {{ $solicitud_lodo[0]->mud_company == null ? 'selected' : '' }}>Seleccione la compañía</option> -->
+                            @foreach ($mud_company as $mud)
+                                <option value="{{ $mud->id }}" {{ $mud->id == $solicitud_lodo[0]->mud_company ? 'selected' : '' }}>
+                                    {{ $mud->nombre }}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="col-span-2 xl:col-span-1">
-                        <label for="densidad_lodo"
+                        <label for="densidad_lodo_3"
                             class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Densidad del lodo <span class="text-red-500">*</span></label>
-                        <input type="number" name="densidad_lodo" id="densidad_lodo"
-                            class="form-control text-sm p-2" value="{{ $solicitud->densidad_lodo ?? 0}}" readonly>
-                        @error('densidad_lodo')
+                        <input type="number" name="densidad_lodo_3" id="densidad_lodo_3"
+                            class="form-control text-sm p-2" value="{{ $solicitud_lodo[0]->densidad_lodo}}" readonly>
+                        @error('densidad_lodo_3')
                             <small class="text-xs text-red-600">La densidad del lodo es requerida</small>
                         @enderror
                     </div>
@@ -334,6 +343,32 @@
                     @enderror
                     </div>
 
+                    <div class="md:col-span-2 xl:col-span-1">
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Profundidad <small>(MD/TVD) (m)</small></label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <input type="number" min="0" name="profundidad_md"
+                                class="form-control text-sm p-2" placeholder="MD" step=".01"
+                                value="{{ $solicitud_lodo[0]->profundidad_md }}" readonly>
+                            <input type="number" min="0" name="profundidad_tvd"
+                                class="form-control text-sm p-2" placeholder="TVD" step=".01"
+                                value="{{ $solicitud_lodo[0]->profundidad_tvd }}" readonly>
+                        </div>
+                    </div> 
+
+                    {{--
+                    <div class="md:col-span-2 xl:col-span-1">
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Profundidad <small>(MD/TVD) (m)</small></label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <input type="number" min="0" name="profundidad_md"
+                                class="form-control text-sm p-2" placeholder="MD" step=".01"
+                                value="{{ $solicitud_lodo[0]->profundidad_md }}" readonly>
+                            <input type="number" min="0" name="profundidad_tvd"
+                                class="form-control text-sm p-2" placeholder="TVD" step=".01"
+                                value="{{ $solicitud_lodo[0]->profundidad_tvd }}" readonly>
+                        </div>
+                    </div> 
+                    
+                    
                     <div class="col-span-2 xl:col-span-1">
 
                         <label for='profundidad_md' class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Profundidad MD
@@ -354,7 +389,7 @@
                          @error('profundidad_tvd')
                              <small class="text-xs text-red-600">La profundidad es requerida</small>
                          @enderror
-                    </div>
+                    </div> --}}
 
                 </div>
                 <hr class="my-4">
@@ -368,7 +403,6 @@
                 <div class="grid md:grid-cols-6 gap-3 mt-4 relative">
                     @foreach ($ensayos_referencia as $e_r)
                     <div>
-                        <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2" for="ensayo_id_{{ $loop->index }}">Ensayo seleccionado:</label>
                         <select name="ensayo_id[]" class="form-control text-sm p-2"  disabled>
                             @foreach ($ensayos as $ensayo)
                                 <option value="{{ $ensayo->id }}" {{ $ensayo->id == $e_r->ensayo_id ? 'selected' : '' }}>{{ $ensayo->tipo . "-" . $ensayo->incrementable . "-" . $ensayo->anio}}</option>
@@ -381,39 +415,70 @@
                 <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2" for="ensayo_id">Comentarios ingresados:</label>
                 <div class="grid md:grid-cols-6 gap-3 mt-4 relative">
                     @foreach ($comentarios_referencia as $comentario)
-                    
                         <div>
                             <input type="text" name="" class="form-control text-sm p-2"
                                 value="{{ $comentario->comentario_ensayo }}" readonly>
                         </div>
-                    
                     @endforeach
                 </div>
+                <hr class="my-4">
+
+                <p class="m-0 font-bold text-lg my-3 tracking-wide">Requerimientos del Colchón</p>
+                
+                @include('solicitud.components.lodo.requerimientos')
                 
             
                 <hr class="my-4">
-
-                <!--div class="grid xs:grid-cols-2 md:grid-cols-6 gap-3 mt-3">
-                    <p class="m-0 font-bold text-lg my-3 tracking-wide">Ensayos requeridos</p>
-
-                </!--div>
-                <hr class="my-4">
-
-                <div class="grid xs:grid-cols-2 md:grid-cols-6 gap-3 mt-3">
-                    <p class="m-0 font-bold text-lg my-3 tracking-wide">Requerimientos del colchon</p>
-
-                </div>
-                <hr class="my-4" -->
-
-                <div class="grid mt-3">
-                    <p class="m-0 font-bold text-lg my-3 tracking-wide">Observación/Comentarios</p>
-
-                    <div class="col-span-2 md:col-span-1">
-                        <textarea name="observacion_lodo" rows="5" class="form-control text-sm" placeholder="Máximo 500 caracteres"
-                            readonly> {{ $solicitud_lodo[0]->comentario }}</textarea>
+                <p class="m-0 font-bold text-lg my-3 tracking-wide">Reconocimiento de que el trabajo fue solicitado</p>
+                <div class="grid grid-cols-2 gap-3 mt-3">
+                    <div>
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre <small>(Solicitado por)</small></label>
+                        <select name="firma_solicitante_lodo" class="form-select text-sm" disabled>
+                            @foreach ($names_ingenieros as $name)
+                                @if ($name->id == $solicitud_lodo[0]->firma_solicitante_id)
+                                <option value="{{ $name->id }}" selected>{{ $name->nombre }}
+                                    {{ $name->apellido }}
+                                </option>
+                                @else
+                                    <option value="{{ $name->id }}">{{ $name->nombre }} {{ $name->apellido }}
+                                    </option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>   
+                    <div>
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de
+                            la firma</label>
+                        <input type="date" name="fecha_solicitante_lodo"
+                            value="{{ $solicitud_lodo[0]->fecha_solicitante }}" readonly class="form-control text-sm">
                     </div>
-                </div>
-                <p class="m-0 mt-3 font-bold text-lg tracking-wide dark:text-gray-300">Firmas de Autorización</p>
+                </div> 
+
+                <div class="grid grid-cols-2 gap-3 mt-3">
+                    <div>
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre <small>(Laboratorio)</small></label>
+                        <select name="firma_reconocimiento_lodo" class="form-select text-sm" disabled>
+                            @foreach ($users as $u)
+                                @if ($u->id == $solicitud_lodo[0]->firma_reconocimiento_id)
+                                <option value="{{ $u->id }}" selected>{{ $u->nombre }}
+                                    {{ $u->apellido }}
+                                </option>
+                                @else
+                                    <option value="{{ $u->id }}">{{ $u->nombre }} {{ $u->apellido }}
+                                    </option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+                    <div>
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de
+                            la firma</label>
+                        <input type="date" name="fecha_reconocimiento_lodo"
+                            value="{{ $solicitud_lodo[0]->fecha_reconocimiento }}" readonly class="form-control text-sm">
+                    </div>
+                </div>   
+
+                {{--<p class="m-0 mt-3 font-bold text-lg tracking-wide dark:text-gray-300">Firmas de Autorización</p>
 
                 <div class="row mt-3">
                     <div class="col-xs-12 col-md-6 my-2">
@@ -438,27 +503,22 @@
                     <div class="col-xs-12 col-md-6 my-2">
                         <label for="fecha_autorizacion"
                             class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Fecha
-                            de la Firma
-                            <small>(*)</small></label>
+                            de la Firma </label>
                         <input type="date" name="fecha_autorizacion" id="fecha_autorizacion"
                             class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
                             value="{{ $solicitud_lodo[0]->fecha_autorizacion }}" readonly>
                     </div>
+                <hr>
+                </div>--}}
+                <p class="m-0 font-bold text-lg my-3 tracking-wide">Firma de Autorización para realizar el trabajo</p>
 
-                  
-
-                <p class="m-0 mt-3 font-bold text-lg tracking-wide dark:text-gray-300">Reconocimiento</p>
-                <div class="row mt-3">
-                    <div class="col-xs-12 col-md-6 my-2">
-                        <label for="firma_reconocimiento"
-                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Nombre
-                            <small>(Reconocimiento)</small></label>
-                        <select name="firma_reconocimiento" id="firma_reconocimiento"
-                            class="form-select sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
-                            disabled>
+                <div class="grid grid-cols-2 gap-3 mt-3">
+                    <div>
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Nombre <small>(Autoriza)</small></label>
+                        <select name="firma_autorizacion_lodo" class="form-select text-sm" disabled>
                             <option value="">-- Seleccione --</option>
                             @foreach ($users as $e)
-                                @if ($e->id == $solicitud_lodo[0]->firma_reconocimiento_id)
+                                @if ($e->id == $solicitud_lodo[0]->firma_autorizacion_id)
                                     <option value="{{ $e->id }}" selected>{{ $e->nombre }}
                                         {{ $e->apellido }}
                                     </option>
@@ -470,24 +530,17 @@
                         </select>
                     </div>
 
-                    <div class="col-xs-12 col-md-6 my-2">
-                        <label for="fecha_reconocimiento"
-                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Fecha
-                            de la Firma
-                            <small>(*)</small></label>
-                        <input type="date" name="fecha_reconocimiento" id="fecha_reconocimiento"
-                            class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
-                            value="{{ $solicitud_lodo[0]->fecha_reconocimiento }}" readonly>
+                    <div>
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de la firma</label>
+                        <input type="date" name="fecha_autorizacion"
+                            value="{{ $solicitud_lodo[0]->fecha_autorizacion }}" readonly class="form-control text-sm">
                     </div>
                 </div>
-
-                <hr>
-
-            </div>
         </form>
+        <br>
    
             <hr class="dark:bg-gray-400">
-
+        <br>
                     <!-- Aprobar la solicitud -->
             @if ($solicitud->aprobada)
             <div class="mt-3 flex items-center justify-center flex-col md:flex-row gap-3 text-center bg_approved">
@@ -545,10 +598,10 @@
                 ele: "#locacion_lodo",
                 placeholder: "Seleccione el yacimiento",
             });
-           /* VirtualSelect.init({
+            VirtualSelect.init({
                 ele: "#mud_company",
                 placeholder: "Seleccione la compañía",
-            });*/
+            });
             VirtualSelect.init({
                 ele: "#equipo_lodo",
                 placeholder: "Seleccione equipo",

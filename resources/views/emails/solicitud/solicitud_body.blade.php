@@ -24,7 +24,7 @@
         <hr>
 
         <div style="padding: 10px; font-size: 14px">
-            <p style="margin: 0 auto; text-align: center"><b>{{ $data['solicitud']->ensayo->tipo }}-{{ $data['solicitud']->ensayo->incrementable }}-{{ $data['solicitud']->ensayo->anio }}</b></p>
+            <p style="margin: 0 auto; text-align: center"><b>{{--{{ $data['solicitud']->ensayo->tipo }}-{{ $data['solicitud']->ensayo->incrementable }}-{{ $data['solicitud']->ensayo->anio }} --}}</b></p>
         </div>
 
         <div style="display: flex; justify-content: center">
@@ -33,7 +33,8 @@
         <hr>
 
         <div style="padding: 10px; display: flex; flex-direction: column; font-size: 14px">
-            Le informamos que el reporte de cementación ha sido enviado en formato PDF. Puede descargarlo y visualizarlo
+            Le informamos que el reporte de cementación ha sido enviado
+             en formato PDF. Puede descargarlo y visualizarlo
         </div>
 
         <footer style="background-color: #006F53; padding: 15px 10px; color: white; font-size: 13px">

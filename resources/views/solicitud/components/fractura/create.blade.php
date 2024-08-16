@@ -670,7 +670,10 @@
 
 <!-- Create formulación tentativa -->
 <script src="{{ asset('js/Solicitud/fractura/aditivos.js') }}"></script>
-
+<script>
+    // Datos de aditivos pasados desde el controlador
+    const aditivos = @json($aditivos);
+</script>
 <script>
     const aditivo_extra_inp = document.querySelectorAll('.aditivo_extra_inp');
  

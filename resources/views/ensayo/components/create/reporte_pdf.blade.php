@@ -63,6 +63,7 @@
         var url = "{{ route('pdf_report_lechada', '') }}" + "/" + solicitud_id;
         window.open(url, '_blank');
     }
+    
 </script>
 
 {{-- Generar el envío de corre a un usuario del sistema o fuera del sistema --}}
@@ -95,6 +96,7 @@
                     }).then((response) => response.json())
                     .then((data) => {
                         if (data) {
+                            
                             successAlert('¡Reporte Enviado!',
                                 'El reporte se envió correctamente.').then(
                                 (confirmed) => {

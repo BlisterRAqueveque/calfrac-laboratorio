@@ -299,7 +299,7 @@ class EnsayoController extends Controller
         # Insertar adjunto (Si es que hay)
         $image = $request->file('file_upload_bombeabilidad');
 
-        if ($image) {
+        // if ($image) {
             # Nombre y destino
             $imageName = time() . '_bombeabilidad.' . $image->getClientOriginalExtension();
             $destinationPath = public_path('/uploads/ensayos');
@@ -322,9 +322,9 @@ class EnsayoController extends Controller
             }
     
             $img->save($destinationPath . '/' . $imageName);
-        } else {
-            $imageName = '';
-        }
+        // } else {
+        //     $imageName = '';
+        // }
 
         $bomb_id = RelBombeabilidadSolicitudEnsayo::create([
             'consistometro' => $request->bombeabilidad_consistometro,

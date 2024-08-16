@@ -98,7 +98,6 @@
                 </li>
 
                 <li class="relative p-2 flex gap-3 cursor-pointer rounded-md" id="miPerfilNav">
-
                     @if (auth()->user()->img)
                         <div class="flex justify-center items-center w-10 h-10 mx-auto">
                             <img src="{{ asset('uploads/perfiles') . '/' . auth()->user()->img }}"
@@ -115,6 +114,7 @@
                             {{ auth()->user()->apellido }}</span>
                         <small class="text-xs xl:text-sm text-gray-400">{{ auth()->user()->grupo->nombre }}</small>
                     </div>
+                    
 
                     {{-- <div class="absolute z-50 text-xs xl:text-sm mt-1 rounded bg-white shadow-md w-56 hidden"
                         id="miPerfilConfig"

@@ -22,5 +22,10 @@ class RelAditivoSolicitudLechada extends Model
     public function solicitud_lechada() {
         return $this->hasMany(SolicitudLechada::class);
     }
+    
+    public function aditivos()
+    {
+        return $this->belongsTo(Aditivo::class, 'aditivo');
+    }
 
 }

@@ -681,7 +681,10 @@
 
 <!-- Create Ensayos de Referencia -->
 <script src="{{ asset('js/Solicitud/lechada/ens_ref.js') }}"></script>
-
+<script>
+    // Datos de aditivos pasados desde el controlador
+    const aditivos_lechada = @json($aditivos);
+</script>
 <!-- Create formulación tentativa -->
 <script src="{{ asset('js/Solicitud/lechada/aditivos.js') }}"></script>
 <script>

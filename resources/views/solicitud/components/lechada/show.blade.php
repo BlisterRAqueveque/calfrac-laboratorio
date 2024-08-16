@@ -429,7 +429,6 @@
                 <div class="grid md:grid-cols-6 gap-3 mt-4 relative">
                     @foreach ($ensayos_referencia as $e_r)
                     <div>
-                        <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2" for="ensayo_id_{{ $loop->index }}"></label>
                         <select name="ensayo_id[]" class="form-control text-sm p-2"  disabled>
                             @foreach ($ensayos as $ensayo)
                                 <option value="{{ $ensayo->id }}" {{ $ensayo->id == $e_r->ensayo_id ? 'selected' : '' }}>{{ $ensayo->tipo . "-" . $ensayo->incrementable . "-" . $ensayo->anio}}</option>

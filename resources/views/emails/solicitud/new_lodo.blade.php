@@ -16,14 +16,14 @@
 
     <main>
         <div style="display: flex; justify-content: center; flex-direction: column; align-items: center">
-            <h3 style="letter-spacing: .8px; margin-bottom: 0">Solicitud de Fractura</h3>
+            <h3 style="letter-spacing: .8px; margin-bottom: 0">Solicitud de Lodo</h3>
             <p style="margin: 0 auto; font-weight: 700">N°{{ $data['solicitud_id'] }}</p>
         </div>
 
         <hr>
 
         <div style="padding: 10px; font-size: 14px">
-            <p style="margin: 0 auto">Estimado/a, se ha creado una nueva Solicitud de Fractura</p>
+            <p style="margin: 0 auto">Estimado/a, se ha creado una nueva Solicitud de Lodo</p>
             <p style="margin: 0 auto"></p>
         </div>
 
@@ -34,7 +34,7 @@
         <div style="padding: 10px; display: flex; flex-direction: column; font-size: 14px">
             <p style="margin-bottom: 0"><b>Fecha de Solicitud:</b> {{ $data['fecha_solicitud'] }}</p>
             <p style="margin-bottom: 0"><b>Usuario carga:</b> {{ $data['usuario_carga'] }}</p>
-            <p style="margin-bottom: 0"><b>Cliente:</b> {{ $data['cliente'] }}</p>
+            <p style="margin-bottom: 0"><b>Cliente:</b> {{ $data['cliente_id'] }}</p>
             {{--<p style="margin-bottom: 0"><b>Compañía:</b> {{ $data['empresa'] }}</p>--}}
         </div>
         

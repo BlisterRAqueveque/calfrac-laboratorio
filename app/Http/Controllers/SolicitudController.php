@@ -83,6 +83,8 @@ class SolicitudController extends Controller
             'estados' => Estados::all(),
             'ensayos_sol_lodo' => Ensayo::where('tipo', 'LN')->where('estado', 1)->get(),
             'names_ingenieros' => User::whereIn('users.grupo_id', [3, 4])->get('users.*'),
+            'aditivos' => Aditivo::all(),
+            //'name_aditivos' =>
         ];
         return view('solicitud.create', $data);
     }
@@ -213,7 +215,7 @@ class SolicitudController extends Controller
                 ]);
             }
         }
-
+        $url = route('solicitud.fractura.show', ['solicitud_id' => $solicitud->id]);
         $emailsAEnviar = [];
 
         # Envío de Emails
@@ -229,13 +231,15 @@ class SolicitudController extends Controller
             $correos[] = $solicitud_fractura->user_reconocimiento->email;
         //Podria hardcodear mi email aca para probar?
         */
-        #$correos[] = "franco.marquez@blistertechnologies.com";
+        $correos[] = "rocio.carvajal@blistertechnologies.com";
+        $correos[] = "orodriguez@calfrac.com";
         $data = [
             'solicitud_id' => $solicitud->id,
             'locacion_id' => $request->locacion,
             'fecha_solicitud' => $request->fecha_solicitud,
             'usuario_carga' => auth()->user()->nombre . ' ' . auth()->user()->apellido,
             'cliente' => $request->cliente,
+            'url' => $url
             //'empresa' => $request->empresa
         ];
         $this->_sendEmailNew($data, $correos);         //Podria hardcodear mi email aca para probar?
@@ -392,6 +396,19 @@ class SolicitudController extends Controller
             }
         }
         */
+        $url = route('solicitud.lechada.show', ['solicitud_id' => $solicitud->id]);
+        $correos[] = "rocio.carvajal@blistertechnologies.com";
+        $correos[] = "orodriguez@calfrac.com";
+        $data = [
+            'solicitud_id' => $solicitud->id,
+            'locacion_id' => $request->locacion_lechada,
+            'fecha_solicitud' => $request->fecha_solicitud_lechada,
+            'usuario_carga' => auth()->user()->nombre . ' ' . auth()->user()->apellido,
+            'cliente_id' => $request->cliente_lechada,
+            'url' => $url
+            //'empresa' => $request->empresa
+        ];
+        $this->_sendEmailNewLechada($data, $correos);  
 
         # Formulaciones Tentativas
         if ($request->aditivos) {
@@ -525,6 +542,7 @@ class SolicitudController extends Controller
         $solicitud_fractura->firma_reconocimiento_id = $request->firma_reconocimiento_id;
         $solicitud_fractura->fecha_firma_reconocimiento = $request->fecha_firma_reconocimiento;
         $solicitud_fractura->fecha_firma_reconocimiento = $request->fecha_firma_reconocimiento;
+
         $solicitud_fractura->save();
 
         $aditivos_bd = RelAditivosSolicitudFractura::where('solicitud_fractura_id', $solicitud_fractura->id)->get();
@@ -652,6 +670,8 @@ class SolicitudController extends Controller
             'fecha_autorizacion' => date('Y-m-d'),
             'firma_reconocimiento_id' => $request->firma_reconocimiento_lodo,
             'fecha_reconocimiento'  => $request->fecha_reconocimiento_lodo,
+            'firma_solicitante_id' => $request->firma_solicitante_lodo,
+            'fecha_solicitante'  => $request->fecha_solicitante_lodo,
             'densidad_lodo' => $request->densidad_lodo_3, // Tiene _3 porque se repetia con el resto de solicitudes
             'temperatura' => $request->temperatura,
             'vol_colchon' => $request->vol_colchon,
@@ -696,6 +716,20 @@ class SolicitudController extends Controller
                 }
             }
         }
+        # Envio de mails
+        $url = route('solicitud.lodo.show', ['solicitud_id' => $solicitud->id]);
+        $correos[] = "rocio.carvajal@blistertechnologies.com";
+        $correos[] = "orodriguez@calfrac.com";
+        $data = [
+            'solicitud_id' => $solicitud->id,
+            'locacion_id' => $request->locacion_lodo,
+            'fecha_solicitud' => $request->fecha_solicitante_lodo,
+            'usuario_carga' => auth()->user()->nombre . ' ' . auth()->user()->apellido,
+            'cliente_id' => $request->cliente_lodo,
+            'url' => $url
+            //'empresa' => $request->empresa
+        ];
+        $this->_sendEmailNewLodo($data, $correos);  
 
         # Ensayos requeridos
         if ($request->ensayos) {
@@ -723,6 +757,7 @@ class SolicitudController extends Controller
         if ($solicitud->id)
             return redirect('solicitud')->with('success', $solicitud->id);
     }
+
     public function index()
     {
         $data = [
@@ -813,6 +848,7 @@ class SolicitudController extends Controller
             'servicios' => Servicios::all(),
             'solicitud_lodo' => SolicitudLodo::where('solicitud_id', $solicitud_id)->get(),
             'comentarios_referencia' => RelEnsayoComentarioSolicitud::where('solicitud_id', $solicitud_id)->get(),
+            'names_ingenieros' => User::whereIn('users.grupo_id', [3, 4])->get('users.*'),
             // 'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
         // $generate_report = $this->_generate_report($solicitud_id);
@@ -1205,5 +1241,27 @@ class SolicitudController extends Controller
             'recordsFiltered' => $recordsFiltered,
             'data' => $data
         ]);
+
+    }
+    // Funcion para enviar mail a lechada
+    public function _sendEmailNewLechada($data, $correos)
+    {
+        foreach ($correos as $c) {
+            Mail::send('emails.solicitud.new_lechada', ['data' => $data], function ($message) use ($c, $data) {
+                $message->to($c)
+                    ->subject('Laboratorio Calfrac | Solicitud de Lechada N°' . $data['solicitud_id']);
+            });
+        };
+    }
+
+    // Funcion para enviar mail a lechada
+    public function _sendEmailNewLodo($data, $correos)
+    {
+        foreach ($correos as $c) {
+            Mail::send('emails.solicitud.new_lodo', ['data' => $data], function ($message) use ($c, $data) {
+                $message->to($c)
+                    ->subject('Laboratorio Calfrac | Solicitud de Lodo N°' . $data['solicitud_id']);
+            });
+        };
     }
 }
