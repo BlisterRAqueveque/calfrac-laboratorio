@@ -239,7 +239,7 @@
                     <div class="col-span-2 xl:col-span-1">
                         <label for="densidad_colchon" class="text-sm text-gray-700 font-semibold tracking-wide">Densidad de Colchón
                             <small>(ppg)</small></label>
-                        <input type="text" placeholder="Ingrese la densidad de Colchón"
+                        <input type="number" placeholder="Ingrese la densidad de Colchón"
                             class="form-control sz placeholder:text-gray-300 placeholder:font-light" name="densidad_colchon"
                             id="densidad_colchon">
                         @error('densidad_colchon')
@@ -250,7 +250,7 @@
                     <div class="col-span-2 xl:col-span-1">
                         <label for="tiempo_contacto" class="text-sm text-gray-700 font-semibold tracking-wide">Tiempo de contacto
                             <small>(min)</small></label>
-                        <input type="text" placeholder="Ingrese el tiempo de contacto"
+                        <input type="number" placeholder="Ingrese el tiempo de contacto"
                             class="form-control sz placeholder:text-gray-300 placeholder:font-light" name="tiempo_contacto"
                             id="tiempo_contacto">
                         @error('tiempo_contacto')
