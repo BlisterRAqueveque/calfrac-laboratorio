@@ -225,13 +225,13 @@
                     <label for="uca_hs_12" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">12 hs
                         (psi)</label>
                     <input type="number" name="uca_hs_12" id="uca_hs_12" class="form-control text-sm p-2"
-                        step=".01" placeholder="Ingresar las horas (si corresponde)">
+                        step=".0001" placeholder="Ingresar las horas (si corresponde)">
                 </div>
                 <div>
                     <label for="uca_hs_24" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">24 hs
                         (psi)</label>
                     <input type="number" name="uca_hs_24" id="uca_hs_24" class="form-control text-sm p-2"
-                        step=".01" placeholder="Ingresar las horas (si corresponde)">
+                        step=".0001" placeholder="Ingresar las horas (si corresponde)">
                 </div>
                 <div>
                     <label for="uca_impedancia_acustica"

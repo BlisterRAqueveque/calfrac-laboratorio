@@ -235,12 +235,19 @@
         <hr class="my-4">
         <p class="m-0 font-bold text-lg my-3 tracking-wide">Ensayo Solicitado</p>
         <div class="grid md:grid-cols-5 gap-3 mt-3">
+            {{-- <div class="">
+                <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Base de Lechada <small>(MD/TVD) (m)</small></label>
+                <div class="grid grid-cols-2 gap-3">
+                    <input type="number" name="base_md" value="{{ old('base_md') }}" class="form-control text-sm p-2" placeholder="MD" step=".01">
+                    <input type="number" name="base_tvd" value="{{ old('base_tvd') }}" class="form-control text-sm p-2" placeholder="TVD" step=".01">
+                </div>
+            </div> --}}
             <div>
                 <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">OH/Trepano
                     <small>(in)</small></label>
                 <div class="grid grid-cols-2 gap-3">
-                    <input type="number" name="OH" class="form-control text-sm p-2" value="{{ old('OH') }}" placeholder="OH" step=".01">
-                    <input type="number" name="trepano" value="{{ old('trepano') }}" class="form-control text-sm p-2" placeholder="Trepano" step=".01">
+                    <input type="number" name="OH" value="{{ old('OH') }}" class="form-control text-sm p-2" placeholder="OH" step=".0001">
+                    <input type="number" name="trepano" value="{{ old('trepano') }}" class="form-control text-sm p-2" placeholder="Trepano" step=".0001">
                 </div>
             </div>
 
@@ -248,15 +255,15 @@
                 <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Casing ID y
                     OD <small>(in)</small></label>
                 <div class="grid grid-cols-2 gap-3">
-                    <input type="number" name="casing_id" class="form-control text-sm p-2" placeholder="Casing ID" value="{{ old('casing_id') }}" step=".01">
-                    <input type="number" name="casing_od" class="form-control text-sm p-2" placeholder="Casing OD" value="{{ old('casing_od') }}" step=".01">
+                    <input type="number" min="0" name="casing_id" value="{{ old('casing_id') }}"  class="form-control text-sm p-2" placeholder="Casing ID" step=".0001">
+                    <input type="number" min="0" name="casing_od" value="{{ old('casing_od') }}" class="form-control text-sm p-2" placeholder="Casing OD" step=".0001">
                 </div>
             </div>
 
             <div class="">
                 <label for="densidad_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Densidad
                     del Lodo <small>(ppg)</small></label>
-                <input type="number" name="densidad_lodo" id="densidad_lodo" value="{{ old('densidad_lodo') }}" class="form-control text-sm p-2" placeholder="Densidad del lodo" step=".01">
+                <input type="number" name="densidad_lodo" id="densidad_lodo" value="{{ old('densidad_lodo') }}" class="form-control text-sm p-2" placeholder="Densidad del lodo" step=".0001">
             </div>
 
             <div class="">
@@ -283,16 +290,16 @@
                 <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Profundidad
                     Pozo <small>(MD/TVD) (m)</small></label>
                 <div class="grid grid-cols-2 gap-3">
-                    <input type="number" min="0" name="profundidad_pozo_md" class="form-control text-sm p-2" value="{{ old('profundidad_pozo_md') }}" placeholder="MD" step=".01">
-                    <input type="number" min="0" name="profundidad_pozo_tvd" class="form-control text-sm p-2" value="{{ old('profundidad_pozo_tvd') }}" placeholder="TVD" step=".01">
+                    <input type="number" min="0" name="profundidad_pozo_md" class="form-control text-sm p-2" value="{{ old('profundidad_pozo_md') }}" placeholder="MD" step=".0001">
+                    <input type="number" min="0" name="profundidad_pozo_tvd" class="form-control text-sm p-2" value="{{ old('profundidad_pozo_tvd') }}" placeholder="TVD" step=".0001">
                 </div>
             </div>
 
             <div class="">
                 <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Base de Lechada <small>(MD/TVD) (m)</small></label>
                 <div class="grid grid-cols-2 gap-3">
-                    <input type="number" name="base_md" value="{{ old('base_md') }}" class="form-control text-sm p-2" placeholder="MD" step=".01">
-                    <input type="number" name="base_tvd" value="{{ old('base_tvd') }}" class="form-control text-sm p-2" placeholder="TVD" step=".01">
+                    <input type="number" name="base_md" value="{{ old('base_md') }}" class="form-control text-sm p-2" placeholder="MD" step=".0001">
+                    <input type="number" name="base_tvd" value="{{ old('base_tvd') }}" class="form-control text-sm p-2" placeholder="TVD" step=".0001">
                 </div>
             </div>
 
@@ -359,42 +366,42 @@
                 <div class="grid grid-cols-2 gap-3">
                     <input type="number" min="0" name="top_of_slurry_md"
                         class="form-control text-sm p-2" value="{{ old('top_of_slurry_md') }}"
-                        placeholder="MD" step=".01">
+                        placeholder="MD" step=".0001">
                     <input type="number" min="0" name="top_of_slurry_tvd"
                         class="form-control text-sm p-2" value="{{ old('top_of_slurry_tvd') }}"
-                        placeholder="TVD" step=".01">
+                        placeholder="TVD" step=".0001">
                 </div>
             </div>    
 
             <div class="md:col-span-2 xl:col-span-1">
                 <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Volumen
                     <small>(bbl)</small></label>
-                <input type="number" name="volumen" value="{{ old('volumen') }}" class="form-control sz p-2" placeholder="Volumen" step=".01">
+                <input type="number" name="volumen" value="{{ old('volumen') }}" class="form-control sz p-2" placeholder="Volumen" step=".0001">
             </div>
 
             <div class="md:col-span-2 xl:col-span-1">
                 <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Caudal
                     <small>(bpm)</small></label>
-                <input type="number" name="pump_rate" value="{{ old('pump_rate') }}" class="form-control sz p-2" placeholder="Caudal" step=".01">
+                <input type="number" name="pump_rate" value="{{ old('pump_rate') }}" class="form-control sz p-2" placeholder="Caudal" step=".0001">
             </div>
 
             <div class="md:col-span-2 xl:col-span-1">
                 <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Grado de
                     Temperatura <small>(F°/100ft)</small></label>
-                <input type="number" name="grado_temperatura" value="{{ old('grado_temperatura') }}" class="form-control sz p-2" placeholder="(F°/100ft)" step=".01">
+                <input type="number" name="grado_temperatura" value="{{ old('grado_temperatura') }}" class="form-control sz p-2" placeholder="(F°/100ft)" step=".0001">
             </div>
 
             <div class="xl:col-span-1">
                 <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">BHCT
                     <small>(ºC)</small></label>
-                <input type="number" name="bhct" value="{{ old('bhct') }}" class="form-control sz p-2" placeholder="ºC" step=".01">
+                <input type="number" name="bhct" value="{{ old('bhct') }}" class="form-control sz p-2" placeholder="ºC" step=".0001">
             </div>
 
             <div class="grid grid-cols-2 col-span-2 xl:col-span-1 gap-3">
                 <div class="xl:col-span-1">
                     <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">BHST
                         <small>(ºC)</small></label>
-                    <input type="number" name="bhst" value="{{ old('bhst') }}" class="form-control text-sm p-2" placeholder="ºC" step=".01">
+                    <input type="number" name="bhst" value="{{ old('bhst') }}" class="form-control text-sm p-2" placeholder="ºC" step=".0001">
                 </div>
 
             </div>

@@ -38,20 +38,20 @@
                     <label for="agua_libre" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Agua Libre
                         °C</label>
                     <input type="number" name="agua_libre" id="agua_libre" class="form-control text-sm p-2"
-                        placeholder="Agua Libre °C" step=".01">
+                        placeholder="Agua Libre °C" step=".0001">
                 </div>
                 <div>
                     <label for="agua_libre_volumen"
                         class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Volumen
                         mL</label>
                     <input type="number" name="agua_libre_volumen" id="agua_libre_volumen"
-                        class="form-control text-sm p-2" placeholder="Ingrese el Volumen" step=".01">
+                        class="form-control text-sm p-2" placeholder="Ingrese el Volumen" step=".0001">
                 </div>
                 <div>
                     <label for="api_agua_libre" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">API Agua
                         Libre %</label>
                     <input type="number" name="api_agua_libre" id="api_agua_libre" class="form-control text-sm p-2"
-                        placeholder="Filtrado API" step=".01">
+                        placeholder="Filtrado API" step=".0001">
                 </div>
             </div>
             <div class="flex justify-center">

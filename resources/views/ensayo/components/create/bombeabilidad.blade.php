@@ -249,21 +249,21 @@
                     <label for="bombeabilidad_gradiente"
                         class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Gradiente °F/100ft</label>
                     <input type="number" name="bombeabilidad_gradiente" id="bombeabilidad_gradiente"
-                        class="form-control text-sm p-2 inp_b" placeholder="°F / 100 ft" step=".01">
+                        class="form-control text-sm p-2 inp_b" placeholder="°F / 100 ft" step=".0001">
                 </div>
 
                 <div>
                     <label for="bombeabilidad_temperatura"
                         class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Temperatura °C</label>
                     <input type="number" name="bombeabilidad_temperatura" id="bombeabilidad_temperatura"
-                        class="form-control text-sm p-2 inp_b" placeholder="°C" step=".01">
+                        class="form-control text-sm p-2 inp_b" placeholder="°C" step=".0001">
                 </div>
 
                 <div>
                     <label for="bombeabilidad_presion"
                         class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Presión (psi)</label>
                     <input type="number" name="bombeabilidad_presion" id="bombeabilidad_presion"
-                        class="form-control text-sm p-2 inp_b" placeholder="(psi)" step=".01">
+                        class="form-control text-sm p-2 inp_b" placeholder="(psi)" step=".0001">
                 </div>
 
                 <div>

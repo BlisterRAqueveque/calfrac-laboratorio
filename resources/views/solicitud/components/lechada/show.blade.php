@@ -498,15 +498,17 @@
                     <div class="">
                         <label for="mud_company" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Compañía de Lodos</label>
                         <select name="mud_company" id="mud_company" class="text-sm inp_edit" disabled>
-                            <!--<option value="" selected disabled {{ $s_l[0]->mud_company_id == null ? 'selected' : '' }}>Seleccione la compañía</option> -->
+                           
                             @foreach ($mud_company as $mud)
                                 <option value="{{ $mud->id }}" {{ $mud->id == $s_l[0]->mud_company_id ? 'selected' : '' }}>
-                                    {{ $mud->nombre }}</option>
+                                    {{ $mud->nombre ?? "Seleccione"}}</option>
                             @endforeach
                         </select>
                     </div>
                     
                     {{--
+                    por si
+                     <option value="" {{ is_null($s_l[0]->mud_company_id) ? 'selected' : '' }}>Seleccione</option>
                     Vieja configuracion Lodos
                     <div class="">
                         <label for="tipo_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de

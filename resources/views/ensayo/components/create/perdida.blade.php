@@ -41,20 +41,20 @@
                     <label for="perdida_temperatura"
                         class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Temperatura °C</label>
                     <input type="number" name="perdida_temperatura" id="perdida_temperatura"
-                        class="form-control text-sm p-2" placeholder="Temperatura °C" step=".01">
+                        class="form-control text-sm p-2" placeholder="Temperatura °C" step=".0001">
                 </div>
                 <div>
                     <label for="perdida_fluido_acumulado"
                         class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fluido Acumulado mL</label>
                     <input type="number" name="perdida_fluido_acumulado" id="perdida_fluido_acumulado"
-                        class="form-control text-sm p-2" placeholder="Ingrese el fluido acumulado" step=".01">
+                        class="form-control text-sm p-2" placeholder="Ingrese el fluido acumulado" step=".0001">
                 </div>
                 <div>
                     <label for="perdida_filtrado_api"
                         class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Filtrado API
                         ml/30min</label>
                     <input type="number" name="perdida_filtrado_api" id="perdida_filtrado_api"
-                        class="form-control text-sm p-2" placeholder="Filtrado API" step=".01">
+                        class="form-control text-sm p-2" placeholder="Filtrado API" step=".0001">
                 </div>
             </div>
             <div class="flex justify-center">
