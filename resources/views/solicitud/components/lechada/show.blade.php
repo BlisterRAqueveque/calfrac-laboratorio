@@ -205,7 +205,7 @@
                 <input type="hidden" value="{{ $solicitud->id }}" name="solicitud_id">
 
                 <div class="grid xs:grid-cols-2 md:grid-cols-6 gap-3 mt-3">
-                    <div class="col-span-2 xl:col-span-1">
+                    <div class="col-span-2 xl:col-span-2">
                         <label for="cliente_lechada"
                             class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Cliente
                             <span class="text-red-500">*</span></label>
@@ -384,8 +384,6 @@
                             <small class="text-xs text-red-600">El tipo de cementación es requerido</small>
                         @enderror
                     </div>
-
-                    <br>
 
                     <div class="col-span-2 md:col-span-2 xl:col-span-1">
                         <label for="ensayo_requerido_lechada"
