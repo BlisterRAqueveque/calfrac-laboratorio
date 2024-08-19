@@ -250,7 +250,7 @@
                                     MD:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    m
+                                    {{ $s_l[0]->profundidad_pozo_md }} m
                                 </td>
                             </tr>
                             <tr>
@@ -258,7 +258,7 @@
                                     TVD:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    m
+                                    {{ $s_l[0]->profundidad_pozo_tvd }} m
                                 </td>
                             </tr>
                             <tr>
@@ -323,7 +323,7 @@
                                     Fecha:
                                 </td>
                                 <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-
+                                    {{ $s_l[0]->fecha_reconocimiento }}
                                 </td>
                             </tr>
                             <tr>
@@ -335,7 +335,7 @@
                                     Tipo de cemento / Marca:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-
+                                    {{ $s_l[0]->tipo_cemento ?? "-" }}
                                 </td>
                             </tr>
                         </table>
@@ -351,7 +351,40 @@
                             </tr>
 
                             <!-- Filas numeradas del 1 al 10 -->
+                            <?php
+                            $i = 0;
+                            ?>
+                            @foreach ($s_l[0]->formulacion_tentativa as $formulacion)
+                            <?php
+                            $i++;
+                            ?>
                             <tr>
+                                <td
+                                style="width: 40%;color: #686868; text-align: right; font-size: 13px; background-color: #ffffff;">
+                                <?= $i; ?>
+                                </td>
+                                <td
+                                    style="width: 40%;color: #686868; text-align: center; font-size: 13px; border: 1px solid #494949; background-color: #ffffff;">
+                                    {{ $formulacion->lote }}
+                                </td>
+                                <td
+                                    style="width: 40%;color: #686868; text-align: center; font-size: 13px; border: 1px solid #494949; background-color: #ffffff;">
+                                    {{ $formulacion->aditivos->nombre ? $formulacion->aditivo : "-" }}
+                                </td>
+                                <td
+                                    style="width: 40%;color: #686868; text-align: center; font-size: 13px; border: 1px solid #494949; background-color: #ffffff;">
+                                    {{ $formulacion->concentracion }}
+                                </td>
+                                <td
+                                    style="width: 40%;color: #686868; text-align: center; font-size: 13px; border: 1px solid #494949; background-color: #ffffff;">
+                                    %BOWC
+                                </td>
+                                <td style="width: 40%;color: #686868; text-align: center; font-size: 13px; border: 1px solid #494949; background-color: #ffffff;">
+                                    {{ $formulacion->blend }}
+                                </td>
+                            </tr>
+                        @endforeach
+                            {{-- <tr>
                                 <td style="text-align: center; background-color: #ffffff; border: none;">1</td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">{{ $formulacion->lote ?? "-" }}</td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"> </td>
@@ -430,7 +463,7 @@
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"> %BOWC</td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                            </tr>
+                            </tr> --}}
                             <tr>
                                 <td style="text-align: center; background-color: #ffffff; border: none;"></td>
                                 <td style="text-align: center; background-color: #ffffff; border: none;"></td>
@@ -469,7 +502,8 @@
                     <td style="width: 3%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #006f53; color:white;">
                         <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 90%; left: 90%; width: 200px; height: 20px; text-align: center;font-size: 13px;"><b>RESULTADOS DE LOS ENSAYOS</b></div>
                     </td>
-
+                    @foreach ($s_l[0]->rel_bombeabilidad as $bombeabilidad)
+                    @if ($bombeabilidad->selected)            
                     <!-- Columna con tabla interna -->
                     <td style="width: 47%; padding: 4px; text-align: center; vertical-align: top;">
                         <table style="width: 100%;">
@@ -488,7 +522,7 @@
                                                 Consistometro N°:
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-
+                                                {{ $bombeabilidad->consistometro ? $bombeabilidad->consistometro : '-' }}
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
 
@@ -499,7 +533,7 @@
                                                 Tiempo de acondicionamiento:
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-
+                                                {{ $bombeabilidad->time_acondicionamiento ? $bombeabilidad->time_acondicionamiento : '-' }}
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
 
@@ -510,7 +544,7 @@
                                                 Planilla:
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-
+                                                {{ $bombeabilidad->planilla ? $bombeabilidad->planilla : '-' }}
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
 
@@ -521,7 +555,7 @@
                                                 Gradiente:
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-
+                                            {{ $bombeabilidad->gradiente ? $bombeabilidad->gradiente : '-' }}
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
                                                 ºF/100 ft
@@ -532,7 +566,7 @@
                                                 Temperatura:
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-
+                                                {{ $bombeabilidad->temperatura ? $bombeabilidad->temperatura : '-' }}
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
                                                 ºC
@@ -543,7 +577,7 @@
                                                 Presion:
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-
+                                                {{ $bombeabilidad->presion ? $bombeabilidad->presion : '-' }}
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
                                                 psi
@@ -557,7 +591,7 @@
                                                 40 Bc:
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-
+                                                {{ $bombeabilidad->bc_40 ? $bombeabilidad->bc_40 : '-' }}
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
                                                 hh:mm
@@ -568,7 +602,7 @@
                                                 70 Bc:
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-
+                                                {{ $bombeabilidad->bc_70 ? $bombeabilidad->bc_70 : '-' }}
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
                                                 hh:mm
@@ -579,7 +613,7 @@
                                                 100 Bc:
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-
+                                                {{ $bombeabilidad->bc_100 ? $bombeabilidad->bc_100 : 'No aplica' }}
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
                                                 hh:mm
@@ -590,6 +624,9 @@
                             </tr>
                         </table>
                     </td>
+                    @endif
+                    @endforeach
+                
                     <td style="width: 47%; padding: 4px; text-align: center; vertical-align: top;">
 
                         <table style="width: 100%;">
@@ -608,7 +645,7 @@
                                                 UCA N°:
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-
+                                                {{ $s_l[0]->rel_uca[0]->id }}
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
 
@@ -619,7 +656,7 @@
                                                 Principal:
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-
+                                                {{ $s_l[0]->rel_uca[0]->principal ? $s_l[0]->rel_uca[0]->principal . '°' : '-' }}
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
                                                 °C
@@ -633,7 +670,7 @@
                                                 50 psi:
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-
+                                                {{ $s_l[0]->rel_uca[0]->psi_50 ? $s_l[0]->rel_uca[0]->psi_50 : '-' }}
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
                                                 hh:mm
@@ -644,7 +681,7 @@
                                                 500 psi:
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-
+                                                {{ $s_l[0]->rel_uca[0]->psi_500 ? $s_l[0]->rel_uca[0]->psi_500 : '-' }}
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
                                                 hh:mm
@@ -655,6 +692,7 @@
                                                 1000 psi:
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                {{ $s_l[0]->rel_uca[0]->psi_1000 ? $s_l[0]->rel_uca[0]->psi_1000 : '-' }}
 
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
@@ -666,7 +704,7 @@
                                                 12 hr:
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-
+                                                {{ $s_l[0]->rel_uca[0]->hs_12 ? $s_l[0]->rel_uca[0]->hs_12 : '-' }}
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
                                                 psi
@@ -677,7 +715,7 @@
                                                 24 hr:
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-
+                                                {{ $s_l[0]->rel_uca[0]->hs_24 ? $s_l[0]->rel_uca[0]->hs_24 : '-' }}
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
                                                 psi
@@ -688,7 +726,7 @@
                                                 Impedancia Acustica:
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-
+                                                {{ $s_l[0]->rel_uca[0]->impedancia_acustica ? $s_l[0]->rel_uca[0]->impedancia_acustica : '-' }}
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
                                                 M/rayls
@@ -699,6 +737,7 @@
                                                 SGS cero:
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                {{ $s_l[0]->rel_uca[0]->sgs_cero ? $s_l[0]->rel_uca[0]->sgs_cero : '-' }}
 
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
@@ -710,7 +749,7 @@
                                                 SGS max:
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-
+                                                {{ $s_l[0]->rel_uca[0]->sgs_max ? $s_l[0]->rel_uca[0]->sgs_max : 'No aplica' }}
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
                                                 hh:mm
@@ -789,8 +828,10 @@
                                                                         3
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{ $s_l[0]->rel_reologia[0]->tem_ensayo_3_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_3_up . '°' : '-' }}
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{ $s_l[0]->rel_reologia[0]->tem_ambiente_3_down ? $s_l[0]->rel_reologia[0]->tem_ambiente_3_down . '°' : '-' }}
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
                                                                     </td>
@@ -802,8 +843,10 @@
                                                                         6
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{ $s_l[0]->rel_reologia[0]->tem_ensayo_6_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_6_up . '°' : '-' }}
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{ $s_l[0]->rel_reologia[0]->tem_ambiente_6_down ? $s_l[0]->rel_reologia[0]->tem_ambiente_6_down . '°' : '-' }}
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
                                                                     </td>
@@ -815,8 +858,10 @@
                                                                         30
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{ $s_l[0]->rel_reologia[0]->tem_ensayo_30_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_30_up . '°' : '-' }}       
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{ $s_l[0]->rel_reologia[0]->tem_ambiente_30_down ? $s_l[0]->rel_reologia[0]->tem_ambiente_30_down . '°' : '-' }}
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
                                                                     </td>
@@ -828,8 +873,10 @@
                                                                         60
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{ $s_l[0]->rel_reologia[0]->tem_ensayo_60_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_60_up . '°' : '-' }}
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{ $s_l[0]->rel_reologia[0]->tem_ambiente_60_down ? $s_l[0]->rel_reologia[0]->tem_ambiente_60_down . '°' : '-' }}
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
                                                                     </td>
@@ -841,8 +888,10 @@
                                                                         100
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{ $s_l[0]->rel_reologia[0]->tem_ensayo_100_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_100_up . '°' : '-' }}
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{ $s_l[0]->rel_reologia[0]->tem_ambiente_100_down ? $s_l[0]->rel_reologia[0]->tem_ambiente_100_down . '°' : '-' }}
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
                                                                     </td>
@@ -854,8 +903,10 @@
                                                                         200
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{ $s_l[0]->rel_reologia[0]->tem_ensayo_100_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_100_up . '°' : '-' }}
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{ $s_l[0]->rel_reologia[0]->tem_ambiente_200_down ? $s_l[0]->rel_reologia[0]->tem_ambiente_200_down . '°' : '-' }}
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
                                                                     </td>
@@ -867,8 +918,10 @@
                                                                         300
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{ $s_l[0]->rel_reologia[0]->tem_ensayo_300_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_300_up . '°' : '-' }}
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{ $s_l[0]->rel_reologia[0]->tem_ambiente_300_down ? $s_l[0]->rel_reologia[0]->tem_ambiente_300_down . '°' : '-' }}
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
                                                                     </td>
@@ -1132,6 +1185,7 @@
                                                             Temperatura:
                                                         </td>
                                                         <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                            {{ $s_l[0]->rel_perdida_filtrado[0]->temperatura ? $s_l[0]->rel_perdida_filtrado[0]->temperatura : '-' }}
 
                                                         </td>
                                                         <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
@@ -1143,6 +1197,7 @@
                                                             Fluido Acumulado:
                                                         </td>
                                                         <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                            {{ $s_l[0]->rel_perdida_filtrado[0]->fluido_acumulado ? $s_l[0]->rel_perdida_filtrado[0]->fluido_acumulado : '-' }}
 
                                                         </td>
                                                         <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
@@ -1154,6 +1209,7 @@
                                                             Filtrado API:
                                                         </td>
                                                         <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                            {{ $s_l[0]->rel_perdida_filtrado[0]->filtrado_api ? $s_l[0]->rel_perdida_filtrado[0]->filtrado_api : '-' }}
 
                                                         </td>
                                                         <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
@@ -1181,7 +1237,7 @@
                                                             Mezclabilidad:
                                                         </td>
                                                         <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-
+                                                            {{ $s_l[0]->rel_mezclabilidad[0]->mezclabilidad }}
                                                         </td>
                                                         <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
 
@@ -1210,7 +1266,7 @@
                                                             Agua libre:
                                                         </td>
                                                         <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-
+                                                            {{ $s_l[0]->rel_agua_libre[0]->agua_libre ? $s_l[0]->rel_agua_libre[0]->agua_libre . '°C' : 'No aplica' }}
                                                         </td>
                                                         <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
                                                             °C
@@ -1221,7 +1277,7 @@
                                                             Volumen:
                                                         </td>
                                                         <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-
+                                                            {{ $s_l[0]->rel_agua_libre[0]->volumen ? $s_l[0]->rel_agua_libre[0]->volumen . 'mL' : 'No aplica' }}
                                                         </td>
                                                         <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
                                                             mL
@@ -1232,7 +1288,7 @@
                                                             API Agua libre:
                                                         </td>
                                                         <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-
+                                                            {{ $s_l[0]->rel_agua_libre[0]->api_agua_libre ? $s_l[0]->rel_agua_libre[0]->api_agua_libre . ' %' : 'No aplica' }}
                                                         </td>
                                                         <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
                                                             %
@@ -1382,7 +1438,7 @@
                                     Fecha:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949;">
-
+                                    {{ $solicitud->fecha_solicitud->format('Y-m-d') }}
                                 </td>
                             </tr>
                         </table>
