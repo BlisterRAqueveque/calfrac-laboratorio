@@ -270,8 +270,9 @@
                 <label for="tipo_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de
                     lodo</label>
                 <select name="tipo_lodo" id="tipo_lodo">
+                    <option value="" selected disabled>Seleccione una opción</option>
                     @foreach ($tipo_lodo as $tipo)
-                    <option value="{{ $tipo->id }}" {{ old('tipo_lodo') == $tipo->id ? 'selected' : '' }}>{{ $tipo->nombre }}</option>
+                        <option value="{{ $tipo->id }}">{{ $tipo->nombre }}</option>
                     @endforeach
                 </select>
             </div>
@@ -280,6 +281,7 @@
                 <label for="mud_company" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Compañía
                     de Lodos</label>
                 <select name="mud_company" id="mud_company">
+                    <option value="" selected disabled>Seleccione una opción</option>
                     @foreach ($mud_company as $tipo)
                     <option value="{{ $tipo->id }}" {{ old('mud_company') == $tipo->id ? 'selected' : '' }}>{{ $tipo->nombre }}</option>
                     @endforeach

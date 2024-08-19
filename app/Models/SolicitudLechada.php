@@ -17,7 +17,7 @@ class SolicitudLechada extends Model
         'casing_od',
         'densidad_lodo',
         'tipo_lodo',
-        'mud_company',
+        'mud_company_id',
         'profundidad_pozo_md',
         'profundidad_pozo_tvd',
         'base_md',
@@ -75,6 +75,7 @@ class SolicitudLechada extends Model
     {
         return $this->belongsTo(MudCompany::class, 'mud_company_id');
     }
+
     public function sgs() {
         return $this->belongsTo(Sgs::class, 'sgs');
     }

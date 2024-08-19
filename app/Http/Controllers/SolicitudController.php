@@ -232,7 +232,7 @@ class SolicitudController extends Controller
         //Podria hardcodear mi email aca para probar?
         */
         $correos[] = "rocio.carvajal@blistertechnologies.com";
-        $correos[] = "orodriguez@calfrac.com";
+        //$correos[] = "orodriguez@calfrac.com";
         $data = [
             'solicitud_id' => $solicitud->id,
             'locacion_id' => $request->locacion,
@@ -302,8 +302,8 @@ class SolicitudController extends Controller
             'casing_id' => $request->casing_id,
             'casing_od' => $request->casing_od,
             'densidad_lodo' => $request->densidad_lodo,
-            'tipo_lodo' => $request->tipo_lodo,
-            'mud_company_id' => $request->mud_company,
+            'tipo_lodo' => $request->tipo_lodo ?? null,
+            'mud_company_id' => $request->mud_company ?? null,
             'profundidad_pozo_md' => $request->profundidad_pozo_md,
             'profundidad_pozo_tvd' => $request->profundidad_pozo_tvd,
             'base_md' => $request->base_md,
@@ -398,7 +398,7 @@ class SolicitudController extends Controller
         */
         $url = route('solicitud.lechada.show', ['solicitud_id' => $solicitud->id]);
         $correos[] = "rocio.carvajal@blistertechnologies.com";
-        $correos[] = "orodriguez@calfrac.com";
+        //$correos[] = "orodriguez@calfrac.com";
         $data = [
             'solicitud_id' => $solicitud->id,
             'locacion_id' => $request->locacion_lechada,
