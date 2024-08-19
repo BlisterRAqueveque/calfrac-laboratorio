@@ -817,7 +817,7 @@ class SolicitudController extends Controller
             'clientes' => Cliente::all(),
             'yacimientos' => Yacimiento::all(),
             'tipo_requerimiento_cemento' => TipoRequerimientoCemento::all(),
-            'tipo_trabajos' => TipoTrabajoCemento::all(),
+            'tipo_trabajo_cemento' => TipoTrabajoCemento::all(),
             'tipo_cementacion' => TipoCementacion::all(),
             'tipo_lodo' => TipoLodo::all(),
             'mud_company' => MudCompany::all(),

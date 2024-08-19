@@ -356,9 +356,9 @@
                             class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de
                             Trabajo <span class="text-red-500">*</span></label>
                         <select name="tipo_trabajo_lechada" id="tipo_trabajo_lechada" class="text-sm inp_edit" disabled>
-                            @foreach ($tipo_trabajos as $tipo)
+                            @foreach ($tipo_trabajo_cemento as $tipo)
                                 <option value="{{ $tipo->id }} "
-                                    {{ $solicitud->tipo_trabajo == $tipo->id ? 'selected' : '' }}>{{ $tipo->nombre }}
+                                    {{ $solicitud->tipo_trabajo_cemento_id == $tipo->id ? 'selected' : '' }}>{{ $tipo->nombre }}
                                 </option>
                             @endforeach
                         </select>
