@@ -250,7 +250,7 @@
                                     MD:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $s_l[0]->profundidad_pozo_md }} m
+                                    {{ $s_l[0]->profundidad_pozo_md }}m
                                 </td>
                             </tr>
                             <tr>
@@ -258,7 +258,7 @@
                                     TVD:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $s_l[0]->profundidad_pozo_tvd }} m
+                                    {{ $s_l[0]->profundidad_pozo_tvd }}m
                                 </td>
                             </tr>
                             <tr>
@@ -287,7 +287,7 @@
                                     Objetivo del ensayo:
                                 </td>
                                 <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-
+                                    {{ $solicitud->tipo_requerimiento_cemento->nombre }}
                                 </td>
                             </tr>
                             <tr>
@@ -303,7 +303,7 @@
                                     Posicion Lechada:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-
+                                    {{ $ensayos_seleccionados }}
                                 </td>
                             </tr>
                         </table>
@@ -1266,7 +1266,7 @@
                                                             Agua libre:
                                                         </td>
                                                         <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                            {{ $s_l[0]->rel_agua_libre[0]->agua_libre ? $s_l[0]->rel_agua_libre[0]->agua_libre . '°C' : 'No aplica' }}
+                                                            {{ $s_l[0]->rel_agua_libre[0]->agua_libre ? $s_l[0]->rel_agua_libre[0]->agua_libre : 'No aplica' }}
                                                         </td>
                                                         <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
                                                             °C
@@ -1277,7 +1277,7 @@
                                                             Volumen:
                                                         </td>
                                                         <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                            {{ $s_l[0]->rel_agua_libre[0]->volumen ? $s_l[0]->rel_agua_libre[0]->volumen . 'mL' : 'No aplica' }}
+                                                            {{ $s_l[0]->rel_agua_libre[0]->volumen ? $s_l[0]->rel_agua_libre[0]->volumen : 'No aplica' }}
                                                         </td>
                                                         <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
                                                             mL
@@ -1288,7 +1288,7 @@
                                                             API Agua libre:
                                                         </td>
                                                         <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                            {{ $s_l[0]->rel_agua_libre[0]->api_agua_libre ? $s_l[0]->rel_agua_libre[0]->api_agua_libre . ' %' : 'No aplica' }}
+                                                            {{ $s_l[0]->rel_agua_libre[0]->api_agua_libre ? $s_l[0]->rel_agua_libre[0]->api_agua_libre : 'No aplica' }}
                                                         </td>
                                                         <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
                                                             %
@@ -1400,7 +1400,7 @@
                                     MD:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949;">
-                                    m
+                                    {{ $s_l[0]->profundidad_pozo_md}}m
                                 </td>
                             </tr>
                             <tr>
@@ -1408,7 +1408,7 @@
                                     TVD:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949;">
-                                    m
+                                    {{ $s_l[0]->profundidad_pozo_tvd}}m
                                 </td>
                             </tr>
                             <tr>
@@ -1512,36 +1512,36 @@
                             <tr>
                                 <!-- Primera Columna -->
                                 <td width="33.33%" style="position: relative; text-align: left; padding: 10px;">
-                                    <span style="font-weight: bold; font-size: 14px;">Realizado por:</span><br>
-                                    <span style="font-size: 16px; font-weight: bold;">Nicolas Ejemplo</span><br>
+                                    <span style="font-weight: bold; font-size: 14px;">Solicitado por:</span><br>
+                                    <span style="font-size: 16px; font-weight: bold;">{{ $s_l[0]->solicitado->nombre . ' ' . $s_l[0]->solicitado->apellido  }}</span><br>
                                     <span style="font-size: 10px;">
                                         Digitally signed by<br>
-                                        Nicolas Ejemplo<br>
-                                        Date: xxxx-xx-xx hh:ss:mm
+                                        {{ $s_l[0]->solicitado->nombre . ' ' . $s_l[0]->solicitado->apellido }}<br>
+                                        Date: {{ $s_l[0]->fecha_reconocimiento }}
                                     </span>
                                     <img src="ruta/a/la/firma.png" style="position: absolute; top: 10px; left: 10px; width: 80px; opacity: 0.3; z-index: -1;">
                                 </td>
 
                                 <!-- Segunda Columna -->
                                 <td width="33.33%" style="position: relative; text-align: left; padding: 10px;">
-                                    <span style="font-weight: bold; font-size: 14px;">Realizado por:</span><br>
-                                    <span style="font-size: 16px; font-weight: bold;">Nicolas Ejemplo</span><br>
+                                    <span style="font-weight: bold; font-size: 14px;">Reconocido por:</span><br>
+                                    <span style="font-size: 16px; font-weight: bold;">{{ $s_l[0]->user_reconocimiento->nombre . ' ' . $s_l[0]->user_reconocimiento->apellido }}</span><br>
                                     <span style="font-size: 10px;">
                                         Digitally signed by<br>
-                                        Nicolas Ejemplo<br>
-                                        Date: xxxx-xx-xx hh:ss:mm
+                                        {{ $s_l[0]->user_reconocimiento->nombre . ' ' . $s_l[0]->user_reconocimiento->apellido }}<br>
+                                        Date: {{ $s_l[0]->fecha_reconocimiento }}
                                     </span>
                                     <img src="ruta/a/la/firma.png" style="position: absolute; top: 10px; left: 10px; width: 80px; opacity: 0.3; z-index: -1;">
                                 </td>
 
                                 <!-- Tercera Columna -->
                                 <td width="33.33%" style="position: relative; text-align: left; padding: 10px;">
-                                    <span style="font-weight: bold; font-size: 14px;">Realizado por:</span><br>
-                                    <span style="font-size: 16px; font-weight: bold;">Nicolas Ejemplo</span><br>
+                                    <span style="font-weight: bold; font-size: 14px;">Autorizado por:</span><br>
+                                    <span style="font-size: 16px; font-weight: bold;">{{ $s_l[0]->user_autorizacion->nombre . ' ' . $s_l[0]->user_autorizacion->apellido }}</span><br>
                                     <span style="font-size: 10px;">
                                         Digitally signed by<br>
-                                        Nicolas Ejemplo<br>
-                                        Date: xxxx-xx-xx hh:ss:mm
+                                        {{ $s_l[0]->user_autorizacion->nombre . ' ' . $s_l[0]->user_autorizacion->apellido }}<br>
+                                        Date: {{ $s_l[0]->fecha_autorizacion }}
                                     </span>
                                     <img src="ruta/a/la/firma.png" style="position: absolute; top: 10px; left: 10px; width: 80px; opacity: 0.3; z-index: -1;">
                                 </td>
