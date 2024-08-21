@@ -126,8 +126,9 @@
                 </div>
                 <input type="text" class="form-control text-xs rounded-l-none p-2 col-span-4 md:col-span-1"
                     placeholder="Lote" value="{{ $formulacion->lote }}" name="aditivos[{{$inc}}][lote]" readonly>
-                <input type="text" class="form-control text-xs p-2 col-span-4 md:col-span-1"
+                <input type="text" id="aditivo" class="form-control text-xs p-2 col-span-4 md:col-span-1"
                     value="{{ $formulacion->aditivos->nombre ?? $formulacion->aditivo }}" placeholder="Aditivo" name="aditivos[{{$inc}}][aditivo]" readonly>
+                <div id="nuevoInputContainer" class="hidden justify-between"></div>
                 <input type="text" class="form-control text-xs p-2 col-span-4 md:col-span-1"
                     placeholder="Concentración" value="{{ $formulacion->concentracion }}" name="aditivos[{{$inc}}][concentracion]" readonly>
                 <input type="text" class="form-control text-xs p-2 col-span-4 md:col-span-1"

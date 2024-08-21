@@ -146,6 +146,41 @@ btnAddFormulacion.addEventListener("click", (e) => {
   });
   div.appendChild(select);
 
+    // Contenedor para el nuevo input
+    const nuevoInputContainer = document.createElement("div");
+    nuevoInputContainer.id = `nuevoInputContainer_${aux_aditivo}`;
+    nuevoInputContainer.className = "hidden col-span-4 md:col-span-1";
+    div.appendChild(nuevoInputContainer);
+    
+  
+    // Escuchar cambios en el select de aditivos -> vieja conf
+    // select.addEventListener('change', function() {
+    //   const aditivoSelect = this;
+    //   const nuevoInputContainer = document.getElementById(`nuevoInputContainer_${aux_aditivo}`);
+  
+    //   if (aditivoSelect.value === 'SD') {
+    //     aditivoSelect.classList.add('w-1/2');
+  
+    //     if (!document.getElementById(`nuevoInput_${aux_aditivo}`)) {
+    //       const nuevoInput = document.createElement('input');
+    //       nuevoInput.id = `nuevoInput_${aux_aditivo}`;
+    //       nuevoInput.type = 'text';
+    //       nuevoInput.className = 'form-control text-xs p-2 w-1/2';
+    //       nuevoInput.placeholder = 'Otro aditivo';
+    //       nuevoInput.name = `aditivos[${aux_aditivo}][otro_aditivo]`;
+  
+    //       nuevoInputContainer.appendChild(nuevoInput);
+    //       nuevoInputContainer.classList.remove('hidden');
+    //     }
+    //   } else {
+    //     aditivoSelect.classList.remove('w-1/2');
+    //     if (nuevoInputContainer) {
+    //       nuevoInputContainer.innerHTML = '';
+    //       nuevoInputContainer.classList.add('hidden');
+    //     }
+    //   }
+    // });
+
   // Concentración
   input = document.createElement("input");
   input.className = "form-control text-xs rounded-l-none p-2 col-span-4 md:col-span-1";

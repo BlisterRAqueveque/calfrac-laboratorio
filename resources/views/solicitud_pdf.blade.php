@@ -1513,11 +1513,11 @@
                                 <!-- Primera Columna -->
                                 <td width="33.33%" style="position: relative; text-align: left; padding: 10px;">
                                     <span style="font-weight: bold; font-size: 14px;">Solicitado por:</span><br>
-                                    <span style="font-size: 16px; font-weight: bold;">{{ $s_l[0]->solicitado->nombre . ' ' . $s_l[0]->solicitado->apellido  }}</span><br>
+                                    <span style="font-size: 16px; font-weight: bold;">{{ $s_l[0]->solicitado->nombre ?? '-' . ' '}} {{ $s_l[0]->solicitado->apellido ?? '-' }}</span><br>
                                     <span style="font-size: 10px;">
                                         Digitally signed by<br>
-                                        {{ $s_l[0]->solicitado->nombre . ' ' . $s_l[0]->solicitado->apellido }}<br>
-                                        Date: {{ $s_l[0]->fecha_reconocimiento }}
+                                        {{ $s_l[0]->solicitado->nombre  ?? '-' . ' '}} {{ $s_l[0]->solicitado->apellido ?? '-' }}<br>
+                                        Date: {{ $s_l[0]->fecha_solicitante }}
                                     </span>
                                     <img src="ruta/a/la/firma.png" style="position: absolute; top: 10px; left: 10px; width: 80px; opacity: 0.3; z-index: -1;">
                                 </td>
@@ -1525,10 +1525,10 @@
                                 <!-- Segunda Columna -->
                                 <td width="33.33%" style="position: relative; text-align: left; padding: 10px;">
                                     <span style="font-weight: bold; font-size: 14px;">Reconocido por:</span><br>
-                                    <span style="font-size: 16px; font-weight: bold;">{{ $s_l[0]->user_reconocimiento->nombre . ' ' . $s_l[0]->user_reconocimiento->apellido }}</span><br>
+                                    <span style="font-size: 16px; font-weight: bold;">{{ $s_l[0]->user_reconocimiento->nombre ?? '-' . ' '}} {{ $s_l[0]->user_reconocimiento->apellido ?? '-'}}</span><br>
                                     <span style="font-size: 10px;">
                                         Digitally signed by<br>
-                                        {{ $s_l[0]->user_reconocimiento->nombre . ' ' . $s_l[0]->user_reconocimiento->apellido }}<br>
+                                        {{ $s_l[0]->user_reconocimiento->nombre  ?? '-' . ' '}} {{ $s_l[0]->user_reconocimiento->apellido ?? '-' }}<br>
                                         Date: {{ $s_l[0]->fecha_reconocimiento }}
                                     </span>
                                     <img src="ruta/a/la/firma.png" style="position: absolute; top: 10px; left: 10px; width: 80px; opacity: 0.3; z-index: -1;">
@@ -1537,10 +1537,10 @@
                                 <!-- Tercera Columna -->
                                 <td width="33.33%" style="position: relative; text-align: left; padding: 10px;">
                                     <span style="font-weight: bold; font-size: 14px;">Autorizado por:</span><br>
-                                    <span style="font-size: 16px; font-weight: bold;">{{ $s_l[0]->user_autorizacion->nombre . ' ' . $s_l[0]->user_autorizacion->apellido }}</span><br>
+                                    <span style="font-size: 16px; font-weight: bold;">{{ $s_l[0]->user_autorizacion->nombre ?? '-' . ' '}} {{ $s_l[0]->user_autorizacion->apellido ?? '-' }}</span><br>
                                     <span style="font-size: 10px;">
                                         Digitally signed by<br>
-                                        {{ $s_l[0]->user_autorizacion->nombre . ' ' . $s_l[0]->user_autorizacion->apellido }}<br>
+                                        {{ $s_l[0]->user_autorizacion->nombre ?? '-' . ' '}} {{ $s_l[0]->user_autorizacion->apellido ?? '-'}}<br>
                                         Date: {{ $s_l[0]->fecha_autorizacion }}
                                     </span>
                                     <img src="ruta/a/la/firma.png" style="position: absolute; top: 10px; left: 10px; width: 80px; opacity: 0.3; z-index: -1;">
