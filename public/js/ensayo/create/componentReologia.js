@@ -16,6 +16,7 @@ let accordionItem,
   th,
   td;
 const accordionReologia = document.getElementById("accordionReologia");
+
 const componentReologia = (data = "") => {
   accordionItem = el("div");
   
@@ -324,4 +325,33 @@ const componentReologia = (data = "") => {
   mount(table, tbody);
 
   mount(accordionItem, table)
+
+  // let div_img = el('div.mb-2 mt-2 text-center')
+  // let h5 = el('h5.mb-1', 'Adjunto')
+  // let section = el('section')
+  // let div_relative = el('div.relative md:w-1/2 xl:w-1/3 mx-auto flex items-center p-2 border rounded-md border-gray-200 hover:bg-gray-50')
+  // let contain_img = el('div.w-12 h-12 rounded-full bg-gray-100 flex-shrink-0')
+  // let img = el('img.w-12 h-12 object-cover rounded-full cursor-pointer')
+  // img.setAttribute('src', _setUrl('uploads/ensayos', data.img))
+  // img.setAttribute('onclick', `openModal('myModalUca', 'modalImgUca', '${_setUrl('uploads/ensayos', data.img)}')`)
+  // mount(contain_img, img)
+  // mount(div_relative, contain_img)
+
+  // let div_txt = el('div.text-left w-full ms-2')
+  // let h6 = el('text-md', 'Archivo adjunto')
+  // let div_flex = el('div.flex justify-between items-center text-gray-500 text-sm', el('p.mb-0', data.img))
+
+  // mount(div_txt, h6)
+  // mount(div_txt, div_flex)
+
+  // mount(div_relative, div_txt)
+  // mount(section, div_relative)
+  
+  // mount(div_img, h5)
+  // mount(div_img, section)
+
+  // mount(registro_uca, divGrid)
+  // mount(registro_uca, div_img)
+
+
 };
