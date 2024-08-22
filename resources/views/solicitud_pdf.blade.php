@@ -295,7 +295,7 @@
                                     Ensayo N°:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $solicitud->ensayo->tipo }}-{{ $solicitud->ensayo->incrementable }}-{{ $solicitud->ensayo->anio }}
+                                    {{ $solicitud->ensayo->tipo ?? 'null'}}-{{ $solicitud->ensayo->incrementable ?? 'null'}}-{{ $solicitud->ensayo->anio ?? 'null'}}
                                 </td>
                             </tr>
                             <tr>
@@ -935,7 +935,7 @@
                                                                 <tr>
                                                                     <td>
                                                                         <div style="width: 100%; height: 100px; overflow: hidden; display: flex; justify-content: center; align-items: center; text-align: center; border: 1px solid #494949;">
-                                                                            @if (isset($bombeabilidad) && $bombeabilidad->img)
+                                                                            {{-- @if (isset($bombeabilidad) && $bombeabilidad->img)
                                                                             @if (file_exists(public_path('uploads/ensayos/') . $bombeabilidad->img) && $bombeabilidad->img)
                                                                             <img src="{{ public_path('uploads/ensayos/') . $bombeabilidad->img }}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
                                                                             @else
@@ -943,6 +943,11 @@
                                                                             @endif
                                                                             @else
                                                                             <p style="text-align: center;">Archivo no disponible</p>
+                                                                            @endif --}}
+                                                                            @if (!empty($s_l[0]->rel_reologia[0]->img_up) && file_exists(public_path('uploads/ensayos/') . $s_l[0]->rel_reologia[0]->img_up))
+                                                                                <img src="{{ public_path('uploads/ensayos/') . $s_l[0]->rel_reologia[0]->img_up }}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
+                                                                            @else
+                                                                                <p>Archivo no disponible</p>
                                                                             @endif
                                                                         </div>
                                                                     </td>
@@ -1111,7 +1116,7 @@
                                                                 <tr>
                                                                     <td>
                                                                         <div style="width: 100%; height: 100px; overflow: hidden; display: flex; justify-content: center; align-items: center; text-align: center; border: 1px solid #494949;">
-                                                                            @if (isset($bombeabilidad) && $bombeabilidad->img)
+                                                                            {{-- @if (isset($bombeabilidad) && $bombeabilidad->img)
                                                                             @if (file_exists(public_path('uploads/ensayos/') . $bombeabilidad->img) && $bombeabilidad->img)
                                                                             <img src="{{ public_path('uploads/ensayos/') . $bombeabilidad->img }}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
                                                                             @else
@@ -1119,6 +1124,11 @@
                                                                             @endif
                                                                             @else
                                                                             <p style="text-align: center;">Archivo no disponible</p>
+                                                                            @endif --}}
+                                                                            @if (!empty($s_l[0]->rel_reologia[0]->img_down) && file_exists(public_path('uploads/ensayos/') . $s_l[0]->rel_reologia[0]->img_down))
+                                                                                <img src="{{ public_path('uploads/ensayos/') . $s_l[0]->rel_reologia[0]->img_down }}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
+                                                                            @else
+                                                                                <p>Archivo no disponible</p>
                                                                             @endif
                                                                         </div>
                                                                     </td>
