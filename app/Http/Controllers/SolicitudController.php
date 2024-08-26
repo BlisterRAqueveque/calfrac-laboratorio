@@ -190,6 +190,7 @@ class SolicitudController extends Controller
                     'solicitud_fractura_id' => $solicitud_fractura->id,
                     'lote' => $formulacion['lote'],
                     'aditivo' => $formulacion['aditivo'],
+                    'comentario' => $formulacion['comentario'],
                     'concentracion' => $formulacion['concentracion'],
                 ]);
             }

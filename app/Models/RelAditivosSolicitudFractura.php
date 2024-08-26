@@ -13,6 +13,7 @@ class RelAditivosSolicitudFractura extends Model
         'solicitud_fractura_id',
         'lote',
         'aditivo',
+        'comentario',
         'concentracion',
     ];
 
