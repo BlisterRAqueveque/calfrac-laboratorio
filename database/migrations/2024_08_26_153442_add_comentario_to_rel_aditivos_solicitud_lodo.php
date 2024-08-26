@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('rel_aditivos_solicitud_fractura', function (Blueprint $table) {
+        Schema::table('rel_aditivos_solicitud_lodo', function (Blueprint $table) {
             $table->text('comentario')->nullable();
         });
     }
@@ -25,7 +25,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('rel_aditivos_solicitud_fractura', function (Blueprint $table) {
+        Schema::table('rel_aditivos_solicitud_lodo', function (Blueprint $table) {
             $table->text('comentario')->nullable();
         });
     }

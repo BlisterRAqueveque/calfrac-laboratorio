@@ -751,6 +751,7 @@ class SolicitudController extends Controller
                 RelAditivoSolicitudLodo::create([
                     'solicitud_lodo_id' => $solicitud_lodo->id,
                     'lote' => $formulacion['lote'],
+                    'comentario' => $formulacion['comentario'],
                     'aditivo' => $formulacion['aditivo'],
                     'concentracion' => $formulacion['concentracion'],
                 ]);
