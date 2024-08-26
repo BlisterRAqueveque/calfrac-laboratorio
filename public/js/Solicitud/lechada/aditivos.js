@@ -104,7 +104,7 @@ btnAddFormulacion.addEventListener("click", (e) => {
   button.innerHTML = "-";
   
   div = document.createElement("div");
-  div.className = "w-full grid grid-cols-4 bg-gray-100 gap-3 p-2";
+  div.className = "w-full flex bg-gray-100 gap-3 p-2";
 
   button.addEventListener("click", (e) => {
     e.preventDefault();
@@ -146,40 +146,23 @@ btnAddFormulacion.addEventListener("click", (e) => {
   });
   div.appendChild(select);
 
-    // Contenedor para el nuevo input
-    const nuevoInputContainer = document.createElement("div");
-    nuevoInputContainer.id = `nuevoInputContainer_${aux_aditivo}`;
-    nuevoInputContainer.className = "hidden col-span-4 md:col-span-1";
-    div.appendChild(nuevoInputContainer);
-    
-  
+    const newinput = document.createElement("input");
+    newinput.className = "hidden form-control text-xs rounded-l-none p-2 w-1/2";
+    newinput.placeholder = "Comentario";
+    newinput.name = `aditivos[${aux_aditivo}][comentario]`;
+    div.appendChild(newinput);
+
     // Escuchar cambios en el select de aditivos -> vieja conf
-    // select.addEventListener('change', function() {
-    //   const aditivoSelect = this;
-    //   const nuevoInputContainer = document.getElementById(`nuevoInputContainer_${aux_aditivo}`);
-  
-    //   if (aditivoSelect.value === 'SD') {
-    //     aditivoSelect.classList.add('w-1/2');
-  
-    //     if (!document.getElementById(`nuevoInput_${aux_aditivo}`)) {
-    //       const nuevoInput = document.createElement('input');
-    //       nuevoInput.id = `nuevoInput_${aux_aditivo}`;
-    //       nuevoInput.type = 'text';
-    //       nuevoInput.className = 'form-control text-xs p-2 w-1/2';
-    //       nuevoInput.placeholder = 'Otro aditivo';
-    //       nuevoInput.name = `aditivos[${aux_aditivo}][otro_aditivo]`;
-  
-    //       nuevoInputContainer.appendChild(nuevoInput);
-    //       nuevoInputContainer.classList.remove('hidden');
-    //     }
-    //   } else {
-    //     aditivoSelect.classList.remove('w-1/2');
-    //     if (nuevoInputContainer) {
-    //       nuevoInputContainer.innerHTML = '';
-    //       nuevoInputContainer.classList.add('hidden');
-    //     }
-    //   }
-    // });
+    select.addEventListener('change', function() {
+      const aditivoSelect = this;
+      if (aditivoSelect.value === 'SD') {
+        aditivoSelect.classList.add('w-1/2');
+        newinput.classList.remove('hidden');
+      } else {
+        aditivoSelect.classList.remove('w-1/2');
+        newinput.classList.add('hidden');
+      }
+    });
 
   // Concentración
   input = document.createElement("input");

@@ -15,6 +15,7 @@ class RelAditivoSolicitudLechada extends Model
         'solicitud_lechada_id',
         'lote',
         'aditivo',
+        'comentario',
         'concentracion',
         'blend',
     ];
