@@ -354,28 +354,28 @@ class EnsayoController extends Controller
         $image = $request->file('file_upload_bombeabilidad');
 
         // if ($image) {
-        # Nombre y destino
-        $imageName = time() . '_bombeabilidad.' . $image->getClientOriginalExtension();
-        $destinationPath = public_path('/uploads/ensayos');
+            # Nombre y destino
+            $imageName = time() . '_bombeabilidad.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('/uploads/ensayos');
     
             # Si no existe la carpeta de destino, la crea y guarda la img
-        if (!file_exists($destinationPath)) {
-            mkdir($destinationPath, 0755, true);
-        }
+            if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 0755, true);
+            }
     
-        $img = Image::make($image->getRealPath());
+            $img = Image::make($image->getRealPath());
     
-        $width = $img->width();
-        $height = $img->height();
+            $width = $img->width();
+            $height = $img->height();
     
             # Redimensionar si la img es mayor a 1000x1000
-        if ($width > 1000 || $height > 1000) {
-            $img->resize(1000, 1000, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-        }
+            if ($width > 1000 || $height > 1000) {
+                $img->resize(1000, 1000, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+            }
     
-        $img->save($destinationPath . '/' . $imageName);
+            $img->save($destinationPath . '/' . $imageName);
         // } else {
         //     $imageName = '';
         // }
