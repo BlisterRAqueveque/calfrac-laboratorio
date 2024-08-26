@@ -418,6 +418,7 @@ class SolicitudController extends Controller
                     'solicitud_lechada_id' => $solicitud_lechada->id,
                     'lote' => $formulacion['lote'],
                     'aditivo' => $formulacion['aditivo'],
+                    'comentario' => $formulacion['comentario'],
                     'concentracion' => $formulacion['concentracion'],
                     'blend' => $formulacion['blend'],
                 ]);
