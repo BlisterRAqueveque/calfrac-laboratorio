@@ -184,7 +184,7 @@ class EnsayoController extends Controller
         $imageUp = $request->file('file_upload_reologiaup');
 
         # Nombre y destino
-        $imageNameUp = time() . '_reologia_up.' . $imageUp->getClientOriginalExtension();
+        $imageNameUp = time() . '_reologia_ascendente.' . $imageUp->getClientOriginalExtension();
         $destinationPath = public_path('/uploads/ensayos');
 
         # Si no existe la carpeta de destino, la crea y guarda la img
@@ -210,7 +210,7 @@ class EnsayoController extends Controller
         $imageDown = $request->file('file_upload_reologiadown');
 
         # Nombre y destino
-        $imageNameDown = time() . '_reologia_down.' . $imageDown->getClientOriginalExtension();
+        $imageNameDown = time() . '_reologia_descendente.' . $imageDown->getClientOriginalExtension();
         $destinationPath = public_path('/uploads/ensayos');
 
         # Si no existe la carpeta de destino, la crea y guarda la img
@@ -234,7 +234,7 @@ class EnsayoController extends Controller
 
             // Validar los campos obligatorios
         $request->validate([
-            'tem_ambiente_rpm' => 'required',
+            //'tem_ambiente_rpm' => 'required',
             'tem_ambiente_300' => 'required',
             'tem_ambiente_200' => 'required',
             'tem_ambiente_100' => 'required',
@@ -242,7 +242,7 @@ class EnsayoController extends Controller
             'tem_ambiente_30' => 'required',
             'tem_ambiente_6' => 'required',
             'tem_ambiente_3' => 'required',
-            'tem_ensayo_rpm' => 'required',
+            //'tem_ensayo_rpm' => 'required',
             'tem_ensayo_300' => 'required',
             'tem_ensayo_200' => 'required',
             'tem_ensayo_100' => 'required',
@@ -250,14 +250,14 @@ class EnsayoController extends Controller
             'tem_ensayo_30' => 'required',
             'tem_ensayo_6' => 'required',
             'tem_ensayo_3' => 'required',
-            'temp_ambiente' => 'required',
-            'temp_ensayo' => 'required',
-            'temp_ambiente_punto_cedencia' => 'required',
-            'temp_ensayo_punto_cedencia' => 'required',
-            'temp_ambiente_gel_10_seg' => 'required',
-            'temp_ensayo_gel_10_seg' => 'required',
-            'temp_ambiente_gel_10_min' => 'required',
-            'temp_ensayo_gel_10_min' => 'required',
+            //'temp_ambiente' => 'required',
+            //'temp_ensayo' => 'required',
+            //'temp_ambiente_punto_cedencia' => 'required',
+            //'temp_ensayo_punto_cedencia' => 'required',
+            //'temp_ambiente_gel_10_seg' => 'required',
+            //'temp_ensayo_gel_10_seg' => 'required',
+            //'temp_ambiente_gel_10_min' => 'required',
+            //'temp_ensayo_gel_10_min' => 'required',
         ]);
 
         $reologia = RelReologiaSolicitudEnsayo::create([
@@ -301,22 +301,22 @@ class EnsayoController extends Controller
             'tem_ensayo_30_up' => $request->tem_ensayo_30_up,
             'tem_ensayo_6_up' => $request->tem_ensayo_6_up,
             'tem_ensayo_3_up' => $request->tem_ensayo_3_up,
-            'tem_ambiente_rpm_down' => $request->tem_ambiente_rpm_down,
-            'tem_ambiente_300_down' => $request->tem_ambiente_300_down,
-            'tem_ambiente_200_down' => $request->tem_ambiente_200_down,
-            'tem_ambiente_100_down' => $request->tem_ambiente_100_down,
-            'tem_ambiente_60_down' => $request->tem_ambiente_60_down,
-            'tem_ambiente_30_down' => $request->tem_ambiente_30_down,
-            'tem_ambiente_6_down' => $request->tem_ambiente_6_down,
-            'tem_ambiente_3_down' => $request->tem_ambiente_3_down,
-            'tem_ensayo_rpm_down' => $request->tem_ensayo_rpm_down,
-            'tem_ensayo_300_down' => $request->tem_ensayo_300_down,
-            'tem_ensayo_200_down' => $request->tem_ensayo_200_down,
-            'tem_ensayo_100_down' => $request->tem_ensayo_100_down,
-            'tem_ensayo_60_down' => $request->tem_ensayo_60_down,
-            'tem_ensayo_30_down' => $request->tem_ensayo_30_down,
-            'tem_ensayo_6_down' => $request->tem_ensayo_6_down,
-            'tem_ensayo_3_down' => $request->tem_ensayo_3_down,
+            // 'tem_ambiente_rpm_down' => $request->tem_ambiente_rpm_down,
+            // 'tem_ambiente_300_down' => $request->tem_ambiente_300_down,
+            // 'tem_ambiente_200_down' => $request->tem_ambiente_200_down,
+            // 'tem_ambiente_100_down' => $request->tem_ambiente_100_down,
+            // 'tem_ambiente_60_down' => $request->tem_ambiente_60_down,
+            // 'tem_ambiente_30_down' => $request->tem_ambiente_30_down,
+            // 'tem_ambiente_6_down' => $request->tem_ambiente_6_down,
+            // 'tem_ambiente_3_down' => $request->tem_ambiente_3_down,
+            // 'tem_ensayo_rpm_down' => $request->tem_ensayo_rpm_down,
+            // 'tem_ensayo_300_down' => $request->tem_ensayo_300_down,
+            // 'tem_ensayo_200_down' => $request->tem_ensayo_200_down,
+            // 'tem_ensayo_100_down' => $request->tem_ensayo_100_down,
+            // 'tem_ensayo_60_down' => $request->tem_ensayo_60_down,
+            // 'tem_ensayo_30_down' => $request->tem_ensayo_30_down,
+            // 'tem_ensayo_6_down' => $request->tem_ensayo_6_down,
+            // 'tem_ensayo_3_down' => $request->tem_ensayo_3_down,
             'solicitud_lechada_id' => $request->solicitud_lechada_id,
             'img_up' => $imageNameUp,
             'img_down' => $imageNameDown,
