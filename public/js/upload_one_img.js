@@ -4,11 +4,11 @@ const createFile = (id_file) => {
 };
 
 const _listenChange = (file, container_file, section_upload_img, myModal, myModalImg) => {
-  console.log('Este es el file: ', file)
-  console.log('Este es el container_file: ', container_file)
-  console.log('Este es el section_upload: ', section_upload_img)
-  console.log('Este es el myModal: ', myModal)
-  console.log('Este es el myModalImg: ', myModalImg)
+  // console.log('Este es el file: ', file)
+  // console.log('Este es el container_file: ', container_file)
+  // console.log('Este es el section_upload: ', section_upload_img)
+  // console.log('Este es el myModal: ', myModal)
+  // console.log('Este es el myModalImg: ', myModalImg)
  
   if (file.target.files.length == 0) {
     return;

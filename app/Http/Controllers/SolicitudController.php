@@ -190,6 +190,7 @@ class SolicitudController extends Controller
                     'solicitud_fractura_id' => $solicitud_fractura->id,
                     'lote' => $formulacion['lote'],
                     'aditivo' => $formulacion['aditivo'],
+                    'comentario' => $formulacion['comentario'],
                     'concentracion' => $formulacion['concentracion'],
                 ]);
             }
@@ -418,6 +419,7 @@ class SolicitudController extends Controller
                     'solicitud_lechada_id' => $solicitud_lechada->id,
                     'lote' => $formulacion['lote'],
                     'aditivo' => $formulacion['aditivo'],
+                    'comentario' => $formulacion['comentario'],
                     'concentracion' => $formulacion['concentracion'],
                     'blend' => $formulacion['blend'],
                 ]);
@@ -749,6 +751,7 @@ class SolicitudController extends Controller
                 RelAditivoSolicitudLodo::create([
                     'solicitud_lodo_id' => $solicitud_lodo->id,
                     'lote' => $formulacion['lote'],
+                    'comentario' => $formulacion['comentario'],
                     'aditivo' => $formulacion['aditivo'],
                     'concentracion' => $formulacion['concentracion'],
                 ]);

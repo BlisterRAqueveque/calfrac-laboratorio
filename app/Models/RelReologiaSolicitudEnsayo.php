@@ -70,6 +70,8 @@ class RelReologiaSolicitudEnsayo extends Model
         'ensayo_id',
         'solicitud_lechada_id',
         'selected',
+        'img_up',
+        'img_down',
         'usuario_carga',
     ];
 

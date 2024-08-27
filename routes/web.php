@@ -86,9 +86,10 @@ Route::get('/send-email', [SolicitudController::class, 'viewMail']);
 
 
 Route::get('/solicitudes', [SolicitudController::class, 'index'])->name('solicitudes');
-Route::get('/solicitudes/tabla', [SolicitudController::class, 'mostrarTabla'])->name('solicitudes.tabla');
-
 Route::post('/respuesta/{user_id}', [SolicitudController::class, 'update_rta'])->name('fundamento.rta');
+// Vieja configuracion Franco
+// Route::get('/solicitudes/tabla', [SolicitudController::class, 'mostrarTabla'])->name('solicitudes.tabla');
+
 
 // Route::post('/solicitud/lodo', [SolicitudController::class, 'store_lodo'])->name('solicitud.lodo');
 

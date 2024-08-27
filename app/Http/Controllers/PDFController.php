@@ -43,9 +43,27 @@ class PDFController extends Controller
             'tipo_requerimiento_cemento' => TipoRequerimientoCemento::all(),
             'tipo_trabajos' => TipoTrabajoCemento::all(),
             'tipo_cementacion' => TipoCementacion::all(),
+            'names_ingenieros' => User::whereIn('users.grupo_id', [3, 4])->get('users.*'),
             // 'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
         // dd($data);
+        // Lógica para obtener los nombres de los botones seleccionados
+        $ensayos = [];
+
+        if ($data['s_l'][0]->ensayo_requerido_principal == 1) {
+            $ensayos[] = 'Principal';
+        }
+        if ($data['s_l'][0]->ensayo_requerido_bullheading == 1) {
+            $ensayos[] = 'Bullheading';
+        }
+        if ($data['s_l'][0]->ensayo_requerido_tapon == 1) {
+            $ensayos[] = 'Tapón';
+        }
+        if ($data['s_l'][0]->ensayo_requerido_relleno == 1) {
+            $ensayos[] = 'Relleno';
+        }
+
+        $data['ensayos_seleccionados'] = implode(', ', $ensayos);
           
         $pdf = PDF::loadView('solicitud_pdf', $data);
         // return $pdf->loadView('solicitud_lechada.pdf');

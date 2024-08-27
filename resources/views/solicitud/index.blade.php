@@ -3,6 +3,7 @@
 @section('titulo')
     Laboratorio - Histórico Solicitudes
 @endsection
+{{-- Vieja conf Franco 
 <style>
         /* CSS para hacer toda la fila clickeable */
     #tabla_solicitudes tbody tr {
@@ -12,7 +13,7 @@
     #tabla_solicitudes tbody tr:hover {
         background-color: #f0f0f0; /* Cambia el color de fondo al pasar el ratón sobre la fila */
     }
-</style>
+</style> --}}
 @section('contenido')
     <section class="container_mod pt-10 md:pt-5">
         <p class="font-bold uppercase text-sm xl:text-md dark:text-gray-200 mb-2">Histórico de Solicitudes</p>
@@ -120,9 +121,26 @@
                 @endcan
             </div>
 
+            {{-- <div class="card-body dark:tab_bg p-0">
+                <div class="row p-3">
+                    <div class="col-xs-12 col-md-4 my-2">
+                        <input type="text" class="form-control sz p-2 bg-gray-50 border-none dark:inp_bg_2"
+                            placeholder="Buscar por solicitud">
+                    </div>
+                    <div class="col-xs-12 col-md-4 my-2">
+                        <input type="date"
+                            class="form-control sz p-2 dark:inp_bg_2 bg-gray-50  dark:text-gray-400 border-none">
+                    </div>
+                    <div class="col-xs-12 col-md-4 my-2">
+                        <select class="form-select sz p-2 dark:inp_bg_2 dark:text-gray-400 bg-gray-50 border-none">
+                            <option value="">-- Todo --</option>
+                        </select>
+                    </div>
+                </div> --}}
+
 
                 <div class="text-gray-500 text-xs xl:text-sm overflow-x-scroll md:overflow-x-hidden">
-                    <table class="w-full" id="tabla_solicitudes">
+                    <table class="w-full" >
                         <thead class="dark:card-bg-head" style="background-color: #f3f9f5">
                             <th class="p-3">#ID</th>
                             <th class="p-3">Tipo de Solicitud</th>
@@ -130,24 +148,131 @@
                             <th class="p-3">¿Quien solicitó?</th>
                             <th class="p-3">Ensayo Asignado</th>
                             <th class="p-3">Fecha de Carga</th>
-
-                            
+                            <th class="p-3"></th>
                         </thead>
+                        <tbody>
+                            @if ($solicitudes->count() > 0)
+                                @foreach ($solicitudes as $s)
+                                    <tr>
+                                        <td class="p-3">{{ $s->id }}</td>
+                                        <td class="p-3">
+                                            <div class="flex justify-between">
+                                                @php
+                                                    switch ($s->tipo) {
+                                                        case '1':
+                                                            echo 'Solicitud de Fractura';
+                                                            $url = 'solicitud.fractura.show';
+                                                            break;
+                                                        case '2':
+                                                            echo 'Solicitud de Lechada';
+                                                            $url = 'solicitud.lechada.show';
+                                                            break;
+                                                        case '3':
+                                                            echo 'Solicitud de Lodo';
+                                                            $url = 'solicitud.lodo.show';
+                                                            break;
+                                                    }
+                                                @endphp
+                                                <div class="flex items-center gap-3">
+                                                    {{-- <button>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                            class="w-4 h-4">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                                        </svg>
+                                                    </button> --}}
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="p-3">{{ $s->fecha_solicitud->format('d/m/Y') }}</td>
+                                        <td class="p-3">{{ $s->user->nombre }} {{ $s->user->apellido }}</td>
+
+                                        @if ($s->tipo != 1)
+                                            @if ($s->ensayo_asignado_id)
+                                                <td class="p-3 w-72 md:w-96">
+                                                    <div class="table_btn table_btn_success">
+                                                        <div class="w-2 h-2 rounded-full point_success"></div>
+                                                        {{ $s->ensayo->tipo }}-{{ $s->ensayo->incrementable }}-{{ $s->ensayo->anio }}
+                                                    </div>
+                                                </td>
+                                            @else
+                                                <td class="p-3 w-72 md:w-96">
+                                                    <div class="table_btn table_btn_pendiente dark:bg-gray-700">
+                                                        <div class="w-2 h-2 rounded-full point_pendiente"></div>
+                                                        Sin ensayo asignado
+                                                    </div>
+                                                </td>
+                                            @endif
+                                        @else
+                                            <td class="p-3 w-72 md:w-96">
+                                                <em>No Aplica</em>
+                                            </td>
+                                        @endif
+                                        <td>
+                                            {{ $s->created_at->format('d/m/Y H:i')}}
+                                        </td>
+                                        <td>
+                                            <a href="{{ route($url, $s->id) }}" class="text-gray-500">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                    class="w-4 h-4">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                                </svg>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td class="text-center p-2" colspan="6">
+                                        <em>No se agregaron solicitudes aún</em>
+                                    </td>
+                                </tr>
+                            @endif
+                        </tbody>
                     </table>
+                    <div class="px-4 pt-2 pb-1 border-t">
+                        {{ $solicitudes->links() }}
+                    </div>
                    
-                    {{-- <div class="flex gap-3 justify-end p-2 px-4">
+                    {{-- No se que onda esto xD 
+                    <div class="flex gap-3 justify-end p-2 px-4">
                         <button>Anterior</button>
                         <select name="" id="" class="form-control sz p-2 max-w-16 text-center">
                             <option value="">1</option>
                         </select>
                         <button>Siguiente</button>
                     </div> --}}
+                    
                 </div>
 
             </div>
         </div>
     </section>
     <br>
+    <script>
+        function redirectToViewSolicitud(solicitud_id) {
+            event.preventDefault();
+            window.location.replace(`solicitud/fractura/${solicitud_id}`);
+        }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', e => {
+            if (document.querySelector('#alert_success')) {
+                setTimeout(() => {
+                    document.querySelector('#alert_success').remove()
+                }, 4000);
+            }
+        })
+    </script>
+@endsection
+
+    {{-- Vieja configuracion de Franco 
     <script>
         function redirectToViewSolicitud(solicitud_id) {
             event.preventDefault();
@@ -229,4 +354,4 @@
             </div>
         </div>
   
-@endsection
+@endsection --}}

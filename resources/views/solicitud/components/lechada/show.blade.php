@@ -645,7 +645,7 @@
                         <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de
                             la firma</label>
                         <input type="date" name="fecha_reconocimiento_lechada"
-                            value="{{ $s_l[0]->fecha_reconocimiento }}" readonly class="form-control text-sm">
+                            value="{{ $s_l[0]->fecha_solicitante }}" readonly class="form-control text-sm">
                     </div>
                 </div>
 

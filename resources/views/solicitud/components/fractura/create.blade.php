@@ -26,7 +26,7 @@
                         Revisión de Solicitud de Servicio <span class="text-red-500">*</span></label>
                     <input type="number" placeholder="Ingrese el número"
                         class="sz form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
-                        name="servicio_number" id="servicio_number" min="0">
+                        name="servicio_number" id="servicio_number" min="0" step=".000001">
                     @error('servicio_number')
                         <small class="text-xs text-red-600">El Nº de Revisión es requerido</small>
                     @enderror
@@ -263,7 +263,7 @@
                                 class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">BHST</label>
                             <input type="number" placeholder="Cº"
                                 class="form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 sz"
-                                name="bhst" id="bhst">
+                                name="bhst" id="bhst" step=".0001">
                         </div>
                         {{--<div class="col-xs-12 col-md-6">
                             <label for="tipo_temp_bhst"
@@ -285,7 +285,7 @@
                                 Ensayo</label>
                             <input type="number" placeholder="Cº"
                                 class="form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 sz"
-                                name="temp_ensayo" id="temp_ensayo">
+                                name="temp_ensayo" id="temp_ensayo" step=".0001">
                         </div>
                         {{--<div class="col-xs-12 col-md-6">
                             <label for="tipo_temp_ensayo"

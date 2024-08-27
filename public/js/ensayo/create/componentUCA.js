@@ -174,7 +174,7 @@ const componentUCA = (data = "") => {
   let contain_img = el('div.w-12 h-12 rounded-full bg-gray-100 flex-shrink-0')
   let img = el('img.w-12 h-12 object-cover rounded-full cursor-pointer')
   img.setAttribute('src', _setUrl('uploads/ensayos', data.img))
-img.setAttribute('onclick', `openModal('myModalUca', 'modalImgUca', '${_setUrl('uploads/ensayos', data.img)}')`)
+  img.setAttribute('onclick', `openModal('myModalUca', 'modalImgUca', '${_setUrl('uploads/ensayos', data.img)}')`)
   mount(contain_img, img)
   mount(div_relative, contain_img)
 

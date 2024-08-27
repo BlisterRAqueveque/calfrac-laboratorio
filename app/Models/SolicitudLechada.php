@@ -68,7 +68,7 @@ class SolicitudLechada extends Model
 
     public function solicitado()
     {
-        return $this->belongsTo(SolicitudLechada::class, 'firma_solicitante_id');
+        return $this->belongsTo(User::class, 'firma_solicitante_id');
     }
 
     public function mud_company()

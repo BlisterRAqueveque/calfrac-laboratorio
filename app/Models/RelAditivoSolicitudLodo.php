@@ -15,6 +15,7 @@ class RelAditivoSolicitudLodo extends Model
         'solicitud_lodo_id',
         'lote',
         'aditivo',
+        'comentario',
         'concentracion',
     ];
 

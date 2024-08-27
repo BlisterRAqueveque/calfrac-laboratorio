@@ -95,6 +95,7 @@
     </div>
 </div>
 
+
 <div class="grid grid-cols-4 text-center bg-gray-100 py-2 my-3">
     <p>Lote</p>
     <p>Aditivo</p>
@@ -117,8 +118,8 @@
         $inc = 0;
     @endphp
     @foreach ($s_l[0]->formulacion_tentativa as $formulacion)
-        <div class="flex justify-between mb-2 border">
-            <div class="w-full grid grid-cols-4 bg-gray-100 gap-3 p-2">
+        <div class="flex gap-2 justify-between mb-2 border">
+            <div class="w-full flex gap-2 bg-gray-100 p-2">
                 <input type="hidden" value="{{ $formulacion->id }}" name="aditivos[{{$inc}}][id]">
                 <div class="col-span-3 text-right btn_del_formulacion inactive">
                     <button class="bg-red-700 text-white rounded-md font-semibold px-3"
@@ -126,8 +127,16 @@
                 </div>
                 <input type="text" class="form-control text-xs rounded-l-none p-2 col-span-4 md:col-span-1"
                     placeholder="Lote" value="{{ $formulacion->lote }}" name="aditivos[{{$inc}}][lote]" readonly>
-                <input type="text" class="form-control text-xs p-2 col-span-4 md:col-span-1"
-                    value="{{ $formulacion->aditivos->nombre ?? $formulacion->aditivo }}" placeholder="Aditivo" name="aditivos[{{$inc}}][aditivo]" readonly>
+                <!-- Aditivo -->
+                <input type="text" 
+                       class="form-control text-xs p-2 {{ $formulacion->aditivo == 'SD' ? 'w-1/2' : '' }}"
+                       value="{{ $formulacion->aditivos->nombre ?? $formulacion->aditivo }}" 
+                       placeholder="Aditivo" name="aditivos[{{$inc}}][aditivo]" readonly>
+                <!-- Comentario (se muestra solo si el aditivo es 'SD') -->
+                @if($formulacion->aditivo == 'SD')
+                <input type="text" class="form-control text-xs p-2 w-1/2"
+                    placeholder="Comentario" value="{{ $formulacion->comentario }}" name="aditivos[{{$inc}}][comentario]" readonly>
+                @endif
                 <input type="text" class="form-control text-xs p-2 col-span-4 md:col-span-1"
                     placeholder="Concentración" value="{{ $formulacion->concentracion }}" name="aditivos[{{$inc}}][concentracion]" readonly>
                 <input type="text" class="form-control text-xs p-2 col-span-4 md:col-span-1"
