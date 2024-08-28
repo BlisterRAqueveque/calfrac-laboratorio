@@ -91,80 +91,80 @@
                         <tbody class="bg-gray-50">
                             <tr class="border-b">
                                 <td class="py-2 px-1 text-center">300</td>
-                                <td class="py-2 px-1 text-center">
+                                <td id="up-300" class="py-2 px-1 text-center">
                                     {{ $s_l[0]->rel_reologia[0]->tem_ambiente_300 ? $s_l[0]->rel_reologia[0]->tem_ambiente_300 : '-' }}
                                 </td>
-                                <td class="py-2 px-1 text-center">
+                                <td id="down-300" class="py-2 px-1 text-center">
                                     {{ $s_l[0]->rel_reologia[0]->tem_ensayo_300 ? $s_l[0]->rel_reologia[0]->tem_ensayo_300 : '-' }}
                                 </td>
-                                <td class="py-2 px-1 text-center">-</td>
-                                <td class="py-2 px-1 text-center">-</td>
+                                <td id="cociente-300" class="py-2 px-1 text-center">-</td>
+                                <td id="prom-300" class="py-2 px-1 text-center">-</td>
                             </tr>
                             <tr class="border-b">
                                 <td class="py-2 px-1 text-center">200</td>
-                                <td class="py-2 px-1 text-center">
+                                <td id="up-200" class="py-2 px-1 text-center">
                                     {{ $s_l[0]->rel_reologia[0]->tem_ambiente_200 ? $s_l[0]->rel_reologia[0]->tem_ambiente_200 : '-' }}
                                 </td>
-                                <td class="py-2 px-1 text-center">
+                                <td id="down-200" class="py-2 px-1 text-center">
                                     {{ $s_l[0]->rel_reologia[0]->tem_ensayo_200 ? $s_l[0]->rel_reologia[0]->tem_ensayo_200 : '-' }}
                                 </td>
-                                <td class="py-2 px-1 text-center">-</td>
-                                <td class="py-2 px-1 text-center">-</td>
+                                <td id="cociente-200" class="py-2 px-1 text-center">-</td>
+                                <td id="prom-200" class="py-2 px-1 text-center">-</td>
                             </tr>
                             <tr class="border-b">
                                 <td class="py-2 px-1 text-center">100</td>
-                                <td class="py-2 px-1 text-center">
+                                <td id="up-100" class="py-2 px-1 text-center">
                                     {{ $s_l[0]->rel_reologia[0]->tem_ambiente_100 ? $s_l[0]->rel_reologia[0]->tem_ambiente_100 : '-' }}
                                 </td>
-                                <td class="py-2 px-1 text-center">
+                                <td id="down-100" class="py-2 px-1 text-center">
                                     {{ $s_l[0]->rel_reologia[0]->tem_ensayo_100 ? $s_l[0]->rel_reologia[0]->tem_ensayo_100 : '-' }}
                                 </td>
-                                <td class="py-2 px-1 text-center">-</td>
-                                <td class="py-2 px-1 text-center">-</td>
+                                <td id="cociente-100" class="py-2 px-1 text-center">-</td>
+                                <td id="prom-100" class="py-2 px-1 text-center">-</td>
                             </tr>
                             <tr class="border-b">
                                 <td class="py-2 px-1 text-center">60</td>
-                                <td class="py-2 px-1 text-center">
+                                <td id="up-60" class="py-2 px-1 text-center">
                                     {{ $s_l[0]->rel_reologia[0]->tem_ambiente_60 ? $s_l[0]->rel_reologia[0]->tem_ambiente_60 : '-' }}
                                 </td>
-                                <td class="py-2 px-1 text-center">
+                                <td id="down-60" class="py-2 px-1 text-center">
                                     {{ $s_l[0]->rel_reologia[0]->tem_ensayo_60 ? $s_l[0]->rel_reologia[0]->tem_ensayo_60 : '-' }}
                                 </td>
-                                <td class="py-2 px-1 text-center">-</td>
-                                <td class="py-2 px-1 text-center">-</td>
+                                <td id="cociente-60" class="py-2 px-1 text-center">-</td>
+                                <td id="prom-60" class="py-2 px-1 text-center">-</td>
                             </tr>
                             <tr class="border-b">
                                 <td class="py-2 px-1 text-center">30</td>
-                                <td class="py-2 px-1 text-center">
+                                <td id="up-30" class="py-2 px-1 text-center">
                                     {{ $s_l[0]->rel_reologia[0]->tem_ambiente_30 ? $s_l[0]->rel_reologia[0]->tem_ambiente_30 : '-' }}
                                 </td>
-                                <td class="py-2 px-1 text-center">
+                                <td id="down-30" class="py-2 px-1 text-center">
                                     {{ $s_l[0]->rel_reologia[0]->tem_ensayo_30 ? $s_l[0]->rel_reologia[0]->tem_ensayo_30 : '-' }}
                                 </td>
-                                <td class="py-2 px-1 text-center">-</td>
-                                <td class="py-2 px-1 text-center">-</td>
+                                <td id="cociente-30" class="py-2 px-1 text-center">-</td>
+                                <td id="prom-30" class="py-2 px-1 text-center">-</td>
                             </tr>
                             <tr class="border-b">
                                 <td class="py-2 px-1 text-center">6</td>
-                                <td class="py-2 px-1 text-center">
+                                <td id="up-6" class="py-2 px-1 text-center">
                                     {{ $s_l[0]->rel_reologia[0]->tem_ambiente_6 ? $s_l[0]->rel_reologia[0]->tem_ambiente_6 : '-' }}
                                 </td>
-                                <td class="py-2 px-1 text-center">
+                                <td id="down-6" class="py-2 px-1 text-center">
                                     {{ $s_l[0]->rel_reologia[0]->tem_ensayo_6 ? $s_l[0]->rel_reologia[0]->tem_ensayo_6 : '-' }}
                                 </td>
-                                <td class="py-2 px-1 text-center">-</td>
-                                <td class="py-2 px-1 text-center">-</td>
+                                <td id="cociente-6" class="py-2 px-1 text-center">-</td>
+                                <td id="prom-6" class="py-2 px-1 text-center">-</td>
                             </tr>
                             <tr class="border-b">
-                                <td class="py-2 px-1 text-center">3</td>
+                                <td id="up-3" class="py-2 px-1 text-center">3</td>
                                 <td class="py-2 px-1 text-center">
                                     {{ $s_l[0]->rel_reologia[0]->tem_ambiente_3 ? $s_l[0]->rel_reologia[0]->tem_ambiente_3 : '-' }}
                                 </td>
-                                <td class="py-2 px-1 text-center">
+                                <td id="down-3" class="py-2 px-1 text-center">
                                     {{ $s_l[0]->rel_reologia[0]->tem_ensayo_3 ? $s_l[0]->rel_reologia[0]->tem_ensayo_3 : '-' }}
-                                    <td class="py-2 px-1 text-center">-</td>
-                                    <td class="py-2 px-1 text-center">-</td>
                                 </td>
+                                <td id="cociente-3" class="py-2 px-1 text-center">-</td>
+                                <td id="prom-3"class="py-2 px-1 text-center">-</td> 
                             </tr>
                         </tbody>
                     </table>
@@ -187,80 +187,80 @@
                         <tbody class="bg-gray-50">
                             <tr class="border-b">
                                 <td class="py-2 px-1 text-center">300</td>
-                                <td class="py-2 px-1 text-center">
+                                <td id="up-300-des" class="py-2 px-1 text-center">
                                     {{ $s_l[0]->rel_reologia[0]->tem_ambiente_300_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_300_up : '-' }}
                                 </td>
-                                <td class="py-2 px-1 text-center">
+                                <td id="down-300-des" class="py-2 px-1 text-center">
                                     {{ $s_l[0]->rel_reologia[0]->tem_ensayo_300_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_300_up : '-' }}
                                 </td>
-                                <td class="py-2 px-1 text-center">-</td>
-                                <td class="py-2 px-1 text-center">-</td>
+                                <td id="coc-300" class="py-2 px-1 text-center"></td>
+                                <td id="pro-300" class="py-2 px-1 text-center">-</td>
                             </tr>
                             <tr class="border-b">
                                 <td class="py-2 px-1 text-center">200</td>
-                                <td class="py-2 px-1 text-center">
+                                <td id="up-200-des" class="py-2 px-1 text-center">
                                     {{ $s_l[0]->rel_reologia[0]->tem_ambiente_200_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_200_up : '-' }}
                                 </td>
-                                <td class="py-2 px-1 text-center">
+                                <td id="down-200-des" class="py-2 px-1 text-center">
                                     {{ $s_l[0]->rel_reologia[0]->tem_ensayo_200_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_200_up : '-' }}
                                 </td>
-                                <td class="py-2 px-1 text-center">-</td>
-                                <td class="py-2 px-1 text-center">-</td>
+                                <td id="coc-200" class="py-2 px-1 text-center">-</td>
+                                <td id="pro-200" class="py-2 px-1 text-center">-</td>
                             </tr>
                             <tr class="border-b">
                                 <td class="py-2 px-1 text-center">100</td>
-                                <td class="py-2 px-1 text-center">
+                                <td id="up-100-des" class="py-2 px-1 text-center">
                                     {{ $s_l[0]->rel_reologia[0]->tem_ambiente_100_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_100_up : '-' }}
                                 </td>
-                                <td class="py-2 px-1 text-center">
+                                <td id="down-100-des" class="py-2 px-1 text-center">
                                     {{ $s_l[0]->rel_reologia[0]->tem_ensayo_100_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_100_up : '-' }}
                                 </td>
-                                <td class="py-2 px-1 text-center">-</td>
-                                <td class="py-2 px-1 text-center">-</td>
+                                <td id="coc-100" class="py-2 px-1 text-center">-</td>
+                                <td id="pro-100" class="py-2 px-1 text-center">-</td>
                             </tr>
                             <tr class="border-b">
                                 <td class="py-2 px-1 text-center">60</td>
-                                <td class="py-2 px-1 text-center">
+                                <td id="up-60-des" class="py-2 px-1 text-center">
                                     {{ $s_l[0]->rel_reologia[0]->tem_ambiente_60_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_60_up : '-' }}
                                 </td>
-                                <td class="py-2 px-1 text-center">
+                                <td id="down-60-des" class="py-2 px-1 text-center">
                                     {{ $s_l[0]->rel_reologia[0]->tem_ensayo_60_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_60_up : '-' }}
                                 </td>
-                                <td class="py-2 px-1 text-center">-</td>
-                                <td class="py-2 px-1 text-center">-</td>
+                                <td id="coc-60" class="py-2 px-1 text-center">-</td>
+                                <td id="pro-60" class="py-2 px-1 text-center">-</td>
                             </tr>
                             <tr class="border-b">
                                 <td class="py-2 px-1 text-center">30</td>
-                                <td class="py-2 px-1 text-center">
+                                <td id="up-30-des" class="py-2 px-1 text-center">
                                     {{ $s_l[0]->rel_reologia[0]->tem_ambiente_30_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_30_up : '-' }}
                                 </td>
-                                <td class="py-2 px-1 text-center">
+                                <td id="down-30-des" class="py-2 px-1 text-center">
                                     {{ $s_l[0]->rel_reologia[0]->tem_ensayo_30_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_30_up : '-' }}
                                 </td>
-                                <td class="py-2 px-1 text-center">-</td>
-                                <td class="py-2 px-1 text-center">-</td>
+                                <td id="coc-30" class="py-2 px-1 text-center">-</td>
+                                <td id="pro-30" class="py-2 px-1 text-center">-</td>
                             </tr>
                             <tr class="border-b">
                                 <td class="py-2 px-1 text-center">6</td>
-                                <td class="py-2 px-1 text-center">
+                                <td id="up-6-des" class="py-2 px-1 text-center">
                                     {{ $s_l[0]->rel_reologia[0]->tem_ambiente_6_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_6_up : '-' }}
                                 </td>
-                                <td class="py-2 px-1 text-center">
+                                <td id="down-6-des" class="py-2 px-1 text-center">
                                     {{ $s_l[0]->rel_reologia[0]->tem_ensayo_6_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_6_up : '-' }}
                                 </td>
-                                <td class="py-2 px-1 text-center">-</td>
-                                <td class="py-2 px-1 text-center">-</td>
+                                <td id="coc-6" class="py-2 px-1 text-center">-</td>
+                                <td id="pro-6" class="py-2 px-1 text-center">-</td>
                             </tr>
                             <tr class="border-b">
                                 <td class="py-2 px-1 text-center">3</td>
-                                <td class="py-2 px-1 text-center">
+                                <td id="up-3-des" class="py-2 px-1 text-center">
                                     {{ $s_l[0]->rel_reologia[0]->tem_ambiente_3_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_3_up : '-' }}
                                 </td>
-                                <td class="py-2 px-1 text-center">
+                                <td id="down-3-des" class="py-2 px-1 text-center">
                                     {{ $s_l[0]->rel_reologia[0]->tem_ensayo_3_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_3_up : '-' }}
                                 </td>
-                                <td class="py-2 px-1 text-center">-</td>
-                                <td class="py-2 px-1 text-center">-</td>
+                                <td id="coc-3" class="py-2 px-1 text-center">-</td>
+                                <td id="pro-3" class="py-2 px-1 text-center">-</td>
                             </tr>
                         </tbody>
                     </table>
@@ -563,7 +563,83 @@
     @endif
 </div> <!-- Reología -->
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Function to calculate and update the quotient
+        function updateCociente(upId, downId, cocienteId) {
+            var upElement = document.getElementById(upId);
+            var downElement = document.getElementById(downId);
+            var cocienteElement = document.getElementById(cocienteId);
+    
+            // Get the values, handle cases where values might be '-'
+            var upValue = upElement.textContent.trim() !== '-' ? parseFloat(upElement.textContent.trim()) : null;
+            var downValue = downElement.textContent.trim() !== '-' ? parseFloat(downElement.textContent.trim()) : null;
+    
+            // Calculate the quotient
+            if (upValue !== null && downValue !== null && downValue !== 0) {
+                var cociente = upValue / downValue;
+                cocienteElement.textContent = cociente.toFixed(2); // Display with 2 decimal places
+            } else {
+                cocienteElement.textContent = '-';
+            }
+        }
 
+            // Función para calcular y actualizar el promedio redondeado hacia arriba
+            function updatePromedio(upId, downId, promId) {
+            var upElement = document.getElementById(upId);
+            var downElement = document.getElementById(downId);
+            var promElement = document.getElementById(promId);
+
+            var upValue = upElement.textContent.trim() !== '-' ? parseFloat(upElement.textContent.trim()) : null;
+            var downValue = downElement.textContent.trim() !== '-' ? parseFloat(downElement.textContent.trim()) : null;
+
+            if (upValue !== null && downValue !== null) {
+                var promedio = Math.ceil((upValue + downValue) / 2);
+                promElement.textContent = promedio;
+            } else {
+                promElement.textContent = '-';
+            }
+        }
+    
+        // Update the cocientes for each row
+        updateCociente('up-300', 'down-300', 'cociente-300');
+        updateCociente('up-200', 'down-200', 'cociente-200');
+        updateCociente('up-100', 'down-100', 'cociente-100');
+        updateCociente('up-60', 'down-60', 'cociente-60');
+        updateCociente('up-30', 'down-30', 'cociente-30');
+        updateCociente('up-6', 'down-6', 'cociente-6');
+        updateCociente('up-3', 'down-3', 'cociente-3');
+
+        // Update the cocientes for each row
+        updatePromedio('up-300', 'down-300', 'prom-300');
+        updatePromedio('up-200', 'down-200', 'prom-200');
+        updatePromedio('up-100', 'down-100', 'prom-100');
+        updatePromedio('up-60', 'down-60', 'prom-60');
+        updatePromedio('up-30', 'down-30', 'prom-30');
+        updatePromedio('up-6', 'down-6', 'prom-6');
+        updatePromedio('up-3', 'down-3', 'prom-3');
+
+        // Update the cocientes for each row
+        updateCociente('up-300-des', 'down-300-des', 'coc-300');
+        updateCociente('up-200-des', 'down-200-des', 'coc-200');
+        updateCociente('up-100-des', 'down-100-des', 'coc-100');
+        updateCociente('up-60-des', 'down-60-des', 'coc-60');
+        updateCociente('up-30-des', 'down-30-des', 'coc-30');
+        updateCociente('up-6-des', 'down-6-des', 'coc-6');
+        updateCociente('up-3-des', 'down-3-des', 'coc-3');
+
+        // Update the cocientes for each row
+        updatePromedio('up-300-des', 'down-300-des', 'pro-300');
+        updatePromedio('up-200-des', 'down-200-des', 'pro-200');
+        updatePromedio('up-100-des', 'down-100-des', 'pro-100');
+        updatePromedio('up-60-des', 'down-60-des', 'pro-60');
+        updatePromedio('up-30-des', 'down-30-des', 'pro-30');
+        updatePromedio('up-6-des', 'down-6-des', 'pro-6');
+        updatePromedio('up-3-des', 'down-3-des', 'pro-3');
+    });
+</script>
+    
+    
 <script>
     const btn_submit_reologia = document.getElementById('btn_submit_reologia');
 
