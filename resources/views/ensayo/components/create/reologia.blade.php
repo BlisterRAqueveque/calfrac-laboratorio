@@ -156,8 +156,8 @@
                                 <td id="prom-6" class="py-2 px-1 text-center">-</td>
                             </tr>
                             <tr class="border-b">
-                                <td id="up-3" class="py-2 px-1 text-center">3</td>
-                                <td class="py-2 px-1 text-center">
+                                <td class="py-2 px-1 text-center">3</td>
+                                <td id="up-3"class="py-2 px-1 text-center">
                                     {{ $s_l[0]->rel_reologia[0]->tem_ambiente_3 ? $s_l[0]->rel_reologia[0]->tem_ambiente_3 : '-' }}
                                 </td>
                                 <td id="down-3" class="py-2 px-1 text-center">

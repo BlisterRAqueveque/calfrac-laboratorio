@@ -30,11 +30,22 @@ const componentReologia = (data = "") => {
   tbody = el("tbody.bg-gray-50");
   [300, 200, 100, 60, 30, 6, 3].forEach(rpm => {
     tr = el("tr.border-b");
+    const up = parseFloat(data[`tem_ambiente_${rpm}`]) || null;
+    const down = parseFloat(data[`tem_ensayo_${rpm}`]) || null;
+    
+    let cociente = "-";
+    let promedio = "-";
+    
+    if (up && down) {
+      cociente = (up / down).toFixed(2);
+      promedio = Math.ceil((up + down) / 2).toFixed(2);
+    }
+    
     mount(tr, el("td.py-2.px-1.text-center", rpm));
-    mount(tr, el("td.py-2.px-1.text-center", data[`tem_ambiente_${rpm}`] || "-"));
-    mount(tr, el("td.py-2.px-1.text-center", data[`tem_ensayo_${rpm}`] || "-"));
-    mount(tr, el("td.py-2.px-1.text-center", "Calculo"));
-    mount(tr, el("td.py-2.px-1.text-center", "Calculo"));
+    mount(tr, el("td.py-2.px-1.text-center", up !== null ? up : "-"));
+    mount(tr, el("td.py-2.px-1.text-center", down !== null ? down : "-"));
+    mount(tr, el(`td.py-2.px-1.text-center#coc-${rpm}`, cociente));
+    mount(tr, el(`td.py-2.px-1.text-center#prom-${rpm}`, promedio));
     mount(tbody, tr);
   });
   mount(table, tbody);
@@ -61,11 +72,22 @@ const componentReologia = (data = "") => {
   tbody = el("tbody.bg-gray-50");
   [300, 200, 100, 60, 30, 6, 3].forEach(rpm => {
     tr = el("tr.border-b");
+    const up = parseFloat(data[`tem_ambiente_${rpm}_up`]) || null;
+    const down = parseFloat(data[`tem_ensayo_${rpm}_up`]) || null;
+    
+    let cociente = "-";
+    let promedio = "-";
+    
+    if (up && down) {
+      cociente = (up / down).toFixed(2);
+      promedio = Math.ceil((up + down) / 2).toFixed(2);
+    }
+    
     mount(tr, el("td.py-2.px-1.text-center", rpm));
-    mount(tr, el("td.py-2.px-1.text-center", data[`tem_ambiente_${rpm}_up`] || "-"));
-    mount(tr, el("td.py-2.px-1.text-center", data[`tem_ensayo_${rpm}_up`] || "-"));
-    mount(tr, el("td.py-2.px-1.text-center", "Calculo"));
-    mount(tr, el("td.py-2.px-1.text-center", "Calculo"));
+    mount(tr, el("td.py-2.px-1.text-center", up !== null ? up : "-"));
+    mount(tr, el("td.py-2.px-1.text-center", down !== null ? down : "-"));
+    mount(tr, el(`td.py-2.px-1.text-center#coc-${rpm}-desc`, cociente));
+    mount(tr, el(`td.py-2.px-1.text-center#prom-${rpm}-desc`, promedio));
     mount(tbody, tr);
   });
   mount(table, tbody);
