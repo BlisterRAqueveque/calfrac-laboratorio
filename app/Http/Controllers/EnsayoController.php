@@ -180,58 +180,6 @@ class EnsayoController extends Controller
      */
     public function store_reologia(Request $request)
     {
-        # Subo primera imagen
-        $imageUp = $request->file('file_upload_reologiaup');
-
-        # Nombre y destino
-        $imageNameUp = time() . '_reologia_ascendente.' . $imageUp->getClientOriginalExtension();
-        $destinationPath = public_path('/uploads/ensayos');
-
-        # Si no existe la carpeta de destino, la crea y guarda la img
-        if (!file_exists($destinationPath)) {
-            mkdir($destinationPath, 0755, true);
-        }
-
-        $img_up = Image::make($imageUp->getRealPath());
-
-        $width = $img_up->width();
-        $height = $img_up->height();
-
-        # Redimensionar si la img es mayor a 1000x1000
-        if ($width > 1000 || $height > 1000) {
-            $img_up->resize(1000, 1000, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-        }
-
-        $img_up->save($destinationPath . '/' . $imageNameUp);
-
-        # Subo la segunda imagen
-        $imageDown = $request->file('file_upload_reologiadown');
-
-        # Nombre y destino
-        $imageNameDown = time() . '_reologia_descendente.' . $imageDown->getClientOriginalExtension();
-        $destinationPath = public_path('/uploads/ensayos');
-
-        # Si no existe la carpeta de destino, la crea y guarda la img
-        if (!file_exists($destinationPath)) {
-            mkdir($destinationPath, 0755, true);
-        }
-
-        $img_down = Image::make($imageDown->getRealPath());
-
-        $width = $img_down->width();
-        $height = $img_down->height();
-
-        # Redimensionar si la img es mayor a 1000x1000
-        if ($width > 1000 || $height > 1000) {
-            $img_down->resize(1000, 1000, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-        }
-
-        $img_down->save($destinationPath . '/' . $imageNameDown);
-
             // Validar los campos obligatorios
         $request->validate([
             //'tem_ambiente_rpm' => 'required',
@@ -318,8 +266,6 @@ class EnsayoController extends Controller
             // 'tem_ensayo_6_down' => $request->tem_ensayo_6_down,
             // 'tem_ensayo_3_down' => $request->tem_ensayo_3_down,
             'solicitud_lechada_id' => $request->solicitud_lechada_id,
-            'img_up' => $imageNameUp,
-            'img_down' => $imageNameDown,
             'usuario_carga' => auth()->user()->id,
         ]);
 
