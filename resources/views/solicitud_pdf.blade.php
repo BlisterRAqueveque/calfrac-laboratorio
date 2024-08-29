@@ -369,7 +369,13 @@
                                 </td>
                                 <td
                                     style="width: 40%;color: #686868; text-align: center; font-size: 13px; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $formulacion->aditivos->nombre ? $formulacion->aditivo : "-" }}
+                                    @if(isset($formulacion->aditivos->nombre))
+                                    {{ $formulacion->aditivos->nombre }}
+                                @elseif($formulacion->aditivo == 'SD')
+                                    {{ $formulacion->comentario ?? '-' }}
+                                @else
+                                    -
+                                @endif
                                 </td>
                                 <td
                                     style="width: 40%;color: #686868; text-align: center; font-size: 13px; border: 1px solid #494949; background-color: #ffffff;">
