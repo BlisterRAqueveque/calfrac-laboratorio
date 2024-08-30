@@ -15,7 +15,7 @@ const componentReologia = (data = "") => {
 
   // Crear el contenedor para la primera tabla con su título
   tableContainer = el("div.w-1/2.p-2"); // Contenedor para la primera tabla
-  h5 = el("h5.text-center.mb-2", "Reología Ascendente"); // Título para la primera tabla
+  h5 = el("h5.text-center.mb-2", "Reologías a temp. Ambiente"); // Título para la primera tabla
   table = el("table.w-full.text-sm.border.border-gray-300"); // Tabla con ancho completo
 
   thead = el("thead.bg-gray-200.text-gray-700");
@@ -30,8 +30,9 @@ const componentReologia = (data = "") => {
   tbody = el("tbody.bg-gray-50");
   [300, 200, 100, 60, 30, 6, 3].forEach(rpm => {
     tr = el("tr.border-b");
-    const up = parseFloat(data[`tem_ambiente_${rpm}`]) || null;
-    const down = parseFloat(data[`tem_ensayo_${rpm}`]) || null;
+    const up = parseFloat(data[`tem_ambiente_${rpm}_up`]) || null;
+    const down = parseFloat(data[`tem_ambiente_${rpm}`]) || null;
+    //const down = parseFloat(data[`tem_ensayo_${rpm}`]) || null;
     
     let cociente = "-";
     let promedio = "-";
@@ -57,7 +58,7 @@ const componentReologia = (data = "") => {
 
   // Crear el contenedor para la segunda tabla con su título
   tableContainer = el("div.w-1/2.p-2"); // Contenedor para la segunda tabla
-  h5 = el("h5.text-center.mb-2", "Reología Descendente"); // Título para la segunda tabla
+  h5 = el("h5.text-center.mb-2", "Reologías a temp. Ensayo"); // Título para la segunda tabla
   table = el("table.w-full.text-sm.border.border-gray-300"); // Tabla con ancho completo
 
   thead = el("thead.bg-gray-200.text-gray-700");
@@ -72,8 +73,8 @@ const componentReologia = (data = "") => {
   tbody = el("tbody.bg-gray-50");
   [300, 200, 100, 60, 30, 6, 3].forEach(rpm => {
     tr = el("tr.border-b");
-    const up = parseFloat(data[`tem_ambiente_${rpm}_up`]) || null;
-    const down = parseFloat(data[`tem_ensayo_${rpm}_up`]) || null;
+    const up = parseFloat(data[`tem_ensayo_${rpm}_up`]) || null;
+    const down = parseFloat(data[`tem_ensayo_${rpm}`]) || null;
     
     let cociente = "-";
     let promedio = "-";

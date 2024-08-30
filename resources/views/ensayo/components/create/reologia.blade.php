@@ -76,7 +76,7 @@
             <div class="flex">
                 <div class="w-1/2 p-2">
                     <div class="mb-2 text-center">
-                        <h5 class="mb-1 text-center ">Reología Ascendente<span class="text-red-500"> *</span></h5>
+                        <h5 class="mb-1 text-center ">Reologías a temp. Ambiente<span class="text-red-500"> *</span></h5>
                     </div>
                     <table class="w-full text-sm border border-gray-300">
                         <thead class="bg-gray-200 text-gray-700">
@@ -92,21 +92,20 @@
                             <tr class="border-b">
                                 <td class="py-2 px-1 text-center">300</td>
                                 <td id="up-300" class="py-2 px-1 text-center">
-                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_300 ? $s_l[0]->rel_reologia[0]->tem_ambiente_300 : '-' }}
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_300_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_300_up : '-' }}
                                 </td>
                                 <td id="down-300" class="py-2 px-1 text-center">
-                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_300 ? $s_l[0]->rel_reologia[0]->tem_ensayo_300 : '-' }}
-                                </td>
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_300 ? $s_l[0]->rel_reologia[0]->tem_ambiente_300 : '-' }}                                </td>
                                 <td id="cociente-300" class="py-2 px-1 text-center">-</td>
                                 <td id="prom-300" class="py-2 px-1 text-center">-</td>
                             </tr>
                             <tr class="border-b">
                                 <td class="py-2 px-1 text-center">200</td>
                                 <td id="up-200" class="py-2 px-1 text-center">
-                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_200 ? $s_l[0]->rel_reologia[0]->tem_ambiente_200 : '-' }}
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_200_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_200_up : '-' }}
                                 </td>
                                 <td id="down-200" class="py-2 px-1 text-center">
-                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_200 ? $s_l[0]->rel_reologia[0]->tem_ensayo_200 : '-' }}
+                                     {{ $s_l[0]->rel_reologia[0]->tem_ambiente_200 ? $s_l[0]->rel_reologia[0]->tem_ambiente_200 : '-' }}
                                 </td>
                                 <td id="cociente-200" class="py-2 px-1 text-center">-</td>
                                 <td id="prom-200" class="py-2 px-1 text-center">-</td>
@@ -114,10 +113,10 @@
                             <tr class="border-b">
                                 <td class="py-2 px-1 text-center">100</td>
                                 <td id="up-100" class="py-2 px-1 text-center">
-                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_100 ? $s_l[0]->rel_reologia[0]->tem_ambiente_100 : '-' }}
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_100_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_100_up : '-' }}
                                 </td>
                                 <td id="down-100" class="py-2 px-1 text-center">
-                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_100 ? $s_l[0]->rel_reologia[0]->tem_ensayo_100 : '-' }}
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_100 ? $s_l[0]->rel_reologia[0]->tem_ambiente_100 : '-' }}
                                 </td>
                                 <td id="cociente-100" class="py-2 px-1 text-center">-</td>
                                 <td id="prom-100" class="py-2 px-1 text-center">-</td>
@@ -125,10 +124,10 @@
                             <tr class="border-b">
                                 <td class="py-2 px-1 text-center">60</td>
                                 <td id="up-60" class="py-2 px-1 text-center">
-                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_60 ? $s_l[0]->rel_reologia[0]->tem_ambiente_60 : '-' }}
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_60_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_60_up : '-' }}
                                 </td>
                                 <td id="down-60" class="py-2 px-1 text-center">
-                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_60 ? $s_l[0]->rel_reologia[0]->tem_ensayo_60 : '-' }}
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_60 ? $s_l[0]->rel_reologia[0]->tem_ambiente_60 : '-' }}
                                 </td>
                                 <td id="cociente-60" class="py-2 px-1 text-center">-</td>
                                 <td id="prom-60" class="py-2 px-1 text-center">-</td>
@@ -136,10 +135,10 @@
                             <tr class="border-b">
                                 <td class="py-2 px-1 text-center">30</td>
                                 <td id="up-30" class="py-2 px-1 text-center">
-                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_30 ? $s_l[0]->rel_reologia[0]->tem_ambiente_30 : '-' }}
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_30_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_30_up : '-' }}
                                 </td>
                                 <td id="down-30" class="py-2 px-1 text-center">
-                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_30 ? $s_l[0]->rel_reologia[0]->tem_ensayo_30 : '-' }}
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_30 ? $s_l[0]->rel_reologia[0]->tem_ambiente_30 : '-' }}
                                 </td>
                                 <td id="cociente-30" class="py-2 px-1 text-center">-</td>
                                 <td id="prom-30" class="py-2 px-1 text-center">-</td>
@@ -147,10 +146,10 @@
                             <tr class="border-b">
                                 <td class="py-2 px-1 text-center">6</td>
                                 <td id="up-6" class="py-2 px-1 text-center">
-                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_6 ? $s_l[0]->rel_reologia[0]->tem_ambiente_6 : '-' }}
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_6_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_6_up : '-' }}
                                 </td>
                                 <td id="down-6" class="py-2 px-1 text-center">
-                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_6 ? $s_l[0]->rel_reologia[0]->tem_ensayo_6 : '-' }}
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_6 ? $s_l[0]->rel_reologia[0]->tem_ambiente_6 : '-' }}
                                 </td>
                                 <td id="cociente-6" class="py-2 px-1 text-center">-</td>
                                 <td id="prom-6" class="py-2 px-1 text-center">-</td>
@@ -158,10 +157,10 @@
                             <tr class="border-b">
                                 <td class="py-2 px-1 text-center">3</td>
                                 <td id="up-3"class="py-2 px-1 text-center">
-                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_3 ? $s_l[0]->rel_reologia[0]->tem_ambiente_3 : '-' }}
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_3_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_3_up : '-' }}
                                 </td>
                                 <td id="down-3" class="py-2 px-1 text-center">
-                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_3 ? $s_l[0]->rel_reologia[0]->tem_ensayo_3 : '-' }}
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_3 ? $s_l[0]->rel_reologia[0]->tem_ambiente_3 : '-' }}
                                 </td>
                                 <td id="cociente-3" class="py-2 px-1 text-center">-</td>
                                 <td id="prom-3"class="py-2 px-1 text-center">-</td> 
@@ -172,7 +171,7 @@
 
                 <div class="w-1/2 p-2">
                     <div class="mb-2 text-center">
-                        <h5 class="mb-1 text-center ">Reología Descendente<span class="text-red-500"> *</span></h5>
+                        <h5 class="mb-1 text-center ">Reologías a temp. Ensayo<span class="text-red-500"> *</span></h5>
                     </div>
                     <table class="w-full text-sm border border-gray-300">
                         <thead class="bg-gray-200 text-gray-700">
@@ -188,10 +187,10 @@
                             <tr class="border-b">
                                 <td class="py-2 px-1 text-center">300</td>
                                 <td id="up-300-des" class="py-2 px-1 text-center">
-                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_300_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_300_up : '-' }}
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_300_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_300_up : '-' }}
                                 </td>
                                 <td id="down-300-des" class="py-2 px-1 text-center">
-                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_300_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_300_up : '-' }}
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_300 ? $s_l[0]->rel_reologia[0]->tem_ensayo_300 : '-' }}
                                 </td>
                                 <td id="coc-300" class="py-2 px-1 text-center"></td>
                                 <td id="pro-300" class="py-2 px-1 text-center">-</td>
@@ -199,10 +198,10 @@
                             <tr class="border-b">
                                 <td class="py-2 px-1 text-center">200</td>
                                 <td id="up-200-des" class="py-2 px-1 text-center">
-                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_200_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_200_up : '-' }}
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_200_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_200_up : '-' }}
                                 </td>
                                 <td id="down-200-des" class="py-2 px-1 text-center">
-                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_200_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_200_up : '-' }}
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_200? $s_l[0]->rel_reologia[0]->tem_ensayo_200 : '-' }}
                                 </td>
                                 <td id="coc-200" class="py-2 px-1 text-center">-</td>
                                 <td id="pro-200" class="py-2 px-1 text-center">-</td>
@@ -210,10 +209,9 @@
                             <tr class="border-b">
                                 <td class="py-2 px-1 text-center">100</td>
                                 <td id="up-100-des" class="py-2 px-1 text-center">
-                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_100_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_100_up : '-' }}
-                                </td>
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_100_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_100_up : '-' }}                                </td>
                                 <td id="down-100-des" class="py-2 px-1 text-center">
-                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_100_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_100_up : '-' }}
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_100 ? $s_l[0]->rel_reologia[0]->tem_ensayo_100 : '-' }}
                                 </td>
                                 <td id="coc-100" class="py-2 px-1 text-center">-</td>
                                 <td id="pro-100" class="py-2 px-1 text-center">-</td>
@@ -221,10 +219,9 @@
                             <tr class="border-b">
                                 <td class="py-2 px-1 text-center">60</td>
                                 <td id="up-60-des" class="py-2 px-1 text-center">
-                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_60_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_60_up : '-' }}
-                                </td>
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_60_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_60_up : '-' }}                                </td>
                                 <td id="down-60-des" class="py-2 px-1 text-center">
-                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_60_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_60_up : '-' }}
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_60 ? $s_l[0]->rel_reologia[0]->tem_ensayo_60 : '-' }}
                                 </td>
                                 <td id="coc-60" class="py-2 px-1 text-center">-</td>
                                 <td id="pro-60" class="py-2 px-1 text-center">-</td>
@@ -232,10 +229,9 @@
                             <tr class="border-b">
                                 <td class="py-2 px-1 text-center">30</td>
                                 <td id="up-30-des" class="py-2 px-1 text-center">
-                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_30_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_30_up : '-' }}
-                                </td>
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_30_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_30_up : '-' }}                                </td>
                                 <td id="down-30-des" class="py-2 px-1 text-center">
-                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_30_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_30_up : '-' }}
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_30 ? $s_l[0]->rel_reologia[0]->tem_ensayo_30 : '-' }}
                                 </td>
                                 <td id="coc-30" class="py-2 px-1 text-center">-</td>
                                 <td id="pro-30" class="py-2 px-1 text-center">-</td>
@@ -243,10 +239,10 @@
                             <tr class="border-b">
                                 <td class="py-2 px-1 text-center">6</td>
                                 <td id="up-6-des" class="py-2 px-1 text-center">
-                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_6_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_6_up : '-' }}
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_6_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_6_up : '-' }}
                                 </td>
                                 <td id="down-6-des" class="py-2 px-1 text-center">
-                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_6_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_6_up : '-' }}
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_6 ? $s_l[0]->rel_reologia[0]->tem_ensayo_6 : '-' }}
                                 </td>
                                 <td id="coc-6" class="py-2 px-1 text-center">-</td>
                                 <td id="pro-6" class="py-2 px-1 text-center">-</td>
@@ -254,10 +250,10 @@
                             <tr class="border-b">
                                 <td class="py-2 px-1 text-center">3</td>
                                 <td id="up-3-des" class="py-2 px-1 text-center">
-                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_3_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_3_up : '-' }}
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_3_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_3_up : '-' }}
                                 </td>
                                 <td id="down-3-des" class="py-2 px-1 text-center">
-                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_3_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_3_up : '-' }}
+                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_3 ? $s_l[0]->rel_reologia[0]->tem_ensayo_3 : '-' }}
                                 </td>
                                 <td id="coc-3" class="py-2 px-1 text-center">-</td>
                                 <td id="pro-3" class="py-2 px-1 text-center">-</td>
@@ -280,7 +276,7 @@
                 <div class="w-1/2 p-2">
                     {{-- <form action="{{ route('store_reologia') }}" method="POST"> NO DESCOMENTAR--}}
                     <div class="mb-2 text-center">
-                        <h5 class="mb-1">Reología Ascendente <span class="text-red-500"> *<small> requerido</small></span></h5>
+                        <h5 class="mb-1">Reologías a temp. Ambiente<span class="text-red-500"> *<small> requerido</small></span></h5>
                     </div>
                     <input type="hidden" name="solicitud_lechada_id" value="{{ $s_l[0]->id }}">
                         <table class="w-full text-sm border border-gray-300">
@@ -297,9 +293,9 @@
                                 <tr class="border-b">
                                     <td td class="py-2 px-1 text-center">300</td>
                                     <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
-                                        placeholder="Ingrese un resultado" name="tem_ambiente_300"></td>
+                                        placeholder="Ingrese un resultado" name="tem_ambiente_300_up"></td>
                                     <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
-                                        placeholder="Ingrese un resultado" name="tem_ensayo_300"></td>
+                                        placeholder="Ingrese un resultado" name="tem_ambiente_300"></td>
                                     <td class="py-2 px-1 text-center">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 inline-block">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V13.5Zm0 2.25h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V18Zm2.498-6.75h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V13.5Zm0 2.25h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V18Zm2.504-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5Zm0 2.25h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V18Zm2.498-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5ZM8.25 6h7.5v2.25h-7.5V6ZM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 0 0 2.25 2.25h10.5a2.25 2.25 0 0 0 2.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0 0 12 2.25Z" />
@@ -314,9 +310,9 @@
                                 <tr class="border-b">
                                     <td td class="py-2 px-1 text-center">200</td>
                                     <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
-                                        placeholder="Ingrese un resultado" name="tem_ambiente_200"></td>
+                                        placeholder="Ingrese un resultado" name="tem_ambiente_200_up"></td>
                                     <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
-                                        placeholder="Ingrese un resultado" name="tem_ensayo_200"></td>
+                                        placeholder="Ingrese un resultado" name="tem_ambiente_200"></td>
                                     <td class="py-2 px-1 text-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 inline-block">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V13.5Zm0 2.25h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V18Zm2.498-6.75h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V13.5Zm0 2.25h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V18Zm2.504-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5Zm0 2.25h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V18Zm2.498-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5ZM8.25 6h7.5v2.25h-7.5V6ZM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 0 0 2.25 2.25h10.5a2.25 2.25 0 0 0 2.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0 0 12 2.25Z" />
@@ -331,9 +327,9 @@
                                 <tr class="border-b">
                                     <td td class="py-2 px-1 text-center">100</td>
                                     <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
-                                        placeholder="Ingrese un resultado" name="tem_ambiente_100"></td>
+                                        placeholder="Ingrese un resultado" name="tem_ambiente_100_up"></td>
                                     <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
-                                        placeholder="Ingrese un resultado" name="tem_ensayo_100"></td>
+                                        placeholder="Ingrese un resultado" name="tem_ambiente_100"></td>
                                     <td class="py-2 px-1 text-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 inline-block">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V13.5Zm0 2.25h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V18Zm2.498-6.75h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V13.5Zm0 2.25h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V18Zm2.504-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5Zm0 2.25h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V18Zm2.498-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5ZM8.25 6h7.5v2.25h-7.5V6ZM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 0 0 2.25 2.25h10.5a2.25 2.25 0 0 0 2.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0 0 12 2.25Z" />
@@ -348,9 +344,9 @@
                                 <tr class="border-b">
                                     <td td class="py-2 px-1 text-center">60</td>
                                     <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
-                                        placeholder="Ingrese un resultado" name="tem_ambiente_60"></td>
+                                        placeholder="Ingrese un resultado" name="tem_ambiente_60_up"></td>
                                     <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
-                                            placeholder="Ingrese un resultado" name="tem_ensayo_60"></td>
+                                            placeholder="Ingrese un resultado" name="tem_ambiente_60"></td>
                                     <td class="py-2 px-1 text-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 inline-block">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V13.5Zm0 2.25h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V18Zm2.498-6.75h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V13.5Zm0 2.25h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V18Zm2.504-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5Zm0 2.25h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V18Zm2.498-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5ZM8.25 6h7.5v2.25h-7.5V6ZM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 0 0 2.25 2.25h10.5a2.25 2.25 0 0 0 2.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0 0 12 2.25Z" />
@@ -365,9 +361,9 @@
                                 <tr class="border-b">
                                     <td td class="py-2 px-1 text-center">30</td>
                                     <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
-                                        placeholder="Ingrese un resultado" name="tem_ambiente_30"></td>
+                                        placeholder="Ingrese un resultado" name="tem_ambiente_30_up"></td>
                                     <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
-                                        placeholder="Ingrese un resultado" name="tem_ensayo_30"></td>
+                                        placeholder="Ingrese un resultado" name="tem_ambiente_30"></td>
                                     <td class="py-2 px-1 text-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 inline-block">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V13.5Zm0 2.25h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V18Zm2.498-6.75h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V13.5Zm0 2.25h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V18Zm2.504-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5Zm0 2.25h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V18Zm2.498-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5ZM8.25 6h7.5v2.25h-7.5V6ZM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 0 0 2.25 2.25h10.5a2.25 2.25 0 0 0 2.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0 0 12 2.25Z" />
@@ -382,9 +378,9 @@
                                 <tr class="border-b">
                                     <td td class="py-2 px-1 text-center">6</td>
                                     <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
-                                        placeholder="Ingrese un resultado" name="tem_ambiente_6"></td>
+                                        placeholder="Ingrese un resultado" name="tem_ambiente_6_up"></td>
                                     <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
-                                        placeholder="Ingrese un resultado" name="tem_ensayo_6"></td>
+                                        placeholder="Ingrese un resultado" name="tem_ambiente_6"></td>
                                     <td class="py-2 px-1 text-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 inline-block">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V13.5Zm0 2.25h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V18Zm2.498-6.75h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V13.5Zm0 2.25h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V18Zm2.504-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5Zm0 2.25h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V18Zm2.498-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5ZM8.25 6h7.5v2.25h-7.5V6ZM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 0 0 2.25 2.25h10.5a2.25 2.25 0 0 0 2.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0 0 12 2.25Z" />
@@ -399,9 +395,9 @@
                                 <tr class="border-b">
                                     <td td class="py-2 px-1 text-center">3</td>
                                     <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
-                                        placeholder="Ingrese un resultado" name="tem_ambiente_3"></td>
+                                        placeholder="Ingrese un resultado" name="tem_ambiente_3_up"></td>
                                     <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
-                                        placeholder="Ingrese un resultado" name="tem_ensayo_3"></td>
+                                        placeholder="Ingrese un resultado" name="tem_ambiente_3"></td>
                                     <td class="py-2 px-1 text-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 inline-block">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V13.5Zm0 2.25h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V18Zm2.498-6.75h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V13.5Zm0 2.25h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V18Zm2.504-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5Zm0 2.25h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V18Zm2.498-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5ZM8.25 6h7.5v2.25h-7.5V6ZM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 0 0 2.25 2.25h10.5a2.25 2.25 0 0 0 2.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0 0 12 2.25Z" />
@@ -418,7 +414,7 @@
                 </div>
                 <div class="w-1/2 p-2">
                     <div class="mb-2 text-center">
-                        <h5 class="mb-1">Reología Descendente</h5>
+                        <h5 class="mb-1">Reologías a temp. Ensayo</h5>
                     </div>
                     <table class="w-full text-sm border border-gray-300">
                         <thead class="bg-gray-200 text-gray-700">
@@ -434,9 +430,9 @@
                             <tr class="border-b">
                                 <td td class="py-2 px-1 text-center">300</td>
                                 <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
-                                    placeholder="Ingrese un resultado" name="tem_ambiente_300_up"></td>
-                                <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
                                     placeholder="Ingrese un resultado" name="tem_ensayo_300_up"></td>
+                                <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="tem_ensayo_300"></td>
                                 <td class="py-2 px-1 text-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 inline-block">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V13.5Zm0 2.25h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V18Zm2.498-6.75h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V13.5Zm0 2.25h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V18Zm2.504-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5Zm0 2.25h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V18Zm2.498-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5ZM8.25 6h7.5v2.25h-7.5V6ZM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 0 0 2.25 2.25h10.5a2.25 2.25 0 0 0 2.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0 0 12 2.25Z" />
@@ -451,9 +447,9 @@
                             <tr class="border-b">
                                 <td td class="py-2 px-1 text-center">200</td>
                                 <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
-                                    placeholder="Ingrese un resultado" name="tem_ambiente_200_up"></td>
-                                <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
                                     placeholder="Ingrese un resultado" name="tem_ensayo_200_up"></td>
+                                <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="tem_ensayo_200"></td>
                                 <td class="py-2 px-1 text-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 inline-block">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V13.5Zm0 2.25h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V18Zm2.498-6.75h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V13.5Zm0 2.25h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V18Zm2.504-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5Zm0 2.25h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V18Zm2.498-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5ZM8.25 6h7.5v2.25h-7.5V6ZM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 0 0 2.25 2.25h10.5a2.25 2.25 0 0 0 2.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0 0 12 2.25Z" />
@@ -468,9 +464,9 @@
                             <tr class="border-b">
                                 <td td class="py-2 px-1 text-center">100</td>
                                 <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
-                                    placeholder="Ingrese un resultado" name="tem_ambiente_100_up"></td>
-                                <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
                                     placeholder="Ingrese un resultado" name="tem_ensayo_100_up"></td>
+                                <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="tem_ensayo_100"></td>
                                 <td class="py-2 px-1 text-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 inline-block">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V13.5Zm0 2.25h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V18Zm2.498-6.75h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V13.5Zm0 2.25h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V18Zm2.504-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5Zm0 2.25h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V18Zm2.498-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5ZM8.25 6h7.5v2.25h-7.5V6ZM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 0 0 2.25 2.25h10.5a2.25 2.25 0 0 0 2.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0 0 12 2.25Z" />
@@ -485,9 +481,9 @@
                             <tr class="border-b">
                                 <td td class="py-2 px-1 text-center">60</td>
                                 <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
-                                    placeholder="Ingrese un resultado" name="tem_ambiente_60_up"></td>
+                                    placeholder="Ingrese un resultado" name="tem_ensayo_60_up"></td>
                                 <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
-                                        placeholder="Ingrese un resultado" name="tem_ensayo_60_up"></td>
+                                        placeholder="Ingrese un resultado" name="tem_ensayo_60"></td>
                                 <td class="py-2 px-1 text-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 inline-block">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V13.5Zm0 2.25h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V18Zm2.498-6.75h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V13.5Zm0 2.25h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V18Zm2.504-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5Zm0 2.25h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V18Zm2.498-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5ZM8.25 6h7.5v2.25h-7.5V6ZM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 0 0 2.25 2.25h10.5a2.25 2.25 0 0 0 2.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0 0 12 2.25Z" />
@@ -502,9 +498,9 @@
                             <tr class="border-b">
                                 <td td class="py-2 px-1 text-center">30</td>
                                 <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
-                                    placeholder="Ingrese un resultado" name="tem_ambiente_30_up"></td>
-                                <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
                                     placeholder="Ingrese un resultado" name="tem_ensayo_30_up"></td>
+                                <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="tem_ensayo_30"></td>
                                 <td class="py-2 px-1 text-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 inline-block">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V13.5Zm0 2.25h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V18Zm2.498-6.75h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V13.5Zm0 2.25h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V18Zm2.504-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5Zm0 2.25h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V18Zm2.498-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5ZM8.25 6h7.5v2.25h-7.5V6ZM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 0 0 2.25 2.25h10.5a2.25 2.25 0 0 0 2.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0 0 12 2.25Z" />
@@ -519,9 +515,9 @@
                             <tr class="border-b">
                                 <td td class="py-2 px-1 text-center">6</td>
                                 <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
-                                    placeholder="Ingrese un resultado" name="tem_ambiente_6_up"></td>
-                                <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
                                     placeholder="Ingrese un resultado" name="tem_ensayo_6_up"></td>
+                                <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="tem_ensayo_6"></td>
                                 <td class="py-2 px-1 text-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 inline-block">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V13.5Zm0 2.25h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V18Zm2.498-6.75h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V13.5Zm0 2.25h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V18Zm2.504-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5Zm0 2.25h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V18Zm2.498-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5ZM8.25 6h7.5v2.25h-7.5V6ZM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 0 0 2.25 2.25h10.5a2.25 2.25 0 0 0 2.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0 0 12 2.25Z" />
@@ -536,9 +532,9 @@
                             <tr class="border-b">
                                 <td td class="py-2 px-1 text-center">3</td>
                                 <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
-                                    placeholder="Ingrese un resultado" name="tem_ambiente_3_up"></td>
-                                <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
                                     placeholder="Ingrese un resultado" name="tem_ensayo_3_up"></td>
+                                <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="tem_ensayo_3"></td>
                                 <td class="py-2 px-1 text-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 inline-block">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V13.5Zm0 2.25h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V18Zm2.498-6.75h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V13.5Zm0 2.25h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V18Zm2.504-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5Zm0 2.25h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V18Zm2.498-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5ZM8.25 6h7.5v2.25h-7.5V6ZM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 0 0 2.25 2.25h10.5a2.25 2.25 0 0 0 2.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0 0 12 2.25Z" />
