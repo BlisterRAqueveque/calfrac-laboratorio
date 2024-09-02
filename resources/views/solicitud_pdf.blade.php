@@ -295,7 +295,7 @@
                                     Ensayo N°:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $solicitud->ensayo->tipo ?? 'null'}}-{{ $solicitud->ensayo->incrementable ?? 'null'}}-{{ $solicitud->ensayo->anio ?? 'null'}}
+                                    {{-- {{ $solicitud->ensayo->tipo ?? 'null'}}-{{ $solicitud->ensayo->incrementable ?? 'null'}}-{{ $solicitud->ensayo->anio ?? 'null'}} --}}
                                 </td>
                             </tr>
                             <tr>
@@ -474,7 +474,7 @@
                                 <td style="text-align: center; background-color: #ffffff; border: none;"></td>
                                 <td style="text-align: center; background-color: #ffffff; border: none;"></td>
                                 <td style="text-align: center; background-color: #ffffff; border: none;">Densidad</td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">{{ $s_l[0]->densidad ?? "-"}}</td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">g/L: </td>
                                 <td style="text-align: center; background-color: #ffffff; border: none;">ppg</td>
                             </tr>
@@ -839,6 +839,7 @@
                                                                         {{ $s_l[0]->rel_reologia[0]->tem_ambiente_300 ? $s_l[0]->rel_reologia[0]->tem_ambiente_300 : '-' }}
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{ $reologia->cociente_300 }}
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
                                                                     </td>
@@ -968,7 +969,7 @@
                                                                         Viscosidad Plastica (cp):
                                                                     </td>
                                                                     <td style="width: 20%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-
+                                                                        -
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -976,7 +977,7 @@
                                                                         Punto de Cedencia (lb/100ft2):
                                                                     </td>
                                                                     <td style="width: 20%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-
+                                                                        -
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -984,7 +985,7 @@
                                                                         Gel 10 seg:
                                                                     </td>
                                                                     <td style="width: 20%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-
+                                                                        {{ $s_l[0]->rel_reologia[0]->temp_ambiente_gel_10_seg ? $s_l[0]->rel_reologia[0]->temp_ambiente_gel_10_seg : '-' }}
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -992,7 +993,7 @@
                                                                         Gel 10 min:
                                                                     </td>
                                                                     <td style="width: 20%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-
+                                                                        {{ $s_l[0]->rel_reologia[0]->temp_ambiente_gel_10_min ? $s_l[0]->rel_reologia[0]->temp_ambiente_gel_10_min : '-' }}
                                                                     </td>
                                                                 </tr>
                                                             </table>
@@ -1175,7 +1176,7 @@
                                                                         Viscosidad Plastica (cp):
                                                                     </td>
                                                                     <td style="width: 20%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-
+                                                                        -
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -1183,7 +1184,7 @@
                                                                         Punto de Cedencia (lb/100ft2):
                                                                     </td>
                                                                     <td style="width: 20%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-
+                                                                        -
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -1191,6 +1192,7 @@
                                                                         Gel 10 seg:
                                                                     </td>
                                                                     <td style="width: 20%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{ $s_l[0]->rel_reologia[0]->temp_ensayo_gel_10_seg ? $s_l[0]->rel_reologia[0]->temp_ensayo_gel_10_seg : '-' }}
 
                                                                     </td>
                                                                 </tr>
@@ -1199,6 +1201,7 @@
                                                                         Gel 10 min:
                                                                     </td>
                                                                     <td style="width: 20%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{ $s_l[0]->rel_reologia[0]->temp_ensayo_gel_10_min ? $s_l[0]->rel_reologia[0]->temp_ensayo_gel_10_min : '-' }}
 
                                                                     </td>
                                                                 </tr>

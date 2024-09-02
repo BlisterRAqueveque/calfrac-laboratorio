@@ -202,10 +202,10 @@ class EnsayoController extends Controller
             //'temp_ensayo' => 'required',
             //'temp_ambiente_punto_cedencia' => 'required',
             //'temp_ensayo_punto_cedencia' => 'required',
-            //'temp_ambiente_gel_10_seg' => 'required',
-            //'temp_ensayo_gel_10_seg' => 'required',
-            //'temp_ambiente_gel_10_min' => 'required',
-            //'temp_ensayo_gel_10_min' => 'required',
+            'temp_ambiente_gel_10_seg' => 'required',
+            'temp_ensayo_gel_10_seg' => 'required',
+            'temp_ambiente_gel_10_min' => 'required',
+            'temp_ensayo_gel_10_min' => 'required',
         ]);
 
         $reologia = RelReologiaSolicitudEnsayo::create([
@@ -225,10 +225,10 @@ class EnsayoController extends Controller
             'tem_ensayo_30' => $request->tem_ensayo_30,
             'tem_ensayo_6' => $request->tem_ensayo_6,
             'tem_ensayo_3' => $request->tem_ensayo_3,
-            'temp_ambiente' => $request->temp_ambiente,
-            'temp_ensayo' => $request->temp_ensayo,
-            'temp_ambiente_punto_cedencia' => $request->temp_ambiente_punto_cedencia,
-            'temp_ensayo_punto_cedencia' => $request->temp_ensayo_punto_cedencia,
+            //'temp_ambiente' => $request->temp_ambiente,
+            //'temp_ensayo' => $request->temp_ensayo,
+            //'temp_ambiente_punto_cedencia' => $request->temp_ambiente_punto_cedencia,
+            //'temp_ensayo_punto_cedencia' => $request->temp_ensayo_punto_cedencia,
             'temp_ambiente_gel_10_seg' => $request->temp_ambiente_gel_10_seg,
             'temp_ensayo_gel_10_seg' => $request->temp_ensayo_gel_10_seg,
             'temp_ambiente_gel_10_min' => $request->temp_ambiente_gel_10_min,
@@ -270,7 +270,9 @@ class EnsayoController extends Controller
         ]);
 
         if ($reologia->id)
-            return response()->json(['success_reologia' => $reologia]);
+            return response()->json([
+        'success_reologia' => $reologia,
+    ]);
     }
 
     /**

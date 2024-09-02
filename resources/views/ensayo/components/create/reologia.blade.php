@@ -167,6 +167,30 @@
                             </tr>
                         </tbody>
                     </table>
+                    <table class="w-full text-sm border-gray-300">
+                        <tbody>
+                            <tr>               
+                                <td class="py-2 px-1 text-right border-0 w-2/3">Viscosidad Plastica <small>(cp)</small></td>
+                                <td class="py-2 px-1 text-center border-0 w-1/3">-</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-1 text-right border-0">Punto de Cedencia <small>(lb/100ft2)</small></td>
+                                <td class="py-2 px-1 text-center border-0">-</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-1 text-right border-0">Gel 10 segundos</td>
+                                <td class="py-2 px-1 text-center border-0">
+                                    {{ $s_l[0]->rel_reologia[0]->temp_ambiente_gel_10_seg ? $s_l[0]->rel_reologia[0]->temp_ambiente_gel_10_seg : '-' }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-1 text-right border-0">Gel 10 minutos</td>
+                                <td class="py-2 px-1 text-center border-0">
+                                    {{ $s_l[0]->rel_reologia[0]->temp_ambiente_gel_10_min ? $s_l[0]->rel_reologia[0]->temp_ambiente_gel_10_min : '-' }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
                 <div class="w-1/2 p-2">
@@ -257,6 +281,30 @@
                                 </td>
                                 <td id="coc-3" class="py-2 px-1 text-center">-</td>
                                 <td id="pro-3" class="py-2 px-1 text-center">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="w-full text-sm border-gray-300">
+                        <tbody>
+                            <tr>               
+                                <td class="py-2 px-1 text-right border-0 w-2/3">Viscosidad Plastica <small>(cp)</small></td>
+                                <td class="py-2 px-1 text-center border-0 w-1/3"> - </td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-1 text-right border-0">Punto de Cedencia <small>(lb/100ft2)</small></td>
+                                <td class="py-2 px-1 text-center border-0"> - </td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-1 text-right border-0">Gel 10 segundos</td>
+                                <td class="py-2 px-1 text-center border-0">
+                                    {{ $s_l[0]->rel_reologia[0]->temp_ensayo_gel_10_seg ? $s_l[0]->rel_reologia[0]->temp_ensayo_gel_10_seg : '-' }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-1 text-right border-0">Gel 10 minutos</td>
+                                <td class="py-2 px-1 text-center border-0">
+                                    {{ $s_l[0]->rel_reologia[0]->temp_ensayo_gel_10_min ? $s_l[0]->rel_reologia[0]->temp_ensayo_gel_10_min : '-' }}
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -411,6 +459,30 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <table class="w-full text-sm border-gray-300">
+                            <tbody>
+                                <tr>               
+                                    <td class="py-2 px-1 text-right border-0 w-2/3">Viscosidad Plastica <small>(cp)</small></td>
+                                    <td class="py-2 px-1 text-center border-0 w-1/3"><input type="number" class="form-control text-sm"
+                                        placeholder="Cálculo automático" name="" readonly></td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 px-1 text-right border-0">Punto de Cedencia <small>(lb/100ft2)</small></td>
+                                    <td class="py-2 px-1 text-center border-0"><input type="number" class="form-control text-sm"
+                                        placeholder="Cálculo automático" name="" readonly></td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 px-1 text-right border-0">Gel 10 segundos</td>
+                                    <td class="py-2 px-1 text-center border-0"><input type="number" class="form-control text-sm"
+                                        placeholder="Ingrese un resultado" name="temp_ambiente_gel_10_seg"></td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 px-1 text-right border-0">Gel 10 minutos</td>
+                                    <td class="py-2 px-1 text-center border-0"><input type="number" class="form-control text-sm"
+                                        placeholder="Ingrese un resultado" name="temp_ambiente_gel_10_min"></td>
+                                </tr>
+                            </tbody>
+                        </table>
                 </div>
                 <div class="w-1/2 p-2">
                     <div class="mb-2 text-center">
@@ -545,6 +617,30 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V13.5Zm0 2.25h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V18Zm2.498-6.75h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V13.5Zm0 2.25h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V18Zm2.504-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5Zm0 2.25h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V18Zm2.498-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5ZM8.25 6h7.5v2.25h-7.5V6ZM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 0 0 2.25 2.25h10.5a2.25 2.25 0 0 0 2.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0 0 12 2.25Z" />
                                     </svg>
                                 </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="w-full text-sm border-gray-300">
+                        <tbody>
+                            <tr>               
+                                <td class="py-2 px-1 text-right border-0 w-2/3">Viscosidad Plastica <small>(cp)</small></td>
+                                <td class="py-2 px-1 text-center border-0 w-1/3"><input type="number" class="form-control text-sm"
+                                    placeholder="Cálculo automático" name="" readonly></td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-1 text-right border-0">Punto de Cedencia <small>(lb/100ft2)</small></td>
+                                <td class="py-2 px-1 text-center border-0"><input type="number" class="form-control text-sm"
+                                    placeholder="Cálculo automático" name="" readonly></td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-1 text-right border-0">Gel 10 segundos</td>
+                                <td class="py-2 px-1 text-center border-0"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="temp_ensayo_gel_10_seg"></td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-1 text-right border-0">Gel 10 minutos</td>
+                                <td class="py-2 px-1 text-center border-0"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese un resultado" name="temp_ensayo_gel_10_min"></td>
                             </tr>
                         </tbody>
                     </table>
