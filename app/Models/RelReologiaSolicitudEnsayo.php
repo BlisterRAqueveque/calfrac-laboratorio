@@ -82,4 +82,9 @@ class RelReologiaSolicitudEnsayo extends Model
     public function user() {
         return $this->belongsTo(User::class, 'usuario_carga');
     }
+
+    public function calculos_reologias()
+    {
+        return $this->hasOne(CalculosReologias::class, 'reologia_id');
+    }
 }

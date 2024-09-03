@@ -96,6 +96,11 @@ class SolicitudLechada extends Model
         return $this->hasMany(RelPerdidaSolicitudEnsayo::class);
     }
 
+    public function calculos_reologias()
+    {
+        return $this->belongsTo(CalculosReologias::class, 'reologia', 'id');
+    }
+
     public function rel_bombeabilidad() {
         return $this->hasMany(RelBombeabilidadSolicitudEnsayo::class);
     }

@@ -11,6 +11,7 @@ use App\Models\RelPerdidaSolicitudEnsayo;
 use App\Models\RelReologiaSolicitudEnsayo;
 use App\Models\RelRequerimientosEnsayos;
 use App\Models\RelUcaSolicitudEnsayo;
+use App\Models\CalculosReologias;
 use App\Models\Solicitud;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
@@ -209,7 +210,7 @@ class EnsayoController extends Controller
         ]);
 
         $reologia = RelReologiaSolicitudEnsayo::create([
-            'tem_ambiente_rpm' => $request->tem_ambiente_rpm,
+            //'tem_ambiente_rpm' => $request->tem_ambiente_rpm,
             'tem_ambiente_300' => $request->tem_ambiente_300,
             'tem_ambiente_200' => $request->tem_ambiente_200,
             'tem_ambiente_100' => $request->tem_ambiente_100,
@@ -217,7 +218,7 @@ class EnsayoController extends Controller
             'tem_ambiente_30' => $request->tem_ambiente_30,
             'tem_ambiente_6' => $request->tem_ambiente_6,
             'tem_ambiente_3' => $request->tem_ambiente_3,
-            'tem_ensayo_rpm' => $request->tem_ensayo_rpm,
+            //'tem_ensayo_rpm' => $request->tem_ensayo_rpm,
             'tem_ensayo_300' => $request->tem_ensayo_300,
             'tem_ensayo_200' => $request->tem_ensayo_200,
             'tem_ensayo_100' => $request->tem_ensayo_100,
@@ -233,7 +234,7 @@ class EnsayoController extends Controller
             'temp_ensayo_gel_10_seg' => $request->temp_ensayo_gel_10_seg,
             'temp_ambiente_gel_10_min' => $request->temp_ambiente_gel_10_min,
             'temp_ensayo_gel_10_min' => $request->temp_ensayo_gel_10_min,
-            'tem_ambiente_rpm_up' => $request->tem_ambiente_rpm_up,
+            //'tem_ambiente_rpm_up' => $request->tem_ambiente_rpm_up,
             'tem_ambiente_300_up' => $request->tem_ambiente_300_up,
             'tem_ambiente_200_up' => $request->tem_ambiente_200_up,
             'tem_ambiente_100_up' => $request->tem_ambiente_100_up,
@@ -241,7 +242,7 @@ class EnsayoController extends Controller
             'tem_ambiente_30_up' => $request->tem_ambiente_30_up,
             'tem_ambiente_6_up' => $request->tem_ambiente_6_up,
             'tem_ambiente_3_up' => $request->tem_ambiente_3_up,
-            'tem_ensayo_rpm_up' => $request->tem_ensayo_rpm_up,
+            //'tem_ensayo_rpm_up' => $request->tem_ensayo_rpm_up,
             'tem_ensayo_300_up' => $request->tem_ensayo_300_up,
             'tem_ensayo_200_up' => $request->tem_ensayo_200_up,
             'tem_ensayo_100_up' => $request->tem_ensayo_100_up,
@@ -269,9 +270,82 @@ class EnsayoController extends Controller
             'usuario_carga' => auth()->user()->id,
         ]);
 
+        // Realizar cálculos de los cocientes ambiente
+        $tem_ambiente_300_cociente = $request->tem_ambiente_300_up / $request->tem_ambiente_300;
+        $tem_ambiente_200_cociente = $request->tem_ambiente_200_up / $request->tem_ambiente_200;
+        $tem_ambiente_100_cociente = $request->tem_ambiente_100_up / $request->tem_ambiente_100;
+        $tem_ambiente_60_cociente = $request->tem_ambiente_60_up / $request->tem_ambiente_60;
+        $tem_ambiente_30_cociente = $request->tem_ambiente_30_up / $request->tem_ambiente_30;
+        $tem_ambiente_6_cociente = $request->tem_ambiente_6_up / $request->tem_ambiente_6;
+        $tem_ambiente_3_cociente = $request->tem_ambiente_3_up / $request->tem_ambiente_3;
+        // Realizar cálculos de los cocientes ensayos
+        $tem_ensayo_300_cociente = $request->tem_ensayo_300_up / $request->tem_ensayo_300;
+        $tem_ensayo_200_cociente = $request->tem_ensayo_200_up / $request->tem_ensayo_200;
+        $tem_ensayo_100_cociente = $request->tem_ensayo_100_up / $request->tem_ensayo_100;
+        $tem_ensayo_60_cociente = $request->tem_ensayo_60_up / $request->tem_ensayo_60;
+        $tem_ensayo_30_cociente = $request->tem_ensayo_30_up / $request->tem_ensayo_30;
+        $tem_ensayo_6_cociente = $request->tem_ensayo_6_up / $request->tem_ensayo_6;
+        $tem_ensayo_3_cociente = $request->tem_ensayo_3_up / $request->tem_ensayo_3;
+        // Realizar cálculos de los promedios ambiente
+        $tem_ambiente_300_promedio = ceil(($request->tem_ambiente_300_up + $request->tem_ambiente_300) / 2);
+        $tem_ambiente_200_promedio = ceil(($request->tem_ambiente_200_up + $request->tem_ambiente_200) / 2);
+        $tem_ambiente_100_promedio = ceil(($request->tem_ambiente_100_up + $request->tem_ambiente_100) / 2);
+        $tem_ambiente_60_promedio = ceil(($request->tem_ambiente_60_up + $request->tem_ambiente_60) / 2);
+        $tem_ambiente_30_promedio = ceil(($request->tem_ambiente_30_up + $request->tem_ambiente_30) / 2);
+        $tem_ambiente_6_promedio = ceil(($request->tem_ambiente_6_up + $request->tem_ambiente_6) / 2);
+        $tem_ambiente_3_promedio = ceil(($request->tem_ambiente_3_up + $request->tem_ambiente_3) / 2);
+        // Realizar cálculos de los promedios ensayos
+        $tem_ensayo_300_promedio = ceil(($request->tem_ensayo_300_up + $request->tem_ensayo_300) / 2);
+        $tem_ensayo_200_promedio = ceil(($request->tem_ensayo_200_up + $request->tem_ensayo_200) / 2);
+        $tem_ensayo_100_promedio = ceil(($request->tem_ensayo_100_up + $request->tem_ensayo_100) / 2);
+        $tem_ensayo_60_promedio = ceil(($request->tem_ensayo_60_up + $request->tem_ensayo_60) / 2);
+        $tem_ensayo_30_promedio = ceil(($request->tem_ensayo_30_up + $request->tem_ensayo_30) / 2);
+        $tem_ensayo_6_promedio = ceil(($request->tem_ensayo_6_up + $request->tem_ensayo_6) / 2);
+        $tem_ensayo_3_promedio = ceil(($request->tem_ensayo_3_up + $request->tem_ensayo_3) / 2);
+
+        // Guardar los cocientes en la nueva tabla
+        $calculos_reologias = CalculosReologias::create([
+            'reologia_id' => $reologia->id,
+            'solicitud_id' => $request->solicitud_lechada_id,
+            // Div up/down ambiente
+            'tem_ambiente_300_cociente' => $tem_ambiente_300_cociente,
+            'tem_ambiente_200_cociente' => $tem_ambiente_200_cociente,
+            'tem_ambiente_100_cociente' => $tem_ambiente_100_cociente,
+            'tem_ambiente_60_cociente' => $tem_ambiente_60_cociente,
+            'tem_ambiente_30_cociente' => $tem_ambiente_30_cociente,
+            'tem_ambiente_6_cociente' => $tem_ambiente_6_cociente,
+            'tem_ambiente_3_cociente' => $tem_ambiente_3_cociente,
+            // Calculo temp ambiente: (up + down)/2
+            'tem_ambiente_300_promedio' => $tem_ambiente_300_promedio,
+            'tem_ambiente_200_promedio' => $tem_ambiente_200_promedio,
+            'tem_ambiente_100_promedio' => $tem_ambiente_100_promedio,
+            'tem_ambiente_60_promedio' => $tem_ambiente_60_promedio,
+            'tem_ambiente_30_promedio' => $tem_ambiente_30_promedio,
+            'tem_ambiente_6_promedio' => $tem_ambiente_6_promedio,
+            'tem_ambiente_3_promedio' => $tem_ambiente_3_promedio,
+            // Div up/down ensayos
+            'tem_ensayo_300_cociente' => $tem_ensayo_300_cociente,
+            'tem_ensayo_200_cociente' => $tem_ensayo_200_cociente,
+            'tem_ensayo_100_cociente' => $tem_ensayo_100_cociente,
+            'tem_ensayo_60_cociente' => $tem_ensayo_60_cociente,
+            'tem_ensayo_30_cociente' => $tem_ensayo_30_cociente,
+            'tem_ensayo_6_cociente' => $tem_ensayo_6_cociente,
+            'tem_ensayo_3_cociente' => $tem_ensayo_3_cociente,
+            // Calculo temp ambiente: (up + down)/2
+            'tem_ensayo_300_promedio' => $tem_ensayo_300_promedio,
+            'tem_ensayo_200_promedio' => $tem_ensayo_200_promedio,
+            'tem_ensayo_100_promedio' => $tem_ensayo_100_promedio,
+            'tem_ensayo_60_promedio' => $tem_ensayo_60_promedio,
+            'tem_ensayo_30_promedio' => $tem_ensayo_30_promedio,
+            'tem_ensayo_6_promedio' => $tem_ensayo_6_promedio,
+            'tem_ensayo_3_promedio' => $tem_ensayo_3_promedio,
+        ]);
+
+
         if ($reologia->id)
             return response()->json([
         'success_reologia' => $reologia,
+        'success_cociente' => $calculos_reologias,
     ]);
     }
 
