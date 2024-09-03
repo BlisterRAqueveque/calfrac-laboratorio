@@ -45,7 +45,7 @@ class CalculosReologias extends Model
 
     public function solicitud_lechada() 
     {
-        return $this->hasOne(SolicitudLechada::class, 'reologia', 'id');
+        return $this->belongsTo(SolicitudLechada::class);
     }
 
     public function reologia()
