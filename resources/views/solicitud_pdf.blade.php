@@ -360,15 +360,15 @@
                             ?>
                             <tr>
                                 <td
-                                style="width: 40%;color: #686868; text-align: right; font-size: 13px; background-color: #ffffff;">
+                                style="padding: 2px; text-align: right; background-color: #ffffff;">
                                 <?= $i; ?>
                                 </td>
                                 <td
-                                    style="width: 40%;color: #686868; text-align: center; font-size: 13px; border: 1px solid #494949; background-color: #ffffff;">
+                                    style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
                                     {{ $formulacion->lote }}
                                 </td>
                                 <td
-                                    style="width: 40%;color: #686868; text-align: center; font-size: 13px; border: 1px solid #494949; background-color: #ffffff;">
+                                style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
                                     @if(isset($formulacion->aditivos->nombre))
                                     {{ $formulacion->aditivos->nombre }}
                                 @elseif($formulacion->aditivo == 'SD')
@@ -378,14 +378,14 @@
                                 @endif
                                 </td>
                                 <td
-                                    style="width: 40%;color: #686868; text-align: center; font-size: 13px; border: 1px solid #494949; background-color: #ffffff;">
+                                    style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
                                     {{ $formulacion->concentracion }}
                                 </td>
                                 <td
-                                    style="width: 40%;color: #686868; text-align: center; font-size: 13px; border: 1px solid #494949; background-color: #ffffff;">
+                                    style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
                                     %BOWC
                                 </td>
-                                <td style="width: 40%;color: #686868; text-align: center; font-size: 13px; border: 1px solid #494949; background-color: #ffffff;">
+                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
                                     {{ $formulacion->blend }}
                                 </td>
                             </tr>
