@@ -839,8 +839,10 @@
                                                                         {{ $s_l[0]->rel_reologia[0]->tem_ambiente_300 ? $s_l[0]->rel_reologia[0]->tem_ambiente_300 : '-' }}
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{$calculos_reologias[0]->tem_ambiente_300_cociente ?? '-'}}
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{ $calculos_reologias[0]->tem_ambiente_300_promedio ?? '-'}}
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -855,8 +857,10 @@
 
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{$calculos_reologias[0]->tem_ambiente_200_cociente ?? '-'}}
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{ $calculos_reologias[0]->tem_ambiente_200_promedio ?? '-'}}
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -871,8 +875,10 @@
                                                                         {{ $s_l[0]->rel_reologia[0]->tem_ambiente_100 ? $s_l[0]->rel_reologia[0]->tem_ambiente_100 : '-' }}
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{$calculos_reologias[0]->tem_ambiente_100_cociente ?? '-'}}
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{ $calculos_reologias[0]->tem_ambiente_100_promedio ?? '-'}}
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -886,8 +892,10 @@
                                                                         {{ $s_l[0]->rel_reologia[0]->tem_ambiente_60 ? $s_l[0]->rel_reologia[0]->tem_ambiente_60 : '-' }}
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{$calculos_reologias[0]->tem_ambiente_60_cociente ?? '-'}}
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{ $calculos_reologias[0]->tem_ambiente_60_promedio ?? '-'}}
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -902,8 +910,10 @@
 
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{$calculos_reologias[0]->tem_ambiente_30_cociente ?? '-'}}
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{ $calculos_reologias[0]->tem_ambiente_30_promedio ?? '-'}}
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -917,8 +927,10 @@
                                                                         {{ $s_l[0]->rel_reologia[0]->tem_ambiente_6 ? $s_l[0]->rel_reologia[0]->tem_ambiente_6 : '-' }}
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{$calculos_reologias[0]->tem_ambiente_6_cociente ?? '-'}}
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{ $calculos_reologias[0]->tem_ambiente_6_promedio ?? '-'}}
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -932,8 +944,10 @@
                                                                         {{ $s_l[0]->rel_reologia[0]->tem_ambiente_3 ? $s_l[0]->rel_reologia[0]->tem_ambiente_3 : '-' }}
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{$calculos_reologias[0]->tem_ambiente_3_cociente ?? '-'}}
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{ $calculos_reologias[0]->tem_ambiente_3_promedio ?? '-'}}
                                                                     </td>
                                                                 </tr>
                                                             </table>
@@ -1036,11 +1050,12 @@
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
                                                                         {{ $s_l[0]->rel_reologia[0]->tem_ensayo_300 ? $s_l[0]->rel_reologia[0]->tem_ensayo_300 : '-' }}
-
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{$calculos_reologias[0]->tem_ensayo_300_cociente ?? '-'}}
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{$calculos_reologias[0]->tem_ensayo_300_promedio ?? '-'}}
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -1055,8 +1070,10 @@
 
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{$calculos_reologias[0]->tem_ensayo_200_cociente ?? '-'}}
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{$calculos_reologias[0]->tem_ensayo_200_promedio ?? '-'}}
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -1072,8 +1089,10 @@
 
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{$calculos_reologias[0]->tem_ensayo_100_cociente ?? '-'}}
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{$calculos_reologias[0]->tem_ensayo_100_promedio ?? '-'}}
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -1089,8 +1108,10 @@
 
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{$calculos_reologias[0]->tem_ensayo_60_cociente ?? '-'}}
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{$calculos_reologias[0]->tem_ensayo_60_promedio ?? '-'}}
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -1106,8 +1127,10 @@
 
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{$calculos_reologias[0]->tem_ensayo_30_cociente ?? '-'}}
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{$calculos_reologias[0]->tem_ensayo_30_promedio ?? '-'}}
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -1123,8 +1146,10 @@
 
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{$calculos_reologias[0]->tem_ensayo_6_cociente ?? '-'}}
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{$calculos_reologias[0]->tem_ensayo_6_promedio ?? '-'}}
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -1139,8 +1164,10 @@
                                                                         {{ $s_l[0]->rel_reologia[0]->tem_ensayo_3 ? $s_l[0]->rel_reologia[0]->tem_ensayo_3 : '-' }}
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{$calculos_reologias[0]->tem_ensayo_3_cociente ?? '-'}}
                                                                     </td>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                        {{$calculos_reologias[0]->tem_ensayo_3_promedio ?? '-'}}
                                                                     </td>
                                                                 </tr>
                                                             </table>

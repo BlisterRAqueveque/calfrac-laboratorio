@@ -16,6 +16,7 @@ use App\Models\TipoCementacion;
 use App\Models\TipoRequerimientoCemento;
 use App\Models\TipoTrabajoCemento;
 use App\Models\User;
+use App\Models\CalculosReologias;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Http\Request;
 use Mail;
@@ -43,6 +44,7 @@ class PDFController extends Controller
             'tipo_requerimiento_cemento' => TipoRequerimientoCemento::all(),
             'tipo_trabajos' => TipoTrabajoCemento::all(),
             'tipo_cementacion' => TipoCementacion::all(),
+            'calculos_reologias' => CalculosReologias::all(),
             'names_ingenieros' => User::whereIn('users.grupo_id', [3, 4])->get('users.*'),
             // 'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];

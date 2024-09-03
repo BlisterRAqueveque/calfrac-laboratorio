@@ -98,7 +98,7 @@ class SolicitudLechada extends Model
 
     public function calculos_reologias()
     {
-        return $this->belongsTo(CalculosReologias::class, 'reologia', 'id');
+        return $this->belongsTo(CalculosReologias::class);
     }
 
     public function rel_bombeabilidad() {
