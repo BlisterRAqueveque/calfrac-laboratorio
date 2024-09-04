@@ -1048,32 +1048,15 @@ class SolicitudController extends Controller
         if ($solicitud->id)
             return back()->with('success', $solicitud->id);
     }
+    
     /**
      * Se que es un código asqueroso, pero una condición si o si depende de la otra
-     * 
      */
     public function _generate_report($solicitud_id)
     {
         $generar_reporte = false;
         $solicitud_lechada = SolicitudLechada::where('solicitud_id', $solicitud_id)->get();
-        /* 
-        $count_reologia = count($solicitud_lechada[0]->rel_reologia);
-        $count_perdida = count($solicitud_lechada[0]->rel_perdida_filtrado);
-        $count_rel_uca = count($solicitud_lechada[0]->rel_uca);
-        $count_rel_agua_libre = count($solicitud_lechada[0]->rel_agua_libre);
-        $count_rel_mezclabilidad = count($solicitud_lechada[0]->rel_mezclabilidad);
-        $count_rel_bombeabilidad = count($solicitud_lechada[0]->rel_bombeabilidad);
 
-        if (($count_reologia > 0) && ($count_perdida > 0) && ($count_rel_uca > 0) && ($count_rel_agua_libre > 0) && ($count_rel_mezclabilidad > 0)) {
-            if ($count_rel_bombeabilidad > 0) {
-                foreach ($solicitud_lechada[0]->rel_bombeabilidad as $b) {
-                    if ($b->selected) {
-                        $generar_reporte = true;
-                        break;
-                    }
-                }
-            } */
-        //  echo json_encode($generar_reporte);
         // Reología
         if (count($solicitud_lechada[0]->rel_reologia) > 0) {
             // Pérdida de Filtrado
@@ -1112,9 +1095,8 @@ class SolicitudController extends Controller
         } else {
             $generar_reporte = false;
         }
-        //echo json_encode($generar_reporte);
         return response()->json(['generate_report' => $generar_reporte]);
-        echo json_encode($generar_reporte);
+        // echo json_encode($generar_reporte);
     }
 
 
