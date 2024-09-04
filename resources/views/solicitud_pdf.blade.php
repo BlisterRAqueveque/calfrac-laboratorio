@@ -295,7 +295,7 @@
                                     Ensayo N°:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{-- {{ $solicitud->ensayo->tipo ?? 'null'}}-{{ $solicitud->ensayo->incrementable ?? 'null'}}-{{ $solicitud->ensayo->anio ?? 'null'}} --}}
+                                    {{ $solicitud->ensayo->tipo ?? 'null'}}-{{ $solicitud->ensayo->incrementable ?? 'null'}}-{{ $solicitud->ensayo->anio ?? 'null'}}
                                 </td>
                             </tr>
                             <tr>
