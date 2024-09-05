@@ -216,6 +216,7 @@ class SolicitudController extends Controller
                 ]);
             }
         }
+
         $url = route('solicitud.fractura.show', ['solicitud_id' => $solicitud->id]);
         $emailsAEnviar = [];
 
@@ -640,13 +641,13 @@ class SolicitudController extends Controller
             'servicios_lodo' => 'required',
             'mud_company' => 'required',
             'densidad_lodo_3' => 'required',
-            'temperatura' => 'required',
-            'profundidad_md' => 'required',
-            'profundidad_tvd' => 'required',
-            'ensayos' => 'required',
-            'vol_colchon' => 'required',
-            'densidad_colchon' => 'required',
-            'tiempo_contacto' => 'required',
+            //'temperatura' => 'required',
+            //'profundidad_md' => 'required',
+            //'profundidad_tvd' => 'required',
+            //'ensayos' => 'required',
+            //'vol_colchon' => 'required',
+            //'densidad_colchon' => 'required',
+            //'tiempo_contacto' => 'required',
         ]);
 
         # Solicitud General
@@ -734,11 +735,11 @@ class SolicitudController extends Controller
         $this->_sendEmailNewLodo($data, $correos);  
 
         # Ensayos requeridos
-        if ($request->ensayos) {
-            $ensayos_separados = explode(',', $request->ensayos);
+        if ($request->requeridos_lodo) {
+            $ensayos_separados = explode(',', $request->requeridos_lodo);
             foreach ($ensayos_separados as $ensayo) {
                 RelEnsayosRequeridosLodo::create([
-                    'nombre' => $solicitud_lodo->id, // Cambiar el nombre de la columna  //Nombre seria id_solicitud
+                    'nombre' => $solicitud->id, // Cambiar el nombre de la columna  //Nombre seria id_solicitud
                     'id_ensayo' => $ensayo
                 ]);
             }
@@ -839,9 +840,13 @@ class SolicitudController extends Controller
         $data = [
             'solicitud' => Solicitud::find($solicitud_id),
             'ensayos_referencia' => Ensayo::leftJoin('rel_ensayo_referencia_solicitud', 'ensayos.id', '=', 'rel_ensayo_referencia_solicitud.ensayo_id')
-                ->where('rel_ensayo_referencia_solicitud.solicitud_id', $solicitud_id)
-                ->get(['ensayos.*', 'rel_ensayo_referencia_solicitud.*']),
+            ->where('rel_ensayo_referencia_solicitud.solicitud_id', $solicitud_id)
+            ->get(['ensayos.*', 'rel_ensayo_referencia_solicitud.*']),
             //  'aditivos' => Aditivo::all(),
+            'ensayos_multiples' => EnsayosLodo::leftJoin('rel_ensayos_requeridos_lodo', 'ensayos_lodo.id', '=', 'rel_ensayos_requeridos_lodo.id_ensayo')
+            ->where('rel_ensayos_requeridos_lodo.nombre', $solicitud_id)
+            ->get(['ensayos_lodo.*', 'rel_ensayos_requeridos_lodo.*']),
+            'opciones_ensayos' => EnsayosLodo::all(),
             'ensayos' => Ensayo::where('estado', 1)->get(),
             'users' => User::all(),
             'clientes' => Cliente::all(),

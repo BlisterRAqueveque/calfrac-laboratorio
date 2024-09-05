@@ -184,24 +184,17 @@
                 </div>
                 <hr class="my-4">
 
-                <p class="m-0 font-bold text-lg my-3 tracking-wide">Ensayo Requeridos</p>
+                <p class="m-0 font-bold text-lg my-3 tracking-wide">Ensayos Requeridos de Lodo</p>
 
-                <div class="row p-2">
-                    <div class="col-xs-12 col-md-6 my-2">
-                        
-                        <select name='ensayos' id="ensayos" class="text-sm" data-search="true"  data-silent-initial-value-set="true" multiple="true">
-                        @foreach($ensayos_lodo as $sl)
-                        <option value="{{$sl->id}}"
-                            {{ old('ensayos_lodo') == $sl->id ? 'selected' : '' }}> {{$sl->nombre}}</option>
+                <div class="col-xs-12 col-md-6 my-2">
+                    <label for="requeridos_lodo"
+                        class="text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Ensayos de lodo</label>
+                    <select name="requeridos_lodo" id="requeridos_lodo" class="text-sm inp_edit" data-search="false" multiple="true">
+                        @foreach ($ensayos_lodo as $e)
+                            <option value="{{ $e->id }}">{{ $e->nombre }}</option>
                         @endforeach
                     </select>
-
-                        @error('ensayos')
-                            <small class="text-red-700 font-semibold"><em>{{ $message }}</em></small>
-                        @enderror
-                    </div>
-                
-                 </div>
+                </div>
 
                 <hr class="my-4">
 
@@ -372,7 +365,7 @@
             placeholder: "Seleccione la compañia de lodo",
         });
         VirtualSelect.init({
-            ele: "#ensayos",
+            ele: "#requeridos_lodo",
             placeholder: "Seleccione los ensayos",
         });
         VirtualSelect.init({
@@ -390,7 +383,7 @@
         document.getElementById("tipo_lodo").setValue(0);
         document.getElementById("servicios_lodo").setValue(0);
         document.getElementById("mud_company").setValue(0);
-        document.getElementById("ensayos").setValue(0);
+        document.getElementById("requeridos_lodo").setValue(0);
         document.getElementById("firma_reconocimiento_lodo").setValue(0);
         document.getElementById("firma_solicitante_lodo").setValue(0);
     })

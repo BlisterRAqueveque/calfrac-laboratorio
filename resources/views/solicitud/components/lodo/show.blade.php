@@ -421,6 +421,41 @@
                         </div>
                     @endforeach
                 </div>
+
+                <hr class="my-4">
+
+                <p class="m-0 font-bold text-lg my-3 tracking-wide">Ensayos requeridos de lodo</p>
+
+                <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2" for="requeridos_lodo">Ensayos:</label>
+                <div class="grid md:grid-cols-5 gap-3 mt-4 relative">
+                    @foreach ($ensayos_multiples as $e_r)
+                        <select name="requeridos_lodo" class="form-control text-sm p-2" disabled >
+                            @foreach ($opciones_ensayos as $ensayo)
+                                <option value="{{ $ensayo->id }}" {{ $ensayo->id == $e_r->id_ensayo ? 'selected' : '' }}> 
+                                    {{ $ensayo->nombre }}
+                                </option>
+                            @endforeach
+                        </select>
+                    @endforeach
+                </div>
+
+                {{-- <div>
+                    <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2" for="analisis_id">Analisis de Agua Microbial:</label>
+                    <div class="grid md:grid-cols-5 gap-3 mt-4 relative">
+                        @foreach ($ensayos_referencia as $e_r)
+                            <select name="analisis_id[]" class="form-control text-sm p-2" disabled >
+                                @foreach ($ensayos_multiples as $ensayo)
+                                    <option value="{{ $ensayo->id }}" {{ $ensayo->id == $e_r->id_ensayo ? 'selected' : '' }}> 
+                                        {{ $ensayo->nombre }}
+                                    </option>
+                                    <br>
+                                @endforeach
+                            </select>
+                        @endforeach
+                    </div>
+                </div> --}}
+                
+
                 <hr class="my-4">
 
                 <p class="m-0 font-bold text-lg my-3 tracking-wide">Requerimientos del Colchón</p>
