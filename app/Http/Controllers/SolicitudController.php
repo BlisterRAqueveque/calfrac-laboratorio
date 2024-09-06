@@ -681,7 +681,7 @@ class SolicitudController extends Controller
             'densidad_colchon' => $request->densidad_colchon,
             'tiempo_contacto' => $request->tiempo_contacto,
             'mud_company' => $request->mud_company,
-
+            'comentario' => $request->observacion_lodo,
         ]);
 
         #Ensayos de referencia (Usa la misma tabla que lechada y fractura, asique usar SolicitudGeneral)

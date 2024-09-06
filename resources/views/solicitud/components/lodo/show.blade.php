@@ -461,6 +461,17 @@
                 <p class="m-0 font-bold text-lg my-3 tracking-wide">Requerimientos del Colchón</p>
                 
                 @include('solicitud.components.lodo.requerimientos')
+
+                <hr class="my-4">
+
+                <p class="m-0 font-bold text-lg my-3 tracking-wide">Observación/Comentarios</p>
+
+                <div class="grid mt-3">
+                    <div class="col-span-2 md:col-span-1">
+                        <textarea name="observacion_lechada" rows="5" class="form-control text-sm" placeholder="Máximo 500 caracteres"
+                            readonly> {{ $solicitud_lodo[0]->comentario }}</textarea>
+                    </div>
+                </div>
                 
             
                 <hr class="my-4">
