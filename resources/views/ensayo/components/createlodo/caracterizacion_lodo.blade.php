@@ -1,20 +1,13 @@
 
 <div class="mt-4 tab-pane fade show active" id="tab-caracterizacion" role="tabpanel"> <!-- caracterizacion del Lodo (1) -->
-{{-- @if (count($solicitud_lodo[0]->rel_caracterizacion) > 0)
+@if (count($solicitud_lodo[0]->rel_caracterizacion) > 0)
+<div class="mb-2 text-center">
+    <h5 class="mb-1">Caracterización del Lodo</h5>
+</div>
 
-
-@else
-    <div class="accordionLodo" id="accordionReologiaLodo"></div>
-@endif --}}
-@if (count($solicitud_lodo[0]->rel_caracterizacion) == 0)
-    <form id="form_reologia_lodo" method="POST">
-        @csrf
-        <div class="mb-2 text-center">
-            <h5 class="mb-1">Caracterización del Lodo</h5>
-            {{-- <small>(Recuerde que debe seleccionar de todos los intentos una Reología correctamente)</small> --}}
-        </div>
-        <input type="hidden" name="solicitud_lodo_id" value="{{ $solicitud_lodo[0]->id }}">
-        <div class="row mt-3 py-2 px-5">
+<div class="flex">
+    <div class="w-1/2 p-2">
+        <div class="row mt-3 py-2 px-2">
             <table class="w-full text-sm border border-gray-300">
                 <thead class="bg-gray-200 text-gray-700">
                     <tr>
@@ -26,19 +19,25 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
-                            placeholder="Ingrese dato" name="tipo_lodo"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
-                            placeholder="Ingrese dato" name="base"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
-                            placeholder="Ingrese dato" name="densidad"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
-                            placeholder="Ingrese dato" name="cia_lodo"></td>
+                        <td class="py-2 px-1 text-center border">
+                            {{ $solicitud_lodo[0]->rel_caracterizacion[0]->tipo_lodo ? $solicitud_lodo[0]->rel_caracterizacion[0]->tipo_lodo : '-' }}
+                        </td>
+                        <td class="py-2 px-1 text-center border">
+                            {{ $solicitud_lodo[0]->rel_caracterizacion[0]->base ? $solicitud_lodo[0]->rel_caracterizacion[0]->base : '-' }}
+                        </td>
+                        <td class="py-2 px-1 text-center border">
+                            {{ $solicitud_lodo[0]->rel_caracterizacion[0]->densidad ? $solicitud_lodo[0]->rel_caracterizacion[0]->densidad : '-' }}
+                        </td>
+                        <td class="py-2 px-1 text-center border">
+                            {{ $solicitud_lodo[0]->rel_caracterizacion[0]->cia_lodo ? $solicitud_lodo[0]->rel_caracterizacion[0]->cia_lodo : '-' }}
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <div class="row mt-3 py-2 px-5">
+    </div>
+    <div class="w-1/2 p-2">
+        <div class="row mt-3 py-2 px-2">
             <table class="w-full text-sm border border-gray-300">
                 <thead class="bg-gray-200 text-gray-700">
                     <tr>
@@ -50,19 +49,317 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
-                            placeholder="Ingrese dato" name="tiempo"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
-                            placeholder="Ingrese dato" name="seg_10"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
-                            placeholder="Ingrese dato" name="min_10"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
-                            placeholder="Ingrese dato" name="min_30"></td>
+                        <td class="py-2 px-1 text-center border">
+                            {{ $solicitud_lodo[0]->rel_caracterizacion[0]->tiempo ? $solicitud_lodo[0]->rel_caracterizacion[0]->tiempo : '-' }}
+                        </td>
+                        <td class="py-2 px-1 text-center border">
+                            {{ $solicitud_lodo[0]->rel_caracterizacion[0]->seg_10 ? $solicitud_lodo[0]->rel_caracterizacion[0]->seg_10 : '-' }}
+                        </td>
+                        <td class="py-2 px-1 text-center border">
+                            {{ $solicitud_lodo[0]->rel_caracterizacion[0]->min_10 ? $solicitud_lodo[0]->rel_caracterizacion[0]->min_10 : '-' }}
+                        </td>
+                        <td class="py-2 px-1 text-center border">
+                            {{ $solicitud_lodo[0]->rel_caracterizacion[0]->min_30 ? $solicitud_lodo[0]->rel_caracterizacion[0]->min_30 : '-' }}
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <div class="row mt-3 py-2 px-5">
+    </div>
+
+</div>
+<div class="row mt-3 py-2 px-2">
+    <table class="w-full text-sm border border-gray-300">
+        <thead class="bg-gray-200 text-gray-700">
+            <tr>
+                <th class="p-1 text-center border border-gray-300">Temp. BHCT</th>
+                <th class="p-1 text-center border border-gray-300">600 rpm</th>
+                <th class="p-1 text-center border border-gray-300">300 rpm</th>
+                <th class="p-1 text-center border border-gray-300">200 rpm</th>
+                <th class="p-1 text-center border border-gray-300">100 rpm</th>
+                <th class="p-1 text-center border border-gray-300">60 rpm</th>
+                <th class="p-1 text-center border border-gray-300">30 rpm</th>
+                <th class="p-1 text-center border border-gray-300">6 rpm</th>
+                <th class="p-1 text-center border border-gray-300">3 rpm</th>
+                <th class="p-1 text-center border border-gray-300">VP</th>
+                <th class="p-1 text-center border border-gray-300">YP</th>
+            </tr>
+        </thead>
+        <tbody>
+            <td class="py-2 px-1 text-center border">
+                {{ $solicitud_lodo[0]->rel_caracterizacion[0]->temp_bhct ? $solicitud_lodo[0]->rel_caracterizacion[0]->temp_bhct : '-' }}
+            </td>
+            <td class="py-2 px-1 text-center border">
+                {{ $solicitud_lodo[0]->rel_caracterizacion[0]->temp_600_rpm_c ? $solicitud_lodo[0]->rel_caracterizacion[0]->temp_600_rpm_c : '-' }}
+            </td>
+            <td class="py-2 px-1 text-center border">
+                {{ $solicitud_lodo[0]->rel_caracterizacion[0]->temp_300_rpm_c ? $solicitud_lodo[0]->rel_caracterizacion[0]->temp_300_rpm_c : '-' }}
+            </td>
+            <td class="py-2 px-1 text-center border">
+                {{ $solicitud_lodo[0]->rel_caracterizacion[0]->temp_200_rpm_c ? $solicitud_lodo[0]->rel_caracterizacion[0]->temp_200_rpm_c : '-' }}
+            </td>
+            <td class="py-2 px-1 text-center border">
+                {{ $solicitud_lodo[0]->rel_caracterizacion[0]->temp_100_rpm_c ? $solicitud_lodo[0]->rel_caracterizacion[0]->temp_100_rpm_c : '-' }}
+            </td>
+            <td class="py-2 px-1 text-center border">
+                {{ $solicitud_lodo[0]->rel_caracterizacion[0]->temp_60_rpm_c ? $solicitud_lodo[0]->rel_caracterizacion[0]->temp_60_rpm_c : '-' }}
+            </td>
+            <td class="py-2 px-1 text-center border">
+                {{ $solicitud_lodo[0]->rel_caracterizacion[0]->temp_30_rpm_c ? $solicitud_lodo[0]->rel_caracterizacion[0]->temp_30_rpm_c : '-' }}
+            </td>
+            <td class="py-2 px-1 text-center border">
+                {{ $solicitud_lodo[0]->rel_caracterizacion[0]->temp_6_rpm_c ? $solicitud_lodo[0]->rel_caracterizacion[0]->temp_6_rpm_c : '-' }}
+            </td>
+            <td class="py-2 px-1 text-center border">
+                {{ $solicitud_lodo[0]->rel_caracterizacion[0]->temp_3_rpm_c ? $solicitud_lodo[0]->rel_caracterizacion[0]->temp_3_rpm_c : '-' }}
+            </td>
+            <td class="py-2 px-1 text-center border">
+                {{ $solicitud_lodo[0]->rel_caracterizacion[0]->temp_vp ? $solicitud_lodo[0]->rel_caracterizacion[0]->temp_vp : '-' }}
+            </td>
+            <td class="py-2 px-1 text-center border">
+                {{ $solicitud_lodo[0]->rel_caracterizacion[0]->temp_yp ? $solicitud_lodo[0]->rel_caracterizacion[0]->temp_yp : '-' }}
+            </td>
+        </tbody>
+    </table>
+</div>
+<div class="mb-2 text-center">
+    <br>
+    <h5 class="mb-1">Reologías Lodo </h5>
+    {{-- <small>(Recuerde que debe seleccionar de todos los intentos una Reología correctamente)</small> --}}
+</div>
+{{-- <input type="hidden" name="solicitud_lodo_id" value="{{ $solicitud_lodo[0]->id }}"> --}}
+<div class="row mt-3 py-2 px-2">
+    <table class="w-full text-sm border border-gray-300">
+        <thead class="bg-gray-200 text-gray-700">
+            <tr>
+                <th class="p-1 text-center border w-1/4 border-gray-300" colspan="2">% de Fluido</th>
+                <th class="p-1 text-center border border-gray-300" colspan="8">Reologia</th>
+            </tr>
+            <tr>
+                <th class="p-1 text-center border border-gray-300">Lodo</th>
+                <th class="p-1 text-center border border-gray-300">Colchón</th>
+                <td class="p-1 text-center border border-gray-300">600</th>
+                <th class="p-1 text-center border border-gray-300">300</th>
+                <th class="p-1 text-center border border-gray-300">200</th>
+                <th class="p-1 text-center border border-gray-300">100</th>
+                <th class="p-1 text-center border border-gray-300">60</th>
+                <th class="p-1 text-center border border-gray-300">30</th>
+                <th class="p-1 text-center border border-gray-300">6</th>
+                <th class="p-1 text-center border border-gray-300">3</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="border-b">
+                <td class="py-2 text-center border">100</td>
+                <td class="py-2 text-center border">0</td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_600_rpm ?? '-' }}
+                </td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_300_rpm ?? '-' }}
+                </td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_200_rpm ?? '-'  }}
+                </td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_100_rpm ?? '-' }}
+                </td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_60_rpm ?? '-' }}
+                </td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_30_rpm ?? '-' }}
+                </td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_6_rpm ?? '-' }}
+                </td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_3_rpm ?? '-' }}
+                </td>
+            </tr>
+            <tr class="border-b">
+                <td class="py-2 text-center border">75</td>
+                <td class="py-2 text-center border">25</td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_600_rpm_2 ?? '-' }}
+                </td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_300_rpm_2 ?? '-' }}
+                </td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_200_rpm_2 ?? '-' }}
+                </td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_100_rpm_2 ?? '-' }}
+                </td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_60_rpm_2 ?? '-' }}
+                </td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_30_rpm_2 ?? '-' }}
+                </td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_6_rpm_2 ?? '-' }}
+                </td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_3_rpm_2 ?? '-' }}
+                </td>
+            </tr>
+            <tr class="border-b">
+                <td class="py-2 text-center border">50</td>
+                <td class="py-2 text-center border">50</td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_600_rpm_3 ?? '-' }}
+                </td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_300_rpm_3 ?? '-' }}
+                </td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_200_rpm_3 ?? '-' }}
+                </td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_100_rpm_3 ?? '-' }}
+                </td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_60_rpm_3 ?? '-' }}
+                </td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_30_rpm_3 ?? '-' }}
+                </td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_6_rpm_3 ?? '-' }}
+                </td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_3_rpm_3 ?? '-' }}
+                </td>
+            </tr>
+            <tr class="border-b">
+                <td class="py-2 text-center border">25</td>
+                <td class="py-2 text-center border">75</td>
+                <td class="py-2 px-1 text-center">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_600_rpm_4 ?? '-' }}
+                </td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_300_rpm_4 ?? '-' }}
+                </td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_200_rpm_4 ?? '-' }}
+                </td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_100_rpm_4 ?? '-' }}
+                </td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_60_rpm_4 ?? '-' }}
+                </td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_30_rpm_4 ?? '-' }}
+                </td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_6_rpm_4 ?? '-' }}
+                </td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_3_rpm_4 ?? '-' }}
+                </td>
+            </tr>
+            <tr class="border-b">
+                <td class="py-2 text-center border">0</td>
+                <td class="py-2 text-center border">100</td>
+                <td class="py-2 px-1 text-center">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_600_rpm_5 ?? '-' }}
+                </td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_300_rpm_5 ?? '-' }}
+                </td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_200_rpm_5 ?? '-' }}
+                </td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_100_rpm_5 ?? '-' }}
+                </td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_60_rpm_5 ?? '-' }}
+                </td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_30_rpm_5 ?? '-' }}
+                </td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_6_rpm_5 ?? '-' }}
+                </td>
+                <td class="py-2 px-1 text-center border">
+                    {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_3_rpm_5 ?? '-' }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+{{--@else
+    <div class="accordionLodo" id="accordionReologiaLodo"></div>--}}
+@endif 
+@if (count($solicitud_lodo[0]->rel_caracterizacion) == 0)
+    <form id="form_reologia_lodo" method="POST">
+        @csrf
+        <div class="mb-2 text-center">
+            <h5 class="mb-1">Caracterización del Lodo</h5>
+            {{-- <small>(Recuerde que debe seleccionar de todos los intentos una Reología correctamente)</small> --}}
+        </div>
+        <input type="hidden" name="solicitud_lodo_id" value="{{ $solicitud_lodo[0]->id }}">
+        <div class="flex">
+            <div class="w-1/2 p-2">
+                <div class="row mt-3 py-2 px-2">
+                    <table class="w-full text-sm border border-gray-300">
+                        <thead class="bg-gray-200 text-gray-700">
+                            <tr>
+                                <th class="p-1 text-center border border-gray-300">Tipo de Lodo</th>
+                                <th class="p-1 text-center border border-gray-300">Base</th>
+                                <th class="p-1 text-center border border-gray-300">Dens. <small>(ppg)</small></th>
+                                <th class="p-1 text-center border border-gray-300">Cia de Lodos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese dato" name="tipo_lodo"></td>
+                                <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese dato" name="base"></td>
+                                <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese dato" name="densidad"></td>
+                                <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese dato" name="cia_lodo"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="w-1/2 p-2">
+                <div class="row mt-3 py-2 px-2">
+                    <table class="w-full text-sm border border-gray-300">
+                        <thead class="bg-gray-200 text-gray-700">
+                            <tr>
+                                <th class="p-1 text-center border border-gray-300">Tiempo</th>
+                                <th class="p-1 text-center border border-gray-300">10 seg</th>
+                                <th class="p-1 text-center border border-gray-300">10 min</th>
+                                <th class="p-1 text-center border border-gray-300">30 min</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese dato" name="tiempo"></td>
+                                <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese dato" name="seg_10"></td>
+                                <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese dato" name="min_10"></td>
+                                <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                    placeholder="Ingrese dato" name="min_30"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3 py-2 px-2">
             <table class="w-full text-sm border border-gray-300">
                 <thead class="bg-gray-200 text-gray-700">
                     <tr>
@@ -112,7 +409,7 @@
             {{-- <small>(Recuerde que debe seleccionar de todos los intentos una Reología correctamente)</small> --}}
         </div>
         {{-- <input type="hidden" name="solicitud_lodo_id" value="{{ $solicitud_lodo[0]->id }}"> --}}
-        <div class="row mt-3 py-2 px-5">
+        <div class="row mt-3 py-2 px-2">
             <table class="w-full text-sm border border-gray-300">
                 <thead class="bg-gray-200 text-gray-700">
                     <tr>
