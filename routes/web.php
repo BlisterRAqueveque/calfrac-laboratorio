@@ -57,11 +57,11 @@ Route::post('/ensayo/pdf/{solicitud_id}', [EnsayoController::class, 'pdfReport']
 # G
 Route::get('/check_report/{solicitud_id}', [SolicitudController::class, '_generate_report'])->name('check_report');
 
-
 # Solicitudes
 
-
 Route::get('/obtenerIDSolicitud/{ensayo_asignado_id}', [SolicitudController::class, 'obtenerIDSolicitud'])->name('solicitud.obtener.ensayo');
+
+Route::get('/getReologiasTemp/{solicitud_lechada_id}', [SolicitudController::class, 'getReologiasTemp'])->name('solicitud.obtener.reoTemp');
 
 # Fractura
 Route::get('/solicitud', [SolicitudController::class, 'create'])->name('solicitud.create.show')->middleware('auth');
@@ -144,7 +144,7 @@ Route::post('/permisos_user', [PermisosController::class, 'user_permission_store
 Route::get('/testing', [PermisosController::class, 'testing']);
 
 # PDF's
-Route::get('/pdf/report/lechada/{solicitud_id}', [PDFController::class, 'pdf_report_lechada'])->name('pdf_report_lechada');
+Route::post('/pdf/report/lechada/{solicitud_id}', [PDFController::class, 'pdf_report_lechada'])->name('pdf_report_lechada');
 Route::post('/pdf/report/lechada/send/{solicitud_id}', [PDFController::class, 'pdf_send_report_lechada'])->name('pdf_send_report_lechada');
 Route::get('/pdf/view', [PDFController::class, 'pdf_view']);
 # Route::get('/pdf/report/lechadas/{solicitud_id}', [PDFController::class, 'pdf_report_lechada'])->name('pdf_report_lechadas');

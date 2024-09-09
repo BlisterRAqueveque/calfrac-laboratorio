@@ -40,6 +40,7 @@ use App\Models\Ingenieros;
 use App\Models\EnsayosLodo;
 use App\Models\SolicitudLodo;
 use App\Models\Estados;
+use App\Models\RelReologiaSolicitudEnsayo;
 use App\Models\RelEnsayoComentarioSolicitud;
 use App\Models\RelEnsayosRequeridosLodo;
 use Illuminate\Http\Request;
@@ -201,7 +202,7 @@ class SolicitudController extends Controller
             $analisis_separados = explode(',', $request->analisis_microbial);
             foreach ($analisis_separados as $analisis) {
                 RelAnalisisMicrobialFractura::create([
-                    'solicitud_id' => $solicitud->id, 
+                    'solicitud_id' => $solicitud->id,
                     'id_analisis' => $analisis
                 ]);
             }
@@ -410,7 +411,7 @@ class SolicitudController extends Controller
             'url' => $url
             //'empresa' => $request->empresa
         ];
-        $this->_sendEmailNewLechada($data, $correos);  
+        $this->_sendEmailNewLechada($data, $correos);
 
         # Formulaciones Tentativas
         if ($request->aditivos) {
@@ -549,7 +550,7 @@ class SolicitudController extends Controller
         $solicitud_fractura->save();
 
         $aditivos_bd = RelAditivosSolicitudFractura::where('solicitud_fractura_id', $solicitud_fractura->id)->get();
-         
+
 
 
 
@@ -696,14 +697,14 @@ class SolicitudController extends Controller
                 if ($valor !== "sd") {
                     // Convierto $valor a integer para que lo acepte la base de datos
                     $ensayo_id = (int) $valor;
-                    if($ensayo_id>0){
+                    if ($ensayo_id > 0) {
                         // Insertar en rel_ensayos_referencia_solicitud
                         RelEnsayoReferenciaSolicitud::create([
                             'ensayo_id' => $ensayo_id,
                             'solicitud_id' => $solicitud->id
                         ]);
                     }
-                    } else {
+                } else {
                     // Si encontramos "sd", insertamos el comentario correspondiente
                     if ($index_comentario < count($comentarios_lodo)) {
                         $comentario = $comentarios_lodo[$index_comentario];
@@ -732,7 +733,7 @@ class SolicitudController extends Controller
             'url' => $url
             //'empresa' => $request->empresa
         ];
-        $this->_sendEmailNewLodo($data, $correos);  
+        $this->_sendEmailNewLodo($data, $correos);
 
         # Ensayos requeridos
         if ($request->requeridos_lodo) {
@@ -774,11 +775,11 @@ class SolicitudController extends Controller
     {
         $data = [
             'analisis_referencia' => AnalisisMicrobial::leftJoin('rel_analisis_microbial_fractura', 'analisis_microbial.id', '=', 'rel_analisis_microbial_fractura.id_analisis')
-            ->where('rel_analisis_microbial_fractura.solicitud_id', $solicitud_id)
-            ->get(['analisis_microbial.*', 'rel_analisis_microbial_fractura.*']),
+                ->where('rel_analisis_microbial_fractura.solicitud_id', $solicitud_id)
+                ->get(['analisis_microbial.*', 'rel_analisis_microbial_fractura.*']),
             'agente_referencia' => AgenteSosten::leftJoin('rel_agente_sosten_fractura', 'agente_sosten.id', '=', 'rel_agente_sosten_fractura.id_agente')
-            ->where('rel_agente_sosten_fractura.solicitud_id', $solicitud_id)
-            ->get(['agente_sosten.*', 'rel_agente_sosten_fractura.*']),
+                ->where('rel_agente_sosten_fractura.solicitud_id', $solicitud_id)
+                ->get(['agente_sosten.*', 'rel_agente_sosten_fractura.*']),
             'solicitud' => Solicitud::find($solicitud_id),
             'solicitud_fractura' => SolicitudFractura::where('solicitud_id', $solicitud_id)->get(),
             'sistemas_fluidos' => SistemasFluidos::all(),
@@ -805,8 +806,8 @@ class SolicitudController extends Controller
 
         $data = [
             'ensayos_referencia' => Ensayo::leftJoin('rel_ensayo_referencia_solicitud', 'ensayos.id', '=', 'rel_ensayo_referencia_solicitud.ensayo_id')
-            ->where('rel_ensayo_referencia_solicitud.solicitud_id', $solicitud_id)
-            ->get(['ensayos.*', 'rel_ensayo_referencia_solicitud.*']),
+                ->where('rel_ensayo_referencia_solicitud.solicitud_id', $solicitud_id)
+                ->get(['ensayos.*', 'rel_ensayo_referencia_solicitud.*']),
             'ensayos' => Ensayo::where('estado', 1)->get(),
             'solicitud' => Solicitud::find($solicitud_id),
             'ensayos_referencia' => RelEnsayoReferenciaSolicitud::where('solicitud_id', $solicitud_id)->get(),
@@ -864,6 +865,21 @@ class SolicitudController extends Controller
         return view('solicitud.components.lodo.show', $data);
     }
 
+
+    public function getReologiasTemp($solicitud_lechada_id)
+    {
+        // Realiza la consulta para obtener los registros de rel_reologia_solicitud_ensayo
+        $reologias = RelReologiaSolicitudEnsayo::where('solicitud_lechada_id', $solicitud_lechada_id)
+            ->get(); // Obtiene todos los resultados que coincidan con el ID proporcionado
+
+        // Si se encontraron registros, devuelve los datos en formato JSON
+        if ($reologias->isNotEmpty()) {
+            return response()->json($reologias);
+        }
+
+        // Si no se encontraron registros, devuelve un mensaje de error
+        return response()->json(['error' => 'No se encontraron registros para el ID proporcionado'], 404);
+    }
 
     public function obtenerIDSolicitud($ensayo_asignado_id)
     {
@@ -1154,23 +1170,24 @@ class SolicitudController extends Controller
         return view('emails.user.credential');
     }
 
-    public function mostrarTabla(Request $request){
+    public function mostrarTabla(Request $request)
+    {
         // Obtener el número de registros totales
         $recordsTotal = Solicitud::count();
-        
+
         // Consultar las solicitudes con relaciones
         $query = Solicitud::with(['user', 'ensayo']); // Ajusta las relaciones según tu modelo
 
         // Filtros de búsqueda y ordenación
         if ($request->has('search') && !empty($request->search['value'])) {
-            $query->where(function($q) use ($request) {
+            $query->where(function ($q) use ($request) {
                 $q->where('id', 'like', '%' . $request->search['value'] . '%')
-                ->orWhere('tipo', 'like', '%' . $request->search['value'] . '%')
-                ->orWhere('fecha_solicitud', 'like', '%' . $request->search['value'] . '%')
-                ->orWhereHas('user', function($q) use ($request) {
-                    $q->where('nombre', 'like', '%' . $request->search['value'] . '%')
-                        ->orWhere('apellido', 'like', '%' . $request->search['value'] . '%');
-                });
+                    ->orWhere('tipo', 'like', '%' . $request->search['value'] . '%')
+                    ->orWhere('fecha_solicitud', 'like', '%' . $request->search['value'] . '%')
+                    ->orWhereHas('user', function ($q) use ($request) {
+                        $q->where('nombre', 'like', '%' . $request->search['value'] . '%')
+                            ->orWhere('apellido', 'like', '%' . $request->search['value'] . '%');
+                    });
             });
         }
 
@@ -1191,7 +1208,7 @@ class SolicitudController extends Controller
         $recordsFiltered = $query->count();
 
         // Formatear los datos
-        $data = $data->map(function($solicitud) {
+        $data = $data->map(function ($solicitud) {
             $tipo = '';
             $accionesUrl = '';
             switch ($solicitud->tipo) {
@@ -1231,7 +1248,6 @@ class SolicitudController extends Controller
             'recordsFiltered' => $recordsFiltered,
             'data' => $data
         ]);
-
     }
     // Funcion para enviar mail a lechada
     public function _sendEmailNewLechada($data, $correos)
