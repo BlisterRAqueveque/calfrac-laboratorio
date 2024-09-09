@@ -370,9 +370,6 @@
     @else
         <div class="accordion" id="accordionReologia"></div>
     @endif
-    {{--Reporte: los nombres de las variables, no coinciden con las nuevas tablas, ya que todo estaba creado y pidieron cambios.
-    Estos afectaron directamente a las variables ya declaradas en las migraciones de la db, por lo que me es muy dificil cambiarlo a esta altura,
-    lo que antiguamente era avg reads, ahora es la tabla Ascendente, y la que era Up, es Descendente --}}
     @if (count($s_l[0]->rel_reologia) == 0)
         <form id="form_reologia" method="POST">
             @csrf

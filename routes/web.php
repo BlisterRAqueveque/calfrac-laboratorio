@@ -149,3 +149,7 @@ Route::post('/pdf/report/lechada/send/{solicitud_id}', [PDFController::class, 'p
 Route::get('/pdf/view', [PDFController::class, 'pdf_view']);
 # Route::get('/pdf/report/lechadas/{solicitud_id}', [PDFController::class, 'pdf_report_lechada'])->name('pdf_report_lechadas');
 
+# Ruta para lodo
+Route::get('/ensayoslodo/create', [EnsayoController::class, 'create_lodo'])->name('ensayolodo.create');
+#Route::get('/ensayoslodo', [EnsayoController::class, 'index'])->name('ensayos_lodo');
+Route::post('/ensayoslodo/store', [EnsayoController::class, 'store_reologia_lodo'])->name('store_lodo');

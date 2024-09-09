@@ -627,7 +627,7 @@
 
     </div>
     @if ($solicitud->aprobada == 1)
-            @include('ensayos_lodo.create')
+            @include('ensayo.create')
         @endif
     <br>
 

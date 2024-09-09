@@ -85,24 +85,8 @@
 
 <div class="tab-content" id="nav-tabs-content">
     <input type="hidden" value="{{ $solicitud->id }}" name="solicitud_id">
-        {{-- Caracterizacion de lodo --}}
-        @include('ensayos_lodo.components.caracterizacion_lodo')
 
-        {{-- Compatibilidad Espaciador Mecanico-Lodo--}}
-        @include('ensayos_lodo.components.compatibilidad_espaciador')
-
-
-        {{-- Humectabilidad--}}
-        @include('ensayos_lodo.components.humectabilidad')
-
-        {{-- Wettability --}}
-        @include('ensayos_lodo.components.wettability')
-
-        {{-- Remocion estatica--}}
-        @include('ensayos_lodo.components.remocion_estatica')
-
-        {{-- Remocion Mecanica--}}
-        @include('ensayos_lodo.components.remocion_mecanica')
+    @include('ensayo.components.createlodo.caracterizacion_lodo')
 
 </div>
 
@@ -134,10 +118,10 @@
 
 <!--Aca iria un script para mostrar un cartel de carga pero meh -->
 
-<script src="{{ asset('js/ensayos_lodo/componentCaracterizacion.js') }}"></script>
+{{-- <script src="{{ asset('js/ensayos_lodo/componentCaracterizacion.js') }}"></script>
 <script src="{{ asset('js/ensayos_lodo/componentCompatibilidad.js') }}"></script>
 <script src="{{ asset('js/ensayos_lodo/componentHumectabilidad.js') }}"></script>
 <script src="{{ asset('js/ensayos_lodo/componentInhibidor.js') }}"></script>
 <script src="{{ asset('js/ensayos_lodo/componentRemocionEstatica.js') }}"></script>
 <script src="{{ asset('js/ensayos_lodo/componentRemocionDinamica.js') }}"></script>
-<script src="{{ asset('js/ensayos_lodo/componentWettability.js') }}"></script>
+<script src="{{ asset('js/ensayos_lodo/componentWettability.js') }}"></script> --}}
