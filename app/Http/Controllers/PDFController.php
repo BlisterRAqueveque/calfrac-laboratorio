@@ -85,9 +85,9 @@ class PDFController extends Controller
     public function pdf_send_report_lechada($solicitud_id, Request $request)
     {
         // return response()->json(['success_pdf' => $request->destinatario]);
- // Charts de Reologias
- $chartImage1 = $request->chartImage1;
- $chartImage2 = $request->chartImage2;
+        // Charts de Reologias
+        $chartImage1 = $request->chart_image_1;
+        $chartImage2 = $request->chart_image_2;
 
         $destinatario = $request->destinatario;
         $data = [

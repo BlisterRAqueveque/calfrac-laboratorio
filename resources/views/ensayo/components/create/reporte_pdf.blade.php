@@ -45,7 +45,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
 
 <script>
-
     // Función para abrir el reporte PDF en una nueva pestaña
     const pdfReport = (chartImage1, chartImage2) => {
         let solicitud_id = {!! json_encode($solicitud->id) !!};
@@ -55,55 +54,98 @@
 
     let downloadButton = document.getElementById("btn_pdf_report");
 
-let alreadyGeneratedPDF = false;
+    let alreadyGeneratedPDF = false;
 
-downloadButton.addEventListener('click', (e) => {
-    if (!alreadyGeneratedPDF) {
-        alreadyGeneratedPDF = true; // Evitar generación duplicada
-        submitFunction(e);
-    }
-});
+    downloadButton.addEventListener('click', (e) => {
+        if (!alreadyGeneratedPDF) {
+            alreadyGeneratedPDF = true; // Evitar generación duplicada
+            submitFunction(e);
+        }
+    });
 
-const submitFunction = (e) => {
-    e.preventDefault();
+    const submitFunction = (e) => {
+        e.preventDefault();
 
-    const btn_pdf_report = document.querySelector('#btn_pdf_report');
-    btn_pdf_report.classList.toggle('disabled');
+        const btn_pdf_report = document.querySelector('#btn_pdf_report');
+        btn_pdf_report.classList.toggle('disabled');
 
-    // Obtén los canvas de los gráficos
-    const chartCanvas1 = document.getElementById('reporteReologiasTAmbiente');
-    const chartCanvas2 = document.getElementById('reporteReologiasTEnsayo');
+        // Obtén los canvas de los gráficos
+        const chartCanvas1 = document.getElementById('reporteReologiasTAmbiente');
+        const chartCanvas2 = document.getElementById('reporteReologiasTEnsayo');
 
-    const chartDom1hidden = document.getElementById('chartImage1');
-    const chartDom2hidden = document.getElementById('chartImage2');
+        const chartDom1hidden = document.getElementById('chartImage1');
+        const chartDom2hidden = document.getElementById('chartImage2');
 
-    const generatePDF = () => {
-        console.log(chartCanvas1);
-        console.log(chartCanvas2);
+        const generatePDF = () => {
 
+            if (chartCanvas1 && chartCanvas2) {
+                // Obtén la imagen en base64 del gráfico 1
+                const dataUrl1 = chartCanvas1.toDataURL('image/png');
+                chartDom1hidden.value = dataUrl1;
+
+                // Obtén la imagen en base64 del gráfico 2
+                const dataUrl2 = chartCanvas2.toDataURL('image/png');
+                chartDom2hidden.value = dataUrl2;
+
+                // Envía el formulario con las imágenes en base64
+                document.getElementById('mi_form_pdf').submit();
+            } else {
+                console.error('No se pudo encontrar el canvas de los gráficos.');
+            }
+        };
+
+        generatePDF();
+    };
+
+    //La funcion de abajo podria reutilizarla arriba pero hay que agregar unas cositas y paja
+
+    //Creo variable para consultar luego si ya estan las imgs en el form
+    let alreadyGeneratedImages = false;
+
+    const generateImages = () => {
+
+        const chartCanvas1 = document.getElementById('reporteReologiasTAmbiente');
+        const chartCanvas2 = document.getElementById('reporteReologiasTEnsayo');
+
+        // Verificar si los gráficos existen
         if (chartCanvas1 && chartCanvas2) {
-            // Obtén la imagen en base64 del gráfico 1
+            
             const dataUrl1 = chartCanvas1.toDataURL('image/png');
-            chartDom1hidden.value = dataUrl1;
-
-            // Obtén la imagen en base64 del gráfico 2
             const dataUrl2 = chartCanvas2.toDataURL('image/png');
-            chartDom2hidden.value = dataUrl2;
 
-            // Envía el formulario con las imágenes en base64
-            document.getElementById('mi_form_pdf').submit();
+            // Apender las imágenes al formulario 'form_submit_report_lechada' (el form del envio de correo)
+            appendImagesToForm(dataUrl1, dataUrl2);
+
+            // Pongo en true la variable porque ya esta appendeado los charts al form
+            alreadyGeneratedImages = true;
         } else {
             console.error('No se pudo encontrar el canvas de los gráficos.');
         }
     };
 
-    generatePDF();
-};
+    // Función para agregar las imágenes en base64 al formulario 'form_submit_report_lechada' (envio de correos)
+    const appendImagesToForm = (dataUrl1, dataUrl2) => {
+        const formSubmitLechada = document.getElementById('form_submit_report_lechada');
 
-</script>
+        // Crear campos ocultos para las imágenes si no existen (chart_image_1, chart_image_2)
+        if (!document.querySelector('input[name="chart_image_1"]')) {
+            const hiddenInput1 = document.createElement('input');
+            hiddenInput1.type = 'hidden';
+            hiddenInput1.name = 'chart_image_1';
+            hiddenInput1.value = dataUrl1;
+            formSubmitLechada.appendChild(hiddenInput1);
+        }
 
-{{-- Generar el envío de corre a un usuario del sistema o fuera del sistema --}}
-<script>
+        if (!document.querySelector('input[name="chart_image_2"]')) {
+            const hiddenInput2 = document.createElement('input');
+            hiddenInput2.type = 'hidden';
+            hiddenInput2.name = 'chart_image_2';
+            hiddenInput2.value = dataUrl2;
+            formSubmitLechada.appendChild(hiddenInput2);
+        }
+    };
+
+
     const btn_submit_report_lechada = document.querySelector('#btn_submit_report_lechada');
     if (btn_submit_report_lechada) {
         btn_submit_report_lechada.addEventListener('click', e => sendReportEmail());
@@ -114,6 +156,12 @@ const submitFunction = (e) => {
      */
     const sendReportEmail = () => {
         event.preventDefault();
+
+        if (!alreadyGeneratedImages) {
+            generateImages();
+        }
+
+
         let solicitud_id = {!! json_encode($solicitud->id) !!}
 
         confirmAlert('¿Está seguro de enviar el reporte?',
