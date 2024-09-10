@@ -35,7 +35,11 @@ class PDFController extends Controller
         // Charts de Reologias
         $chartImage1 = $request->chartImage1;
         $chartImage2 = $request->chartImage2;
-    
+
+     // Encuentra el registro de SolicitudLechada correspondiente al solicitud_id
+     $solicitudLechada = SolicitudLechada::where('solicitud_id', $solicitud_id)->first();
+     $solicitudLechadaId = $solicitudLechada ? $solicitudLechada->id : null; // Verifica si se encontró
+ 
     
         // Preparar datos para la vista PDF
         $data = [
@@ -52,7 +56,8 @@ class PDFController extends Controller
             'tipo_requerimiento_cemento' => TipoRequerimientoCemento::all(),
             'tipo_trabajos' => TipoTrabajoCemento::all(),
             'tipo_cementacion' => TipoCementacion::all(),
-            'calculos_reologias' => CalculosReologias::all(),
+            //'calculos_reologias' => CalculosReologias::where('solicitud_id', $solicitud_id)->get(),
+            'calculos_reologias' => CalculosReologias::where('solicitud_id', $solicitudLechadaId)->get(),
             'names_ingenieros' => User::whereIn('users.grupo_id', [3, 4])->get('users.*'),
             'chartImage1' => $chartImage1,
             'chartImage2' => $chartImage2
@@ -88,6 +93,9 @@ class PDFController extends Controller
         // Charts de Reologias
         $chartImage1 = $request->chart_image_1;
         $chartImage2 = $request->chart_image_2;
+         // Encuentra el registro de SolicitudLechada correspondiente al solicitud_id
+     $solicitudLechada = SolicitudLechada::where('solicitud_id', $solicitud_id)->first();
+     $solicitudLechadaId = $solicitudLechada ? $solicitudLechada->id : null; // Verifica si se encontró
 
         $destinatario = $request->destinatario;
         $data = [
@@ -104,7 +112,8 @@ class PDFController extends Controller
             'tipo_requerimiento_cemento' => TipoRequerimientoCemento::all(),
             'tipo_trabajos' => TipoTrabajoCemento::all(),
             'tipo_cementacion' => TipoCementacion::all(),
-            'calculos_reologias' => CalculosReologias::all(),
+            //'calculos_reologias' => CalculosReologias::where('solicitud_id', $solicitud_id)->get(),
+            'calculos_reologias' => CalculosReologias::where('solicitud_id', $solicitudLechadaId)->get(),
             'names_ingenieros' => User::whereIn('users.grupo_id', [3, 4])->get('users.*'),
             'chartImage1' => $chartImage1,
             'chartImage2' => $chartImage2
