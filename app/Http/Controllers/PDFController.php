@@ -85,6 +85,9 @@ class PDFController extends Controller
     public function pdf_send_report_lechada($solicitud_id, Request $request)
     {
         // return response()->json(['success_pdf' => $request->destinatario]);
+ // Charts de Reologias
+ $chartImage1 = $request->chartImage1;
+ $chartImage2 = $request->chartImage2;
 
         $destinatario = $request->destinatario;
         $data = [
@@ -101,7 +104,28 @@ class PDFController extends Controller
             'tipo_requerimiento_cemento' => TipoRequerimientoCemento::all(),
             'tipo_trabajos' => TipoTrabajoCemento::all(),
             'tipo_cementacion' => TipoCementacion::all(),
+            'calculos_reologias' => CalculosReologias::all(),
+            'names_ingenieros' => User::whereIn('users.grupo_id', [3, 4])->get('users.*'),
+            'chartImage1' => $chartImage1,
+            'chartImage2' => $chartImage2
         ];
+
+        // Lógica para obtener los nombres de los botones seleccionados
+        $ensayos = [];
+        if ($data['s_l'][0]->ensayo_requerido_principal == 1) {
+            $ensayos[] = 'Principal';
+        }
+        if ($data['s_l'][0]->ensayo_requerido_bullheading == 1) {
+            $ensayos[] = 'Bullheading';
+        }
+        if ($data['s_l'][0]->ensayo_requerido_tapon == 1) {
+            $ensayos[] = 'Tapón';
+        }
+        if ($data['s_l'][0]->ensayo_requerido_relleno == 1) {
+            $ensayos[] = 'Relleno';
+        }
+    
+        $data['ensayos_seleccionados'] = implode(', ', $ensayos);
 
         $pdf = PDF::loadView('solicitud_pdf', $data);
         // Mail::to($request->destinatario)->send(new SolicitudLechadaPdfMail($pdf->output()));
