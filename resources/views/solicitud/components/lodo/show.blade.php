@@ -308,10 +308,10 @@
                             <small class="text-xs text-red-600">La compania de lodo es requerida</small>
                         @enderror --}}
                         <select name="mud_company" id="mud_company" class="text-sm inp_edit" disabled>
-                            <!--<option value="" selected disabled {{ $solicitud_lodo[0]->mud_company == null ? 'selected' : '' }}>Seleccione la compañía</option> -->
+                            
                             @foreach ($mud_company as $mud)
                                 <option value="{{ $mud->id }}" {{ $mud->id == $solicitud_lodo[0]->mud_company ? 'selected' : '' }}>
-                                    {{ $mud->nombre }}</option>
+                                    {{ $mud->nombre}}</option>
                             @endforeach
                         </select>
                     </div>

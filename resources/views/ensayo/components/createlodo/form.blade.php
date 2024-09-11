@@ -116,6 +116,8 @@
     </div>
 </div>
 
+<script src="{{ asset('js/ensayo/createlodo/componentReologiasLodo.js') }}"></script>
+
 <!--Aca iria un script para mostrar un cartel de carga pero meh -->
 
 {{-- <script src="{{ asset('js/ensayos_lodo/componentCaracterizacion.js') }}"></script>
