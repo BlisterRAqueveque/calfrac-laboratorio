@@ -85,8 +85,14 @@
 
 <div class="tab-content" id="nav-tabs-content">
     <input type="hidden" value="{{ $solicitud->id }}" name="solicitud_id">
-
+    {{-- Caracterizacion de lodo --}}
     @include('ensayo.components.createlodo.caracterizacion_lodo')
+    {{-- Compatibilidad Espaciador-Lodo --}}
+    @include('ensayo.components.createlodo.compatibilidad_espaciador')
+    {{-- Remoción Mecanica --}}
+    @include('ensayo.components.createlodo.remocion_mecanica')
+    {{-- Remoción Estática --}}
+    @include('ensayo.components.createlodo.remocion_estatica')
 
 </div>
 
@@ -115,7 +121,7 @@
         </div>
     </div>
 </div>
-
+{{-- JavaScript dinamico para el reload de las tablas de Reologias de Lodo --}}
 <script src="{{ asset('js/ensayo/createlodo/componentReologiasLodo.js') }}"></script>
 
 <!--Aca iria un script para mostrar un cartel de carga pero meh -->

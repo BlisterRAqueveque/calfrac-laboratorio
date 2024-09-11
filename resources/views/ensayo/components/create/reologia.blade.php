@@ -632,7 +632,7 @@
     <input type="hidden" id="chartImage1" name="chartImage1">
     <input type="hidden" id="chartImage2" name="chartImage2">
 </form>
-<script>
+{{-- <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Function to calculate and update the quotient
         function updateCociente(upId, downId, cocienteId) {
@@ -706,7 +706,7 @@
         updatePromedio('up-6-des', 'down-6-des', 'pro-6');
         updatePromedio('up-3-des', 'down-3-des', 'pro-3');
     });
-</script>
+</script> --}}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
     // Usamos fetch para obtener los datos de la ruta 'store_reologia'

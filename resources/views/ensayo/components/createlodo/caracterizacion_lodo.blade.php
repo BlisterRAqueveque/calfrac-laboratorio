@@ -319,13 +319,13 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                                     placeholder="Ingrese dato" name="tipo_lodo"></td>
-                                <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                                     placeholder="Ingrese dato" name="base"></td>
-                                <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                                     placeholder="Ingrese dato" name="densidad"></td>
-                                <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                                     placeholder="Ingrese dato" name="cia_lodo"></td>
                             </tr>
                         </tbody>
@@ -345,13 +345,13 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                                     placeholder="Ingrese dato" name="tiempo"></td>
-                                <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                                     placeholder="Ingrese dato" name="seg_10"></td>
-                                <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                                     placeholder="Ingrese dato" name="min_10"></td>
-                                <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                                <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                                     placeholder="Ingrese dato" name="min_30"></td>
                             </tr>
                         </tbody>
@@ -377,27 +377,27 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                    <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_bhct"></td>
-                    <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                    <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_600_rpm_c"></td>
-                    <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                    <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_300_rpm_c"></td>
-                    <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                    <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_200_rpm_c"></td>
-                    <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                    <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_100_rpm_c"></td>
-                    <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                    <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_60_rpm_c"></td>
-                    <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                    <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_30_rpm_c"></td>
-                    <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                    <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_6_rpm_c"></td>
-                    <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                    <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_3_rpm_c"></td>
-                    <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                    <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_vp"></td>
-                    <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                    <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_yp"></td>
                 </tbody>
             </table>
@@ -433,101 +433,101 @@
                     <tr class="border-b">
                         <td class="py-2 text-center border">100</td>
                         <td class="py-2 text-center border">0</td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_600_rpm"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_300_rpm"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_200_rpm"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_100_rpm"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_60_rpm"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_30_rpm"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_6_rpm"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_3_rpm"></td>
                     </tr>
                     <tr class="border-b">
                         <td class="py-2 text-center border">75</td>
                         <td class="py-2 text-center border">25</td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_600_rpm_2"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_300_rpm_2"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_200_rpm_2"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_100_rpm_2"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_60_rpm_2"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_30_rpm_2"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_6_rpm_2"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_3_rpm_2"></td>
                     </tr>
                     <tr class="border-b">
                         <td class="py-2 text-center border">50</td>
                         <td class="py-2 text-center border">50</td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_600_rpm_3"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_300_rpm_3"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_200_rpm_3"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_100_rpm_3"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_60_rpm_3"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_30_rpm_3"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_6_rpm_3"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_3_rpm_3"></td>
                     </tr>
                     <tr class="border-b">
                         <td class="py-2 text-center border">25</td>
                         <td class="py-2 text-center border">75</td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_600_rpm_4"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_300_rpm_4"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_200_rpm_4"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_100_rpm_4"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_60_rpm_4"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_30_rpm_4"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_6_rpm_4"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_3_rpm_4"></td>
                     </tr>
                     <tr class="border-b">
                         <td class="py-2 text-center border">0</td>
                         <td class="py-2 text-center border">100</td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_600_rpm_5"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_300_rpm_5"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_200_rpm_5"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_100_rpm_5"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_60_rpm_5"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_30_rpm_5"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_6_rpm_5"></td>
-                        <td class="py-2 px-1 text-center"><input type="number" class="form-control text-sm"
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                             placeholder="Ingrese dato" name="temp_3_rpm_5"></td>
                     </tr>
                 </tbody>
@@ -542,6 +542,7 @@
     </form>
 @endif
 </div>
+
 
 
 <script>
