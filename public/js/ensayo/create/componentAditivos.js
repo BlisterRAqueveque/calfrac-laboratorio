@@ -2,7 +2,7 @@ const container_formulaciones_tentativas_aditivos_lechada = document.getElementB
     "container_formulaciones_tentativas_aditivos_lechada"
   );
   const btnAddFormulacionEnsayoAditivo = document.getElementById("btnAddFormulacionEnsayoAditivo");
-  let aux_aditivo_fractura = 0;
+  let aux_ensayo_lechada = 0;
   
   /**
    * Crea las formulaciones para agregar los lotes, aditivos y/o también la concentración
@@ -27,14 +27,14 @@ const container_formulaciones_tentativas_aditivos_lechada = document.getElementB
     // Lote
     input = el(
       "input.form-control text-xs rounded-l-none p-2 col-span-3 md:col-span-1",
-      { placeholder: "Lote", name: `aditivos[${aux_aditivo_fractura}][lote]` }
+      { placeholder: "Lote", name: `aditivos[${aux_ensayo_lechada}][lote]` }
     );
     mount(div, input);
 
     // Aditivo
     select = document.createElement("select");
     select.className = "form-control text-xs rounded-l-none p-2 col-span-4 md:col-span-1";
-    select.name = `aditivos[${aux_aditivo_fractura}][aditivo]`;
+    select.name = `aditivos[${aux_ensayo_lechada}][aditivo]`;
 
     // Añadir opción placeholder
     const placeholderOption = document.createElement('option');
@@ -64,7 +64,7 @@ const container_formulaciones_tentativas_aditivos_lechada = document.getElementB
     const newinput = document.createElement("input");
     newinput.className = "hidden form-control text-xs rounded-l-none p-2 w-1/2";
     newinput.placeholder = "Comentario";
-    newinput.name = `aditivos[${aux_aditivo_fractura}][comentario]`;
+    newinput.name = `aditivos[${aux_ensayo_lechada}][comentario]`;
     div.appendChild(newinput);
   
     // Escuchar cambios en el select de aditivos -> vieja conf
@@ -84,7 +84,7 @@ const container_formulaciones_tentativas_aditivos_lechada = document.getElementB
       "input.form-control text-xs rounded-l-none p-2 col-span-3 md:col-span-1",
       {
         placeholder: "Concentración",
-        name: `aditivos[${aux_aditivo_fractura}][concentracion]`,
+        name: `aditivos[${aux_ensayo_lechada}][concentracion]`,
       }
     );
     mount(div, input);
@@ -106,7 +106,7 @@ const container_formulaciones_tentativas_aditivos_lechada = document.getElementB
       "input.form-control text-xs rounded-l-none p-2 col-span-3 md:col-span-1",
       {
         placeholder: "OM",
-        name: `aditivos[${aux_aditivo_fractura}][om]`,
+        name: `aditivos[${aux_ensayo_lechada}][om]`,
       }
     );
     mount(div, input);
@@ -116,5 +116,5 @@ const container_formulaciones_tentativas_aditivos_lechada = document.getElementB
     mount(flex, div);
     mount(container_formulaciones_tentativas_aditivos_lechada, flex);
   
-    aux_aditivo_fractura++;
+    aux_ensayo_lechada++;
   });

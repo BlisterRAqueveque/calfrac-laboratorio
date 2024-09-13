@@ -1,6 +1,89 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
-
 <div class="mt-4 tab-pane fade" id="tab_aditivos" role="tabpanel" aria-labelledby="nav-tab_aditivos">
+    @if (count($s_l[0]->rel_aditivos) > 0)
+    <h5 class="mb-2 text-center">Registros de aditivos</h5>
+    <hr>
+        <div class="grid grid-cols-5 text-center bg-gray-100 py-2 my-3">
+            <p>N° Lote</p>
+            <p>Aditivo</p>
+            <p>Conc. %</p>
+            <p>Units</p>
+            <p>OM</p>
+        </div>
+        <div id="container_formulaciones_tentativas_aditivos_lechada"></div>
+
+        <style>
+            .btn_del_formulacion.inactive {
+                display: none;
+            }
+        
+            .btn_add_formulacion.inactive {
+                display: none;
+            }
+        </style>
+        <div id="container_formulaciones_tentativas_delete"></div>
+        <div id="container_formulaciones_tentativas">
+            @php
+                $inc = 0;
+            @endphp
+            @foreach ($s_l[0]->rel_aditivos as $formulacion)
+                <div class="flex gap-2 justify-between mb-2 border">
+                    <div class="w-full flex gap-2 bg-gray-100 p-2">
+                        <input type="hidden" value="{{ $formulacion->id }}" name="aditivos[{{$inc}}][id]">
+                        <div class="col-span-3 text-right btn_del_formulacion inactive">
+                            <button class="bg-red-700 text-white rounded-md font-semibold px-3"
+                                onclick="btnDeleteFormulacion(this, {{ $formulacion }})">Eliminar</button>
+                        </div>
+                        <input type="text" class="form-control text-xs rounded-l-none p-2 col-span-4 md:col-span-1"
+                            placeholder="Lote" value="{{ $formulacion->lote }}" name="aditivos[{{$inc}}][lote]" readonly>
+                        <!-- Aditivo -->
+                        <input type="text" 
+                               class="form-control text-xs p-2 {{ $formulacion->aditivo == 'SD' ? 'w-1/2' : '' }}"
+                               value="{{ $formulacion->aditivos->nombre ?? $formulacion->aditivo }}" 
+                               placeholder="Aditivo" name="aditivos[{{$inc}}][aditivo]" readonly>
+                        <!-- Comentario (se muestra solo si el aditivo es 'SD') -->
+                        @if($formulacion->aditivo == 'SD')
+                        <input type="text" class="form-control text-xs p-2 w-1/2"
+                            placeholder="Comentario" value="{{ $formulacion->comentario }}" name="aditivos[{{$inc}}][comentario]" readonly>
+                        @endif
+                        <input type="text" class="form-control text-xs p-2 col-span-4 md:col-span-1"
+                            placeholder="Concentración" value="{{ $formulacion->concentracion }}" name="aditivos[{{$inc}}][concentracion]" readonly>
+                        <input type="text" class="form-control text-xs p-2 col-span-4 md:col-span-1"
+                            placeholder="Units" value="{{ '%BOWC'}}" name="aditivos[{{$inc}}][om]" readonly>
+                        <input type="text" class="form-control text-xs p-2 col-span-4 md:col-span-1"
+                            placeholder="OM" value="{{ $formulacion->om }}" name="aditivos[{{$inc}}][om]" readonly>
+                    </div>
+                </div>
+                @php
+                    $inc++;
+                @endphp
+            @endforeach
+            <div class="container_formulaciones_new"></div>
+            {{-- <div class="flex justify-between mb-2 border">
+                <div class="w-full grid grid-cols-3 bg-gray-100 gap-3 p-2">
+                    <div class="col-span-3 text-right btn_del_formulacion inactive">
+                        <button class="bg-red-700 text-white rounded-md font-semibold px-3" onclick="btnDeleteFormulacion(this)">Eliminar</button>
+                    </div>
+                    <input type="text" class="form-control text-xs rounded-l-none p-2 col-span-3 md:col-span-1"
+                        placeholder="Lote">
+                    <input type="text" class="form-control text-xs p-2 col-span-3 md:col-span-1"  placeholder="Aditivo"
+                    >
+                    <input type="text" class="form-control text-xs p-2 col-span-3 md:col-span-1"
+                        placeholder="Concentración" >
+                </div>
+            </div> --}}
+        
+            <div class="text-center mt-3 btn_add_formulacion inactive">
+                <button id="btnAddFormulacion"
+                    class="text-sm mt-2 bg-gray-200 hover:bg-gray-300 text-gray-600 p-1 rounded-md px-3 border transition-all duration-200 border-gray-300">
+                    Agregar Otra Formulación
+                </button>
+            </div>
+        </div>
+    @else
+    <div id="registro_aditivos"></div>
+    @endif
+    @if (count($s_l[0]->rel_aditivos) == 0)
     <form id="form_aditivos" method="POST">
         @csrf
         <input type="hidden" name="solicitud_lechada_id" value="{{ $s_l[0]->id }}">
@@ -31,6 +114,7 @@
                 Registro</x-button>
         </div>
     </form>
+    @endif
 </div>
 
 <script>
