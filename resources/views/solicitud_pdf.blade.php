@@ -406,7 +406,7 @@
                     <td style="text-align: center; background-color: #ffffff; border: none;"></td>
                     <td style="text-align: center; background-color: #ffffff; border: none;">Req. Agua</td>
                     <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                    <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">%: </td>
+                    <td style="text-align: center; background-color: #ffffff; border: none;">%: </td>
                     <td style="text-align: center; background-color: #ffffff; border: none;">L/bolsa</td>
                 </tr>
             </table>
