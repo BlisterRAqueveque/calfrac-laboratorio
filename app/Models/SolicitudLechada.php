@@ -116,6 +116,11 @@ class SolicitudLechada extends Model
     public function rel_mezclabilidad() {
         return $this->hasMany(RelMezclabilidadSolicitudEnsayo::class);
     }
+
+    public function rel_aditivos() {
+        return $this->hasMany(RelAditivosEnsayosLechada::class);
+    }
+
     public function buscar_mail($userId){
         //paso el id usuario
         //where con el id, busco en la bd el email -> return email

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ensayo;
 use App\Models\RelAditivosEnsayos;
+use App\Models\RelAditivosEnsayosLechada;
 use App\Models\RelAguaLibreSolicitudEnsayo;
 use App\Models\RelBombeabilidadSolicitudEnsayo;
 use App\Models\RelMezclabilidadSolicitudEnsayo;
@@ -505,6 +506,74 @@ class EnsayoController extends Controller
         if ($mezclabilidad->id)
             return response()->json(['success_mezclabilidad' => $mezclabilidad]);
     }
+
+    // Registros de Aditivos 
+    // public function store_aditivos(Request $request)
+    // {
+    //     # Formulaciones Tentativas
+    //     if ($request->aditivos) {
+    //         foreach ($request->aditivos as $formulacion) {
+    //             RelAditivosEnsayosLechada::create([
+    //                 'solicitud_lechada_id' => $request->solicitud_lechada_id,
+    //                 'lote' => $formulacion['lote'],
+    //                 'aditivo' => $formulacion['aditivo'],
+    //                 'comentario' => $formulacion['comentario'],
+    //                 'concentracion' => $formulacion['concentracion'],
+    //                 'om' => $formulacion['om'],
+    //             ]);
+    //         }
+    //     }
+
+    // }
+    public function store_aditivos(Request $request)
+{
+    # Verificar si se enviaron aditivos en la solicitud
+    if ($request->aditivos) {
+        foreach ($request->aditivos as $formulacion) {
+            RelAditivosEnsayosLechada::create([
+                'solicitud_lechada_id' => $request->solicitud_lechada_id,
+                'lote' => $formulacion['lote'],
+                'aditivo' => $formulacion['aditivo'],
+                'comentario' => $formulacion['comentario'],
+                'concentracion' => $formulacion['concentracion'],
+                'om' => $formulacion['om'],
+            ]);
+        }
+
+        return response()->json(['success_aditivos' => 'Aditivos guardados exitosamente']);
+    }
+
+    return response()->json(['error' => 'No se enviaron aditivos en la solicitud'], 400);
+}
+
+
+    // Registros de Aditivos 
+    // public function store_aditivos(Request $request)
+    // {
+    //     $mezclabilidad = RelMezclabilidadSolicitudEnsayo::create([
+    //         'mezclabilidad' => $request->mezclabilidad,
+    //         'solicitud_lechada_id' => $request->solicitud_lechada_id,
+    //         'usuario_carga' => auth()->user()->id,
+    //     ]);
+            # Formulaciones Tentativas
+            // if ($request->aditivos) {
+            //     foreach ($request->aditivos as $formulacion) {
+            //         RelAditivosSolicitudFractura::create([
+            //             'solicitud_fractura_id' => $solicitud_fractura->id,
+            //             'lote' => $formulacion['lote'],
+            //             'aditivo' => $formulacion['aditivo'],
+            //             'comentario' => $formulacion['comentario'],
+            //             'concentracion' => $formulacion['concentracion'],
+            //         ]);
+            //     }
+            // }
+
+    //     if ($mezclabilidad->id)
+    //         return response()->json(['success_mezclabilidad' => $mezclabilidad]);
+    // }
+
+
+    // Seccion Ensayo de Lodo
 
     public function store_reologia_lodo(Request $request) {
 

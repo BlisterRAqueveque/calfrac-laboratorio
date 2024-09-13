@@ -1,5 +1,8 @@
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
 <div class="mt-4 tab-pane fade" id="tab_aditivos" role="tabpanel" aria-labelledby="nav-tab_aditivos">
-    <form action="">
+    <form id="form_aditivos" method="POST">
+        @csrf
         <input type="hidden" name="solicitud_lechada_id" value="{{ $s_l[0]->id }}">
         <h5 class="mb-2 text-center">Registros de aditivos</h5>
     
@@ -29,3 +32,40 @@
         </div>
     </form>
 </div>
+
+<script>
+    const btn_submit_registros_aditivos = document.getElementById('btn_submit_registros_aditivos');
+
+    if (btn_submit_registros_aditivos) {
+        btn_submit_registros_aditivos.addEventListener('click', e => {
+            e.preventDefault();
+            let form = new FormData(document.getElementById('form_aditivos'))
+
+            confirmAlert().then((confirmed) => {
+                if (confirmed) {
+                    fetch("{{ route('store_aditivos') }}", {
+                            method: 'POST',
+                            body: form
+                        }).then((response) => response.json())
+                        .then((data) => {
+                            if (data) {
+                                componentAditivos(data.success_aditivos)
+                                document.getElementById('form_aditivos').style.display = 'none'
+                                successAlert('¡Registro Asignado!',
+                                    'El registro se asignó correctamente.')
+                                    
+                                let solicitud_id = {!! json_encode($solicitud->id) !!}
+                                // checkGenerateReport(solicitud_id)
+                                // .then((data) => {
+                                //     if (data.generate_report) {
+                                //         document.querySelector('#tab_g_report_js').classList.remove('d-none')
+                                //     }
+                                // })
+                            }
+                        })
+                }
+            })
+        })
+    }
+</script>
+
