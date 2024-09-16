@@ -30,6 +30,6 @@ class RelAditivosEnsayosLechada extends Model
 
     public function aditivos()
     {
-        return $this->belongsTo(Aditivo::class, 'aditivo');
+        return $this->belongsTo(Aditivo::class, 'aditivo', 'id');
     }
 }

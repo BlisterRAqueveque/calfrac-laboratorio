@@ -507,27 +507,31 @@ class EnsayoController extends Controller
             return response()->json(['success_mezclabilidad' => $mezclabilidad]);
     }
 
-    // Registros de Aditivos
+
     public function store_aditivos(Request $request)
     {
-        # Verificar si se enviaron aditivos en la solicitud
-        if ($request->aditivos) {
-            foreach ($request->aditivos as $formulacion) {
-                RelAditivosEnsayosLechada::create([
-                    'solicitud_lechada_id' => $request->solicitud_lechada_id,
-                    'lote' => $formulacion['lote'],
-                    'aditivo' => $formulacion['aditivo'],
-                    'comentario' => $formulacion['comentario'],
-                    'concentracion' => $formulacion['concentracion'],
-                    'om' => $formulacion['om'],
-                ]);
-            }
 
-            return response()->json(['success_aditivos' => 'Aditivos guardados exitosamente']);
+    // Verificar si se enviaron aditivos en la solicitud
+    if ($request->aditivos) {
+        foreach ($request->aditivos as $formulacion) {
+            RelAditivosEnsayosLechada::create([
+                'solicitud_lechada_id' => $request->solicitud_lechada_id,
+                'lote' => $formulacion['lote'],
+                'aditivo' => $formulacion['aditivo'],
+                'comentario' => $formulacion['comentario'],
+                'concentracion' => $formulacion['concentracion'],
+                'om' => $formulacion['om'],
+            ]);
         }
 
-        return response()->json(['error' => 'No se enviaron aditivos en la solicitud'], 400);
+        // Obtener solo los datos que coincidan con el id de solicitud de lechada
+        $aditivos = RelAditivosEnsayosLechada::where('solicitud_lechada_id', $request->solicitud_lechada_id)->get();
+
+        return response()->json(['success_aditivos' => $aditivos]);
     }
+
+    return response()->json(['error' => 'No se enviaron aditivos en la solicitud'], 400);
+}
 
 
 

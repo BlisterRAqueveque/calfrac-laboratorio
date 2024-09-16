@@ -1,7 +1,8 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <div class="mt-4 tab-pane fade" id="tab_aditivos" role="tabpanel" aria-labelledby="nav-tab_aditivos">
     @if (count($s_l[0]->rel_aditivos) > 0)
-    <h5 class="mb-2 text-center">Registros de aditivos</h5>
+    <div id="registro_aditivos">
+        <h5 class="mb-2 text-center">Registros de aditivos</h5>
     <hr>
         <div class="grid grid-cols-5 text-center bg-gray-100 py-2 my-3">
             <p>N° Lote</p>
@@ -58,28 +59,8 @@
                     $inc++;
                 @endphp
             @endforeach
-            <div class="container_formulaciones_new"></div>
-            {{-- <div class="flex justify-between mb-2 border">
-                <div class="w-full grid grid-cols-3 bg-gray-100 gap-3 p-2">
-                    <div class="col-span-3 text-right btn_del_formulacion inactive">
-                        <button class="bg-red-700 text-white rounded-md font-semibold px-3" onclick="btnDeleteFormulacion(this)">Eliminar</button>
-                    </div>
-                    <input type="text" class="form-control text-xs rounded-l-none p-2 col-span-3 md:col-span-1"
-                        placeholder="Lote">
-                    <input type="text" class="form-control text-xs p-2 col-span-3 md:col-span-1"  placeholder="Aditivo"
-                    >
-                    <input type="text" class="form-control text-xs p-2 col-span-3 md:col-span-1"
-                        placeholder="Concentración" >
-                </div>
-            </div> --}}
-        
-            <div class="text-center mt-3 btn_add_formulacion inactive">
-                <button id="btnAddFormulacion"
-                    class="text-sm mt-2 bg-gray-200 hover:bg-gray-300 text-gray-600 p-1 rounded-md px-3 border transition-all duration-200 border-gray-300">
-                    Agregar Otra Formulación
-                </button>
-            </div>
         </div>
+    </div>
     @else
     <div id="registro_aditivos"></div>
     @endif
@@ -133,7 +114,9 @@
                         }).then((response) => response.json())
                         .then((data) => {
                             if (data) {
-                                componentAditivos(data.success_aditivos)
+                                //componentAditivos(data.success_aditivos)
+                                componentShowAditivos(data.success_aditivos)
+                                console.log('Data recibida:', data.success_aditivos);
                                 document.getElementById('form_aditivos').style.display = 'none'
                                 successAlert('¡Registro Asignado!',
                                     'El registro se asignó correctamente.')

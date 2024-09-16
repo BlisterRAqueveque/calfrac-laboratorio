@@ -209,6 +209,7 @@
 <script src="{{ asset('js/ensayo/create/componentAguaLibre.js') }}"></script>
 <script src="{{ asset('js/ensayo/create/componentMezclabilidad.js') }}"></script>
 <script src="{{ asset('js/ensayo/create/componentAditivos.js') }}"></script>
+<script src="{{ asset('js/ensayo/create/componentShowAditivos.js') }}"></script>
 
 <!-- Esto es para generar el reporte pdf -->
 <script>
