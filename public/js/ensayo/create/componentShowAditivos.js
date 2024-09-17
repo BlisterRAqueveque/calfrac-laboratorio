@@ -4,9 +4,14 @@
 
 let registro_aditivos = document.getElementById("registro_aditivos");
 
-const componentShowAditivos = (data) => {
-       // Verifica si `data` es un array o un objeto
-       if (Array.isArray(data)) {
+const componentShowAditivos = (data, calculos) => {
+    // Convertir `calculos` en un array si es un objeto
+    if (typeof calculos === 'object' && !Array.isArray(calculos)) {
+        calculos = [calculos];
+    }
+
+    // Verifica si `data` es un array o un objeto
+    if (Array.isArray(data)) {
         if (!data.length) {
             console.log("No hay datos de aditivos para mostrar");
             return;
@@ -24,10 +29,53 @@ const componentShowAditivos = (data) => {
         console.error("Contenedor de aditivos no encontrado.");
         return;
     }
-    //if (!data.length) return; Si no hay datos, no hace nada
 
     const titulo = el("h5.text-center.text-xl.font-bold.mb-4", "Registros de aditivos");
     mount(registro_aditivos, titulo); // Montamos el título
+
+    // Crear inputs para densidad, rendimiento y bolsa
+    const inputContainer = el('div.grid.grid-cols-6.gap-3');
+    
+    // Verificar si `calculos` tiene al menos un elemento
+    if (calculos.length > 0) {
+        // Densidad
+        let densidadDiv = el('div.col-span-6.md:col-span-2');
+        let densidadLabel = el('label.text-sm.text-gray-700.font-semibold.tracking-wide.mb-2', 'Densidad');
+        let densidadInput = el('input.form-control.text-sm', { 
+            value: calculos[0].densidad_ensayo || '-', 
+            readonly: true 
+        });
+        mount(densidadDiv, densidadLabel);
+        mount(densidadDiv, densidadInput);
+        mount(inputContainer, densidadDiv);
+
+        // Rendimiento
+        let rendimientoDiv = el('div.col-span-6.md:col-span-2');
+        let rendimientoLabel = el('label.text-sm.text-gray-700.font-semibold.tracking-wide.mb-2', 'Rendimiento');
+        let rendimientoInput = el('input.form-control.text-sm', { 
+            value: calculos[0].rendimiento_ensayo || '-', 
+            readonly: true 
+        });
+        mount(rendimientoDiv, rendimientoLabel);
+        mount(rendimientoDiv, rendimientoInput);
+        mount(inputContainer, rendimientoDiv);
+
+        // Bolsa
+        let bolsaDiv = el('div.col-span-6.md:col-span-2');
+        let bolsaLabel = el('label.text-sm.text-gray-700.font-semibold.tracking-wide.mb-2', 'L/bolsa');
+        let bolsaInput = el('input.form-control.text-sm', { 
+            value: calculos[0].bolsa_ensayo || '-', 
+            readonly: true 
+        });
+        mount(bolsaDiv, bolsaLabel);
+        mount(bolsaDiv, bolsaInput);
+        mount(inputContainer, bolsaDiv);
+    } else {
+        console.log("No hay datos de cálculos para mostrar");
+    }
+
+    // Montar los inputs en el contenedor
+    mount(registro_aditivos, inputContainer);
 
     // Crear encabezado
     let header = el('div.grid grid-cols-5 text-center bg-gray-100 py-2 my-3');
