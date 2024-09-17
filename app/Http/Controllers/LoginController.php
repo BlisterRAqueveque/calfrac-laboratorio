@@ -8,7 +8,13 @@ class LoginController extends Controller
 {
     public function index()
     {
-        if (auth()->user()) {
+        //vieja config
+        // if (auth()->user()) {
+        //     return redirect()->route('dashboard');
+        // }
+        // return view('auth.login');
+        // new
+        if (auth()->check()) { // Mejor usar auth()->check()
             return redirect()->route('dashboard');
         }
         return view('auth.login');

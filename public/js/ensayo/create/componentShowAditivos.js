@@ -4,8 +4,27 @@
 
 let registro_aditivos = document.getElementById("registro_aditivos");
 
-const componentShowAditivos = (data = []) => {
-    if (!data.length) return; // Si no hay datos, no hace nada
+const componentShowAditivos = (data) => {
+       // Verifica si `data` es un array o un objeto
+       if (Array.isArray(data)) {
+        if (!data.length) {
+            console.log("No hay datos de aditivos para mostrar");
+            return;
+        }
+    } else if (typeof data === 'object') {
+        // Si es un objeto, lo convertimos en un array de un solo elemento
+        data = [data];
+    } else {
+        console.error("Formato de datos inesperado.");
+        return;
+    }
+
+    // Asegúrate de que el contenedor de aditivos existe
+    if (!registro_aditivos) {
+        console.error("Contenedor de aditivos no encontrado.");
+        return;
+    }
+    //if (!data.length) return; Si no hay datos, no hace nada
 
     const titulo = el("h5.text-center.text-xl.font-bold.mb-4", "Registros de aditivos");
     mount(registro_aditivos, titulo); // Montamos el título

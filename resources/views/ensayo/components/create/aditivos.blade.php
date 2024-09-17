@@ -2,8 +2,41 @@
 <div class="mt-4 tab-pane fade" id="tab_aditivos" role="tabpanel" aria-labelledby="nav-tab_aditivos">
     @if (count($s_l[0]->rel_aditivos) > 0)
     <div id="registro_aditivos">
-        <h5 class="mb-2 text-center">Registros de aditivos</h5>
+        <h5 class="mb-2 text-center">Registros de Aditivos</h5>
     <hr>
+
+    <br>
+
+    <div class="grid grid-cols-6 gap-3">
+        <div class="col-span-6 md:col-span-2">
+            <label for="densidad_ensayo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Densidad</label>
+            @foreach ($s_l[0]->calculos_ensayos as $calculo)
+            <input type="text" name="densidad_ensayo" 
+                   value="{{ $calculo->densidad_ensayo ?? '-' }}" 
+                   class="form-control text-sm" placeholder="Ingrese densidad" readonly>
+            @endforeach
+        </div>
+
+        <div class="col-span-6 md:col-span-2">
+            <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Rendimiento</label>
+            @foreach ($s_l[0]->calculos_ensayos as $calculo)
+            <input type="text" name="rendimiento_ensayo" 
+                   value="{{ $calculo->rendimiento_ensayo ?? '-' }}" 
+                   class="form-control text-sm" placeholder="Ingrese rendimiento" readonly>
+            @endforeach
+        </div>
+
+        <div class="col-span-6 md:col-span-2">
+            <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">L/bolsa </label>
+            @foreach ($s_l[0]->calculos_ensayos as $calculo)
+            <input type="text" name="bolsa_ensayo" 
+                   value="{{ $calculo->bolsa_ensayo ?? '-' }}" 
+                   class="form-control text-sm" placeholder="Ingrese L/bolsa" readonly>
+            @endforeach
+        </div>
+    </div>
+    
+    <br>
         <div class="grid grid-cols-5 text-center bg-gray-100 py-2 my-3">
             <p>N° Lote</p>
             <p>Aditivo</p>
@@ -71,7 +104,28 @@
         <h5 class="mb-2 text-center">Registros de aditivos</h5>
     
         <hr>
-    
+        
+        <br>
+        
+        <div class="grid grid-cols-6 gap-3">
+            <div class="col-span-6 md:col-span-2">
+                <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Densidad <small>(ppg)</small></label>
+                <input type="text" name="densidad_ensayo" value="" class="form-control text-sm" placeholder="Ingrese la densidad">
+            </div>
+
+            <div class="col-span-6 md:col-span-2">
+                <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Rendimiento</label>
+                <input type="text" name="rendimiento_ensayo" value="" class="form-control text-sm" placeholder="Ingrese el rendimiento">
+            </div>
+
+            <div class="col-span-6 md:col-span-2">
+                <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">L/bolsa </label>
+                <input type="text" name="bolsa_ensayo" value="" class="form-control text-sm" placeholder="Ingrese el L/bolsa">
+            </div>
+        </div>
+        
+        <br>
+        
         <div class="grid grid-cols-5 text-center bg-gray-100 py-2 my-3">
             <p>N° Lote</p>
             <p>Aditivo</p>
@@ -116,7 +170,9 @@
                             if (data) {
                                 //componentAditivos(data.success_aditivos)
                                 componentShowAditivos(data.success_aditivos)
-                                console.log('Data recibida:', data.success_aditivos);
+                                
+                                console.log('Data aditivos:', data.success_aditivos)
+                                //console.log('Data calculos:', data.success_calculos)
                                 document.getElementById('form_aditivos').style.display = 'none'
                                 successAlert('¡Registro Asignado!',
                                     'El registro se asignó correctamente.')

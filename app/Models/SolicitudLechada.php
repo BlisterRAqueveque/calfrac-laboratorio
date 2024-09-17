@@ -121,6 +121,10 @@ class SolicitudLechada extends Model
         return $this->hasMany(RelAditivosEnsayosLechada::class);
     }
 
+    public function calculos_ensayos() {
+        return $this->hasMany(CalculosAditivosLechada::class, 'solicitud_lechada_id');
+    }
+
     public function buscar_mail($userId){
         //paso el id usuario
         //where con el id, busco en la bd el email -> return email
