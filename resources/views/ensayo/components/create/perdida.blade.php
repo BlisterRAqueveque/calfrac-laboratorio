@@ -2,9 +2,9 @@
 
     <div id="registro_filtrado">
         @if (count($s_l[0]->rel_perdida_filtrado) > 0)
-            <div class="flex justify-center">
-                <p>Registro de Pérdida de Filtrado</p>
-            </div>
+        <h5 class="mb-2 text-center">Registro de Perdida de Filtrado</h5>
+        <hr>
+        <br>
 
             <div class="grid grid-cols-3 gap-3 mb-3">
                 <div>
@@ -34,6 +34,9 @@
     @if (count($s_l[0]->rel_perdida_filtrado) == 0)
         <form id="form_filtrado" class="mt-3" method="POST">
             @csrf
+            <h5 class="mb-2 text-center">Registro de Perdida de Filtrado</h5>
+            <hr>
+            <br>
             <input type="hidden" name="solicitud_lechada_id" value="{{ $s_l[0]->id }}">
 
             <div class="grid grid-cols-3 gap-3 mb-3">

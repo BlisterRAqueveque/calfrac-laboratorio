@@ -74,6 +74,9 @@
     <!-- Reología -->
     @if (count($s_l[0]->rel_reologia) > 0)
     <div class="accordion" id="accordionReologia">
+        <h5 class="mb-2 text-center">Registro de Reologías</h5>
+        <hr>
+        <br>
         <div class="flex">
             <div class="w-1/2 p-2">
                 <div class="mb-2 text-center">
@@ -386,6 +389,9 @@
     @if (count($s_l[0]->rel_reologia) == 0)
     <form id="form_reologia" method="POST">
         @csrf
+        <h5 class="mb-2 text-center">Registro de Reologías</h5>
+        <hr>
+        <br>
         <div class="flex">
             <div class="w-1/2 p-2">
                 {{-- <form action="{{ route('store_reologia') }}" method="POST"> NO DESCOMENTAR--}}

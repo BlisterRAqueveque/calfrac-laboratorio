@@ -81,7 +81,8 @@
     @if (count($s_l[0]->rel_uca) > 0)
         <div id="registro_uca">
             <div class="mb-2 text-center">
-                <h5 class="mb-1">Registro de UCA</h5>
+                <h5 class="mb-1">Registro de Resistencia a la Compresión - UCA</h5>
+                <hr>
             </div>
             <div class="grid grid-cols-3 gap-3 my-3">
                 <div class="col-span-3 grid gap-3 grid-cols-4">
@@ -185,9 +186,9 @@
 
     @if (count($s_l[0]->rel_uca) == 0)
         <form id="form_uca" class="mt-3">
-            <hr class="my-3">
             <div class="mb-2 mt-2 text-center">
-                <h5 class="mb-1">Formulario de Registro | UCA - Resistencia a la Compresión</h5>
+                <h5 class="mb-1">Registro de Resistencia a la Compresión - UCA</h5>
+                <hr class="my-3">
             </div>
             @csrf
             <input type="hidden" name="solicitud_lechada_id" value="{{ $s_l[0]->id }}">
@@ -308,8 +309,6 @@
                 <input type="file" id="file_upload_uca" name="file_upload_uca" onchange="_listenChange(event, 'container_file_uca', 'section_upload_image', 'myModalUca', 'modalImgUca')"
                     hidden>
             </div>
-
-            <hr>
 
             <div class="flex justify-center mt-3">
                 <x-button type="button" id="btn_submit_uca"

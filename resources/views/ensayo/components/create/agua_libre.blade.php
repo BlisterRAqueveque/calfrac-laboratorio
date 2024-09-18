@@ -27,8 +27,6 @@
         <div class="grid grid-cols-3 gap-3 my-3" id="registro_agua_libre"></div>
     @endif
     @if (count($s_l[0]->rel_agua_libre) == 0)
-    <div class="mb-2 text-center">Registro de Agua Libre</div>
-    <hr class="my-3">
         <form id="form_agua_libre" class="mt-3">
             {{-- <form action="{{ route('store_agua_libre') }}" class="mt-3" method="POST"> --}}
             @csrf

@@ -36,7 +36,7 @@
                     3
                 </span>
             </div>
-            Tiempo de Bombeabilidad
+            Bombeabilidad
         </a>
     </li>
     <li class="nav-item w-full md:w-auto text-xs xl:text-sm flex-1" role="presentation">
@@ -49,7 +49,7 @@
                     4
                 </span>
             </div>
-            Resistencia a la Compresión
+            UCA
         </a>
     </li>
     <li class="nav-item w-full md:w-auto text-xs xl:text-sm" role="presentation">
@@ -214,6 +214,7 @@
 <!-- Esto es para generar el reporte pdf -->
 <script>
     const checkGenerateReport = (solicitud_id) => {
+        console.log(solicitud_id); 
         return new Promise((resolve, reject) => {
             fetch("{{ route('check_report', '') }}" + "/" + solicitud_id, {
                     headers: {

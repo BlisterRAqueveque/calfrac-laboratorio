@@ -2,7 +2,7 @@
 <div class="mt-4 tab-pane fade" id="tab_aditivos" role="tabpanel" aria-labelledby="nav-tab_aditivos">
     @if (count($s_l[0]->rel_aditivos) > 0)
     <div id="registro_aditivos">
-        <h5 class="mb-2 text-center">Registros de Aditivos</h5>
+        <h5 class="mb-2 text-center">Registro de Aditivos</h5>
     <hr>
 
     <br>
@@ -101,7 +101,7 @@
     <form id="form_aditivos" method="POST">
         @csrf
         <input type="hidden" name="solicitud_lechada_id" value="{{ $s_l[0]->id }}">
-        <h5 class="mb-2 text-center">Registros de aditivos</h5>
+        <h5 class="mb-2 text-center">Registro de Aditivos</h5>
     
         <hr>
         
@@ -178,12 +178,12 @@
                                     'El registro se asignó correctamente.')
                                     
                                 let solicitud_id = {!! json_encode($solicitud->id) !!}
-                                // checkGenerateReport(solicitud_id)
-                                // .then((data) => {
-                                //     if (data.generate_report) {
-                                //         document.querySelector('#tab_g_report_js').classList.remove('d-none')
-                                //     }
-                                // })
+                                checkGenerateReport(solicitud_id)
+                                .then((data) => {
+                                    if (data.generate_report) {
+                                        document.querySelector('#tab_g_report_js').classList.remove('d-none')
+                                    }
+                                })
                             }
                         })
                 }

@@ -2,10 +2,8 @@
 <div class="mt-4 tab-pane fade" id="tab_bombeabilidad" role="tabpanel" aria-labelledby="nav-tab_aditivos">
 
     @if ($s_l[0]->rel_bombeabilidad)
-        <div class="mb-2 text-center">
-            <h5 class="mb-1">Registros de Tiempo de Bombeabilidad</h5>
-        </div>
         <div class="accordion" id="accordionBombeabilidad">
+                <h5 class="mb-1 text-center">Registro de Tiempo de Bombeabilidad</h5>
             @php
                 $i = 1;
                 $form_bombeabilidad = true;
@@ -209,16 +207,11 @@
             @endforeach
         </div>
 
-        <hr class="my-3">
-
     @endif
 
     @if ($form_bombeabilidad)
         <!-- Tiempo de Bombeabilidad -->
         <form action="{{ route('store_bombeabilidad') }}" id="form_bombeabilidad" class="mt-3" method="POST">
-            <div class="mb-2 mt-2 text-center">
-                <h5 class="mb-1">Formulario de Registro | Tiempo de Bombeabilidad</h5>
-            </div>
             @csrf
             <input type="hidden" name="solicitud_lechada_id" value="{{ $s_l[0]->id }}">
 

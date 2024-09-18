@@ -1073,6 +1073,56 @@ class SolicitudController extends Controller
     /**
      * Se que es un código asqueroso, pero una condición si o si depende de la otra
      */
+    // public function _generate_report($solicitud_id)
+    // {
+    //     $generar_reporte = false;
+    //     $solicitud_lechada = SolicitudLechada::where('solicitud_id', $solicitud_id)->get();
+
+    //     // Reología
+    //     if (count($solicitud_lechada[0]->rel_reologia) > 0) {
+    //         // Pérdida de Filtrado
+    //         if (count($solicitud_lechada[0]->rel_perdida_filtrado) > 0) {
+    //             // UCA
+    //             if (count($solicitud_lechada[0]->rel_uca) > 0) {
+    //                 // Agua Libre
+    //                 if (count($solicitud_lechada[0]->rel_agua_libre) > 0) {
+    //                     // Mezclabilidad
+    //                     if (count($solicitud_lechada[0]->rel_mezclabilidad) > 0) {
+    //                         // Bombeabilidad
+    //                         if (count($solicitud_lechada[0]->rel_bombeabilidad) > 0) {
+    //                             foreach ($solicitud_lechada[0]->rel_bombeabilidad as $b) {
+    //                                 if ($b->selected) {
+    //                                     $generar_reporte = true;
+    //                                     break;
+    //                                 } else {
+    //                                     $generar_reporte = false;
+    //                                 }
+    //                             }
+    //                         } else {
+    //                             $generar_reporte = false;
+    //                         }
+    //                     } else {
+    //                         $generar_reporte = false;
+    //                     }
+    //                 } else {
+    //                     $generar_reporte = false;
+    //                 }
+    //             } else {
+    //                 $generar_reporte = false;
+    //             }
+    //         } else {
+    //             $generar_reporte = false;
+    //         }
+    //     } else {
+    //         $generar_reporte = false;
+    //     }
+    //     return response()->json(['generate_report' => $generar_reporte]);
+    //     // echo json_encode($generar_reporte);
+    // }
+
+    /**
+     * Se que es un código asqueroso, pero una condición si o si depende de la otra
+     */
     public function _generate_report($solicitud_id)
     {
         $generar_reporte = false;
@@ -1088,15 +1138,20 @@ class SolicitudController extends Controller
                     if (count($solicitud_lechada[0]->rel_agua_libre) > 0) {
                         // Mezclabilidad
                         if (count($solicitud_lechada[0]->rel_mezclabilidad) > 0) {
-                            // Bombeabilidad
-                            if (count($solicitud_lechada[0]->rel_bombeabilidad) > 0) {
-                                foreach ($solicitud_lechada[0]->rel_bombeabilidad as $b) {
-                                    if ($b->selected) {
-                                        $generar_reporte = true;
-                                        break;
-                                    } else {
-                                        $generar_reporte = false;
+                            //Aditivos
+                            if (count($solicitud_lechada[0]->rel_aditivos) > 0) {
+                                // Bombeabilidad
+                                if (count($solicitud_lechada[0]->rel_bombeabilidad) > 0) {
+                                    foreach ($solicitud_lechada[0]->rel_bombeabilidad as $b) {
+                                        if ($b->selected) {
+                                            $generar_reporte = true;
+                                            break;
+                                        } else {
+                                            $generar_reporte = false;
+                                        }
                                     }
+                                } else {
+                                    $generar_reporte = false;
                                 }
                             } else {
                                 $generar_reporte = false;
