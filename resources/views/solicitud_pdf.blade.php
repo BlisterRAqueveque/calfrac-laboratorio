@@ -346,7 +346,8 @@
                                 <th style="width: 22%; text-align: center; background-color: #ffffff; border: none;">N° Lote</th>
                                 <th style="width: 22%; text-align: center; background-color: #ffffff; border: none;">Aditivo</th>
                                 <th style="width: 22%; text-align: center; background-color: #ffffff; border: none;">Conc.</th>
-                                <th style="width: 22%; text-align: center; background-color: #ffffff; border: none;">Units</th>
+                                <th style="width: 22%; text-align: right; background-color: #ffffff; border: none;">Units</th>
+                                <th style="width: 12%; text-align: center; background-color: #ffffff; border: none;"></th>
                                 <th style="width: 12%; text-align: center; background-color: #ffffff; border: none;">OM</th>
                             </tr>
 
@@ -377,7 +378,7 @@
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
                                     {{ $formulacion->concentracion }}
                                 </td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                <td colspan="2" style="padding: 2px; text-align: center; border: 1px solid #494949; background-color: #ffffff;">
                                     %BOWC
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
@@ -394,7 +395,12 @@
                         {{ $calculo->densidad_ensayo ?? '-' }}
                         @endforeach
                     </td>
-                    <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">g/L: </td>
+                    <td style="padding: 2px; text-align: left; border: none; background-color: #ffffff;"><small>g/L</small></td>
+                    <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                        @foreach ($s_l[0]->calculos_ensayos as $calculo)
+                        {{ $calculo->ppg_ensayo ?? '-' }}
+                        @endforeach
+                    </td>
                     <td style="text-align: center; background-color: #ffffff; border: none;">ppg</td>
                 </tr>
                 <tr>
@@ -406,22 +412,31 @@
                         {{ $calculo->rendimiento_ensayo ?? '-' }}
                         @endforeach
                     </td>
-                    <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">L/bolsa: </td>
-                    <td style="text-align: center; background-color: #ffffff; border: none;">ft³/bolsa</td>
+                    <td style="padding: 2px; text-align: left; border: none; background-color: #ffffff;"><small>L/bolsa</small></td>
+                    <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                        @foreach ($s_l[0]->calculos_ensayos as $calculo)
+                        {{ $calculo->ft_bolsa ?? '-' }}
+                        @endforeach
+                    </td>
+                    <td style="text-align: center; background-color: #ffffff; border: none;"><small>ft³/bolsa</small></td>
                 </tr>
                 <tr>
                     <td style="text-align: center; background-color: #ffffff; border: none;"></td>
                     <td style="text-align: center; background-color: #ffffff; border: none;"></td>
                     <td style="text-align: center; background-color: #ffffff; border: none;">Req. Agua</td>
                     <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                        
+                        @foreach ($s_l[0]->calculos_ensayos as $calculo)
+                        {{ $calculo->req_agua ?? '-' }}
+                        @endforeach
                     </td>
-                    <td style="text-align: center; background-color: #ffffff; border: none;">%:                        
+                    <td style="text-align: left; background-color: #ffffff; border: none;"><small>%</small></td>
+                    <td style="padding: 2px; text-align: center; border: 1px solid #494949; background-color: #ffffff;">
                         @foreach ($s_l[0]->calculos_ensayos as $calculo)
                         {{ $calculo->bolsa_ensayo ?? '-' }}
-                        @endforeach </td>
+                        @endforeach
+                    </td>
                     <td style="text-align: center; background-color: #ffffff; border: none;">
-                        L/bolsa
+                        <small>L/bolsa</small>
                     </td>
                 </tr>
             </table>
