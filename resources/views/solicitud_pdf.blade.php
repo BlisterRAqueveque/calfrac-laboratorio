@@ -451,7 +451,7 @@
             <tr>
                 <!-- Columna "Datos Generales" -->
                 <td style="width: 3%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #006f53; color:white;">
-                    <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 90%; left: 90%; width: 200px; height: 20px; text-align: center;font-size: 13px;"><b>RESULTADOS DE LOS ENSAYOS</b></div>
+                    <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 90%; left: 90%; width: 200px; height: 20px; text-align: center;font-size: 13px;"><b>RESULTADOS DE ENSAYOS</b></div>
                 </td>
                 @foreach ($s_l[0]->rel_bombeabilidad as $bombeabilidad)
                 @if ($bombeabilidad->selected)
@@ -1454,7 +1454,7 @@
                 <tr>
                     <!-- Columna "Datos Generales" -->
                     <td style="width: 3%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #006f53; color:white;">
-                        <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 110%; left: 110%; width: 200px; height: 20px; text-align: center;font-size: 13px;"><b>RAFICO BOMBEALIDIDAD - Aguada del Chañar</b></div>
+                        <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 110%; left: 110%; width: 200px; height: 20px; text-align: center;font-size: 13px;"><b>GRÁFICO BOMBEALIDIDAD</b></div>
                     </td>
 
                     <!-- Columna con tabla interna -->
@@ -1481,7 +1481,7 @@
                 <tr>
                     <!-- Columna "Datos Generales" -->
                     <td style="width: 3%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #006f53; color:white;">
-                        <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 110%; left: 110%; width: 200px; height: 20px; text-align: center;font-size: 13px;"><b>GRAFICO UCA - Aguada del Chañar</b></div>
+                        <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 110%; left: 110%; width: 200px; height: 20px; text-align: center;font-size: 13px;"><b>GRÁFICO UCA </b></div>
                     </td>
 
                     <!-- Columna con tabla interna -->
