@@ -354,7 +354,7 @@
                             <?php
                             $i = 0;
                             ?>
-                            @foreach ($s_l[0]->formulacion_tentativa as $formulacion)
+                            @foreach ($s_l[0]->rel_aditivos as $formulacion)
                             <?php
                             $i++;
                             ?>
@@ -381,7 +381,7 @@
                                     %BOWC
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $formulacion->blend }}
+                                    {{ $formulacion->om }}
                                 </td>
                             </tr>
                             @endforeach
@@ -389,7 +389,11 @@
                     <td style="text-align: center; background-color: #ffffff; border: none;"></td>
                     <td style="text-align: center; background-color: #ffffff; border: none;"></td>
                     <td style="text-align: center; background-color: #ffffff; border: none;">Densidad</td>
-                    <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">{{ $s_l[0]->densidad ?? "-"}}</td>
+                    <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                        @foreach ($s_l[0]->calculos_ensayos as $calculo)
+                        {{ $calculo->densidad_ensayo ?? '-' }}
+                        @endforeach
+                    </td>
                     <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">g/L: </td>
                     <td style="text-align: center; background-color: #ffffff; border: none;">ppg</td>
                 </tr>
@@ -397,7 +401,11 @@
                     <td style="text-align: center; background-color: #ffffff; border: none;"></td>
                     <td style="text-align: center; background-color: #ffffff; border: none;"></td>
                     <td style="text-align: center; background-color: #ffffff; border: none;">Rendimiento</td>
-                    <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
+                    <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">                        
+                        @foreach ($s_l[0]->calculos_ensayos as $calculo)
+                        {{ $calculo->rendimiento_ensayo ?? '-' }}
+                        @endforeach
+                    </td>
                     <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">L/bolsa: </td>
                     <td style="text-align: center; background-color: #ffffff; border: none;">ft³/bolsa</td>
                 </tr>
@@ -405,9 +413,16 @@
                     <td style="text-align: center; background-color: #ffffff; border: none;"></td>
                     <td style="text-align: center; background-color: #ffffff; border: none;"></td>
                     <td style="text-align: center; background-color: #ffffff; border: none;">Req. Agua</td>
-                    <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                    <td style="text-align: center; background-color: #ffffff; border: none;">%: </td>
-                    <td style="text-align: center; background-color: #ffffff; border: none;">L/bolsa</td>
+                    <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                        
+                    </td>
+                    <td style="text-align: center; background-color: #ffffff; border: none;">%:                        
+                        @foreach ($s_l[0]->calculos_ensayos as $calculo)
+                        {{ $calculo->bolsa_ensayo ?? '-' }}
+                        @endforeach </td>
+                    <td style="text-align: center; background-color: #ffffff; border: none;">
+                        L/bolsa
+                    </td>
                 </tr>
             </table>
 

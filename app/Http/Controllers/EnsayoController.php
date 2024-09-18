@@ -528,6 +528,12 @@ class EnsayoController extends Controller
         // Obtener solo los datos que coincidan con el id de solicitud de lechada
         $aditivos = RelAditivosEnsayosLechada::where('solicitud_lechada_id', $request->solicitud_lechada_id)->get();
         $ultimo_aditivo = $aditivos->last(); 
+
+        // Calcular req_agua
+        $req_agua = ($request->bolsa_ensayo / 50) * 100;
+        $ppg_ensayo = ($request->densidad_ensayo / 1000) * 8.34;
+        $ft_bolsa = $request->rendimiento_ensayo / 28.3;
+
         $calculos_aditivos = CalculosAditivosLechada::create([
             'aditivo_id' => $ultimo_aditivo->id,
             'solicitud_lechada_id' => $request->solicitud_lechada_id,
@@ -535,6 +541,9 @@ class EnsayoController extends Controller
             'densidad_ensayo' => $request->densidad_ensayo,
             'rendimiento_ensayo' => $request->rendimiento_ensayo,
             'bolsa_ensayo' => $request->bolsa_ensayo,
+            'req_agua' => $req_agua, // Almacenar el cálculo
+            'ppg_ensayo' => $ppg_ensayo,
+            'ft_bolsa' => $ft_bolsa,
         ]);
 
         return response()->json([
