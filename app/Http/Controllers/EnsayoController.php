@@ -526,7 +526,9 @@ class EnsayoController extends Controller
         }
 
         // Obtener solo los datos que coincidan con el id de solicitud de lechada
-        $aditivos = RelAditivosEnsayosLechada::where('solicitud_lechada_id', $request->solicitud_lechada_id)->get();
+        $aditivos = RelAditivosEnsayosLechada::where('solicitud_lechada_id', $request->solicitud_lechada_id)
+        ->with('aditivos')  // Cargar la relación
+        ->get();
         $ultimo_aditivo = $aditivos->last(); 
 
         // Calcular req_agua
