@@ -920,7 +920,7 @@
                                                                     Viscosidad Plastica (cp):
                                                                 </td>
                                                                 <td style="width: 20%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    -
+                                                                {{ $viscosidad_plastica_1 ? $viscosidad_plastica_1 : '-' }}
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -928,7 +928,7 @@
                                                                     Punto de Cedencia (lb/100ft2):
                                                                 </td>
                                                                 <td style="width: 20%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    -
+                                                                {{ $punto_cedencia_1 ? $punto_cedencia_1 : '-' }}
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -1132,7 +1132,7 @@
                                                                     Viscosidad Plastica (cp):
                                                                 </td>
                                                                 <td style="width: 20%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    -
+                                                                {{ $viscosidad_plastica_2 ? $viscosidad_plastica_2 : '-' }}
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -1140,7 +1140,7 @@
                                                                     Punto de Cedencia (lb/100ft2):
                                                                 </td>
                                                                 <td style="width: 20%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    -
+                                                                {{ $punto_cedencia_2 ? $punto_cedencia_2 : '-' }}
                                                                 </td>
                                                             </tr>
                                                             <tr>
