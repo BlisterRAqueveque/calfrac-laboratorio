@@ -1,3 +1,5 @@
+// <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 let accordionItem,
   tableContainer,
   table,
@@ -6,7 +8,10 @@ let accordionItem,
   tr,
   th,
   td,
-  h5;
+  h5,
+  ctx,
+  myChartTempAmb,
+  myChartTempEnsayo;
 const accordionReologia = document.getElementById("accordionReologia");
 
 const componentReologia = (data = "") => {
@@ -193,4 +198,128 @@ const componentReologia = (data = "") => {
 
   // Agregar el acordeón al documento
   mount(accordionReologia, accordionItem);
+
+  // Crear el contenedor para las gráficas
+  const chartsContainer = el("div.flex.w-full.mt-8");
+
+  // Contenedor para el gráfico de "Reologías a temp. Ambiente"
+  const chartContainerTempAmb = el("div.w-1/2.p-2"); // Ocupa el 50% del ancho
+  const chartTitleTempAmb = el("h5.text-center.mb-2", "Reologías a Temp. Ambiente"); // Título para el gráfico
+  const canvasTempAmb = el("canvas", "", { id: "chartTempAmb", width: 600, height: 400 }); // Gráfico
+  mount(chartContainerTempAmb, chartTitleTempAmb); // Montar el título
+  mount(chartContainerTempAmb, canvasTempAmb); // Montar el gráfico
+  mount(chartsContainer, chartContainerTempAmb); // Agregar el contenedor del gráfico al contenedor principal
+
+  // Contenedor para el gráfico de "Reologías a temp. Ensayo"
+  const chartContainerTempEnsayo = el("div.w-1/2.p-2"); // Ocupa el 50% del ancho
+  const chartTitleTempEnsayo = el("h5.text-center.mb-2", "Reologías a Temp. Ensayo"); // Título para el gráfico
+  const canvasTempEnsayo = el("canvas", "", { id: "chartTempEnsayo", width: 600, height: 400 }); // Gráfico
+  mount(chartContainerTempEnsayo, chartTitleTempEnsayo); // Montar el título
+  mount(chartContainerTempEnsayo, canvasTempEnsayo); // Montar el gráfico
+  mount(chartsContainer, chartContainerTempEnsayo); // Agregar el contenedor del gráfico al contenedor principal
+
+  // Agregar los gráficos al acordeón
+  mount(accordionItem, chartsContainer);
+
+  // Función para crear el gráfico de "Reologías a temp. Ambiente"
+  const createChartTempAmb = () => {
+    ctx = document.getElementById("chartTempAmb").getContext("2d");
+    myChartTempAmb = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: [0, 50, 100, 150, 200, 250, 300],
+        datasets: [
+          {
+            label: "Up",
+            data: [data.tem_ambiente_3_up, data.tem_ambiente_6_up, data.tem_ambiente_30_up, data.tem_ambiente_60_up, data.tem_ambiente_100_up, data.tem_ambiente_200_up, data.tem_ambiente_300_up],
+            borderColor: "rgba(75, 192, 192, 1)",
+            borderWidth: 1,
+            fill: false
+          },
+          {
+            label: "Down",
+            data: [data.tem_ambiente_3, data.tem_ambiente_6, data.tem_ambiente_30, data.tem_ambiente_60, data.tem_ambiente_100, data.tem_ambiente_200, data.tem_ambiente_300],
+            borderColor: "rgba(153, 102, 255, 1)",
+            borderWidth: 1,
+            fill: false
+          }
+        ]
+      },
+      options: {
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "RPM"
+            }
+          },
+          y: {
+            title: {
+                display: true,
+                text: 'CP'
+            },
+            min: 0,
+            max: 350,
+            ticks: {
+                stepSize: 50
+            }
+        }
+        }
+      }
+    });
+  };
+
+  // Función para crear el gráfico de "Reologías a temp. Ensayo"
+  const createChartTempEnsayo = () => {
+    ctx = document.getElementById("chartTempEnsayo").getContext("2d");
+    myChartTempEnsayo = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: [0, 50, 100, 150, 200, 250, 300],
+        datasets: [
+          {
+            label: "Up",
+            data: [data.tem_ensayo_3_up, data.tem_ensayo_6_up, data.tem_ensayo_30_up, data.tem_ensayo_60_up, data.tem_ensayo_100_up, data.tem_ensayo_200_up, data.tem_ensayo_300_up],
+            borderColor: "rgba(75, 192, 192, 1)",
+            borderWidth: 1,
+            fill: false
+          },
+          {
+            label: "Down",
+            data: [data.tem_ensayo_3, data.tem_ensayo_6, data.tem_ensayo_30, data.tem_ensayo_60, data.tem_ensayo_100, data.tem_ensayo_200, data.tem_ensayo_300],
+            borderColor: "rgba(153, 102, 255, 1)",
+            borderWidth: 1,
+            fill: false
+          }
+        ]
+      },
+      options: {
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "RPM"
+            }
+          },
+          y: {
+            title: {
+                display: true,
+                text: 'CP'
+            },
+            min: 0,
+            max: 350,
+            ticks: {
+                stepSize: 50
+            }
+        }
+        }
+      }
+    });
+  };
+
+  // Crear los gráficos después de montar los elementos
+  setTimeout(() => {
+    createChartTempAmb();
+    createChartTempEnsayo();
+  }, 100); // Ajustar el tiempo según sea necesario
 };

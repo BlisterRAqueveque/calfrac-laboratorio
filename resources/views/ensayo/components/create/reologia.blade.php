@@ -807,7 +807,7 @@
                             data: upReadsData,
                             borderColor: '#77B6EA',
                             backgroundColor: 'rgba(119, 182, 234, 0.2)',
-                            fill: true,
+                            fill: false,
                             datalabels: {
                                 color: '#000',
                                 display: true,
@@ -823,7 +823,7 @@
                             data: downReadsData,
                             borderColor: '#545454',
                             backgroundColor: 'rgba(84, 84, 84, 0.2)',
-                            fill: true,
+                            fill: false,
                             datalabels: {
                                 color: '#000',
                                 display: true,
@@ -868,7 +868,7 @@
                                 text: 'CP'
                             },
                             min: 0,
-                            max: 250,
+                            max: 350,
                             ticks: {
                                 stepSize: 50
                             }
@@ -917,7 +917,7 @@ fetch(`/getReologiasTemp/<?= $s_l[0]->id ?>`)
                         data: upReadsData,
                         borderColor: '#77B6EA',
                         backgroundColor: 'rgba(119, 182, 234, 0.2)',
-                        fill: true,
+                        fill: false,
                         datalabels: {
                             color: '#000',
                             display: true,
@@ -933,7 +933,7 @@ fetch(`/getReologiasTemp/<?= $s_l[0]->id ?>`)
                         data: downReadsData,
                         borderColor: '#545454',
                         backgroundColor: 'rgba(84, 84, 84, 0.2)',
-                        fill: true,
+                        fill: false,
                         datalabels: {
                             color: '#000',
                             display: true,
@@ -977,7 +977,7 @@ fetch(`/getReologiasTemp/<?= $s_l[0]->id ?>`)
                             text: 'CP'
                         },
                         min: 0,
-                        max: 250,
+                        max: 350,
                         ticks: {
                             stepSize: 50
                         }
