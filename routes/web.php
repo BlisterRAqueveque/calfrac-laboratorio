@@ -154,3 +154,4 @@ Route::get('/pdf/view', [PDFController::class, 'pdf_view']);
 Route::get('/ensayoslodo/create', [EnsayoController::class, 'create_lodo'])->name('ensayolodo.create');
 #Route::get('/ensayoslodo', [EnsayoController::class, 'index'])->name('ensayos_lodo');
 Route::post('/ensayoslodo/store', [EnsayoController::class, 'store_reologia_lodo'])->name('store_lodo');
+Route::post('/ensayolodo/compatibilidad', [EnsayoController::class, 'store_compatibilidad'])->name('store_compatibilidad');

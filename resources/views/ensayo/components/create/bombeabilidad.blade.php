@@ -15,8 +15,24 @@
                     }
                 @endphp
             @endforeach
-
             @foreach ($s_l[0]->rel_bombeabilidad as $bombeabilidad)
+    <div class="accordion-item accordion_length_bombeabilidad">
+        <h2 class="accordion-header bomb_header_{{ $bombeabilidad->id }} {{ $bombeabilidad->selected ? 'bg-green-50' : '' }}">
+            <button class="accordion-button collapsed p-2" type="button" data-bs-toggle="collapse"
+                data-bs-target="#bombeabilidad_{{ $bombeabilidad->id }}" aria-expanded="false"
+                aria-controls="bombeabilidad_{{ $bombeabilidad->id }}">
+                Bombeabilidad - Intento Nº{{ $i }}
+                <div class="bombeabilidad_check_{{ $bombeabilidad->id }}">
+                    @if ($bombeabilidad->selected)
+                        <x-icons.check class="w-4 h-4 ms-2" stroke-width="2" />
+                    @else
+                        <!-- Espacio reservado para agregar el ícono después -->
+                    @endif
+                </div>
+            </button>
+        </h2>
+
+            {{-- @foreach ($s_l[0]->rel_bombeabilidad as $bombeabilidad)
                 <div class="accordion-item accordion_length_bombeabilidad">
                     <h2
                         class="accordion-header bomb_header_{{ $bombeabilidad->id }} {{ $bombeabilidad->selected ? 'bg-green-50' : '' }}">
@@ -32,7 +48,7 @@
                                 <div class="bombeabilidad_check_{{ $bombeabilidad->id }}"></div>
                             @endif
                         </button>
-                    </h2>
+                    </h2> --}}
                     <div id="bombeabilidad_{{ $bombeabilidad->id }}" class="accordion-collapse collapse"
                         data-bs-parent="#accordionBombeabilidad">
                         <div class="accordion-body overflow-auto">
@@ -424,7 +440,108 @@
     /*
      * Cuando escucha por un click al momento de crear un registro de "Tiempo de Bombeabilidad"
      * Envía la petición para seleccionar ese registro, y oculta lo que es el formulario y los botones para no poder seleccionar nada más
-     */
+     */ //// 
+     const submitBombeabilidadSelected = (id_form_selected) => {
+    event.preventDefault();
+    console.log(`ID Form Selected: ${id_form_selected}`); 
+    let form = new FormData(document.getElementById(`form_assignment_${id_form_selected}`));
+    confirmAlert().then((confirmed) => {
+        if (confirmed) {
+            fetch("http://127.0.0.1:8000/ensayo/assigned", {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+                            .getAttribute('content')
+                    },
+                    body: form
+                }).then((response) => response.json())
+                .then((data) => {
+                    if (data) {
+                        successAlert('¡Tiempo de Bombeabilidad Seleccionado!', 'Registro seleccionado correctamente.');
+
+                        let btns_hide = document.querySelectorAll('.bombeabilidad_selected');
+                        // Remover todos los botones con la clase 'bombeabilidad_selected'
+                        btns_hide.forEach(btn_h => {
+                            btn_h.remove();
+                        });
+
+                        // Verifica si existe el elemento con la clase `bombeabilidad_check_${id_form_selected}`
+                        let bombeabilidadElement = document.querySelector(`.bombeabilidad_check_${id_form_selected}`);
+                        if (bombeabilidadElement) {
+                            bombeabilidadElement.innerHTML = `
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 ms-2" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                            </svg>`;
+                        } else {
+                            console.warn(`No se encontró el elemento con la clase .bombeabilidad_check_${id_form_selected}`);
+                        }
+
+                        // Oculta el formulario después de la selección
+                        document.getElementById('form_bombeabilidad').style.display = 'none';
+
+                        let solicitud_id = {!! json_encode($solicitud->id) !!}; // Definir solicitud_id
+                        checkGenerateReport(solicitud_id).then((data) => {
+                            if (data.generate_report) {
+                                document.querySelector('#tab_g_report_js').classList.remove('d-none');
+                            }
+                        });
+                    }
+                });
+        }
+    });
+};
+
+</script>
+{{--
+ const submitBombeabilidadSelected = (id_form_selected) => {
+    event.preventDefault();
+    let form = new FormData(document.getElementById(`form_assignment_${id_form_selected}`));
+    confirmAlert().then((confirmed) => {
+        if (confirmed) {
+            fetch("http://127.0.0.1:8000/ensayo/assigned", {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+                            .getAttribute('content')
+                    },
+                    body: form
+                }).then((response) => response.json())
+                .then((data) => {
+                    if (data) {
+                        successAlert('¡Tiempo de Bombeabilidad Seleccionado!', 'Registro seleccionado correctamente.');
+
+                        let btns_hide = document.querySelectorAll('.bombeabilidad_selected');
+                        // Remover todos los elementos con la clase 'bombeabilidad_selected'
+                        btns_hide.forEach(btn_h => {
+                            btn_h.remove();
+                        });
+
+                        // Verificar si el elemento con la clase existe antes de modificar el innerHTML
+                        const bombeabilidadCheckElem = document.querySelector(`.bombeabilidad_check_${id_form_selected}`);
+                        if (bombeabilidadCheckElem) {
+                            bombeabilidadCheckElem.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 ms-2" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                            </svg>`;
+                        } else {
+                            console.error(`No se encontró el elemento con la clase .bombeabilidad_check_${id_form_selected}`);
+                        }
+
+                        document.getElementById('form_bombeabilidad').style.display = 'none';
+
+                        //let solicitud_id = 511;
+                        checkGenerateReport(solicitud_id).then((data) => {
+                            if (data.generate_report) {
+                                document.querySelector('#tab_g_report_js').classList.remove('d-none');
+                            }
+                        });
+                    }
+                });
+        }
+    });
+};
+--}}
+{{-- 
+Fetch con errores
     const submitBombeabilidadSelected = (id_form_selected) => {
         event.preventDefault();
         let form = new FormData(document.getElementById(`form_assignment_${id_form_selected}`));
@@ -449,8 +566,8 @@
                                 btn_h.remove();
                             });
                             // document.querySelector(`.bomb_header_${data.id_rel_bomb}`).classList.add('bg-green-50')
-                            document.querySelector(`.bombeabilidad_check_${id_form_selected}`)
-                                .innerHTML = `<x-icons.check class="w-4 h-4 ms-2" stroke-width="2" />`
+                            document.querySelector(`.bombeabilidad_check_${id_form_selected}`).innerHTML = `<x-icons.check class="w-4 h-4 ms-2" stroke-width="2" />`
+                            
                             document.getElementById('form_bombeabilidad').style.display = 'none'
 
                             let solicitud_id = {!! json_encode($solicitud->id) !!}
@@ -466,4 +583,4 @@
             }
         })
     }
-</script>
+        --}}

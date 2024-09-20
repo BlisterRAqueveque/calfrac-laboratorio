@@ -15,6 +15,7 @@ use App\Models\RelRequerimientosEnsayos;
 use App\Models\RelUcaSolicitudEnsayo;
 use App\Models\CalculosReologias;
 use App\Models\RelCaracterizacionLodo;
+use App\Models\RelCompatibilidadLodo;
 use App\Models\RelReologiasLodo;
 use App\Models\Solicitud;
 use Illuminate\Http\Request;
@@ -635,6 +636,38 @@ class EnsayoController extends Controller
         return response()->json([
         'success_caracterizacion_lodo' => $caracterizacion_lodo,
         'success_reologias_lodos' => $reologias_lodos,
+        ]);
+    }
+
+    public function store_compatibilidad(Request $request) {
+        $compatibilidad_lodo = RelCompatibilidadLodo::create([
+            //modificar las variables vy
+            'vp_1' => $request->vp_1,
+            'vp_2' => $request->vp_2,
+            'vp_3' => $request->vp_3,
+            'vp_4' => $request->vp_4,
+            'vp_5' => $request->vp_5,
+            'yp_1' => $request->yp_1,
+            'yp_2' => $request->yp_2,
+            'yp_3' => $request->yp_3,
+            'yp_4' => $request->yp_4,
+            'yp_5' => $request->yp_4,
+            'gel_seg_1' => $request->gel_seg_1,
+            'gel_seg_2' => $request->gel_seg_2,
+            'gel_seg_3' => $request->gel_seg_3,
+            'gel_seg_4' => $request->gel_seg_4,
+            'gel_seg_5' => $request->gel_seg_5,
+            'gel_min_1' => $request->gel_min_1,
+            'gel_min_2' => $request->gel_min_2,
+            'gel_min_3' => $request->gel_min_3,
+            'gel_min_4' => $request->gel_min_4,
+            'gel_min_5' => $request->gel_min_5,
+            'solicitud_lodo_id' => $request->solicitud_lodo_id,
+            'usuario_carga' => auth()->user()->id,
+        ]);
+        if ($compatibilidad_lodo->id)
+        return response()->json([
+        'success_compatibilidad_lodo' => $compatibilidad_lodo,
         ]);
     }
 

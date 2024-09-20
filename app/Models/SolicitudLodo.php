@@ -41,6 +41,10 @@ class SolicitudLodo extends Model
         return $this->hasMany(RelReologiasLodo::class);
     }
 
+    public function rel_compatiblidad() {
+        return $this->hasMany(RelCompatibilidadLodo::class);
+    }
+
     public function user_iniciado_por()
     {
         return $this->belongsTo(User::class, 'firma_iniciado_por_id');
@@ -66,4 +70,10 @@ class SolicitudLodo extends Model
     {
         return $this->hasMany(RelAditivoSolicitudLodo::class);
     }
+
+    public function solicitud()
+    {
+        return $this->belongsTo(Solicitud::class);
+    }
+
 }
