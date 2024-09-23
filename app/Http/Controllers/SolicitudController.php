@@ -1231,6 +1231,7 @@ class SolicitudController extends Controller
         $requisitos_lodo = [
             'rel_caracterizacion',
             'rel_compatibilidad',
+            'rel_mecanica',
         ];
 
         // Verificar que todas las relaciones tengan datos

@@ -16,6 +16,7 @@ use App\Models\RelUcaSolicitudEnsayo;
 use App\Models\CalculosReologias;
 use App\Models\RelCaracterizacionLodo;
 use App\Models\RelCompatibilidadLodo;
+use App\Models\RelMecanicaLodo;
 use App\Models\RelReologiasLodo;
 use App\Models\Solicitud;
 use Illuminate\Http\Request;
@@ -636,6 +637,22 @@ class EnsayoController extends Controller
         return response()->json([
         'success_caracterizacion_lodo' => $caracterizacion_lodo,
         'success_reologias_lodos' => $reologias_lodos,
+        ]);
+    }
+
+    public function store_mecanica(Request $request) {
+        $mecanica_lodo = RelMecanicaLodo::create([
+            'tiempo_1' => $request->tiempo_1,
+            'tiempo_2' => $request->tiempo_2,
+            'tiempo_3' => $request->tiempo_3,
+            'tiempo_4' => $request->tiempo_4,
+            'tiempo_5' => $request->tiempo_5,
+            'solicitud_lodo_id' => $request->solicitud_lodo_id,
+            'usuario_carga' => auth()->user()->id,
+        ]);
+        if ($mecanica_lodo->id)
+        return response()->json([
+        'success_mecanica_lodo' => $mecanica_lodo,
         ]);
     }
 

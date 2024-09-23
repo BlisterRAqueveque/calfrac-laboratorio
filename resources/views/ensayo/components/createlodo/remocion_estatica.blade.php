@@ -4,7 +4,7 @@
         <div class="mb-2 text-center">
             <h5 class="mb-1">Remoción estática del lodo</h5>
         </div>
-        <div class="row mt-3 py-2 px-2">
+        {{-- <div class="row mt-3 py-2 px-2">
             <table class="w-full text-sm border border-gray-300">
                 <thead class="bg-gray-200 text-gray-700">
                     <tr>
@@ -58,7 +58,7 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
+        </div> --}}
         <div class="row mt-3 py-2 px-2">
             <table class="w-1/2 text-sm border border-gray-300">
                 <thead class="bg-gray-200 text-gray-700">
