@@ -109,7 +109,7 @@
                             <span class="text-red-500">*</span></label>
                             <input type="number" name="densidad_lodo_3" id="densidad_lodo_3"
                             value="{{ old('densidad_lodo_3') }}" class="form-control text-sm p-2"
-                            placeholder="Ingrese la densidad del lodo" step=".01">
+                            placeholder="Ingrese la densidad del lodo" step=".0001">
                         @error('densidad_lodo_3')
                             <small class="text-red-700 font-semibold"><em>{{ $message }}</em></small>
                         @enderror
@@ -123,15 +123,15 @@
                     <div class="md:col-span-2 xl:col-span-1">
                         <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Grado de
                             Temperatura <small>(°C)</small></label>
-                        <input type="number" name="temperatura" value="{{ old('temperatura') }}" class="form-control sz p-2" placeholder="(C°)" step=".01">
+                        <input type="number" name="temperatura" value="{{ old('temperatura') }}" class="form-control sz p-2" placeholder="(C°)" step=".0001">
                     </div>
 
                     <div class="">
                         <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Profundidad
                             <small>(MD/TVD) (m)</small></label>
                         <div class="grid grid-cols-2 gap-3">
-                            <input type="number" min="0" name="profundidad_md" class="form-control text-sm p-2" value="{{ old('profundidad_md') }}" placeholder="MD" step=".01">
-                            <input type="number" min="0" name="profundidad_tvd" class="form-control text-sm p-2" value="{{ old('profundidad_tvd') }}" placeholder="TVD" step=".01">
+                            <input type="number" min="0" name="profundidad_md" class="form-control text-sm p-2" value="{{ old('profundidad_md') }}" placeholder="MD" step=".0001">
+                            <input type="number" min="0" name="profundidad_tvd" class="form-control text-sm p-2" value="{{ old('profundidad_tvd') }}" placeholder="TVD" step=".0001">
                         </div>
                     </div>
                     {{-- 
@@ -184,24 +184,17 @@
                 </div>
                 <hr class="my-4">
 
-                <p class="m-0 font-bold text-lg my-3 tracking-wide">Ensayo Requeridos</p>
+                <p class="m-0 font-bold text-lg my-3 tracking-wide">Ensayos Requeridos de Lodo</p>
 
-                <div class="row p-2">
-                    <div class="col-xs-12 col-md-6 my-2">
-                        
-                        <select name='ensayos' id="ensayos" class="text-sm" data-search="true"  data-silent-initial-value-set="true" multiple="true">
-                        @foreach($ensayos_lodo as $sl)
-                        <option value="{{$sl->id}}"
-                            {{ old('ensayos_lodo') == $sl->id ? 'selected' : '' }}> {{$sl->nombre}}</option>
+                <div class="col-xs-12 col-md-6 my-2">
+                    <label for="requeridos_lodo"
+                        class="text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Ensayos de lodo</label>
+                    <select name="requeridos_lodo" id="requeridos_lodo" class="text-sm inp_edit" data-search="false" multiple="true">
+                        @foreach ($ensayos_lodo as $e)
+                            <option value="{{ $e->id }}">{{ $e->nombre }}</option>
                         @endforeach
                     </select>
-
-                        @error('ensayos')
-                            <small class="text-red-700 font-semibold"><em>{{ $message }}</em></small>
-                        @enderror
-                    </div>
-                
-                 </div>
+                </div>
 
                 <hr class="my-4">
 
@@ -229,7 +222,7 @@
                         <label for="vol_colchon" class="text-sm text-gray-700 font-semibold tracking-wide">Volumen de Colchón
                             <small>(bbl)</small></label>
                         <input type="number" placeholder="Ingrese el volumen de Colchón"
-                            class="form-control sz placeholder:text-gray-300 placeholder:font-light" name="vol_colchon"
+                            class="form-control sz placeholder:text-gray-300 placeholder:font-light" name="vol_colchon" step=".0001"
                             id="vol_colchon">
                         @error('vol_colchon')
                             <small class="text-red-700 font-semibold"><em>{{ $message }}</em></small>
@@ -240,7 +233,7 @@
                         <label for="densidad_colchon" class="text-sm text-gray-700 font-semibold tracking-wide">Densidad de Colchón
                             <small>(ppg)</small></label>
                         <input type="number" placeholder="Ingrese la densidad de Colchón"
-                            class="form-control sz placeholder:text-gray-300 placeholder:font-light" name="densidad_colchon"
+                            class="form-control sz placeholder:text-gray-300 placeholder:font-light" name="densidad_colchon" step=".0001"
                             id="densidad_colchon">
                         @error('densidad_colchon')
                             <small class="text-red-700 font-semibold"><em>{{ $message }}</em></small>
@@ -251,7 +244,7 @@
                         <label for="tiempo_contacto" class="text-sm text-gray-700 font-semibold tracking-wide">Tiempo de contacto
                             <small>(min)</small></label>
                         <input type="number" placeholder="Ingrese el tiempo de contacto"
-                            class="form-control sz placeholder:text-gray-300 placeholder:font-light" name="tiempo_contacto"
+                            class="form-control sz placeholder:text-gray-300 placeholder:font-light" name="tiempo_contacto" step=".0001"
                             id="tiempo_contacto">
                         @error('tiempo_contacto')
                             <small class="text-red-700 font-semibold"><em>{{ $message }}</em></small>
@@ -372,7 +365,7 @@
             placeholder: "Seleccione la compañia de lodo",
         });
         VirtualSelect.init({
-            ele: "#ensayos",
+            ele: "#requeridos_lodo",
             placeholder: "Seleccione los ensayos",
         });
         VirtualSelect.init({
@@ -390,7 +383,7 @@
         document.getElementById("tipo_lodo").setValue(0);
         document.getElementById("servicios_lodo").setValue(0);
         document.getElementById("mud_company").setValue(0);
-        document.getElementById("ensayos").setValue(0);
+        document.getElementById("requeridos_lodo").setValue(0);
         document.getElementById("firma_reconocimiento_lodo").setValue(0);
         document.getElementById("firma_solicitante_lodo").setValue(0);
     })

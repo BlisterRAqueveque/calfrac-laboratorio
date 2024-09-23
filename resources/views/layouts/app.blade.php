@@ -98,7 +98,9 @@
                 </li>
 
                 <li class="relative p-2 flex gap-3 cursor-pointer rounded-md" id="miPerfilNav">
-                    @if (auth()->user()->img)
+                    {{-- Vieja configuracion, error que encontro Victor cuando caduca sesion
+                    @if (auth()->user()->img) --}}
+                    @if (auth()->check() && auth()->user()->img)
                         <div class="flex justify-center items-center w-10 h-10 mx-auto">
                             <img src="{{ asset('uploads/perfiles') . '/' . auth()->user()->img }}"
                                 class="rounded-full object-cover w-10 h-10" alt="">

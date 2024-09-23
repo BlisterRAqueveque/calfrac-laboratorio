@@ -13,4 +13,10 @@ class EnsayosLodo extends Model
     protected $fillable=[
         'nombre'
     ];
+
+    // Relación con RelAnalisisMicrobialFractura
+    public function ensayo_requerido()
+    {
+        return $this->hasMany(RelEnsayosRequeridosLodo::class, 'id_ensayo');
+    }
 }

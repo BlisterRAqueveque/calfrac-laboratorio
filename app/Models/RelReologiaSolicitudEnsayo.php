@@ -43,26 +43,26 @@ class RelReologiaSolicitudEnsayo extends Model
         'tem_ensayo_30_up',
         'tem_ensayo_6_up',
         'tem_ensayo_3_up',
-        'tem_ambiente_rpm_down',
-        'tem_ambiente_300_down',
-        'tem_ambiente_200_down',
-        'tem_ambiente_100_down',
-        'tem_ambiente_60_down',
-        'tem_ambiente_30_down',
-        'tem_ambiente_6_down',
-        'tem_ambiente_3_down',
-        'tem_ensayo_rpm_down',
-        'tem_ensayo_300_down',
-        'tem_ensayo_200_down',
-        'tem_ensayo_100_down',
-        'tem_ensayo_60_down',
-        'tem_ensayo_30_down',
-        'tem_ensayo_6_down',
-        'tem_ensayo_3_down',
-        'temp_ambiente',
-        'temp_ensayo',
-        'temp_ambiente_punto_cedencia',
-        'temp_ensayo_punto_cedencia',
+        // 'tem_ambiente_rpm_down',
+        // 'tem_ambiente_300_down',
+        // 'tem_ambiente_200_down',
+        // 'tem_ambiente_100_down',
+        // 'tem_ambiente_60_down',
+        // 'tem_ambiente_30_down',
+        // 'tem_ambiente_6_down',
+        // 'tem_ambiente_3_down',
+        // 'tem_ensayo_rpm_down',
+        // 'tem_ensayo_300_down',
+        // 'tem_ensayo_200_down',
+        // 'tem_ensayo_100_down',
+        // 'tem_ensayo_60_down',
+        // 'tem_ensayo_30_down',
+        // 'tem_ensayo_6_down',
+        // 'tem_ensayo_3_down',
+        //'temp_ambiente',
+        //'temp_ensayo',
+        //'temp_ambiente_punto_cedencia',
+        //'temp_ensayo_punto_cedencia',
         'temp_ambiente_gel_10_seg',
         'temp_ensayo_gel_10_seg',
         'temp_ambiente_gel_10_min',
@@ -70,8 +70,8 @@ class RelReologiaSolicitudEnsayo extends Model
         'ensayo_id',
         'solicitud_lechada_id',
         'selected',
-        'img_up',
-        'img_down',
+        //'img_up',
+        //'img_down',
         'usuario_carga',
     ];
 
@@ -81,5 +81,10 @@ class RelReologiaSolicitudEnsayo extends Model
 
     public function user() {
         return $this->belongsTo(User::class, 'usuario_carga');
+    }
+
+    public function calculos_reologias()
+    {
+        return $this->hasOne(CalculosReologias::class, 'reologia_id');
     }
 }

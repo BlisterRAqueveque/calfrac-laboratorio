@@ -114,4 +114,9 @@ class Solicitud extends Model
         return $this->belongsTo(Distrito::class, 'id');
     }
 
+    public function solicitudes_lodo()
+    {
+        return $this->hasMany(SolicitudLodo::class, 'solicitud_id');
+    }
+
 }

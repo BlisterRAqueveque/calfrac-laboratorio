@@ -346,7 +346,8 @@
                                 <th style="width: 22%; text-align: center; background-color: #ffffff; border: none;">N° Lote</th>
                                 <th style="width: 22%; text-align: center; background-color: #ffffff; border: none;">Aditivo</th>
                                 <th style="width: 22%; text-align: center; background-color: #ffffff; border: none;">Conc.</th>
-                                <th style="width: 22%; text-align: center; background-color: #ffffff; border: none;">Units</th>
+                                <th style="width: 22%; text-align: right; background-color: #ffffff; border: none;">Units</th>
+                                <th style="width: 12%; text-align: center; background-color: #ffffff; border: none;"></th>
                                 <th style="width: 12%; text-align: center; background-color: #ffffff; border: none;">OM</th>
                             </tr>
 
@@ -354,967 +355,959 @@
                             <?php
                             $i = 0;
                             ?>
-                            @foreach ($s_l[0]->formulacion_tentativa as $formulacion)
+                            @foreach ($s_l[0]->rel_aditivos as $formulacion)
                             <?php
                             $i++;
                             ?>
                             <tr>
-                                <td
-                                style="width: 40%;color: #686868; text-align: right; font-size: 13px; background-color: #ffffff;">
-                                <?= $i; ?>
+                                <td style="padding: 2px; text-align: right; background-color: #ffffff;">
+                                    <?= $i; ?>
                                 </td>
-                                <td
-                                    style="width: 40%;color: #686868; text-align: center; font-size: 13px; border: 1px solid #494949; background-color: #ffffff;">
+                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
                                     {{ $formulacion->lote }}
                                 </td>
-                                <td
-                                    style="width: 40%;color: #686868; text-align: center; font-size: 13px; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $formulacion->aditivos->nombre ? $formulacion->aditivo : "-" }}
+                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                    @if(isset($formulacion->aditivos->nombre))
+                                    {{ $formulacion->aditivos->nombre }}
+                                    @elseif($formulacion->aditivo == 'SD')
+                                    {{ $formulacion->comentario ?? '-' }}
+                                    @else
+                                    -
+                                    @endif
                                 </td>
-                                <td
-                                    style="width: 40%;color: #686868; text-align: center; font-size: 13px; border: 1px solid #494949; background-color: #ffffff;">
+                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
                                     {{ $formulacion->concentracion }}
                                 </td>
-                                <td
-                                    style="width: 40%;color: #686868; text-align: center; font-size: 13px; border: 1px solid #494949; background-color: #ffffff;">
+                                <td colspan="2" style="padding: 2px; text-align: center; border: 1px solid #494949; background-color: #ffffff;">
                                     %BOWC
                                 </td>
-                                <td style="width: 40%;color: #686868; text-align: center; font-size: 13px; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $formulacion->blend }}
+                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                    {{ $formulacion->om }}
                                 </td>
                             </tr>
+                            @endforeach
+                <tr>
+                    <td style="text-align: center; background-color: #ffffff; border: none;"></td>
+                    <td style="text-align: center; background-color: #ffffff; border: none;"></td>
+                    <td style="text-align: center; background-color: #ffffff; border: none;">Densidad</td>
+                    <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                        @foreach ($s_l[0]->calculos_ensayos as $calculo)
+                        {{ $calculo->densidad_ensayo ?? '-' }}
                         @endforeach
-                            {{-- <tr>
-                                <td style="text-align: center; background-color: #ffffff; border: none;">1</td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">{{ $formulacion->lote ?? "-" }}</td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"> </td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">{{ $formulacion->concentracion ?? "-"  }}</td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"> %BOWC</td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; background-color: #ffffff; border: none;">2</td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"> %BOWC</td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; background-color: #ffffff; border: none;">3</td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"> %BOWC</td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; background-color: #ffffff; border: none;">4</td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"> %BOWC</td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; background-color: #ffffff; border: none;">5</td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"> %BOWC</td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; background-color: #ffffff; border: none;">6</td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"> %BOWC</td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; background-color: #ffffff; border: none;">7</td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"> %BOWC</td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; background-color: #ffffff; border: none;">8</td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"> %BOWC</td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; background-color: #ffffff; border: none;">9</td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"> %BOWC</td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; background-color: #ffffff; border: none;">10</td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"> %BOWC</td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                            </tr> --}}
-                            <tr>
-                                <td style="text-align: center; background-color: #ffffff; border: none;"></td>
-                                <td style="text-align: center; background-color: #ffffff; border: none;"></td>
-                                <td style="text-align: center; background-color: #ffffff; border: none;">Densidad</td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">g/L: </td>
-                                <td style="text-align: center; background-color: #ffffff; border: none;">ppg</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; background-color: #ffffff; border: none;"></td>
-                                <td style="text-align: center; background-color: #ffffff; border: none;"></td>
-                                <td style="text-align: center; background-color: #ffffff; border: none;">Rendimiento</td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">L/bolsa: </td>
-                                <td style="text-align: center; background-color: #ffffff; border: none;">ft³/bolsa</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; background-color: #ffffff; border: none;"></td>
-                                <td style="text-align: center; background-color: #ffffff; border: none;"></td>
-                                <td style="text-align: center; background-color: #ffffff; border: none;">Req. Agua</td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"></td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">%: </td>
-                                <td style="text-align: center; background-color: #ffffff; border: none;">L/bolsa</td>
-                            </tr>
-                        </table>
-
                     </td>
-
+                    <td style="padding: 2px; text-align: left; border: none; background-color: #ffffff;"><small>g/L</small></td>
+                    <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                        @foreach ($s_l[0]->calculos_ensayos as $calculo)
+                        {{ $calculo->ppg_ensayo ?? '-' }}
+                        @endforeach
+                    </td>
+                    <td style="text-align: center; background-color: #ffffff; border: none;">ppg</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center; background-color: #ffffff; border: none;"></td>
+                    <td style="text-align: center; background-color: #ffffff; border: none;"></td>
+                    <td style="text-align: center; background-color: #ffffff; border: none;">Rendimiento</td>
+                    <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">                        
+                        @foreach ($s_l[0]->calculos_ensayos as $calculo)
+                        {{ $calculo->rendimiento_ensayo ?? '-' }}
+                        @endforeach
+                    </td>
+                    <td style="padding: 2px; text-align: left; border: none; background-color: #ffffff;"><small>L/bolsa</small></td>
+                    <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                        @foreach ($s_l[0]->calculos_ensayos as $calculo)
+                        {{ $calculo->ft_bolsa ?? '-' }}
+                        @endforeach
+                    </td>
+                    <td style="text-align: center; background-color: #ffffff; border: none;"><small>ft³/bolsa</small></td>
+                </tr>
+                <tr>
+                    <td style="text-align: center; background-color: #ffffff; border: none;"></td>
+                    <td style="text-align: center; background-color: #ffffff; border: none;"></td>
+                    <td style="text-align: center; background-color: #ffffff; border: none;">Req. Agua</td>
+                    <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                        @foreach ($s_l[0]->calculos_ensayos as $calculo)
+                        {{ $calculo->req_agua ?? '-' }}
+                        @endforeach
+                    </td>
+                    <td style="text-align: left; background-color: #ffffff; border: none;"><small>%</small></td>
+                    <td style="padding: 2px; text-align: center; border: 1px solid #494949; background-color: #ffffff;">
+                        @foreach ($s_l[0]->calculos_ensayos as $calculo)
+                        {{ $calculo->bolsa_ensayo ?? '-' }}
+                        @endforeach
+                    </td>
+                    <td style="text-align: center; background-color: #ffffff; border: none;">
+                        <small>L/bolsa</small>
+                    </td>
                 </tr>
             </table>
-        </div>
-        <div style="border-radius: 3px;">
-            <table style="width: 100%;">
-                <tr>
-                    <!-- Columna "Datos Generales" -->
-                    <td style="width: 3%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #006f53; color:white;">
-                        <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 90%; left: 90%; width: 200px; height: 20px; text-align: center;font-size: 13px;"><b>RESULTADOS DE LOS ENSAYOS</b></div>
-                    </td>
-                    @foreach ($s_l[0]->rel_bombeabilidad as $bombeabilidad)
-                    @if ($bombeabilidad->selected)            
-                    <!-- Columna con tabla interna -->
-                    <td style="width: 47%; padding: 4px; text-align: center; vertical-align: top;">
-                        <table style="width: 100%;">
-                            <tr>
-                                <!-- Columna "Datos Generales" -->
-                                <td style="width: 6%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #D3D3D3; color:black;">
-                                    <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 100%; left: 115%; width: 200px; height: 20px; text-align: center;font-size: 13px;">Tiempo de Bombeabilidad</div>
-                                </td>
 
-                                <!-- Columna con tabla interna -->
-                                <td style="width: 94%;  padding: 4px; text-align: center; vertical-align: top;">
-                                    <br>
-                                    <table style="width: 100%; border-collapse: collapse; border: none;">
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                Consistometro N°:
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $bombeabilidad->consistometro ? $bombeabilidad->consistometro : '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+            </td>
 
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                Tiempo de acondicionamiento:
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $bombeabilidad->time_acondicionamiento ? $bombeabilidad->time_acondicionamiento : '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+            </tr>
+    </table>
+    </div>
+    <div style="border-radius: 3px;">
+        <table style="width: 100%;">
+            <tr>
+                <!-- Columna "Datos Generales" -->
+                <td style="width: 3%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #006f53; color:white;">
+                    <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 90%; left: 90%; width: 200px; height: 20px; text-align: center;font-size: 13px;"><b>RESULTADOS DE ENSAYOS</b></div>
+                </td>
+                @foreach ($s_l[0]->rel_bombeabilidad as $bombeabilidad)
+                @if ($bombeabilidad->selected)
+                <!-- Columna con tabla interna -->
+                <td style="width: 47%; padding: 4px; text-align: center; vertical-align: top;">
+                    <table style="width: 100%;">
+                        <tr>
+                            <!-- Columna "Datos Generales" -->
+                            <td style="width: 6%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #D3D3D3; color:black;">
+                                <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 100%; left: 115%; width: 200px; height: 20px; text-align: center;font-size: 13px;">Tiempo de Bombeabilidad</div>
+                            </td>
 
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                Planilla:
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $bombeabilidad->planilla ? $bombeabilidad->planilla : '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                            <!-- Columna con tabla interna -->
+                            <td style="width: 94%;  padding: 4px; text-align: center; vertical-align: top;">
+                                <br>
+                                <table style="width: 100%; border-collapse: collapse; border: none;">
+                                    <tr>
+                                        <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                            Consistometro N°:
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                            {{ $bombeabilidad->consistometro ? $bombeabilidad->consistometro : '-' }}
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
 
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                Gradiente:
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                            Tiempo de acondicionamiento:
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                            {{ $bombeabilidad->time_acondicionamiento ? $bombeabilidad->time_acondicionamiento : '-' }}
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                            Planilla:
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                            {{ $bombeabilidad->planilla ? $bombeabilidad->planilla : '-' }}
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                            Gradiente:
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
                                             {{ $bombeabilidad->gradiente ? $bombeabilidad->gradiente : '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
-                                                ºF/100 ft
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                Temperatura:
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $bombeabilidad->temperatura ? $bombeabilidad->temperatura : '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
-                                                ºC
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                Presion:
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $bombeabilidad->presion ? $bombeabilidad->presion : '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
-                                                psi
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <br><br>
-                                    <table style="width: 100%; border-collapse: collapse; border: none;">
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                40 Bc:
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $bombeabilidad->bc_40 ? $bombeabilidad->bc_40 : '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
-                                                hh:mm
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                70 Bc:
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $bombeabilidad->bc_70 ? $bombeabilidad->bc_70 : '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
-                                                hh:mm
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                100 Bc:
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $bombeabilidad->bc_100 ? $bombeabilidad->bc_100 : 'No aplica' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
-                                                hh:mm
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                    @endif
-                    @endforeach
-                
-                    <td style="width: 47%; padding: 4px; text-align: center; vertical-align: top;">
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
+                                            ºF/100 ft
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                            Temperatura:
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                            {{ $bombeabilidad->temperatura ? $bombeabilidad->temperatura : '-' }}
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
+                                            ºC
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                            Presion:
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                            {{ $bombeabilidad->presion ? $bombeabilidad->presion : '-' }}
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
+                                            psi
+                                        </td>
+                                    </tr>
+                                </table>
+                                <br><br>
+                                <table style="width: 100%; border-collapse: collapse; border: none;">
+                                    <tr>
+                                        <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                            40 Bc:
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                            {{ $bombeabilidad->bc_40 ? $bombeabilidad->bc_40 : '-' }}
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
+                                            hh:mm
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                            70 Bc:
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                            {{ $bombeabilidad->bc_70 ? $bombeabilidad->bc_70 : '-' }}
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
+                                            hh:mm
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                            100 Bc:
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                            {{ $bombeabilidad->bc_100 ? $bombeabilidad->bc_100 : 'No aplica' }}
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
+                                            hh:mm
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                @endif
+                @endforeach
 
-                        <table style="width: 100%;">
-                            <tr>
-                                <!-- Columna "Datos Generales" -->
-                                <td style="width: 6%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #D3D3D3; color:black;">
-                                    <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 92%; left: 115%; width: 200px; height: 20px; text-align: center;font-size: 13px;">UCA - Resistencia a la Compresión</div>
-                                </td>
+                <td style="width: 47%; padding: 4px; text-align: center; vertical-align: top;">
 
-                                <!-- Columna con tabla interna -->
-                                <td style="width: 94%; padding: 4px; text-align: center; vertical-align: top;">
-                                    <br>
-                                    <table style="width: 100%; border-collapse: collapse; border: none;">
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                UCA N°:
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $s_l[0]->rel_uca[0]->id }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                    <table style="width: 100%;">
+                        <tr>
+                            <!-- Columna "Datos Generales" -->
+                            <td style="width: 6%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #D3D3D3; color:black;">
+                                <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 92%; left: 115%; width: 200px; height: 20px; text-align: center;font-size: 13px;">UCA - Resistencia a la Compresión</div>
+                            </td>
 
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                Principal:
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $s_l[0]->rel_uca[0]->principal ? $s_l[0]->rel_uca[0]->principal . '°' : '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
-                                                °C
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <br>
-                                    <table style="width: 100%; border-collapse: collapse; border: none;">
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                50 psi:
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $s_l[0]->rel_uca[0]->psi_50 ? $s_l[0]->rel_uca[0]->psi_50 : '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
-                                                hh:mm
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                500 psi:
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $s_l[0]->rel_uca[0]->psi_500 ? $s_l[0]->rel_uca[0]->psi_500 : '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
-                                                hh:mm
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                1000 psi:
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $s_l[0]->rel_uca[0]->psi_1000 ? $s_l[0]->rel_uca[0]->psi_1000 : '-' }}
+                            <!-- Columna con tabla interna -->
+                            <td style="width: 94%; padding: 4px; text-align: center; vertical-align: top;">
+                                <br>
+                                <table style="width: 100%; border-collapse: collapse; border: none;">
+                                    <tr>
+                                        <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                            UCA N°:
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                            {{ $s_l[0]->rel_uca[0]->id }}
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
 
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
-                                                hh:mm
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                12 hr:
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $s_l[0]->rel_uca[0]->hs_12 ? $s_l[0]->rel_uca[0]->hs_12 : '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
-                                                psi
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                24 hr:
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $s_l[0]->rel_uca[0]->hs_24 ? $s_l[0]->rel_uca[0]->hs_24 : '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
-                                                psi
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                Impedancia Acustica:
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $s_l[0]->rel_uca[0]->impedancia_acustica ? $s_l[0]->rel_uca[0]->impedancia_acustica : '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
-                                                M/rayls
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                SGS cero:
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $s_l[0]->rel_uca[0]->sgs_cero ? $s_l[0]->rel_uca[0]->sgs_cero : '-' }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                            Principal:
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                            {{ $s_l[0]->rel_uca[0]->principal ? $s_l[0]->rel_uca[0]->principal . '°' : '-' }}
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
+                                            °C
+                                        </td>
+                                    </tr>
+                                </table>
+                                <br>
+                                <table style="width: 100%; border-collapse: collapse; border: none;">
+                                    <tr>
+                                        <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                            50 psi:
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                            {{ $s_l[0]->rel_uca[0]->psi_50 ? $s_l[0]->rel_uca[0]->psi_50 : '-' }}
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
+                                            hh:mm
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                            500 psi:
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                            {{ $s_l[0]->rel_uca[0]->psi_500 ? $s_l[0]->rel_uca[0]->psi_500 : '-' }}
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
+                                            hh:mm
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                            1000 psi:
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                            {{ $s_l[0]->rel_uca[0]->psi_1000 ? $s_l[0]->rel_uca[0]->psi_1000 : '-' }}
 
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
-                                                hh:mm
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                SGS max:
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $s_l[0]->rel_uca[0]->sgs_max ? $s_l[0]->rel_uca[0]->sgs_max : 'No aplica' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
-                                                hh:mm
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                D Tiempo:
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
+                                            hh:mm
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                            12 hr:
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                            {{ $s_l[0]->rel_uca[0]->hs_12 ? $s_l[0]->rel_uca[0]->hs_12 : '-' }}
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
+                                            psi
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                            24 hr:
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                            {{ $s_l[0]->rel_uca[0]->hs_24 ? $s_l[0]->rel_uca[0]->hs_24 : '-' }}
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
+                                            psi
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                            Impedancia Acustica:
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                            {{ $s_l[0]->rel_uca[0]->impedancia_acustica ? $s_l[0]->rel_uca[0]->impedancia_acustica : '-' }}
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
+                                            M/rayls
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                            SGS cero:
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                            {{ $s_l[0]->rel_uca[0]->sgs_cero ? $s_l[0]->rel_uca[0]->sgs_cero : '-' }}
 
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
-                                                hh:mm
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div style="border-radius: 3px;">
-            <table style="width: 100%;">
-                <tr>
-                    <!-- Columna "Datos Generales" -->
-                    <td style="width: 1.7%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #006f53; color:white;">
-                        <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 100%; left: 80%; width: 200px; height: 20px; text-align: center;font-size: 13px;"></div>
-                    </td>
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
+                                            hh:mm
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                            SGS max:
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                            {{ $s_l[0]->rel_uca[0]->sgs_max ? $s_l[0]->rel_uca[0]->sgs_max : 'No aplica' }}
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
+                                            hh:mm
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                            D Tiempo:
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
 
-                    <!-- Columna con tabla interna -->
-                    <td style="width: 54%; padding: 4px; text-align: center; vertical-align: top;">
-                        <br>
-                        <table style="width: 100%; border-collapse: collapse; border: none;">
-                            <tr>
-                                <td style="width: 3%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #D3D3D3; color:black;">
-                                    <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 150%; left: 115%; width: 200px; height: 20px; text-align: center;font-size: 13px;">Reología</div>
-                                </td>
+                                        </td>
+                                        <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
+                                            hh:mm
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div style="border-radius: 3px;">
+        <table style="width: 100%;">
+            <tr>
+                <!-- Columna "Datos Generales" -->
+                <td style="width: 1.7%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #006f53; color:white;">
+                    <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 100%; left: 80%; width: 200px; height: 20px; text-align: center;font-size: 13px;"></div>
+                </td>
 
-                                <td style="width: 65%; vertical-align: top;">
-                                    <table style="width: 100%; border-collapse: collapse; border: none;">
-                                        <tr>
-                                            <td style="width: 54%; padding: 4px; text-align: center; vertical-align: top;">
-                                                <table style="width: 100%; border-collapse: collapse; border: none;">
-                                                    <tr>
-                                                        <td style="width: 52%; vertical-align: top;">
-                                                            <table style="width: 100%; border-collapse: collapse; border: none;">
-                                                                <tr>
-                                                                    <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="4">
-                                                                        Reologías Temp. Ambiente (27°C)
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        RPM
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        Up
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        Down
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        Cociente
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        Prom.
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        3
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        {{ $s_l[0]->rel_reologia[0]->tem_ensayo_3_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_3_up . '°' : '-' }}
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        {{ $s_l[0]->rel_reologia[0]->tem_ambiente_3_down ? $s_l[0]->rel_reologia[0]->tem_ambiente_3_down . '°' : '-' }}
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        6
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        {{ $s_l[0]->rel_reologia[0]->tem_ensayo_6_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_6_up . '°' : '-' }}
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        {{ $s_l[0]->rel_reologia[0]->tem_ambiente_6_down ? $s_l[0]->rel_reologia[0]->tem_ambiente_6_down . '°' : '-' }}
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        30
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        {{ $s_l[0]->rel_reologia[0]->tem_ensayo_30_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_30_up . '°' : '-' }}       
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        {{ $s_l[0]->rel_reologia[0]->tem_ambiente_30_down ? $s_l[0]->rel_reologia[0]->tem_ambiente_30_down . '°' : '-' }}
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        60
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        {{ $s_l[0]->rel_reologia[0]->tem_ensayo_60_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_60_up . '°' : '-' }}
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        {{ $s_l[0]->rel_reologia[0]->tem_ambiente_60_down ? $s_l[0]->rel_reologia[0]->tem_ambiente_60_down . '°' : '-' }}
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        100
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        {{ $s_l[0]->rel_reologia[0]->tem_ensayo_100_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_100_up . '°' : '-' }}
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        {{ $s_l[0]->rel_reologia[0]->tem_ambiente_100_down ? $s_l[0]->rel_reologia[0]->tem_ambiente_100_down . '°' : '-' }}
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        200
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        {{ $s_l[0]->rel_reologia[0]->tem_ensayo_100_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_100_up . '°' : '-' }}
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        {{ $s_l[0]->rel_reologia[0]->tem_ambiente_200_down ? $s_l[0]->rel_reologia[0]->tem_ambiente_200_down . '°' : '-' }}
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        300
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        {{ $s_l[0]->rel_reologia[0]->tem_ensayo_300_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_300_up . '°' : '-' }}
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        {{ $s_l[0]->rel_reologia[0]->tem_ambiente_300_down ? $s_l[0]->rel_reologia[0]->tem_ambiente_300_down . '°' : '-' }}
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </td>
-                                                        <td style="width: 50%; vertical-align: top;">
-                                                            <table style="width: 100%; border-collapse: collapse; border: none;">
-                                                                <tr>
-                                                                    <td>
-                                                                        <div style="width: 100%; height: 100px; overflow: hidden; display: flex; justify-content: center; align-items: center; text-align: center; border: 1px solid #494949;">
-                                                                            {{-- @if (isset($bombeabilidad) && $bombeabilidad->img)
-                                                                            @if (file_exists(public_path('uploads/ensayos/') . $bombeabilidad->img) && $bombeabilidad->img)
-                                                                            <img src="{{ public_path('uploads/ensayos/') . $bombeabilidad->img }}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
-                                                                            @else
-                                                                            <p style="text-align: center;">Archivo no disponible</p>
-                                                                            @endif
-                                                                            @else
-                                                                            <p style="text-align: center;">Archivo no disponible</p>
-                                                                            @endif --}}
-                                                                            @if (!empty($s_l[0]->rel_reologia[0]->img_up) && file_exists(public_path('uploads/ensayos/') . $s_l[0]->rel_reologia[0]->img_up))
-                                                                                <img src="{{ public_path('uploads/ensayos/') . $s_l[0]->rel_reologia[0]->img_up }}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
-                                                                            @else
-                                                                                <p>Archivo no disponible</p>
-                                                                            @endif
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                            <br>
-                                                            <table style="width: 100%; border-collapse: collapse; border: none;">
-                                                                <tr>
-                                                                    <td style="width: 80%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                                        Viscosidad Plastica (cp):
-                                                                    </td>
-                                                                    <td style="width: 20%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                <!-- Columna con tabla interna -->
+                <td style="width: 54%; padding: 4px; text-align: center; vertical-align: top;">
+                    <br>
+                    <table style="width: 100%; border-collapse: collapse; border: none;">
+                        <tr>
+                            <td style="width: 3%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #D3D3D3; color:black;">
+                                <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 150%; left: 115%; width: 200px; height: 20px; text-align: center;font-size: 13px;">Reología</div>
+                            </td>
 
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 80%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                                        Punto de Cedencia (lb/100ft2):
-                                                                    </td>
-                                                                    <td style="width: 20%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                            <td style="width: 65%; vertical-align: top;">
+                                <table style="width: 100%; border-collapse: collapse; border: none;">
+                                    <tr>
+                                        <td style="width: 54%; padding: 4px; text-align: center; vertical-align: top;">
+                                            <table style="width: 100%; border-collapse: collapse; border: none;">
+                                                <tr>
+                                                    <td style="width: 52%; vertical-align: top;">
+                                                        <table style="width: 100%; border-collapse: collapse; border: none;">
+                                                            <tr>
+                                                                <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="4">
+                                                                    Reologías Temp. Ambiente (27°C)
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    RPM
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    Up
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    Down
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    Cociente
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    Prom.
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    300
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_300_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_300_up : '-' }}
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_300 ? $s_l[0]->rel_reologia[0]->tem_ambiente_300 : '-' }}
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{$calculos_reologias[0]->tem_ambiente_300_cociente ?? '-'}}
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $calculos_reologias[0]->tem_ambiente_300_promedio ?? '-'}}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    200
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_200_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_200_up : '-' }}
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_200 ? $s_l[0]->rel_reologia[0]->tem_ambiente_200 : '-' }}
 
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 80%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                                        Gel 10 seg:
-                                                                    </td>
-                                                                    <td style="width: 20%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{$calculos_reologias[0]->tem_ambiente_200_cociente ?? '-'}}
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $calculos_reologias[0]->tem_ambiente_200_promedio ?? '-'}}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    100
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_100_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_100_up : '-' }}
 
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 80%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                                        Gel 10 min:
-                                                                    </td>
-                                                                    <td style="width: 20%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_100 ? $s_l[0]->rel_reologia[0]->tem_ambiente_100 : '-' }}
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{$calculos_reologias[0]->tem_ambiente_100_cociente ?? '-'}}
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $calculos_reologias[0]->tem_ambiente_100_promedio ?? '-'}}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    60
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_60_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_60_up : '-' }}
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_60 ? $s_l[0]->rel_reologia[0]->tem_ambiente_60 : '-' }}
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{$calculos_reologias[0]->tem_ambiente_60_cociente ?? '-'}}
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $calculos_reologias[0]->tem_ambiente_60_promedio ?? '-'}}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    30
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_30_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_30_up : '-' }}
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_30 ? $s_l[0]->rel_reologia[0]->tem_ambiente_30 : '-' }}
 
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </td>
-                                                    </tr>
-                                                    <br>
-                                                    <tr>
-                                                        <td style="width: 52%; vertical-align: top;">
-                                                            <table style="width: 100%; border-collapse: collapse; border: none;">
-                                                                <tr>
-                                                                    <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="4">
-                                                                        Reologías a 87°C
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        RPM
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        Up
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        Down
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        Cociente
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        Prom.
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        3
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        6
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        30
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        60
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        100
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        200
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        300
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </td>
-                                                        <td style="width: 50%; vertical-align: top;">
-                                                            <table style="width: 100%; border-collapse: collapse; border: none;">
-                                                                <tr>
-                                                                    <td>
-                                                                        <div style="width: 100%; height: 100px; overflow: hidden; display: flex; justify-content: center; align-items: center; text-align: center; border: 1px solid #494949;">
-                                                                            {{-- @if (isset($bombeabilidad) && $bombeabilidad->img)
-                                                                            @if (file_exists(public_path('uploads/ensayos/') . $bombeabilidad->img) && $bombeabilidad->img)
-                                                                            <img src="{{ public_path('uploads/ensayos/') . $bombeabilidad->img }}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
-                                                                            @else
-                                                                            <p style="text-align: center;">Archivo no disponible</p>
-                                                                            @endif
-                                                                            @else
-                                                                            <p style="text-align: center;">Archivo no disponible</p>
-                                                                            @endif --}}
-                                                                            @if (!empty($s_l[0]->rel_reologia[0]->img_down) && file_exists(public_path('uploads/ensayos/') . $s_l[0]->rel_reologia[0]->img_down))
-                                                                                <img src="{{ public_path('uploads/ensayos/') . $s_l[0]->rel_reologia[0]->img_down }}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
-                                                                            @else
-                                                                                <p>Archivo no disponible</p>
-                                                                            @endif
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                            <br>
-                                                            <table style="width: 100%; border-collapse: collapse; border: none;">
-                                                                <tr>
-                                                                    <td style="width: 80%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                                        Viscosidad Plastica (cp):
-                                                                    </td>
-                                                                    <td style="width: 20%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{$calculos_reologias[0]->tem_ambiente_30_cociente ?? '-'}}
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $calculos_reologias[0]->tem_ambiente_30_promedio ?? '-'}}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    6
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_6_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_6_up : '-' }}
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_6 ? $s_l[0]->rel_reologia[0]->tem_ambiente_6 : '-' }}
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{$calculos_reologias[0]->tem_ambiente_6_cociente ?? '-'}}
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $calculos_reologias[0]->tem_ambiente_6_promedio ?? '-'}}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    3
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_3_up ? $s_l[0]->rel_reologia[0]->tem_ambiente_3_up : '-' }}
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $s_l[0]->rel_reologia[0]->tem_ambiente_3 ? $s_l[0]->rel_reologia[0]->tem_ambiente_3 : '-' }}
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{$calculos_reologias[0]->tem_ambiente_3_cociente ?? '-'}}
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $calculos_reologias[0]->tem_ambiente_3_promedio ?? '-'}}
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td style="width: 50%; vertical-align: top;">
+                                                        <table style="width: 100%; border-collapse: collapse; border: none;">
+                                                            <tr>
+                                                                <td>
+                                                                    <div style="width: 100%; height: 100px; overflow: hidden; display: flex; justify-content: center; align-items: center; text-align: center; border: 1px solid #494949;">
+                                                                        @if ($chartImage1)
+                                                                        <img src="{{ $chartImage1 }}" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
+                                                                        @else
+                                                                        <p>Archivo no disponible</p>
+                                                                        @endif
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
 
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 80%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                                        Punto de Cedencia (lb/100ft2):
-                                                                    </td>
-                                                                    <td style="width: 20%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 80%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                                        Gel 10 seg:
-                                                                    </td>
-                                                                    <td style="width: 20%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 80%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                                        Gel 10 min:
-                                                                    </td>
-                                                                    <td style="width: 20%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                    </table>
-
-                                </td>
-                                <td style="width: 32%; padding: 4px; text-align: center; vertical-align: top;">
-                                    <br>
-                                    <table style="width: 100%;">
-                                        <tr>
-                                            <!-- Columna "Datos Generales" -->
-                                            <td style="width: 10%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 130px; background: #D3D3D3; color:black;">
-                                                <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 110%; left: 120%; width: 200px; height: 20px; text-align: center;font-size: 13px;">Pérdida de Filtrado</div>
-                                            </td>
-
-                                            <!-- Columna con tabla interna -->
-                                            <td style="width: 90%; padding: 4px; text-align: center; vertical-align: top;">
+                                                        <br>
+                                                        <table style="width: 100%; border-collapse: collapse; border: none;">
+                                                            <tr>
+                                                                <td style="width: 80%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                                                    Viscosidad Plastica (cp):
+                                                                </td>
+                                                                <td style="width: 20%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                {{ $viscosidad_plastica_1 ? $viscosidad_plastica_1 : '-' }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width: 80%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                                                    Punto de Cedencia (lb/100ft2):
+                                                                </td>
+                                                                <td style="width: 20%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                {{ $punto_cedencia_1 ? $punto_cedencia_1 : '-' }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width: 80%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                                                    Gel 10 seg:
+                                                                </td>
+                                                                <td style="width: 20%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $s_l[0]->rel_reologia[0]->temp_ambiente_gel_10_seg ? $s_l[0]->rel_reologia[0]->temp_ambiente_gel_10_seg : '-' }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width: 80%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                                                    Gel 10 min:
+                                                                </td>
+                                                                <td style="width: 20%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $s_l[0]->rel_reologia[0]->temp_ambiente_gel_10_min ? $s_l[0]->rel_reologia[0]->temp_ambiente_gel_10_min : '-' }}
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
                                                 <br>
-                                                <table style="width: 100%; border-collapse: collapse; border: none;">
-                                                    <tr>
-                                                        <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                            Temperatura:
-                                                        </td>
-                                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                            {{ $s_l[0]->rel_perdida_filtrado[0]->temperatura ? $s_l[0]->rel_perdida_filtrado[0]->temperatura : '-' }}
+                                                <tr>
+                                                    <td style="width: 52%; vertical-align: top;">
+                                                        <table style="width: 100%; border-collapse: collapse; border: none;">
+                                                            <tr>
+                                                                <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="4">
+                                                                    Reologías a 87°C
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    RPM
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    Up
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    Down
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    Cociente
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    Prom.
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    300
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_300_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_300_up : '-' }}
 
-                                                        </td>
-                                                        <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
-                                                            °C
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                            Fluido Acumulado:
-                                                        </td>
-                                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                            {{ $s_l[0]->rel_perdida_filtrado[0]->fluido_acumulado ? $s_l[0]->rel_perdida_filtrado[0]->fluido_acumulado : '-' }}
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_300 ? $s_l[0]->rel_reologia[0]->tem_ensayo_300 : '-' }}
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{$calculos_reologias[0]->tem_ensayo_300_cociente ?? '-'}}
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{$calculos_reologias[0]->tem_ensayo_300_promedio ?? '-'}}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    200
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_200_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_200_up : '-' }}
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_200 ? $s_l[0]->rel_reologia[0]->tem_ensayo_200 : '-' }}
 
-                                                        </td>
-                                                        <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
-                                                            mL
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                            Filtrado API:
-                                                        </td>
-                                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                            {{ $s_l[0]->rel_perdida_filtrado[0]->filtrado_api ? $s_l[0]->rel_perdida_filtrado[0]->filtrado_api : '-' }}
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{$calculos_reologias[0]->tem_ensayo_200_cociente ?? '-'}}
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{$calculos_reologias[0]->tem_ensayo_200_promedio ?? '-'}}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    100
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_100_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_100_up : '-' }}
 
-                                                        </td>
-                                                        <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
-                                                            mL/30min
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <br>
-                                    <table style="width: 100%;">
-                                        <tr>
-                                            <!-- Columna "Datos Generales" -->
-                                            <td style="width: 10%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 130px; background: #D3D3D3; color:black;">
-                                                <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 110%; left: 120%; width: 200px; height: 20px; text-align: center;font-size: 13px;">Mezclabilidad</div>
-                                            </td>
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_100 ? $s_l[0]->rel_reologia[0]->tem_ensayo_100 : '-' }}
 
-                                            <!-- Columna con tabla interna -->
-                                            <td style="width: 90%; padding: 4px; text-align: center; vertical-align: top;">
-                                                <br>
-                                                <table style="width: 100%; border-collapse: collapse; border: none;">
-                                                    <tr>
-                                                        <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                            Mezclabilidad:
-                                                        </td>
-                                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                            {{ $s_l[0]->rel_mezclabilidad[0]->mezclabilidad }}
-                                                        </td>
-                                                        <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{$calculos_reologias[0]->tem_ensayo_100_cociente ?? '-'}}
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{$calculos_reologias[0]->tem_ensayo_100_promedio ?? '-'}}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    60
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_60_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_60_up : '-' }}
 
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="3"><b>Observación:</b> Mezclabilidad 5 es si la lechada se mezcla muy bien;1 es si cuesta mezclar</td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <br>
-                                    <table style="width: 100%;">
-                                        <tr>
-                                            <!-- Columna "Datos Generales" -->
-                                            <td style="width: 10%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 100px; background: #D3D3D3; color:black;">
-                                                <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 130%; left: 120%; width: 200px; height: 20px; text-align: center;font-size: 13px;">Agua libre</div>
-                                            </td>
-                                            <!-- Columna con tabla interna -->
-                                            <td style="width: 90%; padding: 4px; text-align: center; vertical-align: top;">
-                                                <br>
-                                                <table style="width: 100%; border-collapse: collapse; border: none;">
-                                                    <tr>
-                                                        <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                            Agua libre:
-                                                        </td>
-                                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                            {{ $s_l[0]->rel_agua_libre[0]->agua_libre ? $s_l[0]->rel_agua_libre[0]->agua_libre : 'No aplica' }}
-                                                        </td>
-                                                        <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
-                                                            °C
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                            Volumen:
-                                                        </td>
-                                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                            {{ $s_l[0]->rel_agua_libre[0]->volumen ? $s_l[0]->rel_agua_libre[0]->volumen : 'No aplica' }}
-                                                        </td>
-                                                        <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
-                                                            mL
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                            API Agua libre:
-                                                        </td>
-                                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                            {{ $s_l[0]->rel_agua_libre[0]->api_agua_libre ? $s_l[0]->rel_agua_libre[0]->api_agua_libre : 'No aplica' }}
-                                                        </td>
-                                                        <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
-                                                            %
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-            </table>
-        </div>
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_60 ? $s_l[0]->rel_reologia[0]->tem_ensayo_60 : '-' }}
+
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{$calculos_reologias[0]->tem_ensayo_60_cociente ?? '-'}}
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{$calculos_reologias[0]->tem_ensayo_60_promedio ?? '-'}}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    30
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_30_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_30_up : '-' }}
+
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_30 ? $s_l[0]->rel_reologia[0]->tem_ensayo_30 : '-' }}
+
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{$calculos_reologias[0]->tem_ensayo_30_cociente ?? '-'}}
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{$calculos_reologias[0]->tem_ensayo_30_promedio ?? '-'}}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    6
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_6_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_6_up : '-' }}
+
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_6 ? $s_l[0]->rel_reologia[0]->tem_ensayo_6 : '-' }}
+
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{$calculos_reologias[0]->tem_ensayo_6_cociente ?? '-'}}
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{$calculos_reologias[0]->tem_ensayo_6_promedio ?? '-'}}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    3
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_3_up ? $s_l[0]->rel_reologia[0]->tem_ensayo_3_up : '-' }}
+
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $s_l[0]->rel_reologia[0]->tem_ensayo_3 ? $s_l[0]->rel_reologia[0]->tem_ensayo_3 : '-' }}
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{$calculos_reologias[0]->tem_ensayo_3_cociente ?? '-'}}
+                                                                </td>
+                                                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{$calculos_reologias[0]->tem_ensayo_3_promedio ?? '-'}}
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td style="width: 50%; vertical-align: top;">
+                                                        <table style="width: 100%; border-collapse: collapse; border: none;">
+                                                            <tr>
+                                                                <td>
+                                                                    <div style="width: 100%; height: 100px; overflow: hidden; display: flex; justify-content: center; align-items: center; text-align: center; border: 1px solid #494949;">
+                                                                        @if ($chartImage2)
+                                                                        <img src="{{ $chartImage2 }}" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
+                                                                        @else
+                                                                        <p>Archivo no disponible</p>
+                                                                        @endif
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+
+                                                        <br>
+                                                        <table style="width: 100%; border-collapse: collapse; border: none;">
+                                                            <tr>
+                                                                <td style="width: 80%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                                                    Viscosidad Plastica (cp):
+                                                                </td>
+                                                                <td style="width: 20%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                {{ $viscosidad_plastica_2 ? $viscosidad_plastica_2 : '-' }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width: 80%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                                                    Punto de Cedencia (lb/100ft2):
+                                                                </td>
+                                                                <td style="width: 20%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                {{ $punto_cedencia_2 ? $punto_cedencia_2 : '-' }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width: 80%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                                                    Gel 10 seg:
+                                                                </td>
+                                                                <td style="width: 20%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $s_l[0]->rel_reologia[0]->temp_ensayo_gel_10_seg ? $s_l[0]->rel_reologia[0]->temp_ensayo_gel_10_seg : '-' }}
+
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width: 80%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                                                    Gel 10 min:
+                                                                </td>
+                                                                <td style="width: 20%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                    {{ $s_l[0]->rel_reologia[0]->temp_ensayo_gel_10_min ? $s_l[0]->rel_reologia[0]->temp_ensayo_gel_10_min : '-' }}
+
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </td>
+                            <td style="width: 32%; padding: 4px; text-align: center; vertical-align: top;">
+                                <br>
+                                <table style="width: 100%;">
+                                    <tr>
+                                        <!-- Columna "Datos Generales" -->
+                                        <td style="width: 10%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 130px; background: #D3D3D3; color:black;">
+                                            <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 110%; left: 120%; width: 200px; height: 20px; text-align: center;font-size: 13px;">Pérdida de Filtrado</div>
+                                        </td>
+
+                                        <!-- Columna con tabla interna -->
+                                        <td style="width: 90%; padding: 4px; text-align: center; vertical-align: top;">
+                                            <br>
+                                            <table style="width: 100%; border-collapse: collapse; border: none;">
+                                                <tr>
+                                                    <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                                        Temperatura:
+                                                    </td>
+                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                        {{ $s_l[0]->rel_perdida_filtrado[0]->temperatura ? $s_l[0]->rel_perdida_filtrado[0]->temperatura : '-' }}
+
+                                                    </td>
+                                                    <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
+                                                        °C
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                                        Fluido Acumulado:
+                                                    </td>
+                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                        {{ $s_l[0]->rel_perdida_filtrado[0]->fluido_acumulado ? $s_l[0]->rel_perdida_filtrado[0]->fluido_acumulado : '-' }}
+
+                                                    </td>
+                                                    <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
+                                                        mL
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                                        Filtrado API:
+                                                    </td>
+                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                        {{ $s_l[0]->rel_perdida_filtrado[0]->filtrado_api ? $s_l[0]->rel_perdida_filtrado[0]->filtrado_api : '-' }}
+
+                                                    </td>
+                                                    <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
+                                                        mL/30min
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <br>
+                                <table style="width: 100%;">
+                                    <tr>
+                                        <!-- Columna "Datos Generales" -->
+                                        <td style="width: 10%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 130px; background: #D3D3D3; color:black;">
+                                            <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 110%; left: 120%; width: 200px; height: 20px; text-align: center;font-size: 13px;">Mezclabilidad</div>
+                                        </td>
+
+                                        <!-- Columna con tabla interna -->
+                                        <td style="width: 90%; padding: 4px; text-align: center; vertical-align: top;">
+                                            <br>
+                                            <table style="width: 100%; border-collapse: collapse; border: none;">
+                                                <tr>
+                                                    <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                                        Mezclabilidad:
+                                                    </td>
+                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                        {{ $s_l[0]->rel_mezclabilidad[0]->mezclabilidad }}
+                                                    </td>
+                                                    <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
+
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="3"><b>Observación:</b> Mezclabilidad 5 es si la lechada se mezcla muy bien;1 es si cuesta mezclar</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <br>
+                                <table style="width: 100%;">
+                                    <tr>
+                                        <!-- Columna "Datos Generales" -->
+                                        <td style="width: 10%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 100px; background: #D3D3D3; color:black;">
+                                            <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 130%; left: 120%; width: 200px; height: 20px; text-align: center;font-size: 13px;">Agua libre</div>
+                                        </td>
+                                        <!-- Columna con tabla interna -->
+                                        <td style="width: 90%; padding: 4px; text-align: center; vertical-align: top;">
+                                            <br>
+                                            <table style="width: 100%; border-collapse: collapse; border: none;">
+                                                <tr>
+                                                    <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                                        Agua libre:
+                                                    </td>
+                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                        {{ $s_l[0]->rel_agua_libre[0]->agua_libre ? $s_l[0]->rel_agua_libre[0]->agua_libre : 'No aplica' }}
+                                                    </td>
+                                                    <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
+                                                        °C
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                                        Volumen:
+                                                    </td>
+                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                        {{ $s_l[0]->rel_agua_libre[0]->volumen ? $s_l[0]->rel_agua_libre[0]->volumen : 'No aplica' }}
+                                                    </td>
+                                                    <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
+                                                        mL
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                                        API Agua libre:
+                                                    </td>
+                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                        {{ $s_l[0]->rel_agua_libre[0]->api_agua_libre ? $s_l[0]->rel_agua_libre[0]->api_agua_libre : 'No aplica' }}
+                                                    </td>
+                                                    <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
+                                                        %
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
     </table>
     <table width='100%' style="border: 1px solid #000000; font-size: 10px;">
         <!-- Tamaño de letra uniforme -->
@@ -1461,7 +1454,7 @@
                 <tr>
                     <!-- Columna "Datos Generales" -->
                     <td style="width: 3%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #006f53; color:white;">
-                        <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 110%; left: 110%; width: 200px; height: 20px; text-align: center;font-size: 13px;"><b>RAFICO BOMBEALIDIDAD - Aguada del Chañar</b></div>
+                        <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 110%; left: 110%; width: 200px; height: 20px; text-align: center;font-size: 13px;"><b>GRÁFICO BOMBEALIDIDAD</b></div>
                     </td>
 
                     <!-- Columna con tabla interna -->
@@ -1488,7 +1481,7 @@
                 <tr>
                     <!-- Columna "Datos Generales" -->
                     <td style="width: 3%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #006f53; color:white;">
-                        <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 110%; left: 110%; width: 200px; height: 20px; text-align: center;font-size: 13px;"><b>GRAFICO UCA - Aguada del Chañar</b></div>
+                        <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 110%; left: 110%; width: 200px; height: 20px; text-align: center;font-size: 13px;"><b>GRÁFICO UCA </b></div>
                     </td>
 
                     <!-- Columna con tabla interna -->
@@ -1507,9 +1500,9 @@
                                         <p style="text-align: center;">Archivo no disponible</p>
                                         @endif --}}
                                         @if (!empty($s_l[0]->rel_uca[0]->img) && file_exists(public_path('uploads/ensayos/') . $s_l[0]->rel_uca[0]->img))
-                                            <img src="{{ public_path('uploads/ensayos/') . $s_l[0]->rel_uca[0]->img }}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
+                                        <img src="{{ public_path('uploads/ensayos/') . $s_l[0]->rel_uca[0]->img }}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
                                         @else
-                                            <p>Archivo no disponible</p>
+                                        <p>Archivo no disponible</p>
                                         @endif
                                     </div>
                                 </td>

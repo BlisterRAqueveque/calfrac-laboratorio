@@ -1,5 +1,7 @@
 <div class="mt-4 tab-pane fade" id="tab_agua_libre" role="tabpanel"> <!-- Agua Libre -->
     @if (count($s_l[0]->rel_agua_libre) > 0)
+    <div class="mb-2 text-center">Registro de Agua Libre</div>
+    <hr class="my-3">
         <div class="grid grid-cols-3 gap-3 my-3" id="registro_agua_libre">
             <div>
                 <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Agua Libre
@@ -24,9 +26,6 @@
     @else
         <div class="grid grid-cols-3 gap-3 my-3" id="registro_agua_libre"></div>
     @endif
-
-    <hr class="my-3">
-
     @if (count($s_l[0]->rel_agua_libre) == 0)
         <form id="form_agua_libre" class="mt-3">
             {{-- <form action="{{ route('store_agua_libre') }}" class="mt-3" method="POST"> --}}

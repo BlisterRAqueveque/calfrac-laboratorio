@@ -1,6 +1,8 @@
 <div class="mt-4 tab-pane fade" id="tab_mezclabilidad" role="tabpanel"> <!-- Mezclabilidad -->
     @if (count($s_l[0]->rel_mezclabilidad) > 0)
         <div id="registro_mezclabilidad">
+            <h5 class="mb-2 text-center">Registro de Mezclabilidad</h5>
+            <hr class="my-3">
             <div class="grid grid-cols-3 gap-3 my-3">
                 <div>
                     <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Mezclabilidad
@@ -16,13 +18,13 @@
     @else
         <div id="registro_mezclabilidad"></div>
     @endif
-    <hr class="my-3">
 
     @if (count($s_l[0]->rel_mezclabilidad) == 0)
         <form id="form_mezclabilidad" class="mt-3">
             @csrf
+            <h5 class="mb-2 text-center">Registro de Mezclabilidad</h5>
+            <hr class="my-3">
             <input type="hidden" name="solicitud_lechada_id" value="{{ $s_l[0]->id }}">
-
             <div class="grid grid-cols-3 gap-3 mb-3">
                 <div>
                     <label for="mezclabilidad"

@@ -51,17 +51,18 @@ Route::post('/ensayo/bombeabilidad', [EnsayoController::class, 'store_bombeabili
 Route::post('/ensayo/uca', [EnsayoController::class, 'store_uca'])->name('store_uca');
 Route::post('/ensayo/agua_libre', [EnsayoController::class, 'store_agua_libre'])->name('store_agua_libre');
 Route::post('/ensayo/mezclabilidad', [EnsayoController::class, 'store_mezclabilidad'])->name('store_mezclabilidad');
+Route::post('/ensayo/aditivos', [EnsayoController::class, 'store_aditivos'])->name('store_aditivos');
 Route::post('/ensayo/generate/{solicitud_id}', [EnsayoController::class, 'assignedReporteSolicitud'])->name('assignedReport');
 Route::post('/ensayo/pdf/{solicitud_id}', [EnsayoController::class, 'pdfReport'])->name('pdfReport');
 
 # G
 Route::get('/check_report/{solicitud_id}', [SolicitudController::class, '_generate_report'])->name('check_report');
 
-
 # Solicitudes
 
-
 Route::get('/obtenerIDSolicitud/{ensayo_asignado_id}', [SolicitudController::class, 'obtenerIDSolicitud'])->name('solicitud.obtener.ensayo');
+
+Route::get('/getReologiasTemp/{solicitud_lechada_id}', [SolicitudController::class, 'getReologiasTemp'])->name('solicitud.obtener.reoTemp');
 
 # Fractura
 Route::get('/solicitud', [SolicitudController::class, 'create'])->name('solicitud.create.show')->middleware('auth');
@@ -144,8 +145,13 @@ Route::post('/permisos_user', [PermisosController::class, 'user_permission_store
 Route::get('/testing', [PermisosController::class, 'testing']);
 
 # PDF's
-Route::get('/pdf/report/lechada/{solicitud_id}', [PDFController::class, 'pdf_report_lechada'])->name('pdf_report_lechada');
+Route::post('/pdf/report/lechada/{solicitud_id}', [PDFController::class, 'pdf_report_lechada'])->name('pdf_report_lechada');
 Route::post('/pdf/report/lechada/send/{solicitud_id}', [PDFController::class, 'pdf_send_report_lechada'])->name('pdf_send_report_lechada');
 Route::get('/pdf/view', [PDFController::class, 'pdf_view']);
 # Route::get('/pdf/report/lechadas/{solicitud_id}', [PDFController::class, 'pdf_report_lechada'])->name('pdf_report_lechadas');
 
+# Ruta para lodo
+Route::get('/ensayoslodo/create', [EnsayoController::class, 'create_lodo'])->name('ensayolodo.create');
+#Route::get('/ensayoslodo', [EnsayoController::class, 'index'])->name('ensayos_lodo');
+Route::post('/ensayoslodo/store', [EnsayoController::class, 'store_reologia_lodo'])->name('store_lodo');
+Route::post('/ensayolodo/compatibilidad', [EnsayoController::class, 'store_compatibilidad'])->name('store_compatibilidad');

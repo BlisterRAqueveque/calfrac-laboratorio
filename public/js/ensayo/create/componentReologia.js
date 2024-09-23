@@ -1,393 +1,325 @@
+// <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 let accordionItem,
-  h5_1,
-  h5_2,
-  h5_3,
-  h5_4,
-  br,
-  h2,
-  accordionCollapse,
-  accordionBody,
-  divFlex,
-  p,
+  tableContainer,
   table,
   thead,
   tbody,
   tr,
   th,
-  div_img,
-  section,
-  div_relative,
-  contain_img,
-  img,
-  div_txt,
-  h6,
-  div_flex,
-  td;
+  td,
+  h5,
+  ctx,
+  myChartTempAmb,
+  myChartTempEnsayo;
 const accordionReologia = document.getElementById("accordionReologia");
 
 const componentReologia = (data = "") => {
-  accordionItem = el("div");
-  
-  p = el(
-    "p.flex items-center text-gray-700 mb-0",
-    "Registro creado por Mirko Dinamarca el día 04/04/24 a las 10:02hs"
-  );
+  // Crear el contenedor para los ítems del acordeón
+  accordionItem = el("div.flex.flex-col.p-2"); // Cambiado a flex-col para alinear las tablas verticalmente
 
-  h5_1 = el("h5.mb-1 text-center ", "Registro de Reologías");
-  h5_2 = el("h5.mb-1 text-center ", "Reología (avg reads)");
-  br = el("br");
-  mount(accordionItem, h5_1);
-  mount(accordionItem, br);
-  mount(accordionItem, h5_2);
+  // Crear el contenedor principal para las dos tablas
+  const tablesContainer = el("div.flex.w-full");
 
-  table = el("table.w-full text-sm border border-gray-300");
+  // Crear el contenedor para la primera tabla con su título
+  let tableContainer = el("div.w-1/2.p-2"); // Cambiado a w-1/2 para que ocupe la mitad del ancho disponible
+  let h5 = el("h5.text-center.mb-2", "Reologías a temp. Ambiente"); // Título para la primera tabla
+  let table = el("table.w-full.text-sm.border.border-gray-300"); // Tabla con ancho completo
 
-  thead = el("thead.bg-gray-200 text-gray-700");
+  let thead = el("thead.bg-gray-200.text-gray-700");
+  let tr = el("tr");
+  ["RPM", "Up", "Down", "Cociente", "Prom."].forEach(header => {
+    let th = el("th.p-1.text-center.border.border-gray-300", header);
+    mount(tr, th);
+  });
+  mount(thead, tr);
+  mount(table, thead);
+
+  let tbody = el("tbody.bg-gray-50");
+  [300, 200, 100, 60, 30, 6, 3].forEach(rpm => {
+    tr = el("tr.border-b");
+    const up = parseFloat(data[`tem_ambiente_${rpm}_up`]) || null;
+    const down = parseFloat(data[`tem_ambiente_${rpm}`]) || null;
+    
+    let cociente = "-";
+    let promedio = "-";
+    
+    if (up && down) {
+      cociente = (up / down).toFixed(2);
+      promedio = Math.ceil((up + down) / 2).toFixed(2);
+    }
+    
+    mount(tr, el("td.py-2.px-1.text-center", rpm));
+    mount(tr, el("td.py-2.px-1.text-center", up !== null ? up : "-"));
+    mount(tr, el("td.py-2.px-1.text-center", down !== null ? down : "-"));
+    mount(tr, el(`td.py-2.px-1.text-center#coc-${rpm}`, cociente));
+    mount(tr, el(`td.py-2.px-1.text-center#prom-${rpm}`, promedio));
+    mount(tbody, tr);
+  });
+  mount(table, tbody);
+  mount(tableContainer, h5); // Montar el título antes de la tabla
+  mount(tableContainer, table);
+
+  // Crear el contenedor para la tabla adicional con ítems para "Reologías a temp. Ambiente"
+  const additionalTableContainerTempAmb = el("div.w-full.mt-4"); // Contenedor para la nueva tabla
+  const additionalTableTempAmb = el("table.w-full.text-sm.border-gray-300");
+
+  const additionalTbodyTempAmb = el("tbody");
+
+  // Fila 1 para "Reologías a temp. Ambiente"
   tr = el("tr");
-  th = el("th.border border-gray-300");
-  mount(tr, th);
-  th = el("th.p-1 text-center border border-gray-300", "RPM");
-  mount(tr, th);
-  th = el("th.p-1 text-center border border-gray-300", "300");
-  mount(tr, th);
-  th = el("th.p-1 text-center border border-gray-300", "200");
-  mount(tr, th);
-  th = el("th.p-1 text-center border border-gray-300", "100");
-  mount(tr, th);
-  th = el("th.p-1 text-center border border-gray-300", "60");
-  mount(tr, th);
-  th = el("th.p-1 text-center border border-gray-300", "30");
-  mount(tr, th);
-  th = el("th.p-1 text-center border border-gray-300", "6");
-  mount(tr, th);
-  th = el("th.p-1 text-center border border-gray-300", "3");
-  mount(tr, th);
+  td = el("td.py-2.px-1.text-right.border-0.w-2/3", "Viscosidad Plástica");
+  mount(td, el("small", " (cp)"));
+  mount(tr, td);
+  mount(tr, el("td.py-2.px-1.text-center.border-0.w-1/3", data.temp_ambiente_viscosidad || "-"));
+  mount(additionalTbodyTempAmb, tr);
 
+  // Fila 2 para "Reologías a temp. Ambiente"
+  tr = el("tr");
+  td = el("td.py-2.px-1.text-right.border-0.w-2/3", "Punto de Cedencia");
+  mount(td, el("small", " (lb/100ft2)"));
+  mount(tr, td);
+  mount(tr, el("td.py-2.px-1.text-center.border-0.w-1/3", data.temp_ambiente_punto_cedencia || "-"));
+  mount(additionalTbodyTempAmb, tr);
+
+  // Fila 3 para "Reologías a temp. Ambiente"
+  tr = el("tr");
+  td = el("td.py-2.px-1.text-right.border-0", "Gel 10 segundos");
+  mount(tr, td);
+  const gel10segTempAmb = data.temp_ambiente_gel_10_seg || "-";
+  mount(tr, el("td.py-2.px-1.text-center.border-0", gel10segTempAmb));
+  mount(additionalTbodyTempAmb, tr);
+
+  // Fila 4 para "Reologías a temp. Ambiente"
+  tr = el("tr");
+  td = el("td.py-2.px-1.text-right.border-0", "Gel 10 minutos");
+  mount(tr, td);
+  const gel10minTempAmb = data.temp_ambiente_gel_10_min || "-";
+  mount(tr, el("td.py-2.px-1.text-center.border-0", gel10minTempAmb));
+  mount(additionalTbodyTempAmb, tr);
+
+  mount(additionalTableTempAmb, additionalTbodyTempAmb);
+  mount(additionalTableContainerTempAmb, additionalTableTempAmb);
+
+  // Montar la tabla adicional para "Reologías a temp. Ambiente"
+  mount(tableContainer, additionalTableContainerTempAmb);
+
+  // Agregar la primera tabla y su tabla adicional al contenedor principal
+  mount(tablesContainer, tableContainer);
+
+  // Crear el contenedor para la segunda tabla con su título
+  tableContainer = el("div.w-1/2.p-2"); // Cambiado a w-1/2 para que ocupe la mitad del ancho disponible
+  h5 = el("h5.text-center.mb-2", "Reologías a temp. Ensayo"); // Título para la segunda tabla
+  table = el("table.w-full.text-sm.border.border-gray-300"); // Tabla con ancho completo
+
+  thead = el("thead.bg-gray-200.text-gray-700");
+  tr = el("tr");
+  ["RPM", "Up", "Down", "Cociente", "Prom."].forEach(header => {
+    th = el("th.p-1.text-center.border.border-gray-300", header);
+    mount(tr, th);
+  });
   mount(thead, tr);
   mount(table, thead);
 
   tbody = el("tbody.bg-gray-50");
-  tr = el("tr.border-b");
-  td = el("td.py-2 px-1 text-center", "T° Ambiente");
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ambiente_rpm ? data.tem_ambiente_rpm : '-'}°C`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ambiente_300 ? data.tem_ambiente_300 : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ambiente_200 ? data.tem_ambiente_200 : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ambiente_100 ? data.tem_ambiente_100 : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ambiente_60 ? data.tem_ambiente_60 : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ambiente_30 ? data.tem_ambiente_30 : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ambiente_6 ? data.tem_ambiente_6 : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ambiente_3 ? data.tem_ambiente_3 : '-'}`);
-  mount(tr, td);
-
-  mount(tbody, tr);
-  tr = el("tr.border-b");
-  td = el("td.py-2 px-1 text-center", "T° Ensayo");
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_rpm ? data.tem_ensayo_rpm : '-'}°C`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_300 ? data.tem_ensayo_300 : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_200 ? data.tem_ensayo_200 : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_100 ? data.tem_ensayo_100 : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_60 ? data.tem_ensayo_60 : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_30 ? data.tem_ensayo_30 : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_6 ? data.tem_ensayo_6 : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_3 ? data.tem_ensayo_3 : '-'}`);
-  mount(tr, td);
-
-  mount(tbody, tr);
+  [300, 200, 100, 60, 30, 6, 3].forEach(rpm => {
+    tr = el("tr.border-b");
+    const up = parseFloat(data[`tem_ensayo_${rpm}_up`]) || null;
+    const down = parseFloat(data[`tem_ensayo_${rpm}`]) || null;
+    
+    let cociente = "-";
+    let promedio = "-";
+    
+    if (up && down) {
+      cociente = (up / down).toFixed(2);
+      promedio = Math.ceil((up + down) / 2).toFixed(2);
+    }
+    
+    mount(tr, el("td.py-2.px-1.text-center", rpm));
+    mount(tr, el("td.py-2.px-1.text-center", up !== null ? up : "-"));
+    mount(tr, el("td.py-2.px-1.text-center", down !== null ? down : "-"));
+    mount(tr, el(`td.py-2.px-1.text-center#coc-${rpm}-desc`, cociente));
+    mount(tr, el(`td.py-2.px-1.text-center#prom-${rpm}-desc`, promedio));
+    mount(tbody, tr);
+  });
   mount(table, tbody);
+  mount(tableContainer, h5); // Montar el título antes de la tabla
+  mount(tableContainer, table);
 
-  mount(accordionItem, table)
+  // Crear el contenedor para la tabla adicional con ítems para "Reologías a temp. Ensayo"
+  const additionalTableContainerTempEnsayo = el("div.w-full.mt-4"); // Contenedor para la nueva tabla
+  const additionalTableTempEnsayo = el("table.w-full.text-sm.border-gray-300");
 
-  table = el("table.w-full text-sm mt-3 border border-gray-300");
-  thead = el("thead.bg-gray-200 text-gray-700");
+  const additionalTbodyTempEnsayo = el("tbody");
+
+  // Fila 1 para "Reologías a temp. Ensayo"
   tr = el("tr");
-  th = el("th.p-1 text-center border border-gray-300", "Temperatura °C");
-  mount(tr, th);
-  th = el("th.p-1 text-center border border-gray-300", "T° Ambiente");
-  mount(tr, th);
-  th = el("th.p-1 text-center border border-gray-300", "T° Ensayo");
-  mount(tr, th);
-
-  mount(thead, tr);
-
-  tbody = el("tbody.bg-gray-50");
-  tr = el("tr.border-b");
-  td = el("td.py-2 px-1 text-center", "Viscosidad plastica (lb/100ft2)");
+  td = el("td.py-2.px-1.text-right.border-0.w-2/3", "Viscosidad Plástica");
+  mount(td, el("small", " (cp)"));
   mount(tr, td);
+  mount(tr, el("td.py-2.px-1.text-center.border-0.w-1/3", data.temp_ensayo_viscosidad || "-"));
+  mount(additionalTbodyTempEnsayo, tr);
 
-  td = el("td.py-2 px-1 text-center", `${data.temp_ambiente ? data.temp_ambiente : ''}`);
+  // Fila 2 para "Reologías a temp. Ensayo"
+  tr = el("tr");
+  td = el("td.py-2.px-1.text-right.border-0.w-2/3", "Punto de Cedencia");
+  mount(td, el("small", " (lb/100ft2)"));
   mount(tr, td);
+  mount(tr, el("td.py-2.px-1.text-center.border-0.w-1/3", data.temp_ensayo_punto_cedencia || "-"));
+  mount(additionalTbodyTempEnsayo, tr);
 
-  td = el("td.py-2 px-1 text-center", `${data.temp_ensayo ? data.temp_ensayo : ''}`);
+  // Fila 3 para "Reologías a temp. Ensayo"
+  tr = el("tr");
+  td = el("td.py-2.px-1.text-right.border-0", "Gel 10 segundos");
   mount(tr, td);
+  const gel10segTempEnsayo = data.temp_ensayo_gel_10_seg || "-";
+  mount(tr, el("td.py-2.px-1.text-center.border-0", gel10segTempEnsayo));
+  mount(additionalTbodyTempEnsayo, tr);
 
-  // Punto de Ceciaden
-  mount(tbody, tr);
-  tr = el("tr.border-b");
-  td = el("td.py-2 px-1 text-center", "Punto de Cedencia (lb/100ft2)");
+  // Fila 4 para "Reologías a temp. Ensayo"
+  tr = el("tr");
+  td = el("td.py-2.px-1.text-right.border-0", "Gel 10 minutos");
   mount(tr, td);
+  const gel10minTempEnsayo = data.temp_ensayo_gel_10_min || "-";
+  mount(tr, el("td.py-2.px-1.text-center.border-0", gel10minTempEnsayo));
+  mount(additionalTbodyTempEnsayo, tr);
 
-  td = el("td.py-2 px-1 text-center", `${data.temp_ambiente_punto_cedencia ? data.temp_ambiente_punto_cedencia : ''}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.temp_ensayo_punto_cedencia ? data.temp_ensayo_punto_cedencia : ''}`);
-  mount(tr, td);
+  mount(additionalTableTempEnsayo, additionalTbodyTempEnsayo);
+  mount(additionalTableContainerTempEnsayo, additionalTableTempEnsayo);
 
-  // Gel 10 segundos
-  mount(tbody, tr);
-  tr = el("tr.border-b");
-  td = el("td.py-2 px-1 text-center", "Gel 10 segundos");
-  mount(tr, td);
+  // Montar la tabla adicional para "Reologías a temp. Ensayo"
+  mount(tableContainer, additionalTableContainerTempEnsayo);
 
-  td = el("td.py-2 px-1 text-center", `${data.temp_ambiente_gel_10_seg ? data.temp_ambiente_gel_10_seg : ''}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.temp_ensayo_gel_10_seg ? data.temp_ensayo_gel_10_seg : ''}`);
-  mount(tr, td);
+  // Agregar la segunda tabla y su tabla adicional al contenedor principal
+  mount(tablesContainer, tableContainer);
 
-  // Gel 10 minutos
-  mount(tbody, tr);
-  tr = el("tr.border-b");
-  td = el("td.py-2 px-1 text-center", "Gel 10 minutos");
-  mount(tr, td);
+  // Agregar el contenedor de tablas al acordeón
+  mount(accordionItem, tablesContainer);
 
-  td = el("td.py-2 px-1 text-center", `${data.temp_ambiente_gel_10_min ? data.temp_ambiente_gel_10_min : ''}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.temp_ensayo_gel_10_min ? data.temp_ensayo_gel_10_min : ''}`);
-  mount(tr, td);
-  mount(tbody, tr);
-
-  mount(table, thead)
-  mount(table, tbody)
-
-  mount(accordionItem, table);
+  // Agregar el acordeón al documento
   mount(accordionReologia, accordionItem);
 
-  h5_3 = el("h5.mb-1 text-center ", "Reología (up reads)");
-  br = el("br");
+  // Crear el contenedor para las gráficas
+  const chartsContainer = el("div.flex.w-full.mt-8");
 
-  mount(accordionItem, br);
-  mount(accordionItem, h5_3);
+  // Contenedor para el gráfico de "Reologías a temp. Ambiente"
+  const chartContainerTempAmb = el("div.w-1/2.p-2"); // Ocupa el 50% del ancho
+  const chartTitleTempAmb = el("h5.text-center.mb-2", "Reologías a Temp. Ambiente"); // Título para el gráfico
+  const canvasTempAmb = el("canvas", "", { id: "chartTempAmb", width: 600, height: 400 }); // Gráfico
+  mount(chartContainerTempAmb, chartTitleTempAmb); // Montar el título
+  mount(chartContainerTempAmb, canvasTempAmb); // Montar el gráfico
+  mount(chartsContainer, chartContainerTempAmb); // Agregar el contenedor del gráfico al contenedor principal
 
-  table = el("table.w-full text-sm border border-gray-300");
+  // Contenedor para el gráfico de "Reologías a temp. Ensayo"
+  const chartContainerTempEnsayo = el("div.w-1/2.p-2"); // Ocupa el 50% del ancho
+  const chartTitleTempEnsayo = el("h5.text-center.mb-2", "Reologías a Temp. Ensayo"); // Título para el gráfico
+  const canvasTempEnsayo = el("canvas", "", { id: "chartTempEnsayo", width: 600, height: 400 }); // Gráfico
+  mount(chartContainerTempEnsayo, chartTitleTempEnsayo); // Montar el título
+  mount(chartContainerTempEnsayo, canvasTempEnsayo); // Montar el gráfico
+  mount(chartsContainer, chartContainerTempEnsayo); // Agregar el contenedor del gráfico al contenedor principal
 
-  thead = el("thead.bg-gray-200 text-gray-700");
-  tr = el("tr");
-  th = el("th.border border-gray-300");
-  mount(tr, th);
-  th = el("th.p-1 text-center border border-gray-300", "RPM");
-  mount(tr, th);
-  th = el("th.p-1 text-center border border-gray-300", "300");
-  mount(tr, th);
-  th = el("th.p-1 text-center border border-gray-300", "200");
-  mount(tr, th);
-  th = el("th.p-1 text-center border border-gray-300", "100");
-  mount(tr, th);
-  th = el("th.p-1 text-center border border-gray-300", "60");
-  mount(tr, th);
-  th = el("th.p-1 text-center border border-gray-300", "30");
-  mount(tr, th);
-  th = el("th.p-1 text-center border border-gray-300", "6");
-  mount(tr, th);
-  th = el("th.p-1 text-center border border-gray-300", "3");
-  mount(tr, th);
+  // Agregar los gráficos al acordeón
+  mount(accordionItem, chartsContainer);
 
-  mount(thead, tr);
-  mount(table, thead);
+  // Función para crear el gráfico de "Reologías a temp. Ambiente"
+  const createChartTempAmb = () => {
+    ctx = document.getElementById("chartTempAmb").getContext("2d");
+    myChartTempAmb = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: [0, 50, 100, 150, 200, 250, 300],
+        datasets: [
+          {
+            label: "Up",
+            data: [data.tem_ambiente_3_up, data.tem_ambiente_6_up, data.tem_ambiente_30_up, data.tem_ambiente_60_up, data.tem_ambiente_100_up, data.tem_ambiente_200_up, data.tem_ambiente_300_up],
+            borderColor: "rgba(75, 192, 192, 1)",
+            borderWidth: 1,
+            fill: false
+          },
+          {
+            label: "Down",
+            data: [data.tem_ambiente_3, data.tem_ambiente_6, data.tem_ambiente_30, data.tem_ambiente_60, data.tem_ambiente_100, data.tem_ambiente_200, data.tem_ambiente_300],
+            borderColor: "rgba(153, 102, 255, 1)",
+            borderWidth: 1,
+            fill: false
+          }
+        ]
+      },
+      options: {
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "RPM"
+            }
+          },
+          y: {
+            title: {
+                display: true,
+                text: 'CP'
+            },
+            min: 0,
+            max: 350,
+            ticks: {
+                stepSize: 50
+            }
+        }
+        }
+      }
+    });
+  };
 
-  tbody = el("tbody.bg-gray-50");
-  tr = el("tr.border-b");
-  td = el("td.py-2 px-1 text-center", "T° Ambiente");
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ambiente_rpm_up ? data.tem_ambiente_rpm_up : '-'}°C`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ambiente_300_up ? data.tem_ambiente_300_up : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ambiente_200_up ? data.tem_ambiente_200_up : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ambiente_100_up ? data.tem_ambiente_100_up : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ambiente_60_up ? data.tem_ambiente_60_up : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ambiente_30_up ? data.tem_ambiente_30_up : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ambiente_6_up ? data.tem_ambiente_6_up : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ambiente_3_up ? data.tem_ambiente_3_up : '-'}`);
-  mount(tr, td);
+  // Función para crear el gráfico de "Reologías a temp. Ensayo"
+  const createChartTempEnsayo = () => {
+    ctx = document.getElementById("chartTempEnsayo").getContext("2d");
+    myChartTempEnsayo = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: [0, 50, 100, 150, 200, 250, 300],
+        datasets: [
+          {
+            label: "Up",
+            data: [data.tem_ensayo_3_up, data.tem_ensayo_6_up, data.tem_ensayo_30_up, data.tem_ensayo_60_up, data.tem_ensayo_100_up, data.tem_ensayo_200_up, data.tem_ensayo_300_up],
+            borderColor: "rgba(75, 192, 192, 1)",
+            borderWidth: 1,
+            fill: false
+          },
+          {
+            label: "Down",
+            data: [data.tem_ensayo_3, data.tem_ensayo_6, data.tem_ensayo_30, data.tem_ensayo_60, data.tem_ensayo_100, data.tem_ensayo_200, data.tem_ensayo_300],
+            borderColor: "rgba(153, 102, 255, 1)",
+            borderWidth: 1,
+            fill: false
+          }
+        ]
+      },
+      options: {
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "RPM"
+            }
+          },
+          y: {
+            title: {
+                display: true,
+                text: 'CP'
+            },
+            min: 0,
+            max: 350,
+            ticks: {
+                stepSize: 50
+            }
+        }
+        }
+      }
+    });
+  };
 
-  mount(tbody, tr);
-  tr = el("tr.border-b");
-  td = el("td.py-2 px-1 text-center", "T° Ensayo");
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_rpm_up ? data.tem_ensayo_rpm_up : '-'}°C`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_300_up ? data.tem_ensayo_300_up : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_200_up ? data.tem_ensayo_200_up : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_100_up ? data.tem_ensayo_100_up : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_60_up ? data.tem_ensayo_60_up : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_30_up ? data.tem_ensayo_30_up : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_6_up ? data.tem_ensayo_6_up : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_3_up ? data.tem_ensayo_3_up : '-'}`);
-  mount(tr, td);
-
-  mount(tbody, tr);
-  mount(table, tbody);
-
-  mount(accordionItem, table)
-
-  div_img = el('div.mb-2 mt-2 text-center')
-  h5 = el('h5.mb-1', 'Adjunto')
-  section = el('section')
-  div_relative = el('div.relative md:w-1/2 xl:w-1/3 mx-auto flex items-center p-2 border rounded-md border-gray-200 hover:bg-gray-50')
-  contain_img = el('div.w-12 h-12 rounded-full bg-gray-100 flex-shrink-0')
-  img = el('img.w-12 h-12 object-cover rounded-full cursor-pointer')
-  img.setAttribute('src', _setUrl('uploads/ensayos', data.img_up))
-  img.setAttribute('onclick', `openModal('myModalReologiaUp', 'modalImgReologiaUp', '${_setUrl('uploads/ensayos', data.img_up)}')`)
-  mount(contain_img, img)
-  mount(div_relative, contain_img)
-
-  div_txt = el('div.text-left w-full ms-2')
-  h6 = el('text-md', 'Archivo adjunto')
-  div_flex = el('div.flex justify-between items-center text-gray-500 text-sm', el('p.mb-0', data.img_up))
-
-  mount(div_txt, h6)
-  mount(div_txt, div_flex)
-
-  mount(div_relative, div_txt)
-  mount(section, div_relative)
-  
-  mount(div_img, h5)
-  mount(div_img, section)
-
-  // mount(registro_uca, divGrid)
-  mount(accordionItem, div_img)
-
-  h5_4 = el("h5.mb-1 text-center ", "Reología (down reads)");
-  br = el("br");
-
-  mount(accordionItem, br);
-  mount(accordionItem, h5_4);
-
-  table = el("table.w-full text-sm border border-gray-300");
-
-  thead = el("thead.bg-gray-200 text-gray-700");
-  tr = el("tr");
-  th = el("th.border border-gray-300");
-  mount(tr, th);
-  th = el("th.p-1 text-center border border-gray-300", "RPM");
-  mount(tr, th);
-  th = el("th.p-1 text-center border border-gray-300", "300");
-  mount(tr, th);
-  th = el("th.p-1 text-center border border-gray-300", "200");
-  mount(tr, th);
-  th = el("th.p-1 text-center border border-gray-300", "100");
-  mount(tr, th);
-  th = el("th.p-1 text-center border border-gray-300", "60");
-  mount(tr, th);
-  th = el("th.p-1 text-center border border-gray-300", "30");
-  mount(tr, th);
-  th = el("th.p-1 text-center border border-gray-300", "6");
-  mount(tr, th);
-  th = el("th.p-1 text-center border border-gray-300", "3");
-  mount(tr, th);
-
-  mount(thead, tr);
-  mount(table, thead);
-
-  tbody = el("tbody.bg-gray-50");
-  tr = el("tr.border-b");
-  td = el("td.py-2 px-1 text-center", "T° Ambiente");
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ambiente_rpm_down ? data.tem_ambiente_rpm_down : '-'}°C`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ambiente_300_down ? data.tem_ambiente_300_down : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ambiente_200_down ? data.tem_ambiente_200_down : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ambiente_100_down ? data.tem_ambiente_100_down : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ambiente_60_down ? data.tem_ambiente_60_down : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ambiente_30_down ? data.tem_ambiente_30_down : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ambiente_6_down ? data.tem_ambiente_6_down : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ambiente_3_down ? data.tem_ambiente_3_down : '-'}`);
-  mount(tr, td);
-
-  mount(tbody, tr);
-  tr = el("tr.border-b");
-  td = el("td.py-2 px-1 text-center", "T° Ensayo");
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_rpm_down ? data.tem_ensayo_rpm_down : '-'}°C`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_300_down ? data.tem_ensayo_300_down : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_200_down ? data.tem_ensayo_200_down : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_100_down ? data.tem_ensayo_100_down : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_60_down ? data.tem_ensayo_60_down : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_30_down ? data.tem_ensayo_30_down : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_6_down ? data.tem_ensayo_6_down : '-'}`);
-  mount(tr, td);
-  td = el("td.py-2 px-1 text-center", `${data.tem_ensayo_3_down ? data.tem_ensayo_3_down : '-'}`);
-  mount(tr, td);
-
-  mount(tbody, tr);
-  mount(table, tbody);
-
-  mount(accordionItem, table)
-
-  div_img = el('div.mb-2 mt-2 text-center')
-  h5 = el('h5.mb-1', 'Adjunto')
-  section = el('section')
-  div_relative = el('div.relative md:w-1/2 xl:w-1/3 mx-auto flex items-center p-2 border rounded-md border-gray-200 hover:bg-gray-50')
-  contain_img = el('div.w-12 h-12 rounded-full bg-gray-100 flex-shrink-0')
-  img = el('img.w-12 h-12 object-cover rounded-full cursor-pointer')
-  img.setAttribute('src', _setUrl('uploads/ensayos', data.img_down))
-  img.setAttribute('onclick', `openModal('modalImgReologiaDown', 'modalImgReologiaDown', '${_setUrl('uploads/ensayos', data.img_down)}')`)
-  mount(contain_img, img)
-  mount(div_relative, contain_img)
-
-  div_txt = el('div.text-left w-full ms-2')
-  h6 = el('text-md', 'Archivo adjunto')
-  div_flex = el('div.flex justify-between items-center text-gray-500 text-sm', el('p.mb-0', data.img_down))
-
-  mount(div_txt, h6)
-  mount(div_txt, div_flex)
-
-  mount(div_relative, div_txt)
-  mount(section, div_relative)
-  
-  mount(div_img, h5)
-  mount(div_img, section)
-
-  // mount(registro_uca, divGrid)
-  mount(accordionItem, div_img)
-
-
-
+  // Crear los gráficos después de montar los elementos
+  setTimeout(() => {
+    createChartTempAmb();
+    createChartTempEnsayo();
+  }, 100); // Ajustar el tiempo según sea necesario
 };

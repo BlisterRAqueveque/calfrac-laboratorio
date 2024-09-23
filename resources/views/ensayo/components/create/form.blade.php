@@ -36,7 +36,7 @@
                     3
                 </span>
             </div>
-            Tiempo de Bombeabilidad
+            Bombeabilidad
         </a>
     </li>
     <li class="nav-item w-full md:w-auto text-xs xl:text-sm flex-1" role="presentation">
@@ -49,7 +49,7 @@
                     4
                 </span>
             </div>
-            Resistencia a la Compresión
+            UCA
         </a>
     </li>
     <li class="nav-item w-full md:w-auto text-xs xl:text-sm" role="presentation">
@@ -80,7 +80,21 @@
         </a>
     </li>
 
-    @if ($solicitud->ensayo_asignado_id == 'null')
+    <li class="nav-item w-full md:w-auto text-xs xl:text-sm flex-1" role="presentation">
+        <a class="nav-link nav_tab_mod d-flex items-center justify-center gap-2 text-violet-700" id="nav-tab2"
+            data-bs-toggle="tab" href="#tab_aditivos" data-bs-target="#tab_aditivos" role="tab"
+            aria-controls="tab_aditivos" aria-selected="false">
+            <div
+                class="w-4 h-4 xl:w-5 xl:h-5 bg-gray-400 shadow-sm rounded-full flex justify-center text-white items-center">
+                <span>
+                    7
+                </span>
+            </div>
+            Aditivos
+        </a>
+    </li>
+
+    @if ($solicitud->ensayo_asignado_id == null)
         <li class="nav-item w-full md:w-auto text-xs xl:text-sm flex-1 {{ $generar_reporte ? '' : 'd-none' }} "
             id="tab_g_report_js" role="presentation">
             <a class="nav-link nav_tab_mod d-flex items-center justify-center gap-2 text-violet-700" id="nav-tab2"
@@ -138,6 +152,9 @@
     <!-- Mezclabilidad -->
     @include('ensayo.components.create.mezclabilidad')
 
+    <!-- Aditivos -->
+    @include('ensayo.components.create.aditivos')
+
     <!-- Generar Reporte -->
     @include('ensayo.components.create.generar_reporte')
     
@@ -191,10 +208,13 @@
 <script src="{{ asset('js/ensayo/create/componentUCA.js') }}"></script>
 <script src="{{ asset('js/ensayo/create/componentAguaLibre.js') }}"></script>
 <script src="{{ asset('js/ensayo/create/componentMezclabilidad.js') }}"></script>
+<script src="{{ asset('js/ensayo/create/componentAditivos.js') }}"></script>
+<script src="{{ asset('js/ensayo/create/componentShowAditivos.js') }}"></script>
 
 <!-- Esto es para generar el reporte pdf -->
 <script>
     const checkGenerateReport = (solicitud_id) => {
+        console.log(solicitud_id); 
         return new Promise((resolve, reject) => {
             fetch("{{ route('check_report', '') }}" + "/" + solicitud_id, {
                     headers: {

@@ -33,6 +33,17 @@ class SolicitudLodo extends Model
 
     ];
 
+    public function rel_caracterizacion() {
+        return $this->hasMany(RelCaracterizacionLodo::class);
+    }
+
+    public function rel_reologia_lodo() {
+        return $this->hasMany(RelReologiasLodo::class);
+    }
+
+    public function rel_compatiblidad() {
+        return $this->hasMany(RelCompatibilidadLodo::class);
+    }
 
     public function user_iniciado_por()
     {
@@ -59,4 +70,10 @@ class SolicitudLodo extends Model
     {
         return $this->hasMany(RelAditivoSolicitudLodo::class);
     }
+
+    public function solicitud()
+    {
+        return $this->belongsTo(Solicitud::class);
+    }
+
 }
