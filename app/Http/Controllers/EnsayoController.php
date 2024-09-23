@@ -640,22 +640,6 @@ class EnsayoController extends Controller
         ]);
     }
 
-    public function store_mecanica(Request $request) {
-        $mecanica_lodo = RelMecanicaLodo::create([
-            'tiempo_1' => $request->tiempo_1,
-            'tiempo_2' => $request->tiempo_2,
-            'tiempo_3' => $request->tiempo_3,
-            'tiempo_4' => $request->tiempo_4,
-            'tiempo_5' => $request->tiempo_5,
-            'solicitud_lodo_id' => $request->solicitud_lodo_id,
-            'usuario_carga' => auth()->user()->id,
-        ]);
-        if ($mecanica_lodo->id)
-        return response()->json([
-        'success_mecanica_lodo' => $mecanica_lodo,
-        ]);
-    }
-
     public function store_compatibilidad(Request $request) {
         $compatibilidad_lodo = RelCompatibilidadLodo::create([
             //modificar las variables vy
@@ -685,6 +669,50 @@ class EnsayoController extends Controller
         if ($compatibilidad_lodo->id)
         return response()->json([
         'success_compatibilidad_lodo' => $compatibilidad_lodo,
+        ]);
+    }
+
+    public function store_mecanica(Request $request) {
+
+        # Insertar adjunto (Si es que hay)
+        $image = $request->file('file_upload_lodo');
+
+        # Nombre y destino
+        $imageName = time() . '_lodo.' . $image->getClientOriginalExtension();
+        $destinationPath = public_path('/uploads/ensayos');
+
+        # Si no existe la carpeta de destino, la crea y guarda la img
+        if (!file_exists($destinationPath)) {
+            mkdir($destinationPath, 0755, true);
+        }
+
+        $img_1 = Image::make($image->getRealPath());
+
+        $width = $img_1->width();
+        $height = $img_1->height();
+
+        # Redimensionar si la img es mayor a 1000x1000
+        if ($width > 1000 || $height > 1000) {
+            $img_1->resize(1000, 1000, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+        }
+
+        $img_1->save($destinationPath . '/' . $imageName);
+
+        $mecanica_lodo = RelMecanicaLodo::create([
+            'tiempo_1' => $request->tiempo_1,
+            'tiempo_2' => $request->tiempo_2,
+            'tiempo_3' => $request->tiempo_3,
+            'tiempo_4' => $request->tiempo_4,
+            'tiempo_5' => $request->tiempo_5,
+            'img_1' => $imageName,
+            'solicitud_lodo_id' => $request->solicitud_lodo_id,
+            'usuario_carga' => auth()->user()->id,
+        ]);
+        if ($mecanica_lodo->id)
+        return response()->json([
+        'success_mecanica_lodo' => $mecanica_lodo,
         ]);
     }
 

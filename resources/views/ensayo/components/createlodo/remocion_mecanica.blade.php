@@ -1,4 +1,82 @@
+<style>
+    /* Modal styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+        animation-name: fadeIn;
+        animation-duration: 0.5s;
+        /* display: flex; */
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal-content {
+        background-color: transparent;
+        margin: 15% auto;
+        padding: 20px;
+        border: none;
+        width: 50%;
+        animation-name: slideIn;
+        animation-duration: 0.5s;
+        /* display: flex; */
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .closeImg {
+        color: #e1e1e1;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .closeImg:hover,
+    .closeImg:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateY(-50px);
+        }
+
+        to {
+            transform: translateY(0);
+        }
+    }
+
+    body.modal-open {
+        overflow: hidden;
+    }
+</style>
 <div class="mt-4 tab-pane fade" id="tab-remocion_mecanica" role="tabpanel" aria-labelledby="nav-tab_test">
+    <div id="myModalLodo" class="modal">
+        <div class="modal-content">
+            <span id="closeImgLodo" class="closeImg">&times;</span>
+            <img id="modalImgLodo" style="width: auto;">
+        </div>
+    </div>
 @if (count($solicitud_lodo[0]->rel_mecanica) > 0)
 <div class="accordionMecanicaLodo" id="accordionMecanicaLodo">
     <div class="mb-2 text-center">
@@ -46,7 +124,26 @@
             </tbody>
         </table>
     </div>
+    <div class="mb-2 mt-2 text-center">
+        <h5 class="mb-1">Adjunto</h5>
+        <section>
+            <div
+                class="relative md:w-1/2 xl:w-1/3 mx-auto flex items-center p-2 border rounded-md border-gray-200 hover:bg-gray-50 ">
+                <div class="w-12 h-12 rounded-full bg-gray-100 flex-shrink-0">
+                    <img src="{{ asset('uploads/ensayos/') . '/' . $solicitud_lodo[0]->rel_mecanica[0]->img_1 }}"
+                        class="w-12 h-12 object-cover rounded-full cursor-pointer" alt=""
+                        onclick="openModal('myModalLodo', 'modalImgLodo', '{{ asset('uploads/ensayos/') . '/' . $solicitud_lodo[0]->rel_mecanica[0]->img_1 }}')">
+                </div>
+                <div class="text-left w-full ms-2">
+                    <h6 class="text-md">Archivo adjunto</h6>
+                    <div class="flex justify-between items-center text-gray-500 text-sm">
+                        <p class="mb-0">{{ $solicitud_lodo[0]->rel_mecanica[0]->img_1 }}</p>
+                    </div>
+                </div>
 
+            </div>
+        </section>
+    </div>
 </div>
 @else
     <div class="accordionMecanicaLodo" id="accordionMecanicaLodo"></div>
@@ -96,6 +193,39 @@
             </tbody>
         </table>
     </div>
+    <div class="mb-2 mt-2 text-center">
+        <h5 class="mb-1">Adjuntos a cargar <span class="text-red-500"><small>(Requerido)</small></span></h5>
+        <section id="container_file_lodo">
+
+        </section>
+
+        <!-- The Modal -->
+        <div id="myModalLodo" class="modal">
+            <div class="modal-content">
+                <span id="closeImgLodo" class="closeImg">&times;</span>
+                <img id="modalImgLodo" style="width: auto;">
+            </div>
+        </div>
+
+        <div class="bg-gray-50 w-1/2 mx-auto py-8 flex items-center justify-center rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer transition-all duration-100"
+            onclick="createFile('file_upload_lodo')" id="section_upload_image_lodo">
+            <div class="flex flex-col items-center">
+                <div class="p-3 bg-white rounded-full border">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 16.5V9.75m0 0 3 3m-3-3-3 3M6.75 19.5a4.5 4.5 0 0 1-1.41-8.775 5.25 5.25 0 0 1 10.233-2.33 3 3 0 0 1 3.758 3.848A3.752 3.752 0 0 1 18 19.5H6.75Z" />
+                    </svg>
+                </div>
+
+                <h5><b>Haga click</b> para adjuntar un archivo</h5>
+                <p><small>(Máximo tamaño del archivo 10mb)</small></p>
+            </div>
+        </div>
+        <input type="file" id="file_upload_lodo" name="file_upload_lodo" onchange="_listenChange(event, 'container_file_lodo', 'section_upload_image_lodo', 'myModalLodo', 'modalImgLodo')"
+            hidden>
+    </div>
+
     <div class="flex justify-center">
         <x-button type="click" id="btn_submit_remocion_mecanica_lodo"
             style="w-full md:w-auto bg-green-700 bg-opacity-60 text-white p-2 rounded-sm hover:shadow-lg transition-all duration-75 font-bold text-sm">Crear
@@ -104,6 +234,28 @@
 </form>
 @endif
 </div>
+<script src="{{ asset('js/upload_one_img.js') }}"></script>
+
+<script>
+    // Modal open img UCA
+    let myModalLodo = document.querySelector('#myModalLodo');
+    let modalImgLodo = document.querySelector('#modalImgLodo');
+    let spanImgCloseLodo = document.querySelector('#closeImgLodo');
+
+    if (spanImgCloseLodo) {
+        spanImgCloseLodo.onclick = function() {
+            myModalLodo.style.display = "none";
+            document.body.classList.remove('modal-open');
+        }
+    }
+
+    // window.onclick = function(event) {
+    //     if (event.target == modal) {
+    //         myModalUca.style.display = "none";
+    //         document.body.classList.remove('modal-open');
+    //     }
+    // }
+</script>
 
 <script>
     const btn_submit_remocion_mecanica_lodo = document.getElementById('btn_submit_remocion_mecanica_lodo');
