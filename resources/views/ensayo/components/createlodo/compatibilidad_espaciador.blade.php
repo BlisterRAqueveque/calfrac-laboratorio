@@ -310,10 +310,9 @@
                         }).then((response) => response.json())
                         .then((data) => {
                             if (data) {
-                                componentCompatibilidad(data.success_compatibilidad_lodo)
+                                componentCompatibilidadLodo(data.success_compatibilidad_lodo)
                                 
-                                console.log('Data aditivos:', data.success_compatibilidad_lodo)
-                                //console.log('Data calculos:', data.success_calculos)
+                                //console.log('Data aditivos:', data.success_compatibilidad_lodo)
                                 document.getElementById('form_compatibilidad_lodo').style.display = 'none'
                                 successAlert('¡Registro Asignado!',
                                     'El registro se asignó correctamente.').then(

@@ -652,7 +652,7 @@ class EnsayoController extends Controller
             'yp_2' => $request->yp_2,
             'yp_3' => $request->yp_3,
             'yp_4' => $request->yp_4,
-            'yp_5' => $request->yp_4,
+            'yp_5' => $request->yp_5,
             'gel_seg_1' => $request->gel_seg_1,
             'gel_seg_2' => $request->gel_seg_2,
             'gel_seg_3' => $request->gel_seg_3,

@@ -123,7 +123,7 @@
 </div>
 {{-- JavaScript dinamico para el reload de las tablas de Reologias de Lodo --}}
 <script src="{{ asset('js/ensayo/createlodo/componentReologiasLodo.js') }}"></script>
-
+<script src="{{ asset('js/ensayo/createlodo/componentCompatibilidadLodo.js') }}"></script>
 
 <!--Aca iria un script para mostrar un cartel de carga pero meh -->
 
