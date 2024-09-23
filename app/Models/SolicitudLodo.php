@@ -41,7 +41,7 @@ class SolicitudLodo extends Model
         return $this->hasMany(RelReologiasLodo::class);
     }
 
-    public function rel_compatiblidad() {
+    public function rel_compatibilidad() {
         return $this->hasMany(RelCompatibilidadLodo::class);
     }
 
