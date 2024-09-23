@@ -77,6 +77,12 @@
             <img id="modalImgLodo" style="width: auto;">
         </div>
     </div>
+    <div id="myModalLodo2" class="modal">
+        <div class="modal-content">
+            <span id="closeImgLodo2" class="closeImg">&times;</span>
+            <img id="modalImgLodo2" style="width: auto;">
+        </div>
+    </div>
 @if (count($solicitud_lodo[0]->rel_mecanica) > 0)
 <div class="accordionMecanicaLodo" id="accordionMecanicaLodo">
     <div class="mb-2 text-center">
@@ -144,13 +150,33 @@
             </div>
         </section>
     </div>
+    <div class="mb-2 mt-2 text-center">
+        <h5 class="mb-1">Adjunto</h5>
+        <section>
+            <div
+                class="relative md:w-1/2 xl:w-1/3 mx-auto flex items-center p-2 border rounded-md border-gray-200 hover:bg-gray-50 ">
+                <div class="w-12 h-12 rounded-full bg-gray-100 flex-shrink-0">
+                    <img src="{{ asset('uploads/ensayos/') . '/' . $solicitud_lodo[0]->rel_mecanica[0]->img_2 }}"
+                        class="w-12 h-12 object-cover rounded-full cursor-pointer" alt=""
+                        onclick="openModal('myModalLodo2', 'modalImgLodo2', '{{ asset('uploads/ensayos/') . '/' . $solicitud_lodo[0]->rel_mecanica[0]->img_2 }}')">
+                </div>
+                <div class="text-left w-full ms-2">
+                    <h6 class="text-md">Archivo adjunto</h6>
+                    <div class="flex justify-between items-center text-gray-500 text-sm">
+                        <p class="mb-0">{{ $solicitud_lodo[0]->rel_mecanica[0]->img_2 }}</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
 </div>
 @else
     <div class="accordionMecanicaLodo" id="accordionMecanicaLodo"></div>
 @endif 
 
 @if (count($solicitud_lodo[0]->rel_mecanica) == 0)
-<form id="form_mecanica_lodo" method="POST">
+<form id="form_mecanica_lodo" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="mb-2 text-center">
         <h5 class="mb-1">Registro de Remoción Mecánica del Lodo</h5>
@@ -193,6 +219,8 @@
             </tbody>
         </table>
     </div>
+
+    {{-- Primer adjunto --}}
     <div class="mb-2 mt-2 text-center">
         <h5 class="mb-1">Adjuntos a cargar <span class="text-red-500"><small>(Requerido)</small></span></h5>
         <section id="container_file_lodo">
@@ -226,6 +254,41 @@
             hidden>
     </div>
 
+    {{-- Segundo adjunto --}}
+        <div class="mb-2 mt-2 text-center">
+        <h5 class="mb-1">Adjuntos a cargar <span class="text-red-500"><small>(Requerido)</small></span></h5>
+        <section id="container_file_lodo_2">
+
+        </section>
+
+        <!-- The Modal -->
+        <div id="myModalLodo2" class="modal">
+            <div class="modal-content">
+                <span id="closeImgLodo2" class="closeImg">&times;</span>
+                <img id="modalImgLodo2" style="width: auto;">
+            </div>
+        </div>
+
+        <div class="bg-gray-50 w-1/2 mx-auto py-8 flex items-center justify-center rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer transition-all duration-100"
+            onclick="createFile('file_upload_lodo_2')" id="section_upload_image_lodo_2">
+            <div class="flex flex-col items-center">
+                <div class="p-3 bg-white rounded-full border">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 16.5V9.75m0 0 3 3m-3-3-3 3M6.75 19.5a4.5 4.5 0 0 1-1.41-8.775 5.25 5.25 0 0 1 10.233-2.33 3 3 0 0 1 3.758 3.848A3.752 3.752 0 0 1 18 19.5H6.75Z" />
+                    </svg>
+                </div>
+
+                <h5><b>Haga click</b> para adjuntar un archivo</h5>
+                <p><small>(Máximo tamaño del archivo 10mb)</small></p>
+            </div>
+        </div>
+        <input type="file" id="file_upload_lodo_2" name="file_upload_lodo_2" onchange="_listenChange(event, 'container_file_lodo_2', 'section_upload_image_lodo_2', 'myModalLodo2', 'modalImgLodo2')"
+            hidden>
+    </div>
+    
+
     <div class="flex justify-center">
         <x-button type="click" id="btn_submit_remocion_mecanica_lodo"
             style="w-full md:w-auto bg-green-700 bg-opacity-60 text-white p-2 rounded-sm hover:shadow-lg transition-all duration-75 font-bold text-sm">Crear
@@ -245,6 +308,19 @@
     if (spanImgCloseLodo) {
         spanImgCloseLodo.onclick = function() {
             myModalLodo.style.display = "none";
+            document.body.classList.remove('modal-open');
+        }
+    }
+
+    // Para segundo adjunto
+
+    let myModalLodo2 = document.querySelector('#myModalLodo2');
+    let modalImgLodo2 = document.querySelector('#modalImgLodo2');
+    let spanImgCloseLodo2 = document.querySelector('#closeImgLodo2');
+
+    if (spanImgCloseLodo2) {
+        spanImgCloseLodo2.onclick = function() {
+            myModalLodo2.style.display = "none";
             document.body.classList.remove('modal-open');
         }
     }

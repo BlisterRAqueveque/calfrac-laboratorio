@@ -17,7 +17,7 @@ class RelMecanicaLodo extends Model
         'tiempo_4',
         'tiempo_5',
         'img_1',
-        //'img_2',
+        'img_2',
         'solicitud_lodo_id',
         'usuario_carga',
     ];
