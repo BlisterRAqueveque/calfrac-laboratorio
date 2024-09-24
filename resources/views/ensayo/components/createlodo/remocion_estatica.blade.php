@@ -179,7 +179,7 @@
     </div>
 </div>
 @else
-    <div class="accordionMecanicaLodo" id="accordionMecanicaLodo"></div>
+    <div class="accordionEstaticaLodo" id="accordionEstaticaLodo"></div>
 @endif 
     @if (count($solicitud_lodo[0]->rel_estatica) == 0)
     <form id="form_estatica_lodo" method="POST">
