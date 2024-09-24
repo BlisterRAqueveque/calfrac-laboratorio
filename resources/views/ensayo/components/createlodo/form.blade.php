@@ -151,7 +151,7 @@
 {{-- JavaScript dinamico para el reload de las tablas de Reologias de Lodo --}}
 <script src="{{ asset('js/ensayo/createlodo/componentReologiasLodo.js') }}"></script>
 <script src="{{ asset('js/ensayo/createlodo/componentCompatibilidadLodo.js') }}"></script>
-
+<script src="{{ asset('js/ensayo/createlodo/componentMecanicaLodo.js') }}"></script>
 <!--Aca iria un script para mostrar un cartel de carga pero meh -->
 
 {{-- <script src="{{ asset('js/ensayos_lodo/componentCaracterizacion.js') }}"></script>
