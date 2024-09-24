@@ -724,8 +724,8 @@ class EnsayoController extends Controller
          # Asegurarse de que ambos archivos existan antes de procesarlos
          if ($image1 && $image2) {
              # Nombres y destinos
-             $imageName1 = time() . '_lodo_1.' . $image1->getClientOriginalExtension();
-             $imageName2 = time() . '_lodo_2.' . $image2->getClientOriginalExtension();
+             $imageName1 = time() . '_lodo_estatica_1.' . $image1->getClientOriginalExtension();
+             $imageName2 = time() . '_lodo_estatica_2.' . $image2->getClientOriginalExtension();
              $destinationPath = public_path('/uploads/ensayos');
      
              # Si no existe la carpeta de destino, la crea

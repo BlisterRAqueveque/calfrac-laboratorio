@@ -71,30 +71,116 @@
     }
 </style>
 <div class="mt-4 tab-pane fade" id="tab-remocion_estatica" role="tabpanel" aria-labelledby="nav-tab_test">
+    <div id="myModalLodoEstatica" class="modal">
+        <div class="modal-content">
+            <span id="closeImgLodoEstatica" class="closeImg">&times;</span>
+            <img id="modalImgLodoEstatica" style="width: auto;">
+        </div>
+    </div>
+    <div id="myModalLodoEstatica2" class="modal">
+        <div class="modal-content">
+            <span id="closeImgLodoEstatica2" class="closeImg">&times;</span>
+            <img id="modalImgLodoEstatica2" style="width: auto;">
+        </div>
+    </div>
+    @if (count($solicitud_lodo[0]->rel_estatica) > 0)
+<div class="accordionEstaticaLodo" id="accordionEstaticaLodo">
+    <div class="row mt-3 py-2 px-2">
+        <!-- Contenedor Flex para la tabla y los adjuntos -->
+        <div class="flex flex-wrap">
+            <!-- Tabla de Remoción Mecánica -->
+            <div class="w-full md:w-1/2">
+                <div class="mb-2 text-center">
+                    <h5 class="mb-1">Registro de Remoción Estatica del Lodo</h5>
+                </div>        
+                <table class="w-full text-sm border border-gray-300">
+                    <thead class="bg-gray-200 text-gray-700">
+                        <tr>
+                            <th class="p-1 text-center border border-gray-300">Tiempo de contacto (min)</th>
+                            <th class="p-1 text-center border border-gray-300">DynaFlush-"O"</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="p-1 text-center border border-gray-300">2.5</td>
+                            <td class="py-2 px-1 text-center border border-gray-300">
+                                {{ $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_1 ? $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_1 : '-' }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-1 text-center border border-gray-300">5</td>
+                            <td class="py-2 px-1 text-center border border-gray-300">
+                                {{ $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_2 ? $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_2 : '-' }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-1 text-center border border-gray-300">7.5</td>
+                            <td class="py-2 px-1 text-center border border-gray-300">
+                                {{ $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_3 ? $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_3 : '-' }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-1 text-center border border-gray-300">10</td>
+                            <td class="py-2 px-1 text-center border border-gray-300">
+                                {{ $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_4 ? $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_4 : '-' }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-1 text-center border border-gray-300">12.5</td>
+                            <td class="py-2 px-1 text-center border border-gray-300">
+                                {{ $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_5 ? $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_5 : '-' }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
+            <!-- Sección de Adjuntos -->
+            <div class="w-full md:w-1/2 pl-4">
+                <div class="mb-2 mt-2 text-center">
+                    <h5 class="mb-1">Adjunto 1</h5>
+                    <section>
+                        <div class="relative flex items-center p-2 border rounded-md border-gray-200 hover:bg-gray-50">
+                            <div class="w-12 h-12 rounded-full bg-gray-100 flex-shrink-0">
+                                <img src="{{ asset('uploads/ensayos/') . '/' . $solicitud_lodo[0]->rel_estatica[0]->img_1 }}"
+                                    class="w-12 h-12 object-cover rounded-full cursor-pointer" alt=""
+                                    onclick="openModal('myModalLodoEstatica', 'modalImgLodoEstatica', '{{ asset('uploads/ensayos/') . '/' . $solicitud_lodo[0]->rel_estatica[0]->img_1 }}')">
+                            </div>
+                            <div class="text-left w-full ms-2">
+                                <h6 class="text-md">Archivo adjunto</h6>
+                                <div class="flex justify-between items-center text-gray-500 text-sm">
+                                    <p class="mb-0">{{ $solicitud_lodo[0]->rel_estatica[0]->img_1 }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                <div class="mb-2 mt-2 text-center">
+                    <h5 class="mb-1">Adjunto 2</h5>
+                    <section>
+                        <div class="relative flex items-center p-2 border rounded-md border-gray-200 hover:bg-gray-50">
+                            <div class="w-12 h-12 rounded-full bg-gray-100 flex-shrink-0">
+                                <img src="{{ asset('uploads/ensayos/') . '/' . $solicitud_lodo[0]->rel_estatica[0]->img_2 }}"
+                                    class="w-12 h-12 object-cover rounded-full cursor-pointer" alt=""
+                                    onclick="openModal('myModalLodoEstatica2', 'modalImgLodoEstatica2', '{{ asset('uploads/ensayos/') . '/' . $solicitud_lodo[0]->rel_estatica[0]->img_2 }}')">
+                            </div>
+                            <div class="text-left w-full ms-2">
+                                <h6 class="text-md">Archivo adjunto</h6>
+                                <div class="flex justify-between items-center text-gray-500 text-sm">
+                                    <p class="mb-0">{{ $solicitud_lodo[0]->rel_estatica[0]->img_2 }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@else
+    <div class="accordionMecanicaLodo" id="accordionMecanicaLodo"></div>
+@endif 
     @if (count($solicitud_lodo[0]->rel_estatica) == 0)
     <form id="form_estatica_lodo" method="POST">
         @csrf
