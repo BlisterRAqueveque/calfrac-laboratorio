@@ -13,19 +13,6 @@
             Sistema 
         </a>
     </li>
-    {{-- <li class="nav-item w-full md:w-auto text-xs xl:text-sm" role="presentation">
-        <a class="nav-link nav_tab_mod d-flex items-center gap-2 justify-center active text-violet-700"
-            aria-current="page" id="nav-tab1" href="#tab-caracterizacion" data-bs-toggle="tab" data-bs-target="#tab-caracterizacion"
-            role="tab" aria-controls="tab-caracterizacion" aria-selected="true">
-            <div
-                class="w-4 h-4 xl:w-5 xl:h-5 bg-gray-400 shadow-sm rounded-full flex justify-center text-white items-center">
-                <span>
-                    2
-                </span>
-            </div>
-            Caracterización
-        </a>
-    </li> --}}
     <li class="nav-item w-full md:w-auto text-xs xl:text-sm flex-1" role="presentation">
         <a class="nav-link nav_tab_mod d-flex items-center justify-center gap-2 text-violet-700" id="nav-tab2"
             data-bs-toggle="tab" href="#tab-caracterizacion" data-bs-target="#tab-caracterizacion" role="tab"
