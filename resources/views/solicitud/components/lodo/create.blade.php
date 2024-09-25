@@ -199,6 +199,14 @@
                 <hr class="my-4">
 
                 <p class="m-0 font-bold text-lg my-3 tracking-wide">Requerimientos del Colchon</p>
+
+                <div class="grid grid-cols-4">
+                    <div class="col-span-4 md:col-span-1">
+                        <label for="" class="text-sm mt-3 text-gray-700 font-semibold tracking-wide mb-2">Sistema de Aditivos</label>
+                        <input type="text" name="sistema_aditivos" class="form-control text-sm" placeholder="Ingrese Sistema de Aditivos">
+                    </div>
+                </div>
+
                 <div class="grid grid-cols-3 text-center bg-gray-100 py-2 my-3">
                     <p>Lote</p>
                     <p>Aditivo</p>
@@ -222,7 +230,7 @@
                         <label for="vol_colchon" class="text-sm text-gray-700 font-semibold tracking-wide">Volumen de Colchón
                             <small>(bbl)</small></label>
                         <input type="number" placeholder="Ingrese el volumen de Colchón"
-                            class="form-control sz placeholder:text-gray-300 placeholder:font-light" name="vol_colchon" step=".0001"
+                            class="form-control sz " name="vol_colchon" step=".0001"
                             id="vol_colchon">
                         @error('vol_colchon')
                             <small class="text-red-700 font-semibold"><em>{{ $message }}</em></small>
@@ -233,7 +241,7 @@
                         <label for="densidad_colchon" class="text-sm text-gray-700 font-semibold tracking-wide">Densidad de Colchón
                             <small>(ppg)</small></label>
                         <input type="number" placeholder="Ingrese la densidad de Colchón"
-                            class="form-control sz placeholder:text-gray-300 placeholder:font-light" name="densidad_colchon" step=".0001"
+                            class="form-control sz" name="densidad_colchon" step=".0001"
                             id="densidad_colchon">
                         @error('densidad_colchon')
                             <small class="text-red-700 font-semibold"><em>{{ $message }}</em></small>
@@ -244,7 +252,7 @@
                         <label for="tiempo_contacto" class="text-sm text-gray-700 font-semibold tracking-wide">Tiempo de contacto
                             <small>(min)</small></label>
                         <input type="number" placeholder="Ingrese el tiempo de contacto"
-                            class="form-control sz placeholder:text-gray-300 placeholder:font-light" name="tiempo_contacto" step=".0001"
+                            class="form-control sz " name="tiempo_contacto" step=".0001"
                             id="tiempo_contacto">
                         @error('tiempo_contacto')
                             <small class="text-red-700 font-semibold"><em>{{ $message }}</em></small>
