@@ -2,15 +2,28 @@
     style="z-index: 999">
     <li class="nav-item w-full md:w-auto text-xs xl:text-sm" role="presentation">
         <a class="nav-link nav_tab_mod d-flex items-center gap-2 justify-center active text-violet-700"
-            aria-current="page" id="nav-tab1" href="#tab-caracterizacion" data-bs-toggle="tab" data-bs-target="#tab-caracterizacion"
-            role="tab" aria-controls="tab-caracterizacion" aria-selected="true">
+            aria-current="page" id="nav-tab1" href="#tab-sistema" data-bs-toggle="tab" data-bs-target="#tab-sistema"
+            role="tab" aria-controls="tab-sistema" aria-selected="true">
             <div
                 class="w-4 h-4 xl:w-5 xl:h-5 bg-gray-400 shadow-sm rounded-full flex justify-center text-white items-center">
                 <span>
                     1
                 </span>
             </div>
-            Caracterización del Lodo
+            Sistema 
+        </a>
+    </li>
+    <li class="nav-item w-full md:w-auto text-xs xl:text-sm flex-1" role="presentation">
+        <a class="nav-link nav_tab_mod d-flex items-center justify-center gap-2 text-violet-700" id="nav-tab2"
+            data-bs-toggle="tab" href="#tab-caracterizacion" data-bs-target="#tab-caracterizacion" role="tab"
+            aria-controls="tab-caracterizacion" aria-selected="false">
+            <div
+                class="w-4 h-4 xl:w-5 xl:h-5 bg-gray-400 shadow-sm rounded-full flex justify-center text-white items-center">
+                <span>
+                    2
+                </span>
+            </div>
+           Caracterización
         </a>
     </li>
     <li class="nav-item w-full md:w-auto text-xs xl:text-sm flex-1" role="presentation">
@@ -20,10 +33,10 @@
             <div
                 class="w-4 h-4 xl:w-5 xl:h-5 bg-gray-400 shadow-sm rounded-full flex justify-center text-white items-center">
                 <span>
-                    2
+                    3
                 </span>
             </div>
-           Compatibilidad Espaciador-Lodo
+           Compatibilidad
         </a>
     </li>
     <li class="nav-item w-full md:w-auto text-xs xl:text-sm flex-1" role="presentation">
@@ -33,7 +46,7 @@
             <div
                 class="w-4 h-4 xl:w-5 xl:h-5 bg-gray-400 shadow-sm rounded-full flex justify-center text-white items-center">
                 <span>
-                    3
+                    4
                 </span>
             </div>
            Remoción mecánica
@@ -46,7 +59,7 @@
             <div
                 class="w-4 h-4 xl:w-5 xl:h-5 bg-gray-400 shadow-sm rounded-full flex justify-center text-white items-center">
                 <span>
-                    4
+                    5
                 </span>
             </div>
             Remoción estática
@@ -59,7 +72,7 @@
             <div
                 class="w-4 h-4 xl:w-5 xl:h-5 bg-gray-400 shadow-sm rounded-full flex justify-center text-white items-center">
                 <span>
-                    5
+                    6
                 </span>
             </div>
            Humectabilidad
@@ -73,18 +86,19 @@
             <div
                 class="w-4 h-4 xl:w-5 xl:h-5 bg-gray-400 shadow-sm rounded-full flex justify-center text-white items-center">
                 <span>
-                    6
+                    7
                 </span>
             </div>
             Wettability
         </a>
     </li>
 
-  
 </ul>
 
 <div class="tab-content" id="nav-tabs-content">
     <input type="hidden" value="{{ $solicitud->id }}" name="solicitud_id">
+    {{-- Sistema de Aditivos --}}
+    @include('ensayo.components.createlodo.sistema_aditivos')
     {{-- Caracterizacion de lodo --}}
     @include('ensayo.components.createlodo.caracterizacion_lodo')
     {{-- Compatibilidad Espaciador-Lodo --}}
@@ -123,8 +137,9 @@
 </div>
 {{-- JavaScript dinamico para el reload de las tablas de Reologias de Lodo --}}
 <script src="{{ asset('js/ensayo/createlodo/componentReologiasLodo.js') }}"></script>
-
-
+<script src="{{ asset('js/ensayo/createlodo/componentCompatibilidadLodo.js') }}"></script>
+<script src="{{ asset('js/ensayo/createlodo/componentMecanicaLodo.js') }}"></script>
+<script src="{{ asset('js/ensayo/createlodo/componentEstaticaLodo.js') }}"></script>
 <!--Aca iria un script para mostrar un cartel de carga pero meh -->
 
 {{-- <script src="{{ asset('js/ensayos_lodo/componentCaracterizacion.js') }}"></script>

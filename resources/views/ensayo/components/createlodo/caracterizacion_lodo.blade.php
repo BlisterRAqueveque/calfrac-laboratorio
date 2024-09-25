@@ -1,5 +1,5 @@
 
-<div class="mt-4 tab-pane fade show active" id="tab-caracterizacion" role="tabpanel"> <!-- caracterizacion del Lodo (1) -->
+<div class="mt-4 tab-pane fade" id="tab-caracterizacion" role="tabpanel" aria-labelledby="nav-tab_test">   <!-- caracterizacion del Lodo (1) -->
 @if (count($solicitud_lodo[0]->rel_caracterizacion) > 0)
 <div class="accordionLodo" id="accordionReologiaLodo">
     <div class="mb-2 text-center">

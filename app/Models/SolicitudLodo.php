@@ -41,8 +41,16 @@ class SolicitudLodo extends Model
         return $this->hasMany(RelReologiasLodo::class);
     }
 
-    public function rel_compatiblidad() {
+    public function rel_compatibilidad() {
         return $this->hasMany(RelCompatibilidadLodo::class);
+    }
+
+    public function rel_mecanica() {
+        return $this->hasMany(RelMecanicaLodo::class);
+    }
+
+    public function rel_estatica() {
+        return $this->hasMany(RelEstaticaLodo::class);
     }
 
     public function user_iniciado_por()

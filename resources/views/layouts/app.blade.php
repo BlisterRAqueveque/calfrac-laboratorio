@@ -99,8 +99,8 @@
 
                 <li class="relative p-2 flex gap-3 cursor-pointer rounded-md" id="miPerfilNav">
                     {{-- Vieja configuracion, error que encontro Victor cuando caduca sesion
-                    @if (auth()->user()->img) --}}
-                    @if (auth()->check() && auth()->user()->img)
+                    @if (auth()->user()->img) 
+                    
                         <div class="flex justify-center items-center w-10 h-10 mx-auto">
                             <img src="{{ asset('uploads/perfiles') . '/' . auth()->user()->img }}"
                                 class="rounded-full object-cover w-10 h-10" alt="">
@@ -110,21 +110,48 @@
                             <img src="{{ asset('img/img_default.jpg') }}" class="rounded-full object-cover w-12 h-12"
                                 alt="">
                         </div>
+                    @endif--}}
+                    @if (auth()->check())
+                    {{-- Usuario autenticado --}}
+                    @if (auth()->user()->img)
+                        <div class="flex justify-center items-center w-10 h-10 mx-auto">
+                            <img src="{{ asset('uploads/perfiles') . '/' . auth()->user()->img }}" 
+                                 class="rounded-full object-cover w-10 h-10" alt="">
+                        </div>
+                    @else
+                        <div class="flex justify-center items-center w-12 h-12 mx-auto">
+                            <img src="{{ asset('img/img_default.jpg') }}" 
+                                 class="rounded-full object-cover w-12 h-12" alt="">
+                        </div>
                     @endif
+            
+
                     <div class="flex flex-col">
                         <span class="text-xs xl:text-sm font-semibold tracking-wide dark:text-white">{{ auth()->user()->nombre }}
                             {{ auth()->user()->apellido }}</span>
                         <small class="text-xs xl:text-sm text-gray-400">{{ auth()->user()->grupo->nombre }}</small>
                     </div>
-                    
+                    @else
+                    {{-- Redireccionar al login si la sesión ha expirado --}}
+                    <script>
+                        window.location.href = "{{ route('login') }}";
+                    </script>
+                @endif
 
                     {{-- <div class="absolute z-50 text-xs xl:text-sm mt-1 rounded bg-white shadow-md w-56 hidden"
                         id="miPerfilConfig"
                         style="box-shadow: 0px 0px 2px 0px rgba(171,171,171,1); top: 55px; left: 0; right: 0;"> --}}
                     <div class="absolute text-sm nav_tab_profile dark:dark_bg">
                         <ul class="ps-0 p-2 pe-0">
+                            {{-- Vieja config, intento arreglo log in 
                             <span class="font-semibold text-gray-700 dark:text-white ps-3">Bienvenido
+                                {{ auth()->user()->nombre }}</span> --}}
+                                @if (auth()->check())
+                                    <span class="font-semibold text-gray-700 dark:text-white ps-3">Bienvenido
                                 {{ auth()->user()->nombre }}</span>
+                                @else
+                                    <span class="font-semibold text-gray-700 dark:text-white ps-3">Bienvenido, invitado</span>
+                            @endif
                             <li class="ps-3 mt-2  hover:bg-gray-100 dark:hover:bg-gray-800 py-2">
                                 <a href=""
                                     class="text-gray-600 dark:text-gray-400 hover:text-green-900 dark:hover:text-white flex items-center text-sm gap-1">

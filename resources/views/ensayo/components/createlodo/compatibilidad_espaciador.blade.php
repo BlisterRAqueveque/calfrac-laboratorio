@@ -1,7 +1,160 @@
 <div class="mt-4 tab-pane fade" id="tab-compatibilidad_espaciador" role="tabpanel" aria-labelledby="nav-tab_test">   
-{{-- @if (count($solicitud_lodo[0]->rel_compatibilidad) == 0) --}}
-<form id="form_compatibilidad_lodo" method="POST">
-    @csrf
+    @if (count($solicitud_lodo[0]->rel_compatibilidad) > 0)
+<div class="accordionCompatibilidadLodo" id="accordionCompatibilidadLodo">
+    <div class="mb-2 text-center">
+        <h5 class="mb-1">Caracterización del Compatibilidad</h5>
+    </div>
+    <div class="flex">
+        <div class="w-1/2 p-2">
+            <div class="row mt-3 py-2 px-2">
+                <table class="w-full text-sm border border-gray-300">
+                    <thead class="bg-gray-200 text-gray-700">
+                        <tr>
+                            <th class="p-1 text-center border border-gray-300" colspan="2">% de Fluido</th>
+                            <th class="p-1 text-center border border-gray-300">VP</th>
+                            <th class="p-1 text-center border border-gray-300">YP</th>
+                        </tr>
+                        <tr>
+                            <th class="p-1 text-center border border-gray-300">Lodo</th>
+                            <th class="p-1 text-center border border-gray-300">Colchón</th>
+                            <th class="p-1 text-center border border-gray-300">(cp)</th>
+                            <th class="p-1 text-center border border-gray-300">(lb/100ft2)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="py-2 text-center border">100</td>
+                            <td class="py-2 text-center border">0</td>
+                            <td class="py-2 px-1 text-center border">
+                                {{ $solicitud_lodo[0]->rel_compatibilidad[0]->vp_1 ? $solicitud_lodo[0]->rel_compatibilidad[0]->vp_1 : '-' }}
+                            </td>
+                            <td class="py-2 px-1 text-center border">
+                                {{ $solicitud_lodo[0]->rel_compatibilidad[0]->yp_1 ? $solicitud_lodo[0]->rel_compatibilidad[0]->yp_1 : '-' }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 text-center border">75</td>
+                            <td class="py-2 text-center border">25</td>
+                            <td class="py-2 px-1 text-center border">
+                                {{ $solicitud_lodo[0]->rel_compatibilidad[0]->vp_2 ? $solicitud_lodo[0]->rel_compatibilidad[0]->vp_2 : '-' }}
+                            </td>
+                            <td class="py-2 px-1 text-center border">
+                                {{ $solicitud_lodo[0]->rel_compatibilidad[0]->yp_2 ? $solicitud_lodo[0]->rel_compatibilidad[0]->yp_2 : '-' }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 text-center border">50</td>
+                            <td class="py-2 text-center border">50</td>
+                            <td class="py-2 px-1 text-center border">
+                                {{ $solicitud_lodo[0]->rel_compatibilidad[0]->vp_3 ? $solicitud_lodo[0]->rel_compatibilidad[0]->vp_3 : '-' }}
+                            </td>
+                            <td class="py-2 px-1 text-center border">
+                                {{ $solicitud_lodo[0]->rel_compatibilidad[0]->yp_3 ? $solicitud_lodo[0]->rel_compatibilidad[0]->yp_3 : '-' }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 text-center border">25</td>
+                            <td class="py-2 text-center border">75</td>
+                            <td class="py-2 px-1 text-center border">
+                                {{ $solicitud_lodo[0]->rel_compatibilidad[0]->vp_4 ? $solicitud_lodo[0]->rel_compatibilidad[0]->vp_4 : '-' }}
+                            </td>
+                            <td class="py-2 px-1 text-center border">
+                                {{ $solicitud_lodo[0]->rel_compatibilidad[0]->yp_4 ? $solicitud_lodo[0]->rel_compatibilidad[0]->yp_4 : '-' }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 text-center border">0</td>
+                            <td class="py-2 text-center border">100</td>
+                            <td class="py-2 px-1 text-center border">
+                                {{ $solicitud_lodo[0]->rel_compatibilidad[0]->vp_5 ? $solicitud_lodo[0]->rel_compatibilidad[0]->vp_5 : '-' }}
+                            </td>
+                            <td class="py-2 px-1 text-center border">
+                                {{ $solicitud_lodo[0]->rel_compatibilidad[0]->yp_5 ? $solicitud_lodo[0]->rel_compatibilidad[0]->yp_5 : '-' }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="w-1/2 p-2">
+            <div class="row mt-3 py-2 px-2">
+                <table class="w-full text-sm border border-gray-300">
+                    <thead class="bg-gray-200 text-gray-700">
+                        <tr>
+                            <th class="p-1 text-center border border-gray-300" colspan="2">% de Fluido</th>
+                            <th class="p-1 text-center border border-gray-300">Gel 10</th>
+                            <th class="p-1 text-center border border-gray-300">Gel 10</th>
+                        </tr>
+                        <tr>
+                            <th class="p-1 text-center border border-gray-300">Lodo</th>
+                            <th class="p-1 text-center border border-gray-300">Colchón</th>
+                            <th class="p-1 text-center border border-gray-300">(Seg)</th>
+                            <th class="p-1 text-center border border-gray-300">(Min)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="py-2 text-center border">100</td>
+                            <td class="py-2 text-center border">0</td>
+                            <td class="py-2 px-1 text-center border">
+                                {{ $solicitud_lodo[0]->rel_compatibilidad[0]->gel_seg_1 ? $solicitud_lodo[0]->rel_compatibilidad[0]->gel_seg_1 : '-' }}
+                            </td>
+                            <td class="py-2 px-1 text-center border">
+                                {{ $solicitud_lodo[0]->rel_compatibilidad[0]->gel_min_1 ? $solicitud_lodo[0]->rel_compatibilidad[0]->gel_min_1 : '-' }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 text-center border">75</td>
+                            <td class="py-2 text-center border">25</td>
+                            <td class="py-2 px-1 text-center border">
+                                {{ $solicitud_lodo[0]->rel_compatibilidad[0]->gel_seg_2 ? $solicitud_lodo[0]->rel_compatibilidad[0]->gel_seg_2 : '-' }}
+                            </td>
+                            <td class="py-2 px-1 text-center border">
+                                {{ $solicitud_lodo[0]->rel_compatibilidad[0]->gel_min_2 ? $solicitud_lodo[0]->rel_compatibilidad[0]->gel_min_2 : '-' }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 text-center border">50</td>
+                            <td class="py-2 text-center border">50</td>
+                            <td class="py-2 px-1 text-center border">
+                                {{ $solicitud_lodo[0]->rel_compatibilidad[0]->gel_seg_3 ? $solicitud_lodo[0]->rel_compatibilidad[0]->gel_seg_3 : '-' }}
+                            </td>
+                            <td class="py-2 px-1 text-center border">
+                                {{ $solicitud_lodo[0]->rel_compatibilidad[0]->gel_min_3 ? $solicitud_lodo[0]->rel_compatibilidad[0]->gel_min_3 : '-' }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 text-center border">25</td>
+                            <td class="py-2 text-center border">75</td>
+                            <td class="py-2 px-1 text-center border">
+                                {{ $solicitud_lodo[0]->rel_compatibilidad[0]->gel_seg_4 ? $solicitud_lodo[0]->rel_compatibilidad[0]->gel_seg_4 : '-' }}
+                            </td>
+                            <td class="py-2 px-1 text-center border">
+                                {{ $solicitud_lodo[0]->rel_compatibilidad[0]->gel_min_4 ? $solicitud_lodo[0]->rel_compatibilidad[0]->gel_min_4 : '-' }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 text-center border">0</td>
+                            <td class="py-2 text-center border">100</td>
+                            <td class="py-2 px-1 text-center border">
+                                {{ $solicitud_lodo[0]->rel_compatibilidad[0]->gel_seg_5 ? $solicitud_lodo[0]->rel_compatibilidad[0]->gel_seg_5 : '-' }}
+                            </td>
+                            <td class="py-2 px-1 text-center border">
+                                {{ $solicitud_lodo[0]->rel_compatibilidad[0]->gel_min_5 ? $solicitud_lodo[0]->rel_compatibilidad[0]->gel_min_5 : '-' }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@else
+    <div class="accordionCompatibilidadLodo" id="accordionCompatibilidadLodo"></div>
+@endif
+@if (count($solicitud_lodo[0]->rel_compatibilidad) == 0)
+    <form id="form_compatibilidad_lodo" method="POST">
+        @csrf
     <div class="mb-2 text-center">
         <h5 class="mb-1">Registro de compatibilidad colchón mecánico y lodo</h5>
         <hr>
@@ -138,8 +291,9 @@
             Registro</x-button>
     </div>
 </form>
-{{-- @endif --}}
+@endif
 </div>
+
 <script>
     const btn_submit_compatibilidad_lodo = document.getElementById('btn_submit_compatibilidad_lodo');
 
@@ -156,10 +310,9 @@
                         }).then((response) => response.json())
                         .then((data) => {
                             if (data) {
-                                componentCaracterizacion(data.success_compatibilidad_lodo)
+                                componentCompatibilidadLodo(data.success_compatibilidad_lodo)
                                 
-                                console.log('Data aditivos:', data.success_compatibilidad_lodo)
-                                //console.log('Data calculos:', data.success_calculos)
+                                //console.log('Data aditivos:', data.success_compatibilidad_lodo)
                                 document.getElementById('form_compatibilidad_lodo').style.display = 'none'
                                 successAlert('¡Registro Asignado!',
                                     'El registro se asignó correctamente.').then(

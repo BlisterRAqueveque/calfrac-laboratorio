@@ -16,6 +16,8 @@ use App\Models\RelUcaSolicitudEnsayo;
 use App\Models\CalculosReologias;
 use App\Models\RelCaracterizacionLodo;
 use App\Models\RelCompatibilidadLodo;
+use App\Models\RelMecanicaLodo;
+use App\Models\RelEstaticaLodo;
 use App\Models\RelReologiasLodo;
 use App\Models\Solicitud;
 use Illuminate\Http\Request;
@@ -651,7 +653,7 @@ class EnsayoController extends Controller
             'yp_2' => $request->yp_2,
             'yp_3' => $request->yp_3,
             'yp_4' => $request->yp_4,
-            'yp_5' => $request->yp_4,
+            'yp_5' => $request->yp_5,
             'gel_seg_1' => $request->gel_seg_1,
             'gel_seg_2' => $request->gel_seg_2,
             'gel_seg_3' => $request->gel_seg_3,
@@ -670,6 +672,187 @@ class EnsayoController extends Controller
         'success_compatibilidad_lodo' => $compatibilidad_lodo,
         ]);
     }
+
+    // public function store_mecanica(Request $request) {
+
+    //     # Insertar adjunto (Si es que hay)
+    //     $image = $request->file('file_upload_lodo');
+
+    //     # Nombre y destino
+    //     $imageName = time() . '_lodo.' . $image->getClientOriginalExtension();
+    //     $destinationPath = public_path('/uploads/ensayos');
+
+    //     # Si no existe la carpeta de destino, la crea y guarda la img
+    //     if (!file_exists($destinationPath)) {
+    //         mkdir($destinationPath, 0755, true);
+    //     }
+
+    //     $img_1 = Image::make($image->getRealPath());
+
+    //     $width = $img_1->width();
+    //     $height = $img_1->height();
+
+    //     # Redimensionar si la img es mayor a 1000x1000
+    //     if ($width > 1000 || $height > 1000) {
+    //         $img_1->resize(1000, 1000, function ($constraint) {
+    //             $constraint->aspectRatio();
+    //         });
+    //     }
+
+    //     $img_1->save($destinationPath . '/' . $imageName);
+
+    //     $mecanica_lodo = RelMecanicaLodo::create([
+    //         'tiempo_1' => $request->tiempo_1,
+    //         'tiempo_2' => $request->tiempo_2,
+    //         'tiempo_3' => $request->tiempo_3,
+    //         'tiempo_4' => $request->tiempo_4,
+    //         'tiempo_5' => $request->tiempo_5,
+    //         'img_1' => $imageName,
+    //         'solicitud_lodo_id' => $request->solicitud_lodo_id,
+    //         'usuario_carga' => auth()->user()->id,
+    //     ]);
+    //     if ($mecanica_lodo->id)
+    //     return response()->json([
+    //     'success_mecanica_lodo' => $mecanica_lodo,
+    //     ]);
+    // }
+    public function store_estatica(Request $request) {
+         # Insertar adjuntos (Si es que hay)
+         $image1 = $request->file('file_upload_lodo_estatica');
+         $image2 = $request->file('file_upload_lodo_estatica_2');
+     
+         # Asegurarse de que ambos archivos existan antes de procesarlos
+         if ($image1 && $image2) {
+             # Nombres y destinos
+             $imageName1 = time() . '_lodo_estatica_1.' . $image1->getClientOriginalExtension();
+             $imageName2 = time() . '_lodo_estatica_2.' . $image2->getClientOriginalExtension();
+             $destinationPath = public_path('/uploads/ensayos');
+     
+             # Si no existe la carpeta de destino, la crea
+             if (!file_exists($destinationPath)) {
+                 mkdir($destinationPath, 0755, true);
+             }
+     
+             # Procesar ambas imágenes
+             $img_1 = Image::make($image1->getRealPath());
+             $img_2 = Image::make($image2->getRealPath());
+     
+             $width1 = $img_1->width();
+             $height1 = $img_1->height();
+             $width2 = $img_2->width();
+             $height2 = $img_2->height();
+     
+             # Redimensionar si alguna imagen es mayor a 1000x1000
+             if ($width1 > 1000 || $height1 > 1000) {
+                 $img_1->resize(1000, 1000, function ($constraint) {
+                     $constraint->aspectRatio();
+                 });
+             }
+     
+             if ($width2 > 1000 || $height2 > 1000) {
+                 $img_2->resize(1000, 1000, function ($constraint) {
+                     $constraint->aspectRatio();
+                 });
+             }
+     
+             # Guardar ambas imágenes en el destino
+             $img_1->save($destinationPath . '/' . $imageName1);
+             $img_2->save($destinationPath . '/' . $imageName2);
+
+            # Insertar los datos en la base de datos
+            $estatica_lodo = RelEstaticaLodo::create([
+                'tiempo_estatica_1' => $request->tiempo_estatica_1,
+                'tiempo_estatica_2' => $request->tiempo_estatica_2,
+                'tiempo_estatica_3' => $request->tiempo_estatica_3,
+                'tiempo_estatica_4' => $request->tiempo_estatica_4,
+                'tiempo_estatica_5' => $request->tiempo_estatica_5,
+                'img_1' => $imageName1,  // Almacenar el nombre de la primera imagen
+                'img_2' => $imageName2,  // Almacenar el nombre de la segunda imagen
+                'solicitud_lodo_id' => $request->solicitud_lodo_id,
+                'usuario_carga' => auth()->user()->id,
+            ]);
+            if ($estatica_lodo->id) {
+                return response()->json([
+                    'success_estatica_lodo' => $estatica_lodo,
+                ]);
+            }
+        } else {
+            return response()->json([
+                'error' => 'Ambas imágenes son requeridas.',
+            ], 400);
+        }
+
+    }
+
+    public function store_mecanica(Request $request) {
+
+        # Insertar adjuntos (Si es que hay)
+        $image1 = $request->file('file_upload_lodo');
+        $image2 = $request->file('file_upload_lodo_2');
+    
+        # Asegurarse de que ambos archivos existan antes de procesarlos
+        if ($image1 && $image2) {
+            # Nombres y destinos
+            $imageName1 = time() . '_lodo_1.' . $image1->getClientOriginalExtension();
+            $imageName2 = time() . '_lodo_2.' . $image2->getClientOriginalExtension();
+            $destinationPath = public_path('/uploads/ensayos');
+    
+            # Si no existe la carpeta de destino, la crea
+            if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 0755, true);
+            }
+    
+            # Procesar ambas imágenes
+            $img_1 = Image::make($image1->getRealPath());
+            $img_2 = Image::make($image2->getRealPath());
+    
+            $width1 = $img_1->width();
+            $height1 = $img_1->height();
+            $width2 = $img_2->width();
+            $height2 = $img_2->height();
+    
+            # Redimensionar si alguna imagen es mayor a 1000x1000
+            if ($width1 > 1000 || $height1 > 1000) {
+                $img_1->resize(1000, 1000, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+            }
+    
+            if ($width2 > 1000 || $height2 > 1000) {
+                $img_2->resize(1000, 1000, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+            }
+    
+            # Guardar ambas imágenes en el destino
+            $img_1->save($destinationPath . '/' . $imageName1);
+            $img_2->save($destinationPath . '/' . $imageName2);
+    
+            # Insertar los datos en la base de datos
+            $mecanica_lodo = RelMecanicaLodo::create([
+                'tiempo_1' => $request->tiempo_1,
+                'tiempo_2' => $request->tiempo_2,
+                'tiempo_3' => $request->tiempo_3,
+                'tiempo_4' => $request->tiempo_4,
+                'tiempo_5' => $request->tiempo_5,
+                'img_1' => $imageName1,  // Almacenar el nombre de la primera imagen
+                'img_2' => $imageName2,  // Almacenar el nombre de la segunda imagen
+                'solicitud_lodo_id' => $request->solicitud_lodo_id,
+                'usuario_carga' => auth()->user()->id,
+            ]);
+    
+            if ($mecanica_lodo->id) {
+                return response()->json([
+                    'success_mecanica_lodo' => $mecanica_lodo,
+                ]);
+            }
+        } else {
+            return response()->json([
+                'error' => 'Ambas imágenes son requeridas.',
+            ], 400);
+        }
+    }
+    
 
     /**
      * 

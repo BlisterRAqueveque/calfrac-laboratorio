@@ -1177,6 +1177,7 @@ class SolicitudController extends Controller
     //     return response()->json(['generate_report' => $generar_reporte]);
     //     // echo json_encode($generar_reporte);
     // }
+
     public function _generate_report($solicitud_id)
     {
     $generar_reporte = false;
@@ -1212,7 +1213,77 @@ class SolicitudController extends Controller
     }
 
     return response()->json(['generate_report' => $generar_reporte]);
-}
+    }
+
+    // Reporte de ensayo para Lodo
+    public function _generate_report_lodo($solicitud_id) {
+        $generar_reporte_lodo = false;
+        $solicitud_lodo = SolicitudLodo::where('solicitud_id', $solicitud_id)->first();
+        $solicitud_lodo = SolicitudLodo::with('rel_compatibilidad')->find($solicitud_id);
+
+
+        // Si no existe la solicitud de lodo, retorna que no se puede generar el reporte
+        if (!$solicitud_lodo) {
+            return response()->json(['generate_report_lodo' => $generar_reporte_lodo]);
+        }
+
+        // Requisitos necesarios para generar el reporte de lodo
+        $requisitos_lodo = [
+            'rel_caracterizacion',
+            'rel_compatibilidad',
+            'rel_mecanica',
+        ];
+
+        // Verificar que todas las relaciones tengan datos
+        foreach ($requisitos_lodo as $relacion) {
+            if (count($solicitud_lodo->$relacion) == 0) {
+                return response()->json(['generate_report_lodo' => $generar_reporte_lodo]);
+            }
+        }
+
+        // Si se pasaron todas las verificaciones, se puede generar el reporte
+        $generar_reporte_lodo = true;
+        return response()->json(['generate_report_lodo' => $generar_reporte_lodo]);
+    }
+
+    
+
+    // public function _generate_report($solicitud_id)
+    // {
+    // $generar_reporte = false;
+    // $solicitud_lechada = SolicitudLechada::where('solicitud_id', $solicitud_id)->first();
+
+    // if (!$solicitud_lechada) {
+    //     return response()->json(['generate_report' => $generar_reporte]);
+    // }
+
+    // $requisitos = [
+    //     'rel_reologia',
+    //     'rel_perdida_filtrado',
+    //     'rel_uca',
+    //     'rel_agua_libre',
+    //     'rel_mezclabilidad',
+    //     'rel_aditivos',
+    //     'rel_bombeabilidad',
+    // ];
+
+    // // Verificar que todas las relaciones tengan datos
+    // foreach ($requisitos as $relacion) {
+    //     if (count($solicitud_lechada->$relacion) == 0) {
+    //         return response()->json(['generate_report' => $generar_reporte]);
+    //     }
+    // }
+
+    // // Verificar si en rel_bombeabilidad hay algún valor seleccionado
+    // foreach ($solicitud_lechada->rel_bombeabilidad as $b) {
+    //     if ($b->selected) {
+    //         $generar_reporte = true;
+    //         break;
+    //     }
+    // }
+
+    // return response()->json(['generate_report' => $generar_reporte]);
+    // }
 
 
     /**

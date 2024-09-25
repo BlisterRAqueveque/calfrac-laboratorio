@@ -40,7 +40,8 @@ const _createPreview = (file, container_file, section_id, myModal, myModalImg) =
   let div_size = el(
     "div.flex justify-between items-center text-gray-500 text-sm"
   );
-  let p_name = el("p.mb_0", file.name);
+  //let p_name = el("p.mb_0", file.name); --> vieja conf
+  let p_name = el("p.mb_0");
   let small_size = el("small", el("b", `Tamaño: ${size}`));
 
   let button = el(
