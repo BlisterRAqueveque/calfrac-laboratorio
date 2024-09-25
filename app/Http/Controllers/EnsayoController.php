@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CalculosAditivosLechada;
 use App\Models\Ensayo;
+use App\Models\Aditivo;
 use App\Models\RelAditivosEnsayos;
 use App\Models\RelAditivosEnsayosLechada;
 use App\Models\RelAguaLibreSolicitudEnsayo;
@@ -14,6 +15,7 @@ use App\Models\RelReologiaSolicitudEnsayo;
 use App\Models\RelRequerimientosEnsayos;
 use App\Models\RelUcaSolicitudEnsayo;
 use App\Models\CalculosReologias;
+use App\Models\RelAditivosEnsayosLodo;
 use App\Models\RelCaracterizacionLodo;
 use App\Models\RelCompatibilidadLodo;
 use App\Models\RelMecanicaLodo;
@@ -511,7 +513,6 @@ class EnsayoController extends Controller
             return response()->json(['success_mezclabilidad' => $mezclabilidad]);
     }
 
-
     public function store_aditivos(Request $request)
     {
 
@@ -559,6 +560,75 @@ class EnsayoController extends Controller
 
     return response()->json(['error' => 'No se enviaron aditivos en la solicitud'], 400);
 }
+
+
+
+// public function store_aditivos_lodo(Request $request)
+// {
+
+//     // Verificar si se enviaron aditivos en la solicitud
+//     if ($request->aditivos) {
+//         foreach ($request->aditivos as $formulacion) {
+//             RelAditivosEnsayosLodo::create([
+//                 'solicitud_lodo_id' => $request->solicitud_lodo_id,
+//                 'lote' => $formulacion['lote'],
+//                 'aditivo' => $formulacion['aditivo'],
+//                 'comentario' => $formulacion['comentario'],
+//                 'concentracion' => $formulacion['concentracion'],
+//             ]);
+//         }
+
+//         // Obtener los aditivos relacionados a la solicitud de lodo
+//         $aditivos_lodo = RelAditivosEnsayosLodo::where('solicitud_lodo_id', $request->solicitud_lodo_id)
+//             ->with('aditivos')  // Cargar la relación con la tabla 'aditivos'
+//             ->get();
+
+//         // Retornar la respuesta JSON con los aditivos para el lado del cliente (JavaScript)
+//         return response()->json([
+//             'success_aditivos' => $aditivos_lodo,
+//         ]);
+//     }
+
+//     return response()->json(['error' => 'No se enviaron aditivos en la solicitud'], 400);
+// }
+public function store_aditivos_lodo(Request $request)
+{
+    // Verificar si se enviaron aditivos en la solicitud
+    if ($request->aditivos) {
+        $hasData = false; // Variable para rastrear si hay datos de aditivos
+
+        foreach ($request->aditivos as $formulacion) {
+            // Verificar si hay datos en la formulación
+            if (!empty($formulacion['lote']) || !empty($formulacion['aditivo']) || !empty($formulacion['concentracion'])) {
+                $hasData = true; // Hay al menos un dato cargado
+            }
+
+            RelAditivosEnsayosLodo::create([
+                'solicitud_lodo_id' => $request->solicitud_lodo_id,
+                'lote' => $formulacion['lote'],
+                'aditivo' => $formulacion['aditivo'],
+                'comentario' => $formulacion['comentario'],
+                'concentracion' => $formulacion['concentracion'],
+                'check' => $hasData ? 1 : 0, // Asignar el valor de check
+            ]);
+        }
+
+        // Obtener los aditivos relacionados a la solicitud de lodo
+        $aditivos_lodo = RelAditivosEnsayosLodo::where('solicitud_lodo_id', $request->solicitud_lodo_id)
+            ->with('aditivos')  // Cargar la relación con la tabla 'aditivos'
+            ->get();
+
+        // Retornar la respuesta JSON con los aditivos y el estado de hasData
+        return response()->json([
+            'success_aditivos' => $aditivos_lodo,
+            'hasData' => $hasData, // Devolver el estado de hasData
+        ]);
+    }
+
+    return response()->json(['error' => 'No se enviaron aditivos en la solicitud'], 400);
+}
+
+
 
 
 

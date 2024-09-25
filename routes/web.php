@@ -153,6 +153,7 @@ Route::get('/pdf/view', [PDFController::class, 'pdf_view']);
 # Ruta para lodo
 Route::get('/ensayoslodo/create', [EnsayoController::class, 'create_lodo'])->name('ensayolodo.create');
 #Route::get('/ensayoslodo', [EnsayoController::class, 'index'])->name('ensayos_lodo');
+Route::post('/ensayoslodo/aditivos', [EnsayoController::class, 'store_aditivos_lodo'])->name('store_aditivos_lodo');
 Route::post('/ensayoslodo/store', [EnsayoController::class, 'store_reologia_lodo'])->name('store_lodo');
 Route::post('/ensayolodo/compatibilidad', [EnsayoController::class, 'store_compatibilidad'])->name('store_compatibilidad');
 Route::post('/ensayolodo/mecanica', [EnsayoController::class, 'store_mecanica'])->name('store_mecanica');

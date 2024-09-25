@@ -34,6 +34,10 @@ class SolicitudLodo extends Model
 
     ];
 
+    public function rel_aditivos() {
+        return $this->hasMany(RelAditivosEnsayosLodo::class);
+    }
+
     public function rel_caracterizacion() {
         return $this->hasMany(RelCaracterizacionLodo::class);
     }

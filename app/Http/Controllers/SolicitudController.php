@@ -859,6 +859,7 @@ class SolicitudController extends Controller
             'solicitud_lodo' => SolicitudLodo::where('solicitud_id', $solicitud_id)->get(),
             'comentarios_referencia' => RelEnsayoComentarioSolicitud::where('solicitud_id', $solicitud_id)->get(),
             'names_ingenieros' => User::whereIn('users.grupo_id', [3, 4])->get('users.*'),
+            'aditivos' => Aditivo::all(),
             // 'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
         // $generate_report = $this->_generate_report($solicitud_id);
@@ -1233,6 +1234,8 @@ class SolicitudController extends Controller
             'rel_caracterizacion',
             'rel_compatibilidad',
             'rel_mecanica',
+            'rel_estatica',
+            'rel_aditivos',
         ];
 
         // Verificar que todas las relaciones tengan datos
