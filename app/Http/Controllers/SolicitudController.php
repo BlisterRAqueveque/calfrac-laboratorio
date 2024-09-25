@@ -682,6 +682,7 @@ class SolicitudController extends Controller
             'densidad_colchon' => $request->densidad_colchon,
             'tiempo_contacto' => $request->tiempo_contacto,
             'mud_company' => $request->mud_company,
+            'sistema_aditivos' => $request->sistema_aditivos,
             'comentario' => $request->observacion_lodo,
         ]);
 
