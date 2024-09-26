@@ -682,7 +682,9 @@ class SolicitudController extends Controller
             'densidad_colchon' => $request->densidad_colchon,
             'tiempo_contacto' => $request->tiempo_contacto,
             'mud_company' => $request->mud_company,
-            'sistema_aditivos' => $request->sistema_aditivos,
+            'tipo_colchon' => $request->tipo_colchon,
+            'vp' => $request->vp,
+            'pf' => $request->pf,
             'comentario' => $request->observacion_lodo,
         ]);
 
@@ -856,6 +858,7 @@ class SolicitudController extends Controller
             'mud_company' => MudCompany::all(),
             'equipos' => Equipos::all(),
             'servicios' => Servicios::all(),
+            'tipo_lodo' => TipoLodo_Lodos::all(),
             'solicitud_lodo' => SolicitudLodo::where('solicitud_id', $solicitud_id)->get(),
             'comentarios_referencia' => RelEnsayoComentarioSolicitud::where('solicitud_id', $solicitud_id)->get(),
             'names_ingenieros' => User::whereIn('users.grupo_id', [3, 4])->get('users.*'),

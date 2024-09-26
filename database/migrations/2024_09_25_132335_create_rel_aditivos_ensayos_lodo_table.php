@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('aditivo')->nullable();
             $table->string('comentario')->nullable();
             $table->string('concentracion')->nullable();
+            $table->string('unidad')->nullable();
             $table->boolean('check')->default(1);
             $table->timestamps();
         });

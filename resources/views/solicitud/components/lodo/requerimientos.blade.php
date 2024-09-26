@@ -1,9 +1,9 @@
 
 <div class="grid grid-cols-4">
     <div class="col-span-4 md:col-span-1">
-        <label for="" class="text-sm mt-3 text-gray-700 font-semibold tracking-wide mb-2">Sistema de Aditivos</label>
-        <input type="text" name="sistema_aditivos"
-            value="{{ $solicitud_lodo[0]->sistema_aditivos ?? 'No aplica' }}" class="form-control text-sm"
+        <label for="" class="text-sm mt-3 text-gray-700 font-semibold tracking-wide mb-2">Tipo de Colchón</label>
+        <input type="text" name="tipo_colchon"
+            value="{{ $solicitud_lodo[0]->tipo_colchon ?? 'No aplica' }}" class="form-control text-sm"
             placeholder="Ingrese el tipo de cemento" readonly>
     </div>
 </div>

@@ -14,7 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::table('solicitud_lodo', function (Blueprint $table) {
-            $table->date('sistema_aditivos')->nullable();
+            $table->string('tipo_colchon')->nullable();
+            $table->string('pf')->nullable();
+            $table->string('vp')->nullable();
         });
     }
 
@@ -27,7 +29,9 @@ return new class extends Migration
     {
         Schema::table('solicitud_lodo', function (Blueprint $table) {
             $table->dropColumn([
-                'sistema_aditivos',
+                'tipo_colchon',
+                'pf',
+                'vp',
             ]);
         });
     }

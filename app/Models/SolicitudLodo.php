@@ -29,7 +29,9 @@ class SolicitudLodo extends Model
         'densidad_colchon',
         'tiempo_contacto',
         'comentario',
-        'sistema_aditivos',
+        'tipo_colchon',
+        'vp',
+        'pf',
         'comentario_ensayo_referencia'
 
     ];
