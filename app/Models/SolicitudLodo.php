@@ -63,6 +63,9 @@ class SolicitudLodo extends Model
     public function rel_estatica() {
         return $this->hasMany(RelEstaticaLodo::class);
     }
+    public function rel_humectabilidad() {
+        return $this->hasMany(RelHumectabilidad::class);
+    }
 
     public function user_iniciado_por()
     {

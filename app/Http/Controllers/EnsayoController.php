@@ -20,6 +20,7 @@ use App\Models\RelCaracterizacionLodo;
 use App\Models\RelCompatibilidadLodo;
 use App\Models\RelMecanicaLodo;
 use App\Models\RelEstaticaLodo;
+use App\Models\RelHumectabilidad;
 use App\Models\RelReologiasLodo;
 use App\Models\Solicitud;
 use Illuminate\Http\Request;
@@ -924,6 +925,18 @@ public function store_aditivos_lodo(Request $request)
         }
     }
     
+    public function store_humectabilidad (Request $request) {
+        $humectabilidad_lodo = RelHumectabilidad::create([
+            'humectabilidad' => $request->humectabilidad,
+            'solicitud_lodo_id' => $request->solicitud_lodo_id,
+            'usuario_carga' => auth()->user()->id,
+        ]);
+        if ($humectabilidad_lodo->id)
+        return response()->json([
+        'success_humectabilidad_lodo' => $humectabilidad_lodo,
+        ]);
+        
+    }
 
     /**
      * 

@@ -158,5 +158,6 @@ Route::post('/ensayoslodo/store', [EnsayoController::class, 'store_reologia_lodo
 Route::post('/ensayolodo/compatibilidad', [EnsayoController::class, 'store_compatibilidad'])->name('store_compatibilidad');
 Route::post('/ensayolodo/mecanica', [EnsayoController::class, 'store_mecanica'])->name('store_mecanica');
 Route::post('/ensayolodo/estatica', [EnsayoController::class, 'store_estatica'])->name('store_estatica');
+Route::post('/ensayolodo/humectabilidad', [EnsayoController::class, 'store_humectabilidad'])->name('store_humectabilidad');
 //Route::post('/ensayolodo/pdf/{solicitud_id}', [EnsayoController::class, 'pdfReport'])->name('pdfReport');
 Route::get('/check_report_lodo/{solicitud_id}', [SolicitudController::class, '_generate_report_lodo'])->name('check_report_lodo');

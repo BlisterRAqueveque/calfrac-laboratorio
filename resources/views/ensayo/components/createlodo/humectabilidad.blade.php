@@ -1,0 +1,100 @@
+<div class="mt-4 tab-pane fade" id="tab-humectabilidad" role="tabpanel" aria-labelledby="nav-tab_test">
+@if (count($solicitud_lodo[0]->rel_humectabilidad) > 0)
+<div class="accordionHumectabilidadLodo" id="accordionHumectabilidadLodo">
+    <h5>HUMECTABILIDAD:</h5>
+    <br>
+    <p class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Se evalúa la capacidad del colchón mecánico de invertir la fase externa oleosa no conductiva elétricamente del lodo, por una fase externa acousa conductiva. 
+        <br>
+        El procedimiento considedra el agregado de colchón en un volumen determinado de lodo, ambos son pre acondicionados a BHCT y finalmente se determina el oprcentaje de espaciador necesaio par invertir la fase externa del lodo.
+        <br>
+        % Vol de Espaciador = (Vol Total de Espaciador / (Vol de lodo + Espaciador) * 100)
+    </p> 
+<div class="grid grid-cols-6 gap-3">
+    <div class="col-span-2 xl:col-span-1">
+        <label for="humectabilidad" class="text-sm text-gray-700 font-semibold tracking-wide mb-2"> % Humectabilidad
+            <span class="text-red-500">*</span></label>
+            <input type="number" name="humectabilidad" id="humectabilidad"
+            value="{{ $solicitud_lodo[0]->rel_humectabilidad[0]->humectabilidad }}" class="form-control text-sm p-2"
+            placeholder="%" readonly>
+        {{-- @error('humectabilidad')
+            <small class="text-red-700 font-semibold"><em>{{ $message }}</em></small>
+        @enderror --}}
+    </div>
+</div>
+@else
+    <div class="accordionHumectabilidadLodo" id="accordionHumectabilidadLodo"></div>
+@endif
+@if (count($solicitud_lodo[0]->rel_humectabilidad) == 0)
+    <form id="form_humectabilidad" method="POST">
+    @csrf
+    <input type="hidden" name="solicitud_lodo_id" value="{{ $solicitud_lodo[0]->id }}">
+    <h5>HUMECTABILIDAD:</h5>
+    <br>
+    <p class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Se evalúa la capacidad del colchón mecánico de invertir la fase externa oleosa no conductiva elétricamente del lodo, por una fase externa acousa conductiva. 
+        <br>
+        El procedimiento considedra el agregado de colchón en un volumen determinado de lodo, ambos son pre acondicionados a BHCT y finalmente se determina el oprcentaje de espaciador necesaio par invertir la fase externa del lodo.
+        <br>
+        % Vol de Espaciador = (Vol Total de Espaciador / (Vol de lodo + Espaciador) * 100)
+    </p>
+<div class="grid grid-cols-6 gap-3">
+    <div class="col-span-2 xl:col-span-1">
+        <label for="humectabilidad" class="text-sm text-gray-700 font-semibold tracking-wide mb-2"> % Humectabilidad
+            <span class="text-red-500">*</span></label>
+            <input type="number" name="humectabilidad" id="humectabilidad"
+            value="{{ old('humectabilidad') }}" class="form-control text-sm p-2"
+            placeholder="%" >
+        {{-- @error('humectabilidad')
+            <small class="text-red-700 font-semibold"><em>{{ $message }}</em></small>
+        @enderror --}}
+    </div>
+</div>
+<div class="flex justify-center mt-4">
+    <x-button type="click" id="btn_submit_humectabilidad_lodo"
+        style="w-full md:w-auto bg-green-700 bg-opacity-60 text-white p-2 rounded-sm hover:shadow-lg transition-all duration-75 font-bold text-sm">Crear
+        Registro</x-button>
+</div>
+</form>
+@endif
+</div>
+
+
+<script>
+    const btn_submit_humectabilidad_lodo = document.getElementById('btn_submit_humectabilidad_lodo');
+
+    if (btn_submit_humectabilidad_lodo) {
+        btn_submit_humectabilidad_lodo.addEventListener('click', e => {
+            e.preventDefault();
+            let form = new FormData(document.getElementById('form_humectabilidad'))
+
+            confirmAlert().then((confirmed) => {
+                if (confirmed) {
+                    fetch("{{ route('store_humectabilidad') }}", {
+                            method: 'POST',
+                            body: form
+                        }).then((response) => response.json())
+                        .then((data) => {
+                            if (data) {
+                                //componentReologiasLodo(data.success_caracterizacion_lodo, data.success_reologias_lodos)
+                                componentHumectabilidadLodo(data.success_humectabilidad_lodo)
+                                document.getElementById('form_humectabilidad').style.display = 'none'
+                                successAlert('¡Registro Asignado!',
+                                    'El registro se asignó correctamente.').then(
+                                    (confirmed) => {
+                                        // window.location.reload();
+                                    })
+                                let solicitud_id = {!! json_encode($solicitud->id) !!}
+                                // checkGenerateReport(solicitud_id)
+                                // .then((data) => {
+                                //     if (data.generate_report) {
+                                //         // document.querySelector('#tab_g_report_js').classList.remove('d-none')
+                                //     }
+                                // })
+                            }
+                        })
+                }
+            })
+        })
+    }
+</script>
+
+

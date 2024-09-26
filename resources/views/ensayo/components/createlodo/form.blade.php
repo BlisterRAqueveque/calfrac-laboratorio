@@ -79,20 +79,6 @@
         </a>
     </li>
 
-    <li class="nav-item w-full md:w-auto text-xs xl:text-sm flex-1" role="presentation">
-        <a class="nav-link nav_tab_mod d-flex items-center justify-center gap-2 text-violet-700" id="nav-tab2"
-            data-bs-toggle="tab" href="#tab_mezclabilidad" data-bs-target="#tab_mezclabilidad" role="tab"
-            aria-controls="tab_mezclabilidad" aria-selected="false">
-            <div
-                class="w-4 h-4 xl:w-5 xl:h-5 bg-gray-400 shadow-sm rounded-full flex justify-center text-white items-center">
-                <span>
-                    7
-                </span>
-            </div>
-            Wettability
-        </a>
-    </li>
-
 </ul>
 
 <div class="tab-content" id="nav-tabs-content">
@@ -107,6 +93,8 @@
     @include('ensayo.components.createlodo.remocion_mecanica')
     {{-- Remoción Estática --}}
     @include('ensayo.components.createlodo.remocion_estatica')
+    {{-- Remoción Estática --}}
+    @include('ensayo.components.createlodo.humectabilidad')
 
 </div>
 
@@ -142,6 +130,7 @@
 <script src="{{ asset('js/ensayo/createlodo/componentMecanicaLodo.js') }}"></script>
 <script src="{{ asset('js/ensayo/createlodo/componentEstaticaLodo.js') }}"></script>
 <script src="{{ asset('js/ensayo/createlodo/componentShowAditivosLodo.js') }}"></script>
+<script src="{{ asset('js/ensayo/createlodo/componentHumectabilidad.js') }}"></script>
 <!--Aca iria un script para mostrar un cartel de carga pero meh -->
 
 {{-- <script src="{{ asset('js/ensayos_lodo/componentCaracterizacion.js') }}"></script>
