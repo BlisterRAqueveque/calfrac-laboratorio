@@ -214,11 +214,17 @@
                 <p class="m-0 font-bold text-lg my-3 tracking-wide">Requerimientos del Colchon</p>
 
                 <div class="grid grid-cols-4">
-                    <div class="col-span-4 md:col-span-1">
-                        <label for="" class="text-sm mt-3 text-gray-700 font-semibold tracking-wide mb-2">Tipo de Colchón</label>
-                        <input type="text" name="tipo_colchon" class="form-control text-sm" placeholder="Ingrese el tipo de Colchón">
+                    <div>
+                        <label for="tipo_colchon" class="text-sm mt-3 text-gray-700 font-semibold tracking-wide mb-2">Tipo de Colchón</label>
+                        <select name="tipo_colchon" id="tipo_colchon" class="text-sm inp_edit" data-search="false" >
+                            @foreach ($tipo_de_colchon as $e)
+                                <option value="{{ $e->id }}">{{ $e->nombre }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
+
+
 
                 <div class="grid grid-cols-3 text-center bg-gray-100 py-2 my-3">
                     <p>Lote</p>
@@ -397,7 +403,11 @@
             ele: "#firma_solicitante_lodo",
             placeholder: "Seleccione quien solicita",
         });
-             
+        VirtualSelect.init({
+            ele: "#tipo_colchon",
+            placeholder: "Seleccione el tipo de colchón",
+        });
+        document.getElementById("tipo_colchon").setValue(0);
         document.getElementById("cliente_lodo").setValue(0);
         document.getElementById("locacion_lodo").setValue(0);
         document.getElementById("equipo_lodo").setValue(0);

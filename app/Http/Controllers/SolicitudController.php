@@ -43,6 +43,7 @@ use App\Models\Estados;
 use App\Models\RelReologiaSolicitudEnsayo;
 use App\Models\RelEnsayoComentarioSolicitud;
 use App\Models\RelEnsayosRequeridosLodo;
+use App\Models\TipoDeColchon;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Mail;
@@ -85,6 +86,7 @@ class SolicitudController extends Controller
             'ensayos_sol_lodo' => Ensayo::where('tipo', 'LN')->where('estado', 1)->get(),
             'names_ingenieros' => User::whereIn('users.grupo_id', [3, 4])->get('users.*'),
             'aditivos' => Aditivo::all(),
+            'tipo_de_colchon' => TipoDeColchon::all(),
             //'name_aditivos' =>
         ];
         return view('solicitud.create', $data);
@@ -863,6 +865,7 @@ class SolicitudController extends Controller
             'comentarios_referencia' => RelEnsayoComentarioSolicitud::where('solicitud_id', $solicitud_id)->get(),
             'names_ingenieros' => User::whereIn('users.grupo_id', [3, 4])->get('users.*'),
             'aditivos' => Aditivo::all(),
+            'tipo_de_colchon' => TipoDeColchon::all(),
             // 'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
         // $generate_report = $this->_generate_report($solicitud_id);

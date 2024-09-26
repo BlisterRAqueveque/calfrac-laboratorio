@@ -36,6 +36,10 @@ class SolicitudLodo extends Model
 
     ];
 
+    public function rel_colchon() {
+        return $this->hasMany(TipoDeColchon::class);
+    }
+
     public function rel_aditivos() {
         return $this->hasMany(RelAditivosEnsayosLodo::class);
     }

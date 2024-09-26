@@ -13,6 +13,7 @@
         #equipo_lodo,
         #mud_company,
         #tipo_lodo,
+        #tipo_colchon,
         #servicio_lodo {
             background: #b9b9b9;
             border-radius: 5px;
@@ -485,6 +486,21 @@
                 <hr class="my-4">
 
                 <p class="m-0 font-bold text-lg my-3 tracking-wide">Requerimientos del Colchón</p>
+
+                <div class="grid grid-cols-4">
+                    <div class="col-span-4 md:col-span-1">
+                        <label for="" class="text-sm mt-3 text-gray-700 font-semibold tracking-wide mb-2">Tipo de Colchón</label>
+                        {{-- <input type="text" name="tipo_colchon"
+                            value="{{ $solicitud_lodo[0]->tipo_colchon ?? 'No aplica' }}" class="form-control text-sm"
+                            placeholder="Ingrese el tipo de cemento" readonly> --}}
+                            <select name="tipo_colchon" id="tipo_colchon" class="text-sm inp_edit" disabled>
+                                @foreach ($tipo_de_colchon as $y)
+                                    <option value="{{ $y->id }}"
+                                        {{ $y->id == $solicitud_lodo[0]->tipo_colchon ? 'selected' : '' }}>{{ $y->nombre }}</option>
+                                @endforeach
+                            </select>
+                    </div>
+                </div>
                 
                 @include('solicitud.components.lodo.requerimientos')
 
@@ -684,6 +700,10 @@
             });
             VirtualSelect.init({
                 ele: "#tipo_lodo",
+                placeholder: "Seleccione tipo de lodo",
+            });
+            VirtualSelect.init({
+                ele: "#tipo_colchon",
                 placeholder: "Seleccione tipo de lodo",
             });
         })
