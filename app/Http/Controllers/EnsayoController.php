@@ -620,7 +620,7 @@ public function store_aditivos_lodo(Request $request)
 
         // Retornar la respuesta JSON con los aditivos y el estado de hasData
         return response()->json([
-            'success_aditivos' => $aditivos_lodo,
+            'success_aditivos_lodo' => $aditivos_lodo,
             'hasData' => $hasData, // Devolver el estado de hasData
         ]);
     }

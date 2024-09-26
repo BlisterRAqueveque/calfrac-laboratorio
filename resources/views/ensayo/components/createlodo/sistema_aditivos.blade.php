@@ -1,7 +1,57 @@
 <div class="mt-4 tab-pane fade show active" id="tab-sistema" role="tabpanel"> 
     @if (count($solicitud_lodo[0]->rel_aditivos) > 0)
+    <h5 class="mb-2 text-center">Registro de Aditivos</h5>
+    <div class="grid grid-cols-3 text-center bg-gray-100 py-2 my-3">
+        <p>N° Lote</p>
+        <p>Aditivo</p>
+        <p>Conc. %</p>
+    </div>
+    <div id="container_formulaciones_tentativas_aditivos_lodo"></div>
 
-    <p>Funciona?</p>
+    <style>
+        .btn_del_formulacion.inactive {
+            display: none;
+        }
+    
+        .btn_add_formulacion.inactive {
+            display: none;
+        }
+    </style>
+        <div id="container_formulaciones_tentativas_delete"></div>
+        <div id="container_formulaciones_tentativas">
+            @php
+                $inc = 0;
+            @endphp
+            @foreach ($solicitud_lodo[0]->rel_aditivos as $formulacion)
+                <div class="flex gap-2 justify-between mb-2 border">
+                    <div class="w-full flex gap-2 bg-gray-100 p-2">
+                        <input type="hidden" value="{{ $formulacion->id }}" name="aditivos[{{$inc}}][id]">
+                        <div class="col-span-3 text-right btn_del_formulacion inactive">
+                            <button class="bg-red-700 text-white rounded-md font-semibold px-3"
+                                onclick="btnDeleteFormulacion(this, {{ $formulacion }})">Eliminar</button>
+                        </div>
+                        <input type="text" class="form-control text-xs rounded-l-none p-2 col-span-4 md:col-span-1"
+                            placeholder="Lote" value="{{ $formulacion->lote }}" name="aditivos[{{$inc}}][lote]" readonly>
+                        <!-- Aditivo -->
+                        <input type="text" 
+                               class="form-control text-xs p-2 {{ $formulacion->aditivo == 'SD' ? 'w-1/2' : '' }}"
+                               value="{{ $formulacion->aditivos->nombre ?? $formulacion->aditivo }}" 
+                               placeholder="Aditivo" name="aditivos[{{$inc}}][aditivo]" readonly>
+                        <!-- Comentario (se muestra solo si el aditivo es 'SD') -->
+                        @if($formulacion->aditivo == 'SD')
+                        <input type="text" class="form-control text-xs p-2 w-1/2"
+                            placeholder="Comentario" value="{{ $formulacion->comentario }}" name="aditivos[{{$inc}}][comentario]" readonly>
+                        @endif
+                        <input type="text" class="form-control text-xs p-2 col-span-4 md:col-span-1"
+                            placeholder="Concentración" value="{{ $formulacion->concentracion }}" name="aditivos[{{$inc}}][concentracion]" readonly>
+                    </div>
+                </div>
+                @php
+                    $inc++;
+                @endphp
+            @endforeach
+        </div>
+
     @else
     <div id="registro_aditivos_lodo"></div>
     @endif
@@ -55,7 +105,7 @@
                         }).then((response) => response.json())
                         .then((data) => {
                             if (data) {
-                                componentAditivosLodo(data.success_aditivos_lodo)
+                                componentShowAditivosLodo(data.success_aditivos_lodo)
                                 //componentShowAditivos(data.success_aditivos, data.success_calculos)
                                 
                                 console.log('Data aditivos:', data.success_aditivos_lodo)
