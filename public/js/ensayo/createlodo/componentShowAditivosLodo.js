@@ -34,8 +34,8 @@ const componentShowAditivosLodo = (data) => {
     mount(registro_aditivos_lodo, titulo); // Montamos el título
 
     // Crear encabezado
-    let header = el('div.grid grid-cols-5 text-center bg-gray-100 py-2 my-3');
-    ['N° Lote', 'Aditivo', 'Conc. %', 'Units', 'OM'].forEach(text => {
+    let header = el('div.grid grid-cols-3 text-center bg-gray-100 py-2 my-3');
+    ['N° Lote', 'Aditivo', 'Conc. %'].forEach(text => {
         let p = el('p', text);
         mount(header, p);
     });
