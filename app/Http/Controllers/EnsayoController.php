@@ -609,6 +609,7 @@ public function store_aditivos_lodo(Request $request)
                 'aditivo' => $formulacion['aditivo'],
                 'comentario' => $formulacion['comentario'],
                 'concentracion' => $formulacion['concentracion'],
+                'unidad' => $formulacion['unidad'],
                 'check' => $hasData ? 1 : 0, // Asignar el valor de check
             ]);
         }

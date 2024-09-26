@@ -16,6 +16,7 @@ class RelAditivosEnsayosLodo extends Model
         'aditivo',
         'comentario',
         'concentracion',
+        'unidad',
     ];
 
     public function solicitud_lpdo() 

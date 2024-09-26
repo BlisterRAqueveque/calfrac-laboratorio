@@ -1,15 +1,6 @@
-// let registro_aditivos_lodo = document.getElementById("registro_aditivos_lodo");
-// const componentShowAditivos = (data = "") => {
-// };
-
 let registro_aditivos_lodo = document.getElementById("registro_aditivos_lodo");
 
 const componentShowAditivosLodo = (data) => {
-    // Convertir `calculos` en un array si es un objeto
-    if (typeof calculos === 'object' && !Array.isArray(calculos)) {
-        calculos = [calculos];
-    }
-
     // Verifica si `data` es un array o un objeto
     if (Array.isArray(data)) {
         if (!data.length) {
@@ -34,8 +25,8 @@ const componentShowAditivosLodo = (data) => {
     mount(registro_aditivos_lodo, titulo); // Montamos el título
 
     // Crear encabezado
-    let header = el('div.grid grid-cols-3 text-center bg-gray-100 py-2 my-3');
-    ['N° Lote', 'Aditivo', 'Conc. %'].forEach(text => {
+    let header = el('div.grid grid-cols-4 text-center bg-gray-100 py-2 my-3'); // Ajustar a 4 columnas
+    ['N° Lote', 'Aditivo', 'Conc. %', 'Unidad'].forEach(text => {
         let p = el('p', text);
         mount(header, p);
     });
@@ -75,6 +66,13 @@ const componentShowAditivosLodo = (data) => {
             readonly: true
         });
         mount(div, inputConcentracion);
+
+        // Unidad
+        let inputUnidad = el('input.form-control text-xs p-2 col-span-4 md:col-span-1', {
+            value: formulacion.unidad || 'Unidad no especificada', // Muestra la unidad seleccionada o un texto por defecto
+            readonly: true
+        });
+        mount(div, inputUnidad);
 
         // Montar en el contenedor
         mount(flex, div);

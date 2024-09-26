@@ -1,10 +1,11 @@
 <div class="mt-4 tab-pane fade show active" id="tab-sistema" role="tabpanel"> 
     @if (count($solicitud_lodo[0]->rel_aditivos) > 0)
     <h5 class="mb-2 text-center">Registro de Aditivos</h5>
-    <div class="grid grid-cols-3 text-center bg-gray-100 py-2 my-3">
+    <div class="grid grid-cols-4 text-center bg-gray-100 py-2 my-3">
         <p>N° Lote</p>
         <p>Aditivo</p>
         <p>Conc. %</p>
+        <p>Unidad <small>(lt/m³ o kg/m³)</small></p>
     </div>
     <div id="container_formulaciones_tentativas_aditivos_lodo"></div>
 
@@ -44,6 +45,8 @@
                         @endif
                         <input type="text" class="form-control text-xs p-2 col-span-4 md:col-span-1"
                             placeholder="Concentración" value="{{ $formulacion->concentracion }}" name="aditivos[{{$inc}}][concentracion]" readonly>
+                        <input type="text" class="form-control text-xs p-2 col-span-4 md:col-span-1"
+                            placeholder="Unidad" value="{{ $formulacion->unidad }}" name="aditivos[{{$inc}}][unidad]" readonly>
                     </div>
                 </div>
                 @php
@@ -61,10 +64,11 @@
     <input type="hidden" name="solicitud_lodo_id" value="{{ $solicitud_lodo[0]->id }}">
     <h5 class="mb-2 text-center">Registro de Aditivos</h5>
     
-    <div class="grid grid-cols-3 text-center bg-gray-100 py-2 my-3">
+    <div class="grid grid-cols-4 text-center bg-gray-100 py-2 my-3">
         <p>N° Lote</p>
         <p>Aditivo</p>
         <p>Conc. %</p>
+        <p>Unidad <small>(lt/m³ o kg/m³)</small></p>
     </div>
     <div id="container_formulaciones_tentativas_aditivos_lodo"></div>
 
