@@ -18,9 +18,7 @@ componentHumectabilidadLodo = (data = {}) => {
   // Texto descriptivo
   texto = el("p.text-sm.text-gray-700.font-semibold.tracking-wide.mb-2", 
     `Se evalúa la capacidad del colchón mecánico de invertir la fase externa oleosa no conductiva eléctricamente del lodo, por una fase externa acousa conductiva.
-    <br>
     El procedimiento considera el agregado de colchón en un volumen determinado de lodo, ambos son pre acondicionados a BHCT y finalmente se determina el porcentaje de espaciador necesario para invertir la fase externa del lodo.
-    <br>
     % Vol de Espaciador = (Vol Total de Espaciador / (Vol de lodo + Espaciador) * 100)`
   );
   mount(accordionItem, texto);
