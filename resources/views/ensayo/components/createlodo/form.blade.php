@@ -27,9 +27,9 @@
         </a>
     </li>
     <li class="nav-item w-full md:w-auto text-xs xl:text-sm flex-1" role="presentation">
-        <a class="nav-link nav_tab_mod d-flex items-center justify-center gap-2 text-violet-700" id="nav-tab2"
+        <a class="nav-link nav_tab_mod d-flex items-center justify-center gap-2 text-violet-700 disabled-tab" id="nav-tab2"
             data-bs-toggle="tab" href="#tab-compatibilidad_espaciador" data-bs-target="#tab-compatibilidad_espaciador" role="tab"
-            aria-controls="tab-compatibilidad_espaciador" aria-selected="false">
+            aria-controls="tab-compatibilidad_espaciador" aria-selected="false" aria-disabled="true">
             <div
                 class="w-4 h-4 xl:w-5 xl:h-5 bg-gray-400 shadow-sm rounded-full flex justify-center text-white items-center">
                 <span>
@@ -40,9 +40,9 @@
         </a>
     </li>
     <li class="nav-item w-full md:w-auto text-xs xl:text-sm flex-1" role="presentation">
-        <a class="nav-link nav_tab_mod d-flex items-center justify-center gap-2 text-violet-700" id="nav-tab2"
+        <a class="nav-link nav_tab_mod d-flex items-center justify-center gap-2 text-violet-700 disabled-tab" id="nav-tab2"
             data-bs-toggle="tab" href="#tab-remocion_mecanica" data-bs-target="#tab-remocion_mecanica" role="tab"
-            aria-controls="tab-remocion_mecanica" aria-selected="false">
+            aria-controls="tab-remocion_mecanica" aria-selected="false" aria-disabled="true">
             <div
                 class="w-4 h-4 xl:w-5 xl:h-5 bg-gray-400 shadow-sm rounded-full flex justify-center text-white items-center">
                 <span>
@@ -53,9 +53,9 @@
         </a>
     </li>
     <li class="nav-item w-full md:w-auto text-xs xl:text-sm flex-1" role="presentation">
-        <a class="nav-link nav_tab_mod d-flex items-center justify-center gap-2 text-violet-700" id="nav-tab2"
+        <a class="nav-link nav_tab_mod d-flex items-center justify-center gap-2 text-violet-700 disabled-tab" id="nav-tab2"
             data-bs-toggle="tab" href="#tab-remocion_estatica" data-bs-target="#tab-remocion_estatica" role="tab" aria-controls="tab-remocion_estatica"
-            aria-selected="false">
+            aria-selected="false" aria-disabled="true">
             <div
                 class="w-4 h-4 xl:w-5 xl:h-5 bg-gray-400 shadow-sm rounded-full flex justify-center text-white items-center">
                 <span>
