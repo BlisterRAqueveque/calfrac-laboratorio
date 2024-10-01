@@ -223,6 +223,17 @@
             disableTabs();
         }
     });
+
+    function habilitarSolapas() {
+    // Selecciona todas las solapas que tienen la clase `disabled-tab`
+    const solapasDeshabilitadas = document.querySelectorAll('.disabled-tab');
+    
+    // Recorre las solapas y quita la clase `disabled-tab` y el atributo `aria-disabled`
+    solapasDeshabilitadas.forEach((solapa) => {
+        solapa.classList.remove('disabled-tab'); // Quita la clase de deshabilitado
+        solapa.setAttribute('aria-disabled', 'false'); // Cambia el estado a habilitado
+    });
+}
 </script>
 
 

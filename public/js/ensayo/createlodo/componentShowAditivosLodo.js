@@ -78,4 +78,6 @@ const componentShowAditivosLodo = (data) => {
         mount(flex, div);
         mount(registro_aditivos_lodo, flex);
     });
+
+    habilitarSolapas();
 };
