@@ -185,6 +185,47 @@
 <script src="{{ asset('js/ensayo/createlodo/componentShowAditivosLodo.js') }}"></script>
 <script src="{{ asset('js/ensayo/createlodo/componentHumectabilidad.js') }}"></script>
 
+  
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Obtener las pestañas 3, 4 y 5
+        const tab3 = document.querySelector('a[href="#tab-compatibilidad_espaciador"]');
+        const tab4 = document.querySelector('a[href="#tab-remocion_mecanica"]');
+        const tab5 = document.querySelector('a[href="#tab-remocion_estatica"]');
+
+        // Obtener los datos de 'rel_aditivos' de Blade
+        const aditivos = @json($solicitud_lodo[0]->rel_aditivos);
+
+        // Función para habilitar las pestañas
+        function enableTabs() {
+            tab3.classList.remove('disabled-tab');
+            tab3.removeAttribute('aria-disabled');
+            tab4.classList.remove('disabled-tab');
+            tab4.removeAttribute('aria-disabled');
+            tab5.classList.remove('disabled-tab');
+            tab5.removeAttribute('aria-disabled');
+        }
+
+        // Función para deshabilitar las pestañas
+        function disableTabs() {
+            tab3.classList.add('disabled-tab');
+            tab3.setAttribute('aria-disabled', 'true');
+            tab4.classList.add('disabled-tab');
+            tab4.setAttribute('aria-disabled', 'true');
+            tab5.classList.add('disabled-tab');
+            tab5.setAttribute('aria-disabled', 'true');
+        }
+
+        // Verificar si hay aditivos, si hay, habilita las pestañas
+        if (aditivos.length > 0) {
+            enableTabs();
+        } else {
+            disableTabs();
+        }
+    });
+</script>
+
+
 <!--Aca iria un script para mostrar un cartel de carga pero meh -->
 <script>
     const checkGenerateReportLodo = (solicitud_id) => {
