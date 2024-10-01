@@ -44,7 +44,7 @@
             <input type="text" class="form-control text-xs p-2 col-span-3 md:col-span-1"
                 placeholder="Concentración" value="{{ $formulacion->concentracion }}" name="aditivos[{{$inc}}][concentracion]" readonly>
                 <input type="text" class="form-control text-xs p-2 col-span-3 md:col-span-1"
-                placeholder="Unidad" value="-" name="aditivos[{{$inc}}][concentracion]" readonly>
+                placeholder="Unidad" value="{{ $formulacion->unidad }}" name="aditivos[{{$inc}}][unidad]" readonly>
         </div>
     </div>
     @php

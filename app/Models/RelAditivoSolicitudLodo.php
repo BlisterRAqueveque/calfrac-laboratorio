@@ -17,6 +17,7 @@ class RelAditivoSolicitudLodo extends Model
         'aditivo',
         'comentario',
         'concentracion',
+        'unidad',
     ];
 
     public function solicitud_lodo() {

@@ -762,6 +762,7 @@ class SolicitudController extends Controller
                     'comentario' => $formulacion['comentario'],
                     'aditivo' => $formulacion['aditivo'],
                     'concentracion' => $formulacion['concentracion'],
+                    'unidad' => $formulacion['unidad'],
                 ]);
             }
         }
