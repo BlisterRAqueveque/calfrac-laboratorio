@@ -97,7 +97,9 @@
                     <thead class="bg-gray-200 text-gray-700">
                         <tr>
                             <th class="p-1 text-center border border-gray-300">Tiempo de contacto (min)</th>
-                            <th class="p-1 text-center border border-gray-300">DynaFlush-"O"</th>
+                            <th class="p-1 text-center border border-gray-300">
+                                {{ isset($solicitud_lodo[0]->rel_colchon) ? $solicitud_lodo[0]->rel_colchon->nombre : '-' }}
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -194,7 +196,9 @@
                     <thead class="bg-gray-200 text-gray-700">
                         <tr>
                             <th class="p-1 text-center border border-gray-300">Tiempo de contacto (min)</th>
-                            <th class="p-1 text-center border border-gray-300">DynaFlush-"O"</th>
+                            <th class="p-1 text-center border border-gray-300">
+                                {{ isset($solicitud_lodo[0]->rel_colchon) ? $solicitud_lodo[0]->rel_colchon->nombre : '-' }}
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -311,6 +315,9 @@
     //     }
     // }
 </script>
+<script>
+    const colchonNombre = "{{ isset($solicitud_lodo[0]->rel_colchon) ? $solicitud_lodo[0]->rel_colchon->nombre : '-' }}";
+</script>
 
 <script>
     const btn_submit_remocion_estatica_lodo = document.getElementById('btn_submit_remocion_estatica_lodo');
@@ -329,6 +336,7 @@
                         .then((data) => {
                             if (data) {
                                 //componentReologiasLodo(data.success_caracterizacion_lodo, data.success_reologias_lodos)
+                                data.colchon_nombre = colchonNombre;
                                 componentEstaticaLodo(data.success_estatica_lodo)
                                 document.getElementById('form_estatica_lodo').style.display = 'none'
                                 successAlert('¡Registro Asignado!',
@@ -337,12 +345,12 @@
                                         // window.location.reload();
                                     })
                                 let solicitud_id = {!! json_encode($solicitud->id) !!}
-                                // checkGenerateReport(solicitud_id)
-                                // .then((data) => {
-                                //     if (data.generate_report) {
-                                //         // document.querySelector('#tab_g_report_js').classList.remove('d-none')
-                                //     }
-                                // })
+                                checkGenerateReportLodo(solicitud_id)
+                                .then((data) => {
+                                    if (data.generate_report_lodo) {
+                                        document.querySelector('#tab_g_report_js_lodo').classList.remove('d-none')
+                                    }
+                                })
                             }
                         })
                 }

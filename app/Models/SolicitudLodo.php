@@ -37,7 +37,7 @@ class SolicitudLodo extends Model
     ];
 
     public function rel_colchon() {
-        return $this->hasMany(TipoDeColchon::class);
+        return $this->belongsTo(TipoDeColchon::class, 'tipo_colchon', 'id');
     }
 
     public function rel_aditivos() {
@@ -63,6 +63,7 @@ class SolicitudLodo extends Model
     public function rel_estatica() {
         return $this->hasMany(RelEstaticaLodo::class);
     }
+    
     public function rel_humectabilidad() {
         return $this->hasMany(RelHumectabilidad::class);
     }

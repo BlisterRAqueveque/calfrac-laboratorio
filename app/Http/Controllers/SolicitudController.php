@@ -644,6 +644,7 @@ class SolicitudController extends Controller
             'servicios_lodo' => 'required',
             'mud_company' => 'required',
             'densidad_lodo_3' => 'required',
+            'tipo_colchon'=> 'required',
             //'temperatura' => 'required',
             //'profundidad_md' => 'required',
             //'profundidad_tvd' => 'required',
@@ -868,8 +869,8 @@ class SolicitudController extends Controller
             'tipo_de_colchon' => TipoDeColchon::all(),
             // 'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
-        // $generate_report = $this->_generate_report($solicitud_id);
-        //$data['generar_reporte'] = $generate_report->original['generate_report'];
+        $generate_report_lodo = $this->_generate_report_lodo($solicitud_id);
+        $data['generar_reporte_lodo'] = $generate_report_lodo->original['generate_report_lodo'];
         return view('solicitud.components.lodo.show', $data);
     }
 
@@ -1227,7 +1228,7 @@ class SolicitudController extends Controller
     public function _generate_report_lodo($solicitud_id) {
         $generar_reporte_lodo = false;
         $solicitud_lodo = SolicitudLodo::where('solicitud_id', $solicitud_id)->first();
-        $solicitud_lodo = SolicitudLodo::with('rel_compatibilidad')->find($solicitud_id);
+        //$solicitud_lodo = SolicitudLodo::with('rel_compatibilidad')->find($solicitud_id);
 
 
         // Si no existe la solicitud de lodo, retorna que no se puede generar el reporte
@@ -1237,11 +1238,12 @@ class SolicitudController extends Controller
 
         // Requisitos necesarios para generar el reporte de lodo
         $requisitos_lodo = [
+            'rel_aditivos',
             'rel_caracterizacion',
             'rel_compatibilidad',
             'rel_mecanica',
             'rel_estatica',
-            'rel_aditivos',
+            'rel_humectabilidad',
         ];
 
         // Verificar que todas las relaciones tengan datos

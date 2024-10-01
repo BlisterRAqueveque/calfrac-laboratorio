@@ -23,7 +23,7 @@ class RelEstaticaLodo extends Model
     ];
 
     public function solicitud_lodo() {
-        return $this->hasMany(SolicitudLodo::class);
+        return $this->hasMany(SolicitudLodo::class, 'solicitud_lodo_id');
     }
 
     public function user() {

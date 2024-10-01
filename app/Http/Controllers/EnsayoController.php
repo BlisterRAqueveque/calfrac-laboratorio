@@ -843,6 +843,7 @@ public function store_aditivos_lodo(Request $request)
                 'solicitud_lodo_id' => $request->solicitud_lodo_id,
                 'usuario_carga' => auth()->user()->id,
             ]);
+
             if ($estatica_lodo->id) {
                 return response()->json([
                     'success_estatica_lodo' => $estatica_lodo,

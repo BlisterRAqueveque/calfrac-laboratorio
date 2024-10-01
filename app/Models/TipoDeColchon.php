@@ -14,5 +14,5 @@ class TipoDeColchon extends Model
         'nombre',
         'estado',
     ];
-    
+
 }

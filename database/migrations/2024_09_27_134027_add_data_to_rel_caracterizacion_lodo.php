@@ -13,13 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('rel_humectabilidad', function (Blueprint $table) {
-            $table->id();
-            $table->string('humectabilidad')->nullable();
-            $table->foreignId('solicitud_lodo_id')->references('id')->on('solicitud_lodo')->nullable();
-            $table->foreignId('usuario_carga')->references('id')->on('users');
+        Schema::table('rel_caracterizacion_lodo', function (Blueprint $table) {
             $table->tinyInteger('selected')->default(0)->comment('1: Seleccionado para el reporte | 0: No seleccionado');
-            $table->timestamps();
         });
     }
 
@@ -30,6 +25,10 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rel_humectabilidad');
+        Schema::table('rel_caracterizacion_lodo', function (Blueprint $table) {
+            $table->dropColumn([
+                'selected',
+            ]);
+        });
     }
 };

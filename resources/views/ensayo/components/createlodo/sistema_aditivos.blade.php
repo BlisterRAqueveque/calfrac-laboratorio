@@ -119,12 +119,12 @@
                                     'El registro se asignó correctamente.')
                                     
                                 let solicitud_id = {!! json_encode($solicitud->id) !!}
-                                //checkGenerateReport(solicitud_id)
-                                //.then((data) => {
-                                //    if (data.generate_report) {
-                                //        document.querySelector('#tab_g_report_js').classList.remove('d-none')
-                                //    }
-                                //})
+                                checkGenerateReportLodo(solicitud_id)
+                                .then((data) => {
+                                   if (data.generate_report_lodo) {
+                                       document.querySelector('#tab_g_report_js_lodo').classList.remove('d-none')
+                                   }
+                                })
                             }
                         })
                 }

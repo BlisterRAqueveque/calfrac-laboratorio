@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('concentracion')->nullable();
             $table->string('unidad')->nullable();
             $table->boolean('check')->default(1);
+            $table->tinyInteger('selected')->default(0)->comment('1: Seleccionado para el reporte | 0: No seleccionado');
             $table->timestamps();
         });
     }
