@@ -78,61 +78,6 @@
            Humectabilidad
         </a>
     </li>
-
-    {{-- <li class="nav-item w-full md:w-auto text-xs xl:text-sm flex-1 " role="presentation">
-    <a class="nav-link nav_tab_mod d-flex items-center justify-center gap-2 text-violet-700" 
-        data-bs-toggle="tab" href="#tab-reporte_pdf_lodo" data-bs-target="#tab-reporte_pdf_lodo" role="tab"
-        aria-controls="tab-reporte_pdf_lodo" aria-selected="false">
-        <div
-            class="w-4 h-4 xl:w-5 xl:h-5 bg-opacity-60 shadow-sm rounded-sm flex justify-center text-red items-center">
-            <span>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="w-6 h-6 text-red-900">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0-3-3m3 3 3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" />
-                </svg>
-            </span>
-        </div>
-        Reporte - PDF
-    </a>
-    </li> --}}
-
- {{--@if ($solicitud->ensayo_asignado_id == null)
-    <li class="nav-item w-full md:w-auto text-xs xl:text-sm flex-1 {{ $generar_reporte_lodo ? '' : 'd-none' }} "
-        id="tab_g_report_js" role="presentation">
-
-            <a class="nav-link nav_tab_mod d-flex items-center justify-center gap-2 text-violet-700" id="nav-tab2"
-            data-bs-toggle="tab" href="#tab_reporte_pdf_lodo" data-bs-target="#tab_reporte_pdf_lodo" role="tab"
-            aria-controls="tab_reporte_pdf_lodo" aria-selected="false">
-            <div
-                class="w-4 h-4 xl:w-5 xl:h-5 bg-green-700 bg-opacity-60 shadow-sm rounded-full flex justify-center text-white items-center">
-                <span>
-                    <x-icons.check class="w-4 h-4" stroke-width="1.5" />
-                </span>
-            </div>
-            Generar Reporte
-        </a>
-    </li>
-@else
-    <li class="nav-item w-full md:w-auto text-xs xl:text-sm flex-1 {{ $generar_reporte_lodo ? '' : 'd-none' }} "
-        id="tab_g_report_js_lodo" role="presentation">
-        <a class="nav-link nav_tab_mod d-flex items-center justify-center gap-2 text-violet-700" id="nav-tab2"
-            data-bs-toggle="tab" href="#tab-reporte_pdf_lodo" data-bs-target="#tab-reporte_pdf_lodo" role="tab"
-            aria-controls="tab-reporte_pdf_lodo" aria-selected="false">
-            <div
-                class="w-4 h-4 xl:w-5 xl:h-5 bg-opacity-60 shadow-sm rounded-sm flex justify-center text-red items-center">
-                <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-6 h-6 text-red-900">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0-3-3m3 3 3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" />
-                    </svg>
-                </span>
-            </div>
-            Reporte - PDF
-        </a>
-    </li>
-@endif --}}
 </ul>
 <div class="tab-content" id="nav-tabs-content">
     <input type="hidden" value="{{ $solicitud->id }}" name="solicitud_id">
@@ -151,7 +96,7 @@
 
 </div>
 
-    <!-- Modal -->
+    <!-- Modal -->                   
 <div class="modal fade" id="modalSubmitEnsayoLodo" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -184,6 +129,7 @@
 <script src="{{ asset('js/ensayo/createlodo/componentEstaticaLodo.js') }}"></script>
 <script src="{{ asset('js/ensayo/createlodo/componentShowAditivosLodo.js') }}"></script>
 <script src="{{ asset('js/ensayo/createlodo/componentHumectabilidad.js') }}"></script>
+
 
   
 <script>

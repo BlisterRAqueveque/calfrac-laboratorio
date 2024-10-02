@@ -80,4 +80,8 @@ const componentShowAditivosLodo = (data) => {
     });
 
     habilitarSolapas();
+    location.reload();
+
+
 };
+

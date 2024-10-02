@@ -338,10 +338,12 @@
                             class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Densidad del lodo <span class="text-red-500">*</span></label>
                         <input type="number" name="densidad_lodo_3" id="densidad_lodo_3"
                             class="form-control text-sm p-2" value="{{ $solicitud_lodo[0]->densidad_lodo}}" readonly>
-                        @error('densidad_lodo_3')
+                        {{-- @error('densidad_lodo_3')
                             <small class="text-xs text-red-600">La densidad del lodo es requerida</small>
-                        @enderror
+                        @enderror --}}
                     </div>
+
+
                     <div class="">
                         <div class="grid grid-cols-2 gap-3">
                         <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">PF</label>
@@ -503,6 +505,41 @@
                 </div>
                 
                 @include('solicitud.components.lodo.requerimientos')
+
+                <hr class="my-4">
+
+                <p class="m-0 font-bold text-lg my-3 tracking-wide">Colchón</p>
+
+                <div class="grid xs:grid-cols-2 md:grid-cols-3 gap-3 mt-3">
+                    <div class="col-span-2 xl:col-span-1">
+                        <label for="vol_colchon"
+                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Volumen del Colchón <span class="text-red-500">*</span></label>
+                        <input type="number" name="vol_colchon" id="vol_colchon"
+                            class="form-control text-sm p-2" value="{{ $solicitud_lodo[0]->vol_colchon}}" readonly>
+                        {{-- @error('densidad_lodo_3')
+                            <small class="text-xs text-red-600">La densidad del lodo es requerida</small>
+                        @enderror --}}
+                    </div>
+                    <div class="col-span-2 xl:col-span-1">
+                        <label for="densidad_colchon"
+                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Densidad del Colchón <span class="text-red-500">*</span></label>
+                        <input type="number" name="densidad_colchon" id="densidad_colchon"
+                            class="form-control text-sm p-2" value="{{ $solicitud_lodo[0]->densidad_colchon}}" readonly>
+                        {{-- @error('densidad_lodo_3')
+                            <small class="text-xs text-red-600">La densidad del lodo es requerida</small>
+                        @enderror --}}
+                    </div>
+                    <div class="col-span-2 xl:col-span-1">
+                        <label for="tiempo_contacto"
+                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tiempo de Contacto<span class="text-red-500">*</span></label>
+                        <input type="number" name="tiempo_contacto" id="tiempo_contacto"
+                            class="form-control text-sm p-2" value="{{ $solicitud_lodo[0]->tiempo_contacto}}" readonly>
+                        {{-- @error('densidad_lodo_3')
+                            <small class="text-xs text-red-600">La densidad del lodo es requerida</small>
+                        @enderror --}}
+                    </div>
+
+                </div>
 
                 <hr class="my-4">
 
