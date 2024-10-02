@@ -14,12 +14,12 @@
                         {{ isset($solicitud_lodo[0]->rel_colchon) ? $solicitud_lodo[0]->rel_colchon->nombre : '-' }}
                     </th>
                     <th class="p-1 text-center border border-gray-300">Den.<small>(ppg)</small></th>
-                    <th class="p-1 text-center border border-gray-300">{{ $solicitud_lodo->densidad_colchon }}</th>
+                    <th class="p-1 text-center border border-gray-300">{{ $solicitud_lodo[0]->densidad_colchon }}</th>
                 </tr>
             </thead>
             <tbody>
-                @if(isset($solicitud_lodo->rel_aditivos) && count($solicitud_lodo->rel_aditivos) > 0)
-                    @foreach($solicitud_lodo->rel_aditivos as $formulacion)
+                @if(isset($solicitud_lodo[0]->rel_aditivos) && count($solicitud_lodo[0]->rel_aditivos) > 0)
+                    @foreach($solicitud_lodo[0]->rel_aditivos as $formulacion)
                         <tr class="border-b">
                             <td class="py-2 text-center border" colspan="2">{{ $formulacion->lote }}</td>
                             <td class="py-2 text-center border">
@@ -39,10 +39,6 @@
                             </td>
                         </tr>
                     @endforeach
-                @else
-                    <tr>
-                        <td colspan="5" class="py-2 text-center">No hay aditivos registrados</td>
-                    </tr>
                 @endif
             </tbody>
         </table>
