@@ -23,6 +23,8 @@ use App\Models\RelEstaticaLodo;
 use App\Models\RelHumectabilidad;
 use App\Models\RelReologiasLodo;
 use App\Models\RelEnsayoCompatibilidad;
+use App\Models\RelEnsayoEstatica;
+use App\Models\RelEnsayoMecanica;
 use App\Models\Solicitud;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
@@ -858,6 +860,18 @@ public function store_aditivos_lodo(Request $request)
                 'usuario_carga' => auth()->user()->id,
             ]);
 
+                        // Guardar los datos de colchon y densidad
+            $colchones = $request->input('colchon');
+            $densidades = $request->input('densidad');
+
+            foreach ($colchones as $key => $colchon) {
+                RelEnsayoEstatica::create([
+                    'solicitud_lodo_id' => $request->solicitud_lodo_id,
+                    'colchon' => $colchon,
+                    'densidad' => $densidades[$key] ?? null,  // Asegurarse de que densidad esté en el mismo índice
+                ]);
+            }
+
             if ($estatica_lodo->id) {
                 return response()->json([
                     'success_estatica_lodo' => $estatica_lodo,
@@ -927,6 +941,17 @@ public function store_aditivos_lodo(Request $request)
                 'solicitud_lodo_id' => $request->solicitud_lodo_id,
                 'usuario_carga' => auth()->user()->id,
             ]);
+                                    // Guardar los datos de colchon y densidad
+            $colchones = $request->input('colchon');
+            $densidades = $request->input('densidad');
+
+            foreach ($colchones as $key => $colchon) {
+                RelEnsayoMecanica::create([
+                    'solicitud_lodo_id' => $request->solicitud_lodo_id,
+                    'colchon' => $colchon,
+                    'densidad' => $densidades[$key] ?? null,  // Asegurarse de que densidad esté en el mismo índice
+                ]);
+            }
     
             if ($mecanica_lodo->id) {
                 return response()->json([

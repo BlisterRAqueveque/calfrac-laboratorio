@@ -40,6 +40,16 @@ class SolicitudLodo extends Model
         return $this->hasMany(RelEnsayoCompatibilidad::class, 'solicitud_lodo_id');
     }
 
+    public function mecanica()
+    {
+        return $this->hasMany(RelEnsayoMecanica::class, 'solicitud_lodo_id');
+    }
+
+    public function estatica()
+    {
+        return $this->hasMany(RelEnsayoEstatica::class, 'solicitud_lodo_id');
+    }
+
     public function rel_colchon() {
         return $this->belongsTo(TipoDeColchon::class, 'tipo_colchon', 'id');
     }

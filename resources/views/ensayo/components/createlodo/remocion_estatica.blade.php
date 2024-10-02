@@ -219,11 +219,11 @@
                                 </td>
                                 <td class="py-2 px-1 text-center border border-gray-300">
                                     <input type="number" class="form-control text-sm"
-                                    placeholder="Ingrese dato" name="">
+                                    placeholder="Ingrese dato" name="colchon[]">
                                 </td>
                                 <td class="py-2 px-1 text-center border border-gray-300" colspan="2">
                                     <input type="number" class="form-control text-sm"
-                                    placeholder="Ingrese dato" name="">
+                                    placeholder="Ingrese dato" name="densidad[]">
                                 </td>
                             </tr>
                         @endforeach
