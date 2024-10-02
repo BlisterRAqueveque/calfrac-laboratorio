@@ -1,0 +1,59 @@
+# Usar la imagen oficial de PHP con extensiones de FPM
+FROM php:8.2-fpm
+
+# Instalar dependencias necesarias
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    libonig-dev \
+    libzip-dev \
+    zip \
+    unzip \
+    git \
+    curl
+
+# Instalar Node.js y npm
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs
+
+# Instalar extensiones de PHP
+RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd zip
+
+# Instalar Composer
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
+    php -r "if (hash_file('sha384', 'composer-setup.php') === 'dac665fdc30fdd8ec78b38b9800061b4150413ff2e3b6f88543c636f7cd84f6db9189d43a81e5503cda447da73c7e5b6') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
+    php composer-setup.php && \
+    php -r "unlink('composer-setup.php');" && \
+    mv composer.phar /usr/local/bin/composer
+
+# Instalar Composer
+# COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Establecer el directorio de trabajo
+WORKDIR /var/www/html
+
+# Copiar el archivo de configuración .env y correr composer install
+COPY . /var/www/html
+
+# Cambiar permisos de storage y bootstrap/cache
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+
+# Instalar las dependencias de PHP (Laravel) con Composer
+RUN composer install
+
+# Instalar dependencias de Node.js
+RUN npm install
+
+# Compilar los assets de frontend
+RUN npm run build
+
+# Copia el archivo de configuración de nginx
+# COPY nginx.conf /etc/nginx/nginx.conf
+
+# Exponer el puerto 9000
+EXPOSE 9000
+
+# Correr el servidor PHP-FPM
+CMD ["php-fpm"]

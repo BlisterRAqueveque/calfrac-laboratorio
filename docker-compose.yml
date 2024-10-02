@@ -1,0 +1,16 @@
+services:
+  cal-app:
+    container_name: cal-app # El nombre del contenedor
+    build:
+      context: . # Usamos la raíz del proyecto para trabajar
+      dockerfile: Dockerfile # El nombre del dockerfile que va a usar
+    ports:
+      - "8000:8000" # Expornemos el puerto 8000
+    volumes:
+      - ./public/uploads:/app/public/uploads # La persistencia de los archivos <host>:<host_container>
+    environment:
+      - PHP_FPM_MAX_CHILDREN=5 # Revisar si sirve, creo que no
+    env_file:
+      - .env # La ubicación del archivo de variables de entorno
+    restart: unless-stopped # Se levanta el contenedor automaticamente
+    command: ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"] # Corremos el proyecto
