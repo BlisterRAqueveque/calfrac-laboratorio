@@ -35,6 +35,10 @@ class SolicitudLodo extends Model
         'comentario_ensayo_referencia'
 
     ];
+    public function compatibilidades()
+    {
+        return $this->hasMany(RelEnsayoCompatibilidad::class, 'solicitud_lodo_id');
+    }
 
     public function rel_colchon() {
         return $this->belongsTo(TipoDeColchon::class, 'tipo_colchon', 'id');

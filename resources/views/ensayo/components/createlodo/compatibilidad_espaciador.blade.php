@@ -4,6 +4,49 @@
     <div class="mb-2 text-center">
         <h5 class="mb-1">Caracterización del Compatibilidad</h5>
     </div>
+    <div class="row mt-3 py-2 px-2" id="solapa3">
+        <table class="w-full text-sm border border-gray-300">
+            <thead class="bg-gray-200 text-gray-700">
+                <tr>
+                    <th class="p-1 text-center border border-gray-300">Vol.<small>(bbl):</small></th>
+                    <th class="p-1 text-center border border-gray-300">{{ $solicitud_lodo[0]->densidad_colchon }}</th>
+                    <th class="p-1 text-center border border-gray-300" colspan="2">
+                        {{ isset($solicitud_lodo[0]->rel_colchon) ? $solicitud_lodo[0]->rel_colchon->nombre : '-' }}
+                    </th>
+                    <th class="p-1 text-center border border-gray-300">Den.<small>(ppg)</small></th>
+                    <th class="p-1 text-center border border-gray-300">{{ $solicitud_lodo->densidad_colchon }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if(isset($solicitud_lodo->rel_aditivos) && count($solicitud_lodo->rel_aditivos) > 0)
+                    @foreach($solicitud_lodo->rel_aditivos as $formulacion)
+                        <tr class="border-b">
+                            <td class="py-2 text-center border" colspan="2">{{ $formulacion->lote }}</td>
+                            <td class="py-2 text-center border">
+                                @if(isset($formulacion->aditivos->nombre))
+                                    {{ $formulacion->aditivos->nombre }}
+                                @elseif($formulacion->aditivo == 'SD')
+                                    {{ $formulacion->comentario ?? '-' }}
+                                @else
+                                    -
+                                @endif
+                            </td>
+                            <td class="py-2 px-1 text-center border border-gray-300">
+                                {{ $formulacion->colchon }}
+                            </td>
+                            <td class="py-2 px-1 text-center border border-gray-300" colspan="2">
+                                {{ $formulacion->densidad }}
+                            </td>
+                        </tr>
+                    @endforeach
+                @else
+                    <tr>
+                        <td colspan="5" class="py-2 text-center">No hay aditivos registrados</td>
+                    </tr>
+                @endif
+            </tbody>
+        </table>
+    </div>
     <div class="flex">
         <div class="w-1/2 p-2">
             <div class="row mt-3 py-2 px-2">
@@ -189,11 +232,11 @@
                             </td>
                             <td class="py-2 px-1 text-center border border-gray-300">
                                 <input type="number" class="form-control text-sm"
-                                placeholder="Ingrese dato" name="">
+                                placeholder="Ingrese dato" name="colchon[]">
                             </td>
                             <td class="py-2 px-1 text-center border border-gray-300" colspan="2">
                                 <input type="number" class="form-control text-sm"
-                                placeholder="Ingrese dato" name="">
+                                placeholder="Ingrese dato" name="densidad[]">
                             </td>
                         </tr>
                     @endforeach

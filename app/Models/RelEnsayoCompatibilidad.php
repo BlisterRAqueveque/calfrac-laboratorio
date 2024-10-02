@@ -5,27 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RelAditivosEnsayosLodo extends Model
+class RelEnsayoCompatibilidad extends Model
 {
     use HasFactory;
 
-    protected $table = 'rel_aditivos_ensayos_lodo';
+    protected $table = 'rel_ensayo_compatibilidad';
     protected $fillable = [
         'solicitud_lodo_id',
-        'lote',
-        'aditivo',
-        'comentario',
-        'concentracion',
-        'unidad',
+        'colchon',
+        'densidad',
     ];
 
     public function solicitud_lodo() 
     {
         return $this->belongsTo(SolicitudLodo::class);
-    }
-
-    public function aditivos()
-    {
-        return $this->belongsTo(Aditivo::class, 'aditivo', 'id');
     }
 }
