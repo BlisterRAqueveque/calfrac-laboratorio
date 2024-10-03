@@ -75,6 +75,7 @@ Route::get('/solicitud/fractura/{solicitud_id}', [SolicitudController::class, 's
 Route::post('/solicitud/lechada', [SolicitudController::class, 'store_lechada'])->name('solicitud.lechada');
 Route::get('/solicitud/lechada/{solicitud_id}', [SolicitudController::class, 'show_lechada'])->name('solicitud.lechada.show');
 Route::post('/solicitud/edicion/lechada', [SolicitudController::class, 'update_lechada'])->name('solicitud.update.lechada');
+Route::post('/solicitud/lechada/aprobada', [SolicitudController::class, 'store_aprobar_lechada'])->name('solicitud.aprobar.lechada');
 
 # Lodo
 Route::post('/solicitud/lodo', [SolicitudController::class, 'store_lodo'])->name('solicitud.lodo');
