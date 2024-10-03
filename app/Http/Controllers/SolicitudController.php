@@ -43,6 +43,8 @@ use App\Models\Estados;
 use App\Models\RelReologiaSolicitudEnsayo;
 use App\Models\RelEnsayoComentarioSolicitud;
 use App\Models\RelEnsayosRequeridosLodo;
+use App\Models\TipoDeColchon;
+use App\Mail\SolicitudLechadaAprobada;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Mail;
@@ -85,6 +87,7 @@ class SolicitudController extends Controller
             'ensayos_sol_lodo' => Ensayo::where('tipo', 'LN')->where('estado', 1)->get(),
             'names_ingenieros' => User::whereIn('users.grupo_id', [3, 4])->get('users.*'),
             'aditivos' => Aditivo::all(),
+            'tipo_de_colchon' => TipoDeColchon::all(),
             //'name_aditivos' =>
         ];
         return view('solicitud.create', $data);
@@ -400,8 +403,8 @@ class SolicitudController extends Controller
         }
         */
         $url = route('solicitud.lechada.show', ['solicitud_id' => $solicitud->id]);
-        $correos[] = "rocio.carvajal@blistertechnologies.com";
-        $correos[] = "orodriguez@calfrac.com";
+
+        //$correos[] = "orodriguez@calfrac.com";
         $data = [
             'solicitud_id' => $solicitud->id,
             'locacion_id' => $request->locacion_lechada,
@@ -411,7 +414,25 @@ class SolicitudController extends Controller
             'url' => $url
             //'empresa' => $request->empresa
         ];
-        $this->_sendEmailNewLechada($data, $correos);
+
+
+        # Listado de correos de laboratoristas, me agrego a mi para chequear que llegue correctamente
+        $destinatarios = [
+            'GTorres@calfrac.com',
+            'CDominguez@calfrac.com',
+            'DMancilla@calfrac.com',
+            'LVazquez@calfrac.com',
+            'ORodriguez@calfrac.com',
+            'rocio.carvajal@blistertechnologies.com',
+            'gruiz@blister.com.ar',
+            // 'lsicolo@blister.com.ar'
+        ];
+
+        # Incluye el correo del usuario que cargó la solicitud mas el arreglo de arriba
+        array_unshift($destinatarios, $solicitud->user->email);
+
+
+        $this->_sendEmailNewLechada($data, $destinatarios);
 
         # Formulaciones Tentativas
         if ($request->aditivos) {
@@ -454,6 +475,51 @@ class SolicitudController extends Controller
         # Comentado por el momento (Se puede descomentar)
         // $this->_sendEmailApproved($data, $solicitud->user->email);
         // -- Finaliza el envío de email
+        return $solicitud->id;
+    }
+
+    public function store_aprobar_lechada(Request $request)
+    {
+        $solicitud = Solicitud::find($request->solicitud_id);
+        $solicitud->estado_solicitud_id = 2;
+        $solicitud->aprobada = 1;
+        $solicitud->fecha_aprobada = date('Y-m-d H:i:s');
+        $solicitud->usuario_aprobo = auth()->user()->id;
+        $solicitud->save();
+
+
+        #URL DE LECHADAS, CUANDO SE HABILITE LODO Y FRACTURA HAY QUE VALIDAR PARA QUE DEPENDE QUE SOLICITUD SEA, TE ENVIE A LA URL CORRECTA
+        $url = route('solicitud.lechada.show', ['solicitud_id' => $solicitud->id]);
+
+        # Envío de Email
+        $data = [
+            'solicitud_id' => $solicitud->id,
+            'fecha_aprobada' => $solicitud->fecha_aprobada->format('d/m/Y'),
+            // 'usuario_aprobo' => $solicitud->usuario_aprobo->nombre . ' ' . $solicitud->usuario_aprobo->apellido,
+            'url' => $url
+        ];
+
+        # Listado de correos de laboratoristas, me agrego a mi para chequear que llegue correctamente
+        $destinatarios = [
+            'GTorres@calfrac.com',
+            'CDominguez@calfrac.com',
+            'DMancilla@calfrac.com',
+            'LVazquez@calfrac.com',
+            'ORodriguez@calfrac.com',
+            'rocio.carvajal@blistertechnologies.com',
+            'gruiz@blister.com.ar',
+            // 'lsicolo@blister.com.ar'
+        ];
+
+        # Incluye el correo del usuario que cargó la solicitud mas el arreglo de arriba
+        array_unshift($destinatarios, $solicitud->user->email);
+
+        # Envío del correo a c/u
+        foreach ($destinatarios as $correo) {
+            $this->_sendEmailApproved($data, $correo);
+        }
+        // -- Finaliza el envío de email
+
         return $solicitud->id;
     }
 
@@ -642,6 +708,7 @@ class SolicitudController extends Controller
             'servicios_lodo' => 'required',
             'mud_company' => 'required',
             'densidad_lodo_3' => 'required',
+            'tipo_colchon' => 'required',
             //'temperatura' => 'required',
             //'profundidad_md' => 'required',
             //'profundidad_tvd' => 'required',
@@ -682,6 +749,9 @@ class SolicitudController extends Controller
             'densidad_colchon' => $request->densidad_colchon,
             'tiempo_contacto' => $request->tiempo_contacto,
             'mud_company' => $request->mud_company,
+            'tipo_colchon' => $request->tipo_colchon,
+            'vp' => $request->vp,
+            'pf' => $request->pf,
             'comentario' => $request->observacion_lodo,
         ]);
 
@@ -756,6 +826,7 @@ class SolicitudController extends Controller
                     'comentario' => $formulacion['comentario'],
                     'aditivo' => $formulacion['aditivo'],
                     'concentracion' => $formulacion['concentracion'],
+                    'unidad' => $formulacion['unidad'],
                 ]);
             }
         }
@@ -841,12 +912,12 @@ class SolicitudController extends Controller
         $data = [
             'solicitud' => Solicitud::find($solicitud_id),
             'ensayos_referencia' => Ensayo::leftJoin('rel_ensayo_referencia_solicitud', 'ensayos.id', '=', 'rel_ensayo_referencia_solicitud.ensayo_id')
-            ->where('rel_ensayo_referencia_solicitud.solicitud_id', $solicitud_id)
-            ->get(['ensayos.*', 'rel_ensayo_referencia_solicitud.*']),
+                ->where('rel_ensayo_referencia_solicitud.solicitud_id', $solicitud_id)
+                ->get(['ensayos.*', 'rel_ensayo_referencia_solicitud.*']),
             //  'aditivos' => Aditivo::all(),
             'ensayos_multiples' => EnsayosLodo::leftJoin('rel_ensayos_requeridos_lodo', 'ensayos_lodo.id', '=', 'rel_ensayos_requeridos_lodo.id_ensayo')
-            ->where('rel_ensayos_requeridos_lodo.nombre', $solicitud_id)
-            ->get(['ensayos_lodo.*', 'rel_ensayos_requeridos_lodo.*']),
+                ->where('rel_ensayos_requeridos_lodo.nombre', $solicitud_id)
+                ->get(['ensayos_lodo.*', 'rel_ensayos_requeridos_lodo.*']),
             'opciones_ensayos' => EnsayosLodo::all(),
             'ensayos' => Ensayo::where('estado', 1)->get(),
             'users' => User::all(),
@@ -855,13 +926,16 @@ class SolicitudController extends Controller
             'mud_company' => MudCompany::all(),
             'equipos' => Equipos::all(),
             'servicios' => Servicios::all(),
+            'tipo_lodo' => TipoLodo_Lodos::all(),
             'solicitud_lodo' => SolicitudLodo::where('solicitud_id', $solicitud_id)->get(),
             'comentarios_referencia' => RelEnsayoComentarioSolicitud::where('solicitud_id', $solicitud_id)->get(),
             'names_ingenieros' => User::whereIn('users.grupo_id', [3, 4])->get('users.*'),
+            'aditivos' => Aditivo::all(),
+            'tipo_de_colchon' => TipoDeColchon::all(),
             // 'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
-        // $generate_report = $this->_generate_report($solicitud_id);
-        //$data['generar_reporte'] = $generate_report->original['generate_report'];
+        $generate_report_lodo = $this->_generate_report_lodo($solicitud_id);
+        $data['generar_reporte_lodo'] = $generate_report_lodo->original['generate_report_lodo'];
         return view('solicitud.components.lodo.show', $data);
     }
 
@@ -1070,8 +1144,8 @@ class SolicitudController extends Controller
             return back()->with('success', $solicitud->id);
     }
 
-    
-    
+
+
     /**
      * Se que es un código asqueroso, pero una condición si o si depende de la otra
      */
@@ -1180,46 +1254,47 @@ class SolicitudController extends Controller
 
     public function _generate_report($solicitud_id)
     {
-    $generar_reporte = false;
-    $solicitud_lechada = SolicitudLechada::where('solicitud_id', $solicitud_id)->first();
+        $generar_reporte = false;
+        $solicitud_lechada = SolicitudLechada::where('solicitud_id', $solicitud_id)->first();
 
-    if (!$solicitud_lechada) {
+        if (!$solicitud_lechada) {
+            return response()->json(['generate_report' => $generar_reporte]);
+        }
+
+        $requisitos = [
+            'rel_reologia',
+            'rel_perdida_filtrado',
+            'rel_uca',
+            'rel_agua_libre',
+            'rel_mezclabilidad',
+            'rel_aditivos',
+            'rel_bombeabilidad',
+        ];
+
+        // Verificar que todas las relaciones tengan datos
+        foreach ($requisitos as $relacion) {
+            if (count($solicitud_lechada->$relacion) == 0) {
+                return response()->json(['generate_report' => $generar_reporte]);
+            }
+        }
+
+        // Verificar si en rel_bombeabilidad hay algún valor seleccionado
+        foreach ($solicitud_lechada->rel_bombeabilidad as $b) {
+            if ($b->selected) {
+                $generar_reporte = true;
+                break;
+            }
+        }
+
         return response()->json(['generate_report' => $generar_reporte]);
     }
 
-    $requisitos = [
-        'rel_reologia',
-        'rel_perdida_filtrado',
-        'rel_uca',
-        'rel_agua_libre',
-        'rel_mezclabilidad',
-        'rel_aditivos',
-        'rel_bombeabilidad',
-    ];
-
-    // Verificar que todas las relaciones tengan datos
-    foreach ($requisitos as $relacion) {
-        if (count($solicitud_lechada->$relacion) == 0) {
-            return response()->json(['generate_report' => $generar_reporte]);
-        }
-    }
-
-    // Verificar si en rel_bombeabilidad hay algún valor seleccionado
-    foreach ($solicitud_lechada->rel_bombeabilidad as $b) {
-        if ($b->selected) {
-            $generar_reporte = true;
-            break;
-        }
-    }
-
-    return response()->json(['generate_report' => $generar_reporte]);
-    }
-
     // Reporte de ensayo para Lodo
-    public function _generate_report_lodo($solicitud_id) {
+    public function _generate_report_lodo($solicitud_id)
+    {
         $generar_reporte_lodo = false;
         $solicitud_lodo = SolicitudLodo::where('solicitud_id', $solicitud_id)->first();
-        $solicitud_lodo = SolicitudLodo::with('rel_compatibilidad')->find($solicitud_id);
+        //$solicitud_lodo = SolicitudLodo::with('rel_compatibilidad')->find($solicitud_id);
 
 
         // Si no existe la solicitud de lodo, retorna que no se puede generar el reporte
@@ -1229,9 +1304,12 @@ class SolicitudController extends Controller
 
         // Requisitos necesarios para generar el reporte de lodo
         $requisitos_lodo = [
+            'rel_aditivos',
             'rel_caracterizacion',
             'rel_compatibilidad',
             'rel_mecanica',
+            'rel_estatica',
+            'rel_humectabilidad',
         ];
 
         // Verificar que todas las relaciones tengan datos
@@ -1246,7 +1324,7 @@ class SolicitudController extends Controller
         return response()->json(['generate_report_lodo' => $generar_reporte_lodo]);
     }
 
-    
+
 
     // public function _generate_report($solicitud_id)
     // {
@@ -1324,10 +1402,12 @@ class SolicitudController extends Controller
      */
     public function _sendEmailApproved($data, $correo)
     {
-        Mail::send('emails.solicitud.approved', ['data' => $data], function ($message) use ($correo, $data) {
-            $message->to($correo)
-                ->subject('Laboratorio Calfrac | Solicitud de Fractura N°' . $data['solicitud_id'] . ' - Aprobada');
-        });
+        Mail::to($correo)->send(new SolicitudLechadaAprobada($data));
+
+        // Mail::send('emails.solicitud.approved', ['data' => $data], function ($message) use ($correo, $data) {
+        //     $message->to($correo)
+        //         ->subject('Laboratorio Calfrac | Solicitud de Fractura N°' . $data['solicitud_id'] . ' - Aprobada');
+        // });
     }
 
     public function viewMail()

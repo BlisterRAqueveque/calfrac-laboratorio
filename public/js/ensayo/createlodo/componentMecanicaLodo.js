@@ -33,7 +33,7 @@ const componentMecanicaLodo = (data = {}) => {
     removalTableHead.innerHTML = `
       <tr>
         <th class="p-1 text-center border border-gray-300">Tiempo de contacto (min)</th>
-        <th class="p-1 text-center border border-gray-300">DynaFlush-"O"</th>
+        <th class="p-1 text-center border border-gray-300">${colchonNombre}</th>
       </tr>
     `;
 

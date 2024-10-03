@@ -75,6 +75,7 @@ Route::get('/solicitud/fractura/{solicitud_id}', [SolicitudController::class, 's
 Route::post('/solicitud/lechada', [SolicitudController::class, 'store_lechada'])->name('solicitud.lechada');
 Route::get('/solicitud/lechada/{solicitud_id}', [SolicitudController::class, 'show_lechada'])->name('solicitud.lechada.show');
 Route::post('/solicitud/edicion/lechada', [SolicitudController::class, 'update_lechada'])->name('solicitud.update.lechada');
+Route::post('/solicitud/lechada/aprobada', [SolicitudController::class, 'store_aprobar_lechada'])->name('solicitud.aprobar.lechada');
 
 # Lodo
 Route::post('/solicitud/lodo', [SolicitudController::class, 'store_lodo'])->name('solicitud.lodo');
@@ -151,11 +152,13 @@ Route::get('/pdf/view', [PDFController::class, 'pdf_view']);
 # Route::get('/pdf/report/lechadas/{solicitud_id}', [PDFController::class, 'pdf_report_lechada'])->name('pdf_report_lechadas');
 
 # Ruta para lodo
-Route::get('/ensayoslodo/create', [EnsayoController::class, 'create_lodo'])->name('ensayolodo.create');
+Route::get('/ensayoslodo/create', [EnsayoController::class, 'create'])->name('ensayolodo.create');
 #Route::get('/ensayoslodo', [EnsayoController::class, 'index'])->name('ensayos_lodo');
+Route::post('/ensayoslodo/aditivos', [EnsayoController::class, 'store_aditivos_lodo'])->name('store_aditivos_lodo');
 Route::post('/ensayoslodo/store', [EnsayoController::class, 'store_reologia_lodo'])->name('store_lodo');
 Route::post('/ensayolodo/compatibilidad', [EnsayoController::class, 'store_compatibilidad'])->name('store_compatibilidad');
 Route::post('/ensayolodo/mecanica', [EnsayoController::class, 'store_mecanica'])->name('store_mecanica');
 Route::post('/ensayolodo/estatica', [EnsayoController::class, 'store_estatica'])->name('store_estatica');
+Route::post('/ensayolodo/humectabilidad', [EnsayoController::class, 'store_humectabilidad'])->name('store_humectabilidad');
 //Route::post('/ensayolodo/pdf/{solicitud_id}', [EnsayoController::class, 'pdfReport'])->name('pdfReport');
 Route::get('/check_report_lodo/{solicitud_id}', [SolicitudController::class, '_generate_report_lodo'])->name('check_report_lodo');

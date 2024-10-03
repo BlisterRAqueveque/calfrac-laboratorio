@@ -115,6 +115,19 @@
                         @enderror
                     </div>
 
+                    <div class="">
+                        <div class="grid grid-cols-2 gap-3">
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">PF</label>
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">VP</label>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <input type="text" name="pf" class="form-control text-sm p-2" placeholder="PF" >
+                            <input type="text" name="vp" class="form-control text-sm p-2" placeholder="VP">
+                        </div>
+                    </div>
+
+
+
                 </div>
                 <div class="row p-2">
                 <hr class="my-4">
@@ -122,16 +135,16 @@
                 <div class="grid md:grid-cols-5 gap-3 mt-3">
                     <div class="md:col-span-2 xl:col-span-1">
                         <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Grado de
-                            Temperatura <small>(°C)</small></label>
-                        <input type="number" name="temperatura" value="{{ old('temperatura') }}" class="form-control sz p-2" placeholder="(C°)" step=".0001">
+                            Temperatura <small>(°F/100 ft)</small></label>
+                        <input type="number" name="temperatura" value="{{ old('temperatura') }}" class="form-control sz p-2" placeholder="(°F/100 ft)" step=".0001">
                     </div>
 
                     <div class="">
                         <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Profundidad
-                            <small>(MD/TVD) (m)</small></label>
+                            <small>(TVD/MD) (m)</small></label>
                         <div class="grid grid-cols-2 gap-3">
-                            <input type="number" min="0" name="profundidad_md" class="form-control text-sm p-2" value="{{ old('profundidad_md') }}" placeholder="MD" step=".0001">
                             <input type="number" min="0" name="profundidad_tvd" class="form-control text-sm p-2" value="{{ old('profundidad_tvd') }}" placeholder="TVD" step=".0001">
+                            <input type="number" min="0" name="profundidad_md" class="form-control text-sm p-2" value="{{ old('profundidad_md') }}" placeholder="MD" step=".0001">
                         </div>
                     </div>
                     {{-- 
@@ -201,16 +214,23 @@
                 <p class="m-0 font-bold text-lg my-3 tracking-wide">Requerimientos del Colchon</p>
 
                 <div class="grid grid-cols-4">
-                    <div class="col-span-4 md:col-span-1">
-                        <label for="" class="text-sm mt-3 text-gray-700 font-semibold tracking-wide mb-2">Sistema de Aditivos</label>
-                        <input type="text" name="sistema_aditivos" class="form-control text-sm" placeholder="Ingrese Sistema de Aditivos">
+                    <div>
+                        <label for="tipo_colchon" class="text-sm mt-3 text-gray-700 font-semibold tracking-wide mb-2">Tipo de Colchón</label>
+                        <select name="tipo_colchon" id="tipo_colchon" class="text-sm inp_edit" data-search="false" >
+                            @foreach ($tipo_de_colchon as $e)
+                                <option value="{{ $e->id }}">{{ $e->nombre }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-3 text-center bg-gray-100 py-2 my-3">
+
+
+                <div class="grid grid-cols-4 text-center bg-gray-100 py-2 my-3">
                     <p>Lote</p>
                     <p>Aditivo</p>
-                    <p>Conc (% BWOC)</p>
+                    <p>Conc (gpt o ppt)</p>
+                    <p>Unidad <small>(lt/m³ o kg/m³)</small></p>
                 </div>
                  <div id="container_formulaciones_tentativas_lodo"></div>
 
@@ -223,7 +243,7 @@
 
                 <hr class="my-4">
 
-                <p class="m-0 font-bold text-lg my-3 tracking-wide">Colchon</p>
+                <p class="m-0 font-bold text-lg my-3 tracking-wide">Colchón</p>
 
                 <div class="grid xs:grid-cols-2 md:grid-cols-3 gap-3 mt-3">
                     <div class="col-span-2 xl:col-span-1">
@@ -384,7 +404,11 @@
             ele: "#firma_solicitante_lodo",
             placeholder: "Seleccione quien solicita",
         });
-             
+        VirtualSelect.init({
+            ele: "#tipo_colchon",
+            placeholder: "Seleccione el tipo de colchón",
+        });
+        document.getElementById("tipo_colchon").setValue(0);
         document.getElementById("cliente_lodo").setValue(0);
         document.getElementById("locacion_lodo").setValue(0);
         document.getElementById("equipo_lodo").setValue(0);

@@ -29,9 +29,34 @@ class SolicitudLodo extends Model
         'densidad_colchon',
         'tiempo_contacto',
         'comentario',
+        'tipo_colchon',
+        'vp',
+        'pf',
         'comentario_ensayo_referencia'
 
     ];
+    public function compatibilidades()
+    {
+        return $this->hasMany(RelEnsayoCompatibilidad::class, 'solicitud_lodo_id');
+    }
+
+    public function mecanica()
+    {
+        return $this->hasMany(RelEnsayoMecanica::class, 'solicitud_lodo_id');
+    }
+
+    public function estatica()
+    {
+        return $this->hasMany(RelEnsayoEstatica::class, 'solicitud_lodo_id');
+    }
+
+    public function rel_colchon() {
+        return $this->belongsTo(TipoDeColchon::class, 'tipo_colchon', 'id');
+    }
+
+    public function rel_aditivos() {
+        return $this->hasMany(RelAditivosEnsayosLodo::class);
+    }
 
     public function rel_caracterizacion() {
         return $this->hasMany(RelCaracterizacionLodo::class);
@@ -51,6 +76,10 @@ class SolicitudLodo extends Model
 
     public function rel_estatica() {
         return $this->hasMany(RelEstaticaLodo::class);
+    }
+    
+    public function rel_humectabilidad() {
+        return $this->hasMany(RelHumectabilidad::class);
     }
 
     public function user_iniciado_por()

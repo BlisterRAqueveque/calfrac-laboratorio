@@ -38,6 +38,7 @@ return new class extends Migration
             $table->float('gel_min_5')->nullable();
             $table->foreignId('solicitud_lodo_id')->references('id')->on('solicitud_lodo')->nullable();
             $table->foreignId('usuario_carga')->references('id')->on('users');
+            $table->tinyInteger('selected')->default(0)->comment('1: Seleccionado para el reporte | 0: No seleccionado');
             $table->timestamps();
         });
     }

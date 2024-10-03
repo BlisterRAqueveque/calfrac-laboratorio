@@ -27,9 +27,9 @@
         </a>
     </li>
     <li class="nav-item w-full md:w-auto text-xs xl:text-sm flex-1" role="presentation">
-        <a class="nav-link nav_tab_mod d-flex items-center justify-center gap-2 text-violet-700" id="nav-tab2"
+        <a class="nav-link nav_tab_mod d-flex items-center justify-center gap-2 text-violet-700 disabled-tab" id="nav-tab2"
             data-bs-toggle="tab" href="#tab-compatibilidad_espaciador" data-bs-target="#tab-compatibilidad_espaciador" role="tab"
-            aria-controls="tab-compatibilidad_espaciador" aria-selected="false">
+            aria-controls="tab-compatibilidad_espaciador" aria-selected="false" aria-disabled="true">
             <div
                 class="w-4 h-4 xl:w-5 xl:h-5 bg-gray-400 shadow-sm rounded-full flex justify-center text-white items-center">
                 <span>
@@ -40,9 +40,9 @@
         </a>
     </li>
     <li class="nav-item w-full md:w-auto text-xs xl:text-sm flex-1" role="presentation">
-        <a class="nav-link nav_tab_mod d-flex items-center justify-center gap-2 text-violet-700" id="nav-tab2"
+        <a class="nav-link nav_tab_mod d-flex items-center justify-center gap-2 text-violet-700 disabled-tab" id="nav-tab2"
             data-bs-toggle="tab" href="#tab-remocion_mecanica" data-bs-target="#tab-remocion_mecanica" role="tab"
-            aria-controls="tab-remocion_mecanica" aria-selected="false">
+            aria-controls="tab-remocion_mecanica" aria-selected="false" aria-disabled="true">
             <div
                 class="w-4 h-4 xl:w-5 xl:h-5 bg-gray-400 shadow-sm rounded-full flex justify-center text-white items-center">
                 <span>
@@ -53,9 +53,9 @@
         </a>
     </li>
     <li class="nav-item w-full md:w-auto text-xs xl:text-sm flex-1" role="presentation">
-        <a class="nav-link nav_tab_mod d-flex items-center justify-center gap-2 text-violet-700" id="nav-tab2"
+        <a class="nav-link nav_tab_mod d-flex items-center justify-center gap-2 text-violet-700 disabled-tab" id="nav-tab2"
             data-bs-toggle="tab" href="#tab-remocion_estatica" data-bs-target="#tab-remocion_estatica" role="tab" aria-controls="tab-remocion_estatica"
-            aria-selected="false">
+            aria-selected="false" aria-disabled="true">
             <div
                 class="w-4 h-4 xl:w-5 xl:h-5 bg-gray-400 shadow-sm rounded-full flex justify-center text-white items-center">
                 <span>
@@ -78,39 +78,25 @@
            Humectabilidad
         </a>
     </li>
-
-    <li class="nav-item w-full md:w-auto text-xs xl:text-sm flex-1" role="presentation">
-        <a class="nav-link nav_tab_mod d-flex items-center justify-center gap-2 text-violet-700" id="nav-tab2"
-            data-bs-toggle="tab" href="#tab_mezclabilidad" data-bs-target="#tab_mezclabilidad" role="tab"
-            aria-controls="tab_mezclabilidad" aria-selected="false">
-            <div
-                class="w-4 h-4 xl:w-5 xl:h-5 bg-gray-400 shadow-sm rounded-full flex justify-center text-white items-center">
-                <span>
-                    7
-                </span>
-            </div>
-            Wettability
-        </a>
-    </li>
-
 </ul>
-
 <div class="tab-content" id="nav-tabs-content">
     <input type="hidden" value="{{ $solicitud->id }}" name="solicitud_id">
-    {{-- Sistema de Aditivos --}}
+    {{-- Registro Sistema de Aditivos --}}
     @include('ensayo.components.createlodo.sistema_aditivos')
-    {{-- Caracterizacion de lodo --}}
+    {{-- Registro Caracterizacion de lodo --}}
     @include('ensayo.components.createlodo.caracterizacion_lodo')
-    {{-- Compatibilidad Espaciador-Lodo --}}
+    {{-- Registro Compatibilidad Espaciador-Lodo --}}
     @include('ensayo.components.createlodo.compatibilidad_espaciador')
-    {{-- Remoción Mecanica --}}
+    {{-- Registro Remoción Mecanica --}}
     @include('ensayo.components.createlodo.remocion_mecanica')
-    {{-- Remoción Estática --}}
+    {{-- Registro Remoción Estática --}}
     @include('ensayo.components.createlodo.remocion_estatica')
+    {{-- Registro Humectabilidad --}}
+    @include('ensayo.components.createlodo.humectabilidad')
 
 </div>
 
-    <!-- Modal -->
+    <!-- Modal -->                   
 <div class="modal fade" id="modalSubmitEnsayoLodo" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -136,16 +122,85 @@
     </div>
 </div>
 {{-- JavaScript dinamico para el reload de las tablas de Reologias de Lodo --}}
+<script src="{{ asset('js/ensayo/createlodo/componentAditivosLodo.js') }}"></script>
 <script src="{{ asset('js/ensayo/createlodo/componentReologiasLodo.js') }}"></script>
 <script src="{{ asset('js/ensayo/createlodo/componentCompatibilidadLodo.js') }}"></script>
 <script src="{{ asset('js/ensayo/createlodo/componentMecanicaLodo.js') }}"></script>
 <script src="{{ asset('js/ensayo/createlodo/componentEstaticaLodo.js') }}"></script>
-<!--Aca iria un script para mostrar un cartel de carga pero meh -->
+<script src="{{ asset('js/ensayo/createlodo/componentShowAditivosLodo.js') }}"></script>
+<script src="{{ asset('js/ensayo/createlodo/componentHumectabilidad.js') }}"></script>
 
-{{-- <script src="{{ asset('js/ensayos_lodo/componentCaracterizacion.js') }}"></script>
-<script src="{{ asset('js/ensayos_lodo/componentCompatibilidad.js') }}"></script>
-<script src="{{ asset('js/ensayos_lodo/componentHumectabilidad.js') }}"></script>
-<script src="{{ asset('js/ensayos_lodo/componentInhibidor.js') }}"></script>
-<script src="{{ asset('js/ensayos_lodo/componentRemocionEstatica.js') }}"></script>
-<script src="{{ asset('js/ensayos_lodo/componentRemocionDinamica.js') }}"></script>
-<script src="{{ asset('js/ensayos_lodo/componentWettability.js') }}"></script> --}}
+
+  
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Obtener las pestañas 3, 4 y 5
+        const tab3 = document.querySelector('a[href="#tab-compatibilidad_espaciador"]');
+        const tab4 = document.querySelector('a[href="#tab-remocion_mecanica"]');
+        const tab5 = document.querySelector('a[href="#tab-remocion_estatica"]');
+
+        // Obtener los datos de 'rel_aditivos' de Blade
+        const aditivos = @json($solicitud_lodo[0]->rel_aditivos);
+
+        // Función para habilitar las pestañas
+        function enableTabs() {
+            tab3.classList.remove('disabled-tab');
+            tab3.removeAttribute('aria-disabled');
+            tab4.classList.remove('disabled-tab');
+            tab4.removeAttribute('aria-disabled');
+            tab5.classList.remove('disabled-tab');
+            tab5.removeAttribute('aria-disabled');
+        }
+
+        // Función para deshabilitar las pestañas
+        function disableTabs() {
+            tab3.classList.add('disabled-tab');
+            tab3.setAttribute('aria-disabled', 'true');
+            tab4.classList.add('disabled-tab');
+            tab4.setAttribute('aria-disabled', 'true');
+            tab5.classList.add('disabled-tab');
+            tab5.setAttribute('aria-disabled', 'true');
+        }
+
+        // Verificar si hay aditivos, si hay, habilita las pestañas
+        if (aditivos.length > 0) {
+            enableTabs();
+        } else {
+            disableTabs();
+        }
+    });
+
+    function habilitarSolapas() {
+    // Selecciona todas las solapas que tienen la clase `disabled-tab`
+    const solapasDeshabilitadas = document.querySelectorAll('.disabled-tab');
+    
+    // Recorre las solapas y quita la clase `disabled-tab` y el atributo `aria-disabled`
+    solapasDeshabilitadas.forEach((solapa) => {
+        solapa.classList.remove('disabled-tab'); // Quita la clase de deshabilitado
+        solapa.setAttribute('aria-disabled', 'false'); // Cambia el estado a habilitado
+    });
+}
+</script>
+
+
+<!--Aca iria un script para mostrar un cartel de carga pero meh -->
+<script>
+    const checkGenerateReportLodo = (solicitud_id) => {
+        console.log(solicitud_id); 
+        return new Promise((resolve, reject) => {
+            fetch("{{ route('check_report_lodo', '') }}" + "/" + solicitud_id, {
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                            'content')
+                    },
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    resolve(data);
+                })
+                .catch((error) => {
+                    reject(error);
+                });
+        })
+    }
+</script>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CalculosAditivosLechada;
 use App\Models\Ensayo;
+use App\Models\Aditivo;
 use App\Models\RelAditivosEnsayos;
 use App\Models\RelAditivosEnsayosLechada;
 use App\Models\RelAguaLibreSolicitudEnsayo;
@@ -14,11 +15,16 @@ use App\Models\RelReologiaSolicitudEnsayo;
 use App\Models\RelRequerimientosEnsayos;
 use App\Models\RelUcaSolicitudEnsayo;
 use App\Models\CalculosReologias;
+use App\Models\RelAditivosEnsayosLodo;
 use App\Models\RelCaracterizacionLodo;
 use App\Models\RelCompatibilidadLodo;
 use App\Models\RelMecanicaLodo;
 use App\Models\RelEstaticaLodo;
+use App\Models\RelHumectabilidad;
 use App\Models\RelReologiasLodo;
+use App\Models\RelEnsayoCompatibilidad;
+use App\Models\RelEnsayoEstatica;
+use App\Models\RelEnsayoMecanica;
 use App\Models\Solicitud;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
@@ -511,7 +517,6 @@ class EnsayoController extends Controller
             return response()->json(['success_mezclabilidad' => $mezclabilidad]);
     }
 
-
     public function store_aditivos(Request $request)
     {
 
@@ -559,6 +564,76 @@ class EnsayoController extends Controller
 
     return response()->json(['error' => 'No se enviaron aditivos en la solicitud'], 400);
 }
+
+
+
+// public function store_aditivos_lodo(Request $request)
+// {
+
+//     // Verificar si se enviaron aditivos en la solicitud
+//     if ($request->aditivos) {
+//         foreach ($request->aditivos as $formulacion) {
+//             RelAditivosEnsayosLodo::create([
+//                 'solicitud_lodo_id' => $request->solicitud_lodo_id,
+//                 'lote' => $formulacion['lote'],
+//                 'aditivo' => $formulacion['aditivo'],
+//                 'comentario' => $formulacion['comentario'],
+//                 'concentracion' => $formulacion['concentracion'],
+//             ]);
+//         }
+
+//         // Obtener los aditivos relacionados a la solicitud de lodo
+//         $aditivos_lodo = RelAditivosEnsayosLodo::where('solicitud_lodo_id', $request->solicitud_lodo_id)
+//             ->with('aditivos')  // Cargar la relación con la tabla 'aditivos'
+//             ->get();
+
+//         // Retornar la respuesta JSON con los aditivos para el lado del cliente (JavaScript)
+//         return response()->json([
+//             'success_aditivos' => $aditivos_lodo,
+//         ]);
+//     }
+
+//     return response()->json(['error' => 'No se enviaron aditivos en la solicitud'], 400);
+// }
+public function store_aditivos_lodo(Request $request)
+{
+    // Verificar si se enviaron aditivos en la solicitud
+    if ($request->aditivos) {
+        $hasData = false; // Variable para rastrear si hay datos de aditivos
+
+        foreach ($request->aditivos as $formulacion) {
+            // Verificar si hay datos en la formulación
+            if (!empty($formulacion['lote']) || !empty($formulacion['aditivo']) || !empty($formulacion['concentracion'])) {
+                $hasData = true; // Hay al menos un dato cargado
+            }
+
+            RelAditivosEnsayosLodo::create([
+                'solicitud_lodo_id' => $request->solicitud_lodo_id,
+                'lote' => $formulacion['lote'],
+                'aditivo' => $formulacion['aditivo'],
+                'comentario' => $formulacion['comentario'],
+                'concentracion' => $formulacion['concentracion'],
+                'unidad' => $formulacion['unidad'],
+                'check' => $hasData ? 1 : 0, // Asignar el valor de check
+            ]);
+        }
+
+        // Obtener los aditivos relacionados a la solicitud de lodo
+        $aditivos_lodo = RelAditivosEnsayosLodo::where('solicitud_lodo_id', $request->solicitud_lodo_id)
+            ->with('aditivos')  // Cargar la relación con la tabla 'aditivos'
+            ->get();
+
+        // Retornar la respuesta JSON con los aditivos y el estado de hasData
+        return response()->json([
+            'success_aditivos_lodo' => $aditivos_lodo,
+            'hasData' => $hasData, // Devolver el estado de hasData
+        ]);
+    }
+
+    return response()->json(['error' => 'No se enviaron aditivos en la solicitud'], 400);
+}
+
+
 
 
 
@@ -642,36 +717,99 @@ class EnsayoController extends Controller
     }
 
     public function store_compatibilidad(Request $request) {
-        $compatibilidad_lodo = RelCompatibilidadLodo::create([
-            //modificar las variables vy
-            'vp_1' => $request->vp_1,
-            'vp_2' => $request->vp_2,
-            'vp_3' => $request->vp_3,
-            'vp_4' => $request->vp_4,
-            'vp_5' => $request->vp_5,
-            'yp_1' => $request->yp_1,
-            'yp_2' => $request->yp_2,
-            'yp_3' => $request->yp_3,
-            'yp_4' => $request->yp_4,
-            'yp_5' => $request->yp_5,
-            'gel_seg_1' => $request->gel_seg_1,
-            'gel_seg_2' => $request->gel_seg_2,
-            'gel_seg_3' => $request->gel_seg_3,
-            'gel_seg_4' => $request->gel_seg_4,
-            'gel_seg_5' => $request->gel_seg_5,
-            'gel_min_1' => $request->gel_min_1,
-            'gel_min_2' => $request->gel_min_2,
-            'gel_min_3' => $request->gel_min_3,
-            'gel_min_4' => $request->gel_min_4,
-            'gel_min_5' => $request->gel_min_5,
+    $compatibilidad_lodo = RelCompatibilidadLodo::create([
+        'vp_1' => $request->vp_1,
+        'vp_2' => $request->vp_2,
+        'vp_3' => $request->vp_3,
+        'vp_4' => $request->vp_4,
+        'vp_5' => $request->vp_5,
+        'yp_1' => $request->yp_1,
+        'yp_2' => $request->yp_2,
+        'yp_3' => $request->yp_3,
+        'yp_4' => $request->yp_4,
+        'yp_5' => $request->yp_5,
+        'gel_seg_1' => $request->gel_seg_1,
+        'gel_seg_2' => $request->gel_seg_2,
+        'gel_seg_3' => $request->gel_seg_3,
+        'gel_seg_4' => $request->gel_seg_4,
+        'gel_seg_5' => $request->gel_seg_5,
+        'gel_min_1' => $request->gel_min_1,
+        'gel_min_2' => $request->gel_min_2,
+        'gel_min_3' => $request->gel_min_3,
+        'gel_min_4' => $request->gel_min_4,
+        'gel_min_5' => $request->gel_min_5,
+        'solicitud_lodo_id' => $request->solicitud_lodo_id,
+        'usuario_carga' => auth()->user()->id,
+    ]);
+
+    // Guardar los datos de colchon y densidad
+    $colchones = $request->input('colchon');
+    $densidades = $request->input('densidad');
+    $ensayos = [];
+
+    foreach ($colchones as $key => $colchon) {
+        $ensayo = RelEnsayoCompatibilidad::create([
             'solicitud_lodo_id' => $request->solicitud_lodo_id,
-            'usuario_carga' => auth()->user()->id,
+            'colchon' => $colchon,
+            'densidad' => $densidades[$key] ?? null,  // Asegurarse de que densidad esté en el mismo índice
         ]);
-        if ($compatibilidad_lodo->id)
-        return response()->json([
-        'success_compatibilidad_lodo' => $compatibilidad_lodo,
-        ]);
+
+        // Almacenar los datos creados en un array para retornarlos
+        $ensayos[] = $ensayo;
     }
+
+    // Incluir los datos de compatibilidad y ensayos en la respuesta
+    return response()->json([
+        'success_compatibilidad_lodo' => $compatibilidad_lodo,
+        'ensayos' => $ensayos, // Incluir los datos de colchon y densidad
+    ]);
+}
+
+    // public function store_compatibilidad(Request $request) {
+    //     $compatibilidad_lodo = RelCompatibilidadLodo::create([
+    //         //modificar las variables vy
+    //         'vp_1' => $request->vp_1,
+    //         'vp_2' => $request->vp_2,
+    //         'vp_3' => $request->vp_3,
+    //         'vp_4' => $request->vp_4,
+    //         'vp_5' => $request->vp_5,
+    //         'yp_1' => $request->yp_1,
+    //         'yp_2' => $request->yp_2,
+    //         'yp_3' => $request->yp_3,
+    //         'yp_4' => $request->yp_4,
+    //         'yp_5' => $request->yp_5,
+    //         'gel_seg_1' => $request->gel_seg_1,
+    //         'gel_seg_2' => $request->gel_seg_2,
+    //         'gel_seg_3' => $request->gel_seg_3,
+    //         'gel_seg_4' => $request->gel_seg_4,
+    //         'gel_seg_5' => $request->gel_seg_5,
+    //         'gel_min_1' => $request->gel_min_1,
+    //         'gel_min_2' => $request->gel_min_2,
+    //         'gel_min_3' => $request->gel_min_3,
+    //         'gel_min_4' => $request->gel_min_4,
+    //         'gel_min_5' => $request->gel_min_5,
+    //         'solicitud_lodo_id' => $request->solicitud_lodo_id,
+    //         'usuario_carga' => auth()->user()->id,
+    //     ]);
+
+    //     // Guardar los datos de colchon y densidad
+    //     $colchones = $request->input('colchon');
+    //     $densidades = $request->input('densidad');
+
+    //     foreach ($colchones as $key => $colchon) {
+    //         RelEnsayoCompatibilidad::create([
+    //             'solicitud_lodo_id' => $request->solicitud_lodo_id,
+    //             'colchon' => $colchon,
+    //             'densidad' => $densidades[$key] ?? null,  // Asegurarse de que densidad esté en el mismo índice
+    //         ]);
+    //     }
+
+        
+    //     if ($compatibilidad_lodo->id)
+    //     return response()->json([
+    //     'success_compatibilidad_lodo' => $compatibilidad_lodo,
+    //     ]);
+    // }
 
     // public function store_mecanica(Request $request) {
 
@@ -771,6 +909,19 @@ class EnsayoController extends Controller
                 'solicitud_lodo_id' => $request->solicitud_lodo_id,
                 'usuario_carga' => auth()->user()->id,
             ]);
+
+            // Guardar los datos de colchon y densidad
+            $colchones = $request->input('colchon');
+            $densidades = $request->input('densidad');
+
+            foreach ($colchones as $key => $colchon) {
+                RelEnsayoEstatica::create([
+                    'solicitud_lodo_id' => $request->solicitud_lodo_id,
+                    'colchon' => $colchon,
+                    'densidad' => $densidades[$key] ?? null,  // Asegurarse de que densidad esté en el mismo índice
+                ]);
+            }
+
             if ($estatica_lodo->id) {
                 return response()->json([
                     'success_estatica_lodo' => $estatica_lodo,
@@ -840,6 +991,17 @@ class EnsayoController extends Controller
                 'solicitud_lodo_id' => $request->solicitud_lodo_id,
                 'usuario_carga' => auth()->user()->id,
             ]);
+                                    // Guardar los datos de colchon y densidad
+            $colchones = $request->input('colchon');
+            $densidades = $request->input('densidad');
+
+            foreach ($colchones as $key => $colchon) {
+                RelEnsayoMecanica::create([
+                    'solicitud_lodo_id' => $request->solicitud_lodo_id,
+                    'colchon' => $colchon,
+                    'densidad' => $densidades[$key] ?? null,  // Asegurarse de que densidad esté en el mismo índice
+                ]);
+            }
     
             if ($mecanica_lodo->id) {
                 return response()->json([
@@ -853,6 +1015,18 @@ class EnsayoController extends Controller
         }
     }
     
+    public function store_humectabilidad (Request $request) {
+        $humectabilidad_lodo = RelHumectabilidad::create([
+            'humectabilidad' => $request->humectabilidad,
+            'solicitud_lodo_id' => $request->solicitud_lodo_id,
+            'usuario_carga' => auth()->user()->id,
+        ]);
+        if ($humectabilidad_lodo->id)
+        return response()->json([
+        'success_humectabilidad_lodo' => $humectabilidad_lodo,
+        ]);
+        
+    }
 
     /**
      * 

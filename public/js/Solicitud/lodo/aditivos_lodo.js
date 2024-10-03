@@ -92,6 +92,32 @@ const container_formulaciones_tentativas_lodo = document.getElementById(
       }
     );
     mount(div, input);
+
+      // Unidad (select)
+      const unidadSelect = document.createElement("select");
+      unidadSelect.className = "form-control text-xs rounded-l-none p-2 col-span-3 md:col-span-1";
+      unidadSelect.name = `aditivos[${aux_aditivo_lodo}][unidad]`;
+  
+      // Añadir opción placeholder no seleccionable
+      const unidadPlaceholder = document.createElement("option");
+      unidadPlaceholder.value = "";
+      unidadPlaceholder.textContent = "Unidad";
+      unidadPlaceholder.disabled = true;
+      unidadPlaceholder.selected = true;
+      unidadSelect.appendChild(unidadPlaceholder);
+  
+      // Añadir opciones "lt/m³" y "kg/m³"
+      const optionLt = document.createElement("option");
+      optionLt.value = "lt/m³";
+      optionLt.textContent = "lt/m³";
+      unidadSelect.appendChild(optionLt);
+  
+      const optionKg = document.createElement("option");
+      optionKg.value = "kg/m³";
+      optionKg.textContent = "kg/m³";
+      unidadSelect.appendChild(optionKg);
+  
+      div.appendChild(unidadSelect);
   
     mount(flex, button);
     mount(flex, div);

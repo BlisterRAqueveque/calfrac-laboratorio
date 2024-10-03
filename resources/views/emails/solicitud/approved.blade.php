@@ -16,7 +16,7 @@
 
     <main>
         <div style="display: flex; justify-content: center; flex-direction: column; align-items: center">
-            <h3 style="letter-spacing: .8px; margin-bottom: 0">Solicitud de Fractura</h3>
+            <h3 style="letter-spacing: .8px; margin-bottom: 0">Solicitud de Lechada</h3>
             <p style="margin: 0 auto; font-weight: 500"></p>
         </div>
 
@@ -27,13 +27,12 @@
         </div>
 
         <div style="padding: 10px; display: flex; flex-direction: column; font-size: 14px">
-            <p style="margin-bottom: 0"><b>¿Quien aprobó?:</b> {{ $data['usuario_aprobo'] }}</p>
             <p style="margin-bottom: 0"><b>Fecha de Aprobación:</b> {{ $data['fecha_aprobada'] }}</p>
             <p style="margin-bottom: 0">La misma le es posible asignar un Ensayo para comenzar la gestión</p>
         </div>
 
         <div style="display: flex; justify-content: center; margin-bottom: 10px">
-            <button style="background: #006F53; color: white; padding: 10px 15px; border: 0; border-radius: 5px; cursor: pointer;">Ver Solicitud</button>
+            <a href="{{ $data['url'] }}" style="background: #006F53; color: white; padding: 10px 15px; border: 0; border-radius: 5px; text-decoration: none; cursor: pointer;">Ver Solicitud</a>        </div>
         </div>
 
         <footer style="background-color: #006F53; padding: 15px 10px; color: white; font-size: 13px">

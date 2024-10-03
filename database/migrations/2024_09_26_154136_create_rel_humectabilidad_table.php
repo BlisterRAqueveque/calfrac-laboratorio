@@ -13,15 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('rel_mecanica_lodo', function (Blueprint $table) {
+        Schema::create('rel_humectabilidad', function (Blueprint $table) {
             $table->id();
-            $table->float('tiempo_1')->nullable();
-            $table->float('tiempo_2')->nullable();
-            $table->float('tiempo_3')->nullable();
-            $table->float('tiempo_4')->nullable();
-            $table->float('tiempo_5')->nullable();
-            $table->string('img_1')->nullable();
-            $table->string('img_2')->nullable();
+            $table->string('humectabilidad')->nullable();
             $table->foreignId('solicitud_lodo_id')->references('id')->on('solicitud_lodo')->nullable();
             $table->foreignId('usuario_carga')->references('id')->on('users');
             $table->tinyInteger('selected')->default(0)->comment('1: Seleccionado para el reporte | 0: No seleccionado');
@@ -36,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rel_mecanica_lodo');
+        Schema::dropIfExists('rel_humectabilidad');
     }
 };

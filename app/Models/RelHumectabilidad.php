@@ -5,25 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RelEstaticaLodo extends Model
+class RelHumectabilidad extends Model
 {
     use HasFactory;
-    protected $table = 'rel_estatica_lodo';
+
+    protected $table = 'rel_humectabilidad';
 
     protected $fillable = [
-        'tiempo_estatica_1',
-        'tiempo_estatica_2',
-        'tiempo_estatica_3',
-        'tiempo_estatica_4',
-        'tiempo_estatica_5',
-        'img_1',
-        'img_2',
+        'humectabilidad',
         'solicitud_lodo_id',
         'usuario_carga',
     ];
 
     public function solicitud_lodo() {
-        return $this->hasMany(SolicitudLodo::class, 'solicitud_lodo_id');
+        return $this->hasMany(SolicitudLodo::class);
     }
 
     public function user() {

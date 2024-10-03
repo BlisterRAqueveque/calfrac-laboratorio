@@ -12,6 +12,8 @@
         #locacion_lodo,
         #equipo_lodo,
         #mud_company,
+        #tipo_lodo,
+        #tipo_colchon,
         #servicio_lodo {
             background: #b9b9b9;
             border-radius: 5px;
@@ -196,7 +198,7 @@
                 @csrf
                 <input type="hidden" value="{{ $solicitud->id }}" name="solicitud_id">
 
-                <div class="grid xs:grid-cols-2 md:grid-cols-6 gap-3 mt-3">
+                <div class="grid xs:grid-cols-2 md:grid-cols-5 gap-3 mt-3">
                     <div class="col-span-2 xl:col-span-2">
                         <label for="cliente_lodo"
                             class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Cliente
@@ -210,20 +212,6 @@
                         </select>
                         @error('cliente_lodo')
                             <small class="text-xs text-red-600">El cliente es requerido</small>
-                        @enderror
-                    </div>
-                    <div class="col-span-2 xl:col-span-1">
-                        <label for="locacion_lodo"
-                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Yacimiento/Locación <span
-                                class="text-red-500">*</span></label>
-                        <select name="locacion_lodo" id="locacion_lodo" class="text-sm inp_edit" disabled>
-                            @foreach ($yacimientos as $y)
-                                <option value="{{ $y->id }}"
-                                    {{ $y->id == $solicitud->locacion_id ? 'selected' : '' }}>{{ $y->nombre }}</option>
-                            @endforeach
-                        </select>
-                        @error('locacion_lodo')
-                            <small class="text-xs text-red-600">La locación es requerida</small>
                         @enderror
                     </div>
                     {{--<div class="col-span-2 xl:col-span-1">
@@ -248,6 +236,20 @@
                         @enderror
                     </div>
 
+                    <div class="col-span-2 xl:col-span-1">
+                        <label for="locacion_lodo"
+                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Yacimiento/Locación <span
+                                class="text-red-500">*</span></label>
+                        <select name="locacion_lodo" id="locacion_lodo" class="text-sm inp_edit" disabled>
+                            @foreach ($yacimientos as $y)
+                                <option value="{{ $y->id }}"
+                                    {{ $y->id == $solicitud->locacion_id ? 'selected' : '' }}>{{ $y->nombre }}</option>
+                            @endforeach
+                        </select>
+                        @error('locacion_lodo')
+                            <small class="text-xs text-red-600">La locación es requerida</small>
+                        @enderror
+                    </div>
                     {{--<div class="col-span-2 xl:col-span-1">
                         <label for="fecha_resultados_lodo"
                             class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha
@@ -276,6 +278,21 @@
                         @error('equipo_lodo')
                             <small class="text-xs text-red-600">El equipo es requerido</small>
                         @enderror
+                    </div>
+
+                    <div class="col-span-2 xl:col-span-1">
+                        <label for="tipo_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de Lodo
+                            <span class="text-red-500">*</span></label>
+                        {{-- <input type="text" name="equipo_lodo" id="equipo_lodo" class="form-control text-sm p-2"
+                            placeholder="Ingrese el equipo" value="{{ $solicitud->equipo }}" readonly> --}}
+                        <select name="tipo_lodo" id="tipo_lodo" class="text-sm inp_edit" disabled>
+                            @foreach ($tipo_lodo as $e)
+                               <option value="{{ $e->id }}"
+                                {{ $e->id == $solicitud->e ? 'selected' : '' }}>{{ $e->nombre }}
+                                </option>
+                            @endforeach
+                        </select>
+                    
                     </div>
 
 
@@ -321,9 +338,21 @@
                             class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Densidad del lodo <span class="text-red-500">*</span></label>
                         <input type="number" name="densidad_lodo_3" id="densidad_lodo_3"
                             class="form-control text-sm p-2" value="{{ $solicitud_lodo[0]->densidad_lodo}}" readonly>
-                        @error('densidad_lodo_3')
+                        {{-- @error('densidad_lodo_3')
                             <small class="text-xs text-red-600">La densidad del lodo es requerida</small>
-                        @enderror
+                        @enderror --}}
+                    </div>
+
+
+                    <div class="">
+                        <div class="grid grid-cols-2 gap-3">
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">PF</label>
+                        <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">VP</label>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <input type="text" name="pf" class="form-control text-sm p-2" placeholder="PF" value="{{ $solicitud_lodo[0]->pf}}" readonly>
+                            <input type="text" name="vp" class="form-control text-sm p-2" placeholder="VP" value="{{ $solicitud_lodo[0]->vp}}" readonly>
+                        </div>
                     </div>
 
                    
@@ -459,8 +488,58 @@
                 <hr class="my-4">
 
                 <p class="m-0 font-bold text-lg my-3 tracking-wide">Requerimientos del Colchón</p>
+
+                <div class="grid grid-cols-4">
+                    <div class="col-span-4 md:col-span-1">
+                        <label for="" class="text-sm mt-3 text-gray-700 font-semibold tracking-wide mb-2">Tipo de Colchón</label>
+                        {{-- <input type="text" name="tipo_colchon"
+                            value="{{ $solicitud_lodo[0]->tipo_colchon ?? 'No aplica' }}" class="form-control text-sm"
+                            placeholder="Ingrese el tipo de cemento" readonly> --}}
+                            <select name="tipo_colchon" id="tipo_colchon" class="text-sm inp_edit" disabled>
+                                @foreach ($tipo_de_colchon as $y)
+                                    <option value="{{ $y->id }}"
+                                        {{ $y->id == $solicitud_lodo[0]->tipo_colchon ? 'selected' : '' }}>{{ $y->nombre }}</option>
+                                @endforeach
+                            </select>
+                    </div>
+                </div>
                 
                 @include('solicitud.components.lodo.requerimientos')
+
+                <hr class="my-4">
+
+                <p class="m-0 font-bold text-lg my-3 tracking-wide">Colchón</p>
+
+                <div class="grid xs:grid-cols-2 md:grid-cols-3 gap-3 mt-3">
+                    <div class="col-span-2 xl:col-span-1">
+                        <label for="vol_colchon"
+                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Volumen del Colchón <span class="text-red-500">*</span></label>
+                        <input type="number" name="vol_colchon" id="vol_colchon"
+                            class="form-control text-sm p-2" value="{{ $solicitud_lodo[0]->vol_colchon}}" readonly>
+                        {{-- @error('densidad_lodo_3')
+                            <small class="text-xs text-red-600">La densidad del lodo es requerida</small>
+                        @enderror --}}
+                    </div>
+                    <div class="col-span-2 xl:col-span-1">
+                        <label for="densidad_colchon"
+                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Densidad del Colchón <span class="text-red-500">*</span></label>
+                        <input type="number" name="densidad_colchon" id="densidad_colchon"
+                            class="form-control text-sm p-2" value="{{ $solicitud_lodo[0]->densidad_colchon}}" readonly>
+                        {{-- @error('densidad_lodo_3')
+                            <small class="text-xs text-red-600">La densidad del lodo es requerida</small>
+                        @enderror --}}
+                    </div>
+                    <div class="col-span-2 xl:col-span-1">
+                        <label for="tiempo_contacto"
+                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tiempo de Contacto<span class="text-red-500">*</span></label>
+                        <input type="number" name="tiempo_contacto" id="tiempo_contacto"
+                            class="form-control text-sm p-2" value="{{ $solicitud_lodo[0]->tiempo_contacto}}" readonly>
+                        {{-- @error('densidad_lodo_3')
+                            <small class="text-xs text-red-600">La densidad del lodo es requerida</small>
+                        @enderror --}}
+                    </div>
+
+                </div>
 
                 <hr class="my-4">
 
@@ -655,6 +734,14 @@
             VirtualSelect.init({
                 ele: "#servicio_lodo",
                 placeholder: "Seleccione servicio",
+            });
+            VirtualSelect.init({
+                ele: "#tipo_lodo",
+                placeholder: "Seleccione tipo de lodo",
+            });
+            VirtualSelect.init({
+                ele: "#tipo_colchon",
+                placeholder: "Seleccione tipo de lodo",
             });
         })
     </script>

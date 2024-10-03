@@ -39,6 +39,13 @@
     background-color: red;
   }
 
+    /* Estilo para pestañas deshabilitadas */
+    .disabled-tab {
+      pointer-events: none; /* Previene el clic */
+      opacity: 0.6; /* Cambia la opacidad para indicar que está deshabilitado */
+      cursor: not-allowed; /* Cambia el cursor para indicar que no es clickeable */
+    }
+
 }
 
 /* Generales */

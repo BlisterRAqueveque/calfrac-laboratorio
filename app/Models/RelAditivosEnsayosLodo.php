@@ -5,12 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RelAditivoSolicitudLodo extends Model
+class RelAditivosEnsayosLodo extends Model
 {
     use HasFactory;
-    
-    protected $table = 'rel_aditivos_solicitud_lodo';
 
+    protected $table = 'rel_aditivos_ensayos_lodo';
     protected $fillable = [
         'solicitud_lodo_id',
         'lote',
@@ -20,12 +19,13 @@ class RelAditivoSolicitudLodo extends Model
         'unidad',
     ];
 
-    public function solicitud_lodo() {
-        return $this->hasMany(SolicitudLodo::class);
+    public function solicitud_lodo() 
+    {
+        return $this->belongsTo(SolicitudLodo::class);
     }
-    
+
     public function aditivos()
     {
-        return $this->belongsTo(Aditivo::class, 'aditivo');
+        return $this->belongsTo(Aditivo::class, 'aditivo', 'id');
     }
 }
