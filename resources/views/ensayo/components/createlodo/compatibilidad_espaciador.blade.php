@@ -44,6 +44,7 @@
     <div class="flex">
         <div class="w-1/2 p-2">
             <div class="row mt-3 py-2 px-2">
+                <br>
                 <table class="w-full text-sm border border-gray-300">
                     <thead class="bg-gray-200 text-gray-700">
                         <tr>
@@ -388,9 +389,10 @@
                         }).then((response) => response.json())
                         .then((data) => {
                             if (data) {
-                                componentCompatibilidadLodo(data.success_compatibilidad_lodo)
-                                
-                                //console.log('Data aditivos:', data.success_compatibilidad_lodo)
+                                componentCompatibilidadLodo(data.success_compatibilidad_lodo, data.ensayos)
+                                // Mostrar en consola los valores de colchon y densidad
+                                console.log('Ensayos:', data.ensayos);
+                                console.log('Data aditivos:', data.success_compatibilidad_lodo)
                                 document.getElementById('form_compatibilidad_lodo').style.display = 'none'
                                 successAlert('¡Registro Asignado!',
                                     'El registro se asignó correctamente.').then(
@@ -410,7 +412,9 @@
             })
         })
     }
+
 </script>
+
 
 
  

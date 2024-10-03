@@ -717,49 +717,99 @@ public function store_aditivos_lodo(Request $request)
     }
 
     public function store_compatibilidad(Request $request) {
-        $compatibilidad_lodo = RelCompatibilidadLodo::create([
-            //modificar las variables vy
-            'vp_1' => $request->vp_1,
-            'vp_2' => $request->vp_2,
-            'vp_3' => $request->vp_3,
-            'vp_4' => $request->vp_4,
-            'vp_5' => $request->vp_5,
-            'yp_1' => $request->yp_1,
-            'yp_2' => $request->yp_2,
-            'yp_3' => $request->yp_3,
-            'yp_4' => $request->yp_4,
-            'yp_5' => $request->yp_5,
-            'gel_seg_1' => $request->gel_seg_1,
-            'gel_seg_2' => $request->gel_seg_2,
-            'gel_seg_3' => $request->gel_seg_3,
-            'gel_seg_4' => $request->gel_seg_4,
-            'gel_seg_5' => $request->gel_seg_5,
-            'gel_min_1' => $request->gel_min_1,
-            'gel_min_2' => $request->gel_min_2,
-            'gel_min_3' => $request->gel_min_3,
-            'gel_min_4' => $request->gel_min_4,
-            'gel_min_5' => $request->gel_min_5,
-            'solicitud_lodo_id' => $request->solicitud_lodo_id,
-            'usuario_carga' => auth()->user()->id,
-        ]);
-            // Guardar los datos de colchon y densidad
-        $colchones = $request->input('colchon');
-        $densidades = $request->input('densidad');
+    $compatibilidad_lodo = RelCompatibilidadLodo::create([
+        'vp_1' => $request->vp_1,
+        'vp_2' => $request->vp_2,
+        'vp_3' => $request->vp_3,
+        'vp_4' => $request->vp_4,
+        'vp_5' => $request->vp_5,
+        'yp_1' => $request->yp_1,
+        'yp_2' => $request->yp_2,
+        'yp_3' => $request->yp_3,
+        'yp_4' => $request->yp_4,
+        'yp_5' => $request->yp_5,
+        'gel_seg_1' => $request->gel_seg_1,
+        'gel_seg_2' => $request->gel_seg_2,
+        'gel_seg_3' => $request->gel_seg_3,
+        'gel_seg_4' => $request->gel_seg_4,
+        'gel_seg_5' => $request->gel_seg_5,
+        'gel_min_1' => $request->gel_min_1,
+        'gel_min_2' => $request->gel_min_2,
+        'gel_min_3' => $request->gel_min_3,
+        'gel_min_4' => $request->gel_min_4,
+        'gel_min_5' => $request->gel_min_5,
+        'solicitud_lodo_id' => $request->solicitud_lodo_id,
+        'usuario_carga' => auth()->user()->id,
+    ]);
 
-        foreach ($colchones as $key => $colchon) {
-            RelEnsayoCompatibilidad::create([
-                'solicitud_lodo_id' => $request->solicitud_lodo_id,
-                'colchon' => $colchon,
-                'densidad' => $densidades[$key] ?? null,  // Asegurarse de que densidad esté en el mismo índice
-            ]);
-        }
+    // Guardar los datos de colchon y densidad
+    $colchones = $request->input('colchon');
+    $densidades = $request->input('densidad');
+    $ensayos = [];
+
+    foreach ($colchones as $key => $colchon) {
+        $ensayo = RelEnsayoCompatibilidad::create([
+            'solicitud_lodo_id' => $request->solicitud_lodo_id,
+            'colchon' => $colchon,
+            'densidad' => $densidades[$key] ?? null,  // Asegurarse de que densidad esté en el mismo índice
+        ]);
+
+        // Almacenar los datos creados en un array para retornarlos
+        $ensayos[] = $ensayo;
+    }
+
+    // Incluir los datos de compatibilidad y ensayos en la respuesta
+    return response()->json([
+        'success_compatibilidad_lodo' => $compatibilidad_lodo,
+        'ensayos' => $ensayos, // Incluir los datos de colchon y densidad
+    ]);
+}
+
+    // public function store_compatibilidad(Request $request) {
+    //     $compatibilidad_lodo = RelCompatibilidadLodo::create([
+    //         //modificar las variables vy
+    //         'vp_1' => $request->vp_1,
+    //         'vp_2' => $request->vp_2,
+    //         'vp_3' => $request->vp_3,
+    //         'vp_4' => $request->vp_4,
+    //         'vp_5' => $request->vp_5,
+    //         'yp_1' => $request->yp_1,
+    //         'yp_2' => $request->yp_2,
+    //         'yp_3' => $request->yp_3,
+    //         'yp_4' => $request->yp_4,
+    //         'yp_5' => $request->yp_5,
+    //         'gel_seg_1' => $request->gel_seg_1,
+    //         'gel_seg_2' => $request->gel_seg_2,
+    //         'gel_seg_3' => $request->gel_seg_3,
+    //         'gel_seg_4' => $request->gel_seg_4,
+    //         'gel_seg_5' => $request->gel_seg_5,
+    //         'gel_min_1' => $request->gel_min_1,
+    //         'gel_min_2' => $request->gel_min_2,
+    //         'gel_min_3' => $request->gel_min_3,
+    //         'gel_min_4' => $request->gel_min_4,
+    //         'gel_min_5' => $request->gel_min_5,
+    //         'solicitud_lodo_id' => $request->solicitud_lodo_id,
+    //         'usuario_carga' => auth()->user()->id,
+    //     ]);
+
+    //     // Guardar los datos de colchon y densidad
+    //     $colchones = $request->input('colchon');
+    //     $densidades = $request->input('densidad');
+
+    //     foreach ($colchones as $key => $colchon) {
+    //         RelEnsayoCompatibilidad::create([
+    //             'solicitud_lodo_id' => $request->solicitud_lodo_id,
+    //             'colchon' => $colchon,
+    //             'densidad' => $densidades[$key] ?? null,  // Asegurarse de que densidad esté en el mismo índice
+    //         ]);
+    //     }
 
         
-        if ($compatibilidad_lodo->id)
-        return response()->json([
-        'success_compatibilidad_lodo' => $compatibilidad_lodo,
-        ]);
-    }
+    //     if ($compatibilidad_lodo->id)
+    //     return response()->json([
+    //     'success_compatibilidad_lodo' => $compatibilidad_lodo,
+    //     ]);
+    // }
 
     // public function store_mecanica(Request $request) {
 
@@ -860,7 +910,7 @@ public function store_aditivos_lodo(Request $request)
                 'usuario_carga' => auth()->user()->id,
             ]);
 
-                        // Guardar los datos de colchon y densidad
+            // Guardar los datos de colchon y densidad
             $colchones = $request->input('colchon');
             $densidades = $request->input('densidad');
 

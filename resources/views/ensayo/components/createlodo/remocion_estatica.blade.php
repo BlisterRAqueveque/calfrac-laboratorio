@@ -86,13 +86,51 @@
     @if (count($solicitud_lodo[0]->rel_estatica) > 0)
 <div class="accordionEstaticaLodo" id="accordionEstaticaLodo">
     <div class="row mt-3 py-2 px-2">
+        <div class="mb-2 text-center">
+            <h5 class="mb-1">Registro de Remoción Estatica del Lodo</h5>
+        </div>
+        <div>
+            <div class="row mt-3 py-2 px-2">
+                <table class="w-full text-sm border border-gray-300">
+                    <thead class="bg-gray-200 text-gray-700">
+                        <tr>
+                            <th class="p-1 text-center border border-gray-300">Vol.<small>(bbl):</small></th>
+                            <th class="p-1 text-center border border-gray-300">{{ $solicitud_lodo[0]->densidad_colchon }}</th>
+                            <th class="p-1 text-center border border-gray-300" colspan="2">
+                                {{ isset($solicitud_lodo[0]->rel_colchon) ? $solicitud_lodo[0]->rel_colchon->nombre : '-' }}
+                            </th>
+                            <th class="p-1 text-center border border-gray-300">Den.<small>(ppg)</small></th>
+                            <th class="p-1 text-center border border-gray-300">{{ $solicitud_lodo[0]->densidad_colchon }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if(isset($solicitud_lodo[0]->rel_aditivos) && count($solicitud_lodo[0]->rel_aditivos) > 0)
+                            @foreach($solicitud_lodo[0]->rel_aditivos as $index => $aditivo)
+                                @php
+                                    // Obtener el nombre del aditivo
+                                    $nombreAditivo = isset($aditivo->aditivos->nombre) ? $aditivo->aditivos->nombre : ($aditivo->aditivo == 'SD' ? $aditivo->comentario : '-');
+                                    
+                                    // Buscar la compatibilidad correspondiente
+                                    $colchon = isset($solicitud_lodo[0]->estatica[$index]) ? $solicitud_lodo[0]->estatica[$index]->colchon : '-';
+                                    $densidad = isset($solicitud_lodo[0]->estatica[$index]) ? $solicitud_lodo[0]->estatica[$index]->densidad : '-';
+                                @endphp
+                                <tr class="border-b">
+                                    <td class="py-2 text-center border" colspan="2">{{ $aditivo->lote }}</td>
+                                    <td class="py-2 text-center border">{{ $nombreAditivo }}</td>
+                                    <td class="py-2 px-1 text-center border border-gray-300">{{ $colchon }}</td>
+                                    <td class="py-2 px-1 text-center border border-gray-300" colspan="2">{{ $densidad }}</td>
+                                </tr>
+                            @endforeach
+                        @endif
+                    </tbody>
+                </table>
+            </div> 
+        </div>  
         <!-- Contenedor Flex para la tabla y los adjuntos -->
         <div class="flex flex-wrap">
             <!-- Tabla de Remoción Mecánica -->
             <div class="w-full md:w-1/2">
-                <div class="mb-2 text-center">
-                    <h5 class="mb-1">Registro de Remoción Estatica del Lodo</h5>
-                </div>        
+                <br>
                 <table class="w-full text-sm border border-gray-300">
                     <thead class="bg-gray-200 text-gray-700">
                         <tr>
