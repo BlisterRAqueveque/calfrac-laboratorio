@@ -761,7 +761,7 @@ public function store_aditivos_lodo(Request $request)
     // Incluir los datos de compatibilidad y ensayos en la respuesta
     return response()->json([
         'success_compatibilidad_lodo' => $compatibilidad_lodo,
-        'ensayos' => $ensayos, // Incluir los datos de colchon y densidad
+        'success_ensayos' => $ensayos, // Incluir los datos de colchon y densidad
     ]);
 }
 
