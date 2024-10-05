@@ -904,6 +904,7 @@ public function store_aditivos_lodo(Request $request)
                 'tiempo_estatica_3' => $request->tiempo_estatica_3,
                 'tiempo_estatica_4' => $request->tiempo_estatica_4,
                 'tiempo_estatica_5' => $request->tiempo_estatica_5,
+                'remocion_estatica' => $request->remocion_estatica,
                 'img_1' => $imageName1,  // Almacenar el nombre de la primera imagen
                 'img_2' => $imageName2,  // Almacenar el nombre de la segunda imagen
                 'solicitud_lodo_id' => $request->solicitud_lodo_id,
