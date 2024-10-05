@@ -1308,7 +1308,6 @@ class SolicitudController extends Controller
             'rel_caracterizacion',
             'rel_compatibilidad',
             'rel_mecanica',
-            'rel_estatica',
             'rel_humectabilidad',
         ];
 

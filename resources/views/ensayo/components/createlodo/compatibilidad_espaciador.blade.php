@@ -10,7 +10,7 @@
             <thead class="bg-gray-200 text-gray-700">
                 <tr>
                     <th class="p-1 text-center border border-gray-300">Vol.<small>(bbl):</small></th>
-                    <th class="p-1 text-center border border-gray-300">{{ $solicitud_lodo[0]->densidad_colchon }}</th>
+                    <th class="p-1 text-center border border-gray-300">{{ $solicitud_lodo[0]->vol_colchon }}</th>
                     <th class="p-1 text-center border border-gray-300" colspan="2">
                         {{ isset($solicitud_lodo[0]->rel_colchon) ? $solicitud_lodo[0]->rel_colchon->nombre : '-' }}
                     </th>
@@ -203,7 +203,7 @@
             <thead class="bg-gray-200 text-gray-700">
                 <tr>
                     <th class="p-1 text-center border border-gray-300">Vol.<small>(bbl):</small></th>
-                    <th class="p-1 text-center border border-gray-300">{{ $solicitud_lodo[0]->densidad_colchon}}</th>
+                    <th class="p-1 text-center border border-gray-300">{{ $solicitud_lodo[0]->vol_colchon}}</th>
                     <th class="p-1 text-center border border-gray-300" colspan="2">
                         {{ isset($solicitud_lodo[0]->rel_colchon) ? $solicitud_lodo[0]->rel_colchon->nombre : '-' }}
                     </th>
@@ -389,10 +389,10 @@
                         }).then((response) => response.json())
                         .then((data) => {
                             if (data) {
-                                componentCompatibilidadLodo(data.success_compatibilidad_lodo, data.ensayos)
+                                componentCompatibilidadLodo(data.success_compatibilidad_lodo, data.success_ensayos)
                                 // Mostrar en consola los valores de colchon y densidad
-                                console.log('Ensayos:', data.ensayos);
-                                console.log('Data aditivos:', data.success_compatibilidad_lodo)
+                                //console.log('Ensayos:', data.ensayos);
+                                //console.log('Data aditivos:', data.success_compatibilidad_lodo)
                                 document.getElementById('form_compatibilidad_lodo').style.display = 'none'
                                 successAlert('¡Registro Asignado!',
                                     'El registro se asignó correctamente.').then(
@@ -400,12 +400,12 @@
                                         // window.location.reload();
                                     })
                                    let solicitud_id = {!! json_encode($solicitud->id) !!}
-                                checkGenerateReportLodo(solicitud_id)
-                                .then((data) => {
-                                    if (data.generate_report_lodo) {
-                                        document.querySelector('#tab_g_report_js_lodo').classList.remove('d-none')
-                                    }
-                                })
+                                // checkGenerateReportLodo(solicitud_id)
+                                // .then((data) => {
+                                //     if (data.generate_report_lodo) {
+                                //         document.querySelector('#tab_g_report_js_lodo').classList.remove('d-none')
+                                //     }
+                                // })
                             }
                         })
                 }

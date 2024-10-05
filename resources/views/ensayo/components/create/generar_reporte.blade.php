@@ -5,7 +5,7 @@
     </div>
 </div>
 
-{{-- <script>
+<script>
     const btn_generate_report = document.querySelector('#btn_generate_report');
     if (btn_generate_report) {
         btn_generate_report.addEventListener('click', e => generateReport());
@@ -40,4 +40,4 @@
                 }
             })
     }
-</script> --}}
+</script>

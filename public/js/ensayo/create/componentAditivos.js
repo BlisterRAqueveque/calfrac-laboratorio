@@ -1,8 +1,8 @@
-const container_formulaciones_tentativas_aditivos_lodo = document.getElementById(
-  "container_formulaciones_tentativas_aditivos_lodo"
+const container_formulaciones_tentativas_aditivos_lechada = document.getElementById(
+  "container_formulaciones_tentativas_aditivos_lechada"
 );
-const btnAddFormulacionEnsayoAditivoLodo = document.getElementById("btnAddFormulacionEnsayoAditivoLodo");
-let aux_ensayo_lodo = 0;
+const btnAddFormulacionEnsayoAditivo = document.getElementById("btnAddFormulacionEnsayoAditivo");
+let aux_ensayo_lechada = 0;
 
 // Opciones para el select "Unidad"
 const unidadOptions = [
@@ -10,7 +10,7 @@ const unidadOptions = [
   { value: 'kg/m³', text: 'kg/m³' },
 ];
 
-btnAddFormulacionEnsayoAditivoLodo.addEventListener("click", (e) => {
+btnAddFormulacionEnsayoAditivo.addEventListener("click", (e) => {
   e.preventDefault();
   let flex, button, div, input, select;
 
@@ -33,13 +33,13 @@ btnAddFormulacionEnsayoAditivoLodo.addEventListener("click", (e) => {
   input = document.createElement("input");
   input.className = "form-control text-xs rounded-l-none p-2 col-span-4 md:col-span-1";
   input.placeholder = "Lote";
-  input.name = `aditivos[${aux_ensayo_lodo}][lote]`;
+  input.name = `aditivos[${aux_ensayo_lechada}][lote]`;
   div.appendChild(input);
 
   // Aditivo (select)
   select = document.createElement("select");
   select.className = "form-control text-xs rounded-l-none p-2 col-span-4 md:col-span-1";
-  select.name = `aditivos[${aux_ensayo_lodo}][aditivo]`;
+  select.name = `aditivos[${aux_ensayo_lechada}][aditivo]`;
 
   // Añadir opción placeholder
   const placeholderOption = document.createElement('option');
@@ -67,7 +67,7 @@ btnAddFormulacionEnsayoAditivoLodo.addEventListener("click", (e) => {
   const newinput = document.createElement("input");
   newinput.className = "hidden form-control text-xs rounded-l-none p-2 w-1/2";
   newinput.placeholder = "Comentario";
-  newinput.name = `aditivos[${aux_ensayo_lodo}][comentario]`;
+  newinput.name = `aditivos[${aux_ensayo_lechada}][comentario]`;
   div.appendChild(newinput);
 
   // Escuchar cambios en el select de aditivos
@@ -86,34 +86,26 @@ btnAddFormulacionEnsayoAditivoLodo.addEventListener("click", (e) => {
   input = document.createElement("input");
   input.className = "form-control text-xs rounded-l-none p-2 col-span-4 md:col-span-1";
   input.placeholder = "Concentración";
-  input.name = `aditivos[${aux_ensayo_lodo}][concentracion]`;
+  input.name = `aditivos[${aux_ensayo_lechada}][concentracion]`;
   div.appendChild(input);
 
-  // Unidad (select) - nuevo input agregado
-  select = document.createElement("select");
-  select.className = "form-control text-xs rounded-l-none p-2 col-span-4 md:col-span-1"; // estilo similar a blend
-  select.name = `aditivos[${aux_ensayo_lodo}][unidad]`;
+    // Units (input con valor predeterminado y solo lectura)
+    const unitsInput = document.createElement("input");
+    unitsInput.className = "form-control text-xs rounded-l-none p-2 col-span-4 md:col-span-1";
+    unitsInput.value = "%BOWC"; // Valor por defecto
+    unitsInput.readOnly = true; // Solo lectura
+    div.appendChild(unitsInput);
 
-  // Añadir opción placeholder
-  const unidadPlaceholder = document.createElement('option');
-  unidadPlaceholder.value = '';
-  unidadPlaceholder.textContent = 'Unidad';
-  unidadPlaceholder.disabled = true;
-  unidadPlaceholder.selected = true;
-  select.appendChild(unidadPlaceholder);
-
-  // Añadir opciones de unidad
-  unidadOptions.forEach(optionData => {
-    const option = document.createElement('option');
-    option.value = optionData.value;
-    option.textContent = optionData.text;
-    select.appendChild(option);
-  });
-  div.appendChild(select);
+    // OM
+    input = document.createElement("input");
+    input.className = "form-control text-xs rounded-l-none p-2 col-span-4 md:col-span-1";
+    input.placeholder = "OM";
+    input.name = `aditivos[${aux_ensayo_lechada}][om]`;
+    div.appendChild(input);
 
   flex.appendChild(button);
   flex.appendChild(div);
-  container_formulaciones_tentativas_aditivos_lodo.appendChild(flex);
+  container_formulaciones_tentativas_aditivos_lechada.appendChild(flex);
 
-  aux_ensayo_lodo++;
+  aux_ensayo_lechada++;
 });

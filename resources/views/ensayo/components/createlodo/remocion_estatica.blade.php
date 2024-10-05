@@ -89,6 +89,14 @@
         <div class="mb-2 text-center">
             <h5 class="mb-1">Registro de Remoción Estatica del Lodo</h5>
         </div>
+        <div class="grid grid-cols-5 gap-3">
+ 
+            <div class="col-span-5 md:col-span-1">
+                <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Remoción Estatica <small>(Si/No)</small></label>
+                <input type="text" name="remocion_estatica" value="" class="form-control text-sm"
+                    placeholder="¿Reporta remoción estatica?" readonly>
+            </div> 
+        </div>
         <div>
             <div class="row mt-3 py-2 px-2">
                 <table class="w-full text-sm border border-gray-300">
@@ -227,6 +235,13 @@
         <input type="hidden" name="solicitud_lodo_id" value="{{ $solicitud_lodo[0]->id }}">
         <div class="mb-2 text-center">
             <h5 class="mb-1">Remoción estática del lodo</h5>
+        </div>
+        <div class="grid grid-cols-5 gap-3">
+
+            <div class="col-span-5 md:col-span-1">
+                <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Remoción Estatica <small>(Si/No)</small></label>
+                <input type="text" name="remocion_estatica" value="{{ old('remocion_estatica') }}" class="form-control text-sm" placeholder="¿Reporta remoción estatica?">
+            </div>
         </div>
         <div class="row mt-3 py-2 px-2" id="solapa3">
             <table class="w-full text-sm border border-gray-300">
@@ -422,7 +437,7 @@
                                 successAlert('¡Registro Asignado!',
                                     'El registro se asignó correctamente.').then(
                                     (confirmed) => {
-                                        // window.location.reload();
+                                        window.location.reload();
                                     })
                                 let solicitud_id = {!! json_encode($solicitud->id) !!}
                                 checkGenerateReportLodo(solicitud_id)

@@ -161,4 +161,4 @@ Route::post('/ensayolodo/mecanica', [EnsayoController::class, 'store_mecanica'])
 Route::post('/ensayolodo/estatica', [EnsayoController::class, 'store_estatica'])->name('store_estatica');
 Route::post('/ensayolodo/humectabilidad', [EnsayoController::class, 'store_humectabilidad'])->name('store_humectabilidad');
 //Route::post('/ensayolodo/pdf/{solicitud_id}', [EnsayoController::class, 'pdfReport'])->name('pdfReport');
-Route::get('/check_report_lodo/{solicitud_id}', [SolicitudController::class, '_generate_report_lodo'])->name('check_report_lodo');
+// Route::get('/check_report_lodo/{solicitud_id}', [SolicitudController::class, '_generate_report_lodo'])->name('check_report_lodo');
