@@ -43,6 +43,12 @@ RUN npm ci
 # Cambiar permisos de storage y bootstrap/cache
 RUN chown -R www-data:www-data /app/storage /app/bootstrap/cache
 
+# Correr las migraciones
+RUN php artisan migrate
+
+# Build de la app
+RUN npm run build
+
 # Exponemos el puerto 8000
 EXPOSE 8000
 

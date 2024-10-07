@@ -14,3 +14,22 @@ services:
       - .env # La ubicación del archivo de variables de entorno
     restart: unless-stopped # Se levanta el contenedor automaticamente
     command: ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"] # Corremos el proyecto
+
+
+# Para que se conecte a la base de datos local, en DB_HOST colocar:
+  # DB_HOST=host.docker.internal
+
+  ## Comandos
+  # Levanta el contenedor
+    # -d Para hacer el detach del comando
+    # docker-compose up -d
+    # En caso de hacer cambios en el archivo compose, pasar el flag --build
+    # docker-compose up --build
+  # Lo baja
+    # docker-compose down
+  # Elimina contenedores detenidos
+    # docker container prune
+  # Elimina imagenes no utilizadas
+    # docker image prune
+  # Elimina recursos no utilizados
+    # docker system prune
