@@ -294,6 +294,7 @@
         </table>
     </div>
 </div>
+
 @else
     <div class="accordionLodo" id="accordionReologiaLodo"></div>
 @endif 
@@ -541,6 +542,7 @@
         </div>
     </form>
 @endif
+
 </div>
 
 

@@ -383,6 +383,7 @@
             <canvas id="reporteReologiasTEnsayo" width="600" height="400"></canvas>
         </div>
     </div>
+    
     @else
     <div class="accordion" id="accordionReologia"></div>
     @endif
