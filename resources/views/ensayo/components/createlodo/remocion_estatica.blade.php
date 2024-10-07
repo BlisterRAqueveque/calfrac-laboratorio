@@ -83,7 +83,7 @@
             <img id="modalImgLodoEstatica2" style="width: auto;">
         </div>
     </div>
-    @if (count($solicitud_lodo[0]->rel_estatica) > 0)
+    @if (count($solicitud_lodo[0]->rel_estatica) > 0 )
 <div class="accordionEstaticaLodo" id="accordionEstaticaLodo">
     <div class="row mt-3 py-2 px-2">
         <div class="mb-2 text-center">
@@ -240,7 +240,7 @@
         <div class="grid grid-cols-5 gap-3">
 
             <div class="col-span-5 md:col-span-1">
-                <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Remoción Estatica <small>(Si/No)</small></label>
+                <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Remoción Estatica <small>(Si/No) </small><span class="text-red-500"><small>(Requerido)</small></span></label>
                 <input type="text" name="remocion_estatica" value="{{ old('remocion_estatica') }}" class="form-control text-sm" placeholder="¿Reporta remoción estatica?">
             </div>
         </div>
@@ -322,7 +322,7 @@
                 </table>
             </div>
             <div class="w-1/2 pl-4">
-                <h5 class="mb-1 text-center">Adjuntos a cargar <span class="text-red-500"><small>(Requerido)</small></span></h5>
+                <h5 class="mb-1 text-center">Adjuntos a cargar</h5>
                 <section id="container_file_lodo_estatica"></section>
 
                 <div id="myModalLodoEstatica" class="modal">

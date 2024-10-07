@@ -854,86 +854,91 @@ public function store_aditivos_lodo(Request $request)
     //     'success_mecanica_lodo' => $mecanica_lodo,
     //     ]);
     // }
+
+   
     public function store_estatica(Request $request) {
-         # Insertar adjuntos (Si es que hay)
-         $image1 = $request->file('file_upload_lodo_estatica');
-         $image2 = $request->file('file_upload_lodo_estatica_2');
-     
-         # Asegurarse de que ambos archivos existan antes de procesarlos
-         if ($image1 && $image2) {
-             # Nombres y destinos
-             $imageName1 = time() . '_lodo_estatica_1.' . $image1->getClientOriginalExtension();
-             $imageName2 = time() . '_lodo_estatica_2.' . $image2->getClientOriginalExtension();
-             $destinationPath = public_path('/uploads/ensayos');
-     
-             # Si no existe la carpeta de destino, la crea
-             if (!file_exists($destinationPath)) {
-                 mkdir($destinationPath, 0755, true);
-             }
-     
-             # Procesar ambas imágenes
-             $img_1 = Image::make($image1->getRealPath());
-             $img_2 = Image::make($image2->getRealPath());
-     
-             $width1 = $img_1->width();
-             $height1 = $img_1->height();
-             $width2 = $img_2->width();
-             $height2 = $img_2->height();
-     
-             # Redimensionar si alguna imagen es mayor a 1000x1000
-             if ($width1 > 1000 || $height1 > 1000) {
-                 $img_1->resize(1000, 1000, function ($constraint) {
-                     $constraint->aspectRatio();
-                 });
-             }
-     
-             if ($width2 > 1000 || $height2 > 1000) {
-                 $img_2->resize(1000, 1000, function ($constraint) {
-                     $constraint->aspectRatio();
-                 });
-             }
-     
-             # Guardar ambas imágenes en el destino
-             $img_1->save($destinationPath . '/' . $imageName1);
-             $img_2->save($destinationPath . '/' . $imageName2);
-
-            # Insertar los datos en la base de datos
-            $estatica_lodo = RelEstaticaLodo::create([
-                'tiempo_estatica_1' => $request->tiempo_estatica_1,
-                'tiempo_estatica_2' => $request->tiempo_estatica_2,
-                'tiempo_estatica_3' => $request->tiempo_estatica_3,
-                'tiempo_estatica_4' => $request->tiempo_estatica_4,
-                'tiempo_estatica_5' => $request->tiempo_estatica_5,
-                'remocion_estatica' => $request->remocion_estatica,
-                'img_1' => $imageName1,  // Almacenar el nombre de la primera imagen
-                'img_2' => $imageName2,  // Almacenar el nombre de la segunda imagen
-                'solicitud_lodo_id' => $request->solicitud_lodo_id,
-                'usuario_carga' => auth()->user()->id,
-            ]);
-
-            // Guardar los datos de colchon y densidad
-            $colchones = $request->input('colchon');
-            $densidades = $request->input('densidad');
-
-            foreach ($colchones as $key => $colchon) {
-                RelEnsayoEstatica::create([
-                    'solicitud_lodo_id' => $request->solicitud_lodo_id,
-                    'colchon' => $colchon,
-                    'densidad' => $densidades[$key] ?? null,  // Asegurarse de que densidad esté en el mismo índice
-                ]);
-            }
-
-            if ($estatica_lodo->id) {
-                return response()->json([
-                    'success_estatica_lodo' => $estatica_lodo,
-                ]);
-            }
-        } else {
-            return response()->json([
-                'error' => 'Ambas imágenes son requeridas.',
-            ], 400);
+        // Validar solo el campo remocion_estatica
+        $request->validate([
+            'remocion_estatica' => 'required|string',
+            // Otras validaciones pueden ser opcionales si son no requeridas
+        ]);
+    
+        // Procesar las imágenes solo si están presentes
+        $image1 = $request->file('file_upload_lodo_estatica');
+        $image2 = $request->file('file_upload_lodo_estatica_2');
+    
+        // Inicializar nombres de imágenes
+        $imageName1 = null;
+        $imageName2 = null;
+    
+        // Asegurarse de que ambos archivos existan antes de procesarlos
+        if ($image1) {
+            // Procesar imagen 1
+            $imageName1 = time() . '_lodo_estatica_1.' . $image1->getClientOriginalExtension();
+            $this->processImage($image1, $imageName1);
         }
-
+    
+        if ($image2) {
+            // Procesar imagen 2
+            $imageName2 = time() . '_lodo_estatica_2.' . $image2->getClientOriginalExtension();
+            $this->processImage($image2, $imageName2);
+        }
+    
+        // Insertar los datos en la base de datos
+        $estatica_lodo = RelEstaticaLodo::create([
+            'tiempo_estatica_1' => $request->tiempo_estatica_1,
+            'tiempo_estatica_2' => $request->tiempo_estatica_2,
+            'tiempo_estatica_3' => $request->tiempo_estatica_3,
+            'tiempo_estatica_4' => $request->tiempo_estatica_4,
+            'tiempo_estatica_5' => $request->tiempo_estatica_5,
+            'remocion_estatica' => $request->remocion_estatica,
+            'img_1' => $imageName1,
+            'img_2' => $imageName2,
+            'solicitud_lodo_id' => $request->solicitud_lodo_id,
+            'usuario_carga' => auth()->user()->id,
+        ]);
+    
+        // Guardar los datos de colchon y densidad
+        $this->saveColchonDensidad($request->input('colchon'), $request->input('densidad'), $request->solicitud_lodo_id);
+    
+        return response()->json([
+            'success_estatica_lodo' => $estatica_lodo,
+        ]);
+    }
+    
+    // Función para procesar la imagen
+    private function processImage($image, $imageName) {
+        $destinationPath = public_path('/uploads/ensayos');
+    
+        // Si no existe la carpeta de destino, la crea
+        if (!file_exists($destinationPath)) {
+            mkdir($destinationPath, 0755, true);
+        }
+    
+        // Procesar y guardar la imagen
+        $img = Image::make($image->getRealPath());
+        $width = $img->width();
+        $height = $img->height();
+    
+        // Redimensionar si la imagen es mayor a 1000x1000
+        if ($width > 1000 || $height > 1000) {
+            $img->resize(1000, 1000, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+        }
+    
+        $img->save($destinationPath . '/' . $imageName);
+    }
+    
+    // Función para guardar colchones y densidades
+    private function saveColchonDensidad($colchones, $densidades, $solicitudId) {
+        foreach ($colchones as $key => $colchon) {
+            RelEnsayoEstatica::create([
+                'solicitud_lodo_id' => $solicitudId,
+                'colchon' => $colchon,
+                'densidad' => $densidades[$key] ?? null,
+            ]);
+        }
     }
 
     public function store_mecanica(Request $request) {
