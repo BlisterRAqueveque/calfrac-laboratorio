@@ -93,7 +93,7 @@
  
             <div class="col-span-5 md:col-span-1">
                 <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Remoción Estatica <small>(Si/No)</small></label>
-                <input type="text" name="remocion_estatica" value="" class="form-control text-sm"
+                <input type="text" name="remocion_estatica" value="{{ $solicitud_lodo[0]->rel_estatica[0]->remocion_estatica }}" class="form-control text-sm"
                     placeholder="¿Reporta remoción estatica?" readonly>
             </div> 
         </div>
@@ -144,37 +144,38 @@
                         <tr>
                             <th class="p-1 text-center border border-gray-300">Tiempo de contacto (min)</th>
                             <th class="p-1 text-center border border-gray-300">
-                                {{ isset($solicitud_lodo[0]->rel_colchon) ? $solicitud_lodo[0]->rel_colchon->nombre : '-' }}
+                                {{-- {{ isset($solicitud_lodo[0]->rel_colchon) ? $solicitud_lodo[0]->rel_colchon->nombre : '-' }} --}}
+                                % Remoción
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="p-1 text-center border border-gray-300">2.5</td>
+                            <td class="p-1 text-center border border-gray-300">1</td>
                             <td class="py-2 px-1 text-center border border-gray-300">
                                 {{ $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_1 ? $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_1 : '-' }}
                             </td>
                         </tr>
                         <tr>
-                            <td class="p-1 text-center border border-gray-300">5</td>
+                            <td class="p-1 text-center border border-gray-300">2</td>
                             <td class="py-2 px-1 text-center border border-gray-300">
                                 {{ $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_2 ? $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_2 : '-' }}
                             </td>
                         </tr>
                         <tr>
-                            <td class="p-1 text-center border border-gray-300">7.5</td>
+                            <td class="p-1 text-center border border-gray-300">3</td>
                             <td class="py-2 px-1 text-center border border-gray-300">
                                 {{ $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_3 ? $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_3 : '-' }}
                             </td>
                         </tr>
                         <tr>
-                            <td class="p-1 text-center border border-gray-300">10</td>
+                            <td class="p-1 text-center border border-gray-300">4</td>
                             <td class="py-2 px-1 text-center border border-gray-300">
                                 {{ $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_4 ? $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_4 : '-' }}
                             </td>
                         </tr>
                         <tr>
-                            <td class="p-1 text-center border border-gray-300">12.5</td>
+                            <td class="p-1 text-center border border-gray-300">5</td>
                             <td class="py-2 px-1 text-center border border-gray-300">
                                 {{ $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_5 ? $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_5 : '-' }}
                             </td>
@@ -298,23 +299,23 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="p-1 text-center border border-gray-300">2.5</td>
+                            <td class="p-1 text-center border border-gray-300">1</td>
                             <td class="py-2 px-1 text-center border border-gray-300"><input type="text" class="form-control text-sm" placeholder="Ingrese dato" name="tiempo_estatica_1"></td>
                         </tr>
                         <tr>
-                            <td class="p-1 text-center border border-gray-300">5</td>
+                            <td class="p-1 text-center border border-gray-300">2</td>
                             <td class="py-2 px-1 text-center border border-gray-300"><input type="text" class="form-control text-sm" placeholder="Ingrese dato" name="tiempo_estatica_2"></td>
                         </tr>
                         <tr>
-                            <td class="p-1 text-center border border-gray-300">7.5</td>
+                            <td class="p-1 text-center border border-gray-300">3</td>
                             <td class="py-2 px-1 text-center border border-gray-300"><input type="text" class="form-control text-sm" placeholder="Ingrese dato" name="tiempo_estatica_3"></td>
                         </tr>
                         <tr>
-                            <td class="p-1 text-center border border-gray-300">10</td>
+                            <td class="p-1 text-center border border-gray-300">4</td>
                             <td class="py-2 px-1 text-center border border-gray-300"><input type="text" class="form-control text-sm" placeholder="Ingrese dato" name="tiempo_estatica_4"></td>
                         </tr>
                         <tr>
-                            <td class="p-1 text-center border border-gray-300">12.5</td>
+                            <td class="p-1 text-center border border-gray-300">5</td>
                             <td class="py-2 px-1 text-center border border-gray-300"><input type="text" class="form-control text-sm" placeholder="Ingrese dato" name="tiempo_estatica_5"></td>
                         </tr>
                     </tbody>

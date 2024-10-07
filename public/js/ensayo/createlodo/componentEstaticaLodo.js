@@ -49,7 +49,7 @@ const componentEstaticaLodo = (data = {}) => {
     const tbody = document.createElement('tbody');
 
     // Filas de la tabla, usando datos de 'data'
-    const times = [2.5, 5, 7.5, 10, 12.5];
+    const times = [1, 2, 3, 4, 5];
     times.forEach((time, index) => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
