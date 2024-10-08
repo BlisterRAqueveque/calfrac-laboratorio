@@ -1,35 +1,52 @@
+version: "3.7"
+
 services:
-  cal-app:
-    container_name: cal-app # El nombre del contenedor
-    build:
-      context: . # Usamos la raíz del proyecto para trabajar
-      dockerfile: Dockerfile # El nombre del dockerfile que va a usar
+  # Servicio para el servidor Nginx
+  server:
+    image: nginx:alpine
+    restart: unless-stopped
     ports:
-      - "8000:8000" # Expornemos el puerto 8000
+      - 81:80 # Exponer el puerto 80
+      - 444:443 # Exponer el puerto 443
+    networks:
+      - app-network
     volumes:
-      - ./public/uploads:/app/public/uploads # La persistencia de los archivos <host>:<host_container>
-    environment:
-      - PHP_FPM_MAX_CHILDREN=5 # Revisar si sirve, creo que no
+      - ./public:/var/www/public # Mapear el directorio public
+      - ./nginx/conf.d/:/etc/nginx/conf.d/ # Mapear la configuración de Nginx
+    depends_on:
+      - app
+
+  # Servicio para la base de datos MySQL
+  db:
+    image: mysql:8.0.39
+    restart: unless-stopped
     env_file:
-      - .env # La ubicación del archivo de variables de entorno
-    restart: unless-stopped # Se levanta el contenedor automaticamente
-    command: ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"] # Corremos el proyecto
+      - .env
+    environment:
+      MYSQL_DATABASE: $DB_DATABASE
+      MYSQL_ROOT_PASSWORD: $DB_PASSWORD
+    networks:
+      - app-network
+    volumes:
+      - ./dbdata:/var/lib/mysql # Persistencia de los datos de MySQL
 
+  # Servicio para la aplicación PHP
+  app:
+    build: . # Construir la imagen desde el Dockerfile
+    restart: unless-stopped
+    networks:
+      - app-network
+    volumes:
+      - ./public/uploads:/var/www/public/uploads # Mapear los archivos de carga
+    env_file:
+      - .env
+    command: sh -c './wait-for-it.sh db:3306 -- sh /var/www/start.sh' # Comando para iniciar la aplicación
+    depends_on:
+      - db
 
-# Para que se conecte a la base de datos local, en DB_HOST colocar:
-  # DB_HOST=host.docker.internal
+networks:
+  app-network:
+    driver: bridge
 
-  ## Comandos
-  # Levanta el contenedor
-    # -d Para hacer el detach del comando
-    # docker-compose up -d
-    # En caso de hacer cambios en el archivo compose, pasar el flag --build
-    # docker-compose up --build
-  # Lo baja
-    # docker-compose down
-  # Elimina contenedores detenidos
-    # docker container prune
-  # Elimina imagenes no utilizadas
-    # docker image prune
-  # Elimina recursos no utilizados
-    # docker system prune
+volumes:
+  dbdata:

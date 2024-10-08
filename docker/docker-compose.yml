@@ -1,0 +1,58 @@
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: cal-nginx
+    ports:
+      - "8000:80"  # Exponer el puerto 80
+    volumes:
+      - ./public:/var/www/html/public
+      - ./nginx.conf:/etc/nginx/nginx.conf  # Archivo de configuración de Nginx
+    depends_on:
+      - cal-app  # Asegurarse de que cal-app esté corriendo
+
+  cal-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./public/uploads:/app/public/uploads
+    env_file:
+      - .env
+    restart: unless-stopped
+    # Usar php-fpm para manejar las peticiones PHP
+    command: >
+      sh -c "php artisan migrate && php-fpm -F"
+  # cal-app:
+  #   container_name: cal-app # El nombre del contenedor
+  #   build:
+  #     context: . # Usamos la raíz del proyecto para trabajar
+  #     dockerfile: Dockerfile # El nombre del dockerfile que va a usar
+  #   #ports:
+  #   #  - "8000:8000" # Expornemos el puerto 8000
+  #   volumes:
+  #     - ./public/uploads:/app/public/uploads # La persistencia de los archivos <host>:<host_container>
+  #   # environment:
+  #   #  - PHP_FPM_MAX_CHILDREN=5 # Revisar si sirve, creo que no
+  #   env_file:
+  #     - .env # La ubicación del archivo de variables de entorno
+  #   restart: unless-stopped # Se levanta el contenedor automaticamente
+  #   command: ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"] # Corremos el proyecto
+
+
+# Para que se conecte a la base de datos local, en DB_HOST colocar:
+  # DB_HOST=host.docker.internal
+
+  ## Comandos
+  # Levanta el contenedor
+    # -d Para hacer el detach del comando
+    # docker-compose up -d
+    # En caso de hacer cambios en el archivo compose, pasar el flag --build
+    # docker-compose up --build
+  # Lo baja
+    # docker-compose down
+  # Elimina contenedores detenidos
+    # docker container prune
+  # Elimina imagenes no utilizadas
+    # docker image prune
+  # Elimina recursos no utilizados
+    # docker system prune
