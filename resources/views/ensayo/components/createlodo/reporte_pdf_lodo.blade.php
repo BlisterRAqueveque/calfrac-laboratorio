@@ -13,7 +13,7 @@
             PDF</button>
     </div>
 
-    <button id="btn_report_pdf_lodo"
+    {{-- <button id="btn_report_pdf_lodo"
         class="accordion-button collapsed btn_submit md:w-auto bg-opacity-60 p-2 rounded-sm text-xs xl:text-sm mt-3"
         data-bs-toggle="collapse" data-bs-target="#send_report_lodo">Enviar Reporte PDF</button>
     <div class="accordion" id="accordion_report_lodo">
@@ -24,32 +24,32 @@
                         ¿A quién desea enviar el correo junto al reporte?
                     </div>
                     <div class="card-body">
-                        {{-- <form id="form_submit_report_lodo">
+                        <form id="form_submit_report_lodo">
                             <div class="grid grid-cols-6 gap-x-2 items-center">
                                 <div class="col-span-6">
-                                    <label for=""
+                                    <label for="mail_destino"
                                         class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Ingrese el
                                         correo</label>
                                 </div>
                                 <div class="col-span-2">
                                     <input type="email" class="form-control text-sm p-2"
-                                        placeholder="Correo electrónico.." name="destinatario" id="destinatario">
+                                        placeholder="Correo electrónico.." name="destinatario_lodo" id="destinatario_lodo">
                                 </div>
                                 <div class="col-span-1">
-                                    <button id="btn_submit_report_lechada"
+                                    <button id="btn_submit_report_lodo"
                                         class="btn_submit bg-opacity-60 p-2 rounded-sm text-xs xl:text-sm w-full">Enviar</button>
                                 </div>
                             </div>
-                        </form> --}}
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 
-{{-- <script>
+<script>
     const btn_pdf_report_lodo = document.querySelector('#btn_pdf_report_lodo');
     if (btn_pdf_report_lodo) {
         btn_pdf_report_lodo.addEventListener('click', e => pdfReportLodo());
@@ -65,19 +65,19 @@
         window.open(url, '_blank');
     }
     
-</script> --}}
+</script> 
 
 {{-- Generar el envío de corre a un usuario del sistema o fuera del sistema --}}
 {{-- <script>
-    const btn_submit_report_lechada = document.querySelector('#btn_submit_report_lechada');
-    if (btn_submit_report_lechada) {
-        btn_submit_report_lechada.addEventListener('click', e => sendReportEmail());
+    const btn_submit_report_lodo = document.querySelector('#btn_submit_report_lodo');
+    if (btn_submit_report_lodo) {
+        btn_submit_report_lodo.addEventListener('click', e => sendReportEmailLodo());
     }
 
     /**
      * Genera el envío del PDF por el correo al usuario que desee
      */
-    const sendReportEmail = () => {
+    const sendReportEmailLodo = () => {
         event.preventDefault();
         let solicitud_id = {!! json_encode($solicitud->id) !!}
 
@@ -101,12 +101,12 @@
                             successAlert('¡Reporte Enviado!',
                                 'El reporte se envió correctamente.').then(
                                 (confirmed) => {
-                                    document.getElementById('destinatario').value = ''
+                                    document.getElementById('destinatario_lodo').value = ''
                                 })
                         }
                     })
             }
         })
     }
-</script> --}}
+</script>  --}}
                                                                                                                                                                                                                                                                                                                                                                                                                               

@@ -338,4 +338,22 @@ class PDFController extends Controller
         ];
         return view('emails.solicitud.solicitud_body', $data);
     }
+
+
+
+    public function pdf_report_lodo($solicitud_id)
+    {
+        $data = [
+            'solicitud' => Solicitud::find($solicitud_id),
+
+        ];
+
+          
+        $pdf = PDF::loadView('solicitud_pdf_lodo', $data);
+        // return $pdf->loadView('solicitud_lechada.pdf');
+        return $pdf->stream();
+    }
+
+
+
 }

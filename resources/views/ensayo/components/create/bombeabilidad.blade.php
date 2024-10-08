@@ -447,7 +447,7 @@
     let form = new FormData(document.getElementById(`form_assignment_${id_form_selected}`));
     confirmAlert().then((confirmed) => {
         if (confirmed) {
-            fetch("http://127.0.0.1:8000/ensayo/assigned", {
+            fetch("{{ route('ensayo.assigned') }}", {
                     method: 'POST',
                     headers: {
                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')

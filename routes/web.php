@@ -161,5 +161,11 @@ Route::post('/ensayolodo/mecanica', [EnsayoController::class, 'store_mecanica'])
 Route::post('/ensayolodo/estatica', [EnsayoController::class, 'store_estatica'])->name('store_estatica');
 Route::post('/ensayolodo/humectabilidad', [EnsayoController::class, 'store_humectabilidad'])->name('store_humectabilidad');
 Route::post('/ensayolodo/generate/{solicitud_id}', [EnsayoController::class, 'assignedReporteSolicitud'])->name('assignedReportLodo');
-//Route::post('/ensayolodo/pdf/{solicitud_id}', [EnsayoController::class, 'pdfReport'])->name('pdfReport');
+Route::post('/ensayolodo/pdf/{solicitud_id}', [EnsayoController::class, 'pdfReport'])->name('pdfReportLodo');
+
 Route::get('/check_report_lodo/{solicitud_id}', [SolicitudController::class, '_generate_report_lodo'])->name('check_report_lodo');
+
+# PDF's Lodo
+# Esta ruta deberia ser post, pero por mientras va a ser GET
+Route::get('/pdf/report/lodo/{solicitud_id}', [PDFController::class, 'pdf_report_lodo'])->name('pdf_report_lodo');
+

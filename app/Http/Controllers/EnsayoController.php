@@ -354,7 +354,6 @@ class EnsayoController extends Controller
             'tem_ensayo_3_promedio' => $tem_ensayo_3_promedio,
         ]);
 
-
         if ($reologia->id)
             return response()->json([
         'success_reologia' => $reologia,
@@ -632,10 +631,6 @@ public function store_aditivos_lodo(Request $request)
 
     return response()->json(['error' => 'No se enviaron aditivos en la solicitud'], 400);
 }
-
-
-
-
 
     // Seccion Ensayo de Lodo
 

@@ -34,7 +34,7 @@ class SolicitudLechadaAprobada extends Mailable
     public function build()
     {
         return $this->view('emails.solicitud.approved')  // Vista del correo
-            ->subject('Laboratorio Calfrac | Solicitud de Fractura N°' . $this->data['solicitud_id'] . ' - Aprobada')  // Asunto dinámico
+            ->subject('Laboratorio Calfrac | Solicitud de Lechada N°' . $this->data['solicitud_id'] . ' - Aprobada')  // Asunto dinámico
             ->with('data', $this->data);  // Pasamos la variable $data a la vista
     }
 }
