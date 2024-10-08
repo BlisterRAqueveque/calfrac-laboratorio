@@ -1,16 +1,19 @@
 {
+  "_axios-88827dbe.js": {
+    "file": "assets/axios-88827dbe.js"
+  },
   "resources/css/app.css": {
-    "file": "assets/app-94296ecb.css",
+    "file": "assets/app-de632874.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
   "resources/css/bootstrap.min.css": {
-    "file": "assets/bootstrap.min-de4ed862.css",
+    "file": "assets/bootstrap.min-902249d7.css",
     "isEntry": true,
     "src": "resources/css/bootstrap.min.css"
   },
   "resources/css/sb-admin-2.css": {
-    "file": "assets/sb-admin-2-6da4f8d8.css",
+    "file": "assets/sb-admin-2-3b914005.css",
     "isEntry": true,
     "src": "resources/css/sb-admin-2.css"
   },
@@ -20,16 +23,16 @@
     "src": "resources/css/solicitud.css"
   },
   "resources/js/app.css": {
-    "file": "assets/app-b19f3e89.css",
+    "file": "assets/app-c2e83fd7.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.js": {
     "css": [
-      "assets/app-b19f3e89.css"
+      "assets/app-c2e83fd7.css"
     ],
-    "file": "assets/app-f73fdbd4.js",
+    "file": "assets/app-c6794daa.js",
     "imports": [
-      "resources/js/bootstrap.js"
+      "_axios-88827dbe.js"
     ],
     "isEntry": true,
     "src": "resources/js/app.js"
@@ -40,7 +43,10 @@
     "src": "resources/js/bootstrap.bundle.min.js"
   },
   "resources/js/bootstrap.js": {
-    "file": "assets/bootstrap-cd17eadc.js",
+    "file": "assets/bootstrap-06eeaf19.js",
+    "imports": [
+      "_axios-88827dbe.js"
+    ],
     "isEntry": true,
     "src": "resources/js/bootstrap.js"
   }

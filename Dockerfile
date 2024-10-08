@@ -59,7 +59,8 @@ RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 # RUN npm run build
 
 COPY wait-for-it.sh /usr/local/bin/wait-for-it.sh
-RUN chmod +x /usr/local/bin/wait-for-it.sh
+
+RUN chmod 777 /usr/local/bin/wait-for-it.sh
 
 # Exponemos el puerto 8000, el cual es usado por PHP-FPM
 EXPOSE 8000
