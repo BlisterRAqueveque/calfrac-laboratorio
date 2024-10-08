@@ -20,6 +20,7 @@ class RelEstaticaLodo extends Model
         'img_2',
         'solicitud_lodo_id',
         'usuario_carga',
+        'remocion_estatica',
     ];
 
     public function solicitud_lodo() {

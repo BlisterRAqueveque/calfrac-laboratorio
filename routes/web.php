@@ -151,7 +151,7 @@ Route::post('/pdf/report/lechada/send/{solicitud_id}', [PDFController::class, 'p
 Route::get('/pdf/view', [PDFController::class, 'pdf_view']);
 # Route::get('/pdf/report/lechadas/{solicitud_id}', [PDFController::class, 'pdf_report_lechada'])->name('pdf_report_lechadas');
 
-# Ruta para lodo
+# Ensayos de Lodo
 Route::get('/ensayoslodo/create', [EnsayoController::class, 'create'])->name('ensayolodo.create');
 #Route::get('/ensayoslodo', [EnsayoController::class, 'index'])->name('ensayos_lodo');
 Route::post('/ensayoslodo/aditivos', [EnsayoController::class, 'store_aditivos_lodo'])->name('store_aditivos_lodo');
@@ -160,5 +160,6 @@ Route::post('/ensayolodo/compatibilidad', [EnsayoController::class, 'store_compa
 Route::post('/ensayolodo/mecanica', [EnsayoController::class, 'store_mecanica'])->name('store_mecanica');
 Route::post('/ensayolodo/estatica', [EnsayoController::class, 'store_estatica'])->name('store_estatica');
 Route::post('/ensayolodo/humectabilidad', [EnsayoController::class, 'store_humectabilidad'])->name('store_humectabilidad');
+Route::post('/ensayolodo/generate/{solicitud_id}', [EnsayoController::class, 'assignedReporteSolicitud'])->name('assignedReportLodo');
 //Route::post('/ensayolodo/pdf/{solicitud_id}', [EnsayoController::class, 'pdfReport'])->name('pdfReport');
-// Route::get('/check_report_lodo/{solicitud_id}', [SolicitudController::class, '_generate_report_lodo'])->name('check_report_lodo');
+Route::get('/check_report_lodo/{solicitud_id}', [SolicitudController::class, '_generate_report_lodo'])->name('check_report_lodo');

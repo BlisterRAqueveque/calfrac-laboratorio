@@ -9,18 +9,20 @@
         <br>
         % Vol de Espaciador = (Vol Total de Espaciador / (Vol de lodo + Espaciador) * 100)
     </p> 
-<div class="grid grid-cols-6 gap-3">
-    <div class="col-span-2 xl:col-span-1">
-        <label for="humectabilidad" class="text-sm text-gray-700 font-semibold tracking-wide mb-2"> % Humectabilidad
-            <span class="text-red-500">*</span></label>
-            <input type="number" name="humectabilidad" id="humectabilidad"
-            value="{{ $solicitud_lodo[0]->rel_humectabilidad[0]->humectabilidad }}" class="form-control text-sm p-2"
-            placeholder="%" readonly>
-        {{-- @error('humectabilidad')
-            <small class="text-red-700 font-semibold"><em>{{ $message }}</em></small>
-        @enderror --}}
+    <div class="grid grid-cols-6 gap-3">
+        <div class="col-span-2 xl:col-span-1">
+            <label for="humectabilidad" class="text-sm text-gray-700 font-semibold tracking-wide mb-2"> % Humectabilidad
+                <span class="text-red-500">*</span></label>
+                <input type="number" name="humectabilidad" id="humectabilidad"
+                value="{{ $solicitud_lodo[0]->rel_humectabilidad[0]->humectabilidad }}" class="form-control text-sm p-2"
+                placeholder="%" readonly>
+            {{-- @error('humectabilidad')
+                <small class="text-red-700 font-semibold"><em>{{ $message }}</em></small>
+            @enderror --}}
+        </div>
     </div>
 </div>
+
 @else
     <div class="accordionHumectabilidadLodo" id="accordionHumectabilidadLodo"></div>
 @endif

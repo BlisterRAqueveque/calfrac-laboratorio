@@ -294,6 +294,7 @@
         </table>
     </div>
 </div>
+
 @else
     <div class="accordionLodo" id="accordionReologiaLodo"></div>
 @endif 
@@ -541,6 +542,7 @@
         </div>
     </form>
 @endif
+
 </div>
 
 
@@ -567,7 +569,7 @@
                                 successAlert('¡Registro Asignado!',
                                     'El registro se asignó correctamente.').then(
                                     (confirmed) => {
-                                        window.location.reload();
+                                        //window.location.reload();
                                     })
                                 let solicitud_id = {!! json_encode($solicitud->id) !!}
                                 checkGenerateReportLodo(solicitud_id)
