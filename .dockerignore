@@ -1,4 +1,5 @@
 node_modules
+vendor
 .dockerignore
 .dockerfile
 .git
