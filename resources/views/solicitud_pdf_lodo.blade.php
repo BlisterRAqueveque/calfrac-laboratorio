@@ -973,15 +973,18 @@
                     <td style="width: 1.7%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #006f53; color:white;">
                         <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 100%; left: 80%; width: 200px; height: 20px; text-align: center;font-size: 13px;"></div>
                     </td>
+                    {{-- <td style="width: 3%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #006f53; color:white;">
+                        <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 90%; left: 110%; width: 200px; height: 20px; text-align: center;font-size: 13px;"><b>DATOS GENERALES</b></div>
+                    </td> --}}
 
                     <!-- Columna con tabla interna -->
                     <td style="width: 54%; padding: 4px; text-align: center; vertical-align: top;">
                         <br>
                         <table style="width: 100%; border-collapse: collapse; border: none;">
                             <tr>
-                                <td style="width: 3%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 210px; background: #D3D3D3; color:black;">
+                                {{-- <td style="width: 3%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 210px; background: #D3D3D3; color:black;">
                                     <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 90%; left: 115%; width: 200px; height: 20px; text-align: center;font-size: 13px;">Remoción Estática y Mecánica</div>
-                                </td>
+                                </td> --}}
 
                                 <td style="width: 50%; vertical-align: top;">
                                     <table style="width: 100%; border-collapse: collapse; border: none;">
@@ -1048,7 +1051,7 @@
                                                                         Tiempo de contacto
                                                                     </td>
                                                                     <td style="width: 40%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        Lodo
+                                                                        {{ isset($solicitud_lodo[0]->rel_colchon) ? $solicitud_lodo[0]->rel_colchon->nombre : '-' }}
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -1099,16 +1102,13 @@
                                                                 <tr>
                                                                     <td>
                                                                         <div style="width: 100%; height: 80px; overflow: hidden; display: flex; justify-content: center; align-items: center; text-align: center; border: 1px solid #494949;">
-                                                                            {{-- @if ($chartImage1)
-                                                                            <img src="{{ $chartImage1 }}" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
+                                                                                
+                                                                            @if (!empty($solicitud_lodo[0]->rel_mecanica[0]->img_1) && file_exists(public_path('uploads/ensayos/') . $solicitud_lodo[0]->rel_mecanica[0]->img_1))
+                                                                            <img src="{{ public_path('uploads/ensayos/') . '/' . $solicitud_lodo[0]->rel_mecanica[0]->img_1 }}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
                                                                             @else
                                                                             <p>Archivo no disponible</p>
-                                                                            @endif --}}
-                                                                            {{-- @if (!empty($solicitud_lodo[0]->rel_mecanica[0]->img_1) && file_exists(public_path('uploads/ensayos/') . $solicitud_lodo[0]->rel_mecanica[0]->img_1))
-                                                                            <img src="{{ asset('uploads/ensayos/') . '/' . $solicitud_lodo[0]->rel_mecanica[0]->img_1 }}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
-                                                                            @else
-                                                                            <p>Archivo no disponible</p>
-                                                                            @endif --}}
+                                                                            @endif
+                                                                        {{-- {{ $solicitud_lodo[0]->rel_mecanica[0]->img_1 ?? 'archivo no disponible' }} --}}
                                                                         </div>
                                                                     </td>
                                                                 </tr>
@@ -1119,11 +1119,11 @@
                                                                 <tr>
                                                                     <td>
                                                                         <div style="width: 100%; height: 80px; overflow: hidden; display: flex; justify-content: center; align-items: center; text-align: center; border: 1px solid #494949;">
-                                                                            {{-- @if (!empty($solicitud_lodo[0]->rel_mecanica[0]->img_2) && file_exists(public_path('uploads/ensayos/') . $solicitud_lodo[0]->rel_mecanica[0]->img_2))
-                                                                            <img src="{{ asset('uploads/ensayos/') . '/' . $solicitud_lodo[0]->rel_mecanica[0]->img_1 }}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
+                                                                            @if (!empty($solicitud_lodo[0]->rel_mecanica[0]->img_2) && file_exists(public_path('uploads/ensayos/') . $solicitud_lodo[0]->rel_mecanica[0]->img_2))
+                                                                            <img src="{{ public_path('uploads/ensayos/') . '/' . $solicitud_lodo[0]->rel_mecanica[0]->img_2 }}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
                                                                             @else
                                                                             <p>Archivo no disponible</p>
-                                                                            @endif --}}
+                                                                            @endif
                                                                         </div>
                                                                     </td>
                                                                 </tr>
@@ -1202,7 +1202,7 @@
                                                                         <small>Tiempo de contacto</small>
                                                                     </td>
                                                                     <td style="width: 40%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        Lodo
+                                                                        % Remoción
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -1253,11 +1253,11 @@
                                                                 <tr>
                                                                     <td>
                                                                         <div style="width: 100%; height: 80px; overflow: hidden; display: flex; justify-content: center; align-items: center; text-align: center; border: 1px solid #494949;">
-                                                                            {{-- @if (!empty($solicitud_lodo[0]->rel_estatica[0]->img_1) && file_exists(public_path('uploads/ensayos/') . $solicitud_lodo[0]->rel_estatica[0]->img_1))
-                                                                            <img src="{{ asset('uploads/ensayos/') . '/' . $solicitud_lodo[0]->rel_mecanica[0]->img_1 }}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
+                                                                            @if (!empty($solicitud_lodo[0]->rel_estatica[0]->img_1) && file_exists(public_path('uploads/ensayos/') . $solicitud_lodo[0]->rel_estatica[0]->img_1))
+                                                                            <img src="{{ public_path('uploads/ensayos/') . '/' . $solicitud_lodo[0]->rel_mecanica[0]->img_1 }}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
                                                                             @else
                                                                             <p>Archivo no disponible</p>
-                                                                            @endif --}}
+                                                                            @endif
                                                                         </div>
                                                                     </td>
                                                                 </tr>
@@ -1268,11 +1268,11 @@
                                                                 <tr>
                                                                     <td>
                                                                         <div style="width: 100%; height: 80px; overflow: hidden; display: flex; justify-content: center; align-items: center; text-align: center; border: 1px solid #494949;">
-                                                                            {{-- @if (!empty($solicitud_lodo[0]->rel_estatica[0]->img_2) && file_exists(public_path('uploads/ensayos/') . $solicitud_lodo[0]->rel_estatica[0]->img_2))
-                                                                            <img src="{{ asset('uploads/ensayos/') . '/' . $solicitud_lodo[0]->rel_mecanica[0]->img_1 }}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
+                                                                            @if (!empty($solicitud_lodo[0]->rel_estatica[0]->img_2) && file_exists(public_path('uploads/ensayos/') . $solicitud_lodo[0]->rel_estatica[0]->img_2))
+                                                                            <img src="{{ public_path('uploads/ensayos/') . '/' . $solicitud_lodo[0]->rel_mecanica[0]->img_2 }}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
                                                                             @else
                                                                             <p>Archivo no disponible</p>
-                                                                            @endif --}}
+                                                                            @endif
                                                                         </div>
                                                                     </td>
                                                                 </tr>
@@ -1291,7 +1291,7 @@
                 </tr>
             </table>
         </div>
-        {{-- <div style="border-radius: 3px;">
+        <div style="border-radius: 3px;">
             <table style="width: 100%;">
                 <tr>
                     <!-- Columna "Datos Generales" -->
@@ -1311,7 +1311,7 @@
                     </td>
                 </tr>
             </table>
-        </div> --}}
+        </div>
         <div style="border-radius: 3px;">
             <table style="width: 100%; border: 1px solid #494949;">
                 <tr>
@@ -1374,8 +1374,6 @@
             </table>
         </div>
     </table>
-   
-
 </body>
 
 </html>
