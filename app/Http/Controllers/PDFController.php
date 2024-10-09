@@ -17,6 +17,11 @@ use App\Models\TipoRequerimientoCemento;
 use App\Models\TipoTrabajoCemento;
 use App\Models\User;
 use App\Models\CalculosReologias;
+// Modelos para PDF Lodo
+use App\Models\SolicitudLodo;
+use App\Models\MudCompany;
+use App\Models\TipoLodo_Lodos;
+
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Http\Request;
 use Mail;
@@ -339,21 +344,18 @@ class PDFController extends Controller
         return view('emails.solicitud.solicitud_body', $data);
     }
 
-
-
     public function pdf_report_lodo($solicitud_id)
     {
         $data = [
             'solicitud' => Solicitud::find($solicitud_id),
-
+            'solicitud_lodo' => SolicitudLodo::where('solicitud_id', $solicitud_id)->get(),
+            'mud_company' => MudCompany::all(),
+            'tipo_lodo' => TipoLodo_Lodos::all(),
+            
         ];
-
           
         $pdf = PDF::loadView('solicitud_pdf_lodo', $data);
         // return $pdf->loadView('solicitud_lechada.pdf');
         return $pdf->stream();
     }
-
-
-
 }

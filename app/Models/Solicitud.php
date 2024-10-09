@@ -119,4 +119,10 @@ class Solicitud extends Model
         return $this->hasMany(SolicitudLodo::class, 'solicitud_id');
     }
 
+    // Variables para PDF Ensayo Lodo
+
+    public function servicios_lodo() {
+        return $this->belongsTo(Servicios::class, 'servicio');
+    }
+
 }
