@@ -113,4 +113,14 @@ class SolicitudLodo extends Model
         return $this->belongsTo(Solicitud::class);
     }
 
+    // Variables para PDF de Ensayos Lodo
+
+    public function compania_lodo() {
+        return $this->belongsTo(MudCompany::class, 'mud_company');
+    }
+
+    public function tipo_lodo_Lodos() {
+        return $this->belongsTo(TipoLodo_Lodos::class, 'tipo_lodo');
+    }
+
 }
