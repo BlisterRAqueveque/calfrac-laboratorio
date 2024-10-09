@@ -56,6 +56,9 @@ RUN npm ci --production
 # Cambiar permisos de directorios necesarios (por ejemplo, para storage y cache en aplicaciones Laravel)
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
+# Cambiamos el dueño de la carpeta uploads
+RUN chown -R www-data:www-data /var/www/public/uploads
+
 COPY wait-for-it.sh /usr/local/bin/wait-for-it.sh
 
 RUN chmod 777 /usr/local/bin/wait-for-it.sh
