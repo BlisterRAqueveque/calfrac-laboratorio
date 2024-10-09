@@ -35,6 +35,7 @@ class SolicitudLodo extends Model
         'comentario_ensayo_referencia'
 
     ];
+
     public function compatibilidades()
     {
         return $this->hasMany(RelEnsayoCompatibilidad::class, 'solicitud_lodo_id');
@@ -86,21 +87,30 @@ class SolicitudLodo extends Model
     {
         return $this->belongsTo(User::class, 'firma_iniciado_por_id');
     }
+
     public function user_servicio_tecnico()
     {
         return $this->belongsTo(User::class, 'firma_servicio_tecnico_id');
     }
+
     public function user_laboratorio()
     {
         return $this->belongsTo(User::class, 'firma_laboratorio_id');
     }
+
     public function user_reconocimiento()
     {
         return $this->belongsTo(User::class, 'firma_reconocimiento_id');
     }
+
     public function user_solicitante()
     {
         return $this->belongsTo(User::class, 'firma_solicitante_id');
+    }
+
+    public function user_autorizacion()
+    {
+        return $this->belongsTo(User::class, 'firma_autorizacion_id');
     }
 
     public function formulacion_tentativa()

@@ -351,6 +351,7 @@ class PDFController extends Controller
             'solicitud_lodo' => SolicitudLodo::where('solicitud_id', $solicitud_id)->get(),
             'mud_company' => MudCompany::all(),
             'tipo_lodo' => TipoLodo_Lodos::all(),
+            
         ];
           
         $pdf = PDF::loadView('solicitud_pdf_lodo', $data);
