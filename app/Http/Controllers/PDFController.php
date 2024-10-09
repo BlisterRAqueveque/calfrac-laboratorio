@@ -358,4 +358,22 @@ class PDFController extends Controller
         // return $pdf->loadView('solicitud_lechada.pdf');
         return $pdf->stream();
     }
+
+
+    // PDF para Solicitud Lodo
+
+    public function pdf_report_lodo_solicitud($solicitud_id)
+    {
+        $data = [
+            'solicitud' => Solicitud::find($solicitud_id),
+            'solicitud_lodo' => SolicitudLodo::where('solicitud_id', $solicitud_id)->get(),
+            'mud_company' => MudCompany::all(),
+            'tipo_lodo' => TipoLodo_Lodos::all(),
+            
+        ];
+          
+        $pdf = PDF::loadView('pdf_lodo_solicitud', $data);
+        // return $pdf->loadView('solicitud_lechada.pdf');
+        return $pdf->stream();
+    }
 }

@@ -168,4 +168,6 @@ Route::get('/check_report_lodo/{solicitud_id}', [SolicitudController::class, '_g
 # PDF's Lodo
 # Esta ruta deberia ser post, pero por mientras va a ser GET
 Route::get('/pdf/report/lodo/{solicitud_id}', [PDFController::class, 'pdf_report_lodo'])->name('pdf_report_lodo');
+# PDF Solicitud Lodo
+Route::get('/pdf/reportsolicitud/lodo/{solicitud_id}', [PDFController::class, 'pdf_report_lodo_solicitud'])->name('pdf_report_lodo_solicitud');
 
