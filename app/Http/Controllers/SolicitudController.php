@@ -238,7 +238,7 @@ class SolicitudController extends Controller
         //Podria hardcodear mi email aca para probar?
         */
         $correos[] = "rocio.carvajal@blistertechnologies.com";
-        //$correos[] = "orodriguez@calfrac.com";
+        $correos[] = "orodriguez@calfrac.com";
         $data = [
             'solicitud_id' => $solicitud->id,
             'locacion_id' => $request->locacion,

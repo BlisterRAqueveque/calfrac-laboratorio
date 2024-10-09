@@ -1,0 +1,50 @@
+services:
+  # Servicio para el servidor Nginx
+  server:
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - 81:80 # Exponer el puerto 80
+      - 444:443 # Exponer el puerto 443
+    networks:
+      - app-network
+    volumes:
+      - ./public:/var/www/public # Mapear el directorio public
+      - ./nginx/conf.d/:/etc/nginx/conf.d/ # Mapear la configuración de Nginx
+    depends_on:
+      - app
+
+  # Servicio para la base de datos MySQL
+  db:
+    image: mysql:8.0.39
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      MYSQL_DATABASE: $DB_DATABASE
+      MYSQL_ROOT_PASSWORD: $DB_PASSWORD
+    networks:
+      - app-network
+    volumes:
+      - ./dbdata:/var/lib/mysql # Persistencia de los datos de MySQL
+
+  # Servicio para la aplicación PHP
+  app:
+    build: . # Construir la imagen desde el Dockerfile
+    restart: unless-stopped
+    networks:
+      - app-network
+    volumes:
+      - ./public/uploads:/var/www/public/uploads # Mapear los archivos de carga
+    env_file:
+      - .env
+    command: sh -c './wait-for-it.sh db:3306 -- sh /var/www/start.sh' # Comando para iniciar la aplicación
+    depends_on:
+      - db
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  dbdata:
