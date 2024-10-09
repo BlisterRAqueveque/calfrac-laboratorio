@@ -115,6 +115,10 @@ npm run dev
 ### 1. Crear las variables de entorno
 
 ### 2. Clonar el proyecto en el ambiente donde será desplegado
+  - Dentro, darle permisos al siguiente archivo:
+  ```bash
+  chmod 777 wait-for-it.sh
+  ```
 
 ### 3. En la raíz del proyecto:
 
