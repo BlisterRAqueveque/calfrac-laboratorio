@@ -1,10 +1,7 @@
-# Ignorar node_modules
-node_modules/
-
-# Ignorar vendor (para dependencias de PHP, si estás usando Composer)
-vendor/
-
-# También se ignorar otros archivos o carpetas innecesarias
-# *.log
-# *.git
-# *.env
+node_modules
+.dockerignore
+.dockerfile
+.git
+.gitignore
+*.log
+*.md

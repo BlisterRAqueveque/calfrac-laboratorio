@@ -13,16 +13,17 @@ FROM php:8.2-fpm
 # Herramienta de control de versiones
 # Herramienta para realizar solicitudes HTTP
 RUN apt-get update && apt-get install -y \
-    build-essential \   
-    libpng-dev \        
-    libjpeg-dev \       
-    libfreetype6-dev \  
-    libonig-dev \       
-    libzip-dev \        
-    zip \               
-    unzip \             
-    git \               
-    curl                
+    build-essential \
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    libonig-dev \
+    libzip-dev \
+    zip \
+    unzip \
+    git \
+    curl && \
+    rm -rf /var/lib/apt/lists/*
 
 # Instalar Node.js y npm (gestor de paquetes de Node.js)
 RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - \
@@ -47,16 +48,13 @@ WORKDIR /var/www/
 COPY . /var/www/
 
 # Instalamos dependencias de Composer (para PHP)
-RUN composer install
+RUN composer install --no-dev --optimize-autoloader
 
 # Instalamos dependencias de Node.js con npm
-RUN npm ci
+RUN npm ci --production
 
 # Cambiar permisos de directorios necesarios (por ejemplo, para storage y cache en aplicaciones Laravel)
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
-
-# Compilamos la aplicación (si es necesario, dependiendo de tu aplicación)
-# RUN npm run build
 
 COPY wait-for-it.sh /usr/local/bin/wait-for-it.sh
 
