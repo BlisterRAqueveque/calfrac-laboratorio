@@ -210,7 +210,7 @@
                                     Cliente:
                                 </td>
                                 <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $solicitud->cliente->nombre }}
+                                    {{ $solicitud->cliente->nombre ?? '-'}}
                                 </td>
                             </tr>
                             <tr>
@@ -218,7 +218,7 @@
                                     Pozo:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $solicitud->pozo}}
+                                    {{ $solicitud->pozo ?? '-'}}
                                 </td>
                             </tr>
                             <tr>
@@ -226,7 +226,7 @@
                                     Yacimiento:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $solicitud->locacion->nombre}}
+                                    {{ $solicitud->locacion->nombre ?? '-'}}
                                 </td>
                             </tr>
                             <tr>
@@ -234,7 +234,7 @@
                                     Trabajo:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{$solicitud->tipo_trabajo_cemento->nombre}}
+                                    {{$solicitud->tipo_trabajo_cemento->nombre ?? '-'}}
                                 </td>
                             </tr>
                             <tr>
@@ -242,7 +242,7 @@
                                     Servicio:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $solicitud->servicio }}
+                                    {{ $solicitud->servicio ?? '-'}}
                                 </td>
                             </tr>
                             <tr>
@@ -250,7 +250,7 @@
                                     Programa:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $solicitud->programa }}
+                                    {{ $solicitud->programa ?? '-'}}
                                 </td>
                             </tr>
                             <tr>
@@ -258,7 +258,7 @@
                                     Equipo:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $solicitud->equipos->nombre }}
+                                    {{ $solicitud->equipos->nombre ?? '-'}}
                                 </td>
                             </tr>
                             <tr>
@@ -266,7 +266,7 @@
                                     MD:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $s_l[0]->profundidad_pozo_md }}m
+                                    {{ $s_l[0]->profundidad_pozo_md ?? '-'}}m
                                 </td>
                             </tr>
                             <tr>
@@ -274,7 +274,7 @@
                                     TVD:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $s_l[0]->profundidad_pozo_tvd }}m
+                                    {{ $s_l[0]->profundidad_pozo_tvd ?? '-'}}m
                                 </td>
                             </tr>
                             <tr>
@@ -282,7 +282,7 @@
                                     BHCT:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $s_l[0]->bhct }} °C
+                                    {{ $s_l[0]->bhct ?? '-'}} °C
 
                                 </td>
                             </tr>
@@ -291,7 +291,7 @@
                                     BHST:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $s_l[0]->bhst }} °C
+                                    {{ $s_l[0]->bhst ?? '-' }} °C
                                 </td>
                             </tr>
                         </table>
@@ -303,7 +303,7 @@
                                     Objetivo del ensayo:
                                 </td>
                                 <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $solicitud->tipo_requerimiento_cemento->nombre }}
+                                    {{ $solicitud->tipo_requerimiento_cemento->nombre ?? '-'}}
                                 </td>
                             </tr>
                             <tr>
@@ -319,7 +319,7 @@
                                     Posicion Lechada:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $ensayos_seleccionados }}
+                                    {{ $ensayos_seleccionados ?? '-' }}
                                 </td>
                             </tr>
                             <tr>
@@ -327,7 +327,7 @@
                                     Tipo de Requerimiento:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $solicitud->tipo_requerimiento_cemento->nombre}}
+                                    {{ $solicitud->tipo_requerimiento_cemento->nombre ?? '-' }}
                                 </td>
                             </tr>
                             <tr>
@@ -335,7 +335,7 @@
                                     Tipo de Trabajo:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $solicitud->tipo_trabajo_cemento->nombre}}
+                                    {{ $solicitud->tipo_trabajo_cemento->nombre ?? '-'}}
                                 </td>
                             </tr>
                         </table>
@@ -355,7 +355,7 @@
                                     Fecha:
                                 </td>
                                 <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $s_l[0]->fecha_reconocimiento }}
+                                    {{ $s_l[0]->fecha_reconocimiento ?? '-' }}
                                 </td>
                             </tr>
                             <tr>
@@ -394,7 +394,7 @@
                                     <?= $i; ?>
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $formulacion->lote }}
+                                    {{ $formulacion->lote ?? '-'}}
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
                                     @if(isset($formulacion->aditivos->nombre))
@@ -406,10 +406,10 @@
                                     @endif
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $formulacion->concentracion }}
+                                    {{ $formulacion->concentracion ?? '-' }}
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $formulacion->blend}}
+                                    {{ $formulacion->blend ?? '-'}}
                                 </td>
                             </tr>
                             @endforeach
@@ -445,10 +445,10 @@
                                                 OH/Trepano (in):
                                             </td>
                                             <td style="width: 25%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $s_l[0]->OH }} 
+                                                {{ $s_l[0]->OH ?? '-' }} 
                                             </td>
                                             <td style="width: 25%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $s_l[0]->trepano }}
+                                                {{ $s_l[0]->trepano ?? '-' }}
                                             </td>
                                         </tr>
                                         <tr>
@@ -456,10 +456,10 @@
                                                 Casing ID y OD (in)
                                             </td>
                                             <td style="width: 25%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $s_l[0]->casing_id }}
+                                                {{ $s_l[0]->casing_id ?? '-'}}
                                             </td>
                                             <td style="width: 25%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $s_l[0]->casing_od }}
+                                                {{ $s_l[0]->casing_od ?? '-' }}
                                             </td>
                                         </tr>
                                         <tr>
@@ -467,7 +467,7 @@
                                                 Densidad del Lodo (ppg)
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                {{ $s_l[0]->densidad_lodo }}
+                                                {{ $s_l[0]->densidad_lodo ?? '-' }}
                                             </td>
                                         </tr>
                                         <tr>
@@ -475,7 +475,7 @@
                                                 Tipo de lodo
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                {{ $s_l[0]->tipo_lodos->nombre }}
+                                                {{ $s_l[0]->tipo_lodos->nombre  ?? '-'}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -483,7 +483,7 @@
                                                 Compañía de Lodos
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                {{ $s_l[0]->mud_company->nombre }}
+                                                {{ $s_l[0]->mud_company->nombre ?? '-'}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -491,10 +491,10 @@
                                                 Base de Lechada (MD/TVD) (m)
                                             </td>
                                             <td style="width: 25%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $s_l[0]->profundidad_pozo_md }} MD
+                                                {{ $s_l[0]->profundidad_pozo_md ?? '-'}} MD
                                             </td>
                                             <td style="width: 25%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $s_l[0]->profundidad_pozo_tvd }} TVD
+                                                {{ $s_l[0]->profundidad_pozo_tvd ?? '-'}} TVD
                                             </td>
                                         </tr>
                                         <tr>
@@ -502,10 +502,10 @@
                                                 Tope de Lechada (MD/TVD) (m)
                                             </td>
                                             <td style="width: 25%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $s_l[0]->base_md }} MD
+                                                {{ $s_l[0]->base_md ?? '-'}} MD
                                             </td>
                                             <td style="width: 25%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $s_l[0]->base_tvd }} TVD
+                                                {{ $s_l[0]->base_tvd ?? '-'}} TVD
                                             </td>
                                         </tr>
                                         <tr>
@@ -513,7 +513,7 @@
                                                 Volumen (bbl)
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                {{ $s_l[0]->volumen }}
+                                                {{ $s_l[0]->volumen ?? '-'}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -521,7 +521,7 @@
                                                 Caudal (bpm)
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                {{ $s_l[0]->pump_rate }}
+                                                {{ $s_l[0]->pump_rate ?? '-'}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -529,7 +529,7 @@
                                                 Grado de Temperatura (F°/100ft)
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                {{ $s_l[0]->grado_temperatura }}
+                                                {{ $s_l[0]->grado_temperatura ?? '-'}}
                                             </td>
                                         </tr>
                                     </table>
@@ -567,7 +567,7 @@
                                                 Reología (Si/No)
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                {{ $s_l[0]->reologia }}
+                                                {{ $s_l[0]->reologia ?? '-'}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -575,14 +575,14 @@
                                                 Densidad (ppg)
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                {{ $s_l[0]->densidad }}
+                                                {{ $s_l[0]->densidad ?? '-'}}
                                             </td>
                                         </tr>
                                         <tr>
                                             <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
                                                 Filtrado < mL </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                {{ $s_l[0]->filtrado }}
+                                                {{ $s_l[0]->filtrado ?? '-'}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -590,7 +590,7 @@
                                                 <small>Bombeabilidad T. Acondicionamiento + T. Operación</small>
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                {{ $s_l[0]->bombeabilidad }}
+                                                {{ $s_l[0]->bombeabilidad ?? '-'}}
                                             </td>
                                         </tr>
                                         {{-- <tr>
@@ -669,7 +669,7 @@
                                                 Observación/Comentarios:
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $s_l[0]->observacion }}
+                                                {{ $s_l[0]->observacion ?? 'No se registraron observaciones'}}
                                             </td>
                                         </tr>
                                     </table>
