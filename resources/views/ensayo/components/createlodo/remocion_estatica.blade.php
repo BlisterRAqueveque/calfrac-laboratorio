@@ -97,7 +97,7 @@
                     placeholder="¿Reporta remoción estatica?" readonly>
             </div> 
         </div>
-        <div>
+        {{-- <div>
             <div class="row mt-3 py-2 px-2">
                 <table class="w-full text-sm border border-gray-300">
                     <thead class="bg-gray-200 text-gray-700">
@@ -133,7 +133,7 @@
                     </tbody>
                 </table>
             </div> 
-        </div>  
+        </div>   --}}
         <!-- Contenedor Flex para la tabla y los adjuntos -->
         <div class="flex flex-wrap">
             <!-- Tabla de Remoción Mecánica -->
@@ -244,7 +244,7 @@
                 <input type="text" name="remocion_estatica" value="{{ old('remocion_estatica') }}" class="form-control text-sm" placeholder="¿Reporta remoción estatica?">
             </div>
         </div>
-        <div class="row mt-3 py-2 px-2" id="solapa3">
+        {{-- <div class="row mt-3 py-2 px-2" id="solapa3">
             <table class="w-full text-sm border border-gray-300">
                 <thead class="bg-gray-200 text-gray-700">
                     <tr>
@@ -284,7 +284,7 @@
                     @endif
                 </tbody>
             </table>
-        </div>
+        </div> --}}
         <div class="flex mt-3 py-2 px-2">
             <div class="w-1/2">
                 <br>

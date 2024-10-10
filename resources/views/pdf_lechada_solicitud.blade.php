@@ -149,13 +149,13 @@
 
 <head>
     <meta charset="gb18030">
-    <title>Calfrac - Laboratorio de Cementación</title>
+    <title>Calfrac - Solicitud de Lechada</title>
 </head>
 
 <body>
 
     <div class="footer">
-        Calfrac | Laboratorio de Cementación <span class="pagenum"></span>
+        Calfrac | Solicitud de Lechada<span class="pagenum"></span>
     </div>
     <table width='100%' style="border: 1px solid #000000; font-size: 10px;">
         <!-- Tamaño de letra uniforme -->
@@ -169,7 +169,7 @@
                         </div>
                     </td>
                     <td style="width: 60%; text-align: center;">
-                        <h2 style="color: #000000; margin: 0; padding: 0; font-size: 14px;">Laboratorio de Cementación</h2> <!-- Tamaño más grande para el título -->
+                        <h2 style="color: #000000; margin: 0; padding: 0; font-size: 14px;">Solicitud de Lechada</h2> <!-- Tamaño más grande para el título -->
                         <h6 style="margin: 0; padding: 0;">NEUQUEN, ARGENTINA</h6>
                     </td>
                     <td style="width: 20%; text-align: center;">

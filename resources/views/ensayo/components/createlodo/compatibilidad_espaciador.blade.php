@@ -5,7 +5,7 @@
         <h5 class="mb-1">Registro de Compatibilidad Colchón Mecánico y Lodo</h5>
     </div>
     
-    <div class="row mt-3 py-2 px-2" id="solapa3">
+    {{-- <div class="row mt-3 py-2 px-2" id="solapa3">
         <table class="w-full text-sm border border-gray-300">
             <thead class="bg-gray-200 text-gray-700">
                 <tr>
@@ -39,7 +39,7 @@
                 @endif
             </tbody>
         </table>
-    </div>
+    </div> --}}
     
     <div class="flex">
         <div class="w-1/2 p-2">
@@ -198,7 +198,7 @@
     </div>
     <input type="hidden" name="solicitud_lodo_id" value="{{ $solicitud_lodo[0]->id }}">
 
-    <div class="row mt-3 py-2 px-2" id="solapa3">
+    {{-- <div class="row mt-3 py-2 px-2" id="solapa3">
         <table class="w-full text-sm border border-gray-300">
             <thead class="bg-gray-200 text-gray-700">
                 <tr>
@@ -238,7 +238,7 @@
                 @endif
             </tbody>
         </table>
-    </div>
+    </div> --}}
    
     <div class="flex">
         <div class="w-1/2 p-2">
