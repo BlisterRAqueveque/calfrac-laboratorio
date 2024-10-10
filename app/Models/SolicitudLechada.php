@@ -71,6 +71,11 @@ class SolicitudLechada extends Model
         return $this->belongsTo(User::class, 'firma_solicitante_id');
     }
 
+    public function tipo_lodos()
+    {
+        return $this->belongsTo(TipoLodo::class, 'tipo_lodo');
+    }
+
     public function mud_company()
     {
         return $this->belongsTo(MudCompany::class, 'mud_company_id');

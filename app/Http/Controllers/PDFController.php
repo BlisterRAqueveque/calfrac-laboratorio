@@ -15,13 +15,13 @@ use App\Models\SolicitudLechada;
 use App\Models\TipoCementacion;
 use App\Models\TipoRequerimientoCemento;
 use App\Models\TipoTrabajoCemento;
+use App\Models\TipoLodo;
 use App\Models\User;
 use App\Models\CalculosReologias;
 // Modelos para PDF Lodo
 use App\Models\SolicitudLodo;
 use App\Models\MudCompany;
 use App\Models\TipoLodo_Lodos;
-
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Http\Request;
 use Mail;
@@ -350,7 +350,7 @@ class PDFController extends Controller
             'solicitud' => Solicitud::find($solicitud_id),
             'solicitud_lodo' => SolicitudLodo::where('solicitud_id', $solicitud_id)->get(),
             'mud_company' => MudCompany::all(),
-            'tipo_lodo' => TipoLodo_Lodos::all(),
+            'tipo_lodos' => TipoLodo_Lodos::all(),
             
         ];
           
@@ -373,6 +373,46 @@ class PDFController extends Controller
         ];
           
         $pdf = PDF::loadView('pdf_lodo_solicitud', $data);
+        // return $pdf->loadView('solicitud_lechada.pdf');
+        return $pdf->stream();
+    }
+
+    # PDF para Solicitud de Lechada 
+    public function pdf_report_lechada_solicitud($solicitud_id)
+    {
+        $data = [
+            'solicitud' => Solicitud::find($solicitud_id),
+            's_l' => SolicitudLechada::where('solicitud_id', $solicitud_id)->get(),
+            'mud_company' => MudCompany::all(),
+            'tipo_lodo' => TipoLodo::all(),
+        ];
+
+        // Lógica para obtener los nombres de los botones seleccionados
+        $ensayos = [];
+        if ($data['s_l'][0]->ensayo_requerido_principal == 1) {
+            $ensayos[] = 'Principal';
+        }
+        if ($data['s_l'][0]->ensayo_requerido_bullheading == 1) {
+            $ensayos[] = 'Bullheading';
+        }
+        if ($data['s_l'][0]->ensayo_requerido_tapon == 1) {
+            $ensayos[] = 'Tapón';
+        }
+        if ($data['s_l'][0]->ensayo_requerido_relleno == 1) {
+            $ensayos[] = 'Relleno';
+        }
+
+        $data['ensayos_seleccionados'] = implode(', ', $ensayos);
+
+        $data['checkboxes'] = [
+            'tiempo_50_psi' => $data['s_l'][0]->tiempo_50_psi,
+            'tiempo_500_psi' => $data['s_l'][0]->tiempo_500_psi,
+            'tiempo_1000_psi' => $data['s_l'][0]->tiempo_1000_psi,
+            'resistencia_12_hs' => $data['s_l'][0]->resistencia_12_hs,
+            'resistencia_24_hs' => $data['s_l'][0]->resistencia_24_hs,
+        ];
+          
+        $pdf = PDF::loadView('pdf_lechada_solicitud', $data);
         // return $pdf->loadView('solicitud_lechada.pdf');
         return $pdf->stream();
     }

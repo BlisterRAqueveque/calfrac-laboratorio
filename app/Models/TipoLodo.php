@@ -9,5 +9,9 @@ class TipoLodo extends Model
 {
     use HasFactory;
     protected $table = 'tipo_lodo';
+    protected $fillable = [
+        'nombre',
+        'estado',
+    ];
 
 }
