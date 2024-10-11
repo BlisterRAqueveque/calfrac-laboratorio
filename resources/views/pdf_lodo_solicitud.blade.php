@@ -404,14 +404,21 @@
                         <br><br>
                         <table style="width: 100%; border-collapse: collapse; border: none;">
                             <tr>
-                                <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
                                     <u><b>Ensayos Requeridos:</b></u>
                                 </td>
-                                <td style="width: 25%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                <td style="width: 80%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
                                     <ul>
                                         <!-- Aca se hace el foreach para mostrar la/las opciones marcadas de ensayos requeridos -->
-                                        <li> EJEMPLO </li>
-                                        <!-- aca se cerraria el foreach -->
+                                        <!-- <li> EJEMPLO </li>
+                                        aca se cerraria el foreach -->
+                                        @foreach ($ensayos_multiples as $e_r)
+                                        @foreach ($opciones_ensayos as $ensayo)
+                                            @if ($ensayo->id == $e_r->id_ensayo)
+                                                <li>{{ $ensayo->nombre }}</li>
+                                            @endif
+                                        @endforeach
+                                    @endforeach
                                     </ul>
                                 </td>
                             </tr>
