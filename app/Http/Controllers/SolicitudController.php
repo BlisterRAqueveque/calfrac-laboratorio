@@ -722,6 +722,7 @@ class SolicitudController extends Controller
         $solicitud = Solicitud::create([
             'tipo' => 3,
             'cliente_id' => $request->cliente_lodo,
+            'programa' => $request->programa_lodo,
             'locacion_id' => $request->locacion_lodo,
             'fecha_solicitud' => date('Y-m-d'),
             'pozo' => $request->pozo_lodo,

@@ -40,6 +40,7 @@
                     <small class="text-xs text-red-600">El programa es requerido</small>
                     @enderror
                 </div>
+                
                 <div class="col-span-2 xl:col-span-1">
                     <label for="fecha_solicitud_lechada" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de
                         Solicitud</label>

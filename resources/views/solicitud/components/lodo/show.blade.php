@@ -206,7 +206,7 @@
                 <input type="hidden" value="{{ $solicitud->id }}" name="solicitud_id">
                 
 
-                <div class="grid xs:grid-cols-2 md:grid-cols-5 gap-3 mt-3">
+                <div class="grid xs:grid-cols-2 md:grid-cols-6 gap-3 mt-3">
                     
                     <div class="col-span-2 xl:col-span-2">
                         <label for="cliente_lodo"
@@ -221,6 +221,18 @@
                         </select>
                         @error('cliente_lodo')
                             <small class="text-xs text-red-600">El cliente es requerido</small>
+                        @enderror
+                    </div>
+
+                    <div class="col-span-2 xl:col-span-1">
+                        <label for="programa_lodo"
+                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Programa <span
+                                class="text-red-500">*</span></label>
+                        <input type="text" name="programa_lodo" id="programa_lodo"
+                            class="form-control text-sm p-2" placeholder="Programa" value="{{ $solicitud->programa }}"
+                            readonly>
+                        @error('programa_lodo')
+                            <small class="text-xs text-red-600">El programa es requerido</small>
                         @enderror
                     </div>
                     {{--<div class="col-span-2 xl:col-span-1">
