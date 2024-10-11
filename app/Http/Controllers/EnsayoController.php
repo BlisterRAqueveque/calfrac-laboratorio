@@ -659,7 +659,85 @@ public function store_aditivos_lodo(Request $request)
             'solicitud_lodo_id' => $request->solicitud_lodo_id,
             'usuario_carga' => auth()->user()->id,
         ]);
-        $reologias_lodos = RelReologiasLodo::create ([
+        // $reologias_lodos = RelReologiasLodo::create ([
+        //     'temp_600_rpm' => $request->temp_600_rpm,
+        //     'temp_300_rpm' => $request->temp_300_rpm,
+        //     'temp_200_rpm' => $request->temp_200_rpm,
+        //     'temp_100_rpm' => $request->temp_100_rpm,
+        //     'temp_60_rpm' => $request->temp_60_rpm,
+        //     'temp_30_rpm' => $request->temp_30_rpm,
+        //     'temp_6_rpm' => $request->temp_6_rpm,
+        //     'temp_3_rpm' => $request->temp_3_rpm,
+        //     'temp_600_rpm_2' => $request->temp_600_rpm_2,
+        //     'temp_300_rpm_2' => $request->temp_300_rpm_2,
+        //     'temp_200_rpm_2' => $request->temp_200_rpm_2,
+        //     'temp_100_rpm_2' => $request->temp_100_rpm_2,
+        //     'temp_60_rpm_2' => $request->temp_60_rpm_2,
+        //     'temp_30_rpm_2' => $request->temp_30_rpm_2,
+        //     'temp_6_rpm_2' => $request->temp_6_rpm_2,
+        //     'temp_3_rpm_2' => $request->temp_3_rpm_2,
+        //     'temp_600_rpm_3' => $request->temp_600_rpm_3,
+        //     'temp_300_rpm_3' => $request->temp_300_rpm_3,
+        //     'temp_200_rpm_3' => $request->temp_200_rpm_3,
+        //     'temp_100_rpm_3' => $request->temp_100_rpm_3,
+        //     'temp_60_rpm_3' => $request->temp_60_rpm_3,
+        //     'temp_30_rpm_3' => $request->temp_30_rpm_3,
+        //     'temp_6_rpm_3' => $request->temp_6_rpm_3,
+        //     'temp_3_rpm_3' => $request->temp_3_rpm_3,
+        //     'temp_600_rpm_4' => $request->temp_600_rpm_4,
+        //     'temp_300_rpm_4' => $request->temp_300_rpm_4,
+        //     'temp_200_rpm_4' => $request->temp_200_rpm_4,
+        //     'temp_100_rpm_4' => $request->temp_100_rpm_4,
+        //     'temp_60_rpm_4' => $request->temp_60_rpm_4,
+        //     'temp_30_rpm_4' => $request->temp_30_rpm_4,
+        //     'temp_6_rpm_4' => $request->temp_6_rpm_4,
+        //     'temp_3_rpm_4' => $request->temp_3_rpm_4,
+        //     'temp_600_rpm_5' => $request->temp_600_rpm_5,
+        //     'temp_300_rpm_5' => $request->temp_300_rpm_5,
+        //     'temp_200_rpm_5' => $request->temp_200_rpm_5,
+        //     'temp_100_rpm_5' => $request->temp_100_rpm_5,
+        //     'temp_60_rpm_5' => $request->temp_60_rpm_5,
+        //     'temp_30_rpm_5' => $request->temp_30_rpm_5,
+        //     'temp_6_rpm_5' => $request->temp_6_rpm_5,
+        //     'temp_3_rpm_5' => $request->temp_3_rpm_5,
+        //     'reologia_id' => $caracterizacion_lodo->id,
+        //     'solicitud_lodo_id' => $request->solicitud_lodo_id,
+        //     'usuario_carga' => auth()->user()->id, 
+        // ]);
+        if ($caracterizacion_lodo->id)
+        return response()->json([
+        'success_caracterizacion_lodo' => $caracterizacion_lodo,
+        // 'success_reologias_lodos' => $reologias_lodos,
+        ]);
+    }
+
+    public function store_compatibilidad(Request $request) {
+    $compatibilidad_lodo = RelCompatibilidadLodo::create([
+        'vp_1' => $request->vp_1,
+        'vp_2' => $request->vp_2,
+        'vp_3' => $request->vp_3,
+        'vp_4' => $request->vp_4,
+        'vp_5' => $request->vp_5,
+        'yp_1' => $request->yp_1,
+        'yp_2' => $request->yp_2,
+        'yp_3' => $request->yp_3,
+        'yp_4' => $request->yp_4,
+        'yp_5' => $request->yp_5,
+        'gel_seg_1' => $request->gel_seg_1,
+        'gel_seg_2' => $request->gel_seg_2,
+        'gel_seg_3' => $request->gel_seg_3,
+        'gel_seg_4' => $request->gel_seg_4,
+        'gel_seg_5' => $request->gel_seg_5,
+        'gel_min_1' => $request->gel_min_1,
+        'gel_min_2' => $request->gel_min_2,
+        'gel_min_3' => $request->gel_min_3,
+        'gel_min_4' => $request->gel_min_4,
+        'gel_min_5' => $request->gel_min_5,
+        'solicitud_lodo_id' => $request->solicitud_lodo_id,
+        'usuario_carga' => auth()->user()->id,
+    ]);
+
+     $reologias_lodos = RelReologiasLodo::create ([
             'temp_600_rpm' => $request->temp_600_rpm,
             'temp_300_rpm' => $request->temp_300_rpm,
             'temp_200_rpm' => $request->temp_200_rpm,
@@ -700,63 +778,32 @@ public function store_aditivos_lodo(Request $request)
             'temp_30_rpm_5' => $request->temp_30_rpm_5,
             'temp_6_rpm_5' => $request->temp_6_rpm_5,
             'temp_3_rpm_5' => $request->temp_3_rpm_5,
-            'reologia_id' => $caracterizacion_lodo->id,
+            'reologia_id' => $compatibilidad_lodo->id,
             'solicitud_lodo_id' => $request->solicitud_lodo_id,
             'usuario_carga' => auth()->user()->id, 
         ]);
-        if ($caracterizacion_lodo->id)
-        return response()->json([
-        'success_caracterizacion_lodo' => $caracterizacion_lodo,
-        'success_reologias_lodos' => $reologias_lodos,
-        ]);
-    }
 
-    public function store_compatibilidad(Request $request) {
-    $compatibilidad_lodo = RelCompatibilidadLodo::create([
-        'vp_1' => $request->vp_1,
-        'vp_2' => $request->vp_2,
-        'vp_3' => $request->vp_3,
-        'vp_4' => $request->vp_4,
-        'vp_5' => $request->vp_5,
-        'yp_1' => $request->yp_1,
-        'yp_2' => $request->yp_2,
-        'yp_3' => $request->yp_3,
-        'yp_4' => $request->yp_4,
-        'yp_5' => $request->yp_5,
-        'gel_seg_1' => $request->gel_seg_1,
-        'gel_seg_2' => $request->gel_seg_2,
-        'gel_seg_3' => $request->gel_seg_3,
-        'gel_seg_4' => $request->gel_seg_4,
-        'gel_seg_5' => $request->gel_seg_5,
-        'gel_min_1' => $request->gel_min_1,
-        'gel_min_2' => $request->gel_min_2,
-        'gel_min_3' => $request->gel_min_3,
-        'gel_min_4' => $request->gel_min_4,
-        'gel_min_5' => $request->gel_min_5,
-        'solicitud_lodo_id' => $request->solicitud_lodo_id,
-        'usuario_carga' => auth()->user()->id,
-    ]);
+    // // Guardar los datos de colchon y densidad
+    // $colchones = $request->input('colchon');
+    // $densidades = $request->input('densidad');
+    // $ensayos = [];
 
-    // Guardar los datos de colchon y densidad
-    $colchones = $request->input('colchon');
-    $densidades = $request->input('densidad');
-    $ensayos = [];
+    // foreach ($colchones as $key => $colchon) {
+    //     $ensayo = RelEnsayoCompatibilidad::create([
+    //         'solicitud_lodo_id' => $request->solicitud_lodo_id,
+    //         'colchon' => $colchon,
+    //         'densidad' => $densidades[$key] ?? null,  // Asegurarse de que densidad esté en el mismo índice
+    //     ]);
 
-    foreach ($colchones as $key => $colchon) {
-        $ensayo = RelEnsayoCompatibilidad::create([
-            'solicitud_lodo_id' => $request->solicitud_lodo_id,
-            'colchon' => $colchon,
-            'densidad' => $densidades[$key] ?? null,  // Asegurarse de que densidad esté en el mismo índice
-        ]);
-
-        // Almacenar los datos creados en un array para retornarlos
-        $ensayos[] = $ensayo;
-    }
+    //     // Almacenar los datos creados en un array para retornarlos
+    //     $ensayos[] = $ensayo;
+    // }
 
     // Incluir los datos de compatibilidad y ensayos en la respuesta
     return response()->json([
         'success_compatibilidad_lodo' => $compatibilidad_lodo,
-        'success_ensayos' => $ensayos, // Incluir los datos de colchon y densidad
+        'success_reologias_lodos' => $reologias_lodos,
+         //'success_ensayos' => $ensayos, Incluir los datos de colchon y densidad
     ]);
 }
 
@@ -894,7 +941,7 @@ public function store_aditivos_lodo(Request $request)
         ]);
     
         // Guardar los datos de colchon y densidad
-        $this->saveColchonDensidad($request->input('colchon'), $request->input('densidad'), $request->solicitud_lodo_id);
+        //$this->saveColchonDensidad($request->input('colchon'), $request->input('densidad'), $request->solicitud_lodo_id);
     
         return response()->json([
             'success_estatica_lodo' => $estatica_lodo,
@@ -926,15 +973,15 @@ public function store_aditivos_lodo(Request $request)
     }
     
     // Función para guardar colchones y densidades
-    private function saveColchonDensidad($colchones, $densidades, $solicitudId) {
-        foreach ($colchones as $key => $colchon) {
-            RelEnsayoEstatica::create([
-                'solicitud_lodo_id' => $solicitudId,
-                'colchon' => $colchon,
-                'densidad' => $densidades[$key] ?? null,
-            ]);
-        }
-    }
+    // private function saveColchonDensidad($colchones, $densidades, $solicitudId) {
+    //     foreach ($colchones as $key => $colchon) {
+    //         RelEnsayoEstatica::create([
+    //             'solicitud_lodo_id' => $solicitudId,
+    //             'colchon' => $colchon,
+    //             'densidad' => $densidades[$key] ?? null,
+    //         ]);
+    //     }
+    // }
 
     public function store_mecanica(Request $request) {
 
@@ -992,17 +1039,18 @@ public function store_aditivos_lodo(Request $request)
                 'solicitud_lodo_id' => $request->solicitud_lodo_id,
                 'usuario_carga' => auth()->user()->id,
             ]);
-                                    // Guardar los datos de colchon y densidad
-            $colchones = $request->input('colchon');
-            $densidades = $request->input('densidad');
+            
+            // Guardar los datos de colchon y densidad
+            // $colchones = $request->input('colchon');
+            // $densidades = $request->input('densidad');
 
-            foreach ($colchones as $key => $colchon) {
-                RelEnsayoMecanica::create([
-                    'solicitud_lodo_id' => $request->solicitud_lodo_id,
-                    'colchon' => $colchon,
-                    'densidad' => $densidades[$key] ?? null,  // Asegurarse de que densidad esté en el mismo índice
-                ]);
-            }
+            // foreach ($colchones as $key => $colchon) {
+            //     RelEnsayoMecanica::create([
+            //         'solicitud_lodo_id' => $request->solicitud_lodo_id,
+            //         'colchon' => $colchon,
+            //         'densidad' => $densidades[$key] ?? null,  // Asegurarse de que densidad esté en el mismo índice
+            //     ]);
+            // }
     
             if ($mecanica_lodo->id) {
                 return response()->json([

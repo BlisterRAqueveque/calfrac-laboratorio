@@ -149,13 +149,13 @@
 
 <head>
     <meta charset="gb18030">
-    <title>Calfrac - Solicitud de Lodo</title>
+    <title>Laboratorio Calfrac - Solicitud de Lodo</title>
 </head>
 
 <body>
 
     <div class="footer">
-        Calfrac | Solicitud de Lodo<span class="pagenum"></span>
+        Laboratorio Calfrac | Solicitud de Lodo<span class="pagenum"></span>
     </div>
     <table width='100%' style="border: 1px solid #000000; font-size: 10px;">
         <!-- Tamaño de letra uniforme -->

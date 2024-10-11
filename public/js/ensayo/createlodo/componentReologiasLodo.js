@@ -1,7 +1,7 @@
 let accordionItem, table, thead, tbody, tr, th, td;
 const accordionLodo = document.getElementById("accordionReologiaLodo");
 
-const componentReologiasLodo = (data = {}, reologias = {}) => {
+const componentReologiasLodo = (data = {}) => {
   console.log(data); // Para verificar los valores de 'data'
   console.log(reologias); 
   // Contenedor principal y título
@@ -142,184 +142,184 @@ const componentReologiasLodo = (data = {}, reologias = {}) => {
   mount(terceraTablaContainer, tableContainer); // Montamos el contenedor de la tercera tabla
   mount(accordionItem, terceraTablaContainer);
   
-  // Ahora montamos la tabla de "Reologías Lodo" al final
-  const reologiasLodoContainer = el("div.w-full.pt-4");
+//   // Ahora montamos la tabla de "Reologías Lodo" al final
+//   const reologiasLodoContainer = el("div.w-full.pt-4");
 
-  const tituloReologias = el("h5.text-center.text-xl.font-bold.mb-4", "Reologías Lodo");
-  mount(reologiasLodoContainer, tituloReologias);
+//   const tituloReologias = el("h5.text-center.text-xl.font-bold.mb-4", "Reologías Lodo");
+//   mount(reologiasLodoContainer, tituloReologias);
 
-  table = el("table.w-full.text-sm.border.border-gray-300");
-  thead = el("thead.bg-gray-200.text-gray-700");
+//   table = el("table.w-full.text-sm.border.border-gray-300");
+//   thead = el("thead.bg-gray-200.text-gray-700");
 
-  tr = el("tr");
-  th = el("th.p-1.text-center.border.w-1/4.border-gray-300", { colspan: 2 }, "% de Fluido");
-  mount(tr, th);
-  th = el("th.p-1.text-center.border.border-gray-300", { colspan: 8 }, "Reología");
-  mount(tr, th);
-  mount(thead, tr);
+//   tr = el("tr");
+//   th = el("th.p-1.text-center.border.w-1/4.border-gray-300", { colspan: 2 }, "% de Fluido");
+//   mount(tr, th);
+//   th = el("th.p-1.text-center.border.border-gray-300", { colspan: 8 }, "Reología");
+//   mount(tr, th);
+//   mount(thead, tr);
 
-  tr = el("tr");
-  ["Lodo", "Colchón", "600", "300", "200", "100", "60", "30", "6", "3"].forEach(headerText => {
-    const th = el("th.p-1.text-center.border.border-gray-300", headerText);
-    mount(tr, th);
-  });
-  mount(thead, tr);
-  mount(table, thead);
+//   tr = el("tr");
+//   ["Lodo", "Colchón", "600", "300", "200", "100", "60", "30", "6", "3"].forEach(headerText => {
+//     const th = el("th.p-1.text-center.border.border-gray-300", headerText);
+//     mount(tr, th);
+//   });
+//   mount(thead, tr);
+//   mount(table, thead);
 
-  tbody = el("tbody");
+//   tbody = el("tbody");
 
-  // Ejemplo de una fila de datos
-tr = el("tr.border-b");
-td = el("td.py-2.text-center.border", data.lodo_1 ? data.lodo_1 : '100');
-mount(tr, td);
-td = el("td.py-2.text-center.border", data.colchon_1 ? data.colchon_1 : '0');
-mount(tr, td);
-// ["temp_600_rpm", "temp_300_rpm", "temp_200_rpm", "temp_100_rpm", "temp_60_rpm", "temp_30_rpm", "temp_6_rpm", "temp_3_rpm"].forEach(field => {
-//   td = el("td.py-2.px-1.text-center.border", data[field] ? data[field] : '-');
-//   mount(tr, td);
-// });
-td = el("td.py-2.px-1.text-center.border", reologias.temp_600_rpm ? reologias.temp_600_rpm : '-');
-mount(tr, td);
-td = el("td.py-2.px-1.text-center.border", reologias.temp_300_rpm ? reologias.temp_300_rpm : '-');
-mount(tr, td);
-td = el("td.py-2.px-1.text-center.border", reologias.temp_200_rpm ? reologias.temp_200_rpm : '-');
-mount(tr, td);
-td = el("td.py-2.px-1.text-center.border", reologias.temp_100_rpm ? reologias.temp_100_rpm : '-');
-mount(tr, td);
-td = el("td.py-2.px-1.text-center.border", reologias.temp_60_rpm ? reologias.temp_60_rpm : '-');
-mount(tr, td);
-td = el("td.py-2.px-1.text-center.border", reologias.temp_30_rpm ? reologias.temp_30_rpm : '-');
-mount(tr, td);
-td = el("td.py-2.px-1.text-center.border", reologias.temp_6_rpm ? reologias.temp_6_rpm : '-');
-mount(tr, td);
-td = el("td.py-2.px-1.text-center.border", reologias.temp_3_rpm ? reologias.temp_3_rpm : '-');
-mount(tr, td);
-mount(tbody, tr);
+//   // Ejemplo de una fila de datos
+// tr = el("tr.border-b");
+// td = el("td.py-2.text-center.border", data.lodo_1 ? data.lodo_1 : '100');
+// mount(tr, td);
+// td = el("td.py-2.text-center.border", data.colchon_1 ? data.colchon_1 : '0');
+// mount(tr, td);
+// // ["temp_600_rpm", "temp_300_rpm", "temp_200_rpm", "temp_100_rpm", "temp_60_rpm", "temp_30_rpm", "temp_6_rpm", "temp_3_rpm"].forEach(field => {
+// //   td = el("td.py-2.px-1.text-center.border", data[field] ? data[field] : '-');
+// //   mount(tr, td);
+// // });
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_600_rpm ? reologias.temp_600_rpm : '-');
+// mount(tr, td);
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_300_rpm ? reologias.temp_300_rpm : '-');
+// mount(tr, td);
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_200_rpm ? reologias.temp_200_rpm : '-');
+// mount(tr, td);
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_100_rpm ? reologias.temp_100_rpm : '-');
+// mount(tr, td);
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_60_rpm ? reologias.temp_60_rpm : '-');
+// mount(tr, td);
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_30_rpm ? reologias.temp_30_rpm : '-');
+// mount(tr, td);
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_6_rpm ? reologias.temp_6_rpm : '-');
+// mount(tr, td);
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_3_rpm ? reologias.temp_3_rpm : '-');
+// mount(tr, td);
+// mount(tbody, tr);
 
-// Segunda fila
-tr = el("tr.border-b");
-td = el("td.py-2.text-center.border", data.lodo_2 ? data.lodo_2 : '75');
-mount(tr, td);
-td = el("td.py-2.text-center.border", data.colchon_2 ? data.colchon_2 : '25');
-mount(tr, td);
-// ["temp_600_rpm_2", "temp_300_rpm_2", "temp_200_rpm_2", "temp_100_rpm_2", "temp_60_rpm_2", "temp_30_rpm_2", "temp_6_rpm_2", "temp_3_rpm_2"].forEach(field => {
-//   td = el("td.py-2.px-1.text-center.border", data[field] ? data[field] : '-');
-//   mount(tr, td);
-// });
-td = el("td.py-2.px-1.text-center.border", reologias.temp_600_rpm_2 ? reologias.temp_600_rpm_2 : '-');
-mount(tr, td);
-td = el("td.py-2.px-1.text-center.border", reologias.temp_300_rpm_2 ? reologias.temp_300_rpm_2 : '-');
-mount(tr, td);
-td = el("td.py-2.px-1.text-center.border", reologias.temp_200_rpm_2 ? reologias.temp_200_rpm_2 : '-');
-mount(tr, td);
-td = el("td.py-2.px-1.text-center.border", reologias.temp_100_rpm_2 ? reologias.temp_100_rpm_2 : '-');
-mount(tr, td);
-td = el("td.py-2.px-1.text-center.border", reologias.temp_60_rpm_2 ? reologias.temp_60_rpm_2 : '-');
-mount(tr, td);
-td = el("td.py-2.px-1.text-center.border", reologias.temp_30_rpm_2 ? reologias.temp_30_rpm_2 : '-');
-mount(tr, td);
-td = el("td.py-2.px-1.text-center.border", reologias.temp_6_rpm_2 ? reologias.temp_6_rpm_2 : '-');
-mount(tr, td);
-td = el("td.py-2.px-1.text-center.border", reologias.temp_3_rpm_2 ? reologias.temp_3_rpm_2 : '-');
-mount(tr, td);
-mount(tbody, tr);
+// // Segunda fila
+// tr = el("tr.border-b");
+// td = el("td.py-2.text-center.border", data.lodo_2 ? data.lodo_2 : '75');
+// mount(tr, td);
+// td = el("td.py-2.text-center.border", data.colchon_2 ? data.colchon_2 : '25');
+// mount(tr, td);
+// // ["temp_600_rpm_2", "temp_300_rpm_2", "temp_200_rpm_2", "temp_100_rpm_2", "temp_60_rpm_2", "temp_30_rpm_2", "temp_6_rpm_2", "temp_3_rpm_2"].forEach(field => {
+// //   td = el("td.py-2.px-1.text-center.border", data[field] ? data[field] : '-');
+// //   mount(tr, td);
+// // });
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_600_rpm_2 ? reologias.temp_600_rpm_2 : '-');
+// mount(tr, td);
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_300_rpm_2 ? reologias.temp_300_rpm_2 : '-');
+// mount(tr, td);
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_200_rpm_2 ? reologias.temp_200_rpm_2 : '-');
+// mount(tr, td);
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_100_rpm_2 ? reologias.temp_100_rpm_2 : '-');
+// mount(tr, td);
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_60_rpm_2 ? reologias.temp_60_rpm_2 : '-');
+// mount(tr, td);
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_30_rpm_2 ? reologias.temp_30_rpm_2 : '-');
+// mount(tr, td);
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_6_rpm_2 ? reologias.temp_6_rpm_2 : '-');
+// mount(tr, td);
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_3_rpm_2 ? reologias.temp_3_rpm_2 : '-');
+// mount(tr, td);
+// mount(tbody, tr);
 
-// Tercera fila
-tr = el("tr.border-b");
-td = el("td.py-2.text-center.border", data.lodo_2 ? data.lodo_2 : '50');
-mount(tr, td);
-td = el("td.py-2.text-center.border", data.colchon_2 ? data.colchon_2 : '50');
-mount(tr, td);
-// ["temp_600_rpm_2", "temp_300_rpm_2", "temp_200_rpm_2", "temp_100_rpm_2", "temp_60_rpm_2", "temp_30_rpm_2", "temp_6_rpm_2", "temp_3_rpm_2"].forEach(field => {
-//   td = el("td.py-2.px-1.text-center.border", data[field] ? data[field] : '-');
-//   mount(tr, td);
-// });
-td = el("td.py-2.px-1.text-center.border", reologias.temp_600_rpm_3 ? reologias.temp_600_rpm_3 : '-');
-mount(tr, td);
-td = el("td.py-2.px-1.text-center.border", reologias.temp_300_rpm_3 ? reologias.temp_300_rpm_3 : '-');
-mount(tr, td);
-td = el("td.py-2.px-1.text-center.border", reologias.temp_200_rpm_3 ? reologias.temp_200_rpm_3 : '-');
-mount(tr, td);
-td = el("td.py-2.px-1.text-center.border", reologias.temp_100_rpm_3 ? reologias.temp_100_rpm_3 : '-');
-mount(tr, td);
-td = el("td.py-2.px-1.text-center.border", reologias.temp_60_rpm_3 ?  reologias.temp_60_rpm_3 : '-');
-mount(tr, td);
-td = el("td.py-2.px-1.text-center.border", reologias.temp_30_rpm_3 ? reologias.temp_30_rpm_3 : '-');
-mount(tr, td);
-td = el("td.py-2.px-1.text-center.border", reologias.temp_6_rpm_3 ? reologias.temp_6_rpm_3 : '-');
-mount(tr, td);
-td = el("td.py-2.px-1.text-center.border", reologias.temp_3_rpm_3 ? reologias.temp_3_rpm_3 : '-');
-mount(tr, td);
-mount(tbody, tr);
+// // Tercera fila
+// tr = el("tr.border-b");
+// td = el("td.py-2.text-center.border", data.lodo_2 ? data.lodo_2 : '50');
+// mount(tr, td);
+// td = el("td.py-2.text-center.border", data.colchon_2 ? data.colchon_2 : '50');
+// mount(tr, td);
+// // ["temp_600_rpm_2", "temp_300_rpm_2", "temp_200_rpm_2", "temp_100_rpm_2", "temp_60_rpm_2", "temp_30_rpm_2", "temp_6_rpm_2", "temp_3_rpm_2"].forEach(field => {
+// //   td = el("td.py-2.px-1.text-center.border", data[field] ? data[field] : '-');
+// //   mount(tr, td);
+// // });
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_600_rpm_3 ? reologias.temp_600_rpm_3 : '-');
+// mount(tr, td);
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_300_rpm_3 ? reologias.temp_300_rpm_3 : '-');
+// mount(tr, td);
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_200_rpm_3 ? reologias.temp_200_rpm_3 : '-');
+// mount(tr, td);
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_100_rpm_3 ? reologias.temp_100_rpm_3 : '-');
+// mount(tr, td);
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_60_rpm_3 ?  reologias.temp_60_rpm_3 : '-');
+// mount(tr, td);
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_30_rpm_3 ? reologias.temp_30_rpm_3 : '-');
+// mount(tr, td);
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_6_rpm_3 ? reologias.temp_6_rpm_3 : '-');
+// mount(tr, td);
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_3_rpm_3 ? reologias.temp_3_rpm_3 : '-');
+// mount(tr, td);
+// mount(tbody, tr);
 
-// Cuarta fila
-tr = el("tr.border-b");
-td = el("td.py-2.text-center.border", data.lodo_2 ? data.lodo_2 : '25');
-mount(tr, td);
-td = el("td.py-2.text-center.border", data.colchon_2 ? data.colchon_2 : '75');
-mount(tr, td);
-// ["temp_600_rpm_2", "temp_300_rpm_2", "temp_200_rpm_2", "temp_100_rpm_2", "temp_60_rpm_2", "temp_30_rpm_2", "temp_6_rpm_2", "temp_3_rpm_2"].forEach(field => {
-//   td = el("td.py-2.px-1.text-center.border", data[field] ? data[field] : '-');
-//   mount(tr, td);
-// });
-td = el("td.py-2.px-1.text-center.border", reologias.temp_600_rpm_4 ? reologias.temp_600_rpm_4 : '-');
-mount(tr, td);
-td = el("td.py-2.px-1.text-center.border", reologias.temp_300_rpm_4 ? reologias.temp_300_rpm_4 : '-');
-mount(tr, td);
-td = el("td.py-2.px-1.text-center.border", reologias.temp_200_rpm_4 ? reologias.temp_200_rpm_4 : '-');
-mount(tr, td);
-td = el("td.py-2.px-1.text-center.border", reologias.temp_100_rpm_4 ? reologias.temp_100_rpm_4 : '-');
-mount(tr, td);
-td = el("td.py-2.px-1.text-center.border", reologias.temp_60_rpm_4 ?  reologias.temp_60_rpm_4 : '-');
-mount(tr, td);
-td = el("td.py-2.px-1.text-center.border", reologias.temp_30_rpm_4 ? reologias.temp_30_rpm_4 : '-');
-mount(tr, td);
-td = el("td.py-2.px-1.text-center.border", reologias.temp_6_rpm_4 ? reologias.temp_6_rpm_4 : '-');
-mount(tr, td);
-td = el("td.py-2.px-1.text-center.border", reologias.temp_3_rpm_4 ? reologias.temp_3_rpm_4 : '-');
-mount(tr, td);
-mount(tbody, tr);
+// // Cuarta fila
+// tr = el("tr.border-b");
+// td = el("td.py-2.text-center.border", data.lodo_2 ? data.lodo_2 : '25');
+// mount(tr, td);
+// td = el("td.py-2.text-center.border", data.colchon_2 ? data.colchon_2 : '75');
+// mount(tr, td);
+// // ["temp_600_rpm_2", "temp_300_rpm_2", "temp_200_rpm_2", "temp_100_rpm_2", "temp_60_rpm_2", "temp_30_rpm_2", "temp_6_rpm_2", "temp_3_rpm_2"].forEach(field => {
+// //   td = el("td.py-2.px-1.text-center.border", data[field] ? data[field] : '-');
+// //   mount(tr, td);
+// // });
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_600_rpm_4 ? reologias.temp_600_rpm_4 : '-');
+// mount(tr, td);
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_300_rpm_4 ? reologias.temp_300_rpm_4 : '-');
+// mount(tr, td);
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_200_rpm_4 ? reologias.temp_200_rpm_4 : '-');
+// mount(tr, td);
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_100_rpm_4 ? reologias.temp_100_rpm_4 : '-');
+// mount(tr, td);
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_60_rpm_4 ?  reologias.temp_60_rpm_4 : '-');
+// mount(tr, td);
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_30_rpm_4 ? reologias.temp_30_rpm_4 : '-');
+// mount(tr, td);
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_6_rpm_4 ? reologias.temp_6_rpm_4 : '-');
+// mount(tr, td);
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_3_rpm_4 ? reologias.temp_3_rpm_4 : '-');
+// mount(tr, td);
+// mount(tbody, tr);
 
-// Quinta fila
-tr = el("tr.border-b");
-td = el("td.py-2.text-center.border", data.lodo_2 ? data.lodo_2 : '0');
-mount(tr, td);
-td = el("td.py-2.text-center.border", data.colchon_2 ? data.colchon_2 : '100');
-mount(tr, td);
-// ["temp_600_rpm_2", "temp_300_rpm_2", "temp_200_rpm_2", "temp_100_rpm_2", "temp_60_rpm_2", "temp_30_rpm_2", "temp_6_rpm_2", "temp_3_rpm_2"].forEach(field => {
-//   td = el("td.py-2.px-1.text-center.border", data[field] ? data[field] : '-');
-//   mount(tr, td);
-// });
-td = el("td.py-2.px-1.text-center.border", reologias.temp_600_rpm_5 ? reologias.temp_600_rpm_5 : '-');
-mount(tr, td);
-td = el("td.py-2.px-1.text-center.border", reologias.temp_300_rpm_5 ? reologias.temp_300_rpm_5 : '-');
-mount(tr, td);
-td = el("td.py-2.px-1.text-center.border", reologias.temp_200_rpm_5 ? reologias.temp_200_rpm_5 : '-');
-mount(tr, td);
-td = el("td.py-2.px-1.text-center.border", reologias.temp_100_rpm_5 ? reologias.temp_100_rpm_5 : '-');
-mount(tr, td);
-td = el("td.py-2.px-1.text-center.border", reologias.temp_60_rpm_5 ?  reologias.temp_60_rpm_5 : '-');
-mount(tr, td);
-td = el("td.py-2.px-1.text-center.border", reologias.temp_30_rpm_5 ? reologias.temp_30_rpm_5 : '-');
-mount(tr, td);
-td = el("td.py-2.px-1.text-center.border", reologias.temp_6_rpm_5 ? reologias.temp_6_rpm_5 : '-');
-mount(tr, td);
-td = el("td.py-2.px-1.text-center.border", reologias.temp_3_rpm_5 ? reologias.temp_3_rpm_5 : '-');
-mount(tr, td);
-mount(tbody, tr);
-  // [["lodo_1", "colchon_1", "temp_600_rpm", "temp_300_rpm", "temp_200_rpm", "temp_100_rpm", "temp_60_rpm", "temp_30_rpm", "temp_6_rpm", "temp_3_rpm"],
-  //  ["lodo_2", "colchon_2", "temp_600_rpm_2", "temp_300_rpm_2", "temp_200_rpm_2", "temp_100_rpm_2", "temp_60_rpm_2", "temp_30_rpm_2", "temp_6_rpm_2", "temp_3_rpm_2"]].forEach(rowData => {
-  //   tr = el("tr.border-b");
-  //   rowData.forEach(field => {
-  //     const td = el("td.py-2.px-1.text-center.border", data[field] ? data[field] : '-');
-  //     mount(tr, td);
-  //   });
-  //   mount(tbody, tr);
-  // });
+// // Quinta fila
+// tr = el("tr.border-b");
+// td = el("td.py-2.text-center.border", data.lodo_2 ? data.lodo_2 : '0');
+// mount(tr, td);
+// td = el("td.py-2.text-center.border", data.colchon_2 ? data.colchon_2 : '100');
+// mount(tr, td);
+// // ["temp_600_rpm_2", "temp_300_rpm_2", "temp_200_rpm_2", "temp_100_rpm_2", "temp_60_rpm_2", "temp_30_rpm_2", "temp_6_rpm_2", "temp_3_rpm_2"].forEach(field => {
+// //   td = el("td.py-2.px-1.text-center.border", data[field] ? data[field] : '-');
+// //   mount(tr, td);
+// // });
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_600_rpm_5 ? reologias.temp_600_rpm_5 : '-');
+// mount(tr, td);
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_300_rpm_5 ? reologias.temp_300_rpm_5 : '-');
+// mount(tr, td);
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_200_rpm_5 ? reologias.temp_200_rpm_5 : '-');
+// mount(tr, td);
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_100_rpm_5 ? reologias.temp_100_rpm_5 : '-');
+// mount(tr, td);
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_60_rpm_5 ?  reologias.temp_60_rpm_5 : '-');
+// mount(tr, td);
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_30_rpm_5 ? reologias.temp_30_rpm_5 : '-');
+// mount(tr, td);
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_6_rpm_5 ? reologias.temp_6_rpm_5 : '-');
+// mount(tr, td);
+// td = el("td.py-2.px-1.text-center.border", reologias.temp_3_rpm_5 ? reologias.temp_3_rpm_5 : '-');
+// mount(tr, td);
+// mount(tbody, tr);
+//   // [["lodo_1", "colchon_1", "temp_600_rpm", "temp_300_rpm", "temp_200_rpm", "temp_100_rpm", "temp_60_rpm", "temp_30_rpm", "temp_6_rpm", "temp_3_rpm"],
+//   //  ["lodo_2", "colchon_2", "temp_600_rpm_2", "temp_300_rpm_2", "temp_200_rpm_2", "temp_100_rpm_2", "temp_60_rpm_2", "temp_30_rpm_2", "temp_6_rpm_2", "temp_3_rpm_2"]].forEach(rowData => {
+//   //   tr = el("tr.border-b");
+//   //   rowData.forEach(field => {
+//   //     const td = el("td.py-2.px-1.text-center.border", data[field] ? data[field] : '-');
+//   //     mount(tr, td);
+//   //   });
+//   //   mount(tbody, tr);
+//   // });
 
-  mount(table, tbody);
-  mount(reologiasLodoContainer, table);
-  mount(accordionItem, reologiasLodoContainer); 
+//   mount(table, tbody);
+//   mount(reologiasLodoContainer, table);
+//   mount(accordionItem, reologiasLodoContainer); 
 
   // Finalmente, agregar todo al DOM
   mount(accordionLodo, accordionItem);

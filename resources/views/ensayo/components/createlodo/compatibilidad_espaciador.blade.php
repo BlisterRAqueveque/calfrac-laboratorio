@@ -186,6 +186,170 @@
             </div>
         </div>
     </div>
+    <div class="row mt-3 py-2 px-2">
+        <table class="w-full text-sm border border-gray-300">
+            <thead class="bg-gray-200 text-gray-700">
+                <tr>
+                    <th class="p-1 text-center border w-1/4 border-gray-300" colspan="2">% de Fluido</th>
+                    <th class="p-1 text-center border border-gray-300" colspan="8">Reologia</th>
+                </tr>
+                <tr>
+                    <th class="p-1 text-center border border-gray-300">Lodo</th>
+                    <th class="p-1 text-center border border-gray-300">Colchón</th>
+                    <td class="p-1 text-center border border-gray-300">600</th>
+                    <th class="p-1 text-center border border-gray-300">300</th>
+                    <th class="p-1 text-center border border-gray-300">200</th>
+                    <th class="p-1 text-center border border-gray-300">100</th>
+                    <th class="p-1 text-center border border-gray-300">60</th>
+                    <th class="p-1 text-center border border-gray-300">30</th>
+                    <th class="p-1 text-center border border-gray-300">6</th>
+                    <th class="p-1 text-center border border-gray-300">3</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="border-b">
+                    <td class="py-2 text-center border">100</td>
+                    <td class="py-2 text-center border">0</td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_600_rpm ?? '-' }}
+                    </td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_300_rpm ?? '-' }}
+                    </td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_200_rpm ?? '-'  }}
+                    </td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_100_rpm ?? '-' }}
+                    </td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_60_rpm ?? '-' }}
+                    </td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_30_rpm ?? '-' }}
+                    </td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_6_rpm ?? '-' }}
+                    </td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_3_rpm ?? '-' }}
+                    </td>
+                </tr>
+                <tr class="border-b">
+                    <td class="py-2 text-center border">75</td>
+                    <td class="py-2 text-center border">25</td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_600_rpm_2 ?? '-' }}
+                    </td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_300_rpm_2 ?? '-' }}
+                    </td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_200_rpm_2 ?? '-' }}
+                    </td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_100_rpm_2 ?? '-' }}
+                    </td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_60_rpm_2 ?? '-' }}
+                    </td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_30_rpm_2 ?? '-' }}
+                    </td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_6_rpm_2 ?? '-' }}
+                    </td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_3_rpm_2 ?? '-' }}
+                    </td>
+                </tr>
+                <tr class="border-b">
+                    <td class="py-2 text-center border">50</td>
+                    <td class="py-2 text-center border">50</td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_600_rpm_3 ?? '-' }}
+                    </td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_300_rpm_3 ?? '-' }}
+                    </td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_200_rpm_3 ?? '-' }}
+                    </td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_100_rpm_3 ?? '-' }}
+                    </td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_60_rpm_3 ?? '-' }}
+                    </td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_30_rpm_3 ?? '-' }}
+                    </td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_6_rpm_3 ?? '-' }}
+                    </td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_3_rpm_3 ?? '-' }}
+                    </td>
+                </tr>
+                <tr class="border-b">
+                    <td class="py-2 text-center border">25</td>
+                    <td class="py-2 text-center border">75</td>
+                    <td class="py-2 px-1 text-center">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_600_rpm_4 ?? '-' }}
+                    </td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_300_rpm_4 ?? '-' }}
+                    </td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_200_rpm_4 ?? '-' }}
+                    </td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_100_rpm_4 ?? '-' }}
+                    </td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_60_rpm_4 ?? '-' }}
+                    </td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_30_rpm_4 ?? '-' }}
+                    </td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_6_rpm_4 ?? '-' }}
+                    </td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_3_rpm_4 ?? '-' }}
+                    </td>
+                </tr>
+                <tr class="border-b">
+                    <td class="py-2 text-center border">0</td>
+                    <td class="py-2 text-center border">100</td>
+                    <td class="py-2 px-1 text-center">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_600_rpm_5 ?? '-' }}
+                    </td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_300_rpm_5 ?? '-' }}
+                    </td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_200_rpm_5 ?? '-' }}
+                    </td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_100_rpm_5 ?? '-' }}
+                    </td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_60_rpm_5 ?? '-' }}
+                    </td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_30_rpm_5 ?? '-' }}
+                    </td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_6_rpm_5 ?? '-' }}
+                    </td>
+                    <td class="py-2 px-1 text-center border">
+                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_3_rpm_5 ?? '-' }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 @else
     <div class="accordionCompatibilidadLodo" id="accordionCompatibilidadLodo"></div>
@@ -364,6 +528,130 @@
             </div>
         </div>
     </div>
+            <div class="row mt-3 py-2 px-2">
+            <table class="w-full text-sm border border-gray-300">
+                <thead class="bg-gray-200 text-gray-700">
+                    <tr>
+                        <th class="p-1 text-center border w-1/4 border-gray-300" colspan="2">% de Fluido</th>
+                        <th class="p-1 text-center border border-gray-300" colspan="8">Reologia</th>
+                    </tr>
+                    <tr>
+                        <th class="p-1 text-center border border-gray-300">Lodo</th>
+                        <th class="p-1 text-center border border-gray-300">Colchón</th>
+                        <td class="p-1 text-center border border-gray-300">600</th>
+                        <th class="p-1 text-center border border-gray-300">300</th>
+                        <th class="p-1 text-center border border-gray-300">200</th>
+                        <th class="p-1 text-center border border-gray-300">100</th>
+                        <th class="p-1 text-center border border-gray-300">60</th> 
+                        <th class="p-1 text-center border border-gray-300">30</th>
+                        <th class="p-1 text-center border border-gray-300">6</th>
+                        <th class="p-1 text-center border border-gray-300">3</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b">
+                        <td class="py-2 text-center border">100</td>
+                        <td class="py-2 text-center border">0</td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_600_rpm"></td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_300_rpm"></td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_200_rpm"></td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_100_rpm"></td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_60_rpm"></td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_30_rpm"></td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_6_rpm"></td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_3_rpm"></td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="py-2 text-center border">75</td>
+                        <td class="py-2 text-center border">25</td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_600_rpm_2"></td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_300_rpm_2"></td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_200_rpm_2"></td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_100_rpm_2"></td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_60_rpm_2"></td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_30_rpm_2"></td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_6_rpm_2"></td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_3_rpm_2"></td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="py-2 text-center border">50</td>
+                        <td class="py-2 text-center border">50</td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_600_rpm_3"></td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_300_rpm_3"></td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_200_rpm_3"></td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_100_rpm_3"></td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_60_rpm_3"></td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_30_rpm_3"></td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_6_rpm_3"></td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_3_rpm_3"></td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="py-2 text-center border">25</td>
+                        <td class="py-2 text-center border">75</td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_600_rpm_4"></td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_300_rpm_4"></td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_200_rpm_4"></td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_100_rpm_4"></td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_60_rpm_4"></td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_30_rpm_4"></td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_6_rpm_4"></td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_3_rpm_4"></td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="py-2 text-center border">0</td>
+                        <td class="py-2 text-center border">100</td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_600_rpm_5"></td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_300_rpm_5"></td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_200_rpm_5"></td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_100_rpm_5"></td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_60_rpm_5"></td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_30_rpm_5"></td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_6_rpm_5"></td>
+                        <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                            placeholder="Ingrese dato" name="temp_3_rpm_5"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     <div class="flex justify-center">
         <x-button type="click" id="btn_submit_compatibilidad_lodo"
             style="w-full md:w-auto bg-green-700 bg-opacity-60 text-white p-2 rounded-sm hover:shadow-lg transition-all duration-75 font-bold text-sm">Crear
@@ -389,7 +677,7 @@
                         }).then((response) => response.json())
                         .then((data) => {
                             if (data) {
-                                componentCompatibilidadLodo(data.success_compatibilidad_lodo, data.success_ensayos)
+                                componentCompatibilidadLodo(data.success_compatibilidad_lodo, data.success_reologias_lodos)
                                 // Mostrar en consola los valores de colchon y densidad
                                 //console.log('Ensayos:', data.ensayos);
                                 //console.log('Data aditivos:', data.success_compatibilidad_lodo)

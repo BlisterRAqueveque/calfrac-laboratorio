@@ -149,13 +149,13 @@
 
 <head>
     <meta charset="gb18030">
-    <title>Calfrac - Laboratorio de Lodo</title>
+    <title>Laboratorio Calfrac - Ensayo de Lodo</title>
 </head>
 
 <body>
 
     <div class="footer">
-        Calfrac | Laboratorio de Lodo<span class="pagenum"></span>
+        Laboratorio Calfrac | Ensayo de Lodo<span class="pagenum"></span>
     </div>
     <table width='100%' style="border: 1px solid #000000; font-size: 10px;">
         <!-- Tamaño de letra uniforme -->
@@ -571,6 +571,7 @@
                                         </tr>
                                     </table>
                                     <br>
+                                    {{-- Tabla reologia Lodo 
                                     <table style="width: 100%; border-collapse: collapse; border: none;">
                                         <tr>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
@@ -752,7 +753,7 @@
                                                 {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_3_rpm_5 ?? '-' }}
                                             </td>
                                         </tr>
-                                    </table>
+                                    </table> --}}
 
                                 </td>
                             </tr>
@@ -776,7 +777,7 @@
                                 <!-- Columna con tabla interna -->
                                 <td style="width: 94%; padding: 4px; text-align: center; vertical-align: top;">
                                     <br>
-                                    <table style="width: 100%; border-collapse: collapse; border: none;">
+                                    {{-- <table style="width: 100%; border-collapse: collapse; border: none;">
                                         <tr>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
                                                 Vol.(bbl)
@@ -820,7 +821,7 @@
                                         </tr>
                                         @endforeach
                                         @endif
-                                    </table>
+                                    </table> --}}
                                     <br>
                                     <table style="width: 100%; border-collapse: collapse; table-layout: fixed;">
                                         <tr>
@@ -993,7 +994,7 @@
                                                 <table style="width: 100%; border-collapse: collapse; border: none;">
                                                     <tr>
                                                         <td style="width: 52%; vertical-align: top;">
-                                                            <table style="width: 100%; border-collapse: collapse; border: none;">
+                                                            {{-- <table style="width: 100%; border-collapse: collapse; border: none;">
                                                                 <tr>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="6">
                                                                         Remoción Mecánica Lodo
@@ -1042,7 +1043,7 @@
                                                                 </tr>
                                                                 @endforeach
                                                                 @endif
-                                                            </table>
+                                                            </table> --}}
 
                                                             <br>
                                                             <table style="width: 100%; border-collapse: collapse; border: none;">
@@ -1144,7 +1145,7 @@
                                                 <table style="width: 100%; border-collapse: collapse; border: none;">
                                                     <tr>
                                                         <td style="width: 52%; vertical-align: top;">
-                                                            <table style="width: 100%; border-collapse: collapse; border: none;">
+                                                            {{-- <table style="width: 100%; border-collapse: collapse; border: none;">
                                                                 <tr>
                                                                     <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="6">
                                                                         Remoción Estática Lodo
@@ -1193,7 +1194,7 @@
                                                                 </tr>
                                                                 @endforeach
                                                                 @endif
-                                                            </table>
+                                                            </table> --}}
 
                                                             <br>
                                                             <table style="width: 100%; border-collapse: collapse; border: none;">

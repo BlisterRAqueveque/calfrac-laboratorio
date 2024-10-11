@@ -123,13 +123,14 @@
             </tbody>
         </table>
     </div>
-    <div class="mb-2 text-center">
+
+    {{-- <div class="mb-2 text-center">
         <br>
         <h5 class="mb-1">Reologías Lodo </h5>
-        {{-- <small>(Recuerde que debe seleccionar de todos los intentos una Reología correctamente)</small> --}}
-    </div>
+        
+    </div> --}}
     {{-- <input type="hidden" name="solicitud_lodo_id" value="{{ $solicitud_lodo[0]->id }}"> --}}
-    <div class="row mt-3 py-2 px-2">
+    {{-- <div class="row mt-3 py-2 px-2">
         <table class="w-full text-sm border border-gray-300">
             <thead class="bg-gray-200 text-gray-700">
                 <tr>
@@ -292,7 +293,7 @@
                 </tr>
             </tbody>
         </table>
-    </div>
+    </div> --}}
 </div>
 
 @else
@@ -404,13 +405,8 @@
             </table>
         </div>
         
-        <div class="mb-2 text-center">
-            <br>
-            <h5 class="mb-1">Reologías Lodo </h5>
-            {{-- <small>(Recuerde que debe seleccionar de todos los intentos una Reología correctamente)</small> --}}
-        </div>
         {{-- <input type="hidden" name="solicitud_lodo_id" value="{{ $solicitud_lodo[0]->id }}"> --}}
-        <div class="row mt-3 py-2 px-2">
+        {{-- <div class="row mt-3 py-2 px-2">
             <table class="w-full text-sm border border-gray-300">
                 <thead class="bg-gray-200 text-gray-700">
                     <tr>
@@ -424,7 +420,7 @@
                         <th class="p-1 text-center border border-gray-300">300</th>
                         <th class="p-1 text-center border border-gray-300">200</th>
                         <th class="p-1 text-center border border-gray-300">100</th>
-                        <th class="p-1 text-center border border-gray-300">60</th>
+                        <th class="p-1 text-center border border-gray-300">60</th> 
                         <th class="p-1 text-center border border-gray-300">30</th>
                         <th class="p-1 text-center border border-gray-300">6</th>
                         <th class="p-1 text-center border border-gray-300">3</th>
@@ -533,7 +529,7 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
+        </div> --}}
     
         <div class="flex justify-center">
             <x-button type="click" id="btn_submit_reologia_lodo"
@@ -563,7 +559,7 @@
                         }).then((response) => response.json())
                         .then((data) => {
                             if (data) {
-                                componentReologiasLodo(data.success_caracterizacion_lodo, data.success_reologias_lodos)
+                                componentReologiasLodo(data.success_caracterizacion_lodo)
                                 //componentReologiasLodo(data.success_caracterizacion_lodo)
                                 document.getElementById('form_reologia_lodo').style.display = 'none'
                                 successAlert('¡Registro Asignado!',
