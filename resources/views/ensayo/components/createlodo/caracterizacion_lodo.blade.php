@@ -321,13 +321,13 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                                <td class="py-2 px-1 text-center border border-gray-300"><input type="text" class="form-control text-sm"
                                     placeholder="Ingrese dato" name="tipo_lodo"></td>
-                                <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                                <td class="py-2 px-1 text-center border border-gray-300"><input type="text" class="form-control text-sm"
                                     placeholder="Ingrese dato" name="base"></td>
                                 <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                                     placeholder="Ingrese dato" name="densidad"></td>
-                                <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
+                                <td class="py-2 px-1 text-center border border-gray-300"><input type="text" class="form-control text-sm"
                                     placeholder="Ingrese dato" name="cia_lodo"></td>
                             </tr>
                         </tbody>

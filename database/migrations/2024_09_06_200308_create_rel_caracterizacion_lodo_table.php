@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('rel_caracterizacion_lodo', function (Blueprint $table) {
             $table->id();
             $table->string('tipo_lodo')->nullable();
-            $table->integer('base')->nullable();
+            $table->string('base')->nullable();
             $table->integer('densidad')->nullable();
             $table->string('cia_lodo')->nullable();
             $table->string('tiempo')->nullable();
