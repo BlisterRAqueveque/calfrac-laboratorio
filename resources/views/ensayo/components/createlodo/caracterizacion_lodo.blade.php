@@ -50,8 +50,9 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="py-2 px-1 text-center border">
-                                {{ $solicitud_lodo[0]->rel_caracterizacion[0]->tiempo ? $solicitud_lodo[0]->rel_caracterizacion[0]->tiempo : '-' }}
+                            <td class="py-2 px-1 text-center border text-gray-700">
+                                {{-- {{ $solicitud_lodo[0]->rel_caracterizacion[0]->tiempo ? $solicitud_lodo[0]->rel_caracterizacion[0]->tiempo : '-' }} --}}
+                                Viscosidad de Geles (cp)
                             </td>
                             <td class="py-2 px-1 text-center border">
                                 {{ $solicitud_lodo[0]->rel_caracterizacion[0]->seg_10 ? $solicitud_lodo[0]->rel_caracterizacion[0]->seg_10 : '-' }}
@@ -347,8 +348,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
-                                    placeholder="Ingrese dato" name="tiempo"></td>
+                                <td class="py-2 px-1 text-center border border-gray-300 text-gray-700">Viscosidad de Geles (cp)</td>
                                 <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                                     placeholder="Ingrese dato" name="seg_10"></td>
                                 <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"

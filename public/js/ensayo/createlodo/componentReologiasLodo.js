@@ -70,7 +70,7 @@ const componentReologiasLodo = (data = {}) => {
   tr = el("tr");
 
   // Celdas de la segunda tabla con datos
-  td = el("td.py-2.px-1.text-center.border", data.tiempo ? data.tiempo : '-');
+  td = el("td.py-2.px-1.text-center.border", "Viscosidad de Geles (cp)");
   mount(tr, td);
   td = el("td.py-2.px-1.text-center.border", data.seg_10 ? data.seg_10 : '-');
   mount(tr, td);
