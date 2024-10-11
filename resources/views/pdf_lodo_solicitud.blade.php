@@ -176,8 +176,8 @@
                         <table style="border-collapse: collapse; width: 100%;">
                             <tr style="border: 1px solid #000000;">
                                 <td style="border: 1px solid #000000; padding: 5px;">
-                                    <!-- Numero: C-FM8.0-0459 -->
-                                    -
+                                    <!-- Numero: C-FM8.0-0462 -->
+                                    Num: C-FM8.0-0462
                                 </td>
                             </tr>
                             <tr style="border: 1px solid #000000;">
@@ -212,6 +212,14 @@
                                 </td>
                                 <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
                                     {{ $solicitud->cliente->nombre }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                    Programa:
+                                </td>
+                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                    {{ $solicitud->programa ?? '-' }}
                                 </td>
                             </tr>
                             <tr>

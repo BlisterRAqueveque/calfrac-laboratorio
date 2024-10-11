@@ -169,15 +169,14 @@
                         </div>
                     </td>
                     <td style="width: 60%; text-align: center;">
-                        <h2 style="color: #000000; margin: 0; padding: 0; font-size: 14px;">Solicitud de "Lodos"</h2> <!-- Tamaño más grande para el título -->
+                        <h2 style="color: #000000; margin: 0; padding: 0; font-size: 14px;">Ensayo de Lodo</h2> <!-- Tamaño más grande para el título -->
                         <h6 style="margin: 0; padding: 0;">NEUQUEN, ARGENTINA</h6>
                     </td>
                     <td style="width: 20%; text-align: center;">
                         <table style="border-collapse: collapse; width: 100%;">
                             <tr style="border: 1px solid #000000;">
                                 <td style="border: 1px solid #000000; padding: 5px;">
-                                    <!-- Numero: C-FM8.0-0459 -->
-                                    -
+                                    {{ $solicitud->programa ?? 'S/D' }}
                                 </td>
                             </tr>
                             <tr style="border: 1px solid #000000;">
@@ -212,6 +211,14 @@
                                 </td>
                                 <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
                                     {{ $solicitud->cliente->nombre }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                    Programa:
+                                </td>
+                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                    {{ $solicitud->programa ?? 'S/D' }}
                                 </td>
                             </tr>
                             <tr>
