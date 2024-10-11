@@ -322,8 +322,16 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="py-2 px-1 text-center border border-gray-300"><input type="text" class="form-control text-sm"
-                                    placeholder="Ingrese dato" name="tipo_lodo"></td>
+                                <td class="py-2 px-1 text-center border border-gray-300">
+                                    {{-- <input type="text" class="form-control text-sm"
+                                    placeholder="Ingrese dato" name="tipo_lodo"> --}}
+                                    <select name="tipo_lodo" id="tipo_lodo" class="text-sm" data-search="true" data-silent-initial-value-set="true" multiple="false">
+                                        @foreach($tipo_lodo as $tl)
+                                        <option value="{{$tl->id}}"
+                                            {{ old('tipo_lodo') == $tl->id ? 'selected' : '' }}>{{ $tl->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
                                 <td class="py-2 px-1 text-center border border-gray-300"><input type="text" class="form-control text-sm"
                                     placeholder="Ingrese dato" name="base"></td>
                                 <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
@@ -540,6 +548,15 @@
 @endif
 
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+            VirtualSelect.init({
+                ele: "#tipo_lodo",
+                placeholder: "Seleccione tipo de lodo",
+            });
+            document.getElementById("tipo_lodo").setValue(0);
+        })
+    </script>
 
 
 
