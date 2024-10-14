@@ -21,7 +21,7 @@ const componentReologiasLodo = (data = {}) => {
   tr = el("tr");
 
   // Headers de la primera tabla
-  ["Tipo de Lodo", "Base", "Dens. (ppg)", "Cia de Lodos"].forEach(headerText => {
+  ["Tipo de Lodo", "Dens. (ppg)", "Cia de Lodos"].forEach(headerText => {
     th = el("th.p-1.text-center.border.border-gray-300", headerText);
     mount(tr, th);
   });
@@ -34,14 +34,21 @@ const componentReologiasLodo = (data = {}) => {
   tr = el("tr");
 
   // Celdas de la primera tabla con datos
-  td = el("td.py-2.px-1.text-center.border", data.tipo_lodo ? data.tipo_lodo : '-');
-  mount(tr, td);
-  td = el("td.py-2.px-1.text-center.border", data.base ? data.base : '-');
-  mount(tr, td);
-  td = el("td.py-2.px-1.text-center.border", data.densidad ? data.densidad : '-');
-  mount(tr, td);
-  td = el("td.py-2.px-1.text-center.border", data.cia_lodo ? data.cia_lodo : '-');
-  mount(tr, td);
+  // td = el("td.py-2.px-1.text-center.border", data.tipo_lodo ? data.tipo_lodo : '-');
+  // mount(tr, td);
+  // // td = el("td.py-2.px-1.text-center.border", data.base ? data.base : '-');
+  // // mount(tr, td);
+  // td = el("td.py-2.px-1.text-center.border", data.densidad ? data.densidad : '-');
+  // mount(tr, td);
+  // td = el("td.py-2.px-1.text-center.border", data.cia_lodo ? data.cia_lodo : '-');
+  // mount(tr, td);
+  // Luego, puedes asignarlas a la tabla
+td = el("td.py-2.px-1.text-center.border", tipo_lodo_nombre);
+mount(tr, td);
+td = el("td.py-2.px-1.text-center.border", data.densidad ? data.densidad : '-');
+mount(tr, td);
+td = el("td.py-2.px-1.text-center.border", compania_lodo_nombre);
+mount(tr, td);
 
   mount(tbody, tr);
   mount(table, tbody);

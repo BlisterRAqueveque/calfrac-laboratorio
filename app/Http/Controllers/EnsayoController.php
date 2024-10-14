@@ -659,55 +659,12 @@ public function store_aditivos_lodo(Request $request)
             'solicitud_lodo_id' => $request->solicitud_lodo_id,
             'usuario_carga' => auth()->user()->id,
         ]);
-        // $reologias_lodos = RelReologiasLodo::create ([
-        //     'temp_600_rpm' => $request->temp_600_rpm,
-        //     'temp_300_rpm' => $request->temp_300_rpm,
-        //     'temp_200_rpm' => $request->temp_200_rpm,
-        //     'temp_100_rpm' => $request->temp_100_rpm,
-        //     'temp_60_rpm' => $request->temp_60_rpm,
-        //     'temp_30_rpm' => $request->temp_30_rpm,
-        //     'temp_6_rpm' => $request->temp_6_rpm,
-        //     'temp_3_rpm' => $request->temp_3_rpm,
-        //     'temp_600_rpm_2' => $request->temp_600_rpm_2,
-        //     'temp_300_rpm_2' => $request->temp_300_rpm_2,
-        //     'temp_200_rpm_2' => $request->temp_200_rpm_2,
-        //     'temp_100_rpm_2' => $request->temp_100_rpm_2,
-        //     'temp_60_rpm_2' => $request->temp_60_rpm_2,
-        //     'temp_30_rpm_2' => $request->temp_30_rpm_2,
-        //     'temp_6_rpm_2' => $request->temp_6_rpm_2,
-        //     'temp_3_rpm_2' => $request->temp_3_rpm_2,
-        //     'temp_600_rpm_3' => $request->temp_600_rpm_3,
-        //     'temp_300_rpm_3' => $request->temp_300_rpm_3,
-        //     'temp_200_rpm_3' => $request->temp_200_rpm_3,
-        //     'temp_100_rpm_3' => $request->temp_100_rpm_3,
-        //     'temp_60_rpm_3' => $request->temp_60_rpm_3,
-        //     'temp_30_rpm_3' => $request->temp_30_rpm_3,
-        //     'temp_6_rpm_3' => $request->temp_6_rpm_3,
-        //     'temp_3_rpm_3' => $request->temp_3_rpm_3,
-        //     'temp_600_rpm_4' => $request->temp_600_rpm_4,
-        //     'temp_300_rpm_4' => $request->temp_300_rpm_4,
-        //     'temp_200_rpm_4' => $request->temp_200_rpm_4,
-        //     'temp_100_rpm_4' => $request->temp_100_rpm_4,
-        //     'temp_60_rpm_4' => $request->temp_60_rpm_4,
-        //     'temp_30_rpm_4' => $request->temp_30_rpm_4,
-        //     'temp_6_rpm_4' => $request->temp_6_rpm_4,
-        //     'temp_3_rpm_4' => $request->temp_3_rpm_4,
-        //     'temp_600_rpm_5' => $request->temp_600_rpm_5,
-        //     'temp_300_rpm_5' => $request->temp_300_rpm_5,
-        //     'temp_200_rpm_5' => $request->temp_200_rpm_5,
-        //     'temp_100_rpm_5' => $request->temp_100_rpm_5,
-        //     'temp_60_rpm_5' => $request->temp_60_rpm_5,
-        //     'temp_30_rpm_5' => $request->temp_30_rpm_5,
-        //     'temp_6_rpm_5' => $request->temp_6_rpm_5,
-        //     'temp_3_rpm_5' => $request->temp_3_rpm_5,
-        //     'reologia_id' => $caracterizacion_lodo->id,
-        //     'solicitud_lodo_id' => $request->solicitud_lodo_id,
-        //     'usuario_carga' => auth()->user()->id, 
-        // ]);
+       
         if ($caracterizacion_lodo->id)
         return response()->json([
         'success_caracterizacion_lodo' => $caracterizacion_lodo,
         // 'success_reologias_lodos' => $reologias_lodos,
+        
         ]);
     }
 

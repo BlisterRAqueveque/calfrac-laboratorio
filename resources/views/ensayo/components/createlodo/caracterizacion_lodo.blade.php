@@ -13,7 +13,7 @@
                     <thead class="bg-gray-200 text-gray-700">
                         <tr>
                             <th class="p-1 text-center border border-gray-300">Tipo de Lodo</th>
-                            <th class="p-1 text-center border border-gray-300">Base</th>
+                            {{-- <th class="p-1 text-center border border-gray-300">Base</th> --}}
                             <th class="p-1 text-center border border-gray-300">Dens. <small>(ppg)</small></th>
                             <th class="p-1 text-center border border-gray-300">Cia de Lodos</th>
                         </tr>
@@ -21,16 +21,16 @@
                     <tbody>
                         <tr>
                             <td class="py-2 px-1 text-center border">
-                                {{ $solicitud_lodo[0]->rel_caracterizacion[0]->tipo_lodo ? $solicitud_lodo[0]->rel_caracterizacion[0]->tipo_lodo : '-' }}
+                                {{ $solicitud_lodo[0]->tipo_lodo_Lodos->nombre  ?? '-' }}
                             </td>
-                            <td class="py-2 px-1 text-center border">
+                            {{-- <td class="py-2 px-1 text-center border">
                                 {{ $solicitud_lodo[0]->rel_caracterizacion[0]->base ? $solicitud_lodo[0]->rel_caracterizacion[0]->base : '-' }}
-                            </td>
+                            </td> --}}
                             <td class="py-2 px-1 text-center border">
                                 {{ $solicitud_lodo[0]->rel_caracterizacion[0]->densidad ? $solicitud_lodo[0]->rel_caracterizacion[0]->densidad : '-' }}
                             </td>
                             <td class="py-2 px-1 text-center border">
-                                {{ $solicitud_lodo[0]->rel_caracterizacion[0]->cia_lodo ? $solicitud_lodo[0]->rel_caracterizacion[0]->cia_lodo : '-' }}
+                                {{  $solicitud_lodo[0]->compania_lodo->nombre ?? '-'}}
                             </td>
                         </tr>
                     </tbody>
@@ -315,7 +315,7 @@
                         <thead class="bg-gray-200 text-gray-700">
                             <tr>
                                 <th class="p-1 text-center border border-gray-300">Tipo de Lodo</th>
-                                <th class="p-1 text-center border border-gray-300">Base</th>
+                                {{-- <th class="p-1 text-center border border-gray-300">Base</th> --}}
                                 <th class="p-1 text-center border border-gray-300">Dens. <small>(ppg)</small></th>
                                 <th class="p-1 text-center border border-gray-300">Cia de Lodos</th>
                             </tr>
@@ -325,19 +325,25 @@
                                 <td class="py-2 px-1 text-center border border-gray-300">
                                     {{-- <input type="text" class="form-control text-sm"
                                     placeholder="Ingrese dato" name="tipo_lodo"> --}}
-                                    <select name="tipo_lodo" id="tipo_lodo" class="text-sm" data-search="true" data-silent-initial-value-set="true" multiple="false">
+                                    <select name="tipo_lodo" id="tipo_lodo" class="text-sm" data-silent-initial-value-set="true" multiple="false">
                                         @foreach($tipo_lodo as $tl)
                                         <option value="{{$tl->id}}"
                                             {{ old('tipo_lodo') == $tl->id ? 'selected' : '' }}>{{ $tl->nombre }}</option>
                                         @endforeach
                                     </select>
                                 </td>
-                                <td class="py-2 px-1 text-center border border-gray-300"><input type="text" class="form-control text-sm"
-                                    placeholder="Ingrese dato" name="base"></td>
+                                {{-- <td class="py-2 px-1 text-center border border-gray-300"><input type="text" class="form-control text-sm"
+                                    placeholder="Ingrese dato" name="base"></td> --}}
                                 <td class="py-2 px-1 text-center border border-gray-300"><input type="number" class="form-control text-sm"
                                     placeholder="Ingrese dato" name="densidad"></td>
-                                <td class="py-2 px-1 text-center border border-gray-300"><input type="text" class="form-control text-sm"
-                                    placeholder="Ingrese dato" name="cia_lodo"></td>
+                                <td class="py-2 px-1 text-center border border-gray-300">
+                                    <select name="mud_company" id="mud_company" class="text-sm" data-search="true"  data-silent-initial-value-set="true" multiple="false" >
+                                        @foreach($mud_company as $mc)
+                                        <option value="{{$mc->id}}"
+                                            {{ old('mud_company') == $mc->id ? 'selected' : '' }}> {{$mc->nombre}}</option>
+                                        @endforeach
+                                </select>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -554,10 +560,14 @@
                 ele: "#tipo_lodo",
                 placeholder: "Seleccione tipo de lodo",
             });
-            document.getElementById("tipo_lodo").setValue(0);
+            //document.getElementById("tipo_lodo").setValue(0);
         })
     </script>
-
+<script>
+    const tipo_lodo_nombre = {!! json_encode($solicitud_lodo[0]->tipo_lodo_Lodos->nombre ?? '-') !!};
+    const densidad_lodo = {!! json_encode($solicitud_lodo[0]->rel_caracterizacion[0]->densidad ?? '-') !!};
+    const compania_lodo_nombre = {!! json_encode($solicitud_lodo[0]->compania_lodo->nombre ?? '-') !!};
+</script>
 
 
 <script>

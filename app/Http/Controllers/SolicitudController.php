@@ -415,7 +415,6 @@ class SolicitudController extends Controller
             //'empresa' => $request->empresa
         ];
 
-
         # Listado de correos de laboratoristas, me agrego a mi para chequear que llegue correctamente
         $destinatarios = [
             'GTorres@calfrac.com',
@@ -793,8 +792,22 @@ class SolicitudController extends Controller
         }
         # Envio de mails
         $url = route('solicitud.lodo.show', ['solicitud_id' => $solicitud->id]);
-        $correos[] = "rocio.carvajal@blistertechnologies.com";
-        $correos[] = "orodriguez@calfrac.com";
+        
+        // $correos[] = "rocio.carvajal@blistertechnologies.com";
+        // $correos[] = "orodriguez@calfrac.com";
+        
+        # Listado de correos de laboratoristas
+        $destinatarios = [
+            'GTorres@calfrac.com',
+            'CDominguez@calfrac.com',
+            'DMancilla@calfrac.com',
+            'LVazquez@calfrac.com',
+            'ORodriguez@calfrac.com',
+            'rocio.carvajal@blistertechnologies.com',
+            'gruiz@blister.com.ar',
+            // 'lsicolo@blister.com.ar'
+        ];
+
         $data = [
             'solicitud_id' => $solicitud->id,
             'locacion_id' => $request->locacion_lodo,
@@ -804,7 +817,10 @@ class SolicitudController extends Controller
             'url' => $url
             //'empresa' => $request->empresa
         ];
-        $this->_sendEmailNewLodo($data, $correos);
+        
+        array_unshift($destinatarios, $solicitud->user->email);
+
+        $this->_sendEmailNewLodo($data, $destinatarios);
 
         # Ensayos requeridos
         if ($request->requeridos_lodo) {
