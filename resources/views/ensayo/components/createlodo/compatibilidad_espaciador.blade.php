@@ -730,6 +730,9 @@
 <script>
     // Primer chart - Reologias VP - YP
     document.addEventListener('DOMContentLoaded', function() {
+        var compatibilidad = @json($solicitud_lodo[0]->rel_compatibilidad ?? null); 
+
+       if (compatibilidad && compatibilidad.length > 0) {
         var ctx = document.getElementById('reologiasVP').getContext('2d');
         var reologiasVP = new Chart(ctx, {
             type: 'line', // Gráfico de líneas
@@ -744,11 +747,12 @@
                 datasets: [{
                     label: 'VP (cp)', // Viscosidad plástica
                     data: [
-                        {{ $solicitud_lodo[0]->rel_compatibilidad[0]->vp_1 ? $solicitud_lodo[0]->rel_compatibilidad[0]->vp_1 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_compatibilidad[0]->vp_2 ? $solicitud_lodo[0]->rel_compatibilidad[0]->vp_2 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_compatibilidad[0]->vp_3 ? $solicitud_lodo[0]->rel_compatibilidad[0]->vp_3 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_compatibilidad[0]->vp_4 ? $solicitud_lodo[0]->rel_compatibilidad[0]->vp_4 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_compatibilidad[0]->vp_5 ? $solicitud_lodo[0]->rel_compatibilidad[0]->vp_5 : 'null' }}
+
+                        compatibilidad[0]?.vp_1 ?? null,
+                        compatibilidad[0]?.vp_2 ?? null,
+                        compatibilidad[0]?.vp_3 ?? null,
+                        compatibilidad[0]?.vp_4 ?? null,
+                        compatibilidad[0]?.vp_5 ?? null
                     ],
                     backgroundColor: 'rgb(255, 204, 188)', // Color de fondo de la línea
                     borderColor: 'rgb(255, 87, 34)', // Color de la línea
@@ -758,11 +762,11 @@
                 {
                 label: 'YP (lb/100ft2)', // Límite de fluencia
                 data: [
-                    {{ $solicitud_lodo[0]->rel_compatibilidad[0]->yp_1 ? $solicitud_lodo[0]->rel_compatibilidad[0]->yp_1 : 'null' }},
-                    {{ $solicitud_lodo[0]->rel_compatibilidad[0]->yp_2 ? $solicitud_lodo[0]->rel_compatibilidad[0]->yp_2 : 'null' }},
-                    {{ $solicitud_lodo[0]->rel_compatibilidad[0]->yp_3 ? $solicitud_lodo[0]->rel_compatibilidad[0]->yp_3 : 'null' }},
-                    {{ $solicitud_lodo[0]->rel_compatibilidad[0]->yp_4 ? $solicitud_lodo[0]->rel_compatibilidad[0]->yp_4 : 'null' }},
-                    {{ $solicitud_lodo[0]->rel_compatibilidad[0]->yp_5 ? $solicitud_lodo[0]->rel_compatibilidad[0]->yp_5 : 'null' }}
+                    compatibilidad[0]?.yp_1 ?? null,
+                    compatibilidad[0]?.yp_2 ?? null,
+                    compatibilidad[0]?.yp_3 ?? null,
+                    compatibilidad[0]?.yp_4 ?? null,
+                    compatibilidad[0]?.yp_5 ?? null
                 ],
                 backgroundColor: 'rgb(204, 255, 255)',
                 borderColor: 'rgb(0, 255, 255)',
@@ -785,11 +789,15 @@
                 }
             }
         });
+       }
     })
 
     // Segundo chart - Geles 10 seg -10 min
 
     document.addEventListener('DOMContentLoaded', function() {
+        var compatibilidad = @json($solicitud_lodo[0]->rel_compatibilidad ?? null);
+
+        if (compatibilidad && compatibilidad.length > 0) {
         var ctx = document.getElementById('reologiasGeles').getContext('2d');
         var reologiasGeles = new Chart(ctx, {
             type: 'line', // Gráfico de líneas
@@ -804,11 +812,11 @@
                 datasets: [{
                     label: 'Gel 10 (seg)', // Viscosidad plástica
                     data: [
-                        {{ $solicitud_lodo[0]->rel_compatibilidad[0]->gel_seg_1 ? $solicitud_lodo[0]->rel_compatibilidad[0]->gel_seg_1 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_compatibilidad[0]->gel_seg_2 ? $solicitud_lodo[0]->rel_compatibilidad[0]->gel_seg_2 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_compatibilidad[0]->gel_seg_3 ? $solicitud_lodo[0]->rel_compatibilidad[0]->gel_seg_3 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_compatibilidad[0]->gel_seg_4 ? $solicitud_lodo[0]->rel_compatibilidad[0]->gel_seg_4 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_compatibilidad[0]->gel_seg_5 ? $solicitud_lodo[0]->rel_compatibilidad[0]->gel_seg_5 : 'null' }}
+                        compatibilidad[0]?.gel_seg_1 ?? null,
+                        compatibilidad[0]?.gel_seg_2 ?? null,
+                        compatibilidad[0]?.gel_seg_3 ?? null,
+                        compatibilidad[0]?.gel_seg_4 ?? null,
+                        compatibilidad[0]?.gel_seg_5 ?? null
                     ],
                     backgroundColor: 'rgb(159, 168, 218)', // Color de fondo de la línea
                     borderColor: 'rgb(40, 53, 147)', // Color de la línea
@@ -818,11 +826,11 @@
                 {
                 label: 'Gel 10 (min)', // Límite de fluencia
                 data: [
-                    {{ $solicitud_lodo[0]->rel_compatibilidad[0]->gel_min_1 ? $solicitud_lodo[0]->rel_compatibilidad[0]->gel_min_1 : 'null' }},
-                    {{ $solicitud_lodo[0]->rel_compatibilidad[0]->gel_min_2 ? $solicitud_lodo[0]->rel_compatibilidad[0]->gel_min_2 : 'null' }},
-                    {{ $solicitud_lodo[0]->rel_compatibilidad[0]->gel_min_3 ? $solicitud_lodo[0]->rel_compatibilidad[0]->gel_min_3 : 'null' }},
-                    {{ $solicitud_lodo[0]->rel_compatibilidad[0]->gel_min_4 ? $solicitud_lodo[0]->rel_compatibilidad[0]->gel_min_4 : 'null' }},
-                    {{ $solicitud_lodo[0]->rel_compatibilidad[0]->gel_min_5 ? $solicitud_lodo[0]->rel_compatibilidad[0]->gel_min_5 : 'null' }}
+                    compatibilidad[0]?.gel_min_1 ?? null,
+                    compatibilidad[0]?.gel_min_2 ?? null,
+                    compatibilidad[0]?.gel_min_3 ?? null,
+                    compatibilidad[0]?.gel_min_4 ?? null,
+                    compatibilidad[0]?.gel_min_5 ?? null
                 ],
                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                 borderColor: 'rgba(255, 99, 132, 1)',
@@ -845,12 +853,17 @@
                 }
             }
         });
+            
+        }
     })
 
-    // Tercer chart - Reologias de Fluidos
+     // Tercer chart - Reologias de Fluidos
 
-    document.addEventListener('DOMContentLoaded', function() {
-        var ctx = document.getElementById('reologiasFluidos').getContext('2d');
+     document.addEventListener('DOMContentLoaded', function() {
+
+        var reologias = @json($solicitud_lodo[0]->rel_reologia_lodo ?? null);
+        if (reologias && reologias.length > 0) {
+            var ctx = document.getElementById('reologiasFluidos').getContext('2d');
         var reologiasFluidos = new Chart(ctx, {
             type: 'line', // Gráfico de líneas
             data: {
@@ -867,14 +880,15 @@
                 datasets: [{
                     label: 'Lodo 100% - Colchón 0%', // Viscosidad plástica
                     data: [
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_600_rpm ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_600_rpm : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_300_rpm ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_300_rpm : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_200_rpm ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_200_rpm : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_100_rpm ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_100_rpm : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_60_rpm ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_60_rpm : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_30_rpm ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_30_rpm : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_6_rpm ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_6_rpm : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_3_rpm ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_3_rpm : 'null' }},
+                        reologias[0]?.temp_600_rpm ?? null,
+                        reologias[0]?.temp_300_rpm ?? null,
+                        reologias[0]?.temp_200_rpm ?? null,
+                        reologias[0]?.temp_100_rpm ?? null,
+                        reologias[0]?.temp_60_rpm ?? null,
+                        reologias[0]?.temp_30_rpm ?? null,
+                        reologias[0]?.temp_6_rpm ?? null,
+                        reologias[0]?.temp_3_rpm ?? null
+
                     ],
                     backgroundColor: 'rgb(232, 218, 239)', // Color de fondo de la línea
                     borderColor: 'rgb(187, 143, 206)', // Color de la línea
@@ -884,14 +898,14 @@
                 {
                 label: 'Lodo 75% - Colchón 25%', // Límite de fluencia
                 data: [
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_600_rpm_2 ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_600_rpm_2 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_300_rpm_2 ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_300_rpm_2 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_200_rpm_2 ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_200_rpm_2 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_100_rpm_2 ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_100_rpm_2 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_60_rpm_2 ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_60_rpm_2 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_30_rpm_2 ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_30_rpm_2 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_6_rpm_2 ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_6_rpm_2 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_3_rpm_2 ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_3_rpm_2 : 'null' }},
+                        reologias[0]?.temp_600_rpm_2 ?? null,
+                        reologias[0]?.temp_300_rpm_2 ?? null,
+                        reologias[0]?.temp_200_rpm_2 ?? null,
+                        reologias[0]?.temp_100_rpm_2 ?? null,
+                        reologias[0]?.temp_60_rpm_2 ?? null,
+                        reologias[0]?.temp_30_rpm_2 ?? null,
+                        reologias[0]?.temp_6_rpm_2 ?? null,
+                        reologias[0]?.temp_3_rpm_2 ?? null
                 ],
                 backgroundColor: 'rgb(214, 234, 248)',
                 borderColor: 'rgb(133, 193, 233)',
@@ -901,14 +915,14 @@
                 {
                 label: 'Lodo 50% - Colchón 50%', // Límite de fluencia
                 data: [
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_600_rpm_3 ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_600_rpm_3 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_300_rpm_3 ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_300_rpm_3 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_200_rpm_3 ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_200_rpm_3 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_100_rpm_3 ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_100_rpm_3 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_60_rpm_3 ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_60_rpm_3 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_30_rpm_3 ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_30_rpm_3 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_6_rpm_3 ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_6_rpm_3 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_3_rpm_3 ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_3_rpm_3 : 'null' }},
+                        reologias[0]?.temp_600_rpm_3 ?? null,
+                        reologias[0]?.temp_300_rpm_3 ?? null,
+                        reologias[0]?.temp_200_rpm_3 ?? null,
+                        reologias[0]?.temp_100_rpm_3 ?? null,
+                        reologias[0]?.temp_60_rpm_3 ?? null,
+                        reologias[0]?.temp_30_rpm_3 ?? null,
+                        reologias[0]?.temp_6_rpm_3 ?? null,
+                        reologias[0]?.temp_3_rpm_3 ?? null
                 ],
                 backgroundColor: 'rgb(248, 187, 208)',
                 borderColor: 'rgb(236, 64, 122)',
@@ -918,14 +932,14 @@
                 {
                 label: 'Lodo 25% - Colchón 75%', // Límite de fluencia
                 data: [
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_600_rpm_4 ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_600_rpm_4 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_300_rpm_4 ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_300_rpm_4 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_200_rpm_4 ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_200_rpm_4 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_100_rpm_4 ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_100_rpm_4 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_60_rpm_4 ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_60_rpm_4 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_30_rpm_4 ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_30_rpm_4 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_6_rpm_4 ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_6_rpm_4 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_3_rpm_4 ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_3_rpm_4 : 'null' }},
+                        reologias[0]?.temp_600_rpm_4 ?? null,
+                        reologias[0]?.temp_300_rpm_4 ?? null,
+                        reologias[0]?.temp_200_rpm_4 ?? null,
+                        reologias[0]?.temp_100_rpm_4 ?? null,
+                        reologias[0]?.temp_60_rpm_4 ?? null,
+                        reologias[0]?.temp_30_rpm_4 ?? null,
+                        reologias[0]?.temp_6_rpm_4 ?? null,
+                        reologias[0]?.temp_3_rpm_4 ?? null
                 ],
                 backgroundColor: 'rgb(254, 249, 231)',
                 borderColor: 'rgb(255, 238, 88)',
@@ -935,14 +949,14 @@
                 {
                 label: 'Lodo 0% - Colchón 100%', // Límite de fluencia
                 data: [
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_600_rpm_5 ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_600_rpm_5 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_300_rpm_5 ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_300_rpm_5 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_200_rpm_5 ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_200_rpm_5 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_100_rpm_5 ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_100_rpm_5 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_60_rpm_5 ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_60_rpm_5 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_30_rpm_5 ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_30_rpm_5 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_6_rpm_5 ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_6_rpm_5 : 'null' }},
-                        {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_3_rpm_5 ? $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_3_rpm_5 : 'null' }},
+                        reologias[0]?.temp_600_rpm_5 ?? null,
+                        reologias[0]?.temp_300_rpm_5 ?? null,
+                        reologias[0]?.temp_200_rpm_5 ?? null,
+                        reologias[0]?.temp_100_rpm_5 ?? null,
+                        reologias[0]?.temp_60_rpm_5 ?? null,
+                        reologias[0]?.temp_30_rpm_5 ?? null,
+                        reologias[0]?.temp_6_rpm_5 ?? null,
+                        reologias[0]?.temp_3_rpm_5 ?? null
                 ],
                 backgroundColor: 'rgb(165, 214, 167)',
                 borderColor: 'rgb(76, 175, 80)',
@@ -965,7 +979,13 @@
                 }
             }
         });
+        }
     })
+
+
+
+
+
 </script>
 
 <script>

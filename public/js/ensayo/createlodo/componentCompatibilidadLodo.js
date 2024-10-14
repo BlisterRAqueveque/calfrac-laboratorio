@@ -99,6 +99,10 @@ componentCompatibilidadLodo = (data = {}, reologias = {}) => {
 
   mount(accordionItem, tablasContainer);
 
+
+
+  
+
     const reologiasLodoContainer = el("div.w-full.pt-4");
 
   const tituloReologias = el("h5.text-center.text-xl.font-bold.mb-4", "Reologías Lodo");
