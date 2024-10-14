@@ -190,6 +190,9 @@
                 <div class="w-1/2 p-2">
                     <canvas id="reologiasVP" width="600" height="400"></canvas>
                 </div>
+                <div class="w-1/2 p-2">
+                    <canvas id="reologiasGeles" width="600" height="400"></canvas>
+                </div>
             </div>
 
             {{-- <div class="flex">
@@ -720,9 +723,8 @@
 </div>
 
 <script>
+    // Primer chart - Reologias VP - YP
     document.addEventListener('DOMContentLoaded', function() {
-
-
         var ctx = document.getElementById('reologiasVP').getContext('2d');
         var reologiasVP = new Chart(ctx, {
             type: 'line', // Gráfico de líneas
@@ -771,6 +773,66 @@
                         beginAtZero: true,
                         min: 0,
                         max: 225, // Definimos el rango máximo como 225
+                        ticks: {
+                            stepSize: 25 // Incrementos de 25 en el eje Y
+                        }
+                    }
+                }
+            }
+        });
+    })
+
+    // Segundo chart - Geles 10 seg -10 min
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var ctx = document.getElementById('reologiasGeles').getContext('2d');
+        var rreologiasGeles = new Chart(ctx, {
+            type: 'line', // Gráfico de líneas
+            data: {
+                labels: [
+                    'Lodo 100% - Colchón 0%',
+                    'Lodo 75% - Colchón 25%',
+                    'Lodo 50% - Colchón 50%',
+                    'Lodo 25% - Colchón 75%',
+                    'Lodo 0% - Colchón 100%'
+                ],
+                datasets: [{
+                    label: 'VP (cp)', // Viscosidad plástica
+                    data: [
+                        {{ $solicitud_lodo[0]->rel_compatibilidad[0]->gel_seg_1 ? $solicitud_lodo[0]->rel_compatibilidad[0]->gel_seg_1 : 'null' }},
+                        {{ $solicitud_lodo[0]->rel_compatibilidad[0]->gel_seg_2 ? $solicitud_lodo[0]->rel_compatibilidad[0]->gel_seg_2 : 'null' }},
+                        {{ $solicitud_lodo[0]->rel_compatibilidad[0]->gel_seg_3 ? $solicitud_lodo[0]->rel_compatibilidad[0]->gel_seg_3 : 'null' }},
+                        {{ $solicitud_lodo[0]->rel_compatibilidad[0]->gel_seg_4 ? $solicitud_lodo[0]->rel_compatibilidad[0]->gel_seg_4 : 'null' }},
+                        {{ $solicitud_lodo[0]->rel_compatibilidad[0]->gel_seg_5 ? $solicitud_lodo[0]->rel_compatibilidad[0]->gel_seg_5 : 'null' }}
+                    ],
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)', // Color de fondo de la línea
+                    borderColor: 'rgba(75, 192, 192, 1)', // Color de la línea
+                    borderWidth: 2,
+                    fill: false // No rellenar debajo de la línea
+                },
+                {
+                label: 'YP (lb/100ft2)', // Límite de fluencia
+                data: [
+                    {{ $solicitud_lodo[0]->rel_compatibilidad[0]->gel_min_1 ? $solicitud_lodo[0]->rel_compatibilidad[0]->gel_min_1 : 'null' }},
+                    {{ $solicitud_lodo[0]->rel_compatibilidad[0]->gel_min_2 ? $solicitud_lodo[0]->rel_compatibilidad[0]->gel_min_2 : 'null' }},
+                    {{ $solicitud_lodo[0]->rel_compatibilidad[0]->gel_min_3 ? $solicitud_lodo[0]->rel_compatibilidad[0]->gel_min_3 : 'null' }},
+                    {{ $solicitud_lodo[0]->rel_compatibilidad[0]->gel_min_4 ? $solicitud_lodo[0]->rel_compatibilidad[0]->gel_min_4 : 'null' }},
+                    {{ $solicitud_lodo[0]->rel_compatibilidad[0]->gel_min_5 ? $solicitud_lodo[0]->rel_compatibilidad[0]->gel_min_5 : 'null' }}
+                ],
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 2,
+                fill: false
+            }
+                ]
+            },
+            
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        min: 0,
+                        max: 100, // Definimos el rango máximo como 225
                         ticks: {
                             stepSize: 25 // Incrementos de 25 en el eje Y
                         }
