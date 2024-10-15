@@ -468,22 +468,23 @@
                                                 <table style="width: 100%; border-collapse: collapse; border: 1px solid #494949;">
                                                     <tr>
                                                         <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"><small>T. Lodo</small></td>
-                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">Base</td>
+                                                        {{-- <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">Base</td> --}}
                                                         <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">Dens(ppg)</td>
                                                         <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"><small>Cia </small></td>
                                                     </tr>
                                                     <tr>
                                                         <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                            {{ $solicitud_lodo[0]->rel_caracterizacion[0]->tipo_lodo ? $solicitud_lodo[0]->rel_caracterizacion[0]->tipo_lodo : '-' }}
+                                                            {{-- {{ $solicitud_lodo[0]->rel_caracterizacion[0]->tipo_lodo ? $solicitud_lodo[0]->rel_caracterizacion[0]->tipo_lodo : '-' }} --}}
+                                                            {{ $solicitud_lodo[0]->tipo_lodo_Lodos->nombre  ?? '-' }}
                                                         </td>
-                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                        {{-- <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
                                                             {{ $solicitud_lodo[0]->rel_caracterizacion[0]->base ? $solicitud_lodo[0]->rel_caracterizacion[0]->base : '-' }}
-                                                        </td>
+                                                        </td> --}}
                                                         <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
                                                             {{ $solicitud_lodo[0]->rel_caracterizacion[0]->densidad ? $solicitud_lodo[0]->rel_caracterizacion[0]->densidad : '-' }}
                                                         </td>
                                                         <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                            {{ $solicitud_lodo[0]->rel_caracterizacion[0]->cia_lodo ? $solicitud_lodo[0]->rel_caracterizacion[0]->cia_lodo : '-' }}
+                                                            {{  $solicitud_lodo[0]->compania_lodo->nombre ?? '-'}}
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -500,7 +501,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                            {{ $solicitud_lodo[0]->rel_caracterizacion[0]->tiempo ? $solicitud_lodo[0]->rel_caracterizacion[0]->tiempo : '-' }}
+                                                            Viscosidad de Geles
                                                         </td>
                                                         <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
                                                             {{ $solicitud_lodo[0]->rel_caracterizacion[0]->seg_10 ? $solicitud_lodo[0]->rel_caracterizacion[0]->seg_10 : '-' }}
