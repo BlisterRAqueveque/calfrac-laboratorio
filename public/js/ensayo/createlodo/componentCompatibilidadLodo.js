@@ -99,9 +99,113 @@ componentCompatibilidadLodo = (data = {}, reologias = {}) => {
 
   mount(accordionItem, tablasContainer);
 
+  // Contenedor para las gráficas
+  const chartsContainer = el("div.flex.mt-4");
 
+  // Crear los dos canvas dinámicamente para las gráficas
+  const chartVPContainer = el("div.w-1/2.p-2");
+  const canvasVP = el("canvas#reologiasVP", { width: 600, height: 400 });
+  mount(chartVPContainer, canvasVP);
 
-  
+  const chartGelesContainer = el("div.w-1/2.p-2");
+  const canvasGeles = el("canvas#reologiasGeles", { width: 600, height: 400 });
+  mount(chartGelesContainer, canvasGeles);
+
+  mount(chartsContainer, chartVPContainer);
+  mount(chartsContainer, chartGelesContainer);
+
+  mount(accordionItem, chartsContainer);
+
+  // Montar todo en el DOM
+  mount(accordionCompatibilidadLodo, accordionItem);
+
+  // Ahora que los elementos se han montado, obtener los contextos
+  const ctxVP = document.getElementById('reologiasVP').getContext('2d');
+  const ctxGeles = document.getElementById('reologiasGeles').getContext('2d');
+
+  // **Código Chart.js para la primera gráfica (VP, YP)**
+  new Chart(ctxVP, {
+    type: 'line',
+    data: {
+      labels: [
+        'Lodo 100% - Colchón 0%',
+        'Lodo 75% - Colchón 25%',
+        'Lodo 50% - Colchón 50%',
+        'Lodo 25% - Colchón 75%',
+        'Lodo 0% - Colchón 100%'
+      ],
+      datasets: [
+        {
+          label: 'VP (cp)',
+          data: [data.vp_1, data.vp_2, data.vp_3, data.vp_4, data.vp_5],
+          backgroundColor: 'rgb(255, 204, 188)',
+          borderColor: 'rgb(255, 87, 34)',
+          borderWidth: 2,
+          fill: false
+        },
+        {
+          label: 'YP (lb/100ft2)',
+          data: [data.yp_1, data.yp_2, data.yp_3, data.yp_4, data.yp_5],
+          backgroundColor: 'rgb(204, 255, 255)',
+          borderColor: 'rgb(0, 255, 255)',
+          borderWidth: 2,
+          fill: false
+        }
+      ]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          min: 0,
+          max: 225,
+          ticks: { stepSize: 25 }
+        }
+      }
+    }
+  });
+
+  // **Código Chart.js para la segunda gráfica (Gel 10 seg - 10 min)**
+  new Chart(ctxGeles, {
+    type: 'line',
+    data: {
+      labels: [
+        'Lodo 100% - Colchón 0%',
+        'Lodo 75% - Colchón 25%',
+        'Lodo 50% - Colchón 50%',
+        'Lodo 25% - Colchón 75%',
+        'Lodo 0% - Colchón 100%'
+      ],
+      datasets: [
+        {
+          label: 'Gel 10 (seg)',
+          data: [data.gel_seg_1, data.gel_seg_2, data.gel_seg_3, data.gel_seg_4, data.gel_seg_5],
+          backgroundColor: 'rgb(159, 168, 218)',
+          borderColor: 'rgb(40, 53, 147)',
+          borderWidth: 2,
+          fill: false
+        },
+        {
+          label: 'Gel 10 (min)',
+          data: [data.gel_min_1, data.gel_min_2, data.gel_min_3, data.gel_min_4, data.gel_min_5],
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          borderColor: 'rgba(255, 99, 132, 1)',
+          borderWidth: 2,
+          fill: false
+        }
+      ]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          min: 0,
+          max: 30,
+          ticks: { stepSize: 5 }
+        }
+      }
+    }
+  });  
 
     const reologiasLodoContainer = el("div.w-full.pt-4");
 
