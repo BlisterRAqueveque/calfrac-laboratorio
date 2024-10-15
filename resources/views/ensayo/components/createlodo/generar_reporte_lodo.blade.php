@@ -29,7 +29,7 @@
                         }).then((response) => response.json())
                         .then((data) => {
                             if (data) {
-                                console.log(data)
+                                //console.log(data)
                                 successAlert('¡Registro Asignado!',
                                     'El registro se asignó correctamente.').then(
                                     (confirmed) => {

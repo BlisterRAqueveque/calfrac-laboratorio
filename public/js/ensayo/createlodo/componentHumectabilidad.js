@@ -1,7 +1,7 @@
 const accordionHumectabilidadLodo = document.getElementById("accordionHumectabilidadLodo");
 
 componentHumectabilidadLodo = (data = {}) => {
-  console.log(data); // Verificar los valores de 'data'
+  //console.log(data); // Verificar los valores de 'data'
 
   if (!accordionHumectabilidadLodo) {
     console.error("El contenedor 'accordionHumectabilidadLodo' no se encontró en el DOM");

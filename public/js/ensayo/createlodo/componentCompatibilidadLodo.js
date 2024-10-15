@@ -3,7 +3,7 @@ const accordionCompatibilidadLodo = document.getElementById("accordionCompatibil
 componentCompatibilidadLodo = (data = {}, reologias = {}) => {
   //console.log(data);  Verificar los valores de 'data'
   //console.log('Ensayos:', ensayo);
-  console.log('Data aditivos:', data)
+  //console.log('Data aditivos:', data)
 
   if (!accordionCompatibilidadLodo) {
     console.error("El contenedor 'accordionCompatibilidadLodo' no se encontró en el DOM");

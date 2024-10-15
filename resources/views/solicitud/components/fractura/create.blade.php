@@ -679,7 +679,7 @@
  
     function aditivoExtra(e) {
         event.preventDefault();
-        console.log(e.value);
+        //console.log(e.value);
 
         if (e.value == 1) {
             for (let i = 0; i < aditivo_extra_inp.length; i++) {

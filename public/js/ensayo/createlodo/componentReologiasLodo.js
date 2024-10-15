@@ -2,7 +2,7 @@ let accordionItem, table, thead, tbody, tr, th, td;
 const accordionLodo = document.getElementById("accordionReologiaLodo");
 
 const componentReologiasLodo = (data = {}) => {
-  console.log(data); // Para verificar los valores de 'data'
+  //console.log(data); // Para verificar los valores de 'data'
   //console.log(reologias); 
   // Contenedor principal y título
   accordionItem = el("div.mb-2.text-center");

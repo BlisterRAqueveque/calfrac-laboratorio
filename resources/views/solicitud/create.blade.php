@@ -69,7 +69,7 @@ Laboratorio - Crear Solicitud
         for (let i = 0; i < btnTypeSolicitud.length; i++) {
             btnTypeSolicitud[i].addEventListener('click', e => {
                 for (let j = 0; j < solicitud_label.length; j++) {
-                    console.log(solicitud_label[j].classList.remove('shadow-md'));
+                    //console.log(solicitud_label[j].classList.remove('shadow-md'));
                 }
                 solicitud_label[i].classList.add('shadow-md')
                 for (let j = 0; j < solicitudesContenedor.length; j++) {
