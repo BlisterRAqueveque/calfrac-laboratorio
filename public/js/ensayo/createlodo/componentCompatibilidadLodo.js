@@ -200,14 +200,14 @@ componentCompatibilidadLodo = (data = {}, reologias = {}) => {
         y: {
           beginAtZero: true,
           min: 0,
-          max: 30,
-          ticks: { stepSize: 5 }
+          max: 100,
+          ticks: { stepSize: 25 }
         }
       }
     }
   });  
 
-    const reologiasLodoContainer = el("div.w-full.pt-4");
+  const reologiasLodoContainer = el("div.w-full.pt-4");
 
   const tituloReologias = el("h5.text-center.text-xl.font-bold.mb-4", "Reologías Lodo");
   mount(reologiasLodoContainer, tituloReologias);
@@ -386,7 +386,189 @@ mount(tbody, tr);
 
   // Finalmente monta todo en el contenedor principal (accordion)
   mount(accordionItem, reologiasLodoContainer);
+  //
+  const chartContainer = el("div.flex.mt-4");
+
+  // Crear los dos canvas dinámicamente para las gráficas
+  const chartReologiaLodoContainer = el("div.w-full.p-2");
+  const canvasReologiasFluidos = el("canvas#reologiasFluidos", { width: 1200, height: 400 });
+  mount(chartReologiaLodoContainer, canvasReologiasFluidos);
+
+  mount(chartContainer, chartReologiaLodoContainer);
+
+  mount(accordionItem, chartContainer);
 
   // Muestra todo en el DOM
   mount(accordionCompatibilidadLodo, accordionItem);
+
+  // Ahora que los elementos se han montado, obtener los contextos
+  const ctxReologiaFluido = document.getElementById('reologiasFluidos').getContext('2d');
+
+  new Chart(ctxReologiaFluido, {
+    type: 'line',
+    data: {
+      labels: [
+        '600 rpm',
+        '300 rmp',
+        '200 rmp',
+        '100 rmp',
+        '60 rmp',
+        '30 rmp',
+        '6 rmp',
+        '3 rmp'        
+      ],
+      datasets: [
+        {
+          label: 'Lodo 100% - Colchón 0%',
+          data: [
+            reologias.temp_600_rpm,
+            reologias.temp_300_rpm,
+            reologias.temp_200_rpm,
+            reologias.temp_100_rpm,
+            reologias.temp_60_rpm,
+            reologias.temp_30_rpm,
+            reologias.temp_6_rpm,
+            reologias.temp_3_rpm
+          ],
+          backgroundColor: 'rgb(232, 218, 239)',
+          borderColor: 'rgb(187, 143, 206)',
+          borderWidth: 2,
+          fill: false
+        },
+        {
+          label: 'Lodo 75% - Colchón 25%',
+          data: [
+            reologias.temp_600_rpm_2,
+            reologias.temp_300_rpm_2,
+            reologias.temp_200_rpm_2,
+            reologias.temp_100_rpm_2,
+            reologias.temp_60_rpm_2,
+            reologias.temp_30_rpm_2,
+            reologias.temp_6_rpm_2,
+            reologias.temp_3_rpm_2
+          ],
+          backgroundColor: 'rgb(214, 234, 248)',
+          borderColor: 'rgb(133, 193, 233)',
+          borderWidth: 2,
+          fill: false
+        },
+        {
+          label: 'Lodo 50% - Colchón 50%',
+          data: [
+            reologias.temp_600_rpm_3,
+            reologias.temp_300_rpm_3,
+            reologias.temp_200_rpm_3,
+            reologias.temp_100_rpm_3,
+            reologias.temp_60_rpm_3,
+            reologias.temp_30_rpm_3,
+            reologias.temp_6_rpm_3,
+            reologias.temp_3_rpm_3
+          ],
+          backgroundColor: 'rgb(248, 187, 208)',
+          borderColor: 'rgb(236, 64, 122)',
+          borderWidth: 2,
+          fill: false
+        },
+        {
+          label: 'Lodo 25% - Colchón 75%',
+          data: [
+            reologias.temp_600_rpm_4,
+            reologias.temp_300_rpm_4,
+            reologias.temp_200_rpm_4,
+            reologias.temp_100_rpm_4,
+            reologias.temp_60_rpm_4,
+            reologias.temp_30_rpm_4,
+            reologias.temp_6_rpm_4,
+            reologias.temp_3_rpm_4
+          ],
+          backgroundColor: 'rgb(254, 249, 231)',
+          borderColor: 'rgb(255, 238, 88)',
+          borderWidth: 2,
+          fill: false
+        },
+        {
+          label: 'Lodo 25% - Colchón 75%',
+          data: [
+            reologias.temp_600_rpm_5,
+            reologias.temp_300_rpm_5,
+            reologias.temp_200_rpm_5,
+            reologias.temp_100_rpm_5,
+            reologias.temp_60_rpm_5,
+            reologias.temp_30_rpm_5,
+            reologias.temp_6_rpm_5,
+            reologias.temp_3_rpm_5
+          ],
+          backgroundColor: 'rgb(165, 214, 167)',
+          borderColor: 'rgb(76, 175, 80)',
+          borderWidth: 2,
+          fill: false
+        },
+      ]
+    },
+    options: {
+      scales: {
+          y: {
+              beginAtZero: true,
+              min: 0,
+              max: 240, // Definimos el rango máximo como 225
+              ticks: {
+                  stepSize: 20 // Incrementos de 25 en el eje Y
+              }
+          }
+      }
+  }
+    
+
+  });
+
+  // Codigo para chart
+//   new Chart(ctxReologiaFluido, {
+//     type: 'line',
+//     data: {
+//       labels: [
+//         '600 rpm',
+//         '300 rmp',
+//         '200 rmp',
+//         '100 rmp',
+//         '60 rmp',
+//         '30 rmp',
+//         '6 rmp',
+//         '3 rmp'
+//     ],
+//     datasets: [
+//       {
+//         label: 'Lodo 100% - Colchón 0%',
+//         data: [
+//           reologias.temp_600_rpm,
+//           reologias.temp_300_rpm,
+//           reologias.temp_200_rpm,
+//           reologias.temp_100_rpm,
+//           reologias.temp_60_rpm,
+//           reologias.temp_30_rpm,
+//           reologias.temp_6_rpm,
+//           reologias.temp_3_rpm,
+//         ]
+//       }
+//     ]
+//   },
+//   options: {
+//     scales: {
+//         y: {
+//             beginAtZero: true,
+//             min: 0,
+//             max: 240, // Definimos el rango máximo como 225
+//             ticks: {
+//                 stepSize: 20 // Incrementos de 25 en el eje Y
+//             }
+//         }
+//     }
+// }
+// });
+// }
+// })
+
+
+
+
+
 };
