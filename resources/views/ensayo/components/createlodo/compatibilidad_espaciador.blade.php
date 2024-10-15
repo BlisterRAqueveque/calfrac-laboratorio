@@ -976,7 +976,19 @@
                             stepSize: 20 // Incrementos de 25 en el eje Y
                         }
                     }
-                }
+                },
+                // animation: {
+                //     onComplete: function() {
+                //         // Convertir la gráfica en formato imagen Base64 después de que la animación haya terminado
+                //         var imageBase64 = reologiasFluidos.toBase64Image();
+                //         //console.log(imageBase64); // Ver el string base64 en la consola
+
+                //         // Crear un elemento de imagen y agregarlo al DOM
+                //         var imgElement = document.createElement('img');
+                //         imgElement.src = imageBase64;
+                //         document.body.appendChild(imgElement); // Añadir la imagen al cuerpo del documento
+                //     }
+                // }
             }
         });
         }
