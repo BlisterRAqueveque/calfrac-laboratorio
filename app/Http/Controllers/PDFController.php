@@ -346,13 +346,18 @@ class PDFController extends Controller
         return view('emails.solicitud.solicitud_body', $data);
     }
 
-    public function pdf_report_lodo($solicitud_id)
+    public function pdf_report_lodo(Request $request, $solicitud_id)
     {
+        $chartVP = $request->chartVP;
+        $chartGeles = $request->chartGeles;
+
         $data = [
             'solicitud' => Solicitud::find($solicitud_id),
             'solicitud_lodo' => SolicitudLodo::where('solicitud_id', $solicitud_id)->get(),
             'mud_company' => MudCompany::all(),
             'tipo_lodos' => TipoLodo_Lodos::all(),
+            'chartVP' => $chartVP,
+            'chartGeles' => $chartGeles
             
         ];
           
@@ -366,6 +371,8 @@ class PDFController extends Controller
 
     public function pdf_report_lodo_solicitud($solicitud_id)
     {
+
+    
         $data = [
             'solicitud' => Solicitud::find($solicitud_id),
             'solicitud_lodo' => SolicitudLodo::where('solicitud_id', $solicitud_id)->get(),

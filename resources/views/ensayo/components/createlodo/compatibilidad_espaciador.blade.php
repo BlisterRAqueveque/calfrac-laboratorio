@@ -726,8 +726,12 @@
         </form>
     @endif
 </div>
-
-<script>
+<form method="post" target="_blank" action="{{ route('pdf_report_lodo', ['solicitud_id' => $solicitud->id]) }}" id="charts_pdf">
+    @csrf
+        <input type="hidden" id="chartVP" name="chartVP">
+        <input type="hidden" id="chartGeles" name="chartGeles">
+    </form>
+<script> 
     // Primer chart - Reologias VP - YP
     document.addEventListener('DOMContentLoaded', function() {
         var compatibilidad = @json($solicitud_lodo[0]->rel_compatibilidad ?? null); 
