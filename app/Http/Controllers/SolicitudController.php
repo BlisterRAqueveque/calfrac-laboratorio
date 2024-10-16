@@ -45,6 +45,7 @@ use App\Models\RelEnsayoComentarioSolicitud;
 use App\Models\RelEnsayosRequeridosLodo;
 use App\Models\TipoDeColchon;
 use App\Mail\SolicitudLechadaAprobada;
+use App\Models\Choices;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Mail;
@@ -949,6 +950,7 @@ class SolicitudController extends Controller
             'names_ingenieros' => User::whereIn('users.grupo_id', [3, 4])->get('users.*'),
             'aditivos' => Aditivo::all(),
             'tipo_de_colchon' => TipoDeColchon::all(),
+            'choices' => Choices::all(),
             // 'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
         $generate_report_lodo = $this->_generate_report_lodo($solicitud_id);

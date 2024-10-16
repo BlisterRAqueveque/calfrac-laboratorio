@@ -562,7 +562,7 @@
             });
             //document.getElementById("tipo_lodo").setValue(0);
         })
-    </script>
+</script>
 <script>
     const tipo_lodo_nombre = {!! json_encode($solicitud_lodo[0]->tipo_lodo_Lodos->nombre ?? '-') !!};
     const densidad_lodo = {!! json_encode($solicitud_lodo[0]->rel_caracterizacion[0]->densidad ?? '-') !!};

@@ -93,8 +93,15 @@
  
             <div class="col-span-5 md:col-span-1">
                 <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Remoción Estatica <small>(Si/No)</small></label>
-                <input type="text" name="remocion_estatica" value="{{ $solicitud_lodo[0]->rel_estatica[0]->remocion_estatica }}" class="form-control text-sm"
-                    placeholder="¿Reporta remoción estatica?" readonly>
+                {{-- <input type="text" name="remocion_estatica" value="{{ $solicitud_lodo[0]->rel_estatica[0]->remocion_estatica }}" class="form-control text-sm"
+                    placeholder="¿Reporta remoción estatica?" readonly> --}}
+                    <select name="remocion_estatica" id="remocion_estatica" class="text-sm" data-silent-initial-value-set="true" multiple="false" disabled>
+                        @foreach ($choices as $y)
+                        <option value="{{ $y->id }}"
+                            {{ $y->id == $solicitud_lodo[0]->rel_estatica[0]->remocion_estatica ? 'selected' : '' }}>{{ $y->choices }}
+                        </option>
+                        @endforeach
+                    </select>
             </div> 
         </div>
         {{-- <div>
@@ -241,7 +248,12 @@
 
             <div class="col-span-5 md:col-span-1">
                 <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Remoción Estatica <small>(Si/No) </small><span class="text-red-500"><small>(Requerido)</small></span></label>
-                <input type="text" name="remocion_estatica" value="{{ old('remocion_estatica') }}" class="form-control text-sm" placeholder="¿Reporta remoción estatica?">
+                {{-- <input type="text" name="remocion_estatica" value="{{ old('remocion_estatica') }}" class="form-control text-sm" placeholder="¿Reporta remoción estatica?"> --}}
+                <select name="remocion_estatica" id="remocion_estatica" class="text-sm" data-silent-initial-value-set="true" multiple="false">
+                    @foreach ($choices as $y)
+                    <option value="{{ $y->id }}" {{ old('remocion_estatica') == $y->id ? 'selected' : '' }}>{{ $y->choices }}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
         {{-- <div class="row mt-3 py-2 px-2" id="solapa3">
@@ -414,7 +426,15 @@
 <script>
     const colchonNombre = "{{ isset($solicitud_lodo[0]->rel_colchon) ? $solicitud_lodo[0]->rel_colchon->nombre : '-' }}";
 </script>
-
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+            VirtualSelect.init({
+                ele: "#remocion_estatica",
+                placeholder: "Seleccione una opción",
+            });
+            //document.getElementById("tipo_lodo").setValue(0);
+        })
+</script>
 <script>
     const btn_submit_remocion_estatica_lodo = document.getElementById('btn_submit_remocion_estatica_lodo');
 

@@ -1022,10 +1022,16 @@ public function store_aditivos_lodo(Request $request)
     }
     
     public function store_humectabilidad (Request $request) {
+        $request->validate([
+            'check_humectabilidad' => 'required|string',
+            // Otras validaciones pueden ser opcionales si son no requeridas
+        ]);
+
         $humectabilidad_lodo = RelHumectabilidad::create([
             'humectabilidad' => $request->humectabilidad,
             'solicitud_lodo_id' => $request->solicitud_lodo_id,
             'usuario_carga' => auth()->user()->id,
+            'check_humectabilidad' => $request->check_humectabilidad,
         ]);
         if ($humectabilidad_lodo->id)
         return response()->json([
