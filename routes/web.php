@@ -81,6 +81,7 @@ Route::post('/solicitud/lechada/aprobada', [SolicitudController::class, 'store_a
 Route::post('/solicitud/lodo', [SolicitudController::class, 'store_lodo'])->name('solicitud.lodo');
 Route::get('/solicitudes/lodo/{solicitud_id}', [SolicitudController::class, 'show_lodo'])->name('solicitud.lodo.show');
 Route::post('/solicitud/edicion/lodo', [SolicitudController::class, 'update_lodo'])->name('solicitud.update.lodo');
+Route::post('/solicitud/lodo/aprobada', [SolicitudController::class, 'store_aprobar_lodo'])->name('solicitud.aprobar.lodo');
 
 
 // Route::get('/send-email', [SolicitudController::class, 'sendEmail']);

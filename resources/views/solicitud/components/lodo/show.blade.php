@@ -784,7 +784,7 @@
                         loadingAlert('Aprobación en progreso, por favor espere',
                             'Se están almacenando los cambios y notificando vía email');
 
-                        fetch("{{ route('solicitud.aprobar') }}", {
+                        fetch("{{ route('solicitud.aprobar.lodo') }}", {
                                 method: 'POST',
                                 body: form
                             }).then((response) => response.json())

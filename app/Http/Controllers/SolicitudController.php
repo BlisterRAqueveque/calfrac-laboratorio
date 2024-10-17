@@ -44,8 +44,9 @@ use App\Models\RelReologiaSolicitudEnsayo;
 use App\Models\RelEnsayoComentarioSolicitud;
 use App\Models\RelEnsayosRequeridosLodo;
 use App\Models\TipoDeColchon;
-use App\Mail\SolicitudLechadaAprobada;
 use App\Models\Choices;
+use App\Mail\SolicitudLechadaAprobada;
+use App\Mail\SolicitudLodoAprobada;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Mail;
@@ -517,6 +518,50 @@ class SolicitudController extends Controller
         # Envío del correo a c/u
         foreach ($destinatarios as $correo) {
             $this->_sendEmailApproved($data, $correo);
+        }
+        // -- Finaliza el envío de email
+
+        return $solicitud->id;
+    }
+
+
+    public function store_aprobar_lodo(Request $request)
+    {
+        $solicitud = Solicitud::find($request->solicitud_id);
+        $solicitud->estado_solicitud_id = 2;
+        $solicitud->aprobada = 1;
+        $solicitud->fecha_aprobada = date('Y-m-d H:i:s');
+        $solicitud->usuario_aprobo = auth()->user()->id;
+        $solicitud->save();
+
+        $url = route('solicitud.lodo.show', ['solicitud_id' => $solicitud->id]);
+
+        # Envío de Email
+        $data = [
+            'solicitud_id' => $solicitud->id,
+            'fecha_aprobada' => $solicitud->fecha_aprobada->format('d/m/Y'),
+            // 'usuario_aprobo' => $solicitud->usuario_aprobo->nombre . ' ' . $solicitud->usuario_aprobo->apellido,
+            'url' => $url
+        ];
+
+        # Listado de correos de laboratoristas, me agrego a mi para chequear que llegue correctamente
+        $destinatarios = [
+            'GTorres@calfrac.com',
+            'CDominguez@calfrac.com',
+            'DMancilla@calfrac.com',
+            'LVazquez@calfrac.com',
+            'ORodriguez@calfrac.com',
+            'rocio.carvajal@blistertechnologies.com',
+            'gruiz@blister.com.ar',
+            // 'lsicolo@blister.com.ar'
+        ];
+
+        # Incluye el correo del usuario que cargó la solicitud mas el arreglo de arriba
+        array_unshift($destinatarios, $solicitud->user->email);
+
+        # Envío del correo a c/u
+        foreach ($destinatarios as $correo) {
+            $this->_sendEmailApprovedLodo($data, $correo);
         }
         // -- Finaliza el envío de email
 
@@ -1422,6 +1467,16 @@ class SolicitudController extends Controller
     public function _sendEmailApproved($data, $correo)
     {
         Mail::to($correo)->send(new SolicitudLechadaAprobada($data));
+
+        // Mail::send('emails.solicitud.approved', ['data' => $data], function ($message) use ($correo, $data) {
+        //     $message->to($correo)
+        //         ->subject('Laboratorio Calfrac | Solicitud de Fractura N°' . $data['solicitud_id'] . ' - Aprobada');
+        // });
+    }
+
+    public function _sendEmailApprovedLodo($data, $correo)
+    {
+        Mail::to($correo)->send(new SolicitudLodoAprobada($data));
 
         // Mail::send('emails.solicitud.approved', ['data' => $data], function ($message) use ($correo, $data) {
         //     $message->to($correo)
