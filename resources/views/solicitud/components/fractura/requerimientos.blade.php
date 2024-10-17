@@ -68,9 +68,7 @@
             $inc++;
         @endphp
     @endforeach
-@else
-    <p>Formulaciones tentativas no disponibles.</p>
-@endif
+    @endif
 
     {{--Vieja configuracion
     @foreach ($solicitud_fractura[0]->formulacion_tentativa as $formulacion)
@@ -114,6 +112,7 @@
             Agregar Otra Formulación
         </button>
     </div>
+</div>
 </div>
 
 <script>

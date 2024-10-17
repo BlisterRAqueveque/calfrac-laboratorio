@@ -429,4 +429,24 @@ class PDFController extends Controller
         // return $pdf->loadView('solicitud_lechada.pdf');
         return $pdf->stream();
     }
+
+        // PDF para Solicitud Fractura
+
+    public function pdf_report_fractura_solicitud($solicitud_id)
+    {
+        $data = [
+            'solicitud' => Solicitud::find($solicitud_id),
+             //'solicitud_lodo' => SolicitudLodo::where('solicitud_id', $solicitud_id)->get(),
+            //'mud_company' => MudCompany::all(),
+            //'tipo_lodo' => TipoLodo_Lodos::all(),
+            //'opciones_ensayos' => EnsayosLodo::all(),
+            //'ensayos_multiples' => EnsayosLodo::leftJoin('rel_ensayos_requeridos_lodo', 'ensayos_lodo.id', '=', 'rel_ensayos_requeridos_lodo.id_ensayo')
+            //->where('rel_ensayos_requeridos_lodo.nombre', $solicitud_id)
+            //->get(['ensayos_lodo.*', 'rel_ensayos_requeridos_lodo.*']),
+            
+        ];
+          
+        $pdf = PDF::loadView('pdf_fractura_solicitud', $data);
+        return $pdf->stream();
+    }
 }
