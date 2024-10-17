@@ -621,6 +621,13 @@
         </div>
     </div>
 </form>
+<script>
+    const btnSendSolicitudLechada = document.getElementById('btnSendSolicitudLechada');
+    btnSendSolicitudLechada.addEventListener('click', e => {
+        loadingAlert('Creando solicitud, por favor espere',
+        'Se están enviando los correos desde el sistema');
+    })
+</script>
 
 <!-- Script para agregar una formulación tentativa cuando se escuche por un click -->
 {{-- <script src="{{ asset('js/Solicitud/lechada.js') }}"></script> --}}
