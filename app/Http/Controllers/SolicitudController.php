@@ -546,13 +546,13 @@ class SolicitudController extends Controller
 
         # Listado de correos de laboratoristas, me agrego a mi para chequear que llegue correctamente
         $destinatarios = [
-            'GTorres@calfrac.com',
-            'CDominguez@calfrac.com',
-            'DMancilla@calfrac.com',
-            'LVazquez@calfrac.com',
-            'ORodriguez@calfrac.com',
+            // 'GTorres@calfrac.com',
+            // 'CDominguez@calfrac.com',
+            // 'DMancilla@calfrac.com',
+            // 'LVazquez@calfrac.com',
+            // 'ORodriguez@calfrac.com',
             'rocio.carvajal@blistertechnologies.com',
-            'gruiz@blister.com.ar',
+            // 'gruiz@blister.com.ar',
             // 'lsicolo@blister.com.ar'
         ];
 
@@ -844,13 +844,13 @@ class SolicitudController extends Controller
         
         # Listado de correos de laboratoristas
         $destinatarios = [
-            'GTorres@calfrac.com',
-            'CDominguez@calfrac.com',
-            'DMancilla@calfrac.com',
-            'LVazquez@calfrac.com',
-            'ORodriguez@calfrac.com',
+            // 'GTorres@calfrac.com',
+            // 'CDominguez@calfrac.com',
+            // 'DMancilla@calfrac.com',
+            // 'LVazquez@calfrac.com',
+            // 'ORodriguez@calfrac.com',
             'rocio.carvajal@blistertechnologies.com',
-            'gruiz@blister.com.ar',
+            // 'gruiz@blister.com.ar',
             // 'lsicolo@blister.com.ar'
         ];
 

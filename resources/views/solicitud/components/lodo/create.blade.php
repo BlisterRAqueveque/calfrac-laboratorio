@@ -370,6 +370,7 @@
         </div>
    
 </form>
+
 <script src="{{ asset('js/Solicitud/lodo/aditivos_lodo.js') }}"></script>
 @include('solicitud.components.lodo.modal_confirmar_solicitud')
 
@@ -425,6 +426,13 @@
         document.getElementById("requeridos_lodo").setValue(0);
         document.getElementById("firma_reconocimiento_lodo").setValue(0);
         document.getElementById("firma_solicitante_lodo").setValue(0);
+    })
+</script>
+<script>
+    const btnSubmitSolicitudLodo = document.getElementById('btnSubmitSolicitudLodo');
+    btnSubmitSolicitudLodo.addEventListener('click', e => {
+        loadingAlert('Creando solicitud, por favor espere',
+        'Se están enviando los correos desde el sistema');
     })
 </script>
 <script>
