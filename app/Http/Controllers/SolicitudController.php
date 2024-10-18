@@ -927,7 +927,7 @@ class SolicitudController extends Controller
             'aditivos' => Aditivo::all(),
             'users' => User::all(),
             'clientes' => Cliente::all(),
-            'yacimientos' => Yacimiento::all(),
+            'yacimientos_fractura' => YacimientosFractura::all(),
             'equipos' => Equipos::all(),
             'servicios_fractura' => ServiciosFractura::all(),
             'distrito' => Distrito::all(),

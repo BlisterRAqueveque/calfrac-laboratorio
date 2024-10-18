@@ -684,13 +684,12 @@
                             @endforeach
                         </div>
                     </div>
-
+{{-- 
                     <div>
                         <br>
                         <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2" for="agente_id">Agente Sosten:</label>
                         <div class="grid md:grid-cols-5 gap-3 mt-4 relative">
                             @foreach ($agente_referencia as $agente_r)
-                                {{--<label class="text-sm text-gray-700 font-semibold tracking-wide mb-2" for="analisis_id_{{ $loop->index }}"></label>--}}
                                 <select name="agente_id[]" class="form-control text-sm p-2" disabled >
                                     @foreach ($agente_sosten as $agente)
                                         <option value="{{ $agente->id }}" {{ $agente->id == $agente_r->id_agente ? 'selected' : '' }}> 
@@ -700,7 +699,7 @@
                                 </select>
                             @endforeach
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="col-xs-12 col-md-6 my-2">
                         <br>
                         <label for="sistemas_fluidos"

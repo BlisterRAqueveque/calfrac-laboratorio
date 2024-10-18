@@ -391,7 +391,7 @@
                     </select>
                 </div>
                 
-                <div class="col-xs-12 col-md-6 my-2">
+                {{-- <div class="col-xs-12 col-md-6 my-2">
                     <label for="agente_sosten"
                         class="text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Agente
                         de Sostén</label>
@@ -400,7 +400,7 @@
                             <option value="{{ $e->id }}">{{ $e->nombre }}</option>
                         @endforeach
                     </select>
-                </div>
+                </div> --}}
 
                 <div class="col-xs-12 col-md-6 my-2">
                     <label for="sistemas_fluidos"
