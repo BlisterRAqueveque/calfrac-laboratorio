@@ -271,7 +271,7 @@
                         <label for="servicio_number"
                             class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Nº
                             Revisión de Solicitud de Servicio</label>
-                        <input type="number" placeholder="Ingrese el número"
+                        <input type="text" placeholder="Ingrese el número"
                             class="form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 sz"
                             name="servicio_number" id="servicio_number" min="0"
                             value="{{ $solicitud->servicio_number }}" readonly>
@@ -662,12 +662,29 @@
                 </div> <!-- Información del Pozo -->
 
                 <hr class="my-4">
-                <p class="m-0 mt-3 font-bold text-lg tracking-wide">Análisis Requerido</p>
+                <p class="m-0 mt-3 font-bold text-lg tracking-wide">Análisis de Agua</p>
 
                 <div class="row mt-3"> <!-- Análisis Requerido -->
 
+                    
+                    {{-- <div>
+                        <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2" for="analisis_id"> Tipo de Agua:</label>
+                        <div class="grid md:grid-cols-5 gap-3 mt-4 relative">
+                            @foreach ($tipo_agua as $a_r)
+                                <select name="tipo_agua[]" class="form-control text-sm p-2" disabled >
+                                    @foreach ($tipo_agua as $analisis)
+                                        <option value="{{ $analisis->id }}" {{ $analisis->id == $a_r->id ? 'selected' : '' }}> 
+                                            {{ $analisis->nombre }}
+                                        </option>
+                                        <br>
+                                    @endforeach
+                                </select>
+                            @endforeach
+                        </div>
+                    </div> --}}
+
                     <div>
-                        <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2" for="analisis_id">Analisis de Agua Microbial:</label>
+                        <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2" for="analisis_id"> Tipo de Ensayo:</label>
                         <div class="grid md:grid-cols-5 gap-3 mt-4 relative">
                             @foreach ($analisis_referencia as $a_r)
                                 {{--<label class="text-sm text-gray-700 font-semibold tracking-wide mb-2" for="analisis_id_{{ $loop->index }}"></label>--}}
@@ -734,17 +751,23 @@
                             class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de ensayo</label>
                         <div class="flex gap-1">
                             <label for="ensayo_estabilidad"
-                                class="bg-gray-200 p-1 w-full max-w-28 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
+                                class="bg-gray-200 p-1 max-w-32 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
                                 <input type="checkbox" name="ensayo_estabilidad" id="ensayo_estabilidad"
                                     class="inp_edit" {{ $solicitud_fractura[0]->ensayo_estabilidad == 1 ? 'checked' : '' }}
                                     disabled>
-                                Estabilidad</label>
+                                Convencional</label>
                             <label for="ensayo_ruptura"
-                                class="bg-gray-200 p-1 w-full max-w-28 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
+                                class="bg-gray-200 p-1 max-w-32 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
                                 <input type="checkbox" name="ensayo_ruptura"
                                     id="ensayo_ruptura" class="inp_edit"
                                     {{ $solicitud_fractura[0]->ensayo_ruptura == 1 ? 'checked' : '' }} disabled>
-                                Ruptura</label>
+                                No Convencional</label>
+                            <label for="ensayo_ruptura"
+                                class="bg-gray-200 p-1 max-w-32 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
+                                <input type="checkbox" name="ensayo_especial"
+                                    id="ensayo_especial" class="inp_edit"
+                                    {{ $solicitud_fractura[0]->ensayo_especial == 1 ? 'checked' : '' }} disabled>
+                                Especial</label>
                         </div>
                     </div>
 

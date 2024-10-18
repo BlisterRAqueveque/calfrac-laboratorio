@@ -46,6 +46,7 @@ use App\Models\RelEnsayosRequeridosLodo;
 use App\Models\TipoDeColchon;
 use App\Models\Choices;
 use App\Models\YacimientosFractura;
+use App\Models\TipoAgua;
 use App\Mail\SolicitudLechadaAprobada;
 use App\Mail\SolicitudLodoAprobada;
 use Illuminate\Http\Request;
@@ -91,7 +92,8 @@ class SolicitudController extends Controller
             'names_ingenieros' => User::whereIn('users.grupo_id', [3, 4])->get('users.*'),
             'aditivos' => Aditivo::all(),
             'tipo_de_colchon' => TipoDeColchon::all(),
-            'yacimientos_fractura' => YacimientosFractura::all()
+            'yacimientos_fractura' => YacimientosFractura::all(),
+            'tipo_agua' => TipoAgua::all()
             //'name_aditivos' =>
         ];
         return view('solicitud.create', $data);
@@ -174,8 +176,11 @@ class SolicitudController extends Controller
             //'agente_sosten_id' => $request->agente_sosten,--> idem estados
             //'otro_analisis_id' => $request->otros,
             'otros_analisis' => $request->otros_analisis,
+            // Estabilidad usado para -> Convencional
             'ensayo_estabilidad' => $request->ensayo_estabilidad == 'on' ? 1 : 0,
+            // Ruptura usado para -> NO Convencional
             'ensayo_ruptura' => $request->ensayo_ruptura == 'on' ? 1 : 0,
+            'ensayo_especial' => $request->ensayo_especial == 'on' ? 1 : 0,
             'comentario' => $request->comentario,
             'base_guar' => $request->base_guar,
             'base_hvfr' => $request->base_hvfr,
@@ -932,6 +937,7 @@ class SolicitudController extends Controller
             'servicios_fractura' => ServiciosFractura::all(),
             'distrito' => Distrito::all(),
             'estados' => Estados::all(),
+            'tipo_agua' => TipoAgua::all()
             // 'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
         return view('solicitud.components.fractura.show', $data);

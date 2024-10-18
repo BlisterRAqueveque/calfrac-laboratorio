@@ -376,14 +376,24 @@
             <hr class="my-4">    
             </div> <!-- Información del Pozo -->
 
-            <p class="m-0 mt-3 font-bold text-lg tracking-wide">Análisis Requerido</p>
+            <p class="m-0 mt-3 font-bold text-lg tracking-wide">Análisis de Agua</p>
 
             <div class="row mt-3"> <!-- Análisis Requerido -->
+
+                <div class="col-xs-12 col-md-6 my-2">
+                    <label for="analisis_microbial"
+                        class="text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2" >Tipo
+                        de Agua </label>
+                    <select name="tipo_agua" id="tipo_agua" class="text-sm inp_edit" data-search="false" multiple="true">
+                        @foreach ($tipo_agua as $e)
+                            <option value="{{ $e->id }}">{{ $e->nombre }}</option>
+                        @endforeach
+                    </select>
+                </div>
                 
                 <div class="col-xs-12 col-md-6 my-2">
                     <label for="analisis_microbial"
-                        class="text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2" >Análisis
-                        de Agua y Ensayo Microbial</label>
+                        class="text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2" > Tipo de Ensayo </label>
                     <select name="analisis_microbial" id="analisis_microbial" class="text-sm inp_edit" data-search="false" multiple="true">
                         @foreach ($analisis_microbial as $e)
                             <option value="{{ $e->id }}">{{ $e->nombre }}</option>
@@ -438,14 +448,19 @@
                         class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de ensayo</label>
                     <div class="flex gap-1">
                         <label for="ensayo_estabilidad"
-                            class="bg-gray-200 p-1 w-full max-w-28 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
+                            class="bg-gray-200 p-1 max-w-32 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
                             <input type="checkbox" name="ensayo_estabilidad" id="ensayo_estabilidad">
-                            Estabilidad</label>
+                            Convencional</label>
                         <label for="ensayo_ruptura"
-                            class="bg-gray-200 p-1 w-full max-w-28 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
+                            class="bg-gray-200 p-1  max-w-32 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
                             <input type="checkbox" name="ensayo_ruptura"
                                 id="ensayo_ruptura">
-                            Ruptura</label>
+                            No Convencional</label>
+                            <label for="ensayo_especial"
+                            class="bg-gray-200 p-1  max-w-32 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
+                            <input type="checkbox" name="ensayo_especial"
+                                id="ensayo_especial">
+                            Especial</label>
                     </div>
                 </div>
                 <hr class="my-4">
@@ -656,6 +671,10 @@
             ele: "#estados",
             placeholder: "Seleccione estado",
         });
+        VirtualSelect.init({
+            ele: "#tipo_agua",
+            placeholder: "Seleccione estado",
+        });
         document.getElementById("cliente_fractura").setValue(0);
         document.getElementById("locacion_fractura").setValue(0);
         document.getElementById("equipo").setValue(0);
@@ -665,6 +684,7 @@
         document.getElementById("analisis_microbial").setValue(0);
         document.getElementById("agente_sosten").setValue(0);
         document.getElementById("estados").setValue(0);
+        document.getElementById("tipo_agua").setValue(0);
     })
 </script>
 
