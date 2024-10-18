@@ -462,6 +462,16 @@
                                 id="ensayo_especial">
                             Especial</label>
                     </div>
+
+                    <div class="col-12 my-2">
+                        <label for="comentario_analisis"
+                            class="text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Comentarios
+                            /
+                            Observaciones</label>
+                        <textarea name="comentario_analisis" id="comentario_analisis"
+                            class="form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 sz"
+                            rows="3" placeholder="Ingrese un comentario / instrucciones - Máximo 300 caracteres"></textarea>
+                    </div>
                 </div>
                 <hr class="my-4">
                 <p class="m-0 font-bold text-lg my-3 tracking-wide">Requerimientos de Fractura</p>

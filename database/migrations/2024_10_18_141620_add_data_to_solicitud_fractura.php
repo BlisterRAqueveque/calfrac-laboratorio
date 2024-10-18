@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::table('solicitud_fractura', function (Blueprint $table) {
             $table->tinyInteger('ensayo_especial')->nullable()->default(0);
+            $table->text('comentario_analisis')->nullable();
         });
     }
 
@@ -27,7 +28,8 @@ return new class extends Migration
     {
         Schema::table('solicitud_fractura', function (Blueprint $table) {
             $table->dropColumn([
-                'ensayo_estabilidad',
+                'ensayo_especial',
+                'comentario_analisis'
             ]);
         });
     }

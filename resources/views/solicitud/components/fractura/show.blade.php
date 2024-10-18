@@ -769,6 +769,15 @@
                                     {{ $solicitud_fractura[0]->ensayo_especial == 1 ? 'checked' : '' }} disabled>
                                 Especial</label>
                         </div>
+                        <div class="col-12 my-2">
+                            <label for="comentario_analisis"
+                                class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Comentarios
+                                /
+                                Observaciones</label>
+                            <textarea name="comentario_analisis" id="comentario_analisis"
+                                class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
+                                rows="3" placeholder="Ingrese un comentario / instrucciones - Máximo 300 caracteres" readonly>{{ $solicitud_fractura[0]->comentario_analisis ?? 'No hubieron comentarios' }}</textarea>
+                        </div>
                     </div>
 
                 

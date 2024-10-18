@@ -31,6 +31,7 @@ class SolicitudFractura extends Model
         'ensayo_ruptura',
         'ensayo_especial',
         'comentario',
+        'comentario_analisis',
         'base_guar',
         'base_hvfr',
         'firma_iniciado_por_id',

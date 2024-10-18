@@ -182,6 +182,7 @@ class SolicitudController extends Controller
             'ensayo_ruptura' => $request->ensayo_ruptura == 'on' ? 1 : 0,
             'ensayo_especial' => $request->ensayo_especial == 'on' ? 1 : 0,
             'comentario' => $request->comentario,
+            'comentario_analisis' => $request->comentario_analisis,
             'base_guar' => $request->base_guar,
             'base_hvfr' => $request->base_hvfr,
             'firma_iniciado_por_id' => $request->firma_iniciado_por,
