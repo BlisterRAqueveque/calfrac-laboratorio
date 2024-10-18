@@ -50,7 +50,7 @@
 
                 <div class="col-xs-12 col-md-2 my-2">
                     <label for="locacion"
-                        class="text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Yacimiento/Locación <span class="text-red-500">*</span></label>
+                        class="text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Yacimiento <span class="text-red-500">*</span></label>
                         <select name="locacion_fractura" id="locacion_fractura" class="text-sm" data-search="true">
                             @foreach ($yacimientos_fractura as $y)
                             <option value="{{ $y->id }}"

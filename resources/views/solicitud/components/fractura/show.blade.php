@@ -296,9 +296,7 @@
 
                     <div class="col-xs-12 col-md-2 my-2">
                         <label for="locacion"
-                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Yacimiento
-                            /
-                            Locación</label>
+                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Yacimiento</label>
                         <select name="locacion_fractura" id="locacion_fractura" class="text-sm inp_edit" disabled>
                             @foreach ($yacimientos_fractura as $y)
                                 <option value="{{ $y->id }}"
