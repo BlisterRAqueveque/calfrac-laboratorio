@@ -23,7 +23,8 @@ use App\Models\SolicitudLodo;
 use App\Models\MudCompany;
 use App\Models\TipoLodo_Lodos;
 use App\Models\EnsayosLodo;
-
+// Models para PDF Fractura
+use App\Models\SolicitudFractura;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Http\Request;
 use Mail;
@@ -436,7 +437,7 @@ class PDFController extends Controller
     {
         $data = [
             'solicitud' => Solicitud::find($solicitud_id),
-             //'solicitud_lodo' => SolicitudLodo::where('solicitud_id', $solicitud_id)->get(),
+            'solicitud_fractura' => SolicitudFractura::where('solicitud_id', $solicitud_id)->get(),
             //'mud_company' => MudCompany::all(),
             //'tipo_lodo' => TipoLodo_Lodos::all(),
             //'opciones_ensayos' => EnsayosLodo::all(),

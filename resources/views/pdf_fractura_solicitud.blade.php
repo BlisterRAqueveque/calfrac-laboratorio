@@ -207,18 +207,18 @@
                         <table style="width: 100%; border-collapse: collapse; border: none;">
                             <tr>
                                 <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                    Cliente:
+                                    N° de Revisión:
                                 </td>
                                 <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{-- {{ $solicitud->cliente->nombre ?? '-'}} --}}
+                                    {{ $solicitud->servicio_number ?? '-'}}
                                 </td>
                             </tr>
                             <tr>
                                 <td style="padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                    Pozo:
+                                    Cliente
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{-- {{ $solicitud->pozo ?? '-'}} --}}
+                                    {{ $solicitud->cliente->nombre}}
                                 </td>
                             </tr>
                             <tr>
@@ -226,23 +226,7 @@
                                     Yacimiento:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{-- {{ $solicitud->locacion->nombre ?? '-'}} --}}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                    Trabajo:
-                                </td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{-- {{$solicitud->tipo_trabajo_cemento->nombre ?? '-'}} --}}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                    Servicio:
-                                </td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{-- {{ $solicitud->servicio ?? '-'}} --}}
+                                    {{ $solicitud->locacion_fractura->nombre}}
                                 </td>
                             </tr>
                             <tr>
@@ -250,7 +234,31 @@
                                     Programa:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{-- {{ $solicitud->programa ?? '-'}} --}}
+                                    {{ $solicitud-> programa }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                    Fecha de Solicitud:
+                                </td>
+                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                    {{ $solicitud->fecha_solicitud->format('Y-m-d') }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                    Pozo:
+                                </td>
+                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                    {{ $solicitud->pozo }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                    Rep Compañia:
+                                </td>
+                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                    {{ $solicitud->rep_compania }}
                                 </td>
                             </tr>
                             <tr>
@@ -258,40 +266,24 @@
                                     Equipo:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{-- {{ $solicitud->equipos->nombre ?? '-'}} --}}
+                                    {{ $solicitud->equipos->nombre}}
                                 </td>
                             </tr>
                             <tr>
                                 <td style="padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                    MD:
+                                    Servicio:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{-- {{ $s_l[0]->profundidad_pozo_md ?? '-'}}m --}}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                    TVD:
-                                </td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{-- {{ $s_l[0]->profundidad_pozo_tvd ?? '-'}}m --}}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                    BHCT:
-                                </td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{-- {{ $s_l[0]->bhct ?? '-'}} °C --}}
+                                    {{ $solicitud->fractura_servicios->opciones}}
 
                                 </td>
                             </tr>
                             <tr>
                                 <td style="padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                    BHST:
+                                    Distrito:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{-- {{ $s_l[0]->bhst ?? '-' }} °C --}}
+                                    {{ $solicitud->distrito_fractura->opciones }}
                                 </td>
                             </tr>
                         </table>
@@ -300,42 +292,42 @@
                         <table style="width: 100%; border-collapse: collapse; border: none;">
                             <tr>
                                 <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                    Objetivo del ensayo:
+                                    Información del Pozo:
                                 </td>
-                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{-- {{ $solicitud->tipo_requerimiento_cemento->nombre ?? '-'}} --}}
+                                {{-- <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                    
+                                </td> --}}
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                    Fluido del Reservorio:
+                                </td>
+                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                    {{ $solicitud_fractura[0]->fluido ?? 'No Aplica' }}                                
                                 </td>
                             </tr>
                             <tr>
                                 <td style="padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                    Ensayo N°:
+                                    Formación:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{-- {{ $solicitud->ensayo->tipo ?? 'S/D'}}-{{ $solicitud->ensayo->incrementable ?? 'S/D'}}-{{ $solicitud->ensayo->anio ?? 'S/D'}} --}}
+                                    {{ $solicitud_fractura[0]->formacion ?? 'No Aplica' }}
                                 </td>
                             </tr>
                             <tr>
                                 <td style="padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                    Posicion Lechada:
+                                    BHST:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{-- {{ $ensayos_seleccionados ?? '-' }} --}}
+                                    {{ $solicitud_fractura[0]->bhst ?? 'No Aplica' }}
                                 </td>
                             </tr>
                             <tr>
                                 <td style="padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                    Tipo de Requerimiento:
+                                    Temp. Ensayo:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{-- {{ $solicitud->tipo_requerimiento_cemento->nombre ?? '-' }} --}}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                    Tipo de Trabajo:
-                                </td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{-- {{ $solicitud->tipo_trabajo_cemento->nombre ?? '-'}} --}}
+                                    {{ $solicitud_fractura[0]->temp_ensayo ?? 'No Aplica' }}
                                 </td>
                             </tr>
                         </table>
@@ -350,14 +342,13 @@
                     <!-- Columna con tabla interna -->
                     <td style="width: 54%; border: 1px solid #494949; padding: 4px; text-align: center; vertical-align: top;">
                         <table style="width: 100%; border-collapse: collapse; border: none;">
-                            <tr>
+                            {{-- <tr>
                                 <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
                                     Fecha:
                                 </td>
                                 <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{-- {{ $s_l[0]->fecha_reconocimiento ?? '-' }} --}}
                                 </td>
-                            </tr>
+                            </tr> --}}
                             <tr>
                                 <td></td>
                                 <td></td>
@@ -378,14 +369,14 @@
                                 <th style="width: 22%; text-align: center; background-color: #ffffff; border: none;">N° Lote</th>
                                 <th style="width: 22%; text-align: center; background-color: #ffffff; border: none;">Aditivo</th>
                                 <th style="width: 22%; text-align: center; background-color: #ffffff; border: none;">Conc</th>
-                                {{-- <th style="width: 22%; text-align: center; background-color: #ffffff; border: none;">Blend</th> --}}
+                                <th style="width: 22%; text-align: center; background-color: #ffffff; border: none;">Hidratación</th>
                             </tr>
 
                             <!-- Filas numeradas del 1 al 10 -->
                             <?php
                             $i = 0;
                             ?>
-                            {{-- @foreach ($s_l[0]->formulacion_tentativa as $formulacion) --}}
+                             @foreach ($solicitud_fractura[0]->formulacion_tentativa as $formulacion)
                             <?php
                             $i++;
                             ?>
@@ -394,25 +385,25 @@
                                     <?= $i; ?>
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{-- {{ $formulacion->lote ?? '-'}} --}}
+                                    {{ $formulacion->lote ?? '-'}}
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{-- @if(isset($formulacion->aditivos->nombre))
+                                    @if(isset($formulacion->aditivos->nombre))
                                     {{ $formulacion->aditivos->nombre }}
                                     @elseif($formulacion->aditivo == 'SD')
                                     {{ $formulacion->comentario ?? '-' }}
                                     @else
                                     -
-                                    @endif --}}
+                                    @endif
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{-- {{ $formulacion->concentracion ?? '-' }} --}}
+                                    {{ $formulacion->concentracion ?? '-' }}
                                 </td>
-                                {{-- <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                   
-                                </td> --}}
+                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                    {{ $formulacion->hidratacion ?? '-' }}
+                                </td>
                             </tr>
-                            {{-- @endforeach --}}
+                            @endforeach
                         </table>
 
                     </td>
@@ -433,103 +424,43 @@
                             <tr>
                                 <!-- Columna "Datos Generales" -->
                                 <td style="width: 6%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #D3D3D3; color:black;">
-                                    <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 90%; left: 115%; width: 200px; height: 20px; text-align: center;font-size: 13px;">Ensayo Solicitado</div>
+                                    <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 90%; left: 115%; width: 200px; height: 20px; text-align: center;font-size: 13px;">Información de Ensayos</div>
                                 </td>
 
                                 <!-- Columna con tabla interna -->
                                 <!-- Columna con tabla interna -->
                                 <td style="width: 94%; padding: 4px; text-align: center; vertical-align: top;">
                                     <table style="width: 100%; border-collapse: collapse; border: none;">
-                                        <tr>
+                                        <tr style>
                                             <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                OH/Trepano (in):
+                                                Nombre del Proveedor:
                                             </td>
-                                            <td style="width: 25%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{-- {{ $s_l[0]->OH ?? '-' }}  --}}
-                                            </td>
-                                            <td style="width: 25%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{-- {{ $s_l[0]->trepano ?? '-' }} --}}
+                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                {{ $solicitud_fractura[0]->proveedor ?? 'No Aplica' }}
                                             </td>
                                         </tr>
                                         <tr>
                                             <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                Casing ID y OD (in)
+                                                Nombre del Producto:
                                             </td>
-                                            <td style="width: 25%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{-- {{ $s_l[0]->casing_id ?? '-'}} --}}
-                                            </td>
-                                            <td style="width: 25%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{-- {{ $s_l[0]->casing_od ?? '-' }} --}}
+                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                {{ $solicitud_fractura[0]->producto ?? 'No Aplica' }}
                                             </td>
                                         </tr>
                                         <tr>
                                             <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                Densidad del Lodo (ppg)
+                                                Estado del Producto:
                                             </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                {{-- {{ $s_l[0]->densidad_lodo ?? '-' }} --}}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                Tipo de lodo
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                {{-- {{ $s_l[0]->tipo_lodos->nombre  ?? '-'}} --}}
+                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                
                                             </td>
                                         </tr>
                                         <tr>
                                             <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                Compañía de Lodos
+                                                Concentración a Ensayar:
                                             </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                {{-- {{ $s_l[0]->mud_company->nombre ?? '-'}} --}}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                Base de Lechada (MD/TVD) (m)
-                                            </td>
-                                            <td style="width: 25%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{-- {{ $s_l[0]->profundidad_pozo_md ?? '-'}} MD --}}
-                                            </td>
-                                            <td style="width: 25%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{-- {{ $s_l[0]->profundidad_pozo_tvd ?? '-'}} TVD --}}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                Tope de Lechada (MD/TVD) (m)
-                                            </td>
-                                            <td style="width: 25%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{-- {{ $s_l[0]->base_md ?? '-'}} MD --}}
-                                            </td>
-                                            <td style="width: 25%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{-- {{ $s_l[0]->base_tvd ?? '-'}} TVD --}}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                Volumen (bbl)
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                {{-- {{ $s_l[0]->volumen ?? '-'}} --}}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                Caudal (bpm)
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                {{-- {{ $s_l[0]->pump_rate ?? '-'}} --}}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                Grado de Temperatura (F°/100ft)
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                {{-- {{ $s_l[0]->grado_temperatura ?? '-'}} --}}
+                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                {{ $solicitud_fractura[0]->concentracion ?? 'No Aplica' }}
                                             </td>
                                         </tr>
                                     </table>
