@@ -24,7 +24,7 @@
                     <label for="servicio_number"
                         class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Nº
                         Revisión de Solicitud de Servicio <span class="text-red-500">*</span></label>
-                    <input type="number" placeholder="Ingrese el número"
+                    <input type="text" placeholder="Ingrese el número"
                         class="sz form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
                         name="servicio_number" id="servicio_number" min="0" step=".000001">
                     @error('servicio_number')
