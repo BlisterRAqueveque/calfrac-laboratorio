@@ -52,7 +52,7 @@
                     <label for="locacion"
                         class="text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Yacimiento/Locación <span class="text-red-500">*</span></label>
                         <select name="locacion_fractura" id="locacion_fractura" class="text-sm" data-search="true">
-                            @foreach ($yacimientos as $y)
+                            @foreach ($yacimientos_fractura as $y)
                             <option value="{{ $y->id }}"
                                 {{ old('locacion_fractura') == $y->id ? 'selected' : '' }}>{{ $y->nombre }}</option>
                         @endforeach

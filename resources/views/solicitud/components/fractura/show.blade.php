@@ -300,7 +300,7 @@
                             /
                             Locación</label>
                         <select name="locacion_fractura" id="locacion_fractura" class="text-sm inp_edit" disabled>
-                            @foreach ($yacimientos as $y)
+                            @foreach ($yacimientos_fractura as $y)
                                 <option value="{{ $y->id }}"
                                     {{ $y->id == $solicitud->locacion_id ? 'selected' : '' }}>{{ $y->nombre }}</option>
                             @endforeach

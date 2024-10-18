@@ -45,6 +45,7 @@ use App\Models\RelEnsayoComentarioSolicitud;
 use App\Models\RelEnsayosRequeridosLodo;
 use App\Models\TipoDeColchon;
 use App\Models\Choices;
+use App\Models\YacimientosFractura;
 use App\Mail\SolicitudLechadaAprobada;
 use App\Mail\SolicitudLodoAprobada;
 use Illuminate\Http\Request;
@@ -90,6 +91,7 @@ class SolicitudController extends Controller
             'names_ingenieros' => User::whereIn('users.grupo_id', [3, 4])->get('users.*'),
             'aditivos' => Aditivo::all(),
             'tipo_de_colchon' => TipoDeColchon::all(),
+            'yacimientos_fractura' => YacimientosFractura::all()
             //'name_aditivos' =>
         ];
         return view('solicitud.create', $data);
