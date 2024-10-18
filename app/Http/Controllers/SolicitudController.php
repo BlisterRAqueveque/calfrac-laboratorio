@@ -206,6 +206,7 @@ class SolicitudController extends Controller
                     'aditivo' => $formulacion['aditivo'],
                     'comentario' => $formulacion['comentario'],
                     'concentracion' => $formulacion['concentracion'],
+                    'hidratacion' => $formulacion['hidratacion'],
                 ]);
             }
         }

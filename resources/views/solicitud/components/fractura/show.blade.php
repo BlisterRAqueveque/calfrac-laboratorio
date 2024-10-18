@@ -751,35 +751,36 @@
                             class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de ensayo</label>
                         <div class="flex gap-1">
                             <label for="ensayo_estabilidad"
-                                class="bg-gray-200 p-1 max-w-32 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
+                                class="bg-gray-200 p-1 max-w-34 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
                                 <input type="checkbox" name="ensayo_estabilidad" id="ensayo_estabilidad"
                                     class="inp_edit" {{ $solicitud_fractura[0]->ensayo_estabilidad == 1 ? 'checked' : '' }}
                                     disabled>
                                 Convencional</label>
                             <label for="ensayo_ruptura"
-                                class="bg-gray-200 p-1 max-w-32 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
+                                class="bg-gray-200 p-1 max-w-34 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
                                 <input type="checkbox" name="ensayo_ruptura"
                                     id="ensayo_ruptura" class="inp_edit"
                                     {{ $solicitud_fractura[0]->ensayo_ruptura == 1 ? 'checked' : '' }} disabled>
                                 No Convencional</label>
                             <label for="ensayo_ruptura"
-                                class="bg-gray-200 p-1 max-w-32 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
+                                class="bg-gray-200 p-1 max-w-34 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
                                 <input type="checkbox" name="ensayo_especial"
                                     id="ensayo_especial" class="inp_edit"
                                     {{ $solicitud_fractura[0]->ensayo_especial == 1 ? 'checked' : '' }} disabled>
                                 Especial</label>
                         </div>
-                        <div class="col-12 my-2">
-                            <label for="comentario_analisis"
-                                class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Comentarios
-                                /
-                                Observaciones</label>
-                            <textarea name="comentario_analisis" id="comentario_analisis"
-                                class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
-                                rows="3" placeholder="Ingrese un comentario / instrucciones - Máximo 300 caracteres" readonly>{{ $solicitud_fractura[0]->comentario_analisis ?? 'No hubieron comentarios' }}</textarea>
-                        </div>
+                    
                     </div>
 
+                    <div class="col-12 my-2">
+                        <label for="comentario_analisis"
+                            class="text-xs xl:text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Comentarios
+                            /
+                            Observaciones</label>
+                        <textarea name="comentario_analisis" id="comentario_analisis"
+                            class="form-control sz dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
+                            rows="3" placeholder="Ingrese un comentario / instrucciones - Máximo 300 caracteres" readonly>{{ $solicitud_fractura[0]->comentario_analisis ?? 'No hubieron comentarios' }}</textarea>
+                    </div>
                 
                 </div> 
                 <hr class="my-4">

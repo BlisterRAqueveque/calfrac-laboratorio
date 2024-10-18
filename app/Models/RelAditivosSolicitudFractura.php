@@ -15,6 +15,7 @@ class RelAditivosSolicitudFractura extends Model
         'aditivo',
         'comentario',
         'concentracion',
+        'hidratacion'
     ];
 
     public function solicitud_fractura() {

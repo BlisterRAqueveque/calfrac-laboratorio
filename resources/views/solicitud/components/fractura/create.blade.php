@@ -448,31 +448,31 @@
                         class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de ensayo</label>
                     <div class="flex gap-1">
                         <label for="ensayo_estabilidad"
-                            class="bg-gray-200 p-1 max-w-32 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
+                            class="bg-gray-200 p-1 max-w-34 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
                             <input type="checkbox" name="ensayo_estabilidad" id="ensayo_estabilidad">
                             Convencional</label>
                         <label for="ensayo_ruptura"
-                            class="bg-gray-200 p-1  max-w-32 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
+                            class="bg-gray-200 p-1 max-w-34 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
                             <input type="checkbox" name="ensayo_ruptura"
                                 id="ensayo_ruptura">
                             No Convencional</label>
                             <label for="ensayo_especial"
-                            class="bg-gray-200 p-1  max-w-32 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
+                            class="bg-gray-200 p-1 max-w-34 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
                             <input type="checkbox" name="ensayo_especial"
                                 id="ensayo_especial">
                             Especial</label>
                     </div>
-
-                    <div class="col-12 my-2">
-                        <label for="comentario_analisis"
-                            class="text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Comentarios
-                            /
-                            Observaciones</label>
-                        <textarea name="comentario_analisis" id="comentario_analisis"
-                            class="form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 sz"
-                            rows="3" placeholder="Ingrese un comentario / instrucciones - Máximo 300 caracteres"></textarea>
-                    </div>
                 </div>
+                <div class="col-12 my-2">
+                    <label for="comentario_analisis"
+                        class="text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Comentarios
+                        /
+                        Observaciones</label>
+                    <textarea name="comentario_analisis" id="comentario_analisis"
+                        class="form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 sz"
+                        rows="3" placeholder="Ingrese un comentario / instrucciones - Máximo 300 caracteres"></textarea>
+                </div>
+
                 <hr class="my-4">
                 <p class="m-0 font-bold text-lg my-3 tracking-wide">Requerimientos de Fractura</p>
                     <label for="" class="text-sm mt-3 text-gray-700 font-semibold tracking-wide mb-2">Formulación
@@ -493,10 +493,11 @@
                     </div>                        
     
     
-                <div class="grid grid-cols-3 text-center bg-gray-100 py-2 my-3">
+                <div class="grid grid-cols-4 text-center bg-gray-100 py-2 my-3">
                     <p>Lote</p>
                     <p>Aditivo</p>
                     <p>Conc (gpt o ppt)</p>
+                    <p>Curva de Hidratación</p>
                 </div>
                 <div id="container_formulaciones_tentativas_fractura"></div>
     
