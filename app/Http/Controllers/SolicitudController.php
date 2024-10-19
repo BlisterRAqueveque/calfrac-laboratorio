@@ -15,7 +15,6 @@ use App\Models\RelAditivoSolicitudLechada;
 use App\Models\RelAditivosSolicitudFractura;
 use App\Models\RelAditivoSolicitudLodo;
 use App\Models\RelAnalisisMicrobialFractura;
-use App\Models\RelTipoAgua;
 use App\Models\RelAgenteSostenFractura;
 use App\Models\RelEnsayoReferenciaSolicitud;
 use App\Models\RelFormulacionTentativa;
@@ -229,16 +228,6 @@ class SolicitudController extends Controller
                 RelAgenteSostenFractura::create([
                     'solicitud_id' => $solicitud->id,
                     'id_agente' => $agente
-                ]);
-            }
-        }
-
-        if ($request->tipo_agua) {
-            $tipo_separados = explode(',', $request->tipo_agua);
-            foreach ($tipo_separados as $tipo) {
-                RelTipoAgua::create([
-                    'solicitud_id' => $solicitud->id,
-                    'id_tipo' => $tipo
                 ]);
             }
         }
@@ -934,9 +923,6 @@ class SolicitudController extends Controller
             'agente_referencia' => AgenteSosten::leftJoin('rel_agente_sosten_fractura', 'agente_sosten.id', '=', 'rel_agente_sosten_fractura.id_agente')
                 ->where('rel_agente_sosten_fractura.solicitud_id', $solicitud_id)
                 ->get(['agente_sosten.*', 'rel_agente_sosten_fractura.*']),
-            'agua_referencia' => TipoAgua::leftJoin('rel_tipo_agua', 'tipo_agua.id', '=', 'rel_tipo_agua.id_tipo')
-                ->where('rel_tipo_agua.solicitud_id', $solicitud_id)
-                ->get(['tipo_agua.*', 'rel_tipo_agua.*']),
             'solicitud' => Solicitud::find($solicitud_id),
             'solicitud_fractura' => SolicitudFractura::where('solicitud_id', $solicitud_id)->get(),
             'sistemas_fluidos' => SistemasFluidos::all(),

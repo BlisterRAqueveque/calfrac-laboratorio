@@ -176,7 +176,7 @@
                         <table style="border-collapse: collapse; width: 100%;">
                             <tr style="border: 1px solid #000000;">
                                 <td style="border: 1px solid #000000; padding: 5px;">
-                                    Numero:
+                                    Numero: C-FM8.0-0459
                                 </td>
                             </tr>
                             <tr style="border: 1px solid #000000;">
@@ -552,7 +552,7 @@
                             <tr>
                                 <!-- Columna "Datos Generales" -->
                                 <td style="width: 6%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #D3D3D3; color:black;">
-                                    <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 90%; left: 115%; width: 200px; height: 20px; text-align: center;font-size: 13px;">Datos</div>
+                                    <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 90%; left: 115%; width: 200px; height: 20px; text-align: center;font-size: 13px;">Análisis de Agua</div>
                                 </td>
 
                                 <!-- Columna con tabla interna -->
@@ -560,12 +560,12 @@
                                 <td style="width: 94%; padding: 4px; text-align: center; vertical-align: top;">
                                     <table style="width: 100%; border-collapse: collapse; border: none;">
                                         
-                                        {{-- <tr>
+                                        <tr>
                                             <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
                                                 Agua Libre %
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                               
+                                                {{-- {{$s_l[0]->agua_libre ?? '-'}} --}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -573,20 +573,20 @@
                                                 SGS (min)
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                               
+                                                {{-- {{$s_l[0]->sgs ?? '-'}} --}}
                                             </td>
-                                        </tr> --}}
+                                        </tr>
                                     </table>
                                     <br>
                                     <table style="width: 100%; border-collapse: collapse; border: none;">
-                                        {{-- <tr>
+                                        <tr>
                                             <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
                                                 Observación/Comentarios:
                                             </td>
                                             <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                
+                                                {{-- {{ $s_l[0]->observacion ?? 'No se registraron observaciones'}} --}}
                                             </td>
-                                        </tr> --}}
+                                        </tr>
                                     </table>
                                 </td>
                             </tr>

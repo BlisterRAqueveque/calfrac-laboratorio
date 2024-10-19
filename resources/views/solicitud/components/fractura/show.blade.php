@@ -667,26 +667,25 @@
                 <div class="row mt-3"> <!-- Análisis Requerido -->
 
                     
-                    <div>
-                        <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2" for="tipo_id">Tipo de Agua:</label>
-                        <div class="grid md:grid-cols-4 gap-3 mt-4 relative">
-                            @foreach ($agua_referencia as $agua_r)
-                                <select name="tipo_id[]" class="form-control text-sm p-2" disabled >
-                                    @foreach ($tipo_agua as $tipo)
-                                        <option value="{{ $tipo->id }}" {{ $tipo->id == $agua_r->id_tipo ? 'selected' : '' }}> 
-                                            {{ $tipo->nombre }}
+                    {{-- <div>
+                        <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2" for="analisis_id"> Tipo de Agua:</label>
+                        <div class="grid md:grid-cols-5 gap-3 mt-4 relative">
+                            @foreach ($tipo_agua as $a_r)
+                                <select name="tipo_agua[]" class="form-control text-sm p-2" disabled >
+                                    @foreach ($tipo_agua as $analisis)
+                                        <option value="{{ $analisis->id }}" {{ $analisis->id == $a_r->id ? 'selected' : '' }}> 
+                                            {{ $analisis->nombre }}
                                         </option>
                                         <br>
                                     @endforeach
                                 </select>
                             @endforeach
                         </div>
-                    </div>
-                    <br>
+                    </div> --}}
+
                     <div>
-                        <br>
                         <label class="text-sm text-gray-700 font-semibold tracking-wide mb-2" for="analisis_id"> Tipo de Ensayo:</label>
-                        <div class="grid md:grid-cols-4 gap-3 mt-4 relative">
+                        <div class="grid md:grid-cols-5 gap-3 mt-4 relative">
                             @foreach ($analisis_referencia as $a_r)
                                 {{--<label class="text-sm text-gray-700 font-semibold tracking-wide mb-2" for="analisis_id_{{ $loop->index }}"></label>--}}
                                 <select name="analisis_id[]" class="form-control text-sm p-2" disabled >
