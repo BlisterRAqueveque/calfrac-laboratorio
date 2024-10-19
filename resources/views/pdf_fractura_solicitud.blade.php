@@ -292,7 +292,7 @@
                         <table style="width: 100%; border-collapse: collapse; border: none;">
                             <tr>
                                 <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                    Información del Pozo:
+                                    <b>Información del Pozo:</b>
                                 </td>
                                 {{-- <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
                                     
@@ -424,7 +424,7 @@
                             <tr>
                                 <!-- Columna "Datos Generales" -->
                                 <td style="width: 6%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #D3D3D3; color:black;">
-                                    <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 90%; left: 115%; width: 200px; height: 20px; text-align: center;font-size: 13px;">Información de Ensayos</div>
+                                    <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 90%; left: 115%; width: 200px; height: 20px; text-align: center;font-size: 13px;">Ensayos y Analisis de Agua</div>
                                 </td>
 
                                 <!-- Columna con tabla interna -->
@@ -464,6 +464,72 @@
                                             </td>
                                         </tr>
                                     </table>
+                                    <table style="width: 100%; border-collapse: collapse; border: none;">
+                                        <tr>
+                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                            Observación/Comentarios:
+                                            </td>
+                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"  colspan="2">
+                                                {{ $solicitud_fractura[0]->comentario }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                                Tipo de Ensayo:
+                                            </td>
+                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
+                                                {{-- {{ $s_l[0]->reologia ?? '-'}} --}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                                Compatibilidad con Sistemas Fluidos:
+                                            </td>
+                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                                Otros Análisis: 
+                                            </td>
+                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
+                                                {{-- {{ $s_l[0]->filtrado ?? '-'}} --}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                                <b>Ensayo Estabilidad:</b>
+                                            </td>
+                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
+                                                {{ $checkboxes['ensayo_estabilidad'] == 1 ? 'Sí' : 'No' }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                                <b>Ensayo Ruptura:</b>
+                                            </td>
+                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
+                                                {{ $checkboxes['ensayo_ruptura'] == 1 ? 'Sí' : 'No' }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                                <b>Ensayo Especial:</b>
+                                            </td>
+                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
+                                                {{ $checkboxes['ensayo_especial'] == 1 ? 'Sí' : 'No' }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                            Observación/Comentarios:
+                                            </td>
+                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
+                                                {{ $solicitud_fractura[0]->comentario_analisis }}
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
                             </tr>
                         </table>
@@ -486,96 +552,14 @@
                             <tr>
                                 <!-- Columna "Datos Generales" -->
                                 <td style="width: 6%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #D3D3D3; color:black;">
-                                    <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 90%; left: 115%; width: 200px; height: 20px; text-align: center;font-size: 13px;">Requerimientos de Lechada</div>
+                                    <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 90%; left: 115%; width: 200px; height: 20px; text-align: center;font-size: 13px;">Análisis de Agua</div>
                                 </td>
 
                                 <!-- Columna con tabla interna -->
                                 <!-- Columna con tabla interna -->
                                 <td style="width: 94%; padding: 4px; text-align: center; vertical-align: top;">
                                     <table style="width: 100%; border-collapse: collapse; border: none;">
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                Reología (Si/No)
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                {{-- {{ $s_l[0]->reologia ?? '-'}} --}}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                Densidad (ppg)
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                {{-- {{ $s_l[0]->densidad ?? '-'}} --}}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                Filtrado < mL </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                {{-- {{ $s_l[0]->filtrado ?? '-'}} --}}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                <small>Bombeabilidad T. Acondicionamiento + T. Operación</small>
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                {{-- {{ $s_l[0]->bombeabilidad ?? '-'}} --}}
-                                            </td>
-                                        </tr>
-                                        {{-- <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                <b>Resistencia a la Compresión</b>
-                                                (Reportado a las 24 hr, bajo la siguiente consideración):
-
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                <!-- < ? php foreach($p as $a){
-                                                    echo $a . ", ";
-                                                } ?> -->
-                                            </td>
-                                        </tr> --}}
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                <b>Tiempo @ 50 psi</b>
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                {{-- {{ $checkboxes['tiempo_50_psi'] == 1 ? 'Sí' : 'No' }} --}}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                <b>Tiempo @ 500 psi</b>
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                {{-- {{ $checkboxes['tiempo_500_psi'] == 1 ? 'Sí' : 'No' }} --}}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                <b>Tiempo @ 1000 psi</b>
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                {{-- {{ $checkboxes['tiempo_1000_psi'] == 1 ? 'Sí' : 'No' }} --}}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                <b>Resistencia a las 12 hs.</b>
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                {{-- {{ $checkboxes['resistencia_12_hs'] == 1 ? 'Sí' : 'No' }} --}}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                <b>Resistencia a las 24 hs.</b>
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                {{-- {{ $checkboxes['resistencia_24_hs'] == 1 ? 'Sí' : 'No' }} --}}
-                                            </td>
-                                        </tr>
+                                        
                                         <tr>
                                             <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
                                                 Agua Libre %

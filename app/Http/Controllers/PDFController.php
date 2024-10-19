@@ -435,17 +435,33 @@ class PDFController extends Controller
 
     public function pdf_report_fractura_solicitud($solicitud_id)
     {
+
         $data = [
             'solicitud' => Solicitud::find($solicitud_id),
             'solicitud_fractura' => SolicitudFractura::where('solicitud_id', $solicitud_id)->get(),
-            //'mud_company' => MudCompany::all(),
-            //'tipo_lodo' => TipoLodo_Lodos::all(),
-            //'opciones_ensayos' => EnsayosLodo::all(),
-            //'ensayos_multiples' => EnsayosLodo::leftJoin('rel_ensayos_requeridos_lodo', 'ensayos_lodo.id', '=', 'rel_ensayos_requeridos_lodo.id_ensayo')
-            //->where('rel_ensayos_requeridos_lodo.nombre', $solicitud_id)
-            //->get(['ensayos_lodo.*', 'rel_ensayos_requeridos_lodo.*']),
-            
         ];
+
+        // Lógica para obtener los nombres de los botones seleccionados
+        $ensayos = [];
+        if ($data['solicitud_fractura'][0]->ensayo_estabilidad == 1) {
+            $ensayos[] = 'Convencional';
+        }
+        if ($data['solicitud_fractura'][0]->ensayo_ruptura == 1) {
+            $ensayos[] = 'No Convencional';
+        }
+        if ($data['solicitud_fractura'][0]->ensayo_especial == 1) {
+            $ensayos[] = 'Especial';
+        }
+
+        $data['ensayos_seleccionados'] = implode(', ', $ensayos);
+
+        $data['checkboxes'] = [
+            'ensayo_estabilidad' => $data['solicitud_fractura'][0]->ensayo_estabilidad,
+            'ensayo_ruptura' => $data['solicitud_fractura'][0]->ensayo_ruptura,
+            'ensayo_especial' => $data['solicitud_fractura'][0]->ensayo_especial,
+        ];
+
+        $data['ensayos_seleccionados'] = implode(', ', $ensayos);
           
         $pdf = PDF::loadView('pdf_fractura_solicitud', $data);
         return $pdf->stream();
