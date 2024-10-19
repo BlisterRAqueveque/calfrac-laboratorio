@@ -47,6 +47,7 @@ use App\Models\TipoDeColchon;
 use App\Models\Choices;
 use App\Models\YacimientosFractura;
 use App\Models\TipoAgua;
+use App\Models\RelTipoAgua;
 use App\Mail\SolicitudLechadaAprobada;
 use App\Mail\SolicitudLodoAprobada;
 use Illuminate\Http\Request;
@@ -222,12 +223,22 @@ class SolicitudController extends Controller
             }
         }
 
-        if ($request->agente_sosten) {
-            $agentes_separados = explode(',', $request->agente_sosten);
-            foreach ($agentes_separados as $agente) {
-                RelAgenteSostenFractura::create([
+        // if ($request->agente_sosten) {
+        //     $agentes_separados = explode(',', $request->agente_sosten);
+        //     foreach ($agentes_separados as $agente) {
+        //         RelAgenteSostenFractura::create([
+        //             'solicitud_id' => $solicitud->id,
+        //             'id_agente' => $agente
+        //         ]);
+        //     }
+        // }
+
+        if ($request->tipo_agua) {
+            $tipo_separados = explode(',', $request->tipo_agua);
+            foreach ($tipo_separados as $tipo) {
+                RelTipoAgua::create([
                     'solicitud_id' => $solicitud->id,
-                    'id_agente' => $agente
+                    'id_tipo' => $tipo
                 ]);
             }
         }
@@ -923,6 +934,9 @@ class SolicitudController extends Controller
             'agente_referencia' => AgenteSosten::leftJoin('rel_agente_sosten_fractura', 'agente_sosten.id', '=', 'rel_agente_sosten_fractura.id_agente')
                 ->where('rel_agente_sosten_fractura.solicitud_id', $solicitud_id)
                 ->get(['agente_sosten.*', 'rel_agente_sosten_fractura.*']),
+            'agua_referencia' => TipoAgua::leftJoin('rel_tipo_agua', 'tipo_agua.id', '=', 'rel_tipo_agua.id_tipo')
+                ->where('rel_tipo_agua.solicitud_id', $solicitud_id)
+                ->get(['tipo_agua.*', 'rel_tipo_agua.*']),
             'solicitud' => Solicitud::find($solicitud_id),
             'solicitud_fractura' => SolicitudFractura::where('solicitud_id', $solicitud_id)->get(),
             'sistemas_fluidos' => SistemasFluidos::all(),
