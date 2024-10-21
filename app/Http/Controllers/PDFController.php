@@ -351,6 +351,7 @@ class PDFController extends Controller
     {
         $chartVP = $request->chartVP;
         $chartGeles = $request->chartGeles;
+        $chartReologias = $request->chartReologias;
 
         $data = [
             'solicitud' => Solicitud::find($solicitud_id),
@@ -358,7 +359,8 @@ class PDFController extends Controller
             'mud_company' => MudCompany::all(),
             'tipo_lodos' => TipoLodo_Lodos::all(),
             'chartVP' => $chartVP,
-            'chartGeles' => $chartGeles
+            'chartGeles' => $chartGeles,
+            'chartReologias' => $chartReologias
             
         ];
           

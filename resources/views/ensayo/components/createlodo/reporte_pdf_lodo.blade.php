@@ -50,15 +50,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
 
 <script>
-<<<<<<< Updated upstream
 
 
  // Función para abrir el reporte PDF en una nueva pestaña
  const pdfReportLodo = (chartVP, chartGeles) => {
-=======
-    // Función para abrir el reporte PDF en una nueva pestaña
-    const pdfReportLodo = (chartVP, chartGeles) => {
->>>>>>> Stashed changes
         let solicitud_id = {!! json_encode($solicitud->id) !!};
         let url = `{{ route('pdf_report_lodo', '') }}/${solicitud_id}?chartVP=${encodeURIComponent(chartVP)}&chartGeles=${encodeURIComponent(chartGeles)}`;
         window.open(url, '_blank');
@@ -87,7 +82,7 @@
         // Llamar a la función de generación de PDF después de un breve retraso
         setTimeout(() => {
             submitFunction(e);
-        }, 300); // Ajusta el tiempo según sea necesario
+        }, 1000); // Ajusta el tiempo según sea necesario
     };
 
 
@@ -100,13 +95,15 @@
         // Obtén los canvas de los gráficos
         const chartCanvas1 = document.getElementById('reologiasVP');
         const chartCanvas2 = document.getElementById('reologiasGeles');
+        const chartCanvas3 = document.getElementById('reologiasFluidos');
 
         const chartDom1hidden = document.getElementById('chartVP');
         const chartDom2hidden = document.getElementById('chartGeles');
+        const chartDom3hidden = document.getElementById('chartReologias');
 
         const generatePDF = () => {
 
-            if (chartCanvas1 && chartCanvas2) {
+            if (chartCanvas1 && chartCanvas2 && chartCanvas3) {
                 // Obtén la imagen en base64 del gráfico 1
                 const dataUrl1 = chartCanvas1.toDataURL('image/png');
                 chartDom1hidden.value = dataUrl1;
@@ -114,6 +111,10 @@
                 // Obtén la imagen en base64 del gráfico 2
                 const dataUrl2 = chartCanvas2.toDataURL('image/png');
                 chartDom2hidden.value = dataUrl2;
+
+                // Obtén la imagen en base64 del gráfico 3
+                const dataUrl3 = chartCanvas3.toDataURL('image/png');
+                chartDom3hidden.value = dataUrl3;
 
                 // Envía el formulario con las imágenes en base64
                 document.getElementById('charts_pdf').submit();
@@ -134,15 +135,17 @@
 
         const chartCanvas1 = document.getElementById('reologiasVP');
         const chartCanvas2 = document.getElementById('reologiasGeles');
+        const chartCanvas3 = document.getElementById('reologiasFluidos');
 
         // Verificar si los gráficos existen
-        if (chartCanvas1 && chartCanvas2) {
+        if (chartCanvas1 && chartCanvas2 && chartCanvas3) {
 
             const dataUrl1 = chartCanvas1.toDataURL('image/png');
             const dataUrl2 = chartCanvas2.toDataURL('image/png');
+            const dataUrl3 = chartCanvas2.toDataURL('image/png');
 
             // Apender las imágenes al formulario 'form_submit_report_lechada' (el form del envio de correo)
-            appendImagesToForm(dataUrl1, dataUrl2);
+            appendImagesToForm(dataUrl1, dataUrl2, dataUrl3);
 
             // Pongo en true la variable porque ya esta appendeado los charts al form
             alreadyGeneratedImages = true;
@@ -152,26 +155,34 @@
     };
 
     // Función para agregar las imágenes en base64 al formulario 'form_submit_report_lechada' (envio de correos)
-    const appendImagesToForm = (dataUrl1, dataUrl2) => {
-        const formSubmitLechada = document.getElementById('form_submit_report_lechada');
+    // const appendImagesToForm = (dataUrl1, dataUrl2, dataUrl3) => {
+    //     const formSubmitLechada = document.getElementById('form_submit_report_lechada');
 
-        // Crear campos ocultos para las imágenes si no existen (chart_image_1, chart_image_2)
-        if (!document.querySelector('input[name="chart_image_1"]')) {
-            const hiddenInput1 = document.createElement('input');
-            hiddenInput1.type = 'hidden';
-            hiddenInput1.name = 'chart_image_1';
-            hiddenInput1.value = dataUrl1;
-            formSubmitLechada.appendChild(hiddenInput1);
-        }
+    //     // Crear campos ocultos para las imágenes si no existen (chart_image_1, chart_image_2)
+    //     if (!document.querySelector('input[name="chart_image_1"]')) {
+    //         const hiddenInput1 = document.createElement('input');
+    //         hiddenInput1.type = 'hidden';
+    //         hiddenInput1.name = 'chart_image_1';
+    //         hiddenInput1.value = dataUrl1;
+    //         formSubmitLechada.appendChild(hiddenInput1);
+    //     }
 
-        if (!document.querySelector('input[name="chart_image_2"]')) {
-            const hiddenInput2 = document.createElement('input');
-            hiddenInput2.type = 'hidden';
-            hiddenInput2.name = 'chart_image_2';
-            hiddenInput2.value = dataUrl2;
-            formSubmitLechada.appendChild(hiddenInput2);
-        }
-    };
+    //     if (!document.querySelector('input[name="chart_image_2"]')) {
+    //         const hiddenInput2 = document.createElement('input');
+    //         hiddenInput2.type = 'hidden';
+    //         hiddenInput2.name = 'chart_image_2';
+    //         hiddenInput2.value = dataUrl2;
+    //         formSubmitLechada.appendChild(hiddenInput2);
+    //     }
+
+    //     if (!document.querySelector('input[name="chart_image_"]')) {
+    //         const hiddenInput2 = document.createElement('input');
+    //         hiddenInput2.type = 'hidden';
+    //         hiddenInput2.name = 'chart_image_2';
+    //         hiddenInput2.value = dataUrl2;
+    //         formSubmitLechada.appendChild(hiddenInput2);
+    //     }
+    // };
 </script>
 
 

@@ -701,11 +701,11 @@
                                                     <tr>
                                                         <td>
                                                             <div style="width: 100%; height: 250px; overflow: hidden; display: flex; justify-content: center; align-items: center; text-align: center; border: 1px solid #494949;">
-                                                                {{-- @if ($chartVP)
-                                                                <img src="{{ $chartVP }}" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
+                                                                @if ($chartReologias)
+                                                                <img src="{{ $chartReologias }}" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
                                                                 @else
                                                                 <p>Archivo no disponible</p>
-                                                                @endif --}}
+                                                                @endif
                                                             </div>
 
                                                         </td>
