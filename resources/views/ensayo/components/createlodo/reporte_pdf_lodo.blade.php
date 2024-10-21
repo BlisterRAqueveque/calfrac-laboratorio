@@ -5,11 +5,11 @@
     }
 </style>
 
-<div class="mt-4 tab-pane fade" id="tab_reporte_pdf_lodo" role="tabpanel"> <!-- Mezclabilidad -->
+<div class="mt-4 tab-pane fade" id="tab_reporte_pdf_lodo" role="tabpanel">
+    <!-- Mezclabilidad -->
     <div class="text-center">
         <h5>Seleccione si desea visualizar/descargar el reporte o enviarlo a alguien.</h5>
-        <button id="btn_pdf_report_lodo"
-            class="btn_submit md:w-auto bg-opacity-60 p-2 rounded-sm text-xs xl:text-sm mt-3">Visualizar Reporte
+        <button id="btn_pdf_report_lodo" class="btn_submit md:w-auto bg-opacity-60 p-2 rounded-sm text-xs xl:text-sm mt-3">Visualizar Reporte
             PDF</button>
     </div>
 
@@ -46,14 +46,19 @@
             </div>
         </div>
     </div>--}}
-</div> 
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
 
 <script>
+<<<<<<< Updated upstream
 
 
  // Función para abrir el reporte PDF en una nueva pestaña
  const pdfReportLodo = (chartVP, chartGeles) => {
+=======
+    // Función para abrir el reporte PDF en una nueva pestaña
+    const pdfReportLodo = (chartVP, chartGeles) => {
+>>>>>>> Stashed changes
         let solicitud_id = {!! json_encode($solicitud->id) !!};
         let url = `{{ route('pdf_report_lodo', '') }}/${solicitud_id}?chartVP=${encodeURIComponent(chartVP)}&chartGeles=${encodeURIComponent(chartGeles)}`;
         window.open(url, '_blank');
@@ -66,9 +71,25 @@
     downloadButton.addEventListener('click', (e) => {
         if (!alreadyGeneratedPDF) {
             alreadyGeneratedPDF = true; // Evitar generación duplicada
-            submitFunction(e);
+            switchToTabAndGeneratePDF(e);
         }
     });
+
+    const switchToTabAndGeneratePDF = (e) => {
+        e.preventDefault();
+
+        // Cambiar al tab de compatibilidad
+        const tabButton = document.querySelector('a[href="#tab-compatibilidad_espaciador"]');
+        if (tabButton) {
+            tabButton.click(); // Hacer clic en el tab para activarlo
+        }
+
+        // Llamar a la función de generación de PDF después de un breve retraso
+        setTimeout(() => {
+            submitFunction(e);
+        }, 300); // Ajusta el tiempo según sea necesario
+    };
+
 
     const submitFunction = (e) => {
         e.preventDefault();
@@ -116,7 +137,7 @@
 
         // Verificar si los gráficos existen
         if (chartCanvas1 && chartCanvas2) {
-            
+
             const dataUrl1 = chartCanvas1.toDataURL('image/png');
             const dataUrl2 = chartCanvas2.toDataURL('image/png');
 
@@ -151,9 +172,6 @@
             formSubmitLechada.appendChild(hiddenInput2);
         }
     };
-
-
-
 </script>
 
 
@@ -174,11 +192,11 @@
         event.preventDefault();
         let solicitud_id = {!! json_encode($solicitud->id) !!}
         // var url = "{{ route('pdf_report_lodo', '') }}" + "/" + solicitud_id;
-        let url = `{{ route('pdf_report_lodo', '') }}/${solicitud_id}?chartVP=${encodeURIComponent(chartVP)}&chartGeles=${encodeURIComponent(chartGeles)}`;
-        window.open(url, '_blank');
-    }
-    
-</script>  --}}
+let url = `{{ route('pdf_report_lodo', '') }}/${solicitud_id}?chartVP=${encodeURIComponent(chartVP)}&chartGeles=${encodeURIComponent(chartGeles)}`;
+window.open(url, '_blank');
+}
+
+</script> --}}
 
 {{-- Generar el envío de corre a un usuario del sistema o fuera del sistema --}}
 {{-- <script>
@@ -201,25 +219,24 @@
                 loadingAlert('Envío en progreso, por favor espere',
                     'Se está enviando el reporte y notificando vía email');
                 fetch("{{ route('pdf_send_report_lodo', '') }}" + "/" + solicitud_id, {
-                        method: 'POST',
-                        headers: {
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
-                                .getAttribute('content')
-                        },
-                        body: new FormData(document.getElementById('form_submit_report_lodo'))
-                    }).then((response) => response.json())
-                    .then((data) => {
-                        if (data) {
-                            
-                            successAlert('¡Reporte Enviado!',
-                                'El reporte se envió correctamente.').then(
-                                (confirmed) => {
-                                    document.getElementById('destinatario_lodo').value = ''
-                                })
-                        }
-                    })
-            }
-        })
-    }
-</script>  --}}
-                                                                                                                                                                                                                                                                                                                                                                                                                              
+method: 'POST',
+headers: {
+'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+.getAttribute('content')
+},
+body: new FormData(document.getElementById('form_submit_report_lodo'))
+}).then((response) => response.json())
+.then((data) => {
+if (data) {
+
+successAlert('¡Reporte Enviado!',
+'El reporte se envió correctamente.').then(
+(confirmed) => {
+document.getElementById('destinatario_lodo').value = ''
+})
+}
+})
+}
+})
+}
+</script> --}}
