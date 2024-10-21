@@ -50,8 +50,22 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
 
 <script>
+// const btn_pdf_report_lodo = document.querySelector('#btn_pdf_report_lodo');
+//     if (btn_pdf_report_lodo) {
+//         btn_pdf_report_lodo.addEventListener('click', e => pdfReportLodo());
+//     }
 
+// const pdfReportLodo = () => {
+//         event.preventDefault();
+//         let solicitud_id = {!! json_encode($solicitud->id) !!}
+//         var url = "{{ route('pdf_report_lodo', '') }}" + "/" + solicitud_id;
+//         window.open(url, '_blank');
+//     }
 
+</script>
+
+<script>
+// Codigo Giuli
  // Función para abrir el reporte PDF en una nueva pestaña
  const pdfReportLodo = (chartVP, chartGeles) => {
         let solicitud_id = {!! json_encode($solicitud->id) !!};
@@ -142,7 +156,7 @@
 
             const dataUrl1 = chartCanvas1.toDataURL('image/png');
             const dataUrl2 = chartCanvas2.toDataURL('image/png');
-            const dataUrl3 = chartCanvas2.toDataURL('image/png');
+            const dataUrl3 = chartCanvas3.toDataURL('image/png');
 
             // Apender las imágenes al formulario 'form_submit_report_lechada' (el form del envio de correo)
             appendImagesToForm(dataUrl1, dataUrl2, dataUrl3);
@@ -183,8 +197,8 @@
     //         formSubmitLechada.appendChild(hiddenInput2);
     //     }
     // };
-</script>
 
+</script>
 
 {{-- Codigo Ro --}}
 

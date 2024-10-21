@@ -372,6 +372,7 @@
                     <canvas id="reologiasFluidos" width="1200" height="400"></canvas>
                 </div>
             </div>
+            {{-- <div id="imageContainer" style="width: 1200px; height: 400px; margin-top: 20px;"></div> --}}
         </div>
     @else
         <div class="accordionCompatibilidadLodo" id="accordionCompatibilidadLodo"></div>
@@ -730,6 +731,7 @@
     @csrf
         <input type="hidden" id="chartVP" name="chartVP">
         <input type="hidden" id="chartGeles" name="chartGeles">
+        <input type="hidden" id="chartReologias" name="chartReologias">
     </form>
 <script> 
     // Primer chart - Reologias VP - YP
@@ -981,16 +983,47 @@
                         }
                     }
                 },
+//                 animation: {
+//     onComplete: function() {
+//         var imageBase64 = reologiasFluidos.toBase64Image();
+
+//         // Obtener el div con el ID 'imageContainer'
+//         var imageDiv = document.getElementById('imageContainer');
+//         imageDiv.style.backgroundImage = `url(${imageBase64})`;
+//         imageDiv.style.backgroundSize = 'contain'; // Ajustar la imagen al tamaño del div
+//         imageDiv.style.backgroundRepeat = 'no-repeat'; // No repetir la imagen
+//         imageDiv.style.backgroundPosition = 'center'; // Centrar la imagen si es más pequeña que el div
+//     }
+// }
                 // animation: {
                 //     onComplete: function() {
-                //         // Convertir la gráfica en formato imagen Base64 después de que la animación haya terminado
-                //         var imageBase64 = reologiasFluidos.toBase64Image();
-                //         //console.log(imageBase64); // Ver el string base64 en la consola
+                        // // Convertir la gráfica en formato imagen Base64 después de que la animación haya terminado
+                        // var imageBase64 = reologiasFluidos.toBase64Image();
+                        // //console.log(imageBase64); // Ver el string base64 en la consola
 
-                //         // Crear un elemento de imagen y agregarlo al DOM
-                //         var imgElement = document.createElement('img');
-                //         imgElement.src = imageBase64;
-                //         document.body.appendChild(imgElement); // Añadir la imagen al cuerpo del documento
+                        // // Crear un elemento de imagen y agregarlo al DOM
+                        // var imgElement = document.createElement('img');
+                        // imgElement.src = imageBase64;
+                        // document.body.appendChild(imgElement); // Añadir la imagen al cuerpo del documento
+                        // otra forma
+                        // var imageBase64 = reologiasFluidos.toBase64Image();
+
+                        // // Crear un elemento canvas
+                        // var canvas = document.createElement('canvas');
+                        // var context = canvas.getContext('2d');
+
+                        // // Establecer dimensiones del canvas
+                        // canvas.width = 1200; // Ancho
+                        // canvas.height = 400; // Altura
+
+                        // // Crear una nueva imagen y dibujarla en el canvas
+                        // var img = new Image();
+                        // img.onload = function() {
+                        // context.drawImage(img, 0, 0, canvas.width, canvas.height);
+                        // };
+                        // img.src = imageBase64;
+
+                        // document.body.appendChild(canvas);
                 //     }
                 // }
             }
