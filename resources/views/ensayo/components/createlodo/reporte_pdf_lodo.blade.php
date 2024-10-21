@@ -53,7 +53,7 @@
 
 
  // Función para abrir el reporte PDF en una nueva pestaña
- const pdfReport = (chartVP, chartGeles) => {
+ const pdfReportLodo = (chartVP, chartGeles) => {
         let solicitud_id = {!! json_encode($solicitud->id) !!};
         let url = `{{ route('pdf_report_lodo', '') }}/${solicitud_id}?chartVP=${encodeURIComponent(chartVP)}&chartGeles=${encodeURIComponent(chartGeles)}`;
         window.open(url, '_blank');
