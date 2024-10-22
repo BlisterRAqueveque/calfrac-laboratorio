@@ -9,7 +9,7 @@ const componentEstaticaLodo = (data = {}) => {
         return;
     }
 
-    console.log(data); // Verificar los valores de 'data'
+    //console.log(data); // Verificar los valores de 'data'
 
     // Limpiar el contenido existente en accordionEstaticaLodo
     accordionEstaticaLodo.innerHTML = '';

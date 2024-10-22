@@ -7,7 +7,7 @@
         <div class="card-body">
             <p class="m-0 font-bold text-lg tracking-wide">Información General</p>
 
-            <div class="grid xs:grid-cols-2 md:grid-cols-5 gap-3 mt-3">
+            <div class="grid xs:grid-cols-2 md:grid-cols-6 gap-3 mt-3">
                 <div class="col-span-2 xl:col-span-2">
                     <label for="cliente_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Cliente
                         <span class="text-red-500">*</span></label>
@@ -19,6 +19,13 @@
                     </select>
                     @error('cliente_lodo')
                             <small class="text-xs text-red-600">El cliente es requerido</small>
+                        @enderror
+                    </div>
+                    <div class="col-span-2 xl:col-span-1">
+                        <label for="programa_lodo" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Programa <span class="text-red-500">*</span></label>
+                        <input type="text" name="programa_lodo" id="programa_lodo" class="form-control text-sm p-2" placeholder="Programa" value="{{ old('programa_lodo') }}">
+                        @error('programa_lodo')
+                        <small class="text-xs text-red-600">El programa es requerido</small>
                         @enderror
                     </div>
 
@@ -363,6 +370,7 @@
         </div>
    
 </form>
+
 <script src="{{ asset('js/Solicitud/lodo/aditivos_lodo.js') }}"></script>
 @include('solicitud.components.lodo.modal_confirmar_solicitud')
 
@@ -418,6 +426,13 @@
         document.getElementById("requeridos_lodo").setValue(0);
         document.getElementById("firma_reconocimiento_lodo").setValue(0);
         document.getElementById("firma_solicitante_lodo").setValue(0);
+    })
+</script>
+<script>
+    const btnSubmitSolicitudLodo = document.getElementById('btnSubmitSolicitudLodo');
+    btnSubmitSolicitudLodo.addEventListener('click', e => {
+        loadingAlert('Creando solicitud, por favor espere',
+        'Se están enviando los correos desde el sistema');
     })
 </script>
 <script>

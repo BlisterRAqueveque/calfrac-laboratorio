@@ -73,6 +73,6 @@ function assignedPermission(permiso) {
       new_permissions.push(permiso_id);
     }
   }
-  console.log("Permisos a quitarle del usuario: ", remove_permissions);
-  console.log("Permisos a agregarle al usuario: ", new_permissions);
+  //console.log("Permisos a quitarle del usuario: ", remove_permissions);
+  //console.log("Permisos a agregarle al usuario: ", new_permissions);
 }

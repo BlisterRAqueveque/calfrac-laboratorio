@@ -15,6 +15,7 @@ class RelHumectabilidad extends Model
         'humectabilidad',
         'solicitud_lodo_id',
         'usuario_carga',
+        'check_humectabilidad'
     ];
 
     public function solicitud_lodo() {

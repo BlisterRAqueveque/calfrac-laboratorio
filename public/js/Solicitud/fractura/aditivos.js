@@ -11,6 +11,12 @@ const container_formulaciones_tentativas_fractura = document.getElementById(
   btnAddFormulacionFractura.addEventListener("click", (e) => {
     e.preventDefault();
     let flex, button, div, input;
+
+    // Opciones para el select de "Curva Hidratación"
+    const hidratacionOptions = [
+      { value: 'Si', text: 'Si' },
+      { value: 'No', text: 'No' },
+    ];
   
     flex = el("div.flex justify-between mb-2");
     button = el(
@@ -26,7 +32,7 @@ const container_formulaciones_tentativas_fractura = document.getElementById(
   
     // Lote
     input = el(
-      "input.form-control text-xs rounded-l-none p-2 col-span-3 md:col-span-1",
+      "input.form-control text-xs rounded-l-none p-2 col-span-4 md:col-span-1",
       { placeholder: "Lote", name: `aditivos[${aux_aditivo_fractura}][lote]` }
     );
     mount(div, input);
@@ -88,6 +94,27 @@ const container_formulaciones_tentativas_fractura = document.getElementById(
       }
     );
     mount(div, input);
+
+    // Curva Hidratación (select)
+    select = document.createElement("select");
+    select.className = "form-control text-xs rounded-l-none p-2 col-span-4 md:col-span-1";
+    select.name = `aditivos[${aux_aditivo_fractura}][hidratacion]`;
+
+    // Añadir opción placeholder
+    const hidratacionPlaceholder = document.createElement('option');
+    hidratacionPlaceholder.value = '0';
+    hidratacionPlaceholder.textContent = 'Curva de Hidratación';
+    hidratacionPlaceholder.disabled = true;
+    hidratacionPlaceholder.selected = true;
+    select.appendChild(hidratacionPlaceholder);
+
+    hidratacionOptions.forEach(optionData => {
+        const option = document.createElement('option');
+        option.value = optionData.value;
+        option.textContent = optionData.text;
+        select.appendChild(option);
+    });
+    div.appendChild(select);
   
     mount(flex, button);
     mount(flex, div);

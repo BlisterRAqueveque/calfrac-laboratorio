@@ -19,10 +19,11 @@
                 readonly>
         </div>
 
-<div class="grid grid-cols-3 text-center bg-gray-100 py-2 my-3">
+<div class="grid grid-cols-4 text-center bg-gray-100 py-2 my-3">
     <p>Lote</p>
     <p>Aditivo</p>
     <p>Conc (gpt o ppt)</p>
+    <p>Curva de Hidratación</p>
 </div>
 
 <style>
@@ -62,15 +63,15 @@
                 @endif
                 <input type="text" class="form-control text-xs p-2 col-span-3 md:col-span-1"
                     placeholder="Concentración" value="{{ $formulacion->concentracion }}" name="aditivos[{{$inc}}][concentracion]" readonly>
+                <input type="text" class="form-control text-xs p-2 col-span-3 md:col-span-1"
+                    placeholder="Concentración" value="{{ $formulacion->hidratacion }}" name="aditivos[{{$inc}}][hidratacion]" readonly>
             </div>
         </div>
         @php
             $inc++;
         @endphp
     @endforeach
-@else
-    <p>Formulaciones tentativas no disponibles.</p>
-@endif
+    @endif
 
     {{--Vieja configuracion
     @foreach ($solicitud_fractura[0]->formulacion_tentativa as $formulacion)
@@ -114,6 +115,7 @@
             Agregar Otra Formulación
         </button>
     </div>
+</div>
 </div>
 
 <script>

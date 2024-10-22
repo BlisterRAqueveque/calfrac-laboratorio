@@ -5,13 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TipoLodo extends Model
+class Choices extends Model
 {
     use HasFactory;
-    protected $table = 'tipo_lodo';
+    protected $table = 'choices';
+
     protected $fillable = [
-        'nombre',
-        'estado',
+        'choices'
     ];
+    
+    public function solicitud_lodo() {
+        return $this->hasMany(SolicitudLodo::class);
+    }
 
 }

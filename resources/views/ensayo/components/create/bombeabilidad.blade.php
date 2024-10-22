@@ -383,7 +383,7 @@
 
     function openModalBombeabilidad(modal, modal_img, src) {
         document.getElementById(modal).style.display = "block";
-        console.log('Esta es la img dle modal: ', document.getElementById(modal_img))
+        //console.log('Esta es la img dle modal: ', document.getElementById(modal_img))
         document.getElementById(modal_img).src = src;
         document.body.classList.add('modal-open');
     }
@@ -443,7 +443,7 @@
      */ //// 
      const submitBombeabilidadSelected = (id_form_selected) => {
     event.preventDefault();
-    console.log(`ID Form Selected: ${id_form_selected}`); 
+    //console.log(`ID Form Selected: ${id_form_selected}`); 
     let form = new FormData(document.getElementById(`form_assignment_${id_form_selected}`));
     confirmAlert().then((confirmed) => {
         if (confirmed) {

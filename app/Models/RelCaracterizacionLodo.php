@@ -46,5 +46,13 @@ class RelCaracterizacionLodo extends Model
     {
         return $this->belongsTo(RelReologiasLodo::class, 'reologia_id');
     }
+
+    public function tipo_lodo_Lodos() {
+        return $this->belongsTo(TipoLodo_Lodos::class, 'tipo_lodo');
+    }
+
+    public function compania_lodo() {
+        return $this->belongsTo(MudCompany::class, 'cia_lodo');
+    }
     
 }

@@ -68,6 +68,11 @@ class Solicitud extends Model
         return $this->belongsTo(Yacimiento::class, 'locacion_id');
     }
 
+    public function locacion_fractura()
+    {
+        return $this->belongsTo(YacimientosFractura::class, 'locacion_id');
+    }
+
     public function estado()
     {
         return $this->belongsTo(Estado_Solicitud::class, 'estado_solicitud_id');
@@ -106,12 +111,12 @@ class Solicitud extends Model
         return $this->belongsTo(Equipos::class, 'equipo');
     }
 
-    public function servicios_fractura() {
-        return $this->belongsTo(ServiciosFractura::class, 'id');
+    public function fractura_servicios() {
+        return $this->belongsTo(ServiciosFractura::class, 'servicios_fractura');
     }
 
-    public function distrito() {
-        return $this->belongsTo(Distrito::class, 'id');
+    public function distrito_fractura() {
+        return $this->belongsTo(Distrito::class, 'distrito');
     }
 
     public function solicitudes_lodo()

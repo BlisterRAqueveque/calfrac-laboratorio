@@ -149,13 +149,13 @@
 
 <head>
     <meta charset="gb18030">
-    <title>Calfrac - Laboratorio de Cementación</title>
+    <title>Laboratorio Calfrac - Solicitud de Lodo</title>
 </head>
 
 <body>
 
     <div class="footer">
-        Calfrac | Laboratorio de Cementación <span class="pagenum"></span>
+        Laboratorio Calfrac | Solicitud de Lodo<span class="pagenum"></span>
     </div>
     <table width='100%' style="border: 1px solid #000000; font-size: 10px;">
         <!-- Tamaño de letra uniforme -->
@@ -169,14 +169,15 @@
                         </div>
                     </td>
                     <td style="width: 60%; text-align: center;">
-                        <h2 style="color: #000000; margin: 0; padding: 0; font-size: 14px;">Laboratorio de Cementación</h2> <!-- Tamaño más grande para el título -->
+                        <h2 style="color: #000000; margin: 0; padding: 0; font-size: 14px;">Solicitud de Lodo</h2> <!-- Tamaño más grande para el título -->
                         <h6 style="margin: 0; padding: 0;">NEUQUEN, ARGENTINA</h6>
                     </td>
                     <td style="width: 20%; text-align: center;">
                         <table style="border-collapse: collapse; width: 100%;">
                             <tr style="border: 1px solid #000000;">
                                 <td style="border: 1px solid #000000; padding: 5px;">
-                                    Numero: C-FM8.0-0459
+                                    <!-- Numero: C-FM8.0-0462 -->
+                                    Num: C-FM8.0-0462
                                 </td>
                             </tr>
                             <tr style="border: 1px solid #000000;">
@@ -214,6 +215,14 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                    Programa:
+                                </td>
+                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                    {{ $solicitud->programa ?? '-' }}
+                                </td>
+                            </tr>
+                            <tr>
                                 <td style="padding: 2px; text-align: right; border: none; background-color: #ffffff;">
                                     Pozo:
                                 </td>
@@ -231,26 +240,10 @@
                             </tr>
                             <tr>
                                 <td style="padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                    Trabajo:
-                                </td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{$solicitud->tipo_trabajo_cemento->nombre}}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 2px; text-align: right; border: none; background-color: #ffffff;">
                                     Servicio:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    -
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                    Programa:
-                                </td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    -
+                                    {{ $solicitud->servicios_lodo->nombre}}
                                 </td>
                             </tr>
                             <tr>
@@ -263,35 +256,42 @@
                             </tr>
                             <tr>
                                 <td style="padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                    MD:
+                                    Tipo de Lodo:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $s_l[0]->profundidad_pozo_md }}m
+                                    {{ $solicitud_lodo[0]->tipo_lodo_Lodos->nombre }}
                                 </td>
                             </tr>
                             <tr>
                                 <td style="padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                    TVD:
+                                    Compania de Lodo:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $s_l[0]->profundidad_pozo_tvd }}m
+                                    {{ $solicitud_lodo[0]->compania_lodo->nombre }}
                                 </td>
                             </tr>
                             <tr>
                                 <td style="padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                    BHCT:
+                                    Densidad del lodo:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $s_l[0]->bhct }} °C
-
+                                    {{ $solicitud_lodo[0]->densidad_lodo}}
                                 </td>
                             </tr>
                             <tr>
                                 <td style="padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                    BHST:
+                                    PF:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $s_l[0]->bhst }} °C
+                                    {{ $solicitud_lodo[0]->pf}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                    VP:
+                                </td>
+                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                    {{ $solicitud_lodo[0]->vp}}
                                 </td>
                             </tr>
                         </table>
@@ -300,42 +300,37 @@
                         <table style="width: 100%; border-collapse: collapse; border: none;">
                             <tr>
                                 <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                    Objetivo del ensayo:
+                                    <u><b>Condiciones del Test</b></u>
                                 </td>
-                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $solicitud->tipo_requerimiento_cemento->nombre }}
+                                <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;" colspan="2">
+
                                 </td>
                             </tr>
-                            <tr>
+                            <!-- <tr>
                                 <td style="padding: 2px; text-align: right; border: none; background-color: #ffffff;">
                                     Ensayo N°:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $solicitud->ensayo->tipo ?? 'null'}}-{{ $solicitud->ensayo->incrementable ?? 'null'}}-{{ $solicitud->ensayo->anio ?? 'null'}}
+                                    {{-- {{ $solicitud->ensayo->tipo ?? 'null'}}-{{ $solicitud->ensayo->incrementable ?? 'null'}}-{{ $solicitud->ensayo->anio ?? 'null'}} --}}
+                                </td>
+                            </tr> -->
+                            <tr>
+                                <td style="padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                    Temperatura:
+                                </td>
+                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
+                                    {{ $solicitud_lodo[0]->temperatura ?? '-'}}
                                 </td>
                             </tr>
                             <tr>
                                 <td style="padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                    Posicion Lechada:
+                                    Profundidad (MD/TVD) (m):
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $ensayos_seleccionados }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                    Tipo de Requerimiento:
+                                    {{ $solicitud_lodo[0]->profundidad_md }} MD
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    -
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                    Tipo de Trabajo:
-                                </td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    -
+                                    {{ $solicitud_lodo[0]->profundidad_tvd }} TVD
                                 </td>
                             </tr>
                         </table>
@@ -344,7 +339,7 @@
 
                     <!-- Columna "Datos de Lechada" -->
                     <td style="width: 3%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #006f53; color:white;">
-                        <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 110%; left: 110%; width: 200px; height: 20px; text-align: center;font-size: 13px;"><b>DATOS DE LECHADA</b></div>
+                        <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 110%; left: 110%; width: 200px; height: 20px; text-align: center;font-size: 13px;"><b>REQUERIMIENTOS DEL COLCHON</b></div>
                     </td>
 
                     <!-- Columna con tabla interna -->
@@ -352,24 +347,24 @@
                         <table style="width: 100%; border-collapse: collapse; border: none;">
                             <tr>
                                 <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                    Fecha:
+                                    Tipo de Colchón
                                 </td>
                                 <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $s_l[0]->fecha_reconocimiento }}
+                                    {{ $solicitud_lodo[0]->rel_colchon->nombre }}
                                 </td>
                             </tr>
-                            <tr>
+                            {{-- <tr>
                                 <td></td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td style="padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                    Tipo de cemento / Marca:
+                                    Tipo de Colchón
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $s_l[0]->tipo_cemento ?? "-" }}
+                                    
                                 </td>
-                            </tr>
+                            </tr> --}}
                         </table>
                         <table style="width: 100%; border-collapse: collapse;">
                             <!-- Fila del encabezado -->
@@ -377,17 +372,15 @@
                                 <th style="width: 10%; text-align: center; background-color: #ffffff; border: none;">Prod N°</th>
                                 <th style="width: 22%; text-align: center; background-color: #ffffff; border: none;">N° Lote</th>
                                 <th style="width: 22%; text-align: center; background-color: #ffffff; border: none;">Aditivo</th>
-                                <th style="width: 22%; text-align: center; background-color: #ffffff; border: none;">Conc.</th>
-                                <th style="width: 22%; text-align: right; background-color: #ffffff; border: none;">Units</th>
-                                <th style="width: 12%; text-align: center; background-color: #ffffff; border: none;"></th>
-                                <th style="width: 12%; text-align: center; background-color: #ffffff; border: none;">OM</th>
+                                <th style="width: 22%; text-align: center; background-color: #ffffff; border: none;">Conc</th>
+                                <th style="width: 22%; text-align: center; background-color: #ffffff; border: none;">Unidad</th>
                             </tr>
 
                             <!-- Filas numeradas del 1 al 10 -->
                             <?php
                             $i = 0;
                             ?>
-                            @foreach ($s_l[0]->rel_aditivos as $formulacion)
+                            @foreach ($solicitud_lodo[0]->formulacion_tentativa as $formulacion)
                             <?php
                             $i++;
                             ?>
@@ -410,71 +403,43 @@
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
                                     {{ $formulacion->concentracion }}
                                 </td>
-                                <td colspan="2" style="padding: 2px; text-align: center; border: 1px solid #494949; background-color: #ffffff;">
-                                    %BOWC
-                                </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{ $formulacion->om }}
+                                    {{ $formulacion->unidad}}
                                 </td>
                             </tr>
                             @endforeach
-                            <tr>
-                                <td style="text-align: center; background-color: #ffffff; border: none;"></td>
-                                <td style="text-align: center; background-color: #ffffff; border: none;"></td>
-                                <td style="text-align: center; background-color: #ffffff; border: none;">Densidad</td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    @foreach ($s_l[0]->calculos_ensayos as $calculo)
-                                    {{ $calculo->densidad_ensayo ?? '-' }}
-                                    @endforeach
-                                </td>
-                                <td style="padding: 2px; text-align: left; border: none; background-color: #ffffff;"><small>g/L</small></td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    @foreach ($s_l[0]->calculos_ensayos as $calculo)
-                                    {{ $calculo->ppg_ensayo ?? '-' }}
-                                    @endforeach
-                                </td>
-                                <td style="text-align: center; background-color: #ffffff; border: none;">ppg</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; background-color: #ffffff; border: none;"></td>
-                                <td style="text-align: center; background-color: #ffffff; border: none;"></td>
-                                <td style="text-align: center; background-color: #ffffff; border: none;">Rendimiento</td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    @foreach ($s_l[0]->calculos_ensayos as $calculo)
-                                    {{ $calculo->rendimiento_ensayo ?? '-' }}
-                                    @endforeach
-                                </td>
-                                <td style="padding: 2px; text-align: left; border: none; background-color: #ffffff;"><small>L/bolsa</small></td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    @foreach ($s_l[0]->calculos_ensayos as $calculo)
-                                    {{ $calculo->ft_bolsa ?? '-' }}
-                                    @endforeach
-                                </td>
-                                <td style="text-align: center; background-color: #ffffff; border: none;"><small>ft³/bolsa</small></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; background-color: #ffffff; border: none;"></td>
-                                <td style="text-align: center; background-color: #ffffff; border: none;"></td>
-                                <td style="text-align: center; background-color: #ffffff; border: none;">Req. Agua</td>
-                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    @foreach ($s_l[0]->calculos_ensayos as $calculo)
-                                    {{ $calculo->req_agua ?? '-' }}
-                                    @endforeach
-                                </td>
-                                <td style="text-align: left; background-color: #ffffff; border: none;"><small>%</small></td>
-                                <td style="padding: 2px; text-align: center; border: 1px solid #494949; background-color: #ffffff;">
-                                    @foreach ($s_l[0]->calculos_ensayos as $calculo)
-                                    {{ $calculo->bolsa_ensayo ?? '-' }}
-                                    @endforeach
-                                </td>
-                                <td style="text-align: center; background-color: #ffffff; border: none;">
-                                    <small>L/bolsa</small>
-                                </td>
-                            </tr>
                         </table>
-
+                        <br><br>
+                        <table style="width: 100%; border-collapse: collapse; border: none;">
+                            <tr>
+                                <td style="width: 50%; padding: 2px; text-align: left; border: none; background-color: #ffffff;">
+                                    <u><b>Ensayos Requeridos:</b></u>
+                                </td>
+                                <td style="width: 80%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                    <ul>
+                                        <!-- Aca se hace el foreach para mostrar la/las opciones marcadas de ensayos requeridos -->
+                                        <!-- <li> EJEMPLO </li>
+                                        aca se cerraria el foreach -->
+                                        @foreach ($ensayos_multiples as $e_r)
+                                        @foreach ($opciones_ensayos as $ensayo)
+                                            @if ($ensayo->id == $e_r->id_ensayo)
+                                                <li>{{ $ensayo->nombre }}</li>
+                                            @endif
+                                        @endforeach
+                                    @endforeach
+                                    </ul>
+                                </td>
+                            </tr>
+                            <!-- <tr>
+                                <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                    Densidad del Lodo (ppg)
+                                </td>
+                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
+                                    -
+                                </td>
+                            </tr> -->
+                        </table>
                     </td>
-
                 </tr>
             </table>
         </div>
@@ -483,7 +448,7 @@
                 <tr>
                     <!-- Columna "Datos Generales" -->
                     <td style="width: 3%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #006f53; color:white;">
-                        <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 90%; left: 90%; width: 200px; height: 20px; text-align: center;font-size: 13px;"><b>DATOS</b></div>
+                        <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 90%; left: 90%; width: 200px; height: 20px; text-align: center;font-size: 13px;"><b></b></div>
                     </td>
                     <!-- Columna con tabla interna -->
                     <td style="width: 71%; padding: 4px; text-align: center; vertical-align: top;">
@@ -491,103 +456,47 @@
                             <tr>
                                 <!-- Columna "Datos Generales" -->
                                 <td style="width: 6%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #D3D3D3; color:black;">
-                                    <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 90%; left: 115%; width: 200px; height: 20px; text-align: center;font-size: 13px;">Ensayo Solicitado</div>
+                                    <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 90%; left: 115%; width: 200px; height: 20px; text-align: center;font-size: 13px;">Colchón</div>
                                 </td>
 
                                 <!-- Columna con tabla interna -->
                                 <!-- Columna con tabla interna -->
                                 <td style="width: 94%; padding: 4px; text-align: center; vertical-align: top;">
+                                <br><br><br>
                                     <table style="width: 100%; border-collapse: collapse; border: none;">
                                         <tr>
                                             <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                OH/Trepano (in):
+                                                Volumen del Colchón:
                                             </td>
-                                            <td style="width: 25%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                -
-                                            </td>
-                                            <td style="width: 25%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                -
+                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                {{ $solicitud_lodo[0]->vol_colchon}}
                                             </td>
                                         </tr>
                                         <tr>
                                             <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                Casing ID y OD (in)
+                                                Densidad del Colchón
                                             </td>
-                                            <td style="width: 25%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                -
-                                            </td>
-                                            <td style="width: 25%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                -
+                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                {{ $solicitud_lodo[0]->densidad_colchon}}
                                             </td>
                                         </tr>
                                         <tr>
                                             <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                Densidad del Lodo (ppg)
+                                                Tiempo de Contacto
                                             </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                -
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                Tipo de lodo
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                -
+                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                {{ $solicitud_lodo[0]->tiempo_contacto}}
                                             </td>
                                         </tr>
+                                    </table>
+                                    <br><br><br>
+                                    <table style="width: 100%; border-collapse: collapse; border: none;">
                                         <tr>
                                             <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                Compañía de Lodos
+                                            Observación/Comentarios:
                                             </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                -
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                Base de Lechada (MD/TVD) (m)
-                                            </td>
-                                            <td style="width: 25%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                -
-                                            </td>
-                                            <td style="width: 25%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                -
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                Tope de Lechada (MD/TVD) (m)
-                                            </td>
-                                            <td style="width: 25%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                -
-                                            </td>
-                                            <td style="width: 25%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                -
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                Volumen (bbl)
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                -
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                Caudal (bpm)
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                -
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                Grado de Temperatura (F°/100ft)
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                -
+                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                {{ $solicitud_lodo[0]->comentario }}
                                             </td>
                                         </tr>
                                     </table>
@@ -611,87 +520,6 @@
                     <td style="width: 71%; padding: 4px; text-align: center; vertical-align: top;">
                         <table style="width: 100%;">
                             <tr>
-                                <!-- Columna "Datos Generales" -->
-                                <td style="width: 6%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #D3D3D3; color:black;">
-                                    <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 90%; left: 115%; width: 200px; height: 20px; text-align: center;font-size: 13px;">Requerimientos de Lechada</div>
-                                </td>
-
-                                <!-- Columna con tabla interna -->
-                                <!-- Columna con tabla interna -->
-                                <td style="width: 94%; padding: 4px; text-align: center; vertical-align: top;">
-                                    <table style="width: 100%; border-collapse: collapse; border: none;">
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                Reología (Si/No)
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                -
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                Densidad (ppg)
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                -
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                Filtrado < mL </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                -
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                Bombeabilidad Tiempo Acondicionamiento + Tiempo Operación
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                -
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                <b>Resistencia a la Compresión</b>
-                                                (Reportado a las 24 hr, bajo la siguiente consideración):
-
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                <!-- < ? php foreach($p as $a){
-                                                    echo $a . ", ";
-                                                } ?> -->
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                Agua Libre %
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                -
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                SGS (min)
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                -
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <br>
-                                    <table style="width: 100%; border-collapse: collapse; border: none;">
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                                Observación/Comentarios:
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                -
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
                             </tr>
                         </table>
                     </td>
@@ -708,11 +536,13 @@
                                 <!-- Primera Columna -->
                                 <td width="33.33%" style="position: relative; text-align: left; padding: 10px;">
                                     <span style="font-weight: bold; font-size: 14px;">Solicitado por:</span><br>
-                                    <span style="font-size: 16px; font-weight: bold;">{{ $s_l[0]->solicitado->nombre ?? '-' . ' '}} {{ $s_l[0]->solicitado->apellido ?? '-' }}</span><br>
+                                    <span style="font-size: 16px; font-weight: bold;">
+                                        {{ $solicitud_lodo[0]->user_solicitante->nombre ?? '-' . ' '}} {{ $solicitud_lodo[0]->user_solicitante->apellido ?? '-' }}
+                                    </span><br>
                                     <span style="font-size: 10px;">
                                         Digitally signed by<br>
-                                        {{ $s_l[0]->solicitado->nombre  ?? '-' . ' '}} {{ $s_l[0]->solicitado->apellido ?? '-' }}<br>
-                                        Date: {{ $s_l[0]->fecha_solicitante }}
+                                        {{ $solicitud_lodo[0]->user_solicitante->nombre ?? '-' . ' '}} {{ $solicitud_lodo[0]->user_solicitante->apellido ?? '-' }}<br>
+                                        Date: {{ $solicitud_lodo[0]->fecha_solicitante }}
                                     </span>
                                     <img src="ruta/a/la/firma.png" style="position: absolute; top: 10px; left: 10px; width: 80px; opacity: 0.3; z-index: -1;">
                                 </td>
@@ -720,11 +550,13 @@
                                 <!-- Segunda Columna -->
                                 <td width="33.33%" style="position: relative; text-align: left; padding: 10px;">
                                     <span style="font-weight: bold; font-size: 14px;">Reconocido por:</span><br>
-                                    <span style="font-size: 16px; font-weight: bold;">{{ $s_l[0]->user_reconocimiento->nombre ?? '-' . ' '}} {{ $s_l[0]->user_reconocimiento->apellido ?? '-'}}</span><br>
+                                    <span style="font-size: 16px; font-weight: bold;">
+                                        {{ $solicitud_lodo[0]->user_reconocimiento->nombre ?? '-' . ' '}} {{ $solicitud_lodo[0]->user_reconocimiento->apellido ?? '-' }}
+                                    </span><br>
                                     <span style="font-size: 10px;">
                                         Digitally signed by<br>
-                                        {{ $s_l[0]->user_reconocimiento->nombre  ?? '-' . ' '}} {{ $s_l[0]->user_reconocimiento->apellido ?? '-' }}<br>
-                                        Date: {{ $s_l[0]->fecha_reconocimiento }}
+                                        {{ $solicitud_lodo[0]->user_reconocimiento->nombre ?? '-' . ' '}} {{ $solicitud_lodo[0]->user_reconocimiento->apellido ?? '-' }}<br>
+                                        Date: {{ $solicitud_lodo[0]->fecha_reconocimiento }}
                                     </span>
                                     <img src="ruta/a/la/firma.png" style="position: absolute; top: 10px; left: 10px; width: 80px; opacity: 0.3; z-index: -1;">
                                 </td>
@@ -732,11 +564,14 @@
                                 <!-- Tercera Columna -->
                                 <td width="33.33%" style="position: relative; text-align: left; padding: 10px;">
                                     <span style="font-weight: bold; font-size: 14px;">Autorizado por:</span><br>
-                                    <span style="font-size: 16px; font-weight: bold;">{{ $s_l[0]->user_autorizacion->nombre ?? '-' . ' '}} {{ $s_l[0]->user_autorizacion->apellido ?? '-' }}</span><br>
+                                    <span style="font-size: 16px; font-weight: bold;">
+                                        {{ $solicitud_lodo[0]->user_autorizacion->nombre ?? '-' . ' '}} {{ $solicitud_lodo[0]->user_autorizacion->apellido ?? '-' }}
+                                    </span><br>
                                     <span style="font-size: 10px;">
                                         Digitally signed by<br>
-                                        {{ $s_l[0]->user_autorizacion->nombre ?? '-' . ' '}} {{ $s_l[0]->user_autorizacion->apellido ?? '-'}}<br>
-                                        Date: {{ $s_l[0]->fecha_autorizacion }}
+                                        {{ $solicitud_lodo[0]->user_autorizacion->nombre ?? '-' . ' '}} {{ $solicitud_lodo[0]->user_autorizacion->apellido ?? '-' }}
+                                        <br>
+                                        {{ $solicitud_lodo[0]->fecha_autorizacion }}
                                     </span>
                                     <img src="ruta/a/la/firma.png" style="position: absolute; top: 10px; left: 10px; width: 80px; opacity: 0.3; z-index: -1;">
                                 </td>
@@ -752,3 +587,9 @@
             </table>
         </div>
     </table>
+
+
+    
+</body>
+
+</html>

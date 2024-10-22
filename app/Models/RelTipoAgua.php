@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TipoLodo extends Model
+class RelTipoAgua extends Model
 {
     use HasFactory;
-    protected $table = 'tipo_lodo';
-    protected $fillable = [
-        'nombre',
-        'estado',
-    ];
 
+    protected $table = 'rel_tipo_agua';
+
+    protected $fillable = [
+        'solicitud_id',
+        'id_tipo'
+    ];
 }

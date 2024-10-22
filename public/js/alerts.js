@@ -66,3 +66,20 @@ function loadingAlert(title = 'Carga en progreso, por favor espere', html = 'Se 
     });
   });
 }
+
+function loadingAlertPDF(title = 'Se está generando el PDF, por favor espere', html = 'Capturando gráficos', timer = '') {
+  return new Promise((resolve, reject) => {
+    Swal.fire({
+      title: title,
+      html: html,
+      timer: timer,
+      // timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading();
+        
+      },
+    }).then((result) => {
+        resolve(result);
+    });
+  });
+}

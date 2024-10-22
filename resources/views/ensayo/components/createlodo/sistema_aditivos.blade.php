@@ -112,7 +112,7 @@
                                 componentShowAditivosLodo(data.success_aditivos_lodo)
                                 //componentShowAditivos(data.success_aditivos, data.success_calculos)
                                 
-                                console.log('Data aditivos:', data.success_aditivos_lodo)
+                                //console.log('Data aditivos:', data.success_aditivos_lodo)
                                 //console.log('Data calculos:', data.success_calculos)
                                 document.getElementById('form_aditivos_lodo').style.display = 'none'
                                 successAlert('¡Registro Asignado!',

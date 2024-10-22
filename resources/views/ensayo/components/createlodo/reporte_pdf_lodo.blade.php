@@ -5,11 +5,11 @@
     }
 </style>
 
-<div class="mt-4 tab-pane fade" id="tab_reporte_pdf_lodo" role="tabpanel"> <!-- Mezclabilidad -->
+<div class="mt-4 tab-pane fade" id="tab_reporte_pdf_lodo" role="tabpanel">
+    <!-- Mezclabilidad -->
     <div class="text-center">
         <h5>Seleccione si desea visualizar/descargar el reporte o enviarlo a alguien.</h5>
-        <button id="btn_pdf_report_lodo"
-            class="btn_submit md:w-auto bg-opacity-60 p-2 rounded-sm text-xs xl:text-sm mt-3">Visualizar Reporte
+        <button id="btn_pdf_report_lodo" class="btn_submit md:w-auto bg-opacity-60 p-2 rounded-sm text-xs xl:text-sm mt-3">Visualizar Reporte
             PDF</button>
     </div>
 
@@ -36,7 +36,7 @@
                                         placeholder="Correo electrónico.." name="destinatario_lodo" id="destinatario_lodo">
                                 </div>
                                 <div class="col-span-1">
-                                    <button id="btn_submit_report_lodo"
+                                    <button id="btn_submit_report_lodo_mail"
                                         class="btn_submit bg-opacity-60 p-2 rounded-sm text-xs xl:text-sm w-full">Enviar</button>
                                 </div>
                             </div>
@@ -46,10 +46,182 @@
             </div>
         </div>
     </div>--}}
-</div> 
-
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
 
 <script>
+// const btn_pdf_report_lodo = document.querySelector('#btn_pdf_report_lodo');
+//     if (btn_pdf_report_lodo) {
+//         btn_pdf_report_lodo.addEventListener('click', e => pdfReportLodo());
+//     }
+
+// const pdfReportLodo = () => {
+//         event.preventDefault();
+//         let solicitud_id = {!! json_encode($solicitud->id) !!}
+//         var url = "{{ route('pdf_report_lodo', '') }}" + "/" + solicitud_id;
+//         window.open(url, '_blank');
+//     }
+
+</script>
+
+<script>
+// Codigo Giuli
+ // Función para abrir el reporte PDF en una nueva pestaña
+ const pdfReportLodo = (chartVP, chartGeles) => {
+        let solicitud_id = {!! json_encode($solicitud->id) !!};
+        let url = `{{ route('pdf_report_lodo', '') }}/${solicitud_id}?chartVP=${encodeURIComponent(chartVP)}&chartGeles=${encodeURIComponent(chartGeles)}`;
+        window.open(url, '_blank');
+    };
+
+    let downloadButton = document.getElementById("btn_pdf_report_lodo");
+
+    let alreadyGeneratedPDF = false;
+
+    downloadButton.addEventListener('click', (e) => {
+        if (!alreadyGeneratedPDF) {
+            alreadyGeneratedPDF = true; // Evitar generación duplicada
+            loadingAlertPDF();
+            switchToTabAndGeneratePDF(e);
+        }
+    });
+
+    const switchToTabAndGeneratePDF = (e) => {
+        e.preventDefault();
+
+        // Cambiar al tab de compatibilidad
+        const tabButton = document.querySelector('a[href="#tab-compatibilidad_espaciador"]');
+        if (tabButton) {
+            tabButton.click(); // Hacer clic en el tab para activarlo
+        }
+
+        // Llamar a la función de generación de PDF después de un breve retraso
+        setTimeout(() => {
+            submitFunction(e);
+        }, 1000); // Ajusta el tiempo según sea necesario
+    };
+
+    const submitFunction = (e) => {
+        e.preventDefault();
+
+        const btn_pdf_report_lodo = document.querySelector('#btn_pdf_report_lodo');
+        btn_pdf_report_lodo.classList.toggle('disabled');
+
+        // Obtén los canvas de los gráficos
+        const chartCanvas1 = document.getElementById('reologiasVP');
+        const chartCanvas2 = document.getElementById('reologiasGeles');
+        const chartCanvas3 = document.getElementById('reologiasFluidos');
+
+        const chartDom1hidden = document.getElementById('chartVP');
+        const chartDom2hidden = document.getElementById('chartGeles');
+        const chartDom3hidden = document.getElementById('chartReologias');
+
+        const generatePDF = () => {
+
+            if (chartCanvas1 && chartCanvas2 && chartCanvas3) {
+                // Obtén la imagen en base64 del gráfico 1
+                const dataUrl1 = chartCanvas1.toDataURL('image/png');
+                chartDom1hidden.value = dataUrl1;
+
+                // Obtén la imagen en base64 del gráfico 2
+                const dataUrl2 = chartCanvas2.toDataURL('image/png');
+                chartDom2hidden.value = dataUrl2;
+
+                // Obtén la imagen en base64 del gráfico 3
+                const dataUrl3 = chartCanvas3.toDataURL('image/png');
+                chartDom3hidden.value = dataUrl3;
+
+                // Envía el formulario con las imágenes en base64
+                document.getElementById('charts_pdf').submit();
+
+                // Cerrar el modal de carga
+                Swal.close(); // Usar SweetAlert para cerrar el modal
+
+                // Cambiar a la pestaña del reporte PDF
+                switchToTabReportePDF();
+
+            } else {
+                console.error('No se pudo encontrar el canvas de los gráficos.');
+                Swal.close();
+            }
+        };
+
+        generatePDF();
+    };
+
+
+    // Función para cambiar a la pestaña "tab_reporte_pdf_lodo"
+    const switchToTabReportePDF = () => {
+        const tabReporteButton = document.querySelector('a[href="#tab_reporte_pdf_lodo"]');
+        if (tabReporteButton) {
+            tabReporteButton.click(); // Hacer clic en el tab para activarlo
+        }
+    };
+
+    //La funcion de abajo podria reutilizarla arriba pero hay que agregar unas cositas y paja
+
+    //Creo variable para consultar luego si ya estan las imgs en el form
+    let alreadyGeneratedImages = false;
+
+    const generateImages = () => {
+
+        const chartCanvas1 = document.getElementById('reologiasVP');
+        const chartCanvas2 = document.getElementById('reologiasGeles');
+        const chartCanvas3 = document.getElementById('reologiasFluidos');
+
+        // Verificar si los gráficos existen
+        if (chartCanvas1 && chartCanvas2 && chartCanvas3) {
+
+            const dataUrl1 = chartCanvas1.toDataURL('image/png');
+            const dataUrl2 = chartCanvas2.toDataURL('image/png');
+            const dataUrl3 = chartCanvas3.toDataURL('image/png');
+
+            // Apender las imágenes al formulario 'form_submit_report_lechada' (el form del envio de correo)
+            appendImagesToForm(dataUrl1, dataUrl2, dataUrl3);
+
+            // Pongo en true la variable porque ya esta appendeado los charts al form
+            alreadyGeneratedImages = true;
+        } else {
+            console.error('No se pudo encontrar el canvas de los gráficos.');
+        }
+    };
+
+    // Función para agregar las imágenes en base64 al formulario 'form_submit_report_lechada' (envio de correos)
+    // const appendImagesToForm = (dataUrl1, dataUrl2, dataUrl3) => {
+    //     const formSubmitLechada = document.getElementById('form_submit_report_lechada');
+
+    //     // Crear campos ocultos para las imágenes si no existen (chart_image_1, chart_image_2)
+    //     if (!document.querySelector('input[name="chart_image_1"]')) {
+    //         const hiddenInput1 = document.createElement('input');
+    //         hiddenInput1.type = 'hidden';
+    //         hiddenInput1.name = 'chart_image_1';
+    //         hiddenInput1.value = dataUrl1;
+    //         formSubmitLechada.appendChild(hiddenInput1);
+    //     }
+
+    //     if (!document.querySelector('input[name="chart_image_2"]')) {
+    //         const hiddenInput2 = document.createElement('input');
+    //         hiddenInput2.type = 'hidden';
+    //         hiddenInput2.name = 'chart_image_2';
+    //         hiddenInput2.value = dataUrl2;
+    //         formSubmitLechada.appendChild(hiddenInput2);
+    //     }
+
+    //     if (!document.querySelector('input[name="chart_image_"]')) {
+    //         const hiddenInput2 = document.createElement('input');
+    //         hiddenInput2.type = 'hidden';
+    //         hiddenInput2.name = 'chart_image_2';
+    //         hiddenInput2.value = dataUrl2;
+    //         formSubmitLechada.appendChild(hiddenInput2);
+    //     }
+    // };
+
+</script>
+
+{{-- Codigo Ro --}}
+
+
+{{-- cambie nombre boton email --}}
+{{-- <script>
     const btn_pdf_report_lodo = document.querySelector('#btn_pdf_report_lodo');
     if (btn_pdf_report_lodo) {
         btn_pdf_report_lodo.addEventListener('click', e => pdfReportLodo());
@@ -58,14 +230,15 @@
     /**
      * Genera la visualización del PDF en una nueva pestaña
      */
-    const pdfReportLodo = () => {
+    const pdfReportLodo = (chartVP, chartGeles) => {
         event.preventDefault();
         let solicitud_id = {!! json_encode($solicitud->id) !!}
-        var url = "{{ route('pdf_report_lodo', '') }}" + "/" + solicitud_id;
-        window.open(url, '_blank');
-    }
-    
-</script> 
+        // var url = "{{ route('pdf_report_lodo', '') }}" + "/" + solicitud_id;
+let url = `{{ route('pdf_report_lodo', '') }}/${solicitud_id}?chartVP=${encodeURIComponent(chartVP)}&chartGeles=${encodeURIComponent(chartGeles)}`;
+window.open(url, '_blank');
+}
+
+</script> --}}
 
 {{-- Generar el envío de corre a un usuario del sistema o fuera del sistema --}}
 {{-- <script>
@@ -88,25 +261,24 @@
                 loadingAlert('Envío en progreso, por favor espere',
                     'Se está enviando el reporte y notificando vía email');
                 fetch("{{ route('pdf_send_report_lodo', '') }}" + "/" + solicitud_id, {
-                        method: 'POST',
-                        headers: {
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
-                                .getAttribute('content')
-                        },
-                        body: new FormData(document.getElementById('form_submit_report_lodo'))
-                    }).then((response) => response.json())
-                    .then((data) => {
-                        if (data) {
-                            
-                            successAlert('¡Reporte Enviado!',
-                                'El reporte se envió correctamente.').then(
-                                (confirmed) => {
-                                    document.getElementById('destinatario_lodo').value = ''
-                                })
-                        }
-                    })
-            }
-        })
-    }
-</script>  --}}
-                                                                                                                                                                                                                                                                                                                                                                                                                              
+method: 'POST',
+headers: {
+'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+.getAttribute('content')
+},
+body: new FormData(document.getElementById('form_submit_report_lodo'))
+}).then((response) => response.json())
+.then((data) => {
+if (data) {
+
+successAlert('¡Reporte Enviado!',
+'El reporte se envió correctamente.').then(
+(confirmed) => {
+document.getElementById('destinatario_lodo').value = ''
+})
+}
+})
+}
+})
+}
+</script> --}}
