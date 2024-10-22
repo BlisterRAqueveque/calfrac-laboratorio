@@ -500,3 +500,20 @@ a:link {
 .swal2-validation-message {
   background-color: transparent;
 }
+
+.hide-container {
+  overflow: hidden;
+  transition: all 0.3s ease;
+  padding: 0;
+  display: grid !important;
+  grid-template-rows: 0fr;
+}
+
+.hide-container > div {
+  overflow: hidden;
+}
+
+.show-container {
+  grid-template-rows: 1fr;
+  transition: all 0.3s ease;
+}

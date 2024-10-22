@@ -83,6 +83,7 @@
             <img id="modalImgLodoEstatica2" style="width: auto;">
         </div>
     </div>
+    {{--! Solo vista --}}
     @if (count($solicitud_lodo[0]->rel_estatica) > 0)
         <div class="accordionEstaticaLodo" id="accordionEstaticaLodo">
             <div class="row mt-3 py-2 px-2">
@@ -93,18 +94,9 @@
 
                     <div class="col-span-5 md:col-span-1">
                         <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Remoción
-                            Estatica <small>(Si/No)</small></label>
+                            Estatica:  {{ $solicitud_lodo[0]->rel_estatica[0]->remocion_estatica == 1 ? 'Si' : 'No' }}</label>
                         {{-- <input type="text" name="remocion_estatica" value="{{ $solicitud_lodo[0]->rel_estatica[0]->remocion_estatica }}" class="form-control text-sm"
                     placeholder="¿Reporta remoción estatica?" readonly> --}}
-                        <select name="remocion_estatica" id="remocion_estatica" class="text-sm error-message"
-                            data-silent-initial-value-set="true" multiple="false" disabled>
-                            @foreach ($choices as $y)
-                                <option value="{{ $y->id }}"
-                                    {{ $y->id == $solicitud_lodo[0]->rel_estatica[0]->remocion_estatica ? 'selected' : '' }}>
-                                    {{ $y->choices }}
-                                </option>
-                            @endforeach
-                        </select>
                     </div>
                 </div>
                 {{-- <div>
@@ -242,6 +234,8 @@
     @else
         <div class="accordionEstaticaLodo" id="accordionEstaticaLodo"></div>
     @endif
+
+    {{--! Solo carga --}}
     @if (count($solicitud_lodo[0]->rel_estatica) == 0)
         <form id="form_estatica_lodo" method="POST">
             @csrf
@@ -264,6 +258,11 @@
                             </option>
                         @endforeach
                     </select>
+                    <div class="hide-container" id="error-text">
+                        <div>
+                            <p class="text-red-500 font-bolf">Debe completar este campo</p>
+                        </div>
+                    </div>
                 </div>
             </div>
             {{-- <div class="row mt-3 py-2 px-2" id="solapa3">
@@ -480,11 +479,15 @@
                     // Opcional: puedes enfocar el campo si quieres
 
                     const el = document.getElementById('remocion_estatica');
+                    const error_text = document.getElementById('error-text')
+                    error_text.classList.add('show-container')
                     el.focus()
                     el.classList.add('error-message')
                     el.addEventListener('change', () => {
-                        console.log('aca')
-                        if (el.value) el.classList.remove('error-message')
+                        if (el.value) {
+                            el.classList.remove('error-message')
+                            error_text.classList.remove('show-container')
+                        }
                     })
                 });
                 return; // Detener la ejecución si hay un error
