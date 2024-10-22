@@ -11,7 +11,7 @@ window.axios = axios;
 window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 const virtualSelect_min = "";
 /*!
- * Virtual Select v1.0.45
+ * Virtual Select v1.0.42
  * https://sa-si-dev.github.io/virtual-select
  * Licensed under MIT (https://github.com/sa-si-dev/virtual-select/blob/master/LICENSE)
  */
@@ -41,11 +41,11 @@ const virtualSelect_min = "";
     return o2;
   }
   function i(e2) {
-    return i = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(e3) {
+    return (i = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(e3) {
       return typeof e3;
     } : function(e3) {
       return e3 && "function" == typeof Symbol && e3.constructor === Symbol && e3 !== Symbol.prototype ? "symbol" : typeof e3;
-    }, i(e2);
+    })(e2);
   }
   function o(e2, t2) {
     for (var o2 = 0; o2 < t2.length; o2++) {
@@ -76,7 +76,8 @@ const virtualSelect_min = "";
     return s2 = t2, r2 = [{ key: "getString", value: function(e2) {
       return e2 || 0 === e2 ? e2.toString() : "";
     } }, { key: "convertToBoolean", value: function(e2) {
-      return true === e2 || "true" === e2 || false !== e2 && "false" !== e2 && arguments.length > 1 && void 0 !== arguments[1] && arguments[1];
+      var t3 = arguments.length > 1 && void 0 !== arguments[1] && arguments[1];
+      return true === e2 || "true" === e2 || false !== e2 && "false" !== e2 && t3;
     } }, { key: "isEmpty", value: function(e2) {
       var t3 = false;
       return e2 ? Array.isArray(e2) ? 0 === e2.length && (t3 = true) : "object" === i(e2) && 0 === Object.keys(e2).length && (t3 = true) : t3 = true, t3;
@@ -111,11 +112,11 @@ const virtualSelect_min = "";
     } }], (n2 = null) && o(s2.prototype, n2), r2 && o(s2, r2), Object.defineProperty(s2, "prototype", { writable: false }), t2;
   }();
   function n(e2) {
-    return n = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(e3) {
+    return (n = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(e3) {
       return typeof e3;
     } : function(e3) {
       return e3 && "function" == typeof Symbol && e3.constructor === Symbol && e3 !== Symbol.prototype ? "symbol" : typeof e3;
-    }, n(e2);
+    })(e2);
   }
   function r(e2, t2) {
     return function(e3) {
@@ -316,11 +317,11 @@ const virtualSelect_min = "";
     return (t2 = S(t2)) in e2 ? Object.defineProperty(e2, t2, { value: i2, enumerable: true, configurable: true, writable: true }) : e2[t2] = i2, e2;
   }
   function f(e2) {
-    return f = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(e3) {
+    return (f = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(e3) {
       return typeof e3;
     } : function(e3) {
       return e3 && "function" == typeof Symbol && e3.constructor === Symbol && e3 !== Symbol.prototype ? "symbol" : typeof e3;
-    }, f(e2);
+    })(e2);
   }
   function y(e2, t2) {
     return function(e3) {
@@ -401,7 +402,7 @@ const virtualSelect_min = "";
     }(e2, "string");
     return "symbol" === f(t2) ? t2 : String(t2);
   }
-  var x, w = { 13: "onEnterPress", 38: "onUpArrowPress", 40: "onDownArrowPress", 46: "onBackspaceOrDeletePress", 8: "onBackspaceOrDeletePress" }, k = ["autofocus", "disabled", "multiple", "required"], C = ["autofocus", "class", "disabled", "id", "multiple", "name", "placeholder", "required"], E = ["additionalClasses", "additionalDropboxClasses", "additionalDropboxContainerClasses", "additionalToggleButtonClasses", "aliasKey", "allOptionsSelectedText", "allowNewOption", "alwaysShowSelectedOptionsCount", "alwaysShowSelectedOptionsLabel", "ariaLabelledby", "ariaLabelText", "ariaLabelClearButtonText", "autoSelectFirstOption", "clearButtonText", "descriptionKey", "disableAllOptionsSelectedText", "disableOptionGroupCheckbox", "disableSelectAll", "disableValidation", "dropboxWidth", "dropboxWrapper", "emptyValue", "enableSecureText", "focusSelectedOptionOnOpen", "hasOptionDescription", "hideClearButton", "hideValueTooltipOnSelectAll", "keepAlwaysOpen", "labelKey", "markSearchResults", "maxValues", "maxWidth", "minValues", "moreText", "noOfDisplayValues", "noOptionsText", "noSearchResultsText", "optionHeight", "optionSelectedText", "optionsCount", "optionsSelectedText", "popupDropboxBreakpoint", "popupPosition", "position", "search", "searchByStartsWith", "searchDelay", "searchFormLabel", "searchGroup", "searchNormalize", "searchPlaceholderText", "selectAllOnlyVisible", "selectAllText", "setValueAsArray", "showDropboxAsPopup", "showOptionsOnlyOnSearch", "showSelectedOptionsFirst", "showValueAsTags", "silentInitialValueSet", "textDirection", "tooltipAlignment", "tooltipFontSize", "tooltipMaxWidth", "updatePositionThrottle", "useGroupValue", "valueKey", "zIndex"], $ = function() {
+  var x, w = { 13: "onEnterPress", 38: "onUpArrowPress", 40: "onDownArrowPress", 46: "onBackspaceOrDeletePress", 8: "onBackspaceOrDeletePress" }, k = ["autofocus", "disabled", "multiple", "required"], E = ["autofocus", "class", "disabled", "id", "multiple", "name", "placeholder", "required"], C = ["additionalClasses", "aliasKey", "allOptionsSelectedText", "allowNewOption", "alwaysShowSelectedOptionsCount", "alwaysShowSelectedOptionsLabel", "ariaLabelledby", "ariaLabelText", "ariaLabelClearButtonText", "autoSelectFirstOption", "clearButtonText", "descriptionKey", "disableAllOptionsSelectedText", "disableOptionGroupCheckbox", "disableSelectAll", "disableValidation", "dropboxWidth", "dropboxWrapper", "emptyValue", "enableSecureText", "focusSelectedOptionOnOpen", "hasOptionDescription", "hideClearButton", "hideValueTooltipOnSelectAll", "keepAlwaysOpen", "labelKey", "markSearchResults", "maxValues", "maxWidth", "minValues", "moreText", "noOfDisplayValues", "noOptionsText", "noSearchResultsText", "optionHeight", "optionSelectedText", "optionsCount", "optionsSelectedText", "popupDropboxBreakpoint", "popupPosition", "position", "search", "searchByStartsWith", "searchDelay", "searchFormLabel", "searchGroup", "searchNormalize", "searchPlaceholderText", "selectAllOnlyVisible", "selectAllText", "setValueAsArray", "showDropboxAsPopup", "showOptionsOnlyOnSearch", "showSelectedOptionsFirst", "showValueAsTags", "silentInitialValueSet", "textDirection", "tooltipAlignment", "tooltipFontSize", "tooltipMaxWidth", "updatePositionThrottle", "useGroupValue", "valueKey", "zIndex"], $ = function() {
     function e2(t3) {
       !function(e3, t4) {
         if (!(e3 instanceof t4))
@@ -414,24 +415,115 @@ const virtualSelect_min = "";
       }
     }
     var t2, i2, o2;
-    return t2 = e2, i2 = [{ key: "render", value: function() {
+    return t2 = e2, o2 = [{ key: "init", value: function(t3) {
+      var i3 = t3.ele;
+      if (i3) {
+        var o3 = false;
+        if ("string" == typeof i3) {
+          var s2 = (i3 = document.querySelectorAll(i3)).length;
+          if (0 === s2)
+            return;
+          1 === s2 && (o3 = true);
+        }
+        void 0 !== i3.length && void 0 !== i3.forEach || (i3 = [i3], o3 = true);
+        var n2 = [];
+        return i3.forEach(function(i4) {
+          i4.virtualSelect ? n2.push(i4.virtualSelect) : (t3.ele = i4, "SELECT" === i4.tagName && e2.setPropsFromSelect(t3), n2.push(new e2(t3)));
+        }), o3 ? n2[0] : n2;
+      }
+    } }, { key: "getAttrProps", value: function() {
+      var e3 = p.convertPropToDataAttr, t3 = {};
+      return E.forEach(function(e4) {
+        t3[e4] = e4;
+      }), C.forEach(function(i3) {
+        t3[e3(i3)] = i3;
+      }), t3;
+    } }, { key: "setPropsFromSelect", value: function(e3) {
+      var t3 = e3.ele, i3 = [], o3 = [], s2 = function e4(t4) {
+        var s3 = [];
+        return Array.from(t4.children).forEach(function(t5) {
+          var n3 = t5.value, r2 = { value: n3 };
+          "OPTGROUP" === t5.tagName ? (r2.label = t5.getAttribute("label"), r2.options = e4(t5)) : r2.label = t5.innerHTML, s3.push(r2), t5.disabled && i3.push(n3), t5.selected && o3.push(n3);
+        }), s3;
+      }(t3), n2 = document.createElement("div");
+      p.setAttrFromEle(t3, n2, Object.keys(x), k), t3.parentNode.insertBefore(n2, t3), t3.remove(), e3.ele = n2, e3.options = s2, e3.disabledOptions = i3, e3.selectedValue = o3;
+    } }, { key: "onFormReset", value: function(e3) {
+      var t3 = e3.target.closest("form");
+      t3 && t3.querySelectorAll(".vscomp-ele-wrapper").forEach(function(e4) {
+        e4.parentElement.virtualSelect.reset(true);
+      });
+    } }, { key: "onFormSubmit", value: function(t3) {
+      e2.validate(t3.target.closest("form")) || t3.preventDefault();
+    } }, { key: "validate", value: function(e3) {
+      if (!e3)
+        return true;
+      var t3 = false;
+      return e3.querySelectorAll(".vscomp-ele-wrapper").forEach(function(e4) {
+        var i3 = e4.parentElement.virtualSelect.validate();
+        t3 || i3 || (t3 = true);
+      }), !t3;
+    } }, { key: "reset", value: function() {
+      this.virtualSelect.reset();
+    } }, { key: "setValueMethod", value: function() {
+      var e3;
+      (e3 = this.virtualSelect).setValueMethod.apply(e3, arguments);
+    } }, { key: "setOptionsMethod", value: function() {
+      var e3;
+      (e3 = this.virtualSelect).setOptionsMethod.apply(e3, arguments);
+    } }, { key: "setDisabledOptionsMethod", value: function() {
+      var e3;
+      (e3 = this.virtualSelect).setDisabledOptionsMethod.apply(e3, arguments);
+    } }, { key: "setEnabledOptionsMethod", value: function() {
+      var e3;
+      (e3 = this.virtualSelect).setEnabledOptionsMethod.apply(e3, arguments);
+    } }, { key: "toggleSelectAll", value: function(e3) {
+      this.virtualSelect.toggleAllOptions(e3);
+    } }, { key: "isAllSelected", value: function() {
+      return this.virtualSelect.isAllSelected;
+    } }, { key: "addOptionMethod", value: function(e3) {
+      this.virtualSelect.addOption(e3, true);
+    } }, { key: "getNewValueMethod", value: function() {
+      return this.virtualSelect.getNewValue();
+    } }, { key: "getDisplayValueMethod", value: function() {
+      return this.virtualSelect.getDisplayValue();
+    } }, { key: "getSelectedOptionsMethod", value: function(e3) {
+      return this.virtualSelect.getSelectedOptions(e3);
+    } }, { key: "getDisabledOptionsMethod", value: function() {
+      return this.virtualSelect.getDisabledOptions();
+    } }, { key: "openMethod", value: function() {
+      return this.virtualSelect.openDropbox();
+    } }, { key: "closeMethod", value: function() {
+      return this.virtualSelect.closeDropbox();
+    } }, { key: "focusMethod", value: function() {
+      return this.virtualSelect.focus();
+    } }, { key: "enableMethod", value: function() {
+      return this.virtualSelect.enable();
+    } }, { key: "disableMethod", value: function() {
+      return this.virtualSelect.disable();
+    } }, { key: "destroyMethod", value: function() {
+      return this.virtualSelect.destroy();
+    } }, { key: "validateMethod", value: function() {
+      return this.virtualSelect.validate();
+    } }, { key: "toggleRequiredMethod", value: function(e3) {
+      return this.virtualSelect.toggleRequired(e3);
+    } }, { key: "onResizeMethod", value: function() {
+      document.querySelectorAll(".vscomp-ele-wrapper").forEach(function(e3) {
+        e3.parentElement.virtualSelect.onResize();
+      });
+    } }], (i2 = [{ key: "render", value: function() {
       if (this.$ele) {
-        var e3 = this.uniqueId, t3 = "vscomp-wrapper", i3 = "vscomp-toggle-button", o3 = this.showValueAsTags ? "" : this.getTooltipAttrText(this.placeholder, true, true), s2 = this.getTooltipAttrText(this.clearButtonText), n2 = this.ariaLabelledby ? 'aria-labelledby="'.concat(this.ariaLabelledby, '"') : "", r2 = this.ariaLabelText ? 'aria-label="'.concat(this.ariaLabelText, '"') : "", a2 = this.ariaLabelClearButtonText ? 'aria-label="'.concat(this.ariaLabelClearButtonText, '"') : "", l2 = false;
-        this.additionalClasses && (t3 += " ".concat(this.additionalClasses)), this.additionalToggleButtonClasses && (i3 += " ".concat(this.additionalToggleButtonClasses)), this.multiple && (t3 += " multiple", this.disableSelectAll || (t3 += " has-select-all")), this.hideClearButton || (t3 += " has-clear-button"), this.keepAlwaysOpen ? (t3 += " keep-always-open", l2 = true) : t3 += " closed", this.showAsPopup && (t3 += " show-as-popup"), this.hasSearch && (t3 += " has-search-input"), this.showValueAsTags && (t3 += " show-value-as-tags"), this.textDirection && (t3 += " text-direction-".concat(this.textDirection)), this.popupPosition && (t3 += " popup-position-".concat(this.popupPosition.toLowerCase()));
-        var u2 = '<div id="vscomp-ele-wrapper-'.concat(e3, '" class="vscomp-ele-wrapper ').concat(t3, '" tabindex="0"\n        role="combobox" aria-haspopup="listbox" aria-controls="vscomp-dropbox-container-').concat(e3, '"\n        aria-expanded="').concat(l2, '" ').concat(n2, " ").concat(r2, '>\n        <input type="hidden" name="').concat(this.name, '" class="vscomp-hidden-input">\n        <div class="').concat(i3, '">\n          <div class="vscomp-value" ').concat(o3, ">\n            ").concat(this.placeholder, '\n          </div>\n          <div class="vscomp-arrow"></div>\n          <div class="vscomp-clear-button toggle-button-child" ').concat(s2, ' \n          tabindex="0" ').concat(a2, '>\n            <i class="vscomp-clear-icon"></i>\n          </div>\n        </div>\n\n        ').concat(this.renderDropbox({ wrapperClasses: t3 }), "\n      </div>");
-        this.$ele.innerHTML = u2, this.$body = document.querySelector("body"), this.$wrapper = this.$ele.querySelector(".vscomp-wrapper"), this.hasDropboxWrapper ? (this.$allWrappers = [this.$wrapper, this.$dropboxWrapper], this.$dropboxContainer = this.$dropboxWrapper.querySelector(".vscomp-dropbox-container"), p.addClass(this.$dropboxContainer, "pop-comp-wrapper")) : (this.$allWrappers = [this.$wrapper], this.$dropboxContainer = this.$wrapper.querySelector(".vscomp-dropbox-container")), this.$toggleButton = this.$ele.querySelector(".vscomp-toggle-button"), this.$clearButton = this.$ele.querySelector(".vscomp-clear-button"), this.$valueText = this.$ele.querySelector(".vscomp-value"), this.$hiddenInput = this.$ele.querySelector(".vscomp-hidden-input"), this.$dropbox = this.$dropboxContainer.querySelector(".vscomp-dropbox"), this.$dropboxCloseButton = this.$dropboxContainer.querySelector(".vscomp-dropbox-close-button"), this.$dropboxContainerBottom = this.$dropboxContainer.querySelector(".vscomp-dropbox-container-bottom"), this.$dropboxContainerTop = this.$dropboxContainer.querySelector(".vscomp-dropbox-container-top"), this.$search = this.$dropboxContainer.querySelector(".vscomp-search-wrapper"), this.$optionsContainer = this.$dropboxContainer.querySelector(".vscomp-options-container"), this.$optionsList = this.$dropboxContainer.querySelector(".vscomp-options-list"), this.$options = this.$dropboxContainer.querySelector(".vscomp-options"), this.$noOptions = this.$dropboxContainer.querySelector(".vscomp-no-options"), this.$noSearchResults = this.$dropboxContainer.querySelector(".vscomp-no-search-results"), this.afterRenderWrapper();
+        var e3 = this.uniqueId, t3 = "vscomp-wrapper", i3 = this.showValueAsTags ? "" : this.getTooltipAttrText(this.placeholder, true, true), o3 = this.getTooltipAttrText(this.clearButtonText), s2 = this.ariaLabelledby ? 'aria-labelledby="'.concat(this.ariaLabelledby, '"') : "", n2 = this.ariaLabelText ? 'aria-label="'.concat(this.ariaLabelText, '"') : "", r2 = this.ariaLabelClearButtonText ? 'aria-label="'.concat(this.ariaLabelClearButtonText, '"') : "", a2 = false;
+        this.additionalClasses && (t3 += " ".concat(this.additionalClasses)), this.multiple && (t3 += " multiple", this.disableSelectAll || (t3 += " has-select-all")), this.hideClearButton || (t3 += " has-clear-button"), this.keepAlwaysOpen ? (t3 += " keep-always-open", a2 = true) : t3 += " closed", this.showAsPopup && (t3 += " show-as-popup"), this.hasSearch && (t3 += " has-search-input"), this.showValueAsTags && (t3 += " show-value-as-tags"), this.textDirection && (t3 += " text-direction-".concat(this.textDirection)), this.popupPosition && (t3 += " popup-position-".concat(this.popupPosition.toLowerCase()));
+        var l2 = '<div id="vscomp-ele-wrapper-'.concat(e3, '" class="vscomp-ele-wrapper ').concat(t3, '" tabindex="0"\n        role="combobox" aria-haspopup="listbox" aria-controls="vscomp-dropbox-container-').concat(e3, '"\n        aria-expanded="').concat(a2, '" ').concat(s2, " ").concat(n2, '>\n        <input type="hidden" name="').concat(this.name, '" class="vscomp-hidden-input">\n        <div class="vscomp-toggle-button">\n          <div class="vscomp-value" ').concat(i3, ">\n            ").concat(this.placeholder, '\n          </div>\n          <div class="vscomp-arrow"></div>\n          <div class="vscomp-clear-button toggle-button-child" ').concat(o3, ' tabindex="0" ').concat(r2, '>\n            <i class="vscomp-clear-icon"></i>\n          </div>\n        </div>\n\n        ').concat(this.renderDropbox({ wrapperClasses: t3 }), "\n      </div>");
+        this.$ele.innerHTML = l2, this.$body = document.querySelector("body"), this.$wrapper = this.$ele.querySelector(".vscomp-wrapper"), this.hasDropboxWrapper ? (this.$allWrappers = [this.$wrapper, this.$dropboxWrapper], this.$dropboxContainer = this.$dropboxWrapper.querySelector(".vscomp-dropbox-container"), p.addClass(this.$dropboxContainer, "pop-comp-wrapper")) : (this.$allWrappers = [this.$wrapper], this.$dropboxContainer = this.$wrapper.querySelector(".vscomp-dropbox-container")), this.$toggleButton = this.$ele.querySelector(".vscomp-toggle-button"), this.$clearButton = this.$ele.querySelector(".vscomp-clear-button"), this.$valueText = this.$ele.querySelector(".vscomp-value"), this.$hiddenInput = this.$ele.querySelector(".vscomp-hidden-input"), this.$dropbox = this.$dropboxContainer.querySelector(".vscomp-dropbox"), this.$dropboxCloseButton = this.$dropboxContainer.querySelector(".vscomp-dropbox-close-button"), this.$dropboxContainerBottom = this.$dropboxContainer.querySelector(".vscomp-dropbox-container-bottom"), this.$dropboxContainerTop = this.$dropboxContainer.querySelector(".vscomp-dropbox-container-top"), this.$search = this.$dropboxContainer.querySelector(".vscomp-search-wrapper"), this.$optionsContainer = this.$dropboxContainer.querySelector(".vscomp-options-container"), this.$optionsList = this.$dropboxContainer.querySelector(".vscomp-options-list"), this.$options = this.$dropboxContainer.querySelector(".vscomp-options"), this.$noOptions = this.$dropboxContainer.querySelector(".vscomp-no-options"), this.$noSearchResults = this.$dropboxContainer.querySelector(".vscomp-no-search-results"), this.afterRenderWrapper();
       }
     } }, { key: "renderDropbox", value: function(e3) {
-      var t3 = e3.wrapperClasses, i3 = "self" !== this.dropboxWrapper ? document.querySelector(this.dropboxWrapper) : null, o3 = "vscomp-dropbox";
-      this.additionalDropboxClasses && (o3 += " ".concat(this.additionalDropboxClasses));
-      var s2 = "vscomp-dropbox-container";
-      this.additionalDropboxContainerClasses && (s2 += " ".concat(this.additionalDropboxContainerClasses));
-      var n2 = '<div id="vscomp-dropbox-container-'.concat(this.uniqueId, '" role="listbox" class="').concat(s2, '">\n        <div class="vscomp-dropbox-container-top" aria-hidden="true" tabindex="0">&nbsp;</div>\n        <div class="').concat(o3, '">\n          <div class="vscomp-search-wrapper"></div>\n\n          <div class="vscomp-options-container">\n            <div class="vscomp-options-loader"></div>\n\n            <div class="vscomp-options-list">\n              <div class="vscomp-options"></div>\n            </div>\n          </div>\n\n          <div class="vscomp-options-bottom-freezer"></div>\n          <div class="vscomp-no-options">').concat(this.noOptionsText, '</div>\n          <div class="vscomp-no-search-results">').concat(this.noSearchResultsText, '</div>\n\n          <span class="vscomp-dropbox-close-button"><i class="vscomp-clear-icon"></i></span>\n        </div>\n        <div class="vscomp-dropbox-container-bottom" aria-hidden="true" tabindex="0">&nbsp;</div>\n      </div>');
+      var t3 = e3.wrapperClasses, i3 = "self" !== this.dropboxWrapper ? document.querySelector(this.dropboxWrapper) : null, o3 = '<div id="vscomp-dropbox-container-'.concat(this.uniqueId, '" role="listbox" class="vscomp-dropbox-container">\n        <div class="vscomp-dropbox-container-top" aria-hidden="true" tabindex="0">&nbsp;</div>\n        <div class="vscomp-dropbox">\n          <div class="vscomp-search-wrapper"></div>\n\n          <div class="vscomp-options-container">\n            <div class="vscomp-options-loader"></div>\n\n            <div class="vscomp-options-list">\n              <div class="vscomp-options"></div>\n            </div>\n          </div>\n\n          <div class="vscomp-options-bottom-freezer"></div>\n          <div class="vscomp-no-options">').concat(this.noOptionsText, '</div>\n          <div class="vscomp-no-search-results">').concat(this.noSearchResultsText, '</div>\n\n          <span class="vscomp-dropbox-close-button"><i class="vscomp-clear-icon"></i></span>\n        </div>\n        <div class="vscomp-dropbox-container-bottom" aria-hidden="true" tabindex="0">&nbsp;</div>\n      </div>');
       if (i3) {
-        var r2 = document.createElement("div");
-        return this.$dropboxWrapper = r2, this.hasDropboxWrapper = true, r2.innerHTML = n2, i3.appendChild(r2), p.addClass(r2, "vscomp-dropbox-wrapper ".concat(t3)), "";
+        var s2 = document.createElement("div");
+        return this.$dropboxWrapper = s2, this.hasDropboxWrapper = true, s2.innerHTML = o3, i3.appendChild(s2), p.addClass(s2, "vscomp-dropbox-wrapper ".concat(t3)), "";
       }
-      return this.hasDropboxWrapper = false, n2;
+      return this.hasDropboxWrapper = false, o3;
     } }, { key: "renderOptions", value: function() {
       var e3, t3 = this, i3 = "", o3 = this.getVisibleOptions(), n2 = "", r2 = "", a2 = !(!this.markSearchResults || !this.searchValue), l2 = this.labelRenderer, u2 = this.disableOptionGroupCheckbox, c2 = this.uniqueId, p2 = this.searchGroup, h2 = "function" == typeof l2, d2 = s.convertToBoolean, v2 = "";
       if (a2 && (e3 = new RegExp("(".concat(s.regexEscape(this.searchValue), ")(?!([^<]+)?>)"), "gi")), this.multiple && (n2 = '<span class="checkbox-icon"></span>'), this.allowNewOption) {
@@ -439,12 +531,12 @@ const virtualSelect_min = "";
         r2 = '<span class="vscomp-new-option-icon" '.concat(f2, "></span>");
       }
       o3.forEach(function(o4) {
-        var s2, f3 = o4.index, y2 = "vscomp-option", b2 = t3.getTooltipAttrText("", true, true), m2 = n2, g2 = "", O2 = "", S2 = "", x2 = "", w2 = "-1", k2 = d2(o4.isSelected), C2 = "";
-        if (o4.classNames && (y2 += " ".concat(o4.classNames)), o4.isFocused && (w2 = "0", y2 += " focused"), o4.isDisabled && (y2 += " disabled", C2 = 'aria-disabled="true"'), o4.isGroupTitle && (v2 = o4.label, y2 += " group-title", u2 && (m2 = "")), k2 && (y2 += " selected"), o4.isGroupOption) {
-          var E2 = "";
-          y2 += " group-option", S2 = 'data-group-index="'.concat(o4.groupIndex, '"'), o4.customData ? (v2 = void 0 !== o4.customData.group_name ? "".concat(o4.customData.group_name, ", ") : "", E2 = void 0 !== o4.customData.description ? " ".concat(o4.customData.description, ",") : "", x2 = 'aria-label="'.concat(v2, " ").concat(o4.label, ", ").concat(E2, '"')) : x2 = 'aria-label="'.concat(v2, ", ").concat(o4.label, '"');
+        var s2, f3 = o4.index, y2 = "vscomp-option", b2 = t3.getTooltipAttrText("", true, true), m2 = n2, g2 = "", O2 = "", S2 = "", x2 = "", w2 = "-1", k2 = d2(o4.isSelected), E2 = "";
+        if (o4.classNames && (y2 += " ".concat(o4.classNames)), o4.isFocused && (w2 = "0", y2 += " focused"), o4.isDisabled && (y2 += " disabled", E2 = 'aria-disabled="true"'), o4.isGroupTitle && (v2 = o4.label, y2 += " group-title", u2 && (m2 = "")), k2 && (y2 += " selected"), o4.isGroupOption) {
+          var C2 = "";
+          y2 += " group-option", S2 = 'data-group-index="'.concat(o4.groupIndex, '"'), o4.customData ? (v2 = void 0 !== o4.customData.group_name ? "".concat(o4.customData.group_name, ", ") : "", C2 = void 0 !== o4.customData.description ? " ".concat(o4.customData.description, ",") : "", x2 = 'aria-label="'.concat(v2, " ").concat(o4.label, ", ").concat(C2, '"')) : x2 = 'aria-label="'.concat(v2, ", ").concat(o4.label, '"');
         }
-        s2 = h2 ? l2(o4) : o4.label, o4.description && (O2 = '<div class="vscomp-option-description" '.concat(b2, ">").concat(o4.description, "</div>")), o4.isCurrentNew ? (y2 += " current-new", g2 += r2) : !a2 || o4.isGroupTitle && !p2 || (s2 = s2.replace(e3, "<mark>$1</mark>")), i3 += '<div role="option" aria-selected="'.concat(k2, '" id="vscomp-option-').concat(c2, "-").concat(f3, '"\n          class="').concat(y2, '" data-value="').concat(o4.value, '" data-index="').concat(f3, '" data-visible-index="').concat(o4.visibleIndex, '"\n          tabindex=').concat(w2, " ").concat(S2, " ").concat(C2, " ").concat(x2, "\n        >\n          ").concat(m2, '\n          <span class="vscomp-option-text" ').concat(b2, ">\n            ").concat(s2, "\n          </span>\n          ").concat(O2, "\n          ").concat(g2, "\n        </div>");
+        s2 = h2 ? l2(o4) : o4.label, o4.description && (O2 = '<div class="vscomp-option-description" '.concat(b2, ">").concat(o4.description, "</div>")), o4.isCurrentNew ? (y2 += " current-new", g2 += r2) : !a2 || o4.isGroupTitle && !p2 || (s2 = s2.replace(e3, "<mark>$1</mark>")), i3 += '<div role="option" aria-selected="'.concat(k2, '" id="vscomp-option-').concat(c2, "-").concat(f3, '"\n          class="').concat(y2, '" data-value="').concat(o4.value, '" data-index="').concat(f3, '" data-visible-index="').concat(o4.visibleIndex, '"\n          tabindex=').concat(w2, " ").concat(S2, " ").concat(E2, " ").concat(x2, "\n        >\n          ").concat(m2, '\n          <span class="vscomp-option-text" ').concat(b2, ">\n            ").concat(s2, "\n          </span>\n          ").concat(O2, "\n          ").concat(g2, "\n        </div>");
       }), v2 = "", this.$options.innerHTML = i3, this.$visibleOptions = this.$options.querySelectorAll(".vscomp-option"), this.afterRenderOptions();
     } }, { key: "renderSearch", value: function() {
       if (this.hasSearchContainer) {
@@ -474,16 +566,7 @@ const virtualSelect_min = "";
       t3 !== this.$wrapper && t3 !== this.$dropboxWrapper && this.isOpened() && this.closeDropbox();
     } }, { key: "onKeyDown", value: function(e3) {
       var t3 = e3.which || e3.keyCode, i3 = w[t3];
-      if (document.activeElement === this.$searchInput && e3.shiftKey && 9 === t3)
-        return e3.preventDefault(), void (this.keepAlwaysOpen ? this.$dropboxContainerTop.focus() : this.closeDropbox());
-      if (document.activeElement === this.$searchInput && 9 === t3)
-        return e3.preventDefault(), void this.focusFirstVisibleOption();
-      if (27 === t3 || "Escape" === e3.key) {
-        var o3 = this.showAsPopup ? this.$wrapper : this.$dropboxWrapper;
-        if ((document.activeElement === o3 || o3.contains(document.activeElement)) && !this.keepAlwaysOpen)
-          return void this.closeDropbox();
-      }
-      i3 && this[i3](e3);
+      return document.activeElement === this.$searchInput && e3.shiftKey && 9 === t3 ? (e3.preventDefault(), void this.$dropboxContainerTop.focus()) : document.activeElement === this.$searchInput && 9 === t3 ? (e3.preventDefault(), void this.focusFirstVisibleOption()) : void (document.activeElement !== this.$wrapper || 27 !== t3 && "Escape" !== e3.key || !this.showAsPopup ? i3 && this[i3](e3) : this.closeDropbox());
     } }, { key: "onEnterPress", value: function(e3) {
       e3.preventDefault(), this.isOpened() ? this.selectFocusedOption() : false === this.$ele.disabled && this.openDropbox();
     } }, { key: "onDownArrowPress", value: function(e3) {
@@ -496,7 +579,7 @@ const virtualSelect_min = "";
       var t3 = e3.target;
       t3.closest(".vscomp-value-tag-clear-button") ? this.removeValue(t3.closest(".vscomp-value-tag")) : t3.closest(".toggle-button-child") || this.toggleDropbox();
     } }, { key: "onClearButtonClick", value: function(e3) {
-      "click" === e3.type ? this.reset() : "keydown" !== e3.type || "Enter" !== e3.code && "Space" !== e3.code || (e3.stopPropagation(), this.reset());
+      "click" === e3.type ? this.reset() : "keydown" === e3.type && ("Enter" !== e3.code && "Space" !== e3.code || (e3.stopPropagation(), this.reset()));
     } }, { key: "onOptionsScroll", value: function() {
       this.setVisibleOptions();
     } }, { key: "onOptionsClick", value: function(e3) {
@@ -575,9 +658,9 @@ const virtualSelect_min = "";
       var t3 = this.setDefaultProps(e3);
       this.setPropsFromElementAttr(t3);
       var i3 = s.convertToBoolean;
-      this.$ele = t3.ele, this.dropboxWrapper = t3.dropboxWrapper, this.valueKey = t3.valueKey, this.labelKey = t3.labelKey, this.descriptionKey = t3.descriptionKey, this.aliasKey = t3.aliasKey, this.optionHeightText = t3.optionHeight, this.optionHeight = parseFloat(this.optionHeightText), this.multiple = i3(t3.multiple), this.hasSearch = i3(t3.search), this.searchByStartsWith = i3(t3.searchByStartsWith), this.searchGroup = i3(t3.searchGroup), this.hideClearButton = i3(t3.hideClearButton), this.autoSelectFirstOption = i3(t3.autoSelectFirstOption), this.hasOptionDescription = i3(t3.hasOptionDescription), this.silentInitialValueSet = i3(t3.silentInitialValueSet), this.allowNewOption = i3(t3.allowNewOption), this.markSearchResults = i3(t3.markSearchResults), this.showSelectedOptionsFirst = i3(t3.showSelectedOptionsFirst), this.disableSelectAll = i3(t3.disableSelectAll), this.keepAlwaysOpen = i3(t3.keepAlwaysOpen), this.showDropboxAsPopup = i3(t3.showDropboxAsPopup), this.hideValueTooltipOnSelectAll = i3(t3.hideValueTooltipOnSelectAll), this.showOptionsOnlyOnSearch = i3(t3.showOptionsOnlyOnSearch), this.selectAllOnlyVisible = i3(t3.selectAllOnlyVisible), this.alwaysShowSelectedOptionsCount = i3(t3.alwaysShowSelectedOptionsCount), this.alwaysShowSelectedOptionsLabel = i3(t3.alwaysShowSelectedOptionsLabel), this.disableAllOptionsSelectedText = i3(t3.disableAllOptionsSelectedText), this.showValueAsTags = i3(t3.showValueAsTags), this.disableOptionGroupCheckbox = i3(t3.disableOptionGroupCheckbox), this.enableSecureText = i3(t3.enableSecureText), this.setValueAsArray = i3(t3.setValueAsArray), this.disableValidation = i3(t3.disableValidation), this.initialDisabled = i3(t3.disabled), this.required = i3(t3.required), this.autofocus = i3(t3.autofocus), this.useGroupValue = i3(t3.useGroupValue), this.focusSelectedOptionOnOpen = i3(t3.focusSelectedOptionOnOpen), this.noOptionsText = t3.noOptionsText, this.noSearchResultsText = t3.noSearchResultsText, this.selectAllText = t3.selectAllText, this.searchNormalize = t3.searchNormalize, this.searchPlaceholderText = t3.searchPlaceholderText, this.searchFormLabel = t3.searchFormLabel, this.optionsSelectedText = t3.optionsSelectedText, this.optionSelectedText = t3.optionSelectedText, this.allOptionsSelectedText = t3.allOptionsSelectedText, this.clearButtonText = t3.clearButtonText, this.moreText = t3.moreText, this.placeholder = t3.placeholder, this.position = t3.position, this.textDirection = t3.textDirection, this.dropboxWidth = t3.dropboxWidth, this.tooltipFontSize = t3.tooltipFontSize, this.tooltipAlignment = t3.tooltipAlignment, this.tooltipMaxWidth = t3.tooltipMaxWidth, this.updatePositionThrottle = t3.updatePositionThrottle, this.noOfDisplayValues = parseInt(t3.noOfDisplayValues), this.zIndex = parseInt(t3.zIndex), this.maxValues = parseInt(t3.maxValues), this.minValues = parseInt(t3.minValues), this.name = this.secureText(t3.name), this.additionalClasses = t3.additionalClasses, this.additionalDropboxClasses = t3.additionalDropboxClasses, this.additionalDropboxContainerClasses = t3.additionalDropboxContainerClasses, this.additionalToggleButtonClasses = t3.additionalToggleButtonClasses, this.popupDropboxBreakpoint = t3.popupDropboxBreakpoint, this.popupPosition = t3.popupPosition, this.onServerSearch = t3.onServerSearch, this.labelRenderer = t3.labelRenderer, this.selectedLabelRenderer = t3.selectedLabelRenderer, this.initialSelectedValue = 0 === t3.selectedValue ? "0" : t3.selectedValue, this.emptyValue = t3.emptyValue, this.ariaLabelledby = t3.ariaLabelledby, this.ariaLabelText = t3.ariaLabelText, this.ariaLabelClearButtonText = t3.ariaLabelClearButtonText, this.maxWidth = t3.maxWidth, this.searchDelay = t3.searchDelay, this.selectedValues = [], this.selectedOptions = [], this.newValues = [], this.events = {}, this.tooltipEnterDelay = 200, this.searchValue = "", this.searchValueOriginal = "", this.isAllSelected = false, (void 0 === t3.search && this.multiple || this.allowNewOption || this.showOptionsOnlyOnSearch) && (this.hasSearch = true), this.hasServerSearch = "function" == typeof this.onServerSearch, (this.maxValues || this.hasServerSearch || this.showOptionsOnlyOnSearch) && (this.disableSelectAll = true, this.disableOptionGroupCheckbox = true), this.keepAlwaysOpen && (this.dropboxWrapper = "self"), this.showAsPopup = this.showDropboxAsPopup && !this.keepAlwaysOpen && window.innerWidth <= parseFloat(this.popupDropboxBreakpoint), this.hasSearchContainer = this.hasSearch || this.multiple && !this.disableSelectAll, this.optionsCount = this.getOptionsCount(t3.optionsCount), this.halfOptionsCount = Math.ceil(this.optionsCount / 2), this.optionsHeight = this.getOptionsHeight(), this.uniqueId = this.getUniqueId();
+      this.$ele = t3.ele, this.dropboxWrapper = t3.dropboxWrapper, this.valueKey = t3.valueKey, this.labelKey = t3.labelKey, this.descriptionKey = t3.descriptionKey, this.aliasKey = t3.aliasKey, this.optionHeightText = t3.optionHeight, this.optionHeight = parseFloat(this.optionHeightText), this.multiple = i3(t3.multiple), this.hasSearch = i3(t3.search), this.searchByStartsWith = i3(t3.searchByStartsWith), this.searchGroup = i3(t3.searchGroup), this.hideClearButton = i3(t3.hideClearButton), this.autoSelectFirstOption = i3(t3.autoSelectFirstOption), this.hasOptionDescription = i3(t3.hasOptionDescription), this.silentInitialValueSet = i3(t3.silentInitialValueSet), this.allowNewOption = i3(t3.allowNewOption), this.markSearchResults = i3(t3.markSearchResults), this.showSelectedOptionsFirst = i3(t3.showSelectedOptionsFirst), this.disableSelectAll = i3(t3.disableSelectAll), this.keepAlwaysOpen = i3(t3.keepAlwaysOpen), this.showDropboxAsPopup = i3(t3.showDropboxAsPopup), this.hideValueTooltipOnSelectAll = i3(t3.hideValueTooltipOnSelectAll), this.showOptionsOnlyOnSearch = i3(t3.showOptionsOnlyOnSearch), this.selectAllOnlyVisible = i3(t3.selectAllOnlyVisible), this.alwaysShowSelectedOptionsCount = i3(t3.alwaysShowSelectedOptionsCount), this.alwaysShowSelectedOptionsLabel = i3(t3.alwaysShowSelectedOptionsLabel), this.disableAllOptionsSelectedText = i3(t3.disableAllOptionsSelectedText), this.showValueAsTags = i3(t3.showValueAsTags), this.disableOptionGroupCheckbox = i3(t3.disableOptionGroupCheckbox), this.enableSecureText = i3(t3.enableSecureText), this.setValueAsArray = i3(t3.setValueAsArray), this.disableValidation = i3(t3.disableValidation), this.initialDisabled = i3(t3.disabled), this.required = i3(t3.required), this.autofocus = i3(t3.autofocus), this.useGroupValue = i3(t3.useGroupValue), this.focusSelectedOptionOnOpen = i3(t3.focusSelectedOptionOnOpen), this.noOptionsText = t3.noOptionsText, this.noSearchResultsText = t3.noSearchResultsText, this.selectAllText = t3.selectAllText, this.searchNormalize = t3.searchNormalize, this.searchPlaceholderText = t3.searchPlaceholderText, this.searchFormLabel = t3.searchFormLabel, this.optionsSelectedText = t3.optionsSelectedText, this.optionSelectedText = t3.optionSelectedText, this.allOptionsSelectedText = t3.allOptionsSelectedText, this.clearButtonText = t3.clearButtonText, this.moreText = t3.moreText, this.placeholder = t3.placeholder, this.position = t3.position, this.textDirection = t3.textDirection, this.dropboxWidth = t3.dropboxWidth, this.tooltipFontSize = t3.tooltipFontSize, this.tooltipAlignment = t3.tooltipAlignment, this.tooltipMaxWidth = t3.tooltipMaxWidth, this.updatePositionThrottle = t3.updatePositionThrottle, this.noOfDisplayValues = parseInt(t3.noOfDisplayValues), this.zIndex = parseInt(t3.zIndex), this.maxValues = parseInt(t3.maxValues), this.minValues = parseInt(t3.minValues), this.name = this.secureText(t3.name), this.additionalClasses = t3.additionalClasses, this.popupDropboxBreakpoint = t3.popupDropboxBreakpoint, this.popupPosition = t3.popupPosition, this.onServerSearch = t3.onServerSearch, this.labelRenderer = t3.labelRenderer, this.initialSelectedValue = 0 === t3.selectedValue ? "0" : t3.selectedValue, this.emptyValue = t3.emptyValue, this.ariaLabelledby = t3.ariaLabelledby, this.ariaLabelText = t3.ariaLabelText, this.ariaLabelClearButtonText = t3.ariaLabelClearButtonText, this.maxWidth = t3.maxWidth, this.searchDelay = t3.searchDelay, this.selectedValues = [], this.selectedOptions = [], this.newValues = [], this.events = {}, this.tooltipEnterDelay = 200, this.searchValue = "", this.searchValueOriginal = "", this.isAllSelected = false, (void 0 === t3.search && this.multiple || this.allowNewOption || this.showOptionsOnlyOnSearch) && (this.hasSearch = true), this.hasServerSearch = "function" == typeof this.onServerSearch, (this.maxValues || this.hasServerSearch || this.showOptionsOnlyOnSearch) && (this.disableSelectAll = true, this.disableOptionGroupCheckbox = true), this.keepAlwaysOpen && (this.dropboxWrapper = "self"), this.showAsPopup = this.showDropboxAsPopup && !this.keepAlwaysOpen && window.innerWidth <= parseFloat(this.popupDropboxBreakpoint), this.hasSearchContainer = this.hasSearch || this.multiple && !this.disableSelectAll, this.optionsCount = this.getOptionsCount(t3.optionsCount), this.halfOptionsCount = Math.ceil(this.optionsCount / 2), this.optionsHeight = this.getOptionsHeight(), this.uniqueId = this.getUniqueId();
     } }, { key: "setDefaultProps", value: function(e3) {
-      var t3 = { dropboxWrapper: "self", valueKey: "value", labelKey: "label", descriptionKey: "description", aliasKey: "alias", ariaLabelText: "Options list", ariaLabelClearButtonText: "Clear button", optionsCount: 5, noOfDisplayValues: 50, optionHeight: "40px", noOptionsText: "No options found", noSearchResultsText: "No results found", selectAllText: "Select All", searchNormalize: false, searchPlaceholderText: "Search...", searchFormLabel: "Search", clearButtonText: "Clear", moreText: "more...", optionsSelectedText: "options selected", optionSelectedText: "option selected", allOptionsSelectedText: "All", placeholder: "Select", position: "bottom left", zIndex: e3.keepAlwaysOpen ? 1 : 2, tooltipFontSize: "14px", tooltipAlignment: "center", tooltipMaxWidth: "300px", updatePositionThrottle: 100, name: "", additionalClasses: "", additionalDropboxClasses: "", additionalDropboxContainerClasses: "", additionalToggleButtonClasses: "", maxValues: 0, showDropboxAsPopup: true, popupDropboxBreakpoint: "576px", popupPosition: "center", hideValueTooltipOnSelectAll: true, emptyValue: "", searchDelay: 300, focusSelectedOptionOnOpen: true };
+      var t3 = { dropboxWrapper: "self", valueKey: "value", labelKey: "label", descriptionKey: "description", aliasKey: "alias", ariaLabelText: "Options list", ariaLabelClearButtonText: "Clear button", optionsCount: 5, noOfDisplayValues: 50, optionHeight: "40px", noOptionsText: "No options found", noSearchResultsText: "No results found", selectAllText: "Select All", searchNormalize: false, searchPlaceholderText: "Search...", searchFormLabel: "Search", clearButtonText: "Clear", moreText: "more...", optionsSelectedText: "options selected", optionSelectedText: "option selected", allOptionsSelectedText: "All", placeholder: "Select", position: "bottom left", zIndex: e3.keepAlwaysOpen ? 1 : 2, tooltipFontSize: "14px", tooltipAlignment: "center", tooltipMaxWidth: "300px", updatePositionThrottle: 100, name: "", additionalClasses: "", maxValues: 0, showDropboxAsPopup: true, popupDropboxBreakpoint: "576px", popupPosition: "center", hideValueTooltipOnSelectAll: true, emptyValue: "", searchDelay: 300, focusSelectedOptionOnOpen: true };
       return e3.hasOptionDescription && (t3.optionsCount = 4, t3.optionHeight = "50px"), Object.assign(t3, e3);
     } }, { key: "setPropsFromElementAttr", value: function(e3) {
       var t3 = e3.ele;
@@ -679,19 +762,21 @@ const virtualSelect_min = "";
       var e3 = this, t3 = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : [], i3 = [], o3 = this.disabledOptions.length, n2 = this.valueKey, r2 = this.labelKey, a2 = this.descriptionKey, l2 = this.aliasKey, u2 = this.hasOptionDescription, c2 = s.getString, p2 = s.convertToBoolean, h2 = this.secureText.bind(this), d2 = this.getAlias.bind(this), y2 = 0, b2 = false, m2 = {}, g2 = false;
       this.disabledOptions.forEach(function(e4) {
         m2[e4] = true;
-      }), Array.isArray(t3) && t3.forEach(function t4(O3) {
+      });
+      var O2 = function t4(O3) {
         var S3;
         "object" !== f(O3) && (v(S3 = {}, n2, O3), v(S3, r2, O3), O3 = S3);
-        var x2 = h2(c2(O3[n2])), w2 = h2(c2(O3[r2])), k2 = O3.options, C2 = !!k2, E2 = { index: y2, value: x2, label: w2, labelNormalized: e3.searchNormalize ? s.normalizeString(w2).toLowerCase() : w2.toLowerCase(), alias: d2(O3[l2]), isVisible: p2(O3.isVisible, true), isNew: O3.isNew || false, isGroupTitle: C2, classNames: O3.classNames };
-        if (g2 || "" !== x2 || (g2 = true), o3 && (E2.isDisabled = true === m2[x2]), O3.isGroupOption && (E2.isGroupOption = true, E2.groupIndex = O3.groupIndex), u2 && (E2.description = h2(c2(O3[a2]))), O3.customData && (E2.customData = O3.customData), i3.push(E2), y2 += 1, C2) {
-          var $2 = E2.index;
+        var x3 = h2(c2(O3[n2])), w2 = h2(c2(O3[r2])), k2 = O3.options, E2 = !!k2, C2 = { index: y2, value: x3, label: w2, labelNormalized: e3.searchNormalize ? s.normalizeString(w2).toLowerCase() : w2.toLowerCase(), alias: d2(O3[l2]), isVisible: p2(O3.isVisible, true), isNew: O3.isNew || false, isGroupTitle: E2, classNames: O3.classNames };
+        if (g2 || "" !== x3 || (g2 = true), o3 && (C2.isDisabled = true === m2[x3]), O3.isGroupOption && (C2.isGroupOption = true, C2.groupIndex = O3.groupIndex), u2 && (C2.description = h2(c2(O3[a2]))), O3.customData && (C2.customData = O3.customData), i3.push(C2), y2 += 1, E2) {
+          var $2 = C2.index;
           b2 = true, k2.forEach(function(e4) {
             e4.isGroupOption = true, e4.groupIndex = $2, t4(e4);
           });
         }
-      });
-      var O2 = i3.length, S2 = this.$ele;
-      S2.options = i3, S2.length = O2, this.options = i3, this.visibleOptionsCount = O2, this.lastOptionIndex = O2 - 1, this.newValues = [], this.hasOptionGroup = b2, this.hasEmptyValueOption = g2, this.setSortedOptions();
+      };
+      Array.isArray(t3) && t3.forEach(O2);
+      var S2 = i3.length, x2 = this.$ele;
+      x2.options = i3, x2.length = S2, this.options = i3, this.visibleOptionsCount = S2, this.lastOptionIndex = S2 - 1, this.newValues = [], this.hasOptionGroup = b2, this.hasEmptyValueOption = g2, this.setSortedOptions();
     } }, { key: "setServerOptions", value: function() {
       var e3 = this, t3 = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : [];
       this.setOptionsMethod(t3, true);
@@ -704,9 +789,13 @@ const virtualSelect_min = "";
           true !== n2[e4.value] && (e4.isVisible = false, o3.push(e4));
         }), this.setOptionsMethod(o3, true);
       }
-      this.allowNewOption && this.searchValue && (o3.some(function(t4) {
-        return t4.label.toLowerCase() === e3.searchValue;
-      }) || (s2 = true, this.setNewOption())), s2 ? (this.setVisibleOptionsCount(), this.multiple && this.toggleAllOptionsClass(), this.setValueText()) : this.updatePosition(), this.setVisibleOptionsCount(), p.removeClass(this.$allWrappers, "server-searching");
+      if (this.allowNewOption && this.searchValue) {
+        var r2 = o3.some(function(t4) {
+          return t4.label.toLowerCase() === e3.searchValue;
+        });
+        r2 || (s2 = true, this.setNewOption());
+      }
+      s2 ? (this.setVisibleOptionsCount(), this.multiple && this.toggleAllOptionsClass(), this.setValueText()) : this.updatePosition(), p.removeClass(this.$allWrappers, "server-searching");
     } }, { key: "setSelectedOptions", value: function() {
       this.selectedOptions = this.options.filter(function(e3) {
         return e3.isSelected;
@@ -719,9 +808,9 @@ const virtualSelect_min = "";
       o3 && (o3.visibleIndex = n2, n2 += 1), e3 = e3.filter(function(e4) {
         var t4 = false;
         return e4.isVisible && !e4.isCurrentNew && (t4 = n2 >= i3 && n2 <= s2, e4.visibleIndex = n2, n2 += 1), t4;
-      }), o3 && (e3 = [o3].concat(b(e3))), this.visibleOptions = e3, this.visibleOptionsCount = e3.length, this.renderOptions();
+      }), o3 && (e3 = [o3].concat(b(e3))), this.visibleOptions = e3, this.renderOptions();
     } }, { key: "setOptionsPosition", value: function(e3) {
-      var t3 = parseInt((e3 || this.getVisibleStartIndex()) * this.optionHeight);
+      var t3 = (e3 || this.getVisibleStartIndex()) * this.optionHeight;
       this.$options.style.transform = "translate3d(0, ".concat(t3, "px, 0)"), p.setData(this.$options, "top", t3);
     } }, { key: "setOptionsTooltip", value: function() {
       var e3 = this, t3 = this.getVisibleOptions(), i3 = this.hasOptionDescription;
@@ -730,51 +819,51 @@ const virtualSelect_min = "";
         p.setData(o3.querySelector(".vscomp-option-text"), "tooltip", t4.label), i3 && p.setData(o3.querySelector(".vscomp-option-description"), "tooltip", t4.description);
       });
     } }, { key: "setValue", value: function(e3) {
-      var t3 = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {}, i3 = t3.disableEvent, o3 = void 0 !== i3 && i3, n2 = t3.disableValidation, r2 = void 0 !== n2 && n2;
-      this.hasEmptyValueOption && "" === e3 || e3 ? Array.isArray(e3) ? this.selectedValues = b(e3) : this.selectedValues = [e3] : this.selectedValues = [];
-      var a2 = this.getValue();
-      this.$ele.value = a2, this.$hiddenInput.value = this.getInputValue(a2), this.isMaxValuesSelected = !!(this.maxValues && this.maxValues <= this.selectedValues.length), this.toggleAllOptionsClass(), this.setValueText(), p.toggleClass(this.$allWrappers, "has-value", s.isNotEmpty(this.selectedValues)), p.toggleClass(this.$allWrappers, "max-value-selected", this.isMaxValuesSelected), r2 || this.validate(), o3 || p.dispatchEvent(this.$ele, "change", true);
+      var t3 = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {}, i3 = t3.disableEvent, o3 = void 0 !== i3 && i3, n2 = t3.disableValidation, r2 = void 0 !== n2 && n2, a2 = this.hasEmptyValueOption && "" === e3 || e3;
+      a2 ? Array.isArray(e3) ? this.selectedValues = b(e3) : this.selectedValues = [e3] : this.selectedValues = [];
+      var l2 = this.getValue();
+      this.$ele.value = l2, this.$hiddenInput.value = this.getInputValue(l2), this.isMaxValuesSelected = !!(this.maxValues && this.maxValues <= this.selectedValues.length), this.toggleAllOptionsClass(), this.setValueText(), p.toggleClass(this.$allWrappers, "has-value", s.isNotEmpty(this.selectedValues)), p.toggleClass(this.$allWrappers, "max-value-selected", this.isMaxValuesSelected), r2 || this.validate(), o3 || p.dispatchEvent(this.$ele, "change", true);
     } }, { key: "setValueText", value: function() {
-      var e3 = this, t3 = this.multiple, i3 = this.selectedValues, o3 = this.noOfDisplayValues, n2 = this.showValueAsTags, r2 = this.$valueText, a2 = this.selectedLabelRenderer, l2 = [], u2 = [], c2 = i3.length, h2 = 0, d2 = this.isAllSelected && !this.hasServerSearch && !this.disableAllOptionsSelectedText && !n2;
-      if (d2 && this.hideValueTooltipOnSelectAll)
-        r2.innerHTML = "".concat(this.allOptionsSelectedText, " (").concat(c2, ")");
+      var e3 = this, t3 = this.multiple, i3 = this.selectedValues, o3 = this.noOfDisplayValues, n2 = this.showValueAsTags, r2 = this.$valueText, a2 = [], l2 = [], u2 = i3.length, c2 = 0, h2 = this.isAllSelected && !this.hasServerSearch && !this.disableAllOptionsSelectedText && !n2;
+      if (h2 && this.hideValueTooltipOnSelectAll)
+        r2.innerHTML = "".concat(this.allOptionsSelectedText, " (").concat(u2, ")");
       else {
         this.getSelectedOptions({ fullDetails: true, keepSelectionOrder: true }).some(function(t4) {
           if (t4.isCurrentNew)
             return false;
-          if (h2 >= o3)
+          if (c2 >= o3)
             return true;
           var i4 = t4.label;
-          if ("function" == typeof a2 && (i4 = a2(t4)), l2.push(i4), h2 += 1, n2) {
-            var c3 = s.willTextOverflow(r2.parentElement, i4) ? e3.getTooltipAttrText(i4, false, true) : "", p2 = '<span class="vscomp-value-tag" data-index="'.concat(t4.index, '" ').concat(c3, '>\n                  <span class="vscomp-value-tag-content">').concat(i4, '</span>\n                  <span class="vscomp-value-tag-clear-button">\n                    <i class="vscomp-clear-icon"></i>\n                  </span>\n                </span>');
-            u2.push(p2);
+          if (a2.push(i4), c2 += 1, n2) {
+            var u3 = s.willTextOverflow(r2.parentElement, i4) ? e3.getTooltipAttrText(i4, false, true) : "", p2 = '<span class="vscomp-value-tag" data-index="'.concat(t4.index, '" ').concat(u3, '>\n                  <span class="vscomp-value-tag-content">').concat(i4, '</span>\n                  <span class="vscomp-value-tag-clear-button">\n                    <i class="vscomp-clear-icon"></i>\n                  </span>\n                </span>');
+            l2.push(p2);
           } else
-            u2.push(i4);
+            l2.push(i4);
           return false;
         });
-        var v2 = c2 - o3;
-        v2 > 0 && u2.push('<span class="vscomp-value-tag more-value-count">+ '.concat(v2, " ").concat(this.moreText, "</span>"));
-        var f2 = l2.join(", ");
-        if ("" === f2)
+        var d2 = u2 - o3;
+        d2 > 0 && l2.push('<span class="vscomp-value-tag more-value-count">+ '.concat(d2, " ").concat(this.moreText, "</span>"));
+        var v2 = a2.join(", ");
+        if ("" === v2)
           r2.innerHTML = this.placeholder;
-        else if (r2.innerHTML = f2, t3) {
-          var y2 = this.maxValues;
-          if (this.alwaysShowSelectedOptionsCount || p.hasEllipsis(r2) || y2 || n2) {
-            var b2 = '<span class="vscomp-selected-value-count">'.concat(c2, "</span>");
-            if (y2 && (b2 += ' / <span class="vscomp-max-value-count">'.concat(y2, "</span>")), d2)
-              r2.innerHTML = "".concat(this.allOptionsSelectedText, " (").concat(c2, ")");
+        else if (r2.innerHTML = v2, t3) {
+          var f2 = this.maxValues;
+          if (this.alwaysShowSelectedOptionsCount || p.hasEllipsis(r2) || f2 || n2) {
+            var y2 = '<span class="vscomp-selected-value-count">'.concat(u2, "</span>");
+            if (f2 && (y2 += ' / <span class="vscomp-max-value-count">'.concat(f2, "</span>")), h2)
+              r2.innerHTML = "".concat(this.allOptionsSelectedText, " (").concat(u2, ")");
             else if (n2)
-              r2.innerHTML = u2.join(""), this.$valueTags = r2.querySelectorAll(".vscomp-value-tag"), this.setValueTagAttr();
+              r2.innerHTML = l2.join(""), this.$valueTags = r2.querySelectorAll(".vscomp-value-tag"), this.setValueTagAttr();
             else if (!this.alwaysShowSelectedOptionsLabel) {
-              var m2 = 1 === c2 ? this.optionSelectedText : this.optionsSelectedText;
-              r2.innerHTML = "".concat(b2, " ").concat(m2);
+              var b2 = 1 === u2 ? this.optionSelectedText : this.optionsSelectedText;
+              r2.innerHTML = "".concat(y2, " ").concat(b2);
             }
           } else
-            u2 = [];
+            l2 = [];
         }
       }
-      var g2 = "";
-      0 === c2 ? g2 = this.placeholder : n2 || (g2 = u2.join(", ")), n2 || p.setData(r2, "tooltip", g2), t3 && (n2 ? this.updatePosition() : p.setData(r2, "tooltipEllipsisOnly", 0 === c2));
+      var m2 = "";
+      0 === u2 ? m2 = this.placeholder : n2 || (m2 = l2.join(", ")), n2 || p.setData(r2, "tooltip", m2), t3 && (n2 ? this.updatePosition() : p.setData(r2, "tooltipEllipsisOnly", 0 === u2));
     } }, { key: "setSearchValue", value: function(e3) {
       var t3 = arguments.length > 1 && void 0 !== arguments[1] && arguments[1], i3 = arguments.length > 2 && void 0 !== arguments[2] && arguments[2];
       if (e3 !== this.searchValueOriginal || i3) {
@@ -885,8 +974,8 @@ const virtualSelect_min = "";
       var e3 = this.getFirstVisibleOptionIndex() - this.halfOptionsCount;
       return e3 < 0 && (e3 = 0), e3;
     } }, { key: "getTooltipAttrText", value: function(e3) {
-      var t3 = arguments.length > 1 && void 0 !== arguments[1] && arguments[1], i3 = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], o3 = { "data-tooltip": (s.containsHTML(e3) ? s.replaceDoubleQuotesWithHTML(e3) : e3) || "", "data-tooltip-enter-delay": this.tooltipEnterDelay, "data-tooltip-z-index": this.zIndex, "data-tooltip-font-size": this.tooltipFontSize, "data-tooltip-alignment": this.tooltipAlignment, "data-tooltip-max-width": this.tooltipMaxWidth, "data-tooltip-ellipsis-only": t3, "data-tooltip-allow-html": i3 };
-      return p.getAttributesText(o3);
+      var t3 = arguments.length > 1 && void 0 !== arguments[1] && arguments[1], i3 = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], o3 = s.containsHTML(e3) ? s.replaceDoubleQuotesWithHTML(e3) : e3, n2 = { "data-tooltip": o3 || "", "data-tooltip-enter-delay": this.tooltipEnterDelay, "data-tooltip-z-index": this.zIndex, "data-tooltip-font-size": this.tooltipFontSize, "data-tooltip-alignment": this.tooltipAlignment, "data-tooltip-max-width": this.tooltipMaxWidth, "data-tooltip-ellipsis-only": t3, "data-tooltip-allow-html": i3 };
+      return p.getAttributesText(n2);
     } }, { key: "getOptionObj", value: function(e3) {
       if (e3) {
         var t3 = s.getString, i3 = this.secureText.bind(this);
@@ -980,7 +1069,7 @@ const virtualSelect_min = "";
       var e3 = this.isSilentOpen;
       this.isSilentOpen = false, e3 || (this.moveSelectedOptionsFirst(), this.setScrollTop(), p.addClass(this.$allWrappers, "focused"), this.showAsPopup ? (p.addClass(this.$body, "vscomp-popup-active"), this.isPopupActive = true) : this.focusElementOnOpen(), p.dispatchEvent(this.$ele, "afterOpen"));
     } }, { key: "closeDropbox", value: function(e3) {
-      this.isSilentClose = e3, this.keepAlwaysOpen ? this.removeOptionFocus() : (e3 ? p.setStyle(this.$dropboxContainer, "display", "") : (p.dispatchEvent(this.$ele, "beforeClose"), p.setAria(this.$wrapper, "expanded", false), p.setAria(this.$wrapper, "activedescendant", "")), this.$wrapper.focus(), this.dropboxPopover && !e3 ? this.dropboxPopover.hide() : this.afterHidePopper());
+      this.isSilentClose = e3, this.keepAlwaysOpen ? this.removeOptionFocus() : (e3 ? p.setStyle(this.$dropboxContainer, "display", "") : (p.dispatchEvent(this.$ele, "beforeClose"), p.setAria(this.$wrapper, "expanded", false), p.setAria(this.$wrapper, "activedescendant", "")), this.dropboxPopover && !e3 ? this.dropboxPopover.hide() : this.afterHidePopper());
     } }, { key: "afterHidePopper", value: function() {
       var e3 = this.isSilentClose;
       this.isSilentClose = false, p.removeClass(this.$allWrappers, "focused"), this.removeOptionFocus(), !e3 && this.isPopupActive && (p.removeClass(this.$body, "vscomp-popup-active"), this.isPopupActive = false), p.addClass(this.$allWrappers, "closed"), e3 || (p.dispatchEvent(this.$ele, "afterClose"), (this.initialSelectedValue && 0 === this.initialSelectedValue.length || this.selectedValues.length > 0) && this.focus());
@@ -998,7 +1087,7 @@ const virtualSelect_min = "";
     } }, { key: "focusElementOnOpen", value: function() {
       var e3 = this.$searchInput, t3 = !this.options.length && !this.hasServerSearch;
       if (e3)
-        t3 && !this.allowNewOption ? (p.setAttr(e3, "disabled", ""), this.$noOptions.focus()) : (e3.removeAttribute("disabled"), e3.focus());
+        t3 && !this.allowNewOption ? (p.setAttr(e3, "disabled", ""), this.$noOptions.focus()) : e3.focus();
       else {
         var i3 = this.$dropbox.querySelector('[tabindex="0"]');
         void 0 !== p.getData(i3, "index") ? this.focusOption({ direction: "next" }) : i3 ? i3.focus() : this.focusFirstVisibleOption();
@@ -1026,27 +1115,27 @@ const virtualSelect_min = "";
       var e3 = this.$dropboxContainer.querySelector(".vscomp-option.focused");
       e3 && (this.toggleOptionFocusedState(e3, false), this.toggleFocusedProp(null));
     } }, { key: "selectOption", value: function(e3) {
-      var t3 = (arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {}).event;
+      var t3 = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {}, i3 = t3.event;
       if (e3) {
-        var i3 = !p.hasClass(e3, "selected");
-        if (i3) {
+        var o3 = !p.hasClass(e3, "selected");
+        if (o3) {
           if (this.multiple && this.isMaxValuesSelected)
             return;
         } else if (!this.multiple)
           return void this.closeDropbox();
-        var o3 = this.selectedValues, n2 = p.getData(e3, "value"), r2 = p.getData(e3, "index", "number"), a2 = p.hasClass(e3, "current-new"), l2 = false, u2 = this.lastSelectedOptionIndex;
-        if (this.lastSelectedOptionIndex = null, this.toggleSelectedProp(r2, i3), i3) {
+        var n2 = this.selectedValues, r2 = p.getData(e3, "value"), a2 = p.getData(e3, "index", "number"), l2 = p.hasClass(e3, "current-new"), u2 = false, c2 = this.lastSelectedOptionIndex;
+        if (this.lastSelectedOptionIndex = null, this.toggleSelectedProp(a2, o3), o3) {
           if (this.multiple)
-            o3.push(n2), this.toggleAllOptionsClass(), this.toggleGroupOptionsParent(e3), t3 && t3.shiftKey && (l2 = true);
+            n2.push(r2), this.toggleAllOptionsClass(), this.toggleGroupOptionsParent(e3), i3 && i3.shiftKey && (u2 = true);
           else {
-            o3.length && this.toggleSelectedProp(this.getOptionIndex(o3[0]), false), o3 = [n2];
-            var c2 = this.$dropboxContainer.querySelector(".vscomp-option.selected");
-            c2 && this.toggleOptionSelectedState(c2, false), this.closeDropbox(), a2 || this.setSearchValue("");
+            n2.length && this.toggleSelectedProp(this.getOptionIndex(n2[0]), false), n2 = [r2];
+            var h2 = this.$dropboxContainer.querySelector(".vscomp-option.selected");
+            h2 && this.toggleOptionSelectedState(h2, false), this.closeDropbox(), l2 || this.setSearchValue("");
           }
-          this.lastSelectedOptionIndex = r2, this.toggleOptionSelectedState(e3);
+          this.lastSelectedOptionIndex = a2, this.toggleOptionSelectedState(e3);
         } else
-          this.multiple && (this.toggleOptionSelectedState(e3), s.removeItemFromArray(o3, n2), this.toggleAllOptionsClass(false), this.toggleGroupOptionsParent(e3, false));
-        a2 && this.beforeSelectNewValue(), this.setValue(o3), l2 && this.selectRangeOptions(u2, r2);
+          this.multiple && (this.toggleOptionSelectedState(e3), s.removeItemFromArray(n2, r2), this.toggleAllOptionsClass(false), this.toggleGroupOptionsParent(e3, false));
+        l2 && this.beforeSelectNewValue(), this.setValue(n2), u2 && this.selectRangeOptions(c2, a2);
       }
     } }, { key: "selectFocusedOption", value: function() {
       this.selectOption(this.$dropboxContainer.querySelector(".vscomp-option.focused"));
@@ -1089,7 +1178,7 @@ const virtualSelect_min = "";
     } }, { key: "toggleAllOptionsClass", value: function(e3) {
       if (this.multiple) {
         var t3 = false;
-        "boolean" == typeof e3 || (e3 = this.isAllOptionsSelected()), !e3 && this.selectAllOnlyVisible && "" !== this.searchValue && (this.visibleOptionsCount > 0 || "" === this.searchValue) && (t3 = this.isAllOptionsSelected(true)), p.toggleClass(this.$toggleAllCheckbox, "checked", e3 || t3), this.isAllSelected = e3;
+        "boolean" == typeof e3 || (e3 = this.isAllOptionsSelected()), !e3 && this.selectAllOnlyVisible && ("" !== this.searchValue && this.visibleOptionsCount > 0 || "" == this.searchValue) && (t3 = this.isAllOptionsSelected(true)), p.toggleClass(this.$toggleAllCheckbox, "checked", e3 || t3), this.isAllSelected = e3;
       }
     } }, { key: "isAllOptionsSelected", value: function(e3) {
       var t3 = false;
@@ -1141,10 +1230,10 @@ const virtualSelect_min = "";
       var e3 = !this.isOpened();
       e3 && this.openDropbox(true), this.$optionsContainer.scrollTop > 0 && (this.$optionsContainer.scrollTop = 0), e3 && this.closeDropbox(true);
     } }, { key: "reset", value: function() {
-      var e3 = arguments.length > 0 && void 0 !== arguments[0] && arguments[0], t3 = arguments.length > 1 && void 0 !== arguments[1] && arguments[1];
+      var e3 = arguments.length > 0 && void 0 !== arguments[0] && arguments[0];
       this.options.forEach(function(e4) {
         e4.isSelected = false;
-      }), this.beforeValueSet(true), this.setValue(null, { disableEvent: t3, disableValidation: e3 }), this.afterValueSet(), e3 && p.removeClass(this.$allWrappers, "has-error"), p.dispatchEvent(this.$ele, "reset");
+      }), this.beforeValueSet(true), this.setValue(null, { disableValidation: e3 }), this.afterValueSet(), e3 && p.removeClass(this.$allWrappers, "has-error"), p.dispatchEvent(this.$ele, "reset");
     } }, { key: "addOption", value: function(e3, t3) {
       if (e3) {
         this.lastOptionIndex += 1;
@@ -1217,103 +1306,7 @@ const virtualSelect_min = "";
       void 0 === i3 && (i3 = !p.hasClass(e3, "selected")), p.toggleClass(e3, "selected", i3), p.setAria(e3, "selected", i3);
     } }, { key: "toggleOptionFocusedState", value: function(e3, t3) {
       e3 && (p.toggleClass(e3, "focused", t3), p.setAttr(e3, "tabindex", t3 ? "0" : "-1"), document.activeElement !== this.$searchInput && e3.focus(), t3 && p.setAria(this.$wrapper, "activedescendant", e3.id));
-    } }], o2 = [{ key: "init", value: function(t3) {
-      var i3 = t3.ele;
-      if (i3) {
-        var o3 = false;
-        if ("string" == typeof i3) {
-          var s2 = (i3 = document.querySelectorAll(i3)).length;
-          if (0 === s2)
-            return;
-          1 === s2 && (o3 = true);
-        }
-        void 0 !== i3.length && void 0 !== i3.forEach || (i3 = [i3], o3 = true);
-        var n2 = [];
-        return i3.forEach(function(i4) {
-          i4.virtualSelect ? n2.push(i4.virtualSelect) : (t3.ele = i4, "SELECT" === i4.tagName && e2.setPropsFromSelect(t3), n2.push(new e2(t3)));
-        }), o3 ? n2[0] : n2;
-      }
-    } }, { key: "getAttrProps", value: function() {
-      var e3 = p.convertPropToDataAttr, t3 = {};
-      return C.forEach(function(e4) {
-        t3[e4] = e4;
-      }), E.forEach(function(i3) {
-        t3[e3(i3)] = i3;
-      }), t3;
-    } }, { key: "setPropsFromSelect", value: function(e3) {
-      var t3 = e3.ele, i3 = [], o3 = [], s2 = function e4(t4) {
-        var s3 = [];
-        return Array.from(t4.children).forEach(function(t5) {
-          var n3 = t5.value, r2 = { value: n3 };
-          "OPTGROUP" === t5.tagName ? (r2.label = t5.getAttribute("label"), r2.options = e4(t5)) : r2.label = t5.innerHTML, s3.push(r2), t5.disabled && i3.push(n3), t5.selected && o3.push(n3);
-        }), s3;
-      }(t3), n2 = document.createElement("div");
-      p.setAttrFromEle(t3, n2, Object.keys(x), k), t3.parentNode.insertBefore(n2, t3), t3.remove(), e3.ele = n2, e3.options = s2, e3.disabledOptions = i3, e3.selectedValue = o3;
-    } }, { key: "onFormReset", value: function(e3) {
-      var t3 = e3.target.closest("form");
-      t3 && t3.querySelectorAll(".vscomp-ele-wrapper").forEach(function(e4) {
-        e4.parentElement.virtualSelect.reset(true);
-      });
-    } }, { key: "onFormSubmit", value: function(t3) {
-      e2.validate(t3.target.closest("form")) || t3.preventDefault();
-    } }, { key: "validate", value: function(e3) {
-      if (!e3)
-        return true;
-      var t3 = false;
-      return e3.querySelectorAll(".vscomp-ele-wrapper").forEach(function(e4) {
-        var i3 = e4.parentElement.virtualSelect.validate();
-        t3 || i3 || (t3 = true);
-      }), !t3;
-    } }, { key: "reset", value: function() {
-      var e3 = arguments.length > 0 && void 0 !== arguments[0] && arguments[0], t3 = arguments.length > 1 && void 0 !== arguments[1] && arguments[1];
-      this.virtualSelect.reset(e3, t3);
-    } }, { key: "setValueMethod", value: function() {
-      var e3;
-      (e3 = this.virtualSelect).setValueMethod.apply(e3, arguments);
-    } }, { key: "setOptionsMethod", value: function() {
-      var e3;
-      (e3 = this.virtualSelect).setOptionsMethod.apply(e3, arguments);
-    } }, { key: "setDisabledOptionsMethod", value: function() {
-      var e3;
-      (e3 = this.virtualSelect).setDisabledOptionsMethod.apply(e3, arguments);
-    } }, { key: "setEnabledOptionsMethod", value: function() {
-      var e3;
-      (e3 = this.virtualSelect).setEnabledOptionsMethod.apply(e3, arguments);
-    } }, { key: "toggleSelectAll", value: function(e3) {
-      this.virtualSelect.toggleAllOptions(e3);
-    } }, { key: "isAllSelected", value: function() {
-      return this.virtualSelect.isAllSelected;
-    } }, { key: "addOptionMethod", value: function(e3) {
-      this.virtualSelect.addOption(e3, true);
-    } }, { key: "getNewValueMethod", value: function() {
-      return this.virtualSelect.getNewValue();
-    } }, { key: "getDisplayValueMethod", value: function() {
-      return this.virtualSelect.getDisplayValue();
-    } }, { key: "getSelectedOptionsMethod", value: function(e3) {
-      return this.virtualSelect.getSelectedOptions(e3);
-    } }, { key: "getDisabledOptionsMethod", value: function() {
-      return this.virtualSelect.getDisabledOptions();
-    } }, { key: "openMethod", value: function() {
-      return this.virtualSelect.openDropbox();
-    } }, { key: "closeMethod", value: function() {
-      return this.virtualSelect.closeDropbox();
-    } }, { key: "focusMethod", value: function() {
-      return this.virtualSelect.focus();
-    } }, { key: "enableMethod", value: function() {
-      return this.virtualSelect.enable();
-    } }, { key: "disableMethod", value: function() {
-      return this.virtualSelect.disable();
-    } }, { key: "destroyMethod", value: function() {
-      return this.virtualSelect.destroy();
-    } }, { key: "validateMethod", value: function() {
-      return this.virtualSelect.validate();
-    } }, { key: "toggleRequiredMethod", value: function(e3) {
-      return this.virtualSelect.toggleRequired(e3);
-    } }, { key: "onResizeMethod", value: function() {
-      document.querySelectorAll(".vscomp-ele-wrapper").forEach(function(e3) {
-        e3.parentElement.virtualSelect.onResize();
-      });
-    } }], i2 && O(t2.prototype, i2), o2 && O(t2, o2), Object.defineProperty(t2, "prototype", { writable: false }), e2;
+    } }]) && O(t2.prototype, i2), o2 && O(t2, o2), Object.defineProperty(t2, "prototype", { writable: false }), e2;
   }();
   document.addEventListener("reset", $.onFormReset), document.addEventListener("submit", $.onFormSubmit), window.addEventListener("resize", $.onResizeMethod), x = $.getAttrProps(), window.VirtualSelect = $, "undefined" != typeof NodeList && NodeList.prototype && !NodeList.prototype.forEach && (NodeList.prototype.forEach = Array.prototype.forEach);
 }(), function() {
@@ -1349,7 +1342,7 @@ const virtualSelect_min = "";
       }(this, t2);
     }
     var i2;
-    return i2 = [{ key: "addClass", value: function(i3, o2) {
+    return (i2 = [{ key: "addClass", value: function(i3, o2) {
       i3 && (o2 = o2.split(" "), t2.getElements(i3).forEach(function(t3) {
         var i4;
         (i4 = t3.classList).add.apply(i4, e(o2));
@@ -1398,7 +1391,7 @@ const virtualSelect_min = "";
         i3 = i3.parentElement;
       }
       return t3;
-    } }], i2 && function(e2, t3) {
+    } }]) && function(e2, t3) {
       for (var i3 = 0; i3 < t3.length; i3++) {
         var o2 = t3[i3];
         o2.enumerable = o2.enumerable || false, o2.configurable = true, "value" in o2 && (o2.writable = true), Object.defineProperty(e2, o2.key, o2);
@@ -1419,7 +1412,7 @@ const virtualSelect_min = "";
       }
     }
     var t2;
-    return t2 = [{ key: "init", value: function() {
+    return (t2 = [{ key: "init", value: function() {
       var e3 = this.$popperEle;
       e3 && this.$triggerEle && (i.setStyle(e3, "zIndex", this.zIndex), this.setPosition());
     } }, { key: "setProps", value: function(e3) {
@@ -1433,18 +1426,18 @@ const virtualSelect_min = "";
       return Object.assign({ position: "auto", margin: 8, offset: 5, enterDelay: 0, exitDelay: 0, showDuration: 300, hideDuration: 200, transitionDistance: 10, zIndex: 1 }, e3);
     } }, { key: "setPosition", value: function() {
       i.show(this.$popperEle, "inline-flex");
-      var e3, t3, n2, r = window.innerWidth, a = window.innerHeight, l = i.getAbsoluteCoords(this.$popperEle), u = i.getAbsoluteCoords(this.$triggerEle), c = l.width, p = l.height, h = l.top, d = l.right, v = l.bottom, f = l.left, y = u.width, b = u.height, m = u.top, g = u.right, O = u.bottom, S = u.left, x = m - h, w = S - f, k = w, C = x, E = this.position, $ = this.secondaryPosition, A = y / 2 - c / 2, T = b / 2 - p / 2, D = this.margin, V = this.transitionDistance, P = window.scrollY - h, I = a + P, M = window.scrollX - f, F = r + M, L = this.offset;
-      L && (P += L, I -= L, M += L, F -= L), "auto" === E && (E = i.getMoreVisibleSides(this.$triggerEle).vertical);
-      var G = { top: { top: C - p - D, left: k + A }, bottom: { top: C + b + D, left: k + A }, right: { top: C + T, left: k + y + D }, left: { top: C + T, left: k - c - D } }, H = G[E];
-      if (C = H.top, k = H.left, $ && ("top" === $ ? C = x : "bottom" === $ ? C = x + b - p : "left" === $ ? k = w : "right" === $ && (k = w + y - c)), k < M ? "left" === E ? n2 = "right" : k = M + f > g ? g - f : M : k + c > F && ("right" === E ? n2 = "left" : k = F + f < S ? S - d : F - c), C < P ? "top" === E ? n2 = "bottom" : C = P + h > O ? O - h : P : C + p > I && ("bottom" === E ? n2 = "top" : C = I + h < m ? m - v : I - p), n2) {
+      var e3, t3, n2, r = window.innerWidth, a = window.innerHeight, l = i.getAbsoluteCoords(this.$popperEle), u = i.getAbsoluteCoords(this.$triggerEle), c = l.width, p = l.height, h = l.top, d = l.right, v = l.bottom, f = l.left, y = u.width, b = u.height, m = u.top, g = u.right, O = u.bottom, S = u.left, x = m - h, w = S - f, k = w, E = x, C = this.position, $ = this.secondaryPosition, A = y / 2 - c / 2, T = b / 2 - p / 2, D = this.margin, V = this.transitionDistance, P = window.scrollY - h, I = a + P, M = window.scrollX - f, F = r + M, L = this.offset;
+      L && (P += L, I -= L, M += L, F -= L), "auto" === C && (C = i.getMoreVisibleSides(this.$triggerEle).vertical);
+      var G = { top: { top: E - p - D, left: k + A }, bottom: { top: E + b + D, left: k + A }, right: { top: E + T, left: k + y + D }, left: { top: E + T, left: k - c - D } }, H = G[C];
+      if (E = H.top, k = H.left, $ && ("top" === $ ? E = x : "bottom" === $ ? E = x + b - p : "left" === $ ? k = w : "right" === $ && (k = w + y - c)), k < M ? "left" === C ? n2 = "right" : k = M + f > g ? g - f : M : k + c > F && ("right" === C ? n2 = "left" : k = F + f < S ? S - d : F - c), E < P ? "top" === C ? n2 = "bottom" : E = P + h > O ? O - h : P : E + p > I && ("bottom" === C ? n2 = "top" : E = I + h < m ? m - v : I - p), n2) {
         var N = G[n2];
-        "top" === (E = n2) || "bottom" === E ? C = N.top : "left" !== E && "right" !== E || (k = N.left);
+        "top" === (C = n2) || "bottom" === C ? E = N.top : "left" !== C && "right" !== C || (k = N.left);
       }
-      "top" === E ? (e3 = C + V, t3 = k) : "right" === E ? (e3 = C, t3 = k - V) : "left" === E ? (e3 = C, t3 = k + V) : (e3 = C - V, t3 = k);
-      var j = "translate3d(".concat(parseInt(t3), "px, ").concat(parseInt(e3), "px, 0)");
-      if (i.setStyle(this.$popperEle, "transform", j), i.setData(this.$popperEle, "fromLeft", t3), i.setData(this.$popperEle, "fromTop", e3), i.setData(this.$popperEle, "top", C), i.setData(this.$popperEle, "left", k), i.removeClass(this.$popperEle, o.join(" ")), i.addClass(this.$popperEle, "position-".concat(E)), this.hasArrow) {
-        var W = 0, B = 0, q = k + f, R = C + h, z = this.$arrowEle.offsetWidth / 2, K = s[E] || "";
-        "top" === E || "bottom" === E ? (W = y / 2 + S - q) < z ? W = z : W > c - z && (W = c - z) : "left" !== E && "right" !== E || ((B = b / 2 + m - R) < z ? B = z : B > p - z && (B = p - z)), i.setStyle(this.$arrowEle, "transform", "translate3d(".concat(parseInt(W), "px, ").concat(parseInt(B), "px, 0) ").concat(K));
+      "top" === C ? (e3 = E + V, t3 = k) : "right" === C ? (e3 = E, t3 = k - V) : "left" === C ? (e3 = E, t3 = k + V) : (e3 = E - V, t3 = k);
+      var W = "translate3d(".concat(t3, "px, ").concat(e3, "px, 0)");
+      if (i.setStyle(this.$popperEle, "transform", W), i.setData(this.$popperEle, "fromLeft", t3), i.setData(this.$popperEle, "fromTop", e3), i.setData(this.$popperEle, "top", E), i.setData(this.$popperEle, "left", k), i.removeClass(this.$popperEle, o.join(" ")), i.addClass(this.$popperEle, "position-".concat(C)), this.hasArrow) {
+        var q = 0, j = 0, B = k + f, R = E + h, z = this.$arrowEle.offsetWidth / 2, K = s[C] || "";
+        "top" === C || "bottom" === C ? (q = y / 2 + S - B) < z ? q = z : q > c - z && (q = c - z) : "left" !== C && "right" !== C || ((j = b / 2 + m - R) < z ? j = z : j > p - z && (j = p - z)), i.setStyle(this.$arrowEle, "transform", "translate3d(".concat(q, "px, ").concat(j, "px, 0) ").concat(K));
       }
       i.hide(this.$popperEle);
     } }, { key: "resetPosition", value: function() {
@@ -1452,26 +1445,26 @@ const virtualSelect_min = "";
     } }, { key: "show", value: function() {
       var e3 = this, t3 = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}, o2 = t3.resetPosition, s2 = t3.data;
       clearTimeout(this.exitDelayTimeout), clearTimeout(this.hideDurationTimeout), o2 && this.resetPosition(), this.enterDelayTimeout = setTimeout(function() {
-        var t4 = i.getData(e3.$popperEle, "left"), o3 = i.getData(e3.$popperEle, "top"), n2 = "translate3d(".concat(parseInt(t4), "px, ").concat(parseInt(o3), "px, 0)"), r = e3.showDuration;
+        var t4 = i.getData(e3.$popperEle, "left"), o3 = i.getData(e3.$popperEle, "top"), n2 = "translate3d(".concat(t4, "px, ").concat(o3, "px, 0)"), r = e3.showDuration;
         i.show(e3.$popperEle, "inline-flex"), i.getCoords(e3.$popperEle), i.setStyle(e3.$popperEle, "transitionDuration", r + "ms"), i.setStyle(e3.$popperEle, "transform", n2), i.setStyle(e3.$popperEle, "opacity", 1), e3.showDurationTimeout = setTimeout(function() {
           "function" == typeof e3.afterShowCallback && e3.afterShowCallback(s2);
         }, r);
       }, this.enterDelay);
     } }, { key: "hide", value: function() {
-      var e3 = this, t3 = (arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}).data;
+      var e3 = this, t3 = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}, o2 = t3.data;
       clearTimeout(this.enterDelayTimeout), clearTimeout(this.showDurationTimeout), this.exitDelayTimeout = setTimeout(function() {
         if (e3.$popperEle) {
-          var o2 = parseInt(i.getData(e3.$popperEle, "fromLeft")), s2 = parseInt(i.getData(e3.$popperEle, "fromTop")), n2 = "translate3d(".concat(o2, "px, ").concat(s2, "px, 0)"), r = e3.hideDuration;
+          var t4 = i.getData(e3.$popperEle, "fromLeft"), s2 = i.getData(e3.$popperEle, "fromTop"), n2 = "translate3d(".concat(t4, "px, ").concat(s2, "px, 0)"), r = e3.hideDuration;
           i.setStyle(e3.$popperEle, "transitionDuration", r + "ms"), i.setStyle(e3.$popperEle, "transform", n2), i.setStyle(e3.$popperEle, "opacity", 0), e3.hideDurationTimeout = setTimeout(function() {
-            i.hide(e3.$popperEle), "function" == typeof e3.afterHideCallback && e3.afterHideCallback(t3);
+            i.hide(e3.$popperEle), "function" == typeof e3.afterHideCallback && e3.afterHideCallback(o2);
           }, r);
         }
       }, this.exitDelay);
     } }, { key: "updatePosition", value: function() {
       i.setStyle(this.$popperEle, "transitionDuration", "0ms"), this.resetPosition();
-      var e3 = parseInt(i.getData(this.$popperEle, "left")), t3 = parseInt(i.getData(this.$popperEle, "top"));
+      var e3 = i.getData(this.$popperEle, "left"), t3 = i.getData(this.$popperEle, "top");
       i.show(this.$popperEle, "inline-flex"), i.setStyle(this.$popperEle, "transform", "translate3d(".concat(e3, "px, ").concat(t3, "px, 0)"));
-    } }], t2 && function(e3, t3) {
+    } }]) && function(e3, t3) {
       for (var i2 = 0; i2 < t3.length; i2++) {
         var o2 = t3[i2];
         o2.enumerable = o2.enumerable || false, o2.configurable = true, "value" in o2 && (o2.writable = true), Object.defineProperty(e3, o2.key, o2);
@@ -1480,217 +1473,154 @@ const virtualSelect_min = "";
   }();
   window.PopperComponent = n;
 }(), function() {
-  function e(t2) {
-    return (e = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(e2) {
-      return typeof e2;
-    } : function(e2) {
-      return e2 && "function" == typeof Symbol && e2.constructor === Symbol && e2 !== Symbol.prototype ? "symbol" : typeof e2;
-    })(t2);
-  }
-  function t(e2, t2) {
-    for (var o2 = 0; o2 < t2.length; o2++) {
-      var s2 = t2[o2];
-      s2.enumerable = s2.enumerable || false, s2.configurable = true, "value" in s2 && (s2.writable = true), Object.defineProperty(e2, i(s2.key), s2);
+  function e(e2, t2) {
+    for (var i2 = 0; i2 < t2.length; i2++) {
+      var o2 = t2[i2];
+      o2.enumerable = o2.enumerable || false, o2.configurable = true, "value" in o2 && (o2.writable = true), Object.defineProperty(e2, o2.key, o2);
     }
   }
-  function i(t2) {
-    var i2 = function(t3, i3) {
-      if ("object" != e(t3) || !t3)
-        return t3;
-      var o2 = t3[Symbol.toPrimitive];
-      if (void 0 !== o2) {
-        var s2 = o2.call(t3, "string");
-        if ("object" != e(s2))
-          return s2;
-        throw new TypeError("@@toPrimitive must return a primitive value.");
-      }
-      return String(t3);
-    }(t2);
-    return "symbol" == e(i2) ? i2 : i2 + "";
-  }
-  var o = function() {
-    return e2 = function e3() {
-      !function(e4, t2) {
-        if (!(e4 instanceof t2))
+  var t = function() {
+    function t2() {
+      !function(e2, t3) {
+        if (!(e2 instanceof t3))
           throw new TypeError("Cannot call a class as a function");
-      }(this, e3);
-    }, i2 = [{ key: "convertToBoolean", value: function(e3) {
-      return true === e3 || "true" === e3 || false !== e3 && "false" !== e3 && arguments.length > 1 && void 0 !== arguments[1] && arguments[1];
-    } }, { key: "removeArrayEmpty", value: function(e3) {
-      return Array.isArray(e3) && e3.length ? e3.filter(function(e4) {
-        return !!e4;
+      }(this, t2);
+    }
+    var i2, o2;
+    return i2 = t2, (o2 = [{ key: "convertToBoolean", value: function(e2) {
+      var t3 = arguments.length > 1 && void 0 !== arguments[1] && arguments[1];
+      return true === e2 || "true" === e2 || false !== e2 && "false" !== e2 && t3;
+    } }, { key: "removeArrayEmpty", value: function(e2) {
+      return Array.isArray(e2) && e2.length ? e2.filter(function(e3) {
+        return !!e3;
       }) : [];
-    } }, { key: "throttle", value: function(e3, t2) {
-      var i3, o2 = 0;
+    } }, { key: "throttle", value: function(e2, t3) {
+      var i3, o3 = 0;
       return function() {
         for (var s2 = arguments.length, n2 = new Array(s2), r2 = 0; r2 < s2; r2++)
           n2[r2] = arguments[r2];
-        var a2 = (/* @__PURE__ */ new Date()).getTime(), l2 = t2 - (a2 - o2);
-        clearTimeout(i3), l2 <= 0 ? (o2 = a2, e3.apply(void 0, n2)) : i3 = setTimeout(function() {
-          e3.apply(void 0, n2);
+        var a2 = (/* @__PURE__ */ new Date()).getTime(), l2 = t3 - (a2 - o3);
+        clearTimeout(i3), l2 <= 0 ? (o3 = a2, e2.apply(void 0, n2)) : i3 = setTimeout(function() {
+          e2.apply(void 0, n2);
         }, l2);
       };
-    } }], i2 && t(e2, i2), Object.defineProperty(e2, "prototype", { writable: false }), e2;
-    var e2, i2;
+    } }]) && e(i2, o2), Object.defineProperty(i2, "prototype", { writable: false }), t2;
   }();
-  function s(e2) {
-    return s = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(e3) {
-      return typeof e3;
-    } : function(e3) {
-      return e3 && "function" == typeof Symbol && e3.constructor === Symbol && e3 !== Symbol.prototype ? "symbol" : typeof e3;
-    }, s(e2);
-  }
-  function n(e2) {
+  function i(e2) {
     return function(e3) {
       if (Array.isArray(e3))
-        return r(e3);
+        return o(e3);
     }(e2) || function(e3) {
       if ("undefined" != typeof Symbol && null != e3[Symbol.iterator] || null != e3["@@iterator"])
         return Array.from(e3);
     }(e2) || function(e3, t2) {
       if (e3) {
         if ("string" == typeof e3)
-          return r(e3, t2);
+          return o(e3, t2);
         var i2 = Object.prototype.toString.call(e3).slice(8, -1);
-        return "Object" === i2 && e3.constructor && (i2 = e3.constructor.name), "Map" === i2 || "Set" === i2 ? Array.from(e3) : "Arguments" === i2 || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(i2) ? r(e3, t2) : void 0;
+        return "Object" === i2 && e3.constructor && (i2 = e3.constructor.name), "Map" === i2 || "Set" === i2 ? Array.from(e3) : "Arguments" === i2 || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(i2) ? o(e3, t2) : void 0;
       }
     }(e2) || function() {
       throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
     }();
   }
-  function r(e2, t2) {
+  function o(e2, t2) {
     (null == t2 || t2 > e2.length) && (t2 = e2.length);
     for (var i2 = 0, o2 = new Array(t2); i2 < t2; i2++)
       o2[i2] = e2[i2];
     return o2;
   }
-  function a(e2, t2) {
+  function s(e2, t2) {
     for (var i2 = 0; i2 < t2.length; i2++) {
       var o2 = t2[i2];
-      o2.enumerable = o2.enumerable || false, o2.configurable = true, "value" in o2 && (o2.writable = true), Object.defineProperty(e2, l(o2.key), o2);
+      o2.enumerable = o2.enumerable || false, o2.configurable = true, "value" in o2 && (o2.writable = true), Object.defineProperty(e2, o2.key, o2);
     }
   }
-  function l(e2) {
-    var t2 = function(e3, t3) {
-      if ("object" != s(e3) || !e3)
-        return e3;
-      var i2 = e3[Symbol.toPrimitive];
-      if (void 0 !== i2) {
-        var o2 = i2.call(e3, "string");
-        if ("object" != s(o2))
-          return o2;
-        throw new TypeError("@@toPrimitive must return a primitive value.");
-      }
-      return String(e3);
-    }(e2);
-    return "symbol" == s(t2) ? t2 : t2 + "";
-  }
-  var u = function() {
+  var n = function() {
     function e2() {
-      !function(e3, t3) {
-        if (!(e3 instanceof t3))
+      !function(e3, t2) {
+        if (!(e3 instanceof t2))
           throw new TypeError("Cannot call a class as a function");
       }(this, e2);
     }
-    return t2 = e2, i2 = [{ key: "addClass", value: function(t3, i3) {
-      t3 && (i3 = i3.split(" "), e2.getElements(t3).forEach(function(e3) {
-        var t4;
-        (t4 = e3.classList).add.apply(t4, n(i3));
+    var o2, n2;
+    return o2 = e2, (n2 = [{ key: "addClass", value: function(t2, o3) {
+      t2 && (o3 = o3.split(" "), e2.getElements(t2).forEach(function(e3) {
+        var t3;
+        (t3 = e3.classList).add.apply(t3, i(o3));
       }));
-    } }, { key: "removeClass", value: function(t3, i3) {
-      t3 && (i3 = i3.split(" "), e2.getElements(t3).forEach(function(e3) {
-        var t4;
-        (t4 = e3.classList).remove.apply(t4, n(i3));
+    } }, { key: "removeClass", value: function(t2, o3) {
+      t2 && (o3 = o3.split(" "), e2.getElements(t2).forEach(function(e3) {
+        var t3;
+        (t3 = e3.classList).remove.apply(t3, i(o3));
       }));
-    } }, { key: "hasClass", value: function(e3, t3) {
-      return !!e3 && e3.classList.contains(t3);
+    } }, { key: "hasClass", value: function(e3, t2) {
+      return !!e3 && e3.classList.contains(t2);
     } }, { key: "getElement", value: function(e3) {
       return e3 && ("string" == typeof e3 ? e3 = document.querySelector(e3) : void 0 !== e3.length && (e3 = e3[0])), e3 || null;
     } }, { key: "getElements", value: function(e3) {
       if (e3)
         return void 0 === e3.forEach && (e3 = [e3]), e3;
-    } }, { key: "addEvent", value: function(t3, i3, o2) {
-      e2.addOrRemoveEvent(t3, i3, o2, "add");
-    } }, { key: "removeEvent", value: function(t3, i3, o2) {
-      e2.addOrRemoveEvent(t3, i3, o2, "remove");
-    } }, { key: "addOrRemoveEvent", value: function(t3, i3, s2, n2) {
-      t3 && (i3 = o.removeArrayEmpty(i3.split(" "))).forEach(function(i4) {
-        (t3 = e2.getElements(t3)).forEach(function(e3) {
-          "add" === n2 ? e3.addEventListener(i4, s2) : e3.removeEventListener(i4, s2);
+    } }, { key: "addEvent", value: function(t2, i2, o3) {
+      e2.addOrRemoveEvent(t2, i2, o3, "add");
+    } }, { key: "removeEvent", value: function(t2, i2, o3) {
+      e2.addOrRemoveEvent(t2, i2, o3, "remove");
+    } }, { key: "addOrRemoveEvent", value: function(i2, o3, s2, n3) {
+      i2 && (o3 = t.removeArrayEmpty(o3.split(" "))).forEach(function(t2) {
+        (i2 = e2.getElements(i2)).forEach(function(e3) {
+          "add" === n3 ? e3.addEventListener(t2, s2) : e3.removeEventListener(t2, s2);
         });
       });
     } }, { key: "getScrollableParents", value: function(e3) {
       if (!e3)
         return [];
-      for (var t3 = [window], i3 = e3.parentElement; i3; ) {
-        var o2 = getComputedStyle(i3).overflow;
-        -1 === o2.indexOf("scroll") && -1 === o2.indexOf("auto") || t3.push(i3), i3 = i3.parentElement;
+      for (var t2 = [window], i2 = e3.parentElement; i2; ) {
+        var o3 = getComputedStyle(i2).overflow;
+        -1 === o3.indexOf("scroll") && -1 === o3.indexOf("auto") || t2.push(i2), i2 = i2.parentElement;
       }
-      return t3;
+      return t2;
     } }, { key: "convertPropToDataAttr", value: function(e3) {
       return e3 ? "data-popover-".concat(e3).replace(/([A-Z])/g, "-$1").toLowerCase() : "";
-    } }], i2 && a(t2, i2), Object.defineProperty(t2, "prototype", { writable: false }), t2;
-    var t2, i2;
+    } }]) && s(o2, n2), Object.defineProperty(o2, "prototype", { writable: false }), e2;
   }();
-  function c(e2) {
-    return c = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(e3) {
-      return typeof e3;
-    } : function(e3) {
-      return e3 && "function" == typeof Symbol && e3.constructor === Symbol && e3 !== Symbol.prototype ? "symbol" : typeof e3;
-    }, c(e2);
-  }
-  function p(e2, t2) {
+  function r(e2, t2) {
     for (var i2 = 0; i2 < t2.length; i2++) {
       var o2 = t2[i2];
-      o2.enumerable = o2.enumerable || false, o2.configurable = true, "value" in o2 && (o2.writable = true), Object.defineProperty(e2, h(o2.key), o2);
+      o2.enumerable = o2.enumerable || false, o2.configurable = true, "value" in o2 && (o2.writable = true), Object.defineProperty(e2, o2.key, o2);
     }
   }
-  function h(e2) {
-    var t2 = function(e3, t3) {
-      if ("object" != c(e3) || !e3)
-        return e3;
-      var i2 = e3[Symbol.toPrimitive];
-      if (void 0 !== i2) {
-        var o2 = i2.call(e3, "string");
-        if ("object" != c(o2))
-          return o2;
-        throw new TypeError("@@toPrimitive must return a primitive value.");
-      }
-      return String(e3);
-    }(e2);
-    return "symbol" == c(t2) ? t2 : t2 + "";
-  }
-  var d, v = { 27: "onEscPress" }, f = ["target", "position", "margin", "offset", "enterDelay", "exitDelay", "showDuration", "hideDuration", "transitionDistance", "updatePositionThrottle", "zIndex", "hideOnOuterClick", "showOnHover", "hideArrowIcon", "disableManualAction", "disableUpdatePosition"], y = function() {
-    function e2(t3) {
-      !function(e3, t4) {
-        if (!(e3 instanceof t4))
+  var a, l = { 27: "onEscPress" }, u = ["target", "position", "margin", "offset", "enterDelay", "exitDelay", "showDuration", "hideDuration", "transitionDistance", "updatePositionThrottle", "zIndex", "hideOnOuterClick", "showOnHover", "hideArrowIcon", "disableManualAction", "disableUpdatePosition"], c = function() {
+    function e2(t2) {
+      !function(e3, t3) {
+        if (!(e3 instanceof t3))
           throw new TypeError("Cannot call a class as a function");
       }(this, e2);
       try {
-        this.setProps(t3), this.init();
+        this.setProps(t2), this.init();
       } catch (e3) {
         console.warn("Couldn't initiate Popover component"), console.error(e3);
       }
     }
-    return t2 = e2, s2 = [{ key: "init", value: function(t3) {
-      var i3 = t3.ele;
+    var i2, o2, s2;
+    return i2 = e2, s2 = [{ key: "init", value: function(t2) {
+      var i3 = t2.ele;
       if (i3) {
-        var o2 = false;
+        var o3 = false;
         if ("string" == typeof i3) {
           if (!(i3 = document.querySelectorAll(i3)))
             return;
-          1 === i3.length && (o2 = true);
+          1 === i3.length && (o3 = true);
         }
-        void 0 === i3.length && (i3 = [i3], o2 = true);
+        void 0 === i3.length && (i3 = [i3], o3 = true);
         var s3 = [];
         return i3.forEach(function(i4) {
-          t3.ele = i4, e2.destroy(i4), s3.push(new e2(t3));
-        }), o2 ? s3[0] : s3;
+          t2.ele = i4, e2.destroy(i4), s3.push(new e2(t2));
+        }), o3 ? s3[0] : s3;
       }
     } }, { key: "destroy", value: function(e3) {
       if (e3) {
-        var t3 = e3.popComp;
-        t3 && t3.destroy();
+        var t2 = e3.popComp;
+        t2 && t2.destroy();
       }
     } }, { key: "showMethod", value: function() {
       this.popComp.show();
@@ -1699,32 +1629,32 @@ const virtualSelect_min = "";
     } }, { key: "updatePositionMethod", value: function() {
       this.popComp.popper.updatePosition();
     } }, { key: "getAttrProps", value: function() {
-      var e3 = u.convertPropToDataAttr, t3 = {};
-      return f.forEach(function(i3) {
-        t3[e3(i3)] = i3;
-      }), t3;
-    } }], (i2 = [{ key: "init", value: function() {
+      var e3 = n.convertPropToDataAttr, t2 = {};
+      return u.forEach(function(i3) {
+        t2[e3(i3)] = i3;
+      }), t2;
+    } }], (o2 = [{ key: "init", value: function() {
       this.$popover && (this.setElementProps(), this.renderArrow(), this.initPopper(), this.addEvents());
     } }, { key: "getEvents", value: function() {
       var e3 = [{ $ele: document, event: "click", method: "onDocumentClick" }, { $ele: document, event: "keydown", method: "onDocumentKeyDown" }];
       return this.disableManualAction || (e3.push({ $ele: this.$ele, event: "click", method: "onTriggerEleClick" }), this.showOnHover && (e3.push({ $ele: this.$ele, event: "mouseenter", method: "onTriggerEleMouseEnter" }), e3.push({ $ele: this.$ele, event: "mouseleave", method: "onTriggerEleMouseLeave" }))), e3;
     } }, { key: "addOrRemoveEvents", value: function(e3) {
-      var t3 = this;
+      var t2 = this;
       this.getEvents().forEach(function(i3) {
-        t3.addOrRemoveEvent({ action: e3, $ele: i3.$ele, events: i3.event, method: i3.method });
+        t2.addOrRemoveEvent({ action: e3, $ele: i3.$ele, events: i3.event, method: i3.method });
       });
     } }, { key: "addEvents", value: function() {
       this.addOrRemoveEvents("add");
     } }, { key: "removeEvents", value: function() {
       this.addOrRemoveEvents("remove"), this.removeScrollEventListeners(), this.removeResizeEventListeners();
     } }, { key: "addOrRemoveEvent", value: function(e3) {
-      var t3 = this, i3 = e3.action, s3 = e3.$ele, n2 = e3.events, r2 = e3.method, a2 = e3.throttle;
-      s3 && (n2 = o.removeArrayEmpty(n2.split(" "))).forEach(function(e4) {
-        var n3 = "".concat(r2, "-").concat(e4), l2 = t3.events[n3];
-        l2 || (l2 = t3[r2].bind(t3), a2 && (l2 = o.throttle(l2, a2)), t3.events[n3] = l2), "add" === i3 ? u.addEvent(s3, e4, l2) : u.removeEvent(s3, e4, l2);
+      var i3 = this, o3 = e3.action, s3 = e3.$ele, r2 = e3.events, a2 = e3.method, l2 = e3.throttle;
+      s3 && (r2 = t.removeArrayEmpty(r2.split(" "))).forEach(function(e4) {
+        var r3 = "".concat(a2, "-").concat(e4), u2 = i3.events[r3];
+        u2 || (u2 = i3[a2].bind(i3), l2 && (u2 = t.throttle(u2, l2)), i3.events[r3] = u2), "add" === o3 ? n.addEvent(s3, e4, u2) : n.removeEvent(s3, e4, u2);
       });
     } }, { key: "addScrollEventListeners", value: function() {
-      this.$scrollableElems = u.getScrollableParents(this.$ele), this.addOrRemoveEvent({ action: "add", $ele: this.$scrollableElems, events: "scroll", method: "onAnyParentScroll", throttle: this.updatePositionThrottle });
+      this.$scrollableElems = n.getScrollableParents(this.$ele), this.addOrRemoveEvent({ action: "add", $ele: this.$scrollableElems, events: "scroll", method: "onAnyParentScroll", throttle: this.updatePositionThrottle });
     } }, { key: "removeScrollEventListeners", value: function() {
       this.$scrollableElems && (this.addOrRemoveEvent({ action: "remove", $ele: this.$scrollableElems, events: "scroll", method: "onAnyParentScroll" }), this.$scrollableElems = null);
     } }, { key: "addResizeEventListeners", value: function() {
@@ -1736,10 +1666,10 @@ const virtualSelect_min = "";
     } }, { key: "onResize", value: function() {
       this.popper.updatePosition();
     } }, { key: "onDocumentClick", value: function(e3) {
-      var t3 = e3.target, i3 = t3.closest(".pop-comp-ele"), o2 = t3.closest(".pop-comp-wrapper");
-      this.hideOnOuterClick && i3 !== this.$ele && o2 !== this.$popover && this.hide();
+      var t2 = e3.target, i3 = t2.closest(".pop-comp-ele"), o3 = t2.closest(".pop-comp-wrapper");
+      this.hideOnOuterClick && i3 !== this.$ele && o3 !== this.$popover && this.hide();
     } }, { key: "onDocumentKeyDown", value: function(e3) {
-      var t3 = e3.which || e3.keyCode, i3 = v[t3];
+      var t2 = e3.which || e3.keyCode, i3 = l[t2];
       i3 && this[i3](e3);
     } }, { key: "onEscPress", value: function() {
       this.hideOnOuterClick && this.hide();
@@ -1751,22 +1681,22 @@ const virtualSelect_min = "";
       this.hide();
     } }, { key: "setProps", value: function(e3) {
       e3 = this.setDefaultProps(e3), this.setPropsFromElementAttr(e3);
-      var t3 = o.convertToBoolean;
-      this.$ele = e3.ele, this.target = e3.target, this.position = e3.position, this.margin = parseFloat(e3.margin), this.offset = parseFloat(e3.offset), this.enterDelay = parseFloat(e3.enterDelay), this.exitDelay = parseFloat(e3.exitDelay), this.showDuration = parseFloat(e3.showDuration), this.hideDuration = parseFloat(e3.hideDuration), this.transitionDistance = parseFloat(e3.transitionDistance), this.updatePositionThrottle = parseFloat(e3.updatePositionThrottle), this.zIndex = parseFloat(e3.zIndex), this.hideOnOuterClick = t3(e3.hideOnOuterClick), this.showOnHover = t3(e3.showOnHover), this.hideArrowIcon = t3(e3.hideArrowIcon), this.disableManualAction = t3(e3.disableManualAction), this.disableUpdatePosition = t3(e3.disableUpdatePosition), this.beforeShowCallback = e3.beforeShow, this.afterShowCallback = e3.afterShow, this.beforeHideCallback = e3.beforeHide, this.afterHideCallback = e3.afterHide, this.events = {}, this.$popover = u.getElement(this.target);
+      var i3 = t.convertToBoolean;
+      this.$ele = e3.ele, this.target = e3.target, this.position = e3.position, this.margin = parseFloat(e3.margin), this.offset = parseFloat(e3.offset), this.enterDelay = parseFloat(e3.enterDelay), this.exitDelay = parseFloat(e3.exitDelay), this.showDuration = parseFloat(e3.showDuration), this.hideDuration = parseFloat(e3.hideDuration), this.transitionDistance = parseFloat(e3.transitionDistance), this.updatePositionThrottle = parseFloat(e3.updatePositionThrottle), this.zIndex = parseFloat(e3.zIndex), this.hideOnOuterClick = i3(e3.hideOnOuterClick), this.showOnHover = i3(e3.showOnHover), this.hideArrowIcon = i3(e3.hideArrowIcon), this.disableManualAction = i3(e3.disableManualAction), this.disableUpdatePosition = i3(e3.disableUpdatePosition), this.beforeShowCallback = e3.beforeShow, this.afterShowCallback = e3.afterShow, this.beforeHideCallback = e3.beforeHide, this.afterHideCallback = e3.afterHide, this.events = {}, this.$popover = n.getElement(this.target);
     } }, { key: "setDefaultProps", value: function(e3) {
       return Object.assign({ position: "auto", margin: 8, offset: 5, enterDelay: 0, exitDelay: 0, showDuration: 300, hideDuration: 200, transitionDistance: 10, updatePositionThrottle: 100, zIndex: 1, hideOnOuterClick: true, showOnHover: false, hideArrowIcon: false, disableManualAction: false, disableUpdatePosition: false }, e3);
     } }, { key: "setPropsFromElementAttr", value: function(e3) {
-      var t3 = e3.ele;
-      for (var i3 in d) {
-        var o2 = t3.getAttribute(i3);
-        o2 && (e3[d[i3]] = o2);
+      var t2 = e3.ele;
+      for (var i3 in a) {
+        var o3 = t2.getAttribute(i3);
+        o3 && (e3[a[i3]] = o3);
       }
     } }, { key: "setElementProps", value: function() {
-      var t3 = this.$ele;
-      t3.popComp = this, t3.show = e2.showMethod, t3.hide = e2.hideMethod, t3.updatePosition = e2.updatePositionMethod, u.addClass(this.$ele, "pop-comp-ele"), u.addClass(this.$popover, "pop-comp-wrapper");
+      var t2 = this.$ele;
+      t2.popComp = this, t2.show = e2.showMethod, t2.hide = e2.hideMethod, t2.updatePosition = e2.updatePositionMethod, n.addClass(this.$ele, "pop-comp-ele"), n.addClass(this.$popover, "pop-comp-wrapper");
     } }, { key: "getOtherTriggerPopComp", value: function() {
-      var e3, t3 = this.$popover.popComp;
-      return t3 && t3.$ele !== this.$ele && (e3 = t3), e3;
+      var e3, t2 = this.$popover.popComp;
+      return t2 && t2.$ele !== this.$ele && (e3 = t2), e3;
     } }, { key: "initPopper", value: function() {
       var e3 = { $popperEle: this.$popover, $triggerEle: this.$ele, $arrowEle: this.$arrowEle, position: this.position, margin: this.margin, offset: this.offset, enterDelay: this.enterDelay, exitDelay: this.exitDelay, showDuration: this.showDuration, hideDuration: this.hideDuration, transitionDistance: this.transitionDistance, zIndex: this.zIndex, afterShow: this.afterShow.bind(this), afterHide: this.afterHide.bind(this) };
       this.popper = new PopperComponent(e3);
@@ -1775,20 +1705,20 @@ const virtualSelect_min = "";
     } }, { key: "beforeHide", value: function() {
       "function" == typeof this.beforeHideCallback && this.beforeHideCallback(this);
     } }, { key: "show", value: function() {
-      this.isShown() || (this.isShownForOtherTrigger() ? this.showAfterOtherHide() : (u.addClass(this.$popover, "pop-comp-disable-events"), this.$popover.popComp = this, this.beforeShow(), this.popper.show({ resetPosition: true }), u.addClass(this.$ele, "pop-comp-active")));
+      this.isShown() || (this.isShownForOtherTrigger() ? this.showAfterOtherHide() : (n.addClass(this.$popover, "pop-comp-disable-events"), this.$popover.popComp = this, this.beforeShow(), this.popper.show({ resetPosition: true }), n.addClass(this.$ele, "pop-comp-active")));
     } }, { key: "hide", value: function() {
       this.isShown() && (this.beforeHide(), this.popper.hide(), this.removeScrollEventListeners(), this.removeResizeEventListeners());
     } }, { key: "toggle", value: function(e3) {
       void 0 === e3 && (e3 = !this.isShown()), e3 ? this.show() : this.hide();
     } }, { key: "isShown", value: function() {
-      return u.hasClass(this.$ele, "pop-comp-active");
+      return n.hasClass(this.$ele, "pop-comp-active");
     } }, { key: "isShownForOtherTrigger", value: function() {
       var e3 = this.getOtherTriggerPopComp();
       return !!e3 && e3.isShown();
     } }, { key: "showAfterOtherHide", value: function() {
-      var e3 = this, t3 = this.getOtherTriggerPopComp();
-      if (t3) {
-        var i3 = t3.exitDelay + t3.hideDuration + 100;
+      var e3 = this, t2 = this.getOtherTriggerPopComp();
+      if (t2) {
+        var i3 = t2.exitDelay + t2.hideDuration + 100;
         setTimeout(function() {
           e3.show();
         }, i3);
@@ -1796,10 +1726,10 @@ const virtualSelect_min = "";
     } }, { key: "afterShow", value: function() {
       var e3 = this;
       this.showOnHover ? setTimeout(function() {
-        u.removeClass(e3.$popover, "pop-comp-disable-events");
-      }, 2e3) : u.removeClass(this.$popover, "pop-comp-disable-events"), this.disableUpdatePosition || (this.addScrollEventListeners(), this.addResizeEventListeners()), "function" == typeof this.afterShowCallback && this.afterShowCallback(this);
+        n.removeClass(e3.$popover, "pop-comp-disable-events");
+      }, 2e3) : n.removeClass(this.$popover, "pop-comp-disable-events"), this.disableUpdatePosition || (this.addScrollEventListeners(), this.addResizeEventListeners()), "function" == typeof this.afterShowCallback && this.afterShowCallback(this);
     } }, { key: "afterHide", value: function() {
-      u.removeClass(this.$ele, "pop-comp-active"), "function" == typeof this.afterHideCallback && this.afterHideCallback(this);
+      n.removeClass(this.$ele, "pop-comp-active"), "function" == typeof this.afterHideCallback && this.afterHideCallback(this);
     } }, { key: "renderArrow", value: function() {
       if (!this.hideArrowIcon) {
         var e3 = this.$popover.querySelector(".pop-comp-arrow");
@@ -1807,10 +1737,9 @@ const virtualSelect_min = "";
       }
     } }, { key: "destroy", value: function() {
       this.removeEvents();
-    } }]) && p(t2.prototype, i2), s2 && p(t2, s2), Object.defineProperty(t2, "prototype", { writable: false }), t2;
-    var t2, i2, s2;
+    } }]) && r(i2.prototype, o2), s2 && r(i2, s2), Object.defineProperty(i2, "prototype", { writable: false }), e2;
   }();
-  d = y.getAttrProps(), window.PopoverComponent = y;
+  a = c.getAttrProps(), window.PopoverComponent = c;
 }();
 const tooltip_min = "";
 /*!
