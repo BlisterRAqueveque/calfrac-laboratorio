@@ -1009,11 +1009,16 @@
                                         <tr>
                                             <td>
                                                 <div style="width: 100%; height: 100px; overflow: hidden; display: flex; justify-content: center; align-items: center; text-align: center; border: 1px solid #494949;">
-                                                    {{-- @if ($chartVP)
-                                                    <img src="{{ $chartVP }}" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
+                                                    {{-- @if (!empty({ $solicitud_lodo[0]->rel_mecanica[0]->img_1 }) && file_exists(public_path('uploads/ensayos/') . $solicitud_lodo[0]->rel_mecanica[0]->img_1 ))
+                                                    <img src="{{ public_path('uploads/ensayos/') . $solicitud_lodo[0]->rel_mecanica[0]->img_1  }}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
                                                     @else
                                                     <p>Archivo no disponible</p>
                                                     @endif --}}
+                                                    @if (!empty($solicitud_lodo[0]->rel_mecanica[0]->img_1) && file_exists(public_path('uploads/ensayos/') . $solicitud_lodo[0]->rel_mecanica[0]->img_1))
+                                                    <img src="{{ public_path('uploads/ensayos/') . $solicitud_lodo[0]->rel_mecanica[0]->img_1}}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
+                                                    @else
+                                                    <p>Archivo no disponible</p>
+                                                    @endif
                                                 </div>
 
                                             </td>
@@ -1025,7 +1030,13 @@
                                                     <img src="{{ $chartVP }}" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
                                                     @else
                                                     <p>Archivo no disponible</p>
-                                                    @endif --}}
+                                                    @endif 
+                                                    $solicitud_lodo[0]->rel_mecanica[0]->img_2--}}
+                                                    @if (!empty($solicitud_lodo[0]->rel_mecanica[0]->img_2) && file_exists(public_path('uploads/ensayos/') . $solicitud_lodo[0]->rel_mecanica[0]->img_2))
+                                                    <img src="{{ public_path('uploads/ensayos/') . $solicitud_lodo[0]->rel_mecanica[0]->img_2}}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
+                                                    @else
+                                                    <p>Archivo no disponible</p>
+                                                    @endif
                                                 </div>
 
                                             </td>
@@ -1077,7 +1088,7 @@
                                                 1
                                             </td>
                                             <td style="width: 40%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_mecanica[0]->tiempo_1 ? $solicitud_lodo[0]->rel_mecanica[0]->tiempo_1 : '-' }}
+                                                {{ $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_1 ? $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_1 : 'S/D' }}
                                             </td>
                                         </tr>
                                         <tr>
@@ -1085,7 +1096,7 @@
                                                 2
                                             </td>
                                             <td style="width: 40%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_mecanica[0]->tiempo_2 ? $solicitud_lodo[0]->rel_mecanica[0]->tiempo_2 : '-' }}
+                                                {{ $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_2 ? $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_2 : 'S/D' }}
                                             </td>
                                         </tr>
                                         <tr>
@@ -1093,7 +1104,7 @@
                                                 3
                                             </td>
                                             <td style="width: 40%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_mecanica[0]->tiempo_3 ? $solicitud_lodo[0]->rel_mecanica[0]->tiempo_3 : '-' }}
+                                                {{ $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_3 ? $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_3 : 'S/D' }}
                                             </td>
                                         </tr>
                                         <tr>
@@ -1101,7 +1112,7 @@
                                                 4
                                             </td>
                                             <td style="width: 40%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_mecanica[0]->tiempo_4 ? $solicitud_lodo[0]->rel_mecanica[0]->tiempo_4 : '-' }}
+                                                {{ $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_4 ? $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_4 : 'S/D' }}
                                             </td>
                                         </tr>
                                         <tr>
@@ -1109,7 +1120,7 @@
                                                 5
                                             </td>
                                             <td style="width: 40%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_mecanica[0]->tiempo_5 ? $solicitud_lodo[0]->rel_mecanica[0]->tiempo_5 : '-' }}
+                                                {{ $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_5 ? $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_5 : 'S/D' }}
                                             </td>
                                         </tr>
                                     </table>
@@ -1128,7 +1139,13 @@
                                                     <img src="{{ $chartVP }}" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
                                                     @else
                                                     <p>Archivo no disponible</p>
-                                                    @endif --}}
+                                                    @endif
+                                                    $solicitud_lodo[0]->rel_estatica[0]->img_1 --}}
+                                                    @if (!empty($solicitud_lodo[0]->rel_estatica[0]->img_1) && file_exists(public_path('uploads/ensayos/') . $solicitud_lodo[0]->rel_estatica[0]->img_1))
+                                                    <img src="{{ public_path('uploads/ensayos/') . $solicitud_lodo[0]->rel_estatica[0]->img_1}}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
+                                                    @else
+                                                    <p>No se cargo archivo</p>
+                                                    @endif
                                                 </div>
 
                                             </td>
@@ -1141,6 +1158,11 @@
                                                     @else
                                                     <p>Archivo no disponible</p>
                                                     @endif --}}
+                                                    @if (!empty($solicitud_lodo[0]->rel_estatica[0]->img_2) && file_exists(public_path('uploads/ensayos/') . $solicitud_lodo[0]->rel_estatica[0]->img_2))
+                                                    <img src="{{ public_path('uploads/ensayos/') . $solicitud_lodo[0]->rel_estatica[0]->img_2}}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
+                                                    @else
+                                                    <p>No se cargo archivo</p>
+                                                    @endif
                                                 </div>
 
                                             </td>
@@ -1183,7 +1205,7 @@
                                 <td style="padding: 0px 10px;">
                                     <span style="font-size: 10px;"><b>HUMECTABILIDAD:</b> <br> Se evalúa la capacidad del colchón mecánico de invertir la fase externa oleosa no conductiva elétricamente del lodo, por una fase externa acousa conductiva.
                                         El procedimiento considedra el agregado de colchón en un volumen determinado de lodo, ambos son pre acondicionados a BHCT y finalmente se determina el oprcentaje de espaciador necesaio par invertir la fase externa del lodo.
-                                        % Vol de Espaciador = (Vol Total de Espaciador / (Vol de lodo + Espaciador) * 100) <br> % Humectabilidad: {{ $solicitud_lodo[0]->rel_humectabilidad[0]->humectabilidad }} %</span>
+                                        % Vol de Espaciador = (Vol Total de Espaciador / (Vol de lodo + Espaciador) * 100) <br> % Humectabilidad: <b>{{ $solicitud_lodo[0]->rel_humectabilidad[0]->humectabilidad ?? 'S/D'}}</b> %</span>
                                 </td>
                             </tr>
                         </table>
