@@ -941,6 +941,16 @@ public function store_aditivos_lodo(Request $request)
 
     public function store_mecanica(Request $request) {
 
+        $request->validate([
+            'tiempo_1' => 'required',
+            'tiempo_2' => 'required',
+            'tiempo_3' => 'required',
+            'tiempo_4' => 'required',
+            'tiempo_5' => 'required',
+            'img_1' => 'required',
+            'img_2' => 'required',
+        ]);
+
         # Insertar adjuntos (Si es que hay)
         $image1 = $request->file('file_upload_lodo');
         $image2 = $request->file('file_upload_lodo_2');

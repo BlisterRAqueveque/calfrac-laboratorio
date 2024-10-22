@@ -418,6 +418,39 @@
     if (btn_submit_remocion_mecanica_lodo) {
         btn_submit_remocion_mecanica_lodo.addEventListener('click', e => {
             e.preventDefault();
+
+                    // Obtener los valores de los campos de tiempo
+        const tiempo1 = document.querySelector('input[name="tiempo_1"]').value;
+        const tiempo2 = document.querySelector('input[name="tiempo_2"]').value;
+        const tiempo3 = document.querySelector('input[name="tiempo_3"]').value;
+        const tiempo4 = document.querySelector('input[name="tiempo_4"]').value;
+        const tiempo5 = document.querySelector('input[name="tiempo_5"]').value;
+
+        // Verificar si alguno de los campos de tiempo está vacío
+        if (!tiempo1 || !tiempo2 || !tiempo3 || !tiempo4 || !tiempo5) {
+            errorAlert("Error", "Todos los campos de tiempo son requeridos.").then(() => {
+                // Puedes enfocar el primer campo vacío si lo deseas
+                if (!tiempo1) document.querySelector('input[name="tiempo_1"]').focus();
+                else if (!tiempo2) document.querySelector('input[name="tiempo_2"]').focus();
+                else if (!tiempo3) document.querySelector('input[name="tiempo_3"]').focus();
+                else if (!tiempo4) document.querySelector('input[name="tiempo_4"]').focus();
+                else if (!tiempo5) document.querySelector('input[name="tiempo_5"]').focus();
+            });
+            return; // Detener la ejecución si hay un error
+        }
+
+                // Verificar si los archivos están seleccionados
+        const file1 = document.getElementById('file_upload_lodo').files.length;
+        const file2 = document.getElementById('file_upload_lodo_2').files.length;
+
+        if (file1 === 0 || file2 === 0) {
+            errorAlert("Error", "Debe cargar todos los archivos requeridos antes de enviar.").then(() => {
+                if (file1 === 0) document.getElementById('file_upload_lodo').scrollIntoView();
+                else if (file2 === 0) document.getElementById('file_upload_lodo_2').scrollIntoView();
+            });
+            return;
+        }
+            
             let form = new FormData(document.getElementById('form_mecanica_lodo'))
 
             confirmAlert().then((confirmed) => {
