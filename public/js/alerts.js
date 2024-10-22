@@ -83,3 +83,25 @@ function loadingAlertPDF(title = 'Se está generando el PDF, por favor espere', 
     });
   });
 }
+function errorAlert(
+  title = "Error",
+  text = "Complete los campos requeridos",
+  cancelBtn = 0
+) {
+  return new Promise((resolve) => {
+    Swal.fire({
+      title: title,
+      text: text,
+      icon: "error",
+      showCancelButton: cancelBtn,
+      customClass: {
+        confirmButton: "btn btn-primary w-xs me-2 mt-2",
+        cancelButton: "btn btn-danger w-xs mt-2",
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        resolve(true);
+      }
+    });
+  });
+}

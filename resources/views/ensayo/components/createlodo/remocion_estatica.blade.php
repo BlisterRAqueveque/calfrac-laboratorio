@@ -441,6 +441,19 @@
     if (btn_submit_remocion_estatica_lodo) {
         btn_submit_remocion_estatica_lodo.addEventListener('click', e => {
             e.preventDefault();
+
+                    // Obtener el valor de remocion_estatica
+        const remocionEstatica = document.getElementById('remocion_estatica').value;
+
+        // Verificar si el campo remocion_estatica está vacío
+        if (!remocionEstatica) {
+            errorAlert().then(() => {
+                // Opcional: puedes enfocar el campo si quieres
+                document.getElementById('remocion_estatica').focus();
+            });
+            return; // Detener la ejecución si hay un error
+        }
+
             let form = new FormData(document.getElementById('form_estatica_lodo'))
 
             confirmAlert().then((confirmed) => {

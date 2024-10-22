@@ -858,8 +858,7 @@ public function store_aditivos_lodo(Request $request)
     public function store_estatica(Request $request) {
         // Validar solo el campo remocion_estatica
         $request->validate([
-            'remocion_estatica' => 'required|string',
-            // Otras validaciones pueden ser opcionales si son no requeridas
+            'remocion_estatica' => 'required',
         ]);
     
         // Procesar las imágenes solo si están presentes
