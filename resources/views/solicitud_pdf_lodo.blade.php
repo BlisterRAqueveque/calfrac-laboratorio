@@ -149,13 +149,13 @@
 
 <head>
     <meta charset="gb18030">
-    <title>Calfrac - Laboratorio de Lodo</title>
+    <title>Laboratorio Calfrac - Reporte de Lodo</title>
 </head>
 
 <body>
 
     <div class="footer">
-        Calfrac | Laboratorio de Lodo<span class="pagenum"></span>
+        Laboratorio Calfrac | Reporte de Lodo<span class="pagenum"></span>
     </div>
     <table width='100%' style="border: 1px solid #000000; font-size: 10px;">
         <!-- Tamaño de letra uniforme -->
@@ -169,15 +169,14 @@
                         </div>
                     </td>
                     <td style="width: 60%; text-align: center;">
-                        <h2 style="color: #000000; margin: 0; padding: 0; font-size: 14px;">Solicitud de "Lodos"</h2> <!-- Tamaño más grande para el título -->
+                        <h2 style="color: #000000; margin: 0; padding: 0; font-size: 14px;">Reporte de Lodo</h2> <!-- Tamaño más grande para el título -->
                         <h6 style="margin: 0; padding: 0;">NEUQUEN, ARGENTINA</h6>
                     </td>
                     <td style="width: 20%; text-align: center;">
                         <table style="border-collapse: collapse; width: 100%;">
                             <tr style="border: 1px solid #000000;">
                                 <td style="border: 1px solid #000000; padding: 5px;">
-                                    <!-- Numero: C-FM8.0-0459 -->
-                                    -
+                                    Num: C-FM8.0-0460
                                 </td>
                             </tr>
                             <tr style="border: 1px solid #000000;">
@@ -212,6 +211,14 @@
                                 </td>
                                 <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
                                     {{ $solicitud->cliente->nombre }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
+                                    Programa:
+                                </td>
+                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                    {{ $solicitud->programa ?? 'S/D' }}
                                 </td>
                             </tr>
                             <tr>
@@ -260,7 +267,7 @@
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
                                     {{-- {{ $s_l[0]->profundidad_pozo_md }}m --}}
-                                     {{ $solicitud->servicios_lodo->nombre}}
+                                    {{ $solicitud->servicios_lodo->nombre}}
                                 </td>
                             </tr>
                             <tr>
@@ -308,25 +315,13 @@
                     <td style="width: 54%; border: 1px solid #494949; padding: 4px; text-align: center; vertical-align: top;">
                         <table style="width: 100%; border-collapse: collapse; border: none;">
                             <tr>
-                                <td style="width: 50%; padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                    Fecha:
-                                </td>
-                                <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    {{-- {{ $s_l[0]->fecha_reconocimiento }} --}}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            {{-- <tr>
                                 <td style="padding: 2px; text-align: right; border: none; background-color: #ffffff;">
-                                    Tipo de Lodo:
+                                    Tipo de Colchón:
                                 </td>
                                 <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                    
+                                    {{ isset($solicitud_lodo[0]->rel_colchon) ? $solicitud_lodo[0]->rel_colchon->nombre : '-' }}
                                 </td>
-                            </tr> --}}
+                            </tr>
                         </table>
                         <table style="width: 100%; border-collapse: collapse;">
                             <!-- Fila del encabezado -->
@@ -429,9 +424,17 @@
                     </td>
                 </tr> -->
                         </table>
+                        <table style="width: 100%; border-collapse: collapse; border: 1px solid #494949; margin-top: 20px;">
+                            <tr>
+                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">Vol.(bbl)</td>
+                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">50</td>
+                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">DynaFlush-"O"</td>
+                                <td style="padding: 2px; text-align: center; border: 1px solid #494949; background-color: #ffffff;">Den.(ppg)</td>
+                                <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">15.4</td>
+                            </tr>
+                        </table>
 
                     </td>
-
                 </tr>
             </table>
         </div>
@@ -442,68 +445,73 @@
                     <td style="width: 3%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #006f53; color:white;">
                         <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 100%; left: 90%; width: 200px; height: 20px; text-align: center;font-size: 13px;"><b>RESULTADOS DE ENSAYOS</b></div>
                     </td>
+
                     {{-- @foreach ($s_l[0]->rel_bombeabilidad as $bombeabilidad)
                     @if ($bombeabilidad->selected) --}}
                     <!-- Columna con tabla interna -->
-                    <td style="width: 47%; padding: 4px; text-align: center; vertical-align: top;">
+                    <td style="width: 97%; padding: 0; text-align: center; vertical-align: top;">
                         <table style="width: 100%;">
                             <tr>
-                                <!-- Columna "Datos Generales" -->
-                                <td style="width: 6%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #D3D3D3; color:black;">
-                                    <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 100%; left: 115%; width: 200px; height: 20px; text-align: center;font-size: 13px;">Caracterización del Lodo</div>
+                                <td style="width: 100%; border: 1px solid #494949; text-align: center; vertical-align: middle; background: #D3D3D3; color:black; padding: 10px;">
+                                    <div style="text-align: center; font-size: 13px;">
+                                        <b>Caracterización del Lodo</b>
+                                    </div>
                                 </td>
-                                <td style="width: 94%;">
+                            </tr>
+                        </table>
+                        <table style="width: 100%;">
+                            <tr>
+                                <td>
                                     <!-- Contenedor para las dos tablas lado a lado -->
                                     <table style="width: 100%; border-collapse: collapse; table-layout: fixed;">
                                         <tr>
                                             <!-- Primera tabla: Tipo de Lodo, Base, Dens. (ppg), Cia de Lodos -->
-                                            <td style="width: 50%; vertical-align: top;">
-                                                <table style="width: 100%; border-collapse: collapse; border: 1px solid #494949;">
+                                            <td style="width: 100%; vertical-align: top; padding: 15px;">
+                                                <table style="width: 70%; border-collapse: collapse; border: 1px solid #494949; margin-left: auto; margin-right: 0;">
                                                     <tr>
-                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"><small>T. Lodo</small></td>
-                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">Base</td>
-                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">Dens(ppg)</td>
-                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"><small>Cia </small></td>
+                                                        <td style="padding: 1px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"><small>T. Lodo</small></td>
+                                                        {{-- <td style="padding: 1px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">Base</td> --}}
+                                                        <td style="padding: 1px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">Dens(ppg)</td>
+                                                        <td style="padding: 1px; text-align: left; border: 1px solid #494949; background-color: #ffffff;"><small>Cia </small></td>
                                                     </tr>
                                                     <tr>
-                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                            {{ $solicitud_lodo[0]->rel_caracterizacion[0]->tipo_lodo ? $solicitud_lodo[0]->rel_caracterizacion[0]->tipo_lodo : '-' }}
+                                                        <td style="padding: 1px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                            {{-- {{ $solicitud_lodo[0]->rel_caracterizacion[0]->tipo_lodo ? $solicitud_lodo[0]->rel_caracterizacion[0]->tipo_lodo : '-' }} --}}
+                                                            {{ $solicitud_lodo[0]->tipo_lodo_Lodos->nombre  ?? '-' }}
                                                         </td>
-                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                            {{ $solicitud_lodo[0]->rel_caracterizacion[0]->base ? $solicitud_lodo[0]->rel_caracterizacion[0]->base : '-' }}
-                                                        </td>
-                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+
+                                                        <td style="padding: 1px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
                                                             {{ $solicitud_lodo[0]->rel_caracterizacion[0]->densidad ? $solicitud_lodo[0]->rel_caracterizacion[0]->densidad : '-' }}
                                                         </td>
-                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                            {{ $solicitud_lodo[0]->rel_caracterizacion[0]->cia_lodo ? $solicitud_lodo[0]->rel_caracterizacion[0]->cia_lodo : '-' }}
+                                                        <td style="padding: 1px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                            {{ $solicitud_lodo[0]->compania_lodo->nombre ?? '-'}}
                                                         </td>
                                                     </tr>
                                                 </table>
                                             </td>
 
                                             <!-- Segunda tabla: Tiempo, 10 seg, 10 min, 30 min -->
-                                            <td style="width: 50%; vertical-align: top;">
-                                                <table style="width: 100%; border-collapse: collapse; border: 1px solid #494949;">
+                                            <td style="width: 100%; vertical-align: top; padding: 15px">
+                                                <table style="width: 70%; border-collapse: collapse; border: 1px solid #494949;">
                                                     <tr>
-                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">Tiempo</td>
-                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">10 seg</td>
-                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">10 min</td>
-                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">30 min</td>
+                                                        <td style="padding: 1px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">Tiempo</td>
+                                                        <td style="padding: 1px; text-align: left; border: 1px solid #494949; background-color: #ffffff;font-size: 9px">10 seg</td>
+                                                        <td style="padding: 1px; text-align: left; border: 1px solid #494949; background-color: #ffffff;font-size: 9px">10 min</td>
+                                                        <td style="padding: 1px; text-align: left; border: 1px solid #494949; background-color: #ffffff;font-size: 9px">30 min</td>
                                                     </tr>
                                                     <tr>
-                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                            {{ $solicitud_lodo[0]->rel_caracterizacion[0]->tiempo ? $solicitud_lodo[0]->rel_caracterizacion[0]->tiempo : '-' }}
+                                                        <td style=" text-align: left; border: 1px solid #494949; background-color: #ffffff;font-size: 9px">
+                                                            Viscosidad de Geles
                                                         </td>
-                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                        <td style="padding: 1px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
                                                             {{ $solicitud_lodo[0]->rel_caracterizacion[0]->seg_10 ? $solicitud_lodo[0]->rel_caracterizacion[0]->seg_10 : '-' }}
 
                                                         </td>
-                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                        <td style="padding: 1px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
                                                             {{ $solicitud_lodo[0]->rel_caracterizacion[0]->min_10 ? $solicitud_lodo[0]->rel_caracterizacion[0]->min_10 : '-' }}
 
                                                         </td>
-                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                        <td style="padding: 1px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
                                                             {{ $solicitud_lodo[0]->rel_caracterizacion[0]->min_30 ? $solicitud_lodo[0]->rel_caracterizacion[0]->min_30 : '-' }}
                                                         </td>
                                                     </tr>
@@ -515,8 +523,8 @@
                                     <table style="width: 100%; border-collapse: collapse; table-layout: fixed;">
                                         <tr>
                                             <!-- Primera tabla: Tipo de Lodo, Base, Dens. (ppg), Cia de Lodos -->
-                                            <td style="width: 50%; vertical-align: top;">
-                                                <table style="width: 100%; border-collapse: collapse; border: 1px solid #494949;">
+                                            <td style="width: 100%; vertical-align: top;">
+                                                <table style="width: 70%; border-collapse: collapse; border: 1px solid #494949;font-size: 9px; margin: auto;">
                                                     <tr>
                                                         <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">Temp. BHCT</td>
                                                         <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">600 rpm</td>
@@ -571,272 +579,151 @@
                                         </tr>
                                     </table>
                                     <br>
-                                    <table style="width: 100%; border-collapse: collapse; border: none;">
+                                    <table style="width: 100%; border-collapse: collapse; border: none; margin: auto;">
                                         <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                % de Fluido
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="8">
-                                                Reología
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">Lodo</td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">Colchón</td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">600</td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">300</td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">200</td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">100</td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">60</td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">30</td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">6</td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">3</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                100
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                0
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_600_rpm ?? '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_300_rpm ?? '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_200_rpm ?? '-'  }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_100_rpm ?? '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_60_rpm ?? '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_30_rpm ?? '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_6_rpm ?? '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_3_rpm ?? '-' }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                75
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                25
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_600_rpm_2 ?? '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_300_rpm_2 ?? '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_200_rpm_2 ?? '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_100_rpm_2 ?? '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_60_rpm_2 ?? '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_30_rpm_2 ?? '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_6_rpm_2 ?? '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_3_rpm_2 ?? '-' }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                50
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                50
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_600_rpm_3 ?? '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_300_rpm_3 ?? '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_200_rpm_3 ?? '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_100_rpm_3 ?? '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_60_rpm_3 ?? '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_30_rpm_3 ?? '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_6_rpm_3 ?? '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_3_rpm_3 ?? '-' }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                25
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                75
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_600_rpm_4 ?? '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_300_rpm_4 ?? '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_200_rpm_4 ?? '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_100_rpm_4 ?? '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_60_rpm_4 ?? '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_30_rpm_4 ?? '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_6_rpm_4 ?? '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_3_rpm_4 ?? '-' }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                0
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                100
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_600_rpm_5 ?? '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_300_rpm_5 ?? '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_200_rpm_5 ?? '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_100_rpm_5 ?? '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_60_rpm_5 ?? '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_30_rpm_5 ?? '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_6_rpm_5 ?? '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_3_rpm_5 ?? '-' }}
+                                            <td style="width: 100%; border: 1px solid #494949; text-align: center; vertical-align: middle; background: #D3D3D3; color:black; padding: 10px;">
+                                                <div style="text-align: center; font-size: 13px;">
+                                                    <b>Compatibilidad Colchón Mecánico y Lodo</b>
+                                                </div>
                                             </td>
                                         </tr>
                                     </table>
-
-                                </td>
-                            </tr>
-
-
-
-                        </table>
-                    </td>
-                    {{-- @endif
-                    @endforeach --}}
-
-                    <td style="width: 47%; padding: 4px; text-align: center; vertical-align: top;">
-
-                        <table style="width: 100%;">
-                            <tr>
-                                <!-- Columna "Datos Generales" -->
-                                <td style="width: 6%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 250px; background: #D3D3D3; color:black;">
-                                    <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 83%; left: 115%; width: 200px; height: 20px; text-align: center;font-size: 13px;">Compatibilidad Colchón Mecánico y Lodo</div>
-                                </td>
-
-                                <!-- Columna con tabla interna -->
-                                <td style="width: 94%; padding: 4px; text-align: center; vertical-align: top;">
                                     <br>
-                                    <table style="width: 100%; border-collapse: collapse; border: none;">
+                                    <table style="width: 100%; border-collapse: collapse; border: none; margin: auto;">
                                         <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                Vol.(bbl)
-                                            </td>
-                                            <td style="width: 20%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->vol_colchon}}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                {{ isset($solicitud_lodo[0]->rel_colchon) ? $solicitud_lodo[0]->rel_colchon->nombre : '-' }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                Den.(ppg)
-                                            </td>
-                                            <td style="width: 20%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $solicitud_lodo[0]->densidad_colchon}}
-                                            </td>
-                                        </tr>
-                                        @if(isset($solicitud_lodo[0]->rel_aditivos) && count($solicitud_lodo[0]->rel_aditivos) > 0)
-                                        @foreach($solicitud_lodo[0]->rel_aditivos as $index => $aditivo)
-                                            @php
-                                                // Obtener el nombre del aditivo
-                                                $nombreAditivo = isset($aditivo->aditivos->nombre) ? $aditivo->aditivos->nombre : ($aditivo->aditivo == 'SD' ? $aditivo->comentario : '-');
-                                                
-                                                // Buscar la compatibilidad correspondiente
-                                                $colchon = isset($solicitud_lodo[0]->compatibilidades[$index]) ? $solicitud_lodo[0]->compatibilidades[$index]->colchon : '-';
-                                                $densidad = isset($solicitud_lodo[0]->compatibilidades[$index]) ? $solicitud_lodo[0]->compatibilidades[$index]->densidad : '-';
-                                            @endphp
-                                        <tr>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                {{ $aditivo->lote }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                <small>{{ $nombreAditivo }}</small>
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                {{ $colchon }}
-                                            </td>
-                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                {{ $densidad }}
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                        @endif
-                                    </table>
-                                    <br>
-                                    <table style="width: 100%; border-collapse: collapse; table-layout: fixed;">
-                                        <tr>
-                                            <!-- Primera tabla: Tipo de Lodo, Base, Dens. (ppg), Cia de Lodos -->
-                                            <td style="width: 50%; vertical-align: top;">
-                                                <table style="width: 100%; border-collapse: collapse; border: 1px solid #494949;">
+                                            <td style="width: 50%; padding: 4px; text-align: left; background-color: #ffffff;">
+                                                <table style="width: 100%; border-collapse: collapse; border: none; margin: left;">
                                                     <tr>
-                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">% de Fluido</td>
-                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">VP</td>
-                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">YP</td>
+                                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #006f53; color:white;" colspan="2">
+                                                            % de Fluido
+                                                        </td>
+                                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #006f53; color:white;" colspan="8">
+                                                            Reología
+                                                        </td>
                                                     </tr>
                                                     <tr>
-                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">Lodo</td>
-                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">Colchón</td>
-                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">(cp)</td>
-                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">(lb/100ft2)</td>
+                                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #006f53; color:white;">Lodo</td>
+                                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #006f53; color:white;">Colchón</td>
+                                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #006f53; color:white;">600 rpm</td>
+                                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #006f53; color:white;">300 rpm</td>
+                                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #006f53; color:white;">200 rpm</td>
+                                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #006f53; color:white;">100 rpm</td>
+                                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #006f53; color:white;">60 rpm</td>
+                                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #006f53; color:white;">30 rpm</td>
+                                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #006f53; color:white;">6 rpm</td>
+                                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #006f53; color:white;">3 rpm</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                            100
+                                                        </td>
+                                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                            0
+                                                        </td>
+                                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                            {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_600_rpm ?? '-' }}
+                                                        </td>
+                                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                            {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_300_rpm ?? '-' }}
+                                                        </td>
+                                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                            {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_200_rpm ?? '-'  }}
+                                                        </td>
+                                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                            {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_100_rpm ?? '-' }}
+                                                        </td>
+                                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                            {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_60_rpm ?? '-' }}
+                                                        </td>
+                                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                            {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_30_rpm ?? '-' }}
+                                                        </td>
+                                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                            {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_6_rpm ?? '-' }}
+                                                        </td>
+                                                        <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                            {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->temp_3_rpm ?? '-' }}
+                                                        </td>
+                                                    </tr>
+
+                                                    <?php
+                                                    //Funcion reutilizable, el TR de arriba no se incluye en el foreach meramente por nombre, como al final de las variables (arriba) no terminan en "_1", 
+                                                    //para no hacer muchas condiciones es mas facil empezar por el 2.
+
+                                                    $primerTD = 75;
+                                                    $segundoTD = 25;
+
+                                                    for ($i = 2; $i < 6; $i++) { ?>
+
+                                                        <tr>
+                                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                <?= $primerTD; ?>
+                                                            </td>
+                                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                <?= $segundoTD; ?>
+                                                            </td>
+                                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->{"temp_600_rpm_" . $i} ?? '-' }}
+                                                            </td>
+                                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->{"temp_300_rpm_" . $i} ?? '-' }}
+                                                            </td>
+                                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->{"temp_200_rpm_" . $i} ?? '-' }}
+                                                            </td>
+                                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->{"temp_100_rpm_" . $i} ?? '-' }}
+                                                            </td>
+                                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->{"temp_60_rpm_" . $i} ?? '-' }}
+                                                            </td>
+                                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->{"temp_30_rpm_" . $i} ?? '-' }}
+                                                            </td>
+                                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->{"temp_6_rpm_" . $i} ?? '-' }}
+                                                            </td>
+                                                            <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                                {{ $solicitud_lodo[0]->rel_reologia_lodo[0]->{"temp_3_rpm_" . $i} ?? '-' }}
+                                                            </td>
+                                                        </tr>
+
+                                                    <?php
+
+                                                        $primerTD = $primerTD - 25;
+                                                        $segundoTD = $segundoTD + 25;
+                                                    } ?>
+
+
+                                                </table>
+                                                <br>
+                                                <table style="width: 100%; border-collapse: collapse; border: none; margin: right;">
+                                                    <tr>
+                                                        <td>
+                                                            <div style="width: 100%; height: 250px; overflow: hidden; display: flex; justify-content: center; align-items: center; text-align: center; border: 1px solid #494949;">
+                                                                @if ($chartReologias)
+                                                                <img src="{{ $chartReologias }}" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
+                                                                @else
+                                                                <p>Archivo no disponible</p>
+                                                                @endif
+                                                            </div>
+
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            <td style="width: 25%; padding: 4px; text-align: left; background-color: #ffffff;">
+                                                <table style="width: 100%; border-collapse: collapse; border: 1px solid #494949; margin: left;">
+                                                    <tr>
+                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #006f53; color:white;" colspan="2">% de Fluido</td>
+                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #006f53; color:white;">VP</td>
+                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #006f53; color:white;">YP</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #006f53; color:white;">Lodo</td>
+                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #006f53; color:white;">Colchón</td>
+                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #006f53; color:white;">(cp)</td>
+                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #006f53; color:white;">(lb/100ft2)</td>
                                                     </tr>
                                                     <tr>
                                                         <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">100</td>
@@ -889,21 +776,18 @@
                                                         </td>
                                                     </tr>
                                                 </table>
-                                            </td>
-
-                                            <!-- Segunda tabla: Tiempo, 10 seg, 10 min, 30 min -->
-                                            <td style="width: 50%; vertical-align: top;">
-                                                <table style="width: 100%; border-collapse: collapse; border: 1px solid #494949;">
+                                                <br>
+                                                <table style="width: 100%; border-collapse: collapse; border: 1px solid #494949; margin: left;">
                                                     <tr>
-                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">% de Fluido</td>
-                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">Gel 10</td>
-                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">Gel 10</td>
+                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #006f53; color:white;" colspan="2">% de Fluido</td>
+                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #006f53; color:white;">Gel 10</td>
+                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #006f53; color:white;">Gel 10</td>
                                                     </tr>
                                                     <tr>
-                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">Lodo</td>
-                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">Colchón</td>
-                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">(Seg)</td>
-                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">(Min)</td>
+                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #006f53; color:white;">Lodo</td>
+                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #006f53; color:white;">Colchón</td>
+                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #006f53; color:white;">(Seg)</td>
+                                                        <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #006f53; color:white;">(Min)</td>
                                                     </tr>
                                                     <tr>
                                                         <td style="padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">100</td>
@@ -957,8 +841,87 @@
                                                     </tr>
                                                 </table>
                                             </td>
+                                            <td style="width: 25%; padding: 4px; text-align: left; background-color: #ffffff;">
+                                                <table style="width: 100%; border-collapse: collapse; border: none; margin: right;">
+                                                    <tr>
+                                                        <td>
+                                                            <div style="width: 100%; height: 150px; overflow: hidden; display: flex; justify-content: center; align-items: center; text-align: center; border: 1px solid #494949;">
+                                                                @if ($chartVP)
+                                                                <img src="{{ $chartVP }}" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
+                                                                @else
+                                                                <p>Archivo no disponible</p>
+                                                                @endif
+                                                            </div>
+
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <br>
+                                                <table style="width: 100%; border-collapse: collapse; border: none; margin: right;">
+                                                    <tr>
+                                                        <td>
+                                                            <div style="width: 100%; height: 150px; overflow: hidden; display: flex; justify-content: center; align-items: center; text-align: center; border: 1px solid #494949;">
+                                                                @if ($chartGeles)
+                                                                <img src="{{ $chartGeles }}" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
+                                                                @else
+                                                                <p>Archivo no disponible</p>
+                                                                @endif
+                                                            </div>
+
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
                                         </tr>
                                     </table>
+
+                                    <br>
+
+
+                                </td>
+                            </tr>
+
+
+
+                        </table>
+                    </td>
+                    {{-- @endif
+                    @endforeach --}}
+                </tr>
+
+            </table>
+
+        </div>
+    </table>
+    <table width='100%' style="border: 1px solid #000000; font-size: 10px;">
+
+        <div style="border-radius: 3px">
+            <table style="width: 100%;">
+                <tr>
+                    <td style="width: 20%; text-align: center; background: #006f53; vertical-align: middle;">
+                        <div style="width: 50px; height: 50px; margin: 0 auto;">
+                            <img src="{{ public_path('img/empresa_logo.png') }}" style="max-width: 100%; height: auto;" alt="">
+                        </div>
+                    </td>
+                    <td style="width: 60%; text-align: center;">
+                        <h2 style="color: #000000; margin: 0; padding: 0; font-size: 14px;">Reporte de Lodo</h2> <!-- Tamaño más grande para el título -->
+                        <h6 style="margin: 0; padding: 0;">NEUQUEN, ARGENTINA</h6>
+                    </td>
+                    <td style="width: 20%; text-align: center;">
+                        <table style="border-collapse: collapse; width: 100%;">
+                            <tr style="border: 1px solid #000000;">
+                                <td style="border: 1px solid #000000; padding: 5px;">
+                                    Num: C-FM8.0-0460
+                                </td>
+                            </tr>
+                            <tr style="border: 1px solid #000000;">
+                                <td style="border: 1px solid #000000; padding: 5px;">
+                                    Rev: 1
+                                </td>
+                            </tr>
+                            <tr style="border: 1px solid #000000;">
+                                <td style="border: 1px solid #000000; padding: 5px;">
+                                    Page: <span class="pagenum"></span>
                                 </td>
                             </tr>
                         </table>
@@ -967,332 +930,248 @@
             </table>
         </div>
         <div style="border-radius: 3px;">
-            <table style="width: 100%;">
+            <table style="width: 100%;border: 1px solid #000000;">
                 <tr>
                     <!-- Columna "Datos Generales" -->
-                    <td style="width: 1.7%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #006f53; color:white;">
-                        <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 100%; left: 80%; width: 200px; height: 20px; text-align: center;font-size: 13px;"></div>
+                    <td style="width: 3%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #006f53; color:white;">
+                        <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 90%; left: 90%; width: 200px; height: 20px; text-align: center;font-size: 13px;"><b>RESULTADOS DE ENSAYOS</b></div>
                     </td>
-
-                    <!-- Columna con tabla interna -->
-                    <td style="width: 54%; padding: 4px; text-align: center; vertical-align: top;">
-                        <br>
-                        <table style="width: 100%; border-collapse: collapse; border: none;">
+                    <td style="width: 47%; padding: 4px; text-align: center; vertical-align: top;">
+                        <table style="width: 100%;">
                             <tr>
-                                <td style="width: 3%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 210px; background: #D3D3D3; color:black;">
-                                    <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 90%; left: 115%; width: 200px; height: 20px; text-align: center;font-size: 13px;">Remoción Estática y Mecánica</div>
+                                <!-- Columna "Datos Generales" -->
+                                <td style="width: 6%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #D3D3D3; color:black;">
+                                    <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 100%; left: 115%; width: 200px; height: 20px; text-align: center;font-size: 13px;">Remoción Dinámica</div>
                                 </td>
 
-                                <td style="width: 50%; vertical-align: top;">
+                                <!-- Columna con tabla interna -->
+                                <td style="width: 47%;  padding: 4px; text-align: center; vertical-align: top;">
+                                    <br>
+                                    <br>
                                     <table style="width: 100%; border-collapse: collapse; border: none;">
                                         <tr>
-                                            <td style="width: 54%; padding: 4px; text-align: center; vertical-align: top;">
-                                                <table style="width: 100%; border-collapse: collapse; border: none;">
-                                                    <tr>
-                                                        <td style="width: 52%; vertical-align: top;">
-                                                            <table style="width: 100%; border-collapse: collapse; border: none;">
-                                                                <tr>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="6">
-                                                                        Remoción Mecánica Lodo
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        Vol.(bbl)
-                                                                    </td>
-                                                                    <td style="width: 20%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        {{ $solicitud_lodo[0]->vol_colchon}}
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                                        {{ isset($solicitud_lodo[0]->rel_colchon) ? $solicitud_lodo[0]->rel_colchon->nombre : '-' }}
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        Den.(ppg)
-                                                                    </td>
-                                                                    <td style="width: 20%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        {{ $solicitud_lodo[0]->densidad_colchon}}
-                                                                    </td>
-                                                                </tr>
-                                                                @if(isset($solicitud_lodo[0]->rel_aditivos) && count($solicitud_lodo[0]->rel_aditivos) > 0)
-                                                                @foreach($solicitud_lodo[0]->rel_aditivos as $index => $aditivo)
-                                                                    @php
-                                                                        // Obtener el nombre del aditivo
-                                                                        $nombreAditivo = isset($aditivo->aditivos->nombre) ? $aditivo->aditivos->nombre : ($aditivo->aditivo == 'SD' ? $aditivo->comentario : '-');
-                                                                        
-                                                                        // Buscar la compatibilidad correspondiente
-                                                                        $colchon = isset($solicitud_lodo[0]->mecanica[$index]) ? $solicitud_lodo[0]->mecanica[$index]->colchon : '-';
-                                                                        $densidad = isset($solicitud_lodo[0]->mecanica[$index]) ? $solicitud_lodo[0]->mecanica[$index]->densidad : '-';
-                                                                    @endphp
-                                                                <tr>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                                        {{ $aditivo->lote }}
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        <small>{{ $nombreAditivo }}</small>
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        {{ $colchon }}
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                                        {{ $densidad }}
-                                                                    </td>
-                                                                </tr>
-                                                                @endforeach
-                                                                @endif
-                                                            </table>
-
-                                                            <br>
-                                                            <table style="width: 100%; border-collapse: collapse; border: none;">
-                                                                <tr>
-                                                                    <td style="width: 60%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        Tiempo de contacto
-                                                                    </td>
-                                                                    <td style="width: 40%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        Lodo
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 60%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        2.5
-                                                                    </td>
-                                                                    <td style="width: 40%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        {{ $solicitud_lodo[0]->rel_mecanica[0]->tiempo_1 ? $solicitud_lodo[0]->rel_mecanica[0]->tiempo_1 : '-' }}
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 60%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        5
-                                                                    </td>
-                                                                    <td style="width: 40%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        {{ $solicitud_lodo[0]->rel_mecanica[0]->tiempo_2 ? $solicitud_lodo[0]->rel_mecanica[0]->tiempo_2 : '-' }}
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 60%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        7.5
-                                                                    </td>
-                                                                    <td style="width: 40%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        {{ $solicitud_lodo[0]->rel_mecanica[0]->tiempo_3 ? $solicitud_lodo[0]->rel_mecanica[0]->tiempo_3 : '-' }}
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 60%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        10
-                                                                    </td>
-                                                                    <td style="width: 40%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        {{ $solicitud_lodo[0]->rel_mecanica[0]->tiempo_4 ? $solicitud_lodo[0]->rel_mecanica[0]->tiempo_4 : '-' }}
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 60%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        12.5
-                                                                    </td>
-                                                                    <td style="width: 40%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        {{ $solicitud_lodo[0]->rel_mecanica[0]->tiempo_5 ? $solicitud_lodo[0]->rel_mecanica[0]->tiempo_5 : '-' }}
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-
-                                                        </td>
-                                                        <td style="width: 50%; vertical-align: top;">
-                                                            <table style="width: 100%; border-collapse: collapse; border: none;">
-                                                                <tr>
-                                                                    <td>
-                                                                        <div style="width: 100%; height: 80px; overflow: hidden; display: flex; justify-content: center; align-items: center; text-align: center; border: 1px solid #494949;">
-                                                                            {{-- @if ($chartImage1)
-                                                                            <img src="{{ $chartImage1 }}" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
-                                                                            @else
-                                                                            <p>Archivo no disponible</p>
-                                                                            @endif --}}
-                                                                            {{-- @if (!empty($solicitud_lodo[0]->rel_mecanica[0]->img_1) && file_exists(public_path('uploads/ensayos/') . $solicitud_lodo[0]->rel_mecanica[0]->img_1))
-                                                                            <img src="{{ asset('uploads/ensayos/') . '/' . $solicitud_lodo[0]->rel_mecanica[0]->img_1 }}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
-                                                                            @else
-                                                                            <p>Archivo no disponible</p>
-                                                                            @endif --}}
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-
-                                                            <br>
-                                                            <table style="width: 100%; border-collapse: collapse; border: none;">
-                                                                <tr>
-                                                                    <td>
-                                                                        <div style="width: 100%; height: 80px; overflow: hidden; display: flex; justify-content: center; align-items: center; text-align: center; border: 1px solid #494949;">
-                                                                            {{-- @if (!empty($solicitud_lodo[0]->rel_mecanica[0]->img_2) && file_exists(public_path('uploads/ensayos/') . $solicitud_lodo[0]->rel_mecanica[0]->img_2))
-                                                                            <img src="{{ asset('uploads/ensayos/') . '/' . $solicitud_lodo[0]->rel_mecanica[0]->img_1 }}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
-                                                                            @else
-                                                                            <p>Archivo no disponible</p>
-                                                                            @endif --}}
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </td>
-                                                    </tr>
-                                                    <br>
-                                                </table>
+                                            <td style="width: 60%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                Tiempo de contacto
+                                            </td>
+                                            <td style="width: 40%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                {{ isset($solicitud_lodo[0]->rel_colchon) ? $solicitud_lodo[0]->rel_colchon->nombre : '-' }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 60%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                2.5
+                                            </td>
+                                            <td style="width: 40%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                {{ $solicitud_lodo[0]->rel_mecanica[0]->tiempo_1 ? $solicitud_lodo[0]->rel_mecanica[0]->tiempo_1 : '-' }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 60%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                5
+                                            </td>
+                                            <td style="width: 40%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                {{ $solicitud_lodo[0]->rel_mecanica[0]->tiempo_2 ? $solicitud_lodo[0]->rel_mecanica[0]->tiempo_2 : '-' }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 60%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                7.5
+                                            </td>
+                                            <td style="width: 40%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                {{ $solicitud_lodo[0]->rel_mecanica[0]->tiempo_3 ? $solicitud_lodo[0]->rel_mecanica[0]->tiempo_3 : '-' }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 60%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                10
+                                            </td>
+                                            <td style="width: 40%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                {{ $solicitud_lodo[0]->rel_mecanica[0]->tiempo_4 ? $solicitud_lodo[0]->rel_mecanica[0]->tiempo_4 : '-' }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 60%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                12.5
+                                            </td>
+                                            <td style="width: 40%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                {{ $solicitud_lodo[0]->rel_mecanica[0]->tiempo_5 ? $solicitud_lodo[0]->rel_mecanica[0]->tiempo_5 : '-' }}
                                             </td>
                                         </tr>
                                     </table>
-
+                                    <br>
                                 </td>
-                                <td style="width: 47%; vertical-align: top;">
-                                    <table style="width: 100%; border-collapse: collapse; border: none;">
+
+                                <td style="width: 47%;  padding: 4px; text-align: center; vertical-align: top;">
+
+
+
+                                    <table style="width: 100%; border-collapse: collapse; border: none; margin: right;">
                                         <tr>
-                                            <td style="width: 54%; padding: 4px; text-align: center; vertical-align: top;">
-                                                <table style="width: 100%; border-collapse: collapse; border: none;">
-                                                    <tr>
-                                                        <td style="width: 52%; vertical-align: top;">
-                                                            <table style="width: 100%; border-collapse: collapse; border: none;">
-                                                                <tr>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="6">
-                                                                        Remoción Estática Lodo
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        Vol.(bbl)
-                                                                    </td>
-                                                                    <td style="width: 20%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        {{ $solicitud_lodo[0]->vol_colchon}}
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                                        {{ isset($solicitud_lodo[0]->rel_colchon) ? $solicitud_lodo[0]->rel_colchon->nombre : '-' }}
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        Den.(ppg)
-                                                                    </td>
-                                                                    <td style="width: 20%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        {{ $solicitud_lodo[0]->densidad_colchon}}
-                                                                    </td>
-                                                                </tr>
-                                                                @if(isset($solicitud_lodo[0]->rel_aditivos) && count($solicitud_lodo[0]->rel_aditivos) > 0)
-                                                                @foreach($solicitud_lodo[0]->rel_aditivos as $index => $aditivo)
-                                                                    @php
-                                                                        // Obtener el nombre del aditivo
-                                                                        $nombreAditivo = isset($aditivo->aditivos->nombre) ? $aditivo->aditivos->nombre : ($aditivo->aditivo == 'SD' ? $aditivo->comentario : '-');
-                                                                        
-                                                                        // Buscar la compatibilidad correspondiente
-                                                                        $colchon = isset($solicitud_lodo[0]->estatica[$index]) ? $solicitud_lodo[0]->estatica[$index]->colchon : '-';
-                                                                        $densidad = isset($solicitud_lodo[0]->estatica[$index]) ? $solicitud_lodo[0]->estatica[$index]->densidad : '-';
-                                                                    @endphp
-                                                                <tr>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                                        {{ $aditivo->lote ?? '-'}}
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        <small>{{ $nombreAditivo ?? '-'}}</small>
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        {{ $colchon ?? '-'}}
-                                                                    </td>
-                                                                    <td style="width: 50%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;" colspan="2">
-                                                                        {{ $densidad ?? '-' }}
-                                                                    </td>
-                                                                </tr>
-                                                                @endforeach
-                                                                @endif
-                                                            </table>
+                                            <td>
+                                                <div style="width: 100%; height: 100px; overflow: hidden; display: flex; justify-content: center; align-items: center; text-align: center; border: 1px solid #494949;">
+                                                    {{-- @if ($chartVP)
+                                                    <img src="{{ $chartVP }}" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
+                                                    @else
+                                                    <p>Archivo no disponible</p>
+                                                    @endif --}}
+                                                </div>
 
-                                                            <br>
-                                                            <table style="width: 100%; border-collapse: collapse; border: none;">
-                                                                <tr>
-                                                                    <td style="width: 60%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        <small>Tiempo de contacto</small>
-                                                                    </td>
-                                                                    <td style="width: 40%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        Lodo
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 60%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        1
-                                                                    </td>
-                                                                    <td style="width: 40%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        {{ $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_1 ? $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_1 : '-' }}
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 60%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        2
-                                                                    </td>
-                                                                    <td style="width: 40%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        {{ $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_2 ? $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_2 : '-' }}
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 60%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        3
-                                                                    </td>
-                                                                    <td style="width: 40%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        {{ $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_3 ? $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_3 : '-' }}
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 60%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        4
-                                                                    </td>
-                                                                    <td style="width: 40%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        {{ $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_4 ? $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_4 : '-' }}
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 60%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        5
-                                                                    </td>
-                                                                    <td style="width: 40%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
-                                                                        {{ $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_5 ? $solicitud_lodo[0]->rel_estatica[0]->tiempo_estatica_5 : '-' }}
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div style="width: 100%; height: 100px; overflow: hidden; display: flex; justify-content: center; align-items: center; text-align: center; border: 1px solid #494949;">
+                                                    {{-- @if ($chartVP)
+                                                    <img src="{{ $chartVP }}" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
+                                                    @else
+                                                    <p>Archivo no disponible</p>
+                                                    @endif --}}
+                                                </div>
 
-                                                        </td>
-                                                        <td style="width: 50%; vertical-align: top;">
-                                                            <table style="width: 100%; border-collapse: collapse; border: none;">
-                                                                <tr>
-                                                                    <td>
-                                                                        <div style="width: 100%; height: 80px; overflow: hidden; display: flex; justify-content: center; align-items: center; text-align: center; border: 1px solid #494949;">
-                                                                            {{-- @if (!empty($solicitud_lodo[0]->rel_estatica[0]->img_1) && file_exists(public_path('uploads/ensayos/') . $solicitud_lodo[0]->rel_estatica[0]->img_1))
-                                                                            <img src="{{ asset('uploads/ensayos/') . '/' . $solicitud_lodo[0]->rel_mecanica[0]->img_1 }}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
-                                                                            @else
-                                                                            <p>Archivo no disponible</p>
-                                                                            @endif --}}
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-
-                                                            <br>
-                                                            <table style="width: 100%; border-collapse: collapse; border: none;">
-                                                                <tr>
-                                                                    <td>
-                                                                        <div style="width: 100%; height: 80px; overflow: hidden; display: flex; justify-content: center; align-items: center; text-align: center; border: 1px solid #494949;">
-                                                                            {{-- @if (!empty($solicitud_lodo[0]->rel_estatica[0]->img_2) && file_exists(public_path('uploads/ensayos/') . $solicitud_lodo[0]->rel_estatica[0]->img_2))
-                                                                            <img src="{{ asset('uploads/ensayos/') . '/' . $solicitud_lodo[0]->rel_mecanica[0]->img_1 }}" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
-                                                                            @else
-                                                                            <p>Archivo no disponible</p>
-                                                                            @endif --}}
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </td>
-                                                    </tr>
-                                                </table>
                                             </td>
                                         </tr>
                                     </table>
 
                                 </td>
                             </tr>
+
                         </table>
+                        <table style="width: 100%;">
+                            <tr>
+                                <td style="padding: 4px; text-align: center; vertical-align: top;">
+                                    <br>
+                                    <table style="width: 100%; border-collapse: collapse; border: none;">
+                                        <tr>
+                                            <td style="padding: 2px; height: 50px; text-align: left; border: 1px solid #494949;  background: #c0c0c029; color:black;">
+                                                Comentarios:
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+
+                    <td style="width: 47%; padding: 4px; text-align: center; vertical-align: top;">
+                        <table style="width: 100%;">
+                            <tr>
+                                <!-- Columna "Datos Generales" -->
+                                <td style="width: 6%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 200px; background: #D3D3D3; color:black;">
+                                    <div style="transform: rotate(-90deg); transform-origin: left bottom; white-space: nowrap; position: absolute; top: 100%; left: 115%; width: 200px; height: 20px; text-align: center;font-size: 13px;">Remoción Estática</div>
+                                </td>
+
+                                <!-- Columna con tabla interna -->
+                                <td style="width: 47%;  padding: 4px; text-align: center; vertical-align: top;">
+                                    <br>
+                                    <table style="width: 100%; border-collapse: collapse; border: none;">
+                                        <tr>
+                                            <td style="width: 60%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                Tiempo de contacto
+                                            </td>
+                                            <td style="width: 40%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                % Remoción
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 60%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                1
+                                            </td>
+                                            <td style="width: 40%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                {{ $solicitud_lodo[0]->rel_mecanica[0]->tiempo_1 ? $solicitud_lodo[0]->rel_mecanica[0]->tiempo_1 : '-' }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 60%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                2
+                                            </td>
+                                            <td style="width: 40%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                {{ $solicitud_lodo[0]->rel_mecanica[0]->tiempo_2 ? $solicitud_lodo[0]->rel_mecanica[0]->tiempo_2 : '-' }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 60%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                3
+                                            </td>
+                                            <td style="width: 40%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                {{ $solicitud_lodo[0]->rel_mecanica[0]->tiempo_3 ? $solicitud_lodo[0]->rel_mecanica[0]->tiempo_3 : '-' }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 60%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                4
+                                            </td>
+                                            <td style="width: 40%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                {{ $solicitud_lodo[0]->rel_mecanica[0]->tiempo_4 ? $solicitud_lodo[0]->rel_mecanica[0]->tiempo_4 : '-' }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 60%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                5
+                                            </td>
+                                            <td style="width: 40%; padding: 2px; text-align: left; border: 1px solid #494949; background-color: #ffffff;">
+                                                {{ $solicitud_lodo[0]->rel_mecanica[0]->tiempo_5 ? $solicitud_lodo[0]->rel_mecanica[0]->tiempo_5 : '-' }}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <br>
+                                </td>
+
+                                <td style="width: 47%;  padding: 4px; text-align: center; vertical-align: top;">
+
+
+
+                                    <table style="width: 100%; border-collapse: collapse; border: none; margin: right;">
+                                        <tr>
+                                            <td>
+                                                <div style="width: 100%; height: 100px; overflow: hidden; display: flex; justify-content: center; align-items: center; text-align: center; border: 1px solid #494949;">
+                                                    {{-- @if ($chartVP)
+                                                    <img src="{{ $chartVP }}" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
+                                                    @else
+                                                    <p>Archivo no disponible</p>
+                                                    @endif --}}
+                                                </div>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div style="width: 100%; height: 100px; overflow: hidden; display: flex; justify-content: center; align-items: center; text-align: center; border: 1px solid #494949;">
+                                                    {{-- @if ($chartVP)
+                                                    <img src="{{ $chartVP }}" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 5px; box-shadow: 0px 0px 5px 0px rgba(191,191,191,1);">
+                                                    @else
+                                                    <p>Archivo no disponible</p>
+                                                    @endif --}}
+                                                </div>
+
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                </td>
+
+                            </tr>
+                        </table>
+                        <table style="width: 100%;">
+                            <tr>
+                                <td style="padding: 4px; text-align: center; vertical-align: top;">
+                                    <br>
+                                    <table style="width: 100%; border-collapse: collapse; border: none;">
+                                        <tr>
+                                            <td style="padding: 2px; height: 50px; text-align: left; border: 1px solid #494949;  background: #c0c0c029; color:black;">
+                                                Comentarios:
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <br><br>
                     </td>
                 </tr>
             </table>
         </div>
-        {{-- <div style="border-radius: 3px;">
-            <table style="width: 100%;">
+        <div style="border-radius: 3px;">
+            <table style="width: 100%; border: 1px solid #000000;">
                 <tr>
                     <!-- Columna "Datos Generales" -->
                     <td style="width: 3%; border: 1px solid #494949; text-align: center; vertical-align: top; position: relative; height: 0px; background: #006f53; color:white;">
@@ -1311,7 +1190,7 @@
                     </td>
                 </tr>
             </table>
-        </div> --}}
+        </div>
         <div style="border-radius: 3px;">
             <table style="width: 100%; border: 1px solid #494949;">
                 <tr>
@@ -1374,8 +1253,6 @@
             </table>
         </div>
     </table>
-   
-
 </body>
 
 </html>

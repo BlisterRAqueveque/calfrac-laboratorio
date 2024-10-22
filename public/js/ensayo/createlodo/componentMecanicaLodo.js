@@ -1,7 +1,7 @@
 const accordionMecanicaLodo = document.getElementById("accordionMecanicaLodo");
 
 const componentMecanicaLodo = (data = {}) => {
-    console.log(data); // Verificar los valores de 'data'
+    //console.log(data); // Verificar los valores de 'data'
 
     // Limpiar el contenido existente en accordionMecanicaLodo
     accordionMecanicaLodo.innerHTML = '';

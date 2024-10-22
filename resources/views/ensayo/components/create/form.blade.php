@@ -214,7 +214,7 @@
 <!-- Esto es para generar el reporte pdf -->
 <script>
     const checkGenerateReport = (solicitud_id) => {
-        console.log(solicitud_id); 
+        //console.log(solicitud_id); 
         return new Promise((resolve, reject) => {
             fetch("{{ route('check_report', '') }}" + "/" + solicitud_id, {
                     headers: {

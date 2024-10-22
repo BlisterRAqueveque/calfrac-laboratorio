@@ -169,14 +169,14 @@
                         </div>
                     </td>
                     <td style="width: 60%; text-align: center;">
-                        <h2 style="color: #000000; margin: 0; padding: 0; font-size: 14px;">Laboratorio de Cementación</h2> <!-- Tamaño más grande para el título -->
+                        <h2 style="color: #000000; margin: 0; padding: 0; font-size: 14px;">Reporte de Lechada</h2> <!-- Tamaño más grande para el título -->
                         <h6 style="margin: 0; padding: 0;">NEUQUEN, ARGENTINA</h6>
                     </td>
                     <td style="width: 20%; text-align: center;">
                         <table style="border-collapse: collapse; width: 100%;">
                             <tr style="border: 1px solid #000000;">
                                 <td style="border: 1px solid #000000; padding: 5px;">
-                                    Numero: C-FM8.0-0459
+                                    Num: C-FM8.0-0459
                                 </td>
                             </tr>
                             <tr style="border: 1px solid #000000;">

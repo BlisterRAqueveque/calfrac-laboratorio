@@ -190,6 +190,13 @@
                                 Deshabilitar Edición
                             </button>
                         </div>
+                        @else
+                        <button id="btn_pdf_report_lodo_solicitud" class="bg-red-400 dark:bg-red-700 text-white font-bold tracking-wide px-3 py-1 rounded-sm flex gap-2 hover:bg-red-500 transition-all duration-200" id="btnAccionAprobada">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                            </svg>
+                            PDF
+                        </button>
                     @endif
                 </div>
             </div>
@@ -197,8 +204,10 @@
             <form action="{{ route('solicitud.update') }}" method="POST">
                 @csrf
                 <input type="hidden" value="{{ $solicitud->id }}" name="solicitud_id">
+                
 
-                <div class="grid xs:grid-cols-2 md:grid-cols-5 gap-3 mt-3">
+                <div class="grid xs:grid-cols-2 md:grid-cols-6 gap-3 mt-3">
+                    
                     <div class="col-span-2 xl:col-span-2">
                         <label for="cliente_lodo"
                             class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Cliente
@@ -212,6 +221,18 @@
                         </select>
                         @error('cliente_lodo')
                             <small class="text-xs text-red-600">El cliente es requerido</small>
+                        @enderror
+                    </div>
+
+                    <div class="col-span-2 xl:col-span-1">
+                        <label for="programa_lodo"
+                            class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Programa <span
+                                class="text-red-500">*</span></label>
+                        <input type="text" name="programa_lodo" id="programa_lodo"
+                            class="form-control text-sm p-2" placeholder="Programa" value="{{ $solicitud->programa }}"
+                            readonly>
+                        @error('programa_lodo')
+                            <small class="text-xs text-red-600">El programa es requerido</small>
                         @enderror
                     </div>
                     {{--<div class="col-span-2 xl:col-span-1">
@@ -366,7 +387,7 @@
                    <label for='temperatura' class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Temperatura
                     <span class="text-red-500">*</span></label>
                     <input type="number" name="temperatura" id="temperatura"
-                            class="form-control text-sm p-2" value="{{ $solicitud_lodo[0]->temperatura ?? 0}}" readonly>
+                            class="form-control text-sm p-2" value="{{ $solicitud_lodo[0]->temperatura ?? '-'}}" readonly>
                     @error('temperatura')
                         <small class="text-xs text-red-600">La temperatura es requerida</small>
                     @enderror
@@ -763,7 +784,7 @@
                         loadingAlert('Aprobación en progreso, por favor espere',
                             'Se están almacenando los cambios y notificando vía email');
 
-                        fetch("{{ route('solicitud.aprobar') }}", {
+                        fetch("{{ route('solicitud.aprobar.lodo') }}", {
                                 method: 'POST',
                                 body: form
                             }).then((response) => response.json())
@@ -791,4 +812,22 @@
             @endif
         })
      </script>
+
+<script>
+    const btn_pdf_report_lodo_solicitud = document.querySelector('#btn_pdf_report_lodo_solicitud');
+    if (btn_pdf_report_lodo_solicitud) {
+        btn_pdf_report_lodo_solicitud.addEventListener('click', e => pdfReportLodoSolicitud());
+    }
+
+    /**
+     * Genera la visualización del PDF en una nueva pestaña
+     */
+    const pdfReportLodoSolicitud = () => {
+        event.preventDefault();
+        let solicitud_id = {!! json_encode($solicitud->id) !!}
+        var url = "{{ route('pdf_report_lodo_solicitud', '') }}" + "/" + solicitud_id;
+        window.open(url, '_blank');
+    }
+    
+</script> 
 @endsection

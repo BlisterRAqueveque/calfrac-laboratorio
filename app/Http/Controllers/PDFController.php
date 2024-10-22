@@ -15,13 +15,16 @@ use App\Models\SolicitudLechada;
 use App\Models\TipoCementacion;
 use App\Models\TipoRequerimientoCemento;
 use App\Models\TipoTrabajoCemento;
+use App\Models\TipoLodo;
 use App\Models\User;
 use App\Models\CalculosReologias;
 // Modelos para PDF Lodo
 use App\Models\SolicitudLodo;
 use App\Models\MudCompany;
 use App\Models\TipoLodo_Lodos;
-
+use App\Models\EnsayosLodo;
+// Models para PDF Fractura
+use App\Models\SolicitudFractura;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Http\Request;
 use Mail;
@@ -344,18 +347,125 @@ class PDFController extends Controller
         return view('emails.solicitud.solicitud_body', $data);
     }
 
-    public function pdf_report_lodo($solicitud_id)
+    public function pdf_report_lodo(Request $request, $solicitud_id)
     {
+        $chartVP = $request->chartVP;
+        $chartGeles = $request->chartGeles;
+        $chartReologias = $request->chartReologias;
+
         $data = [
             'solicitud' => Solicitud::find($solicitud_id),
             'solicitud_lodo' => SolicitudLodo::where('solicitud_id', $solicitud_id)->get(),
             'mud_company' => MudCompany::all(),
-            'tipo_lodo' => TipoLodo_Lodos::all(),
+            'tipo_lodos' => TipoLodo_Lodos::all(),
+            'chartVP' => $chartVP,
+            'chartGeles' => $chartGeles,
+            'chartReologias' => $chartReologias
             
         ];
           
         $pdf = PDF::loadView('solicitud_pdf_lodo', $data);
         // return $pdf->loadView('solicitud_lechada.pdf');
+        return $pdf->stream();
+    }
+
+
+    // PDF para Solicitud Lodo
+
+    public function pdf_report_lodo_solicitud($solicitud_id)
+    {
+
+    
+        $data = [
+            'solicitud' => Solicitud::find($solicitud_id),
+            'solicitud_lodo' => SolicitudLodo::where('solicitud_id', $solicitud_id)->get(),
+            'mud_company' => MudCompany::all(),
+            'tipo_lodo' => TipoLodo_Lodos::all(),
+            'opciones_ensayos' => EnsayosLodo::all(),
+            'ensayos_multiples' => EnsayosLodo::leftJoin('rel_ensayos_requeridos_lodo', 'ensayos_lodo.id', '=', 'rel_ensayos_requeridos_lodo.id_ensayo')
+            ->where('rel_ensayos_requeridos_lodo.nombre', $solicitud_id)
+            ->get(['ensayos_lodo.*', 'rel_ensayos_requeridos_lodo.*']),
+            
+        ];
+          
+        $pdf = PDF::loadView('pdf_lodo_solicitud', $data);
+        // return $pdf->loadView('solicitud_lechada.pdf');
+        return $pdf->stream();
+    }
+
+    # PDF para Solicitud de Lechada 
+    public function pdf_report_lechada_solicitud($solicitud_id)
+    {
+        $data = [
+            'solicitud' => Solicitud::find($solicitud_id),
+            's_l' => SolicitudLechada::where('solicitud_id', $solicitud_id)->get(),
+            'mud_company' => MudCompany::all(),
+            'tipo_lodo' => TipoLodo::all(),
+        ];
+
+        // Lógica para obtener los nombres de los botones seleccionados
+        $ensayos = [];
+        if ($data['s_l'][0]->ensayo_requerido_principal == 1) {
+            $ensayos[] = 'Principal';
+        }
+        if ($data['s_l'][0]->ensayo_requerido_bullheading == 1) {
+            $ensayos[] = 'Bullheading';
+        }
+        if ($data['s_l'][0]->ensayo_requerido_tapon == 1) {
+            $ensayos[] = 'Tapón';
+        }
+        if ($data['s_l'][0]->ensayo_requerido_relleno == 1) {
+            $ensayos[] = 'Relleno';
+        }
+
+        $data['ensayos_seleccionados'] = implode(', ', $ensayos);
+
+        $data['checkboxes'] = [
+            'tiempo_50_psi' => $data['s_l'][0]->tiempo_50_psi,
+            'tiempo_500_psi' => $data['s_l'][0]->tiempo_500_psi,
+            'tiempo_1000_psi' => $data['s_l'][0]->tiempo_1000_psi,
+            'resistencia_12_hs' => $data['s_l'][0]->resistencia_12_hs,
+            'resistencia_24_hs' => $data['s_l'][0]->resistencia_24_hs,
+        ];
+          
+        $pdf = PDF::loadView('pdf_lechada_solicitud', $data);
+        // return $pdf->loadView('solicitud_lechada.pdf');
+        return $pdf->stream();
+    }
+
+        // PDF para Solicitud Fractura
+
+    public function pdf_report_fractura_solicitud($solicitud_id)
+    {
+
+        $data = [
+            'solicitud' => Solicitud::find($solicitud_id),
+            'solicitud_fractura' => SolicitudFractura::where('solicitud_id', $solicitud_id)->get(),
+        ];
+
+        // Lógica para obtener los nombres de los botones seleccionados
+        $ensayos = [];
+        if ($data['solicitud_fractura'][0]->ensayo_estabilidad == 1) {
+            $ensayos[] = 'Convencional';
+        }
+        if ($data['solicitud_fractura'][0]->ensayo_ruptura == 1) {
+            $ensayos[] = 'No Convencional';
+        }
+        if ($data['solicitud_fractura'][0]->ensayo_especial == 1) {
+            $ensayos[] = 'Especial';
+        }
+
+        $data['ensayos_seleccionados'] = implode(', ', $ensayos);
+
+        $data['checkboxes'] = [
+            'ensayo_estabilidad' => $data['solicitud_fractura'][0]->ensayo_estabilidad,
+            'ensayo_ruptura' => $data['solicitud_fractura'][0]->ensayo_ruptura,
+            'ensayo_especial' => $data['solicitud_fractura'][0]->ensayo_especial,
+        ];
+
+        $data['ensayos_seleccionados'] = implode(', ', $ensayos);
+          
+        $pdf = PDF::loadView('pdf_fractura_solicitud', $data);
         return $pdf->stream();
     }
 }

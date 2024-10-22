@@ -1,6 +1,25 @@
 <div class="mt-4 tab-pane fade" id="tab-humectabilidad" role="tabpanel" aria-labelledby="nav-tab_test">
 @if (count($solicitud_lodo[0]->rel_humectabilidad) > 0)
 <div class="accordionHumectabilidadLodo" id="accordionHumectabilidadLodo">
+    <div class="mb-2 text-center">
+        <h5 class="mb-1">Registro de Remoción Estatica del Lodo</h5>
+    </div>
+    <div class="grid grid-cols-5 gap-3">
+ 
+        <div class="col-span-5 md:col-span-1">
+            <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">¿Reporta humectabilidad?<small>(Si/No)</small></label>
+            {{-- <input type="text" name="check_humectabilidad" value="{{ $solicitud_lodo[0]->rel_estatica[0]->check_humectabilidad }}" class="form-control text-sm"
+                placeholder="¿Reporta remoción estatica?" readonly> --}}
+                <select name="check_humectabilidad" id="check_humectabilidad" class="text-sm" data-silent-initial-value-set="true" multiple="false" disabled>
+                    @foreach ($choices as $y)
+                    <option value="{{ $y->id }}"
+                        {{ $y->id == $solicitud_lodo[0]->rel_humectabilidad[0]->check_humectabilidad ? 'selected' : '' }}>{{ $y->choices }}
+                    </option>
+                    @endforeach
+                </select>
+        </div> 
+    </div>
+    <br>
     <h5>HUMECTABILIDAD:</h5>
     <br>
     <p class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Se evalúa la capacidad del colchón mecánico de invertir la fase externa oleosa no conductiva elétricamente del lodo, por una fase externa acousa conductiva. 
@@ -30,6 +49,24 @@
     <form id="form_humectabilidad" method="POST">
     @csrf
     <input type="hidden" name="solicitud_lodo_id" value="{{ $solicitud_lodo[0]->id }}">
+    <div class="mb-2 text-center">
+        <h5 class="mb-1">Registro de Humectabilidad</h5>
+    </div>
+    <br>
+    <div class="grid grid-cols-5 gap-3">
+
+        <div class="col-span-5 md:col-span-1">
+            <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">¿Reporta humectabilidad?<small>(Si/No) </small><span class="text-red-500"><small>(Requerido)</small></span></label>
+            {{-- <input type="text" name="check_humectabilidad" value="{{ old('check_humectabilidad') }}" class="form-control text-sm" placeholder="¿Reporta remoción estatica?"> --}}
+            <select name="check_humectabilidad" id="check_humectabilidad" class="text-sm" data-silent-initial-value-set="true" multiple="false">
+                @foreach ($choices as $y)
+                <option value="{{ $y->id }}" {{ old('check_humectabilidad') == $y->id ? 'selected' : '' }}>{{ $y->choices }}</option>
+                @endforeach
+            </select>
+        </div>
+        <br>
+    </div>
+    <br>
     <h5>HUMECTABILIDAD:</h5>
     <br>
     <p class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Se evalúa la capacidad del colchón mecánico de invertir la fase externa oleosa no conductiva elétricamente del lodo, por una fase externa acousa conductiva. 
@@ -41,7 +78,7 @@
 <div class="grid grid-cols-6 gap-3">
     <div class="col-span-2 xl:col-span-1">
         <label for="humectabilidad" class="text-sm text-gray-700 font-semibold tracking-wide mb-2"> % Humectabilidad
-            <span class="text-red-500">*</span></label>
+            </label>
             <input type="number" name="humectabilidad" id="humectabilidad"
             value="{{ old('humectabilidad') }}" class="form-control text-sm p-2"
             placeholder="%" >
@@ -59,7 +96,15 @@
 @endif
 </div>
 
-
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+            VirtualSelect.init({
+                ele: "#check_humectabilidad",
+                placeholder: "Seleccione una opción",
+            });
+            //document.getElementById("tipo_lodo").setValue(0);
+        })
+</script>
 <script>
     const btn_submit_humectabilidad_lodo = document.getElementById('btn_submit_humectabilidad_lodo');
 

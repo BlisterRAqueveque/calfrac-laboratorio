@@ -4,7 +4,7 @@ const componentShowAditivosLodo = (data) => {
     // Verifica si `data` es un array o un objeto
     if (Array.isArray(data)) {
         if (!data.length) {
-            console.log("No hay datos de aditivos para mostrar");
+            //console.log("No hay datos de aditivos para mostrar");
             return;
         }
     } else if (typeof data === 'object') {

@@ -446,7 +446,7 @@
                                 body: form,
                             }).then((response) => response.json())
                             .then((data) => {
-                                console.log(data);
+                                //console.log(data);
                                 if (data) {
                                     successAlert('¡Permisos actualizados correctamente!',
                                         'Se actualizaron los permisos para el usuario').then(

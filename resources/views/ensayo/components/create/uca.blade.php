@@ -361,7 +361,7 @@
                             if (data) {
                                 componentUCA(data.success_uca)
                                 document.getElementById('form_uca').style.display = 'none'
-                                console.log(data);
+                                //console.log(data);
                                 successAlert('¡Registro Asignado!',
                                     'El registro se asignó correctamente.').then(
                                     (confirmed) => {

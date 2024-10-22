@@ -24,7 +24,7 @@
                     <label for="servicio_number"
                         class=" text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Nº
                         Revisión de Solicitud de Servicio <span class="text-red-500">*</span></label>
-                    <input type="number" placeholder="Ingrese el número"
+                    <input type="text" placeholder="Ingrese el número"
                         class="sz form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2"
                         name="servicio_number" id="servicio_number" min="0" step=".000001">
                     @error('servicio_number')
@@ -50,9 +50,9 @@
 
                 <div class="col-xs-12 col-md-2 my-2">
                     <label for="locacion"
-                        class="text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Yacimiento/Locación <span class="text-red-500">*</span></label>
+                        class="text-sm text-gray-700 dark:text-gray-300 font-semibold tracking-wide mb-2">Yacimiento <span class="text-red-500">*</span></label>
                         <select name="locacion_fractura" id="locacion_fractura" class="text-sm" data-search="true">
-                            @foreach ($yacimientos as $y)
+                            @foreach ($yacimientos_fractura as $y)
                             <option value="{{ $y->id }}"
                                 {{ old('locacion_fractura') == $y->id ? 'selected' : '' }}>{{ $y->nombre }}</option>
                         @endforeach
@@ -376,14 +376,24 @@
             <hr class="my-4">    
             </div> <!-- Información del Pozo -->
 
-            <p class="m-0 mt-3 font-bold text-lg tracking-wide">Análisis Requerido</p>
+            <p class="m-0 mt-3 font-bold text-lg tracking-wide">Análisis de Agua</p>
 
             <div class="row mt-3"> <!-- Análisis Requerido -->
+
+                <div class="col-xs-12 col-md-6 my-2">
+                    <label for="analisis_microbial"
+                        class="text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2" >Tipo
+                        de Agua </label>
+                    <select name="tipo_agua" id="tipo_agua" class="text-sm inp_edit" data-search="false" multiple="true">
+                        @foreach ($tipo_agua as $e)
+                            <option value="{{ $e->id }}">{{ $e->nombre }}</option>
+                        @endforeach
+                    </select>
+                </div>
                 
                 <div class="col-xs-12 col-md-6 my-2">
                     <label for="analisis_microbial"
-                        class="text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2" >Análisis
-                        de Agua y Ensayo Microbial</label>
+                        class="text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2" > Tipo de Ensayo </label>
                     <select name="analisis_microbial" id="analisis_microbial" class="text-sm inp_edit" data-search="false" multiple="true">
                         @foreach ($analisis_microbial as $e)
                             <option value="{{ $e->id }}">{{ $e->nombre }}</option>
@@ -391,7 +401,7 @@
                     </select>
                 </div>
                 
-                <div class="col-xs-12 col-md-6 my-2">
+                {{-- <div class="col-xs-12 col-md-6 my-2">
                     <label for="agente_sosten"
                         class="text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Agente
                         de Sostén</label>
@@ -400,7 +410,7 @@
                             <option value="{{ $e->id }}">{{ $e->nombre }}</option>
                         @endforeach
                     </select>
-                </div>
+                </div> --}}
 
                 <div class="col-xs-12 col-md-6 my-2">
                     <label for="sistemas_fluidos"
@@ -438,16 +448,31 @@
                         class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Tipo de ensayo</label>
                     <div class="flex gap-1">
                         <label for="ensayo_estabilidad"
-                            class="bg-gray-200 p-1 w-full max-w-28 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
+                            class="bg-gray-200 p-1 max-w-34 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
                             <input type="checkbox" name="ensayo_estabilidad" id="ensayo_estabilidad">
-                            Estabilidad</label>
+                            Convencional</label>
                         <label for="ensayo_ruptura"
-                            class="bg-gray-200 p-1 w-full max-w-28 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
+                            class="bg-gray-200 p-1 max-w-34 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
                             <input type="checkbox" name="ensayo_ruptura"
                                 id="ensayo_ruptura">
-                            Ruptura</label>
+                            No Convencional</label>
+                            <label for="ensayo_especial"
+                            class="bg-gray-200 p-1 max-w-34 text-center rounded-md flex items-center gap-1 border border-gray-300 cursor-pointer hover:bg-opacity-80">
+                            <input type="checkbox" name="ensayo_especial"
+                                id="ensayo_especial">
+                            Especial</label>
                     </div>
                 </div>
+                <div class="col-12 my-2">
+                    <label for="comentario_analisis"
+                        class="text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-wide mb-2">Comentarios
+                        /
+                        Observaciones</label>
+                    <textarea name="comentario_analisis" id="comentario_analisis"
+                        class="form-control dark:inp_bg_2 dark:text-gray-300 dark:placeholder:text-gray-400 dark:border-none p-2 sz"
+                        rows="3" placeholder="Ingrese un comentario / instrucciones - Máximo 300 caracteres"></textarea>
+                </div>
+
                 <hr class="my-4">
                 <p class="m-0 font-bold text-lg my-3 tracking-wide">Requerimientos de Fractura</p>
                     <label for="" class="text-sm mt-3 text-gray-700 font-semibold tracking-wide mb-2">Formulación
@@ -468,10 +493,11 @@
                     </div>                        
     
     
-                <div class="grid grid-cols-3 text-center bg-gray-100 py-2 my-3">
+                <div class="grid grid-cols-4 text-center bg-gray-100 py-2 my-3">
                     <p>Lote</p>
                     <p>Aditivo</p>
                     <p>Conc (gpt o ppt)</p>
+                    <p>Curva de Hidratación</p>
                 </div>
                 <div id="container_formulaciones_tentativas_fractura"></div>
     
@@ -656,6 +682,10 @@
             ele: "#estados",
             placeholder: "Seleccione estado",
         });
+        VirtualSelect.init({
+            ele: "#tipo_agua",
+            placeholder: "Seleccione estado",
+        });
         document.getElementById("cliente_fractura").setValue(0);
         document.getElementById("locacion_fractura").setValue(0);
         document.getElementById("equipo").setValue(0);
@@ -665,6 +695,7 @@
         document.getElementById("analisis_microbial").setValue(0);
         document.getElementById("agente_sosten").setValue(0);
         document.getElementById("estados").setValue(0);
+        document.getElementById("tipo_agua").setValue(0);
     })
 </script>
 
@@ -679,7 +710,7 @@
  
     function aditivoExtra(e) {
         event.preventDefault();
-        console.log(e.value);
+        //console.log(e.value);
 
         if (e.value == 1) {
             for (let i = 0; i < aditivo_extra_inp.length; i++) {

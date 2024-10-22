@@ -171,8 +171,8 @@
                                 //componentAditivos(data.success_aditivos)
                                 componentShowAditivos(data.success_aditivos, data.success_calculos)
                                 
-                                console.log('Data aditivos:', data.success_aditivos)
-                                console.log('Data calculos:', data.success_calculos)
+                                //console.log('Data aditivos:', data.success_aditivos)
+                                //console.log('Data calculos:', data.success_calculos)
                                 document.getElementById('form_aditivos').style.display = 'none'
                                 successAlert('¡Registro Asignado!',
                                     'El registro se asignó correctamente.')

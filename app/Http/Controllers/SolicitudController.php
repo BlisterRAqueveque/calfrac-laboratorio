@@ -44,7 +44,12 @@ use App\Models\RelReologiaSolicitudEnsayo;
 use App\Models\RelEnsayoComentarioSolicitud;
 use App\Models\RelEnsayosRequeridosLodo;
 use App\Models\TipoDeColchon;
+use App\Models\Choices;
+use App\Models\YacimientosFractura;
+use App\Models\TipoAgua;
+use App\Models\RelTipoAgua;
 use App\Mail\SolicitudLechadaAprobada;
+use App\Mail\SolicitudLodoAprobada;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Mail;
@@ -88,6 +93,8 @@ class SolicitudController extends Controller
             'names_ingenieros' => User::whereIn('users.grupo_id', [3, 4])->get('users.*'),
             'aditivos' => Aditivo::all(),
             'tipo_de_colchon' => TipoDeColchon::all(),
+            'yacimientos_fractura' => YacimientosFractura::all(),
+            'tipo_agua' => TipoAgua::all()
             //'name_aditivos' =>
         ];
         return view('solicitud.create', $data);
@@ -170,9 +177,13 @@ class SolicitudController extends Controller
             //'agente_sosten_id' => $request->agente_sosten,--> idem estados
             //'otro_analisis_id' => $request->otros,
             'otros_analisis' => $request->otros_analisis,
+            // Estabilidad usado para -> Convencional
             'ensayo_estabilidad' => $request->ensayo_estabilidad == 'on' ? 1 : 0,
+            // Ruptura usado para -> NO Convencional
             'ensayo_ruptura' => $request->ensayo_ruptura == 'on' ? 1 : 0,
+            'ensayo_especial' => $request->ensayo_especial == 'on' ? 1 : 0,
             'comentario' => $request->comentario,
+            'comentario_analisis' => $request->comentario_analisis,
             'base_guar' => $request->base_guar,
             'base_hvfr' => $request->base_hvfr,
             'firma_iniciado_por_id' => $request->firma_iniciado_por,
@@ -196,6 +207,7 @@ class SolicitudController extends Controller
                     'aditivo' => $formulacion['aditivo'],
                     'comentario' => $formulacion['comentario'],
                     'concentracion' => $formulacion['concentracion'],
+                    'hidratacion' => $formulacion['hidratacion'],
                 ]);
             }
         }
@@ -211,12 +223,22 @@ class SolicitudController extends Controller
             }
         }
 
-        if ($request->agente_sosten) {
-            $agentes_separados = explode(',', $request->agente_sosten);
-            foreach ($agentes_separados as $agente) {
-                RelAgenteSostenFractura::create([
+        // if ($request->agente_sosten) {
+        //     $agentes_separados = explode(',', $request->agente_sosten);
+        //     foreach ($agentes_separados as $agente) {
+        //         RelAgenteSostenFractura::create([
+        //             'solicitud_id' => $solicitud->id,
+        //             'id_agente' => $agente
+        //         ]);
+        //     }
+        // }
+
+        if ($request->tipo_agua) {
+            $tipo_separados = explode(',', $request->tipo_agua);
+            foreach ($tipo_separados as $tipo) {
+                RelTipoAgua::create([
                     'solicitud_id' => $solicitud->id,
-                    'id_agente' => $agente
+                    'id_tipo' => $tipo
                 ]);
             }
         }
@@ -415,7 +437,6 @@ class SolicitudController extends Controller
             //'empresa' => $request->empresa
         ];
 
-
         # Listado de correos de laboratoristas, me agrego a mi para chequear que llegue correctamente
         $destinatarios = [
             'GTorres@calfrac.com',
@@ -517,6 +538,50 @@ class SolicitudController extends Controller
         # Envío del correo a c/u
         foreach ($destinatarios as $correo) {
             $this->_sendEmailApproved($data, $correo);
+        }
+        // -- Finaliza el envío de email
+
+        return $solicitud->id;
+    }
+
+
+    public function store_aprobar_lodo(Request $request)
+    {
+        $solicitud = Solicitud::find($request->solicitud_id);
+        $solicitud->estado_solicitud_id = 2;
+        $solicitud->aprobada = 1;
+        $solicitud->fecha_aprobada = date('Y-m-d H:i:s');
+        $solicitud->usuario_aprobo = auth()->user()->id;
+        $solicitud->save();
+
+        $url = route('solicitud.lodo.show', ['solicitud_id' => $solicitud->id]);
+
+        # Envío de Email
+        $data = [
+            'solicitud_id' => $solicitud->id,
+            'fecha_aprobada' => $solicitud->fecha_aprobada->format('d/m/Y'),
+            // 'usuario_aprobo' => $solicitud->usuario_aprobo->nombre . ' ' . $solicitud->usuario_aprobo->apellido,
+            'url' => $url
+        ];
+
+        # Listado de correos de laboratoristas, me agrego a mi para chequear que llegue correctamente
+        $destinatarios = [
+            'GTorres@calfrac.com',
+            'CDominguez@calfrac.com',
+            'DMancilla@calfrac.com',
+            'LVazquez@calfrac.com',
+            'ORodriguez@calfrac.com',
+            'rocio.carvajal@blistertechnologies.com',
+            'gruiz@blister.com.ar',
+            // 'lsicolo@blister.com.ar'
+        ];
+
+        # Incluye el correo del usuario que cargó la solicitud mas el arreglo de arriba
+        array_unshift($destinatarios, $solicitud->user->email);
+
+        # Envío del correo a c/u
+        foreach ($destinatarios as $correo) {
+            $this->_sendEmailApprovedLodo($data, $correo);
         }
         // -- Finaliza el envío de email
 
@@ -722,6 +787,7 @@ class SolicitudController extends Controller
         $solicitud = Solicitud::create([
             'tipo' => 3,
             'cliente_id' => $request->cliente_lodo,
+            'programa' => $request->programa_lodo,
             'locacion_id' => $request->locacion_lodo,
             'fecha_solicitud' => date('Y-m-d'),
             'pozo' => $request->pozo_lodo,
@@ -792,8 +858,22 @@ class SolicitudController extends Controller
         }
         # Envio de mails
         $url = route('solicitud.lodo.show', ['solicitud_id' => $solicitud->id]);
-        $correos[] = "rocio.carvajal@blistertechnologies.com";
-        $correos[] = "orodriguez@calfrac.com";
+        
+        // $correos[] = "rocio.carvajal@blistertechnologies.com";
+        // $correos[] = "orodriguez@calfrac.com";
+        
+        # Listado de correos de laboratoristas
+        $destinatarios = [
+            'GTorres@calfrac.com',
+            'CDominguez@calfrac.com',
+            'DMancilla@calfrac.com',
+            'LVazquez@calfrac.com',
+            'ORodriguez@calfrac.com',
+            'rocio.carvajal@blistertechnologies.com',
+            'gruiz@blister.com.ar',
+            // 'lsicolo@blister.com.ar'
+        ];
+
         $data = [
             'solicitud_id' => $solicitud->id,
             'locacion_id' => $request->locacion_lodo,
@@ -803,7 +883,10 @@ class SolicitudController extends Controller
             'url' => $url
             //'empresa' => $request->empresa
         ];
-        $this->_sendEmailNewLodo($data, $correos);
+        
+        array_unshift($destinatarios, $solicitud->user->email);
+
+        $this->_sendEmailNewLodo($data, $destinatarios);
 
         # Ensayos requeridos
         if ($request->requeridos_lodo) {
@@ -851,6 +934,9 @@ class SolicitudController extends Controller
             'agente_referencia' => AgenteSosten::leftJoin('rel_agente_sosten_fractura', 'agente_sosten.id', '=', 'rel_agente_sosten_fractura.id_agente')
                 ->where('rel_agente_sosten_fractura.solicitud_id', $solicitud_id)
                 ->get(['agente_sosten.*', 'rel_agente_sosten_fractura.*']),
+            'agua_referencia' => TipoAgua::leftJoin('rel_tipo_agua', 'tipo_agua.id', '=', 'rel_tipo_agua.id_tipo')
+                ->where('rel_tipo_agua.solicitud_id', $solicitud_id)
+                ->get(['tipo_agua.*', 'rel_tipo_agua.*']),
             'solicitud' => Solicitud::find($solicitud_id),
             'solicitud_fractura' => SolicitudFractura::where('solicitud_id', $solicitud_id)->get(),
             'sistemas_fluidos' => SistemasFluidos::all(),
@@ -862,11 +948,12 @@ class SolicitudController extends Controller
             'aditivos' => Aditivo::all(),
             'users' => User::all(),
             'clientes' => Cliente::all(),
-            'yacimientos' => Yacimiento::all(),
+            'yacimientos_fractura' => YacimientosFractura::all(),
             'equipos' => Equipos::all(),
             'servicios_fractura' => ServiciosFractura::all(),
             'distrito' => Distrito::all(),
             'estados' => Estados::all(),
+            'tipo_agua' => TipoAgua::all()
             // 'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
         return view('solicitud.components.fractura.show', $data);
@@ -932,6 +1019,7 @@ class SolicitudController extends Controller
             'names_ingenieros' => User::whereIn('users.grupo_id', [3, 4])->get('users.*'),
             'aditivos' => Aditivo::all(),
             'tipo_de_colchon' => TipoDeColchon::all(),
+            'choices' => Choices::all(),
             // 'ensayos' => Ensayo::with('aditivos', 'requerimientos')->where('solicitud_id', $solicitud_id)->get()
         ];
         $generate_report_lodo = $this->_generate_report_lodo($solicitud_id);
@@ -1403,6 +1491,16 @@ class SolicitudController extends Controller
     public function _sendEmailApproved($data, $correo)
     {
         Mail::to($correo)->send(new SolicitudLechadaAprobada($data));
+
+        // Mail::send('emails.solicitud.approved', ['data' => $data], function ($message) use ($correo, $data) {
+        //     $message->to($correo)
+        //         ->subject('Laboratorio Calfrac | Solicitud de Fractura N°' . $data['solicitud_id'] . ' - Aprobada');
+        // });
+    }
+
+    public function _sendEmailApprovedLodo($data, $correo)
+    {
+        Mail::to($correo)->send(new SolicitudLodoAprobada($data));
 
         // Mail::send('emails.solicitud.approved', ['data' => $data], function ($message) use ($correo, $data) {
         //     $message->to($correo)

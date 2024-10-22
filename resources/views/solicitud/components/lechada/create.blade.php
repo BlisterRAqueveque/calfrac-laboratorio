@@ -40,6 +40,7 @@
                     <small class="text-xs text-red-600">El programa es requerido</small>
                     @enderror
                 </div>
+                
                 <div class="col-span-2 xl:col-span-1">
                     <label for="fecha_solicitud_lechada" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Fecha de
                         Solicitud</label>
@@ -620,6 +621,13 @@
         </div>
     </div>
 </form>
+<script>
+    const btnSendSolicitudLechada = document.getElementById('btnSendSolicitudLechada');
+    btnSendSolicitudLechada.addEventListener('click', e => {
+        loadingAlert('Creando solicitud, por favor espere',
+        'Se están enviando los correos desde el sistema');
+    })
+</script>
 
 <!-- Script para agregar una formulación tentativa cuando se escuche por un click -->
 {{-- <script src="{{ asset('js/Solicitud/lechada.js') }}"></script> --}}

@@ -225,7 +225,7 @@
 <!--Aca iria un script para mostrar un cartel de carga pero meh -->
 <script>
     const checkGenerateReportLodo = (solicitud_id) => {
-        console.log(solicitud_id); 
+        //console.log(solicitud_id); 
         return new Promise((resolve, reject) => {
             fetch("{{ route('check_report_lodo', '') }}" + "/" + solicitud_id, {
                     headers: {

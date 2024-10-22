@@ -145,7 +145,7 @@
         }
     };
 
-
+// Esto es para el email
     const btn_submit_report_lechada = document.querySelector('#btn_submit_report_lechada');
     if (btn_submit_report_lechada) {
         btn_submit_report_lechada.addEventListener('click', e => sendReportEmail());
