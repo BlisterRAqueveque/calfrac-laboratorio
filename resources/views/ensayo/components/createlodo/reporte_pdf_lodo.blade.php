@@ -80,6 +80,7 @@
     downloadButton.addEventListener('click', (e) => {
         if (!alreadyGeneratedPDF) {
             alreadyGeneratedPDF = true; // Evitar generación duplicada
+            loadingAlertPDF();
             switchToTabAndGeneratePDF(e);
         }
     });
@@ -98,7 +99,6 @@
             submitFunction(e);
         }, 1000); // Ajusta el tiempo según sea necesario
     };
-
 
     const submitFunction = (e) => {
         e.preventDefault();
@@ -132,12 +132,29 @@
 
                 // Envía el formulario con las imágenes en base64
                 document.getElementById('charts_pdf').submit();
+
+                // Cerrar el modal de carga
+                Swal.close(); // Usar SweetAlert para cerrar el modal
+
+                // Cambiar a la pestaña del reporte PDF
+                switchToTabReportePDF();
+
             } else {
                 console.error('No se pudo encontrar el canvas de los gráficos.');
+                Swal.close();
             }
         };
 
         generatePDF();
+    };
+
+
+    // Función para cambiar a la pestaña "tab_reporte_pdf_lodo"
+    const switchToTabReportePDF = () => {
+        const tabReporteButton = document.querySelector('a[href="#tab_reporte_pdf_lodo"]');
+        if (tabReporteButton) {
+            tabReporteButton.click(); // Hacer clic en el tab para activarlo
+        }
     };
 
     //La funcion de abajo podria reutilizarla arriba pero hay que agregar unas cositas y paja
