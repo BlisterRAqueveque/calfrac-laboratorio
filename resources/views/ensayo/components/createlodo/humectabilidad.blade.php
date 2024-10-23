@@ -56,7 +56,7 @@
     <div class="grid grid-cols-5 gap-3">
 
         <div class="col-span-5 md:col-span-1">
-            <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">¿Reporta humectabilidad?<small>(Si/No) </small><span class="text-red-500"><small>(Requerido)</small></span></label>
+            <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">¿Reporta humectabilidad? <small>(Si/No) </small><span class="text-red-500"><small>(Requerido)</small></span></label>
             {{-- <input type="text" name="check_humectabilidad" value="{{ old('check_humectabilidad') }}" class="form-control text-sm" placeholder="¿Reporta remoción estatica?"> --}}
             <select name="check_humectabilidad" id="check_humectabilidad" class="text-sm" data-silent-initial-value-set="true" multiple="false">
                 @foreach ($choices as $y)

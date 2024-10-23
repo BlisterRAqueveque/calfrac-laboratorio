@@ -257,7 +257,7 @@ class SolicitudController extends Controller
             $correos[] = $solicitud_fractura->user_laboratorio->email;
         if ($solicitud_fractura->user_reconocimiento)
             $correos[] = $solicitud_fractura->user_reconocimiento->email;
-        //Podria hardcodear mi email aca para probar?
+        // Podria hardcodear mi email aca para probar?
         */
         $correos[] = "rocio.carvajal@blistertechnologies.com";
         $correos[] = "orodriguez@calfrac.com";

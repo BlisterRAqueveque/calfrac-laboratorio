@@ -246,8 +246,8 @@
             <div class="grid grid-cols-5 gap-3">
 
                 <div class="col-span-5 md:col-span-1">
-                    <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Remoción
-                        Estatica <small>(Si/No) </small><span
+                    <label for="" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">¿Reporta Remoción
+                        Estatica? <small>(Si/No) </small><span
                             class="text-red-500"><small>(Requerido)</small></span></label>
                     {{-- <input type="text" name="remocion_estatica" value="{{ old('remocion_estatica') }}" class="form-control text-sm" placeholder="¿Reporta remoción estatica?"> --}}
                     <select name="remocion_estatica" id="remocion_estatica" class="text-sm"

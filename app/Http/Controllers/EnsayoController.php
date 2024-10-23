@@ -636,12 +636,32 @@ public function store_aditivos_lodo(Request $request)
 
     public function store_reologia_lodo(Request $request) {
 
+        $request->validate([
+            'tipo_lodo' => 'required',
+            'densidad' => 'required',
+            'cia_lodo' => 'required',
+            'seg_10' => 'required',
+            'min_10' => 'required',
+            'min_30' => 'required',
+            'temp_bhct' => 'required',
+            'temp_600_rpm_c' => 'required',
+            'temp_300_rpm_c' => 'required',
+            'temp_200_rpm_c' => 'required',
+            'temp_100_rpm_c' => 'required',
+            'temp_60_rpm_c' => 'required',
+            'temp_30_rpm_c' => 'required',
+            'temp_6_rpm_c' => 'required',
+            'temp_3_rpm_c' => 'required',
+            'temp_vp' => 'required',
+            'temp_yp' => 'required',
+        ]);
+
         $caracterizacion_lodo = RelCaracterizacionLodo::create([
             'tipo_lodo' => $request->tipo_lodo,
-            'base' => $request->base,
+            //'base' => $request->base,
             'densidad' => $request->densidad,
             'cia_lodo' => $request->cia_lodo,
-            'tiempo' => $request->tiempo,
+            //'tiempo' => $request->tiempo,
             'seg_10' => $request->seg_10,
             'min_10' => $request->min_10,
             'min_30' => $request->min_30,
@@ -1032,7 +1052,7 @@ public function store_aditivos_lodo(Request $request)
     
     public function store_humectabilidad (Request $request) {
         $request->validate([
-            'check_humectabilidad' => 'required|string',
+            'check_humectabilidad' => 'required',
             // Otras validaciones pueden ser opcionales si son no requeridas
         ]);
 

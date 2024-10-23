@@ -576,6 +576,59 @@
     if (btn_submit_reologia_lodo) {
         btn_submit_reologia_lodo.addEventListener('click', e => {
             e.preventDefault();
+
+        const tipolodo = document.querySelector('input[name="tipo_lodo"]').value;
+        const densidad = document.querySelector('input[name="densidad"]').value;
+        const cialodo = document.querySelector('input[name="mud_company"]').value;
+        const seg10 = document.querySelector('input[name="seg_10"]').value;
+        const min10 = document.querySelector('input[name="min_10"]').value;
+        const min30 = document.querySelector('input[name="min_30"]').value;
+
+        // Verificar si alguno de los campos de tiempo está vacío
+        if ( !tipolodo || !densidad || !cialodo || !seg10 || !min10 || !min30) {
+            errorAlert("Error", "Los campos Caracterizacion del Lodo son requeridos.").then(() => {
+                // Puedes enfocar el primer campo vacío si lo deseas
+                if (!tipolodo) document.querySelector('input[name="tipo_lodo"]').focus();
+                else if (!densidad) document.querySelector('input[name="densidad"]').focus();
+                else if (!cialodo) document.querySelector('input[name="cia_lodo"]').focus();
+                else if (!seg10) document.querySelector('input[name="seg_10"]').focus();
+                else if (!min10) document.querySelector('input[name="min_10"]').focus();
+                else if (!min30) document.querySelector('input[name="min_30"]').focus();
+            });
+            return; // Detener la ejecución si hay un error
+        }
+
+        const tempbhct = document.querySelector('input[name="temp_bhct"]').value;
+        const temp_600_rpm_c = document.querySelector('input[name="temp_600_rpm_c"]').value;
+        const temp_300_rpm_c = document.querySelector('input[name="temp_300_rpm_c"]').value;
+        const temp_200_rpm_c = document.querySelector('input[name="temp_200_rpm_c"]').value;
+        const temp_100_rpm_c = document.querySelector('input[name="temp_100_rpm_c"]').value;
+        const temp_60_rpm_c = document.querySelector('input[name="temp_60_rpm_c"]').value;
+        const temp_30_rpm_c = document.querySelector('input[name="temp_30_rpm_c"]').value;
+        const temp_6_rpm_c = document.querySelector('input[name="temp_6_rpm_c"]').value;
+        const temp_3_rpm_c = document.querySelector('input[name="temp_3_rpm_c"]').value;
+        const temp_vp = document.querySelector('input[name="temp_vp"]').value;
+        const temp_yp = document.querySelector('input[name="temp_yp"]').value;
+
+        // Verificar si alguno de los campos de tiempo está vacío
+        if ( !tempbhct || !temp_600_rpm_c || !temp_300_rpm_c || !temp_200_rpm_c || !temp_100_rpm_c || !temp_100_rpm_c || !temp_60_rpm_c || !temp_30_rpm_c || !temp_6_rpm_c || !temp_3_rpm_c || !temp_vp || !temp_yp) {
+            errorAlert("Error", "Los campos Caracterizacion del Lodo son requeridos.").then(() => {
+                // Puedes enfocar el primer campo vacío si lo deseas
+                if (!tempbhct) document.querySelector('input[name="temp_bhct"]').focus();
+                else if (!temp_600_rpm_c) document.querySelector('input[name="temp_600_rpm_c"]').focus();
+                else if (!temp_300_rpm_c) document.querySelector('input[name="temp_300_rpm_c"]').focus();
+                else if (!temp_200_rpm_c) document.querySelector('input[name="temp_200_rpm_c"]').focus();
+                else if (!temp_100_rpm_c) document.querySelector('input[name="temp_100_rpm_c"]').focus();
+                else if (!temp_60_rpm_c) document.querySelector('input[name="temp_60_rpm_c"]').focus();
+                else if (!temp_30_rpm_c) document.querySelector('input[name="temp_30_rpm_c"]').focus();
+                else if (!temp_6_rpm_c) document.querySelector('input[name="temp_6_rpm_c"]').focus();
+                else if (!temp_3_rpm_c) document.querySelector('input[name="temp_3_rpm_c"]').focus();
+                else if (!temp_vp) document.querySelector('input[name="temp_vp"]').focus();
+                else if (!temp_yp) document.querySelector('input[name="temp_yp"]').focus();
+            });
+            return; // Detener la ejecución si hay un error
+        }
+
             let form = new FormData(document.getElementById('form_reologia_lodo'))
 
             confirmAlert().then((confirmed) => {
