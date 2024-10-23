@@ -3,7 +3,7 @@
     "file": "assets/axios-88827dbe.js"
   },
   "resources/css/app.css": {
-    "file": "assets/app-de632874.css",
+    "file": "assets/app-6d786fe7.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
@@ -13,7 +13,7 @@
     "src": "resources/css/bootstrap.min.css"
   },
   "resources/css/sb-admin-2.css": {
-    "file": "assets/sb-admin-2-3b914005.css",
+    "file": "assets/sb-admin-2-00d8731f.css",
     "isEntry": true,
     "src": "resources/css/sb-admin-2.css"
   },
@@ -30,7 +30,7 @@
     "css": [
       "assets/app-c2e83fd7.css"
     ],
-    "file": "assets/app-c6794daa.js",
+    "file": "assets/app-69e2ff75.js",
     "imports": [
       "_axios-88827dbe.js"
     ],
@@ -38,7 +38,7 @@
     "src": "resources/js/app.js"
   },
   "resources/js/bootstrap.bundle.min.js": {
-    "file": "assets/bootstrap.bundle.min-68f2658f.js",
+    "file": "assets/bootstrap.bundle.min-d6bd0ca2.js",
     "isEntry": true,
     "src": "resources/js/bootstrap.bundle.min.js"
   },
@@ -49,5 +49,10 @@
     ],
     "isEntry": true,
     "src": "resources/js/bootstrap.js"
+  },
+  "resources/js/componentAditivosLodo.js": {
+    "file": "assets/componentAditivosLodo-a8af0464.js",
+    "isEntry": true,
+    "src": "resources/js/componentAditivosLodo.js"
   }
 }

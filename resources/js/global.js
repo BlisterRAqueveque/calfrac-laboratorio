@@ -1,10 +1,9 @@
 // resources/js/global.js
-import * as echarts from 'echarts';
-import domtoimage from 'dom-to-image-more';
-import html2canvas from 'html2canvas';
 import ApexCharts from 'apexcharts';
 import Chart from 'chart.js/auto';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import * as echarts from 'echarts';
+import html2canvas from 'html2canvas';
 
 
 window.echarts = echarts;

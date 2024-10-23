@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -342,8 +342,8 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
     </nav>
 
 
-    <script src="{{ asset('js/redom.min.js') }}"></script>
-    <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
+    <!-- <script src="{{ asset('js/redom.min.js') }}"></script>
+    <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script> -->
     <script>
         const {
             el,
@@ -370,7 +370,7 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
 </html>
 @vite('resources/js/bootstrap.bundle.min.js')
 
-<script src="{{ asset('js/alerts.js') }}"></script>
+<!-- <script src="{{ asset('js/alerts.js') }}"></script> -->
 
 <script>
     const btn_menu = document.getElementById('btn_menu');

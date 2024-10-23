@@ -321,7 +321,7 @@
 
 {{-- Subir gráfico adjunto UCA --}}
 
-<script src="{{ asset('js/upload_one_img.js') }}"></script>
+{{-- <script src="{{ asset('js/upload_one_img.js') }}"></script> --}}
 <script>
     // Modal open img UCA
     let myModalUca = document.querySelector('#myModalUca');

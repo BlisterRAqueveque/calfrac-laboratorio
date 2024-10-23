@@ -161,13 +161,13 @@
     </div>
 </div>
 {{-- JavaScript dinamico para el reload de las tablas de Reologias de Lodo --}}
-<script src="{{ asset('js/ensayo/createlodo/componentAditivosLodo.js') }}"></script>
+{{-- <script src="{{ asset('js/ensayo/createlodo/componentAditivosLodo.js') }}"></script>
 <script src="{{ asset('js/ensayo/createlodo/componentReologiasLodo.js') }}"></script>
 <script src="{{ asset('js/ensayo/createlodo/componentCompatibilidadLodo.js') }}"></script>
 <script src="{{ asset('js/ensayo/createlodo/componentMecanicaLodo.js') }}"></script>
 <script src="{{ asset('js/ensayo/createlodo/componentEstaticaLodo.js') }}"></script>
 <script src="{{ asset('js/ensayo/createlodo/componentShowAditivosLodo.js') }}"></script>
-<script src="{{ asset('js/ensayo/createlodo/componentHumectabilidad.js') }}"></script>
+<script src="{{ asset('js/ensayo/createlodo/componentHumectabilidad.js') }}"></script> --}}
 
 
   

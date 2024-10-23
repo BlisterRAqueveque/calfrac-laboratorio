@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {{-- <html id="html" lang="en" class="loading"> --}}
-    <html lang="en">
+    <html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -361,8 +361,8 @@
     </nav>
 
 
-    <script src="{{ asset('js/redom.min.js') }}"></script>
-    <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
+    {{-- <script src="{{ asset('js/redom.min.js') }}"></script>
+    <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script> --}}
     <script>
         const {
             el,
@@ -391,8 +391,8 @@
 @vite('resources/js/app.js')
 @vite('resources/js/bootstrap.bundle.min.js')
 {{-- <script src="{{ asset('js/darkmode.js') }}"></script> --}}
-<script src="{{ asset('js/alerts.js') }}"></script>
-<script src="{{ asset('js/helpers.js') }}"></script>
+{{-- <script src="{{ asset('js/alerts.js') }}"></script>
+<script src="{{ asset('js/helpers.js') }}"></script> --}}
 
 <script>
     const btn_menu = document.getElementById('btn_menu');

@@ -374,7 +374,7 @@
 
 @endif
 </div>
-<script src="{{ asset('js/upload_one_img.js') }}"></script>
+{{-- <script src="{{ asset('js/upload_one_img.js') }}"></script> --}}
 <script>
     const baseUrl = "{{ asset('uploads/ensayos/') }}";
 </script>
