@@ -63,8 +63,12 @@
                 <option value="{{ $y->id }}" {{ old('check_humectabilidad') == $y->id ? 'selected' : '' }}>{{ $y->choices }}</option>
                 @endforeach
             </select>
+            <div class="hide-container" id="error-text-h">
+                <div>
+                    <p class="text-red-500 font-normal">Debe completar este campo</p>
+                </div>
+            </div>
         </div>
-        <br>
     </div>
     <br>
     <h5>HUMECTABILIDAD:</h5>
@@ -111,6 +115,31 @@
     if (btn_submit_humectabilidad_lodo) {
         btn_submit_humectabilidad_lodo.addEventListener('click', e => {
             e.preventDefault();
+
+            // Obtener el valor de check_humectabilidad
+            const checkHumectabilidad = document.getElementById('check_humectabilidad').value;
+
+            // Verificar si el campo check_humectabilidad está vacío
+            if (!checkHumectabilidad) {
+                errorAlert().then(() => {
+                    // Opcional: puedes enfocar el campo si quieres
+
+                    const el = document.getElementById('check_humectabilidad');
+                    const error_text = document.getElementById('error-text-h')
+                    error_text.classList.add('show-container')
+                    //el.focus()
+                    el.classList.add('error-message')
+                    el.addEventListener('change', () => {
+                        if (el.value) {
+                            el.classList.remove('error-message')
+                            error_text.classList.remove('show-container')
+                        }
+                    })
+                });
+                return; // Detener la ejecución si hay un error
+            }
+
+
             let form = new FormData(document.getElementById('form_humectabilidad'))
 
             confirmAlert().then((confirmed) => {

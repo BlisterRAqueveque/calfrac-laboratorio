@@ -428,7 +428,7 @@
 
         // Verificar si alguno de los campos de tiempo está vacío
         if (!tiempo1 || !tiempo2 || !tiempo3 || !tiempo4 || !tiempo5) {
-            errorAlert("Error", "Todos los campos de tiempo son requeridos.").then(() => {
+            errorAlert("Error", "Los campos de tiempo de contacto son requeridos.").then(() => {
                 // Puedes enfocar el primer campo vacío si lo deseas
                 if (!tiempo1) document.querySelector('input[name="tiempo_1"]').focus();
                 else if (!tiempo2) document.querySelector('input[name="tiempo_2"]').focus();

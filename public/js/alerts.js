@@ -85,7 +85,7 @@ function loadingAlertPDF(title = 'Se está generando el PDF, por favor espere', 
 }
 function errorAlert(
   title = "Error",
-  text = "Complete los campos requeridos",
+  text = "Campo requerido",
   cancelBtn = 0
 ) {
   return new Promise((resolve) => {

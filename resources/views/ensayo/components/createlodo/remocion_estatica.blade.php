@@ -260,7 +260,7 @@
                     </select>
                     <div class="hide-container" id="error-text">
                         <div>
-                            <p class="text-red-500 font-bolf">Debe completar este campo</p>
+                            <p class="text-red-500 font-normal">Debe completar este campo</p>
                         </div>
                     </div>
                 </div>
@@ -481,7 +481,7 @@
                     const el = document.getElementById('remocion_estatica');
                     const error_text = document.getElementById('error-text')
                     error_text.classList.add('show-container')
-                    el.focus()
+                    //el.focus()
                     el.classList.add('error-message')
                     el.addEventListener('change', () => {
                         if (el.value) {
