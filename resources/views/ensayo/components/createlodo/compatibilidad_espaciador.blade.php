@@ -1043,6 +1043,55 @@
     if (btn_submit_compatibilidad_lodo) {
         btn_submit_compatibilidad_lodo.addEventListener('click', e => {
             e.preventDefault();
+
+                    // Función para obtener los valores de los campos
+        const getFieldValues = (fieldNames) => {
+            return fieldNames.map(name => ({
+                name,
+                value: document.querySelector(`input[name="${name}"]`).value,
+            }));
+        };
+
+        // Función para verificar si hay campos vacíos
+        const checkEmptyFields = (fields) => {
+            for (const field of fields) {
+                if (!field.value) {
+                    return field.name;
+                }
+            }
+            return null;
+        };
+
+        // Definir los campos requeridos
+        const requiredFields = [
+            'vp_1', 'vp_2', 'vp_3', 'vp_4', 'vp_5',
+            'yp_1', 'yp_2', 'yp_3', 'yp_4', 'yp_5',
+            'gel_seg_1', 'gel_seg_2', 'gel_seg_3', 'gel_seg_4', 'gel_seg_5',
+            'gel_min_1', 'gel_min_2', 'gel_min_3', 'gel_min_4', 'gel_min_5',
+            'temp_600_rpm', 'temp_300_rpm', 'temp_200_rpm', 'temp_100_rpm',
+            'temp_60_rpm', 'temp_30_rpm', 'temp_6_rpm', 'temp_3_rpm',
+            'temp_600_rpm_2', 'temp_300_rpm_2', 'temp_200_rpm_2', 'temp_100_rpm_2',
+            'temp_60_rpm_2', 'temp_30_rpm_2', 'temp_6_rpm_2', 'temp_3_rpm_2',
+            'temp_600_rpm_3', 'temp_300_rpm_3', 'temp_200_rpm_3', 'temp_100_rpm_3',
+            'temp_60_rpm_3', 'temp_30_rpm_3', 'temp_6_rpm_3', 'temp_3_rpm_3',
+            'temp_600_rpm_4', 'temp_300_rpm_4', 'temp_200_rpm_4', 'temp_100_rpm_4',
+            'temp_60_rpm_4', 'temp_30_rpm_4', 'temp_6_rpm_4', 'temp_3_rpm_4',
+            'temp_600_rpm_5', 'temp_300_rpm_5', 'temp_200_rpm_5', 'temp_100_rpm_5',
+            'temp_60_rpm_5', 'temp_30_rpm_5', 'temp_6_rpm_5', 'temp_3_rpm_5',
+        ];
+
+        // Obtener los valores de los campos requeridos
+        const fieldValues = getFieldValues(requiredFields);
+
+        // Verificar si hay campos vacíos
+        const emptyField = checkEmptyFields(fieldValues);
+        if (emptyField) {
+            errorAlert("Error", "Todos los campos son requeridos.").then(() => {
+                document.querySelector(`input[name="${emptyField}"]`).focus();
+            });
+            return; // Detener la ejecución si hay un error
+        }
+            
             let form = new FormData(document.getElementById('form_compatibilidad_lodo'))
 
             confirmAlert().then((confirmed) => {

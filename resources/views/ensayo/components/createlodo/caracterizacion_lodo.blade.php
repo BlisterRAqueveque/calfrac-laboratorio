@@ -577,58 +577,69 @@
         btn_submit_reologia_lodo.addEventListener('click', e => {
             e.preventDefault();
 
-        const tipolodo = document.querySelector('input[name="tipo_lodo"]').value;
-        const densidad = document.querySelector('input[name="densidad"]').value;
-        const cialodo = document.querySelector('input[name="mud_company"]').value;
-        const seg10 = document.querySelector('input[name="seg_10"]').value;
-        const min10 = document.querySelector('input[name="min_10"]').value;
-        const min30 = document.querySelector('input[name="min_30"]').value;
+        // Función para obtener los valores de los campos
+        const getFieldValues = (fieldNames) => {
+            return fieldNames.map(name => ({
+                name,
+                value: document.querySelector(`input[name="${name}"]`).value,
+            }));
+        };
 
-        // Verificar si alguno de los campos de tiempo está vacío
-        if ( !tipolodo || !densidad || !cialodo || !seg10 || !min10 || !min30) {
+        // Función para verificar si hay campos vacíos
+        const checkEmptyFields = (fields) => {
+            for (const field of fields) {
+                if (!field.value) {
+                    return field.name;
+                }
+            }
+            return null;
+        };
+
+        // Definir los campos requeridos
+        const requiredFields1 = [
+            'tipo_lodo',
+            'densidad',
+            'mud_company',
+            'seg_10',
+            'min_10',
+            'min_30',
+        ];
+
+        const requiredFields2 = [
+            'temp_bhct',
+            'temp_600_rpm_c',
+            'temp_300_rpm_c',
+            'temp_200_rpm_c',
+            'temp_100_rpm_c',
+            'temp_60_rpm_c',
+            'temp_30_rpm_c',
+            'temp_6_rpm_c',
+            'temp_3_rpm_c',
+            'temp_vp',
+            'temp_yp',
+        ];
+
+        // Obtener los valores de los campos requeridos
+        const fieldValues1 = getFieldValues(requiredFields1);
+        const fieldValues2 = getFieldValues(requiredFields2);
+
+        // Verificar si hay campos vacíos en el primer conjunto
+        const emptyField1 = checkEmptyFields(fieldValues1);
+        if (emptyField1) {
             errorAlert("Error", "Los campos Caracterizacion del Lodo son requeridos.").then(() => {
-                // Puedes enfocar el primer campo vacío si lo deseas
-                if (!tipolodo) document.querySelector('input[name="tipo_lodo"]').focus();
-                else if (!densidad) document.querySelector('input[name="densidad"]').focus();
-                else if (!cialodo) document.querySelector('input[name="cia_lodo"]').focus();
-                else if (!seg10) document.querySelector('input[name="seg_10"]').focus();
-                else if (!min10) document.querySelector('input[name="min_10"]').focus();
-                else if (!min30) document.querySelector('input[name="min_30"]').focus();
+                document.querySelector(`input[name="${emptyField1}"]`).focus();
             });
             return; // Detener la ejecución si hay un error
         }
 
-        const tempbhct = document.querySelector('input[name="temp_bhct"]').value;
-        const temp_600_rpm_c = document.querySelector('input[name="temp_600_rpm_c"]').value;
-        const temp_300_rpm_c = document.querySelector('input[name="temp_300_rpm_c"]').value;
-        const temp_200_rpm_c = document.querySelector('input[name="temp_200_rpm_c"]').value;
-        const temp_100_rpm_c = document.querySelector('input[name="temp_100_rpm_c"]').value;
-        const temp_60_rpm_c = document.querySelector('input[name="temp_60_rpm_c"]').value;
-        const temp_30_rpm_c = document.querySelector('input[name="temp_30_rpm_c"]').value;
-        const temp_6_rpm_c = document.querySelector('input[name="temp_6_rpm_c"]').value;
-        const temp_3_rpm_c = document.querySelector('input[name="temp_3_rpm_c"]').value;
-        const temp_vp = document.querySelector('input[name="temp_vp"]').value;
-        const temp_yp = document.querySelector('input[name="temp_yp"]').value;
-
-        // Verificar si alguno de los campos de tiempo está vacío
-        if ( !tempbhct || !temp_600_rpm_c || !temp_300_rpm_c || !temp_200_rpm_c || !temp_100_rpm_c || !temp_100_rpm_c || !temp_60_rpm_c || !temp_30_rpm_c || !temp_6_rpm_c || !temp_3_rpm_c || !temp_vp || !temp_yp) {
+        // Verificar si hay campos vacíos en el segundo conjunto
+        const emptyField2 = checkEmptyFields(fieldValues2);
+        if (emptyField2) {
             errorAlert("Error", "Los campos Caracterizacion del Lodo son requeridos.").then(() => {
-                // Puedes enfocar el primer campo vacío si lo deseas
-                if (!tempbhct) document.querySelector('input[name="temp_bhct"]').focus();
-                else if (!temp_600_rpm_c) document.querySelector('input[name="temp_600_rpm_c"]').focus();
-                else if (!temp_300_rpm_c) document.querySelector('input[name="temp_300_rpm_c"]').focus();
-                else if (!temp_200_rpm_c) document.querySelector('input[name="temp_200_rpm_c"]').focus();
-                else if (!temp_100_rpm_c) document.querySelector('input[name="temp_100_rpm_c"]').focus();
-                else if (!temp_60_rpm_c) document.querySelector('input[name="temp_60_rpm_c"]').focus();
-                else if (!temp_30_rpm_c) document.querySelector('input[name="temp_30_rpm_c"]').focus();
-                else if (!temp_6_rpm_c) document.querySelector('input[name="temp_6_rpm_c"]').focus();
-                else if (!temp_3_rpm_c) document.querySelector('input[name="temp_3_rpm_c"]').focus();
-                else if (!temp_vp) document.querySelector('input[name="temp_vp"]').focus();
-                else if (!temp_yp) document.querySelector('input[name="temp_yp"]').focus();
+                document.querySelector(`input[name="${emptyField2}"]`).focus();
             });
             return; // Detener la ejecución si hay un error
         }
-
             let form = new FormData(document.getElementById('form_reologia_lodo'))
 
             confirmAlert().then((confirmed) => {
