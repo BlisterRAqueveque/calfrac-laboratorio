@@ -1044,7 +1044,7 @@
         btn_submit_compatibilidad_lodo.addEventListener('click', e => {
             e.preventDefault();
 
-                    // Función para obtener los valores de los campos
+        // Función para obtener los valores de los campos
         const getFieldValues = (fieldNames) => {
             return fieldNames.map(name => ({
                 name,

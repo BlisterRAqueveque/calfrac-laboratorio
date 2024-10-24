@@ -194,9 +194,8 @@ class EnsayoController extends Controller
      */
     public function store_reologia(Request $request)
     {
-            // Validar los campos obligatorios
+        // Validar los campos obligatorios
         $request->validate([
-            //'tem_ambiente_rpm' => 'required',
             'tem_ambiente_300' => 'required',
             'tem_ambiente_200' => 'required',
             'tem_ambiente_100' => 'required',
@@ -204,7 +203,6 @@ class EnsayoController extends Controller
             'tem_ambiente_30' => 'required',
             'tem_ambiente_6' => 'required',
             'tem_ambiente_3' => 'required',
-            //'tem_ensayo_rpm' => 'required',
             'tem_ensayo_300' => 'required',
             'tem_ensayo_200' => 'required',
             'tem_ensayo_100' => 'required',
@@ -212,15 +210,26 @@ class EnsayoController extends Controller
             'tem_ensayo_30' => 'required',
             'tem_ensayo_6' => 'required',
             'tem_ensayo_3' => 'required',
-            //'temp_ambiente' => 'required',
-            //'temp_ensayo' => 'required',
-            //'temp_ambiente_punto_cedencia' => 'required',
-            //'temp_ensayo_punto_cedencia' => 'required',
+            'tem_ambiente_300_up' => 'required',
+            'tem_ambiente_200_up' => 'required',
+            'tem_ambiente_100_up' => 'required',
+            'tem_ambiente_60_up' => 'required',
+            'tem_ambiente_30_up' => 'required',
+            'tem_ambiente_6_up' => 'required',
+            'tem_ambiente_3_up' => 'required',
+            'tem_ensayo_300_up' => 'required',
+            'tem_ensayo_200_up' => 'required',
+            'tem_ensayo_100_up' => 'required',
+            'tem_ensayo_60_up' => 'required',
+            'tem_ensayo_30_up' => 'required',
+            'tem_ensayo_6_up' => 'required',
+            'tem_ensayo_3_up' => 'required',
             'temp_ambiente_gel_10_seg' => 'required',
             'temp_ensayo_gel_10_seg' => 'required',
             'temp_ambiente_gel_10_min' => 'required',
             'temp_ensayo_gel_10_min' => 'required',
         ]);
+
 
         $reologia = RelReologiaSolicitudEnsayo::create([
             //'tem_ambiente_rpm' => $request->tem_ambiente_rpm,

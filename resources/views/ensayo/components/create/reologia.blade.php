@@ -999,6 +999,73 @@ fetch(`/getReologiasTemp/<?= $s_l[0]->id ?>`)
     if (btn_submit_reologia) {
         btn_submit_reologia.addEventListener('click', e => {
             e.preventDefault();
+
+                    // Función para obtener los valores de los campos
+        const getFieldValues = (fieldNames) => {
+            return fieldNames.map(name => ({
+                name,
+                value: document.querySelector(`input[name="${name}"]`).value,
+            }));
+        };
+
+        // Función para verificar si hay campos vacíos
+        const checkEmptyFields = (fields) => {
+            for (const field of fields) {
+                if (!field.value) {
+                    return field.name;
+                }
+            }
+            return null;
+        };
+
+        // Definir los campos requeridos
+        const requiredFields = [
+            'tem_ambiente_300', 
+            'tem_ambiente_200',
+            'tem_ambiente_100', 
+            'tem_ambiente_60', 
+            'tem_ambiente_30', 
+            'tem_ambiente_6', 
+            'tem_ambiente_3', 
+            'tem_ensayo_300', 
+            'tem_ensayo_200', 
+            'tem_ensayo_100', 
+            'tem_ensayo_60', 
+            'tem_ensayo_30', 
+            'tem_ensayo_6', 
+            'tem_ensayo_3', 
+            'tem_ambiente_300_up', 
+            'tem_ambiente_200_up', 
+            'tem_ambiente_100_up', 
+            'tem_ambiente_60_up', 
+            'tem_ambiente_30_up', 
+            'tem_ambiente_6_up', 
+            'tem_ambiente_3_up', 
+            'tem_ensayo_300_up', 
+            'tem_ensayo_200_up', 
+            'tem_ensayo_100_up', 
+            'tem_ensayo_60_up', 
+            'tem_ensayo_30_up', 
+            'tem_ensayo_6_up', 
+            'tem_ensayo_3_up', 
+            'temp_ambiente_gel_10_seg', 
+            'temp_ensayo_gel_10_seg', 
+            'temp_ambiente_gel_10_min', 
+            'temp_ensayo_gel_10_min', 
+        ];
+
+        // Obtener los valores de los campos requeridos
+        const fieldValues = getFieldValues(requiredFields);
+
+        // Verificar si hay campos vacíos
+        const emptyField = checkEmptyFields(fieldValues);
+        if (emptyField) {
+            errorAlert("Error", "Todos los campos son requeridos.").then(() => {
+                document.querySelector(`input[name="${emptyField}"]`);
+            });
+            return; // Detener la ejecución si hay un error
+        }
+
             let form = new FormData(document.getElementById('form_reologia'))
 
             confirmAlert().then((confirmed) => {
