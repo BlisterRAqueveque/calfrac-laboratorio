@@ -76,6 +76,43 @@
     if (btn_submit_filtrado) {
         btn_submit_filtrado.addEventListener('click', e => {
             e.preventDefault();
+
+            const getFieldValues = (fieldNames) => {
+                return fieldNames.map(name => ({
+                    name,
+                    value: document.querySelector(`input[name="${name}"]`).value,
+                }));
+            };
+
+            // Función para verificar si hay campos vacíos
+            const checkEmptyFields = (fields) => {
+                for (const field of fields) {
+                    if (!field.value) {
+                        return field.name;
+                    }
+                }
+                return null;
+            };
+
+            // Definir los campos requeridos
+            const requiredFields = [
+                'perdida_temperatura',
+                'perdida_fluido_acumulado',
+                'perdida_filtrado_api',
+            ];
+
+            // Obtener los valores de los campos requeridos
+            const fieldValues = getFieldValues(requiredFields);
+
+            // Verificar si hay campos vacíos
+            const emptyField = checkEmptyFields(fieldValues);
+            if (emptyField) {
+                errorAlert("Error", "Todos los campos son requeridos.").then(() => {
+                    document.querySelector(`input[name="${emptyField}"]`);
+                });
+                return; // Detener la ejecución si hay un error
+            }
+        
             let form = new FormData(document.getElementById('form_filtrado'))
 
             confirmAlert().then((confirmed) => {

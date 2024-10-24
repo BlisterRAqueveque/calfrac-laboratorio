@@ -627,7 +627,7 @@
         const emptyField1 = checkEmptyFields(fieldValues1);
         if (emptyField1) {
             errorAlert("Error", "Todo los campos son requeridos.").then(() => {
-                document.querySelector(`input[name="${emptyField1}"]`).focus();
+                document.querySelector(`input[name="${emptyField1}"]`);
             });
             return; // Detener la ejecución si hay un error
         }
@@ -636,7 +636,7 @@
         const emptyField2 = checkEmptyFields(fieldValues2);
         if (emptyField2) {
             errorAlert("Error", "Los campos Caracterizacion del Lodo son requeridos.").then(() => {
-                document.querySelector(`input[name="${emptyField2}"]`).focus();
+                document.querySelector(`input[name="${emptyField2}"]`);
             });
             return; // Detener la ejecución si hay un error
         }

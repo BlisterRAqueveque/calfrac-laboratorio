@@ -230,9 +230,7 @@ class EnsayoController extends Controller
             'temp_ensayo_gel_10_min' => 'required',
         ]);
 
-
         $reologia = RelReologiaSolicitudEnsayo::create([
-            //'tem_ambiente_rpm' => $request->tem_ambiente_rpm,
             'tem_ambiente_300' => $request->tem_ambiente_300,
             'tem_ambiente_200' => $request->tem_ambiente_200,
             'tem_ambiente_100' => $request->tem_ambiente_100,
@@ -240,7 +238,6 @@ class EnsayoController extends Controller
             'tem_ambiente_30' => $request->tem_ambiente_30,
             'tem_ambiente_6' => $request->tem_ambiente_6,
             'tem_ambiente_3' => $request->tem_ambiente_3,
-            //'tem_ensayo_rpm' => $request->tem_ensayo_rpm,
             'tem_ensayo_300' => $request->tem_ensayo_300,
             'tem_ensayo_200' => $request->tem_ensayo_200,
             'tem_ensayo_100' => $request->tem_ensayo_100,
@@ -248,15 +245,10 @@ class EnsayoController extends Controller
             'tem_ensayo_30' => $request->tem_ensayo_30,
             'tem_ensayo_6' => $request->tem_ensayo_6,
             'tem_ensayo_3' => $request->tem_ensayo_3,
-            //'temp_ambiente' => $request->temp_ambiente,
-            //'temp_ensayo' => $request->temp_ensayo,
-            //'temp_ambiente_punto_cedencia' => $request->temp_ambiente_punto_cedencia,
-            //'temp_ensayo_punto_cedencia' => $request->temp_ensayo_punto_cedencia,
             'temp_ambiente_gel_10_seg' => $request->temp_ambiente_gel_10_seg,
             'temp_ensayo_gel_10_seg' => $request->temp_ensayo_gel_10_seg,
             'temp_ambiente_gel_10_min' => $request->temp_ambiente_gel_10_min,
             'temp_ensayo_gel_10_min' => $request->temp_ensayo_gel_10_min,
-            //'tem_ambiente_rpm_up' => $request->tem_ambiente_rpm_up,
             'tem_ambiente_300_up' => $request->tem_ambiente_300_up,
             'tem_ambiente_200_up' => $request->tem_ambiente_200_up,
             'tem_ambiente_100_up' => $request->tem_ambiente_100_up,
@@ -264,7 +256,6 @@ class EnsayoController extends Controller
             'tem_ambiente_30_up' => $request->tem_ambiente_30_up,
             'tem_ambiente_6_up' => $request->tem_ambiente_6_up,
             'tem_ambiente_3_up' => $request->tem_ambiente_3_up,
-            //'tem_ensayo_rpm_up' => $request->tem_ensayo_rpm_up,
             'tem_ensayo_300_up' => $request->tem_ensayo_300_up,
             'tem_ensayo_200_up' => $request->tem_ensayo_200_up,
             'tem_ensayo_100_up' => $request->tem_ensayo_100_up,
@@ -272,22 +263,6 @@ class EnsayoController extends Controller
             'tem_ensayo_30_up' => $request->tem_ensayo_30_up,
             'tem_ensayo_6_up' => $request->tem_ensayo_6_up,
             'tem_ensayo_3_up' => $request->tem_ensayo_3_up,
-            // 'tem_ambiente_rpm_down' => $request->tem_ambiente_rpm_down,
-            // 'tem_ambiente_300_down' => $request->tem_ambiente_300_down,
-            // 'tem_ambiente_200_down' => $request->tem_ambiente_200_down,
-            // 'tem_ambiente_100_down' => $request->tem_ambiente_100_down,
-            // 'tem_ambiente_60_down' => $request->tem_ambiente_60_down,
-            // 'tem_ambiente_30_down' => $request->tem_ambiente_30_down,
-            // 'tem_ambiente_6_down' => $request->tem_ambiente_6_down,
-            // 'tem_ambiente_3_down' => $request->tem_ambiente_3_down,
-            // 'tem_ensayo_rpm_down' => $request->tem_ensayo_rpm_down,
-            // 'tem_ensayo_300_down' => $request->tem_ensayo_300_down,
-            // 'tem_ensayo_200_down' => $request->tem_ensayo_200_down,
-            // 'tem_ensayo_100_down' => $request->tem_ensayo_100_down,
-            // 'tem_ensayo_60_down' => $request->tem_ensayo_60_down,
-            // 'tem_ensayo_30_down' => $request->tem_ensayo_30_down,
-            // 'tem_ensayo_6_down' => $request->tem_ensayo_6_down,
-            // 'tem_ensayo_3_down' => $request->tem_ensayo_3_down,
             'solicitud_lechada_id' => $request->solicitud_lechada_id,
             'usuario_carga' => auth()->user()->id,
         ]);
@@ -376,6 +351,12 @@ class EnsayoController extends Controller
      */
     public function store_perdida(Request $request)
     {
+        $request->validate([
+            'temperatura' => 'required',
+            'fluido_acumulado' => 'required',
+            'filtrado_api' => 'required',
+        ]);
+
         $perdida_filtrado = RelPerdidaSolicitudEnsayo::create([
             'temperatura' => $request->perdida_temperatura,
             'fluido_acumulado' => $request->perdida_fluido_acumulado,
@@ -393,6 +374,18 @@ class EnsayoController extends Controller
      */
     public function store_bombeabilidad(Request $request)
     {
+        $request->validate([
+            'bombeabilidad_consistometro' => 'required',
+            'bombeabilidad_acondicionamiento' => 'required',
+            'bombeabilidad_planilla' => 'required',
+            'bombeabilidad_gradiente' => 'required',
+            'bombeabilidad_temperatura' => 'required',
+            'bombeabilidad_presion' => 'required',
+            'bombeabilidad_40_bc' => 'required',
+            'bombeabilidad_70_bc' => 'required',
+            'bombeabilidad_100_bc' => 'required',
+        ]);
+
         # Insertar adjunto (Si es que hay)
         $image = $request->file('file_upload_bombeabilidad');
 
@@ -453,6 +446,19 @@ class EnsayoController extends Controller
 
     public function store_uca(Request $request)
     {
+        $request->validate([
+            'uca_principal' => 'required',
+            'uca_psi_50' => 'required',
+            'uca_psi_500' => 'required',
+            'uca_psi_1000' => 'required',
+            'uca_hs_12' => 'required',
+            'uca_hs_24' => 'required',
+            'uca_impedancia_acustica' => 'required',
+            'uca_sgs_cero' => 'required',
+            'uca_sgs_max' => 'required',
+            'uca_tiempo' => 'required',
+        ]);
+
         # Insertar adjunto (Si es que hay)
         $image = $request->file('file_upload_uca');
 
@@ -501,8 +507,14 @@ class EnsayoController extends Controller
 
     public function store_agua_libre(Request $request)
     {
+        $request->validate([
+            'agua_libre_e' => 'required',
+            'agua_libre_volumen' => 'required',
+            'api_agua_libre' => 'required',
+        ]);
+
         $agua_libre = RelAguaLibreSolicitudEnsayo::create([
-            'agua_libre' => $request->agua_libre,
+            'agua_libre' => $request->agua_libre_e,
             'volumen' => $request->agua_libre_volumen,
             'api_agua_libre' => $request->api_agua_libre,
             'solicitud_lechada_id' => $request->solicitud_lechada_id,
@@ -515,6 +527,10 @@ class EnsayoController extends Controller
 
     public function store_mezclabilidad(Request $request)
     {
+        $request->validate([
+            'mezclabilidad' => 'required',
+        ]);
+
         $mezclabilidad = RelMezclabilidadSolicitudEnsayo::create([
             'mezclabilidad' => $request->mezclabilidad,
             'solicitud_lechada_id' => $request->solicitud_lechada_id,
@@ -527,6 +543,15 @@ class EnsayoController extends Controller
 
     public function store_aditivos(Request $request)
     {
+        $request->validate([
+            'lote' => 'required',
+            'aditivo' => 'required',
+            'concentracion' => 'required',
+            'om' => 'required',
+            'densidad_ensayo' => 'required',
+            'rendimiento_ensayo' => 'required',
+            'bolsa_ensayo' => 'required',
+        ]);
 
     // Verificar si se enviaron aditivos en la solicitud
     if ($request->aditivos) {
@@ -603,51 +628,55 @@ class EnsayoController extends Controller
 
 //     return response()->json(['error' => 'No se enviaron aditivos en la solicitud'], 400);
 // }
-public function store_aditivos_lodo(Request $request)
-{
+    public function store_aditivos_lodo(Request $request)
+    {
 
-    $request->validate([
-        'aditivos.*.lote' => 'required',
-        'aditivos.*.aditivo' => 'required',
-        'aditivos.*.concentracion' => 'required',
-        'aditivos.*.unidad' => 'required',
-    ]);
+        $request->validate
+        ([
+            'aditivos.*.lote' => 'required',
+            'aditivos.*.aditivo' => 'required',
+            'aditivos.*.concentracion' => 'required',
+            'aditivos.*.unidad' => 'required',
+        ]);
 
-    // Verificar si se enviaron aditivos en la solicitud
-    if ($request->aditivos) {
-        $hasData = false; // Variable para rastrear si hay datos de aditivos
+        // Verificar si se enviaron aditivos en la solicitud
+        if ($request->aditivos) 
+        {
+            $hasData = false; // Variable para rastrear si hay datos de aditivos
 
-        foreach ($request->aditivos as $formulacion) {
-            // Verificar si hay datos en la formulación
-            if (!empty($formulacion['lote']) || !empty($formulacion['aditivo']) || !empty($formulacion['concentracion'])) {
-                $hasData = true; // Hay al menos un dato cargado
+            foreach ($request->aditivos as $formulacion) 
+            {
+                // Verificar si hay datos en la formulación
+                if (!empty($formulacion['lote']) || !empty($formulacion['aditivo']) || !empty($formulacion['concentracion'])) {
+                    $hasData = true; // Hay al menos un dato cargado
+                }
+
+                RelAditivosEnsayosLodo::create
+                ([
+                    'solicitud_lodo_id' => $request->solicitud_lodo_id,
+                    'lote' => $formulacion['lote'],
+                    'aditivo' => $formulacion['aditivo'],
+                    'comentario' => $formulacion['comentario'],
+                    'concentracion' => $formulacion['concentracion'],
+                    'unidad' => $formulacion['unidad'],
+                    'check' => $hasData ? 1 : 0, // Asignar el valor de check
+                ]);
             }
 
-            RelAditivosEnsayosLodo::create([
-                'solicitud_lodo_id' => $request->solicitud_lodo_id,
-                'lote' => $formulacion['lote'],
-                'aditivo' => $formulacion['aditivo'],
-                'comentario' => $formulacion['comentario'],
-                'concentracion' => $formulacion['concentracion'],
-                'unidad' => $formulacion['unidad'],
-                'check' => $hasData ? 1 : 0, // Asignar el valor de check
+            // Obtener los aditivos relacionados a la solicitud de lodo
+            $aditivos_lodo = RelAditivosEnsayosLodo::where('solicitud_lodo_id', $request->solicitud_lodo_id)
+                ->with('aditivos')  // Cargar la relación con la tabla 'aditivos'
+                ->get();
+
+            // Retornar la respuesta JSON con los aditivos y el estado de hasData
+            return response()->json
+            ([
+                'success_aditivos_lodo' => $aditivos_lodo,
+                'hasData' => $hasData, // Devolver el estado de hasData
             ]);
         }
-
-        // Obtener los aditivos relacionados a la solicitud de lodo
-        $aditivos_lodo = RelAditivosEnsayosLodo::where('solicitud_lodo_id', $request->solicitud_lodo_id)
-            ->with('aditivos')  // Cargar la relación con la tabla 'aditivos'
-            ->get();
-
-        // Retornar la respuesta JSON con los aditivos y el estado de hasData
-        return response()->json([
-            'success_aditivos_lodo' => $aditivos_lodo,
-            'hasData' => $hasData, // Devolver el estado de hasData
-        ]);
+        return response()->json(['error' => 'No se enviaron aditivos en la solicitud'], 400);
     }
-
-    return response()->json(['error' => 'No se enviaron aditivos en la solicitud'], 400);
-}
 
     // Seccion Ensayo de Lodo
 

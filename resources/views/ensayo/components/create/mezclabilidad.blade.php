@@ -52,6 +52,18 @@
     if (btn_submit_mezclabilidad) {
         btn_submit_mezclabilidad.addEventListener('click', e => {
             e.preventDefault();
+
+            const mezclabilidad = document.querySelector('input[name="mezclabilidad"]').value;
+
+            if (!mezclabilidad ) {
+                errorAlert("Error", "Campo requerido.").then(() => {
+                    // Puedes enfocar el primer campo vacío si lo deseas
+                    if (!mezclabilidad) document.querySelector('input[name="mezclabilidad"]');
+
+                });
+                return; // Detener la ejecución si hay un error
+            }
+
             let form = new FormData(document.getElementById('form_mezclabilidad'))
 
             confirmAlert().then((confirmed) => {

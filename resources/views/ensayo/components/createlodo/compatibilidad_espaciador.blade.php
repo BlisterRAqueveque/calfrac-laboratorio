@@ -1087,7 +1087,7 @@
         const emptyField = checkEmptyFields(fieldValues);
         if (emptyField) {
             errorAlert("Error", "Todos los campos son requeridos.").then(() => {
-                document.querySelector(`input[name="${emptyField}"]`).focus();
+                document.querySelector(`input[name="${emptyField}"]`);
             });
             return; // Detener la ejecución si hay un error
         }

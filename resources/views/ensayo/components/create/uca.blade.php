@@ -349,6 +349,59 @@
     if (btn_submit_uca) {
         btn_submit_uca.addEventListener('click', e => {
             e.preventDefault();
+
+            const getFieldValues = (fieldNames) => {
+                return fieldNames.map(name => ({
+                    name,
+                    value: document.querySelector(`input[name="${name}"]`).value,
+                }));
+            };
+
+            // Función para verificar si hay campos vacíos
+            const checkEmptyFields = (fields) => {
+                for (const field of fields) {
+                    if (!field.value) {
+                        return field.name;
+                    }
+                }
+                return null;
+            };
+
+            // Definir los campos requeridos
+            const requiredFields = [
+                'uca_principal',
+                'uca_psi_50',
+                'uca_psi_500',
+                'uca_psi_1000',
+                'uca_hs_12',
+                'uca_hs_24',
+                'uca_impedancia_acustica',
+                'uca_sgs_cero',
+                'uca_sgs_max',
+                'uca_tiempo',
+            ];
+
+            // Obtener los valores de los campos requeridos
+            const fieldValues = getFieldValues(requiredFields);
+
+            // Verificar si hay campos vacíos
+            const emptyField = checkEmptyFields(fieldValues);
+            if (emptyField) {
+                errorAlert("Error", "Todos los campos son requeridos.").then(() => {
+                    document.querySelector(`input[name="${emptyField}"]`);
+                });
+                return; // Detener la ejecución si hay un error
+            }
+
+            const file1 = document.getElementById('file_upload_uca').files.length;
+
+            if (file1 === 0) {
+                errorAlert("Error", "Cargar adjunto requerido.").then(() => {
+            if (file1 === 0) document.getElementById('file_upload_uca').scrollIntoView();
+                });
+            return;
+            }
+
             let form = new FormData(document.getElementById('form_uca'))
 
             confirmAlert().then((confirmed) => {

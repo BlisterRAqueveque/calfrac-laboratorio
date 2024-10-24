@@ -405,6 +405,58 @@
          */
         btn_submit_bombeabilidad.addEventListener('click', e => {
             e.preventDefault();
+
+            const getFieldValues = (fieldNames) => {
+                return fieldNames.map(name => ({
+                    name,
+                    value: document.querySelector(`input[name="${name}"]`).value,
+                }));
+            };
+
+            // Función para verificar si hay campos vacíos
+            const checkEmptyFields = (fields) => {
+                for (const field of fields) {
+                    if (!field.value) {
+                        return field.name;
+                    }
+                }
+                return null;
+            };
+
+            // Definir los campos requeridos
+            const requiredFields = [
+                'bombeabilidad_consistometro',
+                'bombeabilidad_acondicionamiento',
+                'bombeabilidad_planilla',
+                'bombeabilidad_gradiente',
+                'bombeabilidad_temperatura',
+                'bombeabilidad_presion',
+                'bombeabilidad_40_bc',
+                'bombeabilidad_70_bc',
+                'bombeabilidad_100_bc',
+            ];
+
+            // Obtener los valores de los campos requeridos
+            const fieldValues = getFieldValues(requiredFields);
+
+            // Verificar si hay campos vacíos
+            const emptyField = checkEmptyFields(fieldValues);
+            if (emptyField) {
+                errorAlert("Error", "Todos los campos son requeridos.").then(() => {
+                    document.querySelector(`input[name="${emptyField}"]`);
+                });
+                return; // Detener la ejecución si hay un error
+            }
+
+            const file1 = document.getElementById('file_upload_bombeabilidad').files.length;
+
+            if (file1 === 0) {
+                errorAlert("Error", "Cargar adjunto requerido.").then(() => {
+                    if (file1 === 0) document.getElementById('file_upload_bombeabilidad').scrollIntoView();
+                });
+                return;
+            }
+
             let form = new FormData(document.getElementById('form_bombeabilidad'))
 
             confirmAlert().then((confirmed) => {

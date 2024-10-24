@@ -28,16 +28,18 @@
     @endif
     @if (count($s_l[0]->rel_agua_libre) == 0)
         <form id="form_agua_libre" class="mt-3">
-            {{-- <form action="{{ route('store_agua_libre') }}" class="mt-3" method="POST"> --}}
             @csrf
+            <h5 class="mb-2 text-center">Registro de Agua Libre</h5>
+            <hr>
+            <br>
             <input type="hidden" name="solicitud_lechada_id" value="{{ $s_l[0]->id }}">
-
             <div class="grid grid-cols-3 gap-3 mb-3">
                 <div>
-                    <label for="agua_libre" class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Agua Libre
+                    <label for="agua_libre"
+                        class="text-sm text-gray-700 font-semibold tracking-wide mb-2">Agua Libre
                         °C</label>
-                    <input type="number" name="agua_libre" id="agua_libre" class="form-control text-sm p-2"
-                        placeholder="Agua Libre °C" step=".0001">
+                    <input type="number" name="agua_libre_e" id="agua_libre_e"
+                        class="form-control text-sm p-2" placeholder="Agua Libre °C" step=".0001">
                 </div>
                 <div>
                     <label for="agua_libre_volumen"
@@ -69,6 +71,43 @@
     if (btn_submit_agua_libre) {
         btn_submit_agua_libre.addEventListener('click', e => {
             e.preventDefault();
+
+            const getFieldValues = (fieldNames) => {
+                return fieldNames.map(name => ({
+                    name,
+                    value: document.querySelector(`input[name="${name}"]`).value,
+                }));
+            };
+
+            // Función para verificar si hay campos vacíos
+            const checkEmptyFields = (fields) => {
+                for (const field of fields) {
+                    if (!field.value) {
+                        return field.name;
+                    }
+                }
+                return null;
+            };
+
+            // Definir los campos requeridos
+            const requiredFields = [
+                'agua_libre_e',
+                'agua_libre_volumen',
+                'api_agua_libre',
+            ];
+
+            // Obtener los valores de los campos requeridos
+            const fieldValues = getFieldValues(requiredFields);
+
+            // Verificar si hay campos vacíos
+            const emptyField = checkEmptyFields(fieldValues);
+            if (emptyField) {
+                errorAlert("Error", "Todos los campos son requeridos.").then(() => {
+                    document.querySelector(`input[name="${emptyField}"]`);
+                });
+                return; // Detener la ejecución si hay un error
+            }
+        
             let form = new FormData(document.getElementById('form_agua_libre'))
 
             confirmAlert().then((confirmed) => {

@@ -158,6 +158,69 @@
     if (btn_submit_registros_aditivos) {
         btn_submit_registros_aditivos.addEventListener('click', e => {
             e.preventDefault();
+
+            const densidad_ensayo = document.querySelector('input[name="densidad_ensayo"]').value;
+            const rendimiento_ensayo = document.querySelector('input[name="rendimiento_ensayo"]').value;
+            const bolsa_ensayo = document.querySelector('input[name="bolsa_ensayo"]').value;
+
+            // Verificar si alguno de los campos de tiempo está vacío
+            if (!densidad_ensayo || !rendimiento_ensayo || !bolsa_ensayo) {
+                errorAlert("Error", "Todos los campos son requeridos.").then(() => {
+                    // Puedes enfocar el primer campo vacío si lo deseas
+                    if (!densidad_ensayo) document.querySelector('input[name="densidad_ensayo"]');
+                    else if (!rendimiento_ensayo) document.querySelector('input[name="rendimiento_ensayo"]');
+                    else if (!bolsa_ensayo) document.querySelector('input[name="bolsa_ensayo"]');
+
+                });
+                return; // Detener la ejecución si hay un error
+            }
+
+            // Obtener los campos de aditivos
+            const lotes = document.querySelectorAll('input[name^="aditivos["][name$="[lote]"]');
+            const aditivosSelects = document.querySelectorAll('select[name^="aditivos["][name$="[aditivo]"]');
+            const concentraciones = document.querySelectorAll('input[name^="aditivos["][name$="[concentracion]"]');
+            const om = document.querySelectorAll('input[name^="aditivos["][name$="[om]"]');
+
+            let valid = true;
+            let firstInvalidField = null;
+
+            // Verificar que cada campo requerido esté completado
+            lotes.forEach((lote, index) => {
+                if (!lote.value.trim()) {
+                    valid = false;
+                    if (!firstInvalidField) firstInvalidField = lote; // Guardar el primer campo inválido
+                }
+            });
+
+           aditivosSelects.forEach((select, index) => {
+                if (!select.value) {
+                    valid = false;
+                    if (!firstInvalidField) firstInvalidField = select; // Guardar el primer campo inválido
+                }
+            });
+
+            concentraciones.forEach((concentracion, index) => {
+                if (!concentracion.value.trim()) {
+                    valid = false;
+                    if (!firstInvalidField) firstInvalidField = concentracion; // Guardar el primer campo inválido
+                }
+            });
+
+            om.forEach((om, index) => {
+                if (!om.value.trim()) {
+                    valid = false;
+                    if (!firstInvalidField) firstInvalidField = om; // Guardar el primer campo inválido
+                }
+            });
+
+            if (!valid) {
+                // Mostrar modal de error
+                errorAlert("Error", "Todos los campos son requeridos.").then(() => {
+                    firstInvalidField; // Enfocar el primer campo inválido
+                });
+                return; // Detener la ejecución si hay un error
+            }
+
             let form = new FormData(document.getElementById('form_aditivos'))
 
             confirmAlert().then((confirmed) => {
