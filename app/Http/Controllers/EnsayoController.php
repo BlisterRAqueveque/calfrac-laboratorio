@@ -683,9 +683,9 @@ class EnsayoController extends Controller
     public function store_reologia_lodo(Request $request) {
 
         $request->validate([
-            'tipo_lodo' => 'required',
+            //'tipo_lodo' => 'required',
             'densidad' => 'required',
-            'cia_lodo' => 'required',
+            //'cia_lodo' => 'required',
             'seg_10' => 'required',
             'min_10' => 'required',
             'min_30' => 'required',
@@ -1077,8 +1077,6 @@ class EnsayoController extends Controller
             'tiempo_3' => 'required',
             'tiempo_4' => 'required',
             'tiempo_5' => 'required',
-            'img_1' => 'required',
-            'img_2' => 'required',
         ]);
 
         # Insertar adjuntos (Si es que hay)

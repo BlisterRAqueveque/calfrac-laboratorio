@@ -577,69 +577,69 @@
         btn_submit_reologia_lodo.addEventListener('click', e => {
             e.preventDefault();
 
-        // Función para obtener los valores de los campos
-        const getFieldValues = (fieldNames) => {
-            return fieldNames.map(name => ({
-                name,
-                value: document.querySelector(`input[name="${name}"]`).value,
-            }));
-        };
+        // // Función para obtener los valores de los campos
+        // const getFieldValues = (fieldNames) => {
+        //     return fieldNames.map(name => ({
+        //         name,
+        //         value: document.querySelector(`input[name="${name}"]`).value,
+        //     }));
+        // };
 
-        // Función para verificar si hay campos vacíos
-        const checkEmptyFields = (fields) => {
-            for (const field of fields) {
-                if (!field.value) {
-                    return field.name;
-                }
-            }
-            return null;
-        };
+        // // Función para verificar si hay campos vacíos
+        // const checkEmptyFields = (fields) => {
+        //     for (const field of fields) {
+        //         if (!field.value) {
+        //             return field.name;
+        //         }
+        //     }
+        //     return null;
+        // };
 
-        // Definir los campos requeridos
-        const requiredFields1 = [
-            'tipo_lodo',
-            'densidad',
-            'mud_company',
-            'seg_10',
-            'min_10',
-            'min_30',
-        ];
+        // // Definir los campos requeridos
+        // const requiredFields1 = [
+        //     'tipo_lodo',
+        //     'densidad',
+        //     'mud_company',
+        //     'seg_10',
+        //     'min_10',
+        //     'min_30',
+        // ];
 
-        const requiredFields2 = [
-            'temp_bhct',
-            'temp_600_rpm_c',
-            'temp_300_rpm_c',
-            'temp_200_rpm_c',
-            'temp_100_rpm_c',
-            'temp_60_rpm_c',
-            'temp_30_rpm_c',
-            'temp_6_rpm_c',
-            'temp_3_rpm_c',
-            'temp_vp',
-            'temp_yp',
-        ];
+        // const requiredFields2 = [
+        //     'temp_bhct',
+        //     'temp_600_rpm_c',
+        //     'temp_300_rpm_c',
+        //     'temp_200_rpm_c',
+        //     'temp_100_rpm_c',
+        //     'temp_60_rpm_c',
+        //     'temp_30_rpm_c',
+        //     'temp_6_rpm_c',
+        //     'temp_3_rpm_c',
+        //     'temp_vp',
+        //     'temp_yp',
+        // ];
 
-        // Obtener los valores de los campos requeridos
-        const fieldValues1 = getFieldValues(requiredFields1);
-        const fieldValues2 = getFieldValues(requiredFields2);
+        // // Obtener los valores de los campos requeridos
+        // const fieldValues1 = getFieldValues(requiredFields1);
+        // const fieldValues2 = getFieldValues(requiredFields2);
 
-        // Verificar si hay campos vacíos en el primer conjunto
-        const emptyField1 = checkEmptyFields(fieldValues1);
-        if (emptyField1) {
-            errorAlert("Error", "Todo los campos son requeridos.").then(() => {
-                document.querySelector(`input[name="${emptyField1}"]`);
-            });
-            return; // Detener la ejecución si hay un error
-        }
+        // // Verificar si hay campos vacíos en el primer conjunto
+        // const emptyField1 = checkEmptyFields(fieldValues1);
+        // if (emptyField1) {
+        //     errorAlert("Error", "Todo los campos son requeridos.").then(() => {
+        //         document.querySelector(`input[name="${emptyField1}"]`);
+        //     });
+        //     return; // Detener la ejecución si hay un error
+        // }
 
-        // Verificar si hay campos vacíos en el segundo conjunto
-        const emptyField2 = checkEmptyFields(fieldValues2);
-        if (emptyField2) {
-            errorAlert("Error", "Los campos Caracterizacion del Lodo son requeridos.").then(() => {
-                document.querySelector(`input[name="${emptyField2}"]`);
-            });
-            return; // Detener la ejecución si hay un error
-        }
+        // // Verificar si hay campos vacíos en el segundo conjunto
+        // const emptyField2 = checkEmptyFields(fieldValues2);
+        // if (emptyField2) {
+        //     errorAlert("Error", "Los campos Caracterizacion del Lodo son requeridos.").then(() => {
+        //         document.querySelector(`input[name="${emptyField2}"]`);
+        //     });
+        //     return; // Detener la ejecución si hay un error
+        // }
             let form = new FormData(document.getElementById('form_reologia_lodo'))
 
             confirmAlert().then((confirmed) => {
