@@ -96,6 +96,94 @@
 <script>
     const btn_submit_registros_aditivos_lodo = document.getElementById('btn_submit_registros_aditivos_lodo_lodo');
 
+if (btn_submit_registros_aditivos_lodo) {
+    btn_submit_registros_aditivos_lodo.addEventListener('click', e => {
+        e.preventDefault();
+
+        // Obtener los campos de aditivos
+        const lotes = document.querySelectorAll('input[name^="aditivos["][name$="[lote]"]');
+        const aditivosSelects = document.querySelectorAll('select[name^="aditivos["][name$="[aditivo]"]');
+        const concentraciones = document.querySelectorAll('input[name^="aditivos["][name$="[concentracion]"]');
+        const unidadesSelects = document.querySelectorAll('select[name^="aditivos["][name$="[unidad]"]');
+
+        let valid = true;
+        let firstInvalidField = null;
+
+        // Verificar que cada campo requerido esté completado
+        lotes.forEach((lote, index) => {
+            if (!lote.value.trim()) {
+                valid = false;
+                if (!firstInvalidField) firstInvalidField = lote; // Guardar el primer campo inválido
+            }
+        });
+
+        aditivosSelects.forEach((select, index) => {
+            if (!select.value) {
+                valid = false;
+                if (!firstInvalidField) firstInvalidField = select; // Guardar el primer campo inválido
+            }
+        });
+
+        concentraciones.forEach((concentracion, index) => {
+            if (!concentracion.value.trim()) {
+                valid = false;
+                if (!firstInvalidField) firstInvalidField = concentracion; // Guardar el primer campo inválido
+            }
+        });
+
+        unidadesSelects.forEach((select, index) => {
+            if (!select.value) {
+                valid = false;
+                if (!firstInvalidField) firstInvalidField = select; // Guardar el primer campo inválido
+            }
+        });
+
+        if (!valid) {
+            // Mostrar modal de error
+            errorAlert("Error", "Todos los campos son requeridos.").then(() => {
+                firstInvalidField.focus(); // Enfocar el primer campo inválido
+            });
+            return; // Detener la ejecución si hay un error
+        }
+
+        // Si todos los campos son válidos, continuar con el envío
+        let form = new FormData(document.getElementById('form_aditivos_lodo'));
+        confirmAlert().then((confirmed) => {
+            if (confirmed) {
+                    fetch("{{ route('store_aditivos_lodo') }}", {
+                            method: 'POST',
+                            body: form
+                        }).then((response) => response.json())
+                        .then((data) => {
+                            if (data) {
+                                componentShowAditivosLodo(data.success_aditivos_lodo)
+                                //componentShowAditivos(data.success_aditivos, data.success_calculos)
+                                
+                                //console.log('Data aditivos:', data.success_aditivos_lodo)
+                                //console.log('Data calculos:', data.success_calculos)
+                                document.getElementById('form_aditivos_lodo').style.display = 'none'
+                                successAlert('¡Registro Asignado!',
+                                    'El registro se asignó correctamente.')
+                                    
+                                let solicitud_id = {!! json_encode($solicitud->id) !!}
+                                checkGenerateReportLodo(solicitud_id)
+                                .then((data) => {
+                                   if (data.generate_report_lodo) {
+                                       document.querySelector('#tab_g_report_js_lodo').classList.remove('d-none')
+                                   }
+                                })
+                            }
+                        })
+                }
+            })
+        })
+    }
+
+</script>
+
+{{-- <script>
+    const btn_submit_registros_aditivos_lodo = document.getElementById('btn_submit_registros_aditivos_lodo_lodo');
+
     if (btn_submit_registros_aditivos_lodo) {
         btn_submit_registros_aditivos_lodo.addEventListener('click', e => {
             e.preventDefault();
@@ -131,4 +219,4 @@
             })
         })
     }
-</script>
+</script> --}}

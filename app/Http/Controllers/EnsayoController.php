@@ -596,6 +596,14 @@ class EnsayoController extends Controller
 // }
 public function store_aditivos_lodo(Request $request)
 {
+
+    $request->validate([
+        'aditivos.*.lote' => 'required',
+        'aditivos.*.aditivo' => 'required',
+        'aditivos.*.concentracion' => 'required',
+        'aditivos.*.unidad' => 'required',
+    ]);
+
     // Verificar si se enviaron aditivos en la solicitud
     if ($request->aditivos) {
         $hasData = false; // Variable para rastrear si hay datos de aditivos

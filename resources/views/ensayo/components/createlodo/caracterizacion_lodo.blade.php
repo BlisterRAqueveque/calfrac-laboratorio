@@ -626,7 +626,7 @@
         // Verificar si hay campos vacíos en el primer conjunto
         const emptyField1 = checkEmptyFields(fieldValues1);
         if (emptyField1) {
-            errorAlert("Error", "Los campos Caracterizacion del Lodo son requeridos.").then(() => {
+            errorAlert("Error", "Todo los campos son requeridos.").then(() => {
                 document.querySelector(`input[name="${emptyField1}"]`).focus();
             });
             return; // Detener la ejecución si hay un error
